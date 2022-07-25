@@ -1,0 +1,66 @@
+   BUILD PROCEDURE
+
+The build procedure is a combination of manual and automated procedures. Some steps
+require analysis, verification or documentation.  Other steps have supporting scripts
+that largely automate the process.
+
+Upon finishing the build process, one can create a release for end users.  See the 
+description in DORELEASE.
+
+
+1) Analyze the changes in the latest ION release.
+
+   A new ION release is one the main drivers for a new release of the IonConfig tools.
+   Each new release of ION usually has some config file or command changes, sometimes
+   significant changes. It is important to identify and analyze these changes.
+
+   The analysis method is found in ./ion-diffs, relying on diffs of ion docs.
+   Further explanation is found in ./ion-diffs/README.
+
+2) Update the json configuration files.
+
+   Routine ion command changes can often be handled by appropriate updates to
+   the json configuration files.  This helps restrain the growth of the source
+   code.
+
+   The latest version of the json configuration files in found in ./json.
+   Further description of the configuration files is at ./json/README and ./json/docs/*.
+
+3) Build the dictionary docs.
+
+   These docs are intended for the end user.  The full dictionary defines the full
+   suite of ION config files and ION commands supported by IonConfig.  The delta
+   dictionary highlights the changes from the prior ION release.
+
+   The dictionary build will also expose errors in the construction of the json files,
+   so it is helpful to build the dictionaries early in the process. For this reason,
+   the procedure is semi-manual so that errors can be found and fixed.
+
+   Note that the dictionaries are re-built for every release of the IonConfig tools,
+   not just for new versions of ION.  This covers the case where the json files are
+   changing due to a bug fix rather than a direct change to ION. 
+
+   For more information see ./dict/README, ./dict/PROCEDURE, ./dict/LISTING and
+   ./dict/docs/README.
+
+4) Update and re-build the IonConfig Editor (the web browser tool).
+
+   TBD
+
+5) Update the IonConfig Editor Manual.
+
+   The IonConfig Editor manual is an html document with supporting png files. 
+   The basic functions do not change much, so the manual does not change often.
+
+   The manual files are found in ./manual.
+
+   For more information, see ./manual/README.
+
+6) Update and re-build the IonConfig command-line tools.
+
+   The source code is in ./cli/src.  The final executables are put to ./cli/bin.
+
+   The executables are built with the script ./cli/make.sh.
+
+   For more information, see ./cli/README and ./cli/docs/README.
+

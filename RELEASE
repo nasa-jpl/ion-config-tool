@@ -1,0 +1,28 @@
+   RELEASE JSON OBJECT
+
+The build/release process depends on the release.json object defined at the root 
+directory.  It defines the applicable ION version and the release version of the
+IonConfig tools.  It includes a simple integer seqNum used internally by IonConfig
+tools to distinguish supported command types among the ION versions.
+
+Example:
+
+"release" : {
+   "seqNum": 13,
+   "ionVersion": "4.1.0",
+   "ionConfigVersion": "4.6.1",
+   "desc": "IonConfig Tools Release 4.6.1"
+}
+
+ionConfigVersion: the release version of the IonConfig tools.  There will normally
+  be at least one release of the tools per release of ION, though there can be more
+  for bug fixes or new features.  A dictionary is built per IonConfig tool release, 
+  since the dictionary could also have bug fixes unrelated to changes to ION.
+
+ionVersion: the release version of ION via SourceForge.
+
+seqNum: The IonConfig tools use a simple integer to correspond to the ION version.
+  This makes it easier to map a specific command type to ION versions.  The IonConfig
+  tools can support a network with nodes having differing ION versions, keeping track
+  of which command types are supported by which ION version.  This internal command 
+  mapping by seqNum also enables the version command delta analysis.

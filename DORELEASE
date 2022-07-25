@@ -1,0 +1,13 @@
+   RELEASE PROCEDURE
+
+Upon finishing the build process, one can create a release for end users. The latest
+release.json should already exist from the build process. See RELEASE for the
+description of release.json. Now summarize the release updates in the release.notes
+text file.
+
+The release product is a versioned tar ball of end user software and documentation.
+Running the release script will deposit the new tar ball in the ./tars subdirectory,
+like so:
+
+> ./dorelease.sh
+

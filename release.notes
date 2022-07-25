@@ -1,0 +1,13 @@
+Release Notes 4.6.1
+
+- Restructured form and content of deliverable tar ball.
+
+- Consolidated browser program, command-line programs plus documentation.
+
+- Augmented documentation throughout.
+
+- Command-line tools (javascript) runnable without explicit node command.
+
+- Implemented more practical default values for span max segment size (udp & dccp).
+  These are assigned when generating an ION model from a DTN Network Model.
+
