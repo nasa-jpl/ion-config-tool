@@ -1,0 +1,31 @@
+
+The patterns.json is a json object listing each ION command type with a template
+or pattern for constructing the command.  This takes advantage of the consistent
+ION command style with a keyword and zero, one or more positional parameters.
+This json is a bit different in that it has no sub-objects, using direct properties
+instead.
+
+Sample entries follow:
+
+{
+  "ionrc_initialize"     : "1  [1]  [2]",
+  "ionrc_hypothetical"   : "a contact 0  0  [1]  [2]  0  0.0",
+  "ionrc_utcdelta"       : "m utcdelta  [1]",
+...
+  "contacts_registration": "a contact -1  -1  [1]  [2]  0",
+  "contacts_hypothetical" : "a contact 0  0  [1]  [2]  0  0.0",
+  "contacts_contact_abs_abs_time"  : "a contact [1]  [2]  [3]  [4]  [5]  [6]",
+...
+  "bpv6rc_endpoint"      : "a endpoint  ipn:[1].[2]  [3]  [4]",
+  "bpv6rc_induct_tcp"    : "a induct  tcp  [1]:[2]  [3]",
+  "bpv6rc_induct_stcp"   : "a induct  stcp  [1]:[2]  [3]",
+...
+
+
+The name of each property corresponds to the command name, e.g., "ionrc_utcdelta".
+These names align with those of cmdTypes.json.
+
+The value of each property is a simple text string with the command pattern.  
+The bracketed integers (e.g., [1], [2] ) provide substitution locations for each
+of its parameters.  Some commands have no parameters.
+

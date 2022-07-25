@@ -1,0 +1,66 @@
+Config files ION 3.6.2 vs. ION 3.5.1
+------------------------------------
+acsrc   - no diffs
+====================
+amsrc   - no diffs
+====================
+amsxml  - no diffs
+====================
+bprc    - no diffs
+
+parameter change ...
+
+WAS: a protocol <payload_bytes_per_frame> <overhead_bytes_per_frame> <nominal_data_rate>
+IS:  a protocol <payload_bytes_per_frame> <overhead_bytes_per_frame> <protocol_class>
+
+has long explanation of new parameter
+=====================
+bssprc  - no diffs
+=====================
+bssrc   - no diffs
+=====================
+cfdprc  - no diffs
+=========================
+dtn2rc  - 
+
+parameter change and addition ...
+
+WAS:  a plan <node_ID> <default_directive>
+IS:   a plan <node_ID> <directive> <nominal_xmit_rate>
+
+plus some explanation of change
+
+NOTE:  IonConfig not yet supporting dtn2rc!
+
+=========================
+dtpcrc - no diffs
+==========================
+imcrc  - no diffs
+=========================
+ionconfig - no diffs
+==========================
+ionrc   - no diffs
+
+provides a new "c contact" operation
+   but we only handle "add" commands
+
+==========================
+ionsecrc - no diffs
+==========================
+ipnrc    - no new commands
+ 
+new parameter...
+
+WAS: a plan <node_nbr> <default-duct-expr>
+IS:  a plan <node_nbr> <default-duct-expr> <nominal-data-rate>
+
+ NOTE: offers a simplified shortcut vs. bpadmin commands
+
+==========================
+ltprc    - no diffs
+
+the manage screening command is deprecated
+  plus some explanation
+
+we leave in the command, but it has no effect
+===========================

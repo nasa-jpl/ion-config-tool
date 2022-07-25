@@ -1,0 +1,7 @@
+Config files ION 3.7.0 vs. ION 3.7.1
+------------------------------------
+All the differences appear to be strictly documentation changes.
+There are no evident comand changes.
+
+However, there are some source code notes that indicate 3.7.0 features that
+were not working right, so effectively were deferred to 3.7.1.

@@ -1,0 +1,91 @@
+3.7.0 vs. 3.7.1
+----amsrc diffs----
+----amsxml diffs----
+----ipnrc diffs----
+99c99
+< =item B<c plan> I<node_nbr> [I<duct_expression>] [I<nominal_data_rate>]
+---
+> =item B<c plan> I<node_nbr> I<nominal_data_rate>
+101,102c101,102
+< The B<change plan> command.  This command changes the duct expression
+< and/or nominal data rate for the indicated plan.
+---
+> The B<change plan> command.  This command changes the nominal data rate
+> for the indicated plan.
+----ascrc diffs----
+----bprc diffs----
+460c460
+< identified byI<endpoint_name> must be re-routed.  Declaring
+---
+> identified by I<endpoint_name> must be re-routed.  Declaring
+504,545d503
+< -------------------
+< 
+< =head1 NAME
+< 
+< dtn2rc - "dtn" scheme configuration commands file
+< 
+< =head1 DESCRIPTION
+< 
+< "dtn" scheme configuration commands are passed to B<dtn2admin> either in a
+< file of text lines or interactively at B<dtn2admin>'s command prompt (:).
+< Commands are interpreted line-by line, with exactly one command per line.
+< 
+< "dtn" scheme configuration commands establish static routing rules
+< for forwarding bundles to "dtn"-scheme destination endpoints, identified by
+< node ID.  (Each node ID is simply a BP endpoint ID.)
+< 
+< Static routes are expressed as B<plan>s in the "dtn"-scheme routing database.
+< A plan that is established for a given node name associates a routing
+< B<directive> with the named node.  Each directive is a string of one of
+< two possible forms:
+< 
+< =over 4
+< 
+< f I<endpoint_ID>
+< 
+< =back
+< 
+< ...or...
+< 
+< =over 4
+< 
+< x I<protocol_name>/I<outduct_name>
+< 
+< =back
+< 
+< The former form signifies that the bundle is to be forwarded to the indicated
+< endpoint, requiring that it be re-queued for processing by the forwarder
+< for that endpoint (which might, but need not, be identified by another
+< "dtn"-scheme endpoint ID).  The latter form signifies that the bundle is
+< to be queued for transmission via the indicated convergence layer protocol
+< outduct.
+< 
+----dtn2rc diffs----
+----imcrc diffs----
+7,8c7,8
+< IMC scheme configuration commands are passed to B<ipnadmin> either in a file of
+< text lines or interactively at B<ipnadmin>'s command prompt (:).  Commands
+---
+> IMC scheme configuration commands are passed to B<imcadmin> either in a file of
+> text lines or interactively at B<imcadmin>'s command prompt (:).  Commands
+----lgfile diffs----
+----bssprc diffs----
+----cfdprc diffs----
+47,49c47,49
+< valid values are 0 (modular checksum) and 1 (CRC32).  outcstype is the type of
+< checksum to use when computing the checksum for transmitting data to this
+< entity.
+---
+> valid values are 0 (modular checksum), 2 (CRC32C), and 15 (the null checksum).
+> outcstype is the type of checksum to use when computing the checksum for
+> transmitting data to this entity.
+64c64
+< information about the indicate entity.  Otherwise this command will print
+---
+> information about the indicated entity.  Otherwise this command will print
+----dtpcrc diffs----
+----ionrc diffs----
+----ionconfig diffs----
+----ionsecrc diffs----
+----ltprc diffs----

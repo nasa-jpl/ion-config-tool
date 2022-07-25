@@ -1,0 +1,268 @@
+4.0.1 vs. 4.0.2
+----amsrc diffs----
+129c129
+< Identifies the local continuum.
+---
+> Identifies the remote continuum.
+133c133
+< Identifies the local continuum.
+---
+> Identifies the remote continuum.
+163c163
+< reachable.  The endpoint specification must conform the endpoint
+---
+> reachable.  The endpoint specification must conform to the endpoint
+200,201c200,201
+< must conform the endpoint specification syntax defined for the named transport
+< service; see the AMS Blue Book for details.
+---
+> must conform to the endpoint specification syntax defined for the named
+> transport service; see the AMS Blue Book for details.
+444c444
+< Identifies the venture.
+---
+> Identifies the unit.
+448c448
+< Identifies the venture.
+---
+> Identifies the unit.
+----amsxml diffs----
+----bpv6 ascrc diffs----
+----bpv6 bprc diffs----
+----bpv6 bpsecrc diffs----
+----bpv6 dtn2rc diffs----
+----bpv6 imcrc diffs----
+----bpv6 ipnrc diffs----
+----bpv6 lgfile diffs----
+----bpv6 biberc diffs----
+20a21,78
+> NOTE: in order to cause bundles to be transmitted via BIBE:
+> 
+> =over 4
+> 
+> =item B<Plan>
+> 
+> Remember that BIBE is a convergence-layer protocol; as such, it operates
+> between two nodes that are topologically adjacent in a BP network (but in
+> this case the BP network within which the nodes are topologically adjacent
+> is an overlay on top of the real BP network).  Since the sending and
+> receiving nodes are topologically adjacent they are neighbors: the sending
+> node MUST have an egress plan for transmission to the receiving (that is,
+> B<peer>) node, and there MUST be a BIBE outduct attached to that plan.
+> 
+> =item B<Routing>
+> 
+> In order to compel bundles bound for some destination node to be forwarded
+> via the BIBE peer node rather than over some other route computed by CGR,
+> you have to override CGR routing for that bundle.  The way to do this is
+> to (a) tag the bundle with flow label X (in ancillary data) and (b) use
+> ipnadmin to establish at the sending node a I<routing override> that
+> coerces all bundles with flow label X to be sent directly to the peer node.
+> 
+> If the peer node happens to be a true BP neighbor as well - that is,
+> there is also a non-BIBE outduct attached to the egress plan for
+> transmission to that node - then you additionally need to tell the
+> egress plan management daemon (bpclm) for that node which bundles
+> need to be forwarded using the BIBE outduct rather than the non-BIBE
+> outduct.  The way to do this is to use ipnadmin to establish at the
+> sending node a I<class-of-service override> that locally and temporarily
+> OR's the BP_BIBE_REQUESTED flag (32) to the quality-of-service flags
+> of any bundle tagged with flow label X.
+> 
+> =item B<Quality of Service>
+> 
+> If you want custody transfer to be invoked for each BIBE transmission of a
+> bundle from the sending node to the peer node, you must additionally
+> use ipnadmin to establish at the sending node a I<class-of-service override>
+> that locally and temporarily OR's the BP_CT_REQUESTED flag (64) to the
+> quality-of-service flags of any bundle tagged with flow label X.
+> 
+> If you need to establish a class-of-service override to set the
+> BP_BIBE_REQUESTED flag (as described above) as well, then use the
+> OR of BP_BIBE_REQUESTED and BP_CT_REQUESTED - that is, 96 - as the
+> quality-of-service flags argument for that override.
+> 
+> B<NOTE> that an alternative method of setting both the BP_BIBE_REQUESTED
+> and BP_CT_REQUESTED flags for a given bundle is simply to request custody
+> transfer when the bundle is sourced; this will OR that bundle's own
+> quality-of-service flags (in ancillary data) with 96.  But be careful:
+> in this case the bundle will be permanently tagged with these flag values,
+> meaning that it will be forwarded via BIBE with custody transfer over
+> every "hop" of the end-to-end path to its destination, and if BIBE is
+> unavailable at any forwarding node on the path then the bundle can
+> never reach the destination node.
+> 
+> =back
+> 
+----bpv7 bprc diffs----
+218c218
+< =item B<a protocol> I<protocol_name> I<payload_bytes_per_frame> I<overhead_bytes_per_frame> [I<protocol_class>]
+---
+> =item B<a protocol> I<protocol_name> [I<protocol_class>]
+221,224c221
+< convergence layer protocol at the local node.  The I<payload_bytes_per_frame>
+< and I<overhead_bytes_per_frame> arguments are used in calculating the
+< estimated transmission capacity consumption of each bundle, to aid in
+< route computation and congestion forecasting.
+---
+> convergence layer protocol at the local node.
+235a233,238
+> In earlier versions of ION this command took two additional arguments,
+> I<payload_bytes_per_frame> and I<overhead_bytes_per_frame>.  These arguments
+> are deprecated.  BP configuration files that include B<a protocol> commands
+> in the old format will be processed correctly; the deprecated arguments
+> will simply be ignored.
+> 
+407c410
+< The B<delete plan> command.  This command deletes the outduct identified
+---
+> The B<delete plan> command.  This command deletes the plan identified
+----bpv7 bpsecrc diffs----
+10,11c10,11
+< line.  The formats and effects of the BP security policy management commands
+< are described below.
+---
+> line.  JSON commands may span multiple lines. The formats and effects of the 
+> BP security policy management commands are described below.
+159a160,249
+> =item B<a> I<{ B<event_set> : { B<name> : event set name, 
+> B<desc> : (opt) description } }>
+> 
+> The B<add event_set> command. This command will add a named security operation
+> event set to the system.
+> 
+> =item B<i> I<{ B<event_set> : { B<name> : event set name } }>
+> 
+> The B<info event_set> command for event sets displays the information the system maintains 
+> for a named event set. The security operation events and configured, optional 
+> processing actions associated with the event set are shown.
+> 
+> =item B<d> I<{ B<event_set> : { B<name> : event set name } }>
+> 
+> The B<delete event_set> command deletes a named event set from the system. 
+> A named event set cannot be deleted if it is referenced by a security policy 
+> rule. All security policy rules associated with the named event set must be deleted 
+> before the event set itself may be deleted.
+> 
+> =item B<l> I<{B<type> : B<event_set>}>
+> 
+> The B<list event_set> command lists the names of all event sets defined in the 
+> system.
+> 
+> =item B<a> I<{ B<event> : { >
+> 	I<B<es_ref> : event set name,>
+> 	I<B<event_id> : security operation event ID>
+> 	I<B<actions> : [ opt. processing action, ... , opt. processing action ],>
+> 	I<B<action_parms> : [ { B<id>: parm ID, B<value>: parm value }, ... , { B<id>: parm ID, B<value>: parm value } ] } }>
+> 
+> The B<add event> command adds security operation event and associated optional 
+> processing action(s) to an event set. Multiple processing actions can be specified 
+> for a single security operation event.
+> 
+> =item B<d> I< { B<event> : { >
+>         I<B<es_ref> : event set name,>
+> 	I<B<event_id> : security operation event ID>
+> 	I<B<actions> : [ opt. processing action, ... , opt. processing action ] } }>
+> 
+> The B<delete event> command is used to delete optional processing actions from a
+> named event set. To remove specific processing actions, include both the security 
+> operation event and optional processing actions to be removed in the command. 
+> To remove all processing actions for a security operation event, exclude the 
+> optional processing action field. 
+> 
+> =item 	B<a> I<{ B<policyrule> : {>
+> 	I<B<desc> : description,>
+> 	I<B<filter> :>
+> 	I<{>
+> 	I<B<rule_id> : Security policy rule id,
+> 	B<role> : Security policy role,
+> 	B<src> : Bundle source,
+> 	B<dest> : Bundle destination
+> 	B<sec_src> : Security source
+> 	B<tgt> : Security target block type,
+> 	B<scid> : Security context ID, },>
+> 	I<B<spec> : {
+> 	B<svc> : Security service,
+> 	B<scid> : Security context ID,
+> 	B<sc_parms> : [ { B<id>: SC parm ID, B<value>: SC parm value }, 
+> 	... , { B<id>: SC parm ID, B<value>: SC parm value } ] },
+> 	B<es_ref> : Event set name } } >
+> 	
+> The B<add policyrule> command adds a policy rule to the system, describing a 
+> required security operation and the security policy role of the BPA applying 
+> the policy statement. The above command adds a policy rule referencing a 
+> named event set to the system.
+> 	
+> =item B<d> I<{ B<policyrule> : { B<rule_id> : Security policy rule ID } }>
+> 
+> The B<delete policyrule> command deletes the policy rule identified by its
+> rule ID.
+> 
+> =item B<i> I<{B<policyrule> : Security policy rule id }>
+> 	
+> The B<info policyrule> command displays the information for the
+> policy rule matching the provided ID.
+> 
+> =item B<f> I<{B<policyrule> : { B<type> : B<all | best>, B<src> : Bundle source,
+> 	B<dest> : Bundle destination, B<ssrc> : Security source, B<scid> : Security context ID, B<role> : Security policy role } }>
+> 	
+> The B<find policyrule> command finds all policy rules matching the provided criteria 
+> when type B<all> is selected, and finds the single policy rule that is determined to be 
+> the best match when type B<best> is selected. 
+> 
+> =item B<l> I<{B<type> : B<policyrule>}>
+> 
+> The B<list policyrule> command lists all policy rules currently 
+> defined in the system.
+> 
+----bpv7 dtn2rc diffs----
+----bpv7 ipnrc diffs----
+47a48,64
+> Routing and class-of-service overrides may also be managed:
+> 
+> =over 4
+> 
+> A routing override declares a neighboring node to which all bundles must
+> be forwarded that meet specified criteria.  This override is strictly local,
+> affecting only forwarding from the local node, and it is applied before
+> any route computed by CGR or IRR is considered.
+> 
+> A class-of-service override declares the class of service (priority and
+> ordinal and [optionally] quality-of-service flags) that will condition
+> - in terms of order and outduct selection - the forwarding of all bundles
+> that meet specified criteria.  Again this override is strictly local,
+> affecting only forwarding from the local node.
+> 
+> =back
+> 
+172c189
+< =item B<a cosovrd> I<data_label> I<dest_node_nbr> I<source_node_nbr> I<priority> I<ordinal>
+---
+> =item B<a cosovrd> I<data_label> I<dest_node_nbr> I<source_node_nbr> I<priority> I<ordinal> [I<qos_flags>]
+178c195
+< ordinal) changed as noted.
+---
+> ordinal and, optionally, additional quality-of-service flags) changed as noted.
+180c197
+< =item B<c cosovrd> I<data_label> I<dest_node_nbr> I<source_node_nbr> I<priority> I<ordinal>
+---
+> =item B<c cosovrd> I<data_label> I<dest_node_nbr> I<source_node_nbr> I<priority> I<ordinal> [I<qos_flags>]
+182,185c199,202
+< The B<change cosovrd> command.  This command changes the override priority
+< and ordinal for the override identified by I<data_label>, I<dest_node_nbr>,
+< and I<source_node_nbr>.  To cause ION to forget the override, use -1 as
+< I<priority>.
+---
+> The B<change cosovrd> command.  This command changes the effective class of
+> service (priority and ordinal and, optionally, additional quality-of-service
+> flags) for the override identified by I<data_label>, I<dest_node_nbr>, and
+> I<source_node_nbr>.  To cause ION to forget the override, use -1 as I<priority>.
+----bpv7 lgfile diffs----
+----bssprc diffs----
+----cfdprc diffs----
+----dtpcrc diffs----
+----ionconfig diffs----
+----ionrc diffs----
+----ionsecrc diffs----
+----ltprc diffs----
+----ltpsecrc diffs----

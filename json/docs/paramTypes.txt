@@ -1,0 +1,75 @@
+The configTypes.json is a json object listing and describing each ION configuration
+file type supported by the ionconfig tools.  Some ION config file types remain out of
+scope.  
+
+Sample entries follow:
+
+{
+  "ionrc_utcdelta_p0" : {
+    "id" :  "ionrc_utcdelta_p0",
+    "name":  "local time after utc",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_utcdelta",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "0"
+  },
+...
+  "bpv6rc_endpoint_p3" : {
+    "id" :  "bpv6rc_endpoint_p3",
+    "name":  "queue receiver task",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_endpoint",
+    "valType":  "text",
+    "units":  "",
+    "optional":  true,
+    "defaultValue":  ""
+  },
+...
+  "bpv6rc_induct_tcp_p0" : {
+    "id" :  "bpv6rc_induct_tcp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_tcp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+...
+
+The name of each sub-object corresponds to the parameter type, e.g., "bpv6rc_endpoint_p3".
+By convention, the name is based on the full command name plus a positional parameter
+indicator, with p0 as the first parameter.
+
+Properties:
+
+id            repeats the name of the sub-object
+
+name          a descriptive name for the parameter without including the command id
+
+configType    identifies the ion configuration file type supported
+
+cmdType       identifies the ion command type supported
+
+valType       identifies the type of value required for the parameter
+                number - must be numeric value
+                datetime - must be a datetime value
+                text - can be free text
+                select - must choose from a menu (see selections.json) 
+
+                xxxxx  - a special "clone" value type selected from known declarations
+                partial list: ionEndpoint, ipAddr, ltpInduct, ltpOutduct, udpLink, nodeNum
+
+pickClone     true indicates the parameter value must be selected from a list of "clone" values.
+              Clone values are created by other ion commands such as ipn numbers, port numbers, 
+              etc.  The specific value of a clone value is subject to change, if the value 
+              declared by the origin command is changed.
+
+optional      true indicates that this parameter is optional, so generally these appear at the end.
+
+units         Declares the units of the value, usually but not alwyas for numeric values.
+              Examples: bits per sec, blocks, light secs, hex, UTC
+
+defaultValue  Indicates the value assumed by ION if the parameter is not provided.
+

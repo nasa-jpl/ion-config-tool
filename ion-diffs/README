@@ -1,0 +1,23 @@
+These scripts support analysis of changes between ion releases, specifically ion config file changes. 
+The changes can be quite complex, so the release notes are usually insufficient.  The detailed docs are better.
+The focus of the analysis in on individual pod files (a perl-related document format) per each config file type.
+The output are simple diff command outputs per file, so the developer must perform a visual inspection to identify
+relevant changes to ion command syntax.
+
+The diff scripts assume that each new ion distribution is unzipped into a directory with its version number.
+For example:  ion-4.0.0, ion-4.1.0
+
+The script intrnally defines the root directory for versions of ion, so this should be updated as needed.
+The script takes the two version numbers as arguments, older version first.
+The single output file appears locally with both version numbers, such as: 4.0.0-vs-4.1.0.diffs 
+There were significant structure changes with the ION V4 series, so there are two versions of the scripts:
+
+  mkdiffsv3.sh
+  mkdiffsv4.sh
+
+If new config file types are integrated into the ionconfig tool, the script must be updated.
+
+Example execution:
+> mkdiffsv4.sh  4.0.0   4.1.0
+
+A few sample analysis files appear here.  These were prepared by hand after reviewing the diff report.

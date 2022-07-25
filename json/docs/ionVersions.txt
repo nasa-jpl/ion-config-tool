@@ -1,0 +1,34 @@
+
+The ionVersions.json is a json object listing and describing each ION version supported
+by the ionconfig tools.  Importantly, this file maps ION version numbers to the simple
+ionconfig sequence numbers. The simple numners support the ionconfig command effectivity
+scheme.
+
+Sample entries follow:
+
+{
+  "13" : {
+     "seqNum": 13,
+     "ionVersion": "4.1.0",
+     "desc": "ION 4.1.0 release",
+     "released": "2021-05-31"
+   },
+  "12" : {
+     "seqNum": 12,
+     "ionVersion": "4.0.2",
+     "desc": "ION 4.0.2 release",
+     "released": "2021-02-26"
+   },
+...
+
+The name of each sub-object corresponds to the version sequence number, e.g., "12".
+
+Properties:
+
+seqNum        repeats the name of the sub-object as a simple numeric value
+
+ionVersion    provides the standard multi-part ION version identifier
+
+desc          provides a basic text description of the release
+
+released      provides the official date of the ION release at sourceforge

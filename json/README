@@ -1,0 +1,24 @@
+The json area holds the offical current version of the ionconfig parameter files.  These 
+files support the ionconfig browser tool, ionconfig command-line tool and dictionary builds.
+
+   configTypes.json   describes the supported ION configuration file types
+
+   cmdTypes.json      describes the supported ION command types
+
+   patterns.json      provides command patterns with parameter substitutions per ION command type
+
+   paramTypes.json    describes each parameter per ION command type
+
+   selections.json    provides menu choices for ionconfig browser selection options
+
+   ionVersions.json   maps ION versions to ionconfig seq nums for command versioning 
+
+See /docs for more details.
+
+These parameter json files were first developed for the ionconfig browser tool in order to
+insulate the source code from routine changes to ION commands.  The ION system continues
+to evolve version by version, usually with relevant changes to the configuration files
+and the ION commands supported within each configuration file type.  These json files
+help capture this variations in declarative form, a form better suited for static analysis
+and verification.
+

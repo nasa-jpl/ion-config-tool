@@ -1,0 +1,31 @@
+
+The selections.json is a json object defining menu selection choices for a specific
+parameter.  The menus are built into the ionconfig web browser interface.  This makes 
+it easier to extend or modify selection lists over time.
+
+Sample entries follow:
+
+{
+  "bpv6rc_endpoint_p1" : [
+    { "0" : "ION engine" },
+    { "1" : "BP Echo" },
+    { "64" : "CFDP Service 1" },
+    { "65" : "CFDP Service 2" }
+  ],
+...
+  "bpv6rc_protocol_p0" : [
+    { "tcp"  : "TCP Protocol" },
+    { "stcp" : "Simple TCP Protocol" },
+    { "udp"  : "UDP Protocol" },
+    { "ltp"  : "Licklider Transmission Protocol"},
+    { "dccp" : "Datagram Congestion Control Protocol"},
+    { "bssp" : "Bundle Streaming Service Protocol"}
+  ],
+...
+
+The name of each sub-object corresponds to the parameter name, e.g., "bpv6rc_endpoint_p1".
+These names align with the names in paramTypes.json.
+
+Each parameter has a list of objects with a simple property/value pair.
+The property name corresponds to the value choice provided in the menu. The value
+provides a longer text description explaining the value.

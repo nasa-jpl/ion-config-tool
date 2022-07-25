@@ -1,0 +1,39 @@
+The configTypes.json is a json object listing and describing each ION configuration
+file type supported by the ionconfig tools.  Some ION config file types remain out of
+scope.  
+
+Sample entries follow:
+
+{
+    "ionconfig" : {
+        "id": "ionconfig",
+        "content": "ION node configuration parameters file",
+        "program": "ionadmin",
+        "start_order": 0,
+        "cmdTypes": [ ]
+    },
+    "ionrc" : {
+        "id": "ionrc",
+        "content": "ION node management commands file",
+        "program": "ionadmin",
+        "start_order": 10,
+        "cmdTypes": [ ]
+    },
+...
+
+The name of each sub-object corresponds to the file type, e.g., "ionrc".
+
+Properties:
+
+id            repeats the name of the sub-object
+
+content       provides a text description of the file type
+
+program       identifies the ION program that reads the configuration file
+
+start_order   indicates the order in which to start a program per config file
+
+cmdTypes      a list for each unique command in cmdTypes.json for this config type
+              (this is populated later when all the json files are loaded)
+
+

@@ -1,0 +1,88 @@
+The cmdTypes.json is a json object listing and describing each ION command type
+supported by the ionconfig tools.  In some cases, there are multiple command types
+as viewed by ionconfig tools versus a single command type as viewed by ION. This makes 
+it possible for the tool to be more precise about the specific command parameters.
+There can also be new versions of a command due to some eveolution within the ION
+software,
+
+Sample entries follow:
+
+{
+  "acsrc_custodian": {
+    "configType": "acsrc",
+    "name": "custodian",
+    "order": 30,
+    "paramCnt": 3,
+    "paramTypes": [],
+    "pickClone": true,
+    "verFrom": 10,
+    "verThru": 999
+  },
+...
+  "bpv6rc_induct_ltp": {
+    "configType": "bpv6rc",
+    "copyClone": true,
+    "isCloned": true,
+    "name": "induct_ltp",
+    "order": 54,
+    "paramCnt": 2,
+    "paramTypes": [],
+    "verFrom": 10,
+    "verThru": 999
+  },
+...
+  "bpv6rc_run_ipnadmin": {
+    "configType": "bpv6rc",
+    "copyClone": true,
+    "name": "run_ipnadmin",
+    "order": 90,
+    "paramCnt": 1,
+    "paramTypes": [],
+    "verFrom": 10,
+    "verThru": 999
+  },
+
+The name of each sub-object corresponds to the command type, e.g., "bpv6rc_induct_ltp".
+Note that config file type is always included in the name. When a new version of a
+command arises due to ION changes, a version is added to the name, e.g., "ipnrc_cosovrd_v12".
+
+Properties:
+
+configType    names the ion config file type using this command type
+
+multiple      true indicates that mulitple instances of this command are
+              possible for one config file.  Can be omitted if false.
+
+name          the common name of the command as used in ion documents
+
+order         an integer used to arrange the order of commands within the file
+
+paramCnt      the count of parameters supported by this command
+
+paramTypes    a list for each unique parameter in paramTypes.json for this 
+              command type (this is populated later when all the json files are loaded)
+
+pickClone     true indicates there is at least one parameter that must be selected from
+              a list of "clone" values.  Clone values are created by other ion commands
+              such as ipn numbers, port numbers, etc.  These are called clone values,
+              because these will change automatically if the original command declaring 
+              the value is changed.  
+
+copyClone     true indicates that at least one parameter will be automatically assigned
+              a "clone" value. This happens when another command establishes the value.
+
+isCloned      true indicates that a clone value is created when this command is declared.
+              A clone value is usually based on one paramete, but can be based on more
+              than one parameter, such as some induct names (e.g., host12:1113)
+
+verFrom       The first version for which this command type applies.  The tools can handle
+              ion nodes with different versions of ION at the same time.  The ionconfig
+              system uses simple integers as proxies for ION versions in order to simplify
+              the identification of commands effective for a specific version.
+              By convention, the first numeric version is 10.
+
+verThru       The last version for which this command type applies.  By convention, the
+              highest possible numeric version is 999.  This is the default verThru value
+              until a command becomes obsoleted at a specific ION version.
+
+

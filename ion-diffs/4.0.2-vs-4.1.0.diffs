@@ -1,0 +1,288 @@
+4.0.2 vs. 4.1.0
+----amsrc diffs----
+----amsxml diffs----
+----bpv6 ascrc diffs----
+----bpv6 bprc diffs----
+----bpv6 bpsecrc diffs----
+----bpv6 dtn2rc diffs----
+----bpv6 imcrc diffs----
+----bpv6 ipnrc diffs----
+----bpv6 lgfile diffs----
+----bpv6 biberc diffs----
+----bpv7 bprc diffs----
+----bpv7 bpsecrc diffs----
+----bpv7 dtn2rc diffs----
+12,13c12,13
+< for forwarding bundles to "dtn"-scheme destination endpoints, identified by
+< node ID.  (Each node ID is simply a BP endpoint ID.)
+---
+> for forwarding bundles to nodes identified by "dtn"-scheme destination
+> endpoints.
+41,42c41,42
+< The node IDs cited in dtn2rc plans may be "wild-carded".  That is, when
+< the last character of a node ID is either '*' or '~' (these two wild-card
+---
+> The node names cited in dtn2rc plans may be "wild-carded".  That is, when the
+> last character of a plan's node name is either '*' or '~' (these two wild-card
+44,49c44,49
+< whose IDs are identical to the wild-carded node name up to the wild-card
+< character.  For example, a bundle whose destination EID name is "dtn://foghorn"
+< would be routed by plans citing the following node IDs: "dtn://foghorn",
+< "dtn://fogh*", "dtn://fog~", "//*".  When multiple plans are all applicable
+< to the same destination EID, the one citing the longest (i.e., most narrowly
+< targeted) node ID will be applied.
+---
+> whose names are identical to the wild-carded node name up to the wild-card
+> character.  For example, a bundle whose destination EID is "dtn://foghorn/x"
+> would be routed by plans citing the following node names: "foghorn",
+> "fogh*", "fog~", "*".  When multiple plans are all applicable to the
+> same destination EID, the one citing the longest (i.e., most narrowly
+> targeted) node name will be applied.
+88c88
+< =item B<a plan> I<node_ID> I<directive> [I<nominal_xmit_rate>]
+---
+> =item B<a plan> I<node_name> I<directive> [I<nominal_xmit_rate>]
+91c91
+< the bundles destined for the node(s) identified by I<node_ID>.  The
+---
+> the bundles destined for the node(s) identified by I<node_nameID>.  The
+97c97
+< B<Note that the plan commands consumed by dtn2admin are a simplified
+---
+> B<Note> that the plan commands consumed by dtn2admin are a simplified
+100c100
+< and more powerful bpadmin commands.>
+---
+> and more powerful bpadmin commands.
+102c102
+< =item B<c plan> I<node_ID> [I<directive>] [I<nominal_xmit_rate>]
+---
+> =item B<c plan> I<node_nameID> [f I<endpoint_ID>] [I<nominal_xmit_rate>]
+104c104
+< The B<change plan> command.  This command revises the I<directive> and/or
+---
+> The B<change plan> command.  This command revises the "via node" and/or
+106c106,107
+< I<node_ID>.
+---
+> I<node_nameID>.  To detach an outduct from the plan, use the "planduct"
+> deletion command processed by bpadmin.
+108c109
+< =item B<d plan> I<node_ID>
+---
+> =item B<d plan> I<node_nameID>
+111c112
+< the node(s) identified by I<node_ID>.
+---
+> the node(s) identified by I<node_nameID>.
+113c114
+< =item B<i plan> I<node_ID>
+---
+> =item B<i plan> I<node_nameID>
+116c117
+< identified by I<node_ID>.
+---
+> identified by I<node_nameID>.
+129c130
+< =item a plan dtn://bbn2 f ipn:8.41
+---
+> =item a plan bbn2 f ipn:8.41
+131,132c132,133
+< Declares a static route from the local node to node "//bbn2".  Any bundle
+< destined for any endpoint whose node name is "//bbn2" will be forwarded
+---
+> Declares a static route from the local node to node "bbn2".  Any bundle
+> destined for any endpoint whose node name is "bbn2" will be forwarded
+135c136
+< =item a plan dtn://mitre1* x ltp/6
+---
+> =item a plan mitre* x ltp/6
+137,139c138,140
+< Declares a static route from the local node to node "//mitre1".  Any bundle
+< destined for any endpoint whose node ID begins with "mitre1" will
+< be queued for transmission on LTP outduct 6.
+---
+> Declares a static route from the local node to any node whose node name
+> begins with "mitre".  Any bundle destined for any endpoint whose node
+> name begins with "mitre1" will be queued for transmission on LTP outduct 6.
+----bpv7 ipnrc diffs----
+----bpv7 lgfile diffs----
+----bssprc diffs----
+77,78c77,78
+< between reception of a segment at this node and transmission of an
+< acknowledging segment, due to processing delay in the node.  (See the
+---
+> between reception of a block at this node and transmission of an
+> acknowledging PDU, due to processing delay in the node.  (See the
+90a91,96
+> =item B<a seat> 'I<BE-BSO_command>' 'I<RL-BSO_command>'
+> 
+> The B<add seat> command.  This command declares that the local BSSP engine
+> can receive BSSP PDUs via the link service input daemons that begin
+> running when 'I<BE-BSO_command>' and 'I<RL-BSO_command>' are executed.
+> 
+99,101c105,111
+< by I<peer_engine_nbr>.  The command will fail if any outbound segments
+< for this span are pending transmission or any inbound blocks from the
+< peer engine are incomplete.
+---
+> by I<peer_engine_nbr>.  The command will fail if any outbound blocks
+> for this span are pending transmission.
+> 
+> =item B<d seat> 'I<BE-BSO_command>' 'I<RL-BSO_command>'
+> 
+> The B<delete span> command.  This command deletes the seat identified
+> by 'I<BE-BSO_command>' and 'I<RL-BSO_command>'.
+107a118,122
+> =item B<i seat> 'I<BE-BSO_command>' 'I<RL-BSO_command>'
+> 
+> This command will print all information (i.e., process ID numbers)
+> about the seat identified by 'I<BE-BSO_command>' and 'I<RL-BSO_command>'.
+> 
+112c127,131
+< =item B<s> 'I<BE-BSI_command>' 'I<RL-BSI_command>'
+---
+> =item B<l seat>
+> 
+> This command lists all declared BSSP data acquisition seats.
+> 
+> =item B<s> ['I<BE-BSI_command>' 'I<RL-BSI_command>']
+117c136,140
+< tasks for the local engine.
+---
+> tasks for the local engine.  'I<BE-BSI_command>' and 'I<RL-BSI_command>'
+> are deprecated but are supported for backward compatibility; if provided,
+> the effect is the same as entering the command 
+> "a seat 'I<BE-BSO_command>' 'I<RL-BSO_command>'" prior to starting all
+> daemon tasks.
+----cfdprc diffs----
+----dtpcrc diffs----
+----ionconfig diffs----
+----ionrc diffs----
+91,92c91,92
+< The B<region> command.  This is used to identify the region to which
+< all ensuing "add contact" operations (until this execution of ionadmin
+---
+> The B<region> command.  This is used to select the region to which
+> all ensuing "contact" operations (until this execution of ionadmin
+101a102,112
+> Information regarding up to two (2) regions may be managed at any single node.
+> 
+> By default, region number 1 (the "universal" region) is selected.
+> 
+> =item B<!> [0 | 1]
+> 
+> "Announce" control.  Setting the announce flag to 1 causes contact plan
+> updates (contact add/change/delete, range add/delete) to be multicast to
+> all other nodes in the region in addition to being processed at the local
+> node.  Setting the announce flag to 0 disables this behavior.
+> 
+118,119c129,130
+< Three different types of contact can be intermixed within an .ionrc file that
+< defines a contact plan.
+---
+> Commands pertaining to three different types of contact can be intermixed
+> within an .ionrc file that defines a contact plan.
+138,139c149,150
+< contact is an anticipated opportunity for the local node to transmit data,
+< or received data from, some potentially neighboring node in the same
+---
+> contact is an anticipated opportunity for the local node to transmit data
+> to, or receive data from, some potentially neighboring node in the same
+163a175
+> Registration and hypothetical contacts cannot be changed.
+167,171c179,183
+< The B<delete contact> command.  This command deletes the scheduled
+< period of data transmission from I<source_node> to I<dest_node> starting
+< at I<start_time>.  To delete all contacts between some pair of nodes,
+< use '*' as I<start_time>.  To delete a registration contact, use "-1"
+< as I<start_time>.  To delete a hypothetical contact, use "0" as I<start_time>.
+---
+> The B<delete contact> command.  This command deletes the contact from
+> I<source_node> to I<dest_node> starting at I<start_time>.  To delete
+> all scheduled contacts between some pair of nodes, use '*' as I<start_time>.
+> To delete a registration contact, use "-1" as I<start_time>.  To delete
+> a hypothetical contact, use "0" as I<start_time>.
+181c193,200
+< This command lists all scheduled periods of data transmission.
+---
+> This command lists all contacts in the contact plan for the selected region.
+> 
+> =item B<b contact>
+> 
+> The B<brief contacts> command.  This command writes a file of commands
+> that will recreate the current list of contacts, for the selected region,
+> in the node's ION database.  The name of the file will be
+> "contacts.I<region_number>.ionrc".
+236a256,261
+> =item B<b range>
+> 
+> The B<brief ranges> command.  This command writes a file of commands that
+> will recreate the current list of ranges in the node's ION database.  The
+> file's name will be "ranges.ionrc".
+> 
+----ionsecrc diffs----
+----ltprc diffs----
+51c51
+< =item B<a span> I<peer_engine_nbr> I<max_export_sessions> I<max_import_sessions> I<max_segment_size> I<aggregation_size_limit> I<aggregation_time_limit> 'I<LSO_command>' [I<queuing_latency>]
+---
+> =item B<a span> I<peer_engine_nbr> I<max_export_sessions> I<max_import_sessions> I<max_segment_size> I<aggregation_size_threshold> I<aggregation_time_limit> 'I<LSO_command>' [I<queuing_latency>]
+57c57
+< The I<max_segment_size> and I<aggregation_size_limit>
+---
+> The I<max_segment_size> and I<aggregation_size_threshold>
+64c64
+< I<aggregation_size_limit> limits the number of LTP service data units
+---
+> I<aggregation_size_threshold> limits the number of LTP service data units
+67c67
+< exceeds this limit, aggregation into this block must cease and the block
+---
+> exceeds this threshold, aggregation into this block must cease and the block
+109c109,115
+< =item B<c span> I<peer_engine_nbr> I<max_export_sessions> I<max_import_sessions> I<max_segment_size> I<aggregation_size_limit> I<aggregation_time_limit> 'I<LSO_command>' [I<queuing_latency>]
+---
+> =item B<a seat> 'I<LSI_command>' 
+> 
+> The B<add seat> command.  This command declares that the local LTP engine
+> can receive LTP segments via the link service input daemon that begins
+> running when I<'LSI_command'> is executed.
+> 
+> =item B<c span> I<peer_engine_nbr> I<max_export_sessions> I<max_import_sessions> I<max_segment_size> I<aggregation_size_threshold> I<aggregation_time_limit> 'I<LSO_command>' [I<queuing_latency>]
+120a127,131
+> =item B<d seat> 'I<LSI_command>'
+> 
+> The B<delete seat> command.  This command deletes the seat identified
+> by 'I<LSI_command>'.  
+> 
+125a137,141
+> =item B<i seat> 'I<LSI_command>'
+> 
+> This command will print all information (i.e., process ID number) about
+> the seat identified by 'I<LSI_command>'.  
+> 
+130c146,150
+< =item B<s> 'I<LSI command>'
+---
+> =item B<l seat>
+> 
+> This command lists all declared LTP data acquisition seats.
+> 
+> =item B<s> ['I<LSI_command>']
+132,134c152,156
+< The B<start> command.  This command starts link service output tasks for
+< all LTP spans (to remote engines) from the local LTP engine, and it starts
+< the link service input task for the local engine.
+---
+> The B<start> command.  This command starts link service input tasks for
+> all LTP seats and output tasks for all LTP spans (to remote engines) from
+> the local LTP engine.  'I<LSI_command>' is deprecated but is supported for
+> backward compatibility; if provided, the effect is the same as entering
+> the command "a seat 'I<LSI_command>'" prior to starting all daemon tasks.
+260,261c282,283
+< limit is 32768 bytes, aggregation time limit is 2 seconds, and the link service
+< output task that is initiated when LTP is started on the local ION node
+---
+> threshold is 32768 bytes, aggregation time limit is 2 seconds, and the link
+> service output task that is initiated when LTP is started on the local ION node
+----ltpsecrc diffs----
