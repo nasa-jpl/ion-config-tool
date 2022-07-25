@@ -1,0 +1,52 @@
+The executable command-line programs are in /bin:
+
+   checkdtn.js  - verify syntax and content of a dtn network model
+   dtn2ion.js   - generate a full ion model from a dtn network model
+   ionconfig.js - generate full ion config files for all nodes from an ion model
+
+These programs depend on their companion json and node_modules directories.
+
+Program details
+
+//
+//    checkdtn.js 
+//
+//  check the validity of syntax and content of a dtnmodel
+//
+//  usage:  checkdtn.js -m [netmodelfile]
+//
+//  inputs: net_model.json  (or alternative name)
+//
+//  outputs: progress messages,
+//           error messages
+
+//
+//    dtn2ion.js
+//
+//  generate an ion model from a dtn network model
+//
+//  usage:  dtn2ion.js -m [netmodelfile]
+//
+//  inputs: net_model.json  (or alternative name)
+//
+//  outputs: net_model-ion.json,  [related to input name]
+//           progress messages,
+//           error messages
+
+//
+//    ionconfig.js
+//
+//  generate full set of ion config files based on ion model
+//
+//  usage:  ionconfig.js -m [ionmodelfile]
+//
+//  inputs: ion_model.json  (or alternative name)
+//
+//  outputs: ion_model directory,    (using model name)
+//           ion_model/node1 subdir, (per node using node names from model)
+//           ion_model/node1/node1.xxxrc,   (per node per config file)
+//           ion_model/node1/start_node1.sh, (start script per node)
+//           progress messages,
+//           error messages
+
+

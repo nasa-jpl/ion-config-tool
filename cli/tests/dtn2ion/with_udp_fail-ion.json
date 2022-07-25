@@ -1,0 +1,726 @@
+{
+  "ionModelName": "with_udp_fail-ion",
+  "ionModelDesc": "ION UDP CLA fails?",
+  "nextNodeNum": 1000,
+  "currentContacts": "with_udp_fail-graph",
+  "hosts": [
+    {
+      "hostName": "host1",
+      "hostDesc": "host1 description",
+      "linefeed": "unix",
+      "ipAddrs": [
+        "10.0.0.1"
+      ]
+    },
+    {
+      "hostName": "host2",
+      "hostDesc": "host2 description",
+      "linefeed": "unix",
+      "ipAddrs": [
+        "10.0.0.2"
+      ]
+    },
+    {
+      "hostName": "host3",
+      "hostDesc": "host3 description",
+      "linefeed": "unix",
+      "ipAddrs": [
+        "10.0.1.2"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "nodeName": "n1",
+      "nodeDesc": "n1 description",
+      "nodeNum": 1,
+      "ionVersion": "4.1.0",
+      "hostName": "host1",
+      "configs": {
+        "ionconfig": {
+          "commands": [
+            {
+              "type": "ionconfig_configFlags",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "13"
+              ]
+            }
+          ]
+        },
+        "ionrc": {
+          "commands": [
+            {
+              "type": "ionrc_initialize",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                1,
+                "n1.ionconfig"
+              ]
+            },
+            {
+              "type": "ionrc_start",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": []
+            }
+          ]
+        },
+        "ipnrc": {
+          "commands": [
+            {
+              "type": "ipnrc_plan_udp",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                2,
+                "10.0.0.2:4556",
+                "1000000"
+              ]
+            }
+          ]
+        },
+        "bpv6rc": {
+          "commands": [
+            {
+              "type": "bpv6rc_initialize",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": []
+            },
+            {
+              "type": "bpv6rc_scheme",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "ipn",
+                "ipnfw",
+                "ipnadminep"
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                1,
+                0,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                1,
+                1,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                1,
+                2,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                1,
+                3,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                1,
+                4,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                1,
+                5,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                1,
+                6,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_protocol",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "udp",
+                1400,
+                100,
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_induct_udp",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "10.0.0.1",
+                4556,
+                "udpcli"
+              ]
+            },
+            {
+              "type": "bpv6rc_outduct_udp",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "10.0.0.2:4556",
+                "udpclo",
+                "0"
+              ]
+            },
+            {
+              "type": "bpv6rc_start",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": []
+            }
+          ]
+        },
+        "ionsecrc": {
+          "commands": [
+            {
+              "type": "ionsecrc_initialize",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "nodeName": "n2",
+      "nodeDesc": "n2 description",
+      "nodeNum": 2,
+      "ionVersion": "4.1.0",
+      "hostName": "host2",
+      "configs": {
+        "ionconfig": {
+          "commands": [
+            {
+              "type": "ionconfig_configFlags",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "13"
+              ]
+            }
+          ]
+        },
+        "ionrc": {
+          "commands": [
+            {
+              "type": "ionrc_initialize",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                2,
+                "n2.ionconfig"
+              ]
+            },
+            {
+              "type": "ionrc_start",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": []
+            }
+          ]
+        },
+        "ipnrc": {
+          "commands": [
+            {
+              "type": "ipnrc_plan_udp",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                1,
+                "10.0.0.1:4556",
+                "1000000"
+              ]
+            },
+            {
+              "type": "ipnrc_plan_tcp",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                3,
+                "10.0.1.2:4556",
+                "1000000"
+              ]
+            }
+          ]
+        },
+        "bpv6rc": {
+          "commands": [
+            {
+              "type": "bpv6rc_initialize",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": []
+            },
+            {
+              "type": "bpv6rc_scheme",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "ipn",
+                "ipnfw",
+                "ipnadminep"
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                2,
+                0,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                2,
+                1,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                2,
+                2,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                2,
+                3,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                2,
+                4,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                2,
+                5,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                2,
+                6,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_protocol",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "udp",
+                1400,
+                100,
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_protocol",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "tcp",
+                1400,
+                100,
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_induct_udp",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "10.0.0.2",
+                4556,
+                "udpcli"
+              ]
+            },
+            {
+              "type": "bpv6rc_induct_tcp",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "10.0.0.2",
+                4557,
+                "tcpcli"
+              ]
+            },
+            {
+              "type": "bpv6rc_outduct_udp",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "10.0.0.1:4556",
+                "udpclo",
+                "0"
+              ]
+            },
+            {
+              "type": "bpv6rc_outduct_tcp",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "10.0.1.2:4556",
+                "tcpclo",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_start",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": []
+            }
+          ]
+        },
+        "ionsecrc": {
+          "commands": [
+            {
+              "type": "ionsecrc_initialize",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "nodeName": "n3",
+      "nodeDesc": "n3 description",
+      "nodeNum": 3,
+      "ionVersion": "4.1.0",
+      "hostName": "host3",
+      "configs": {
+        "ionconfig": {
+          "commands": [
+            {
+              "type": "ionconfig_configFlags",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "13"
+              ]
+            }
+          ]
+        },
+        "ionrc": {
+          "commands": [
+            {
+              "type": "ionrc_initialize",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                3,
+                "n3.ionconfig"
+              ]
+            },
+            {
+              "type": "ionrc_start",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": []
+            }
+          ]
+        },
+        "ipnrc": {
+          "commands": [
+            {
+              "type": "ipnrc_plan_tcp",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                2,
+                "10.0.0.2:4557",
+                "1000000"
+              ]
+            }
+          ]
+        },
+        "bpv6rc": {
+          "commands": [
+            {
+              "type": "bpv6rc_initialize",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": []
+            },
+            {
+              "type": "bpv6rc_scheme",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "ipn",
+                "ipnfw",
+                "ipnadminep"
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                3,
+                0,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                3,
+                1,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                3,
+                2,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                3,
+                3,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                3,
+                4,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                3,
+                5,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_endpoint",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                3,
+                6,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_protocol",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "udp",
+                1400,
+                100,
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_protocol",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "tcp",
+                1400,
+                100,
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_induct_tcp",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "10.0.1.2",
+                4556,
+                "tcpcli"
+              ]
+            },
+            {
+              "type": "bpv6rc_outduct_tcp",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                "10.0.0.2:4557",
+                "tcpclo",
+                ""
+              ]
+            },
+            {
+              "type": "bpv6rc_start",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": []
+            }
+          ]
+        },
+        "ionsecrc": {
+          "commands": [
+            {
+              "type": "ionsecrc_initialize",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": []
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "graphs": [
+    {
+      "graphName": "with_udp_fail-graph",
+      "graphDesc": "ION UDP CLA fails? Contacts",
+      "ionVersion": "4.1.0",
+      "configs": {
+        "contacts": {
+          "commands": [
+            {
+              "type": "contacts_contact_rel_rel_time",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                0,
+                50000000,
+                1,
+                2,
+                "1000000",
+                1
+              ]
+            },
+            {
+              "type": "contacts_contact_rel_rel_time",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                0,
+                50000000,
+                2,
+                1,
+                "1000000",
+                1
+              ]
+            },
+            {
+              "type": "contacts_contact_rel_rel_time",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                0,
+                50000000,
+                2,
+                3,
+                "1000000",
+                1
+              ]
+            },
+            {
+              "type": "contacts_contact_rel_rel_time",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                0,
+                50000000,
+                3,
+                2,
+                "1000000",
+                1
+              ]
+            },
+            {
+              "type": "contacts_range_rel_rel_time",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                0,
+                50000000,
+                1,
+                2,
+                1
+              ]
+            },
+            {
+              "type": "contacts_range_rel_rel_time",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                0,
+                50000000,
+                2,
+                1,
+                1
+              ]
+            },
+            {
+              "type": "contacts_range_rel_rel_time",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                0,
+                50000000,
+                2,
+                3,
+                1
+              ]
+            },
+            {
+              "type": "contacts_range_rel_rel_time",
+              "lastUpdate": "2022-07-20T10:58",
+              "parameters": [
+                0,
+                50000000,
+                3,
+                2,
+                1
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

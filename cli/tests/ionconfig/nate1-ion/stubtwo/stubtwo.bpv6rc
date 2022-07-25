@@ -1,0 +1,87 @@
+#  FILE:      stubtwo.bpv6rc
+#  CONTENT:   Bundle Protocol V6 management commands file
+#  FOR:       bpadmin
+#  BUILDER:   ION Configuration Editor
+#  NETWORK:   nate1-ion    [ION Test nate problem]
+#  NODE:      stubtwo    [another ltp termianal]
+#  IPN:       ipn:1002
+#  DATE:      2022-07-25T13:50
+#
+#  INITIALIZE
+1
+#
+#  SCHEME
+#  [1]                        scheme name : ipn  [Interplanetary Overlay Network Scheme]
+#  [2]                  forwarder command : ipnfw  [ION Forwarder]
+#  [3]                  admin app command : ipnadminep  [ION Admin Endpoints]
+a scheme  ipn  'ipnfw'  'ipnadminep'
+#
+#  ENDPOINT
+#  [1]                           node num : 1002  
+#  [2]                        service num : 0  
+#  [3]                 bundle disposition : x  [discard undeliverable bundles]
+#  [4]                queue receiver task :   
+a endpoint  ipn:1002.0  x  
+#
+#  ENDPOINT
+#  [1]                           node num : 1002  
+#  [2]                        service num : 1  
+#  [3]                 bundle disposition : x  [discard undeliverable bundles]
+#  [4]                queue receiver task :   
+a endpoint  ipn:1002.1  x  
+#
+#  ENDPOINT
+#  [1]                           node num : 1002  
+#  [2]                        service num : 2  
+#  [3]                 bundle disposition : x  [discard undeliverable bundles]
+#  [4]                queue receiver task :   
+a endpoint  ipn:1002.2  x  
+#
+#  ENDPOINT
+#  [1]                           node num : 1002  
+#  [2]                        service num : 3  
+#  [3]                 bundle disposition : x  [discard undeliverable bundles]
+#  [4]                queue receiver task :   
+a endpoint  ipn:1002.3  x  
+#
+#  ENDPOINT
+#  [1]                           node num : 1002  
+#  [2]                        service num : 4  
+#  [3]                 bundle disposition : x  [discard undeliverable bundles]
+#  [4]                queue receiver task :   
+a endpoint  ipn:1002.4  x  
+#
+#  ENDPOINT
+#  [1]                           node num : 1002  
+#  [2]                        service num : 5  
+#  [3]                 bundle disposition : x  [discard undeliverable bundles]
+#  [4]                queue receiver task :   
+a endpoint  ipn:1002.5  x  
+#
+#  ENDPOINT
+#  [1]                           node num : 1002  
+#  [2]                        service num : 6  
+#  [3]                 bundle disposition : x  [discard undeliverable bundles]
+#  [4]                queue receiver task :   
+a endpoint  ipn:1002.6  x  
+#
+#  PROTOCOL
+#  [1]                      protocol name : ltp  [Licklider Transmission Protocol]
+#  [2]            payload bytes per frame : 1400 (bytes) 
+#  [3]           overhead bytes per frame : 100 (bytes) 
+#  [4]                     protocol class :   
+a protocol  ltp  1400  100  
+#
+#  INDUCT_LTP
+#  [1]                      ltp duct name : 1002  
+#  [2]                  ltp cli task name : ltpcli  
+a induct  ltp  1002  ltpcli
+#
+#  OUTDUCT_LTP
+#  [1]                      ltp duct name : 1000  
+#  [2]                  ltp clo task name : ltpclo  
+#  [3]                 max payload length :  (bytes) 
+a outduct  ltp  1000  ltpclo  
+#
+#  START
+s

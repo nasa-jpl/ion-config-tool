@@ -1,0 +1,3 @@
+progs=../../bin
+files=../dtn
+node $progs/checkdtn.js -m $files/nate1.json

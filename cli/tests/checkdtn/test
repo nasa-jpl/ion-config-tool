@@ -1,0 +1,3 @@
+progs=/tmp/release/cli/bin
+files=../dtn
+$progs/checkdtn.js -m $files/badattr1.json

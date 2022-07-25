@@ -1,0 +1,20 @@
+#  FILE:      n2.ipnrc
+#  CONTENT:   IPN scheme configuration commands file
+#  FOR:       ipnadmin
+#  BUILDER:   ION Configuration Editor
+#  NETWORK:   with_udp_fail-ion    [ION UDP CLA fails?]
+#  NODE:      n2    [n2 description]
+#  IPN:       ipn:2
+#  DATE:      2022-07-20T10:58
+#
+#  PLAN_UDP
+#  [1]                     to node number : 1  
+#  [2]           default udp outduct name : 10.0.0.1:4556  
+#  [3]                  nominal data rate : 1000000 (bytes per sec) 
+a plan  1  udp/10.0.0.1:4556  1000000
+#
+#  PLAN_TCP
+#  [1]                     to node number : 3  
+#  [2]           default tcp outduct name : 10.0.1.2:4556  
+#  [3]                  nominal data rate : 1000000 (bytes per sec) 
+a plan  3  tcp/10.0.1.2:4556  1000000

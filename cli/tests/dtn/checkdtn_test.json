@@ -1,0 +1,98 @@
+{
+    "netModelName": "test",
+    "netModelDesc": "",
+    "netNodes": {
+        "SC": {
+            "nodeDesc": "",
+            "nodeType": "ion",
+            "endpointID": "1",
+            "protocols": [
+                "ltp"
+            ],
+            "services": [],
+            "nodeHost": "SC_Host"
+        },
+        "MOps": {
+            "nodeDesc": "",
+            "nodeType": "ion",
+            "endpointID": "25",
+            "protocols": [
+                "tcp"
+            ],
+            "services": [],
+            "nodeHost": "MOps_Host"
+        },
+        "Ground": {
+            "nodeDesc": "",
+            "nodeType": "ion",
+            "endpointID": "55",
+            "protocols": [
+                "ltp",
+                "tcp"
+            ],
+            "services": [],
+            "nodeHost": "Ground_host"
+        }
+    },
+    "netHops": {
+        "SC-Ground": {
+            "fromNode": "SC",
+            "toNode": "Ground",
+            "bpLayer": "ltp",
+            "ltpLayer": "udp",
+            "symmetric": false,
+            "maxRate": "0",
+            "hopDesc": ""
+        },
+        "Ground-SC": {
+            "fromNode": "Ground",
+            "toNode": "SC",
+            "bpLayer": "ltp",
+            "ltpLayer": "",
+            "symmetric": false,
+            "maxRate": "0",
+            "hopDesc": ""
+        },
+        "MOps-Ground": {
+            "fromNode": "MOps",
+            "toNode": "Ground",
+            "bpLayer": "tcp",
+            "ltpLayer": "",
+            "symmetric": true,
+            "maxRate": "0",
+            "hopDesc": ""
+        }
+    },
+    "netHosts": {
+        "SC_Host": {
+            "hostDesc": "",
+            "platform": "unix",
+            "ipAddrs": [
+                "192.168.56.10"
+            ],
+            "hostNodes": [
+                "SC"
+            ]
+        },
+        "Ground_host": {
+            "hostDesc": "",
+            "platform": "unix",
+            "ipAddrs": [
+                ""
+            ],
+            "hostNodes": [
+                "Ground"
+            ]
+        },
+        "MOps_Host": {
+            "hostDesc": "",
+            "platform": "unix",
+            "ipAddrs": [
+                "192.168.56.12"
+            ],
+            "hostNodes": [
+                "MOps"
+            ]
+        }
+    }
+}

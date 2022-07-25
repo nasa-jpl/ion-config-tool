@@ -1,0 +1,64 @@
+{
+  "netModelName": "nate1",
+  "netModelDesc": "Test nate problem",
+  "netHosts": {
+    "host1": {
+      "hostName": "host1",
+      "hostDesc": "host1 unix"
+      "ipAddrs": []
+    },
+    "host2": {
+      "hostName": "host2",
+      "hostDesc": "host2 unix",
+      "ipAddrs": []
+    }
+  },
+  "netNodes": {
+    "central": {
+      "nodeName": "central",
+      "nodeDesc": "central control",
+      "nodeHost": "host1",
+      "nodeType": "",
+      "endpointID": "",
+      "services": []
+    },
+    "ltpstub": {
+      "nodeName": "ltpstub",
+      "nodeDesc": "ltp terminal",
+      "nodeHost": "host2",
+      "nodeType": "",
+      "endpointID": "",
+      "services": []
+    },
+    "stubtwo": {
+      "nodeName": "stubtwo",
+      "nodeDesc": "another ltp termianal",
+      "nodeHost": "host2",
+      "nodeType": "",
+      "endpointID": "",
+      "services": []
+    }
+  },
+  "netHops": {
+    "cent-to-ltp": {
+      "hopName": "cent-to-ltp",
+      "hopDesc": "testing ltp",
+      "fromNode": "central",
+      "toNode": "ltpstub",
+      "bpLayer": "ltp",
+      "ltpLayer": "udp",
+      "maxRate": 0,
+      "symmetric": true
+    },
+    "cent-to-stub2": {
+      "hopName": "cent-to-stub2",
+      "hopDesc": "testing stub2",
+      "fromNode": "central",
+      "toNode": "stubtwo",
+      "bpLayer": "ltp",
+      "ltpLayer": "udp",
+      "maxRate": 0,
+      "symmetric": true
+    }
+  }
+}

@@ -1,0 +1,8 @@
+# start a new npm project
+
+> npm init
+
+# install a package
+
+> npm install xyz --save
+

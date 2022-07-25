@@ -1,0 +1,3 @@
+progs=../../bin
+files=../dtn
+$progs/checkdtn.js -m $files/nonesuch.json

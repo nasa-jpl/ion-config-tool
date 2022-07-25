@@ -1,0 +1,16 @@
+#  FILE:      n2.ionrc
+#  CONTENT:   ION node management commands file
+#  FOR:       ionadmin
+#  BUILDER:   ION Configuration Editor
+#  NETWORK:   with_udp_fail-ion    [ION UDP CLA fails?]
+#  NODE:      n2    [n2 description]
+#  IPN:       ipn:2
+#  DATE:      2022-07-20T10:58
+#
+#  INITIALIZE
+#  [1]                    ion node number : 2  
+#  [2]                ionconfig file name : n2.ionconfig  
+1  2  n2.ionconfig
+#
+#  START
+s

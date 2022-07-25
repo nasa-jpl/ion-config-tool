@@ -1,0 +1,13 @@
+{
+  "netModelName": "nate1",
+  "netModelDesc": "Test nate problem",
+  "netHosts": {
+    "host1": {
+      "hostName": "host1",
+      "hostDesc": "host1 unix",
+      "ipAddrs": []
+    },
+    "host2": {
+      "hostName": "host2",
+      "hostDesc": "host2 unix",
+      "ipAddrs": [],

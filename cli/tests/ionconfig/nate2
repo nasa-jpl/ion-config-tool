@@ -1,0 +1,3 @@
+progs=../../bin
+files=../ion
+$progs/ionconfig.js -m $files/iontest-ion.json

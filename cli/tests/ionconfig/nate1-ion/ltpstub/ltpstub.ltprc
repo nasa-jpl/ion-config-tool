@@ -1,0 +1,28 @@
+#  FILE:      ltpstub.ltprc
+#  CONTENT:   Licklider Transmission Protocol management commands file
+#  FOR:       ltpadmin
+#  BUILDER:   ION Configuration Editor
+#  NETWORK:   nate1-ion    [ION Test nate problem]
+#  NODE:      ltpstub    [ltp terminal]
+#  IPN:       ipn:1001
+#  DATE:      2022-07-25T13:50
+#
+#  INITIALIZE
+#  [1]            est max export sessions : 100  
+1  100
+#
+#  SPAN_UDP
+#  [1]                 peer engine number : 1000  
+#  [2]                max export sessions : 100  
+#  [3]                max import sessions : 100  
+#  [4]                   max segment size : 64000 (bytes) 
+#  [5]         aggregation size threshold : 100000 (bytes) 
+#  [6]             aggregation time limit : 1 (secs) 
+#  [7]              udp link service name : host1:1113  
+#  [8]                   queueing latency : 1 (secs) 
+a span  1000  100  100  64000  100000  1  'udplso host1:1113'  1
+#
+#  START_UDP
+#  [1]               ip address (or name) : host2  
+#  [2]                  local port number : 1113  
+s  'udplsi host2:1113'

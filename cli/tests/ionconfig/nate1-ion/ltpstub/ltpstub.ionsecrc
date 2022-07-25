@@ -1,0 +1,11 @@
+#  FILE:      ltpstub.ionsecrc
+#  CONTENT:   ION security policy management commands file
+#  FOR:       ionsecadmin
+#  BUILDER:   ION Configuration Editor
+#  NETWORK:   nate1-ion    [ION Test nate problem]
+#  NODE:      ltpstub    [ltp terminal]
+#  IPN:       ipn:1001
+#  DATE:      2022-07-25T13:50
+#
+#  INITIALIZE
+1

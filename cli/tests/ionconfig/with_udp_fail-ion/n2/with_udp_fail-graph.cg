@@ -1,0 +1,74 @@
+#  FILE:      with_udp_fail-graph.cg
+#  CONTENT:   ION contact graph commands file
+#  FOR:       ionadmin
+#  BUILDER:   ION Configuration Editor
+#  NETWORK:   with_udp_fail-ion    [ION UDP CLA fails?]
+#  DATE:      2022-07-20T10:58
+#
+#  CONTACT_REL_REL_TIME
+#  [1]                relative start time : 0 (secs) 
+#  [2]                 relative stop time : 50000000 (secs) 
+#  [3]                        source node : 1  
+#  [4]                   destination node : 2  
+#  [5]             transmission data rate : 1000000 (bytes per sec) 
+#  [6]                 contact confidence : 1 (fraction) 
+a contact +0  +50000000  1  2  1000000  1
+#
+#  CONTACT_REL_REL_TIME
+#  [1]                relative start time : 0 (secs) 
+#  [2]                 relative stop time : 50000000 (secs) 
+#  [3]                        source node : 2  
+#  [4]                   destination node : 1  
+#  [5]             transmission data rate : 1000000 (bytes per sec) 
+#  [6]                 contact confidence : 1 (fraction) 
+a contact +0  +50000000  2  1  1000000  1
+#
+#  CONTACT_REL_REL_TIME
+#  [1]                relative start time : 0 (secs) 
+#  [2]                 relative stop time : 50000000 (secs) 
+#  [3]                        source node : 2  
+#  [4]                   destination node : 3  
+#  [5]             transmission data rate : 1000000 (bytes per sec) 
+#  [6]                 contact confidence : 1 (fraction) 
+a contact +0  +50000000  2  3  1000000  1
+#
+#  CONTACT_REL_REL_TIME
+#  [1]                relative start time : 0 (secs) 
+#  [2]                 relative stop time : 50000000 (secs) 
+#  [3]                        source node : 3  
+#  [4]                   destination node : 2  
+#  [5]             transmission data rate : 1000000 (bytes per sec) 
+#  [6]                 contact confidence : 1 (fraction) 
+a contact +0  +50000000  3  2  1000000  1
+#
+#  RANGE_REL_REL_TIME
+#  [1]                relative start time : 0 (secs) 
+#  [2]                 relative stop time : 50000000 (secs) 
+#  [3]                           one node : 1  
+#  [4]                         other node : 2  
+#  [5]              transmission distance : 1 (light secs) 
+a range +0  +50000000  1  2  1
+#
+#  RANGE_REL_REL_TIME
+#  [1]                relative start time : 0 (secs) 
+#  [2]                 relative stop time : 50000000 (secs) 
+#  [3]                           one node : 2  
+#  [4]                         other node : 1  
+#  [5]              transmission distance : 1 (light secs) 
+a range +0  +50000000  2  1  1
+#
+#  RANGE_REL_REL_TIME
+#  [1]                relative start time : 0 (secs) 
+#  [2]                 relative stop time : 50000000 (secs) 
+#  [3]                           one node : 2  
+#  [4]                         other node : 3  
+#  [5]              transmission distance : 1 (light secs) 
+a range +0  +50000000  2  3  1
+#
+#  RANGE_REL_REL_TIME
+#  [1]                relative start time : 0 (secs) 
+#  [2]                 relative stop time : 50000000 (secs) 
+#  [3]                           one node : 3  
+#  [4]                         other node : 2  
+#  [5]              transmission distance : 1 (light secs) 
+a range +0  +50000000  3  2  1

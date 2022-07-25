@@ -1,0 +1,11 @@
+#  FILE:      n3.ionsecrc
+#  CONTENT:   ION security policy management commands file
+#  FOR:       ionsecadmin
+#  BUILDER:   ION Configuration Editor
+#  NETWORK:   with_udp_fail-ion    [ION UDP CLA fails?]
+#  NODE:      n3    [n3 description]
+#  IPN:       ipn:3
+#  DATE:      2022-07-20T10:58
+#
+#  INITIALIZE
+1

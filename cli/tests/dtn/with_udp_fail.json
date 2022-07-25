@@ -1,0 +1,75 @@
+{
+    "netModelName": "with_udp_fail",
+    "netModelDesc": "UDP CLA fails?",
+    "netHosts": {
+        "host1": {
+            "hostName": "host1",
+            "hostDesc": "host1 description",
+            "ipAddrs": [
+                "10.0.0.1"
+            ]
+        },
+        "host2": {
+            "hostName": "host2",
+            "hostDesc": "host2 description",
+            "ipAddrs": [
+                "10.0.0.2"
+            ]
+        },
+        "host3": {
+            "hostName": "host3",
+            "hostDesc": "host3 description",
+            "ipAddrs": [
+                "10.0.1.2"
+            ]
+        }
+    },
+    "netNodes": {
+        "n1": {
+            "nodeName": "n1",
+            "nodeDesc": "n1 description",
+            "nodeHost": "host1",
+            "nodeType": "ion",
+            "endpointID": "1",
+            "services": []
+        },
+        "n2": {
+            "nodeName": "n2",
+            "nodeDesc": "n2 description",
+            "nodeHost": "host2",
+            "nodeType": "ion",
+            "endpointID": "2",
+            "services": []
+        },
+        "n3": {
+            "nodeName": "n3",
+            "nodeDesc": "n3 description",
+            "nodeHost": "host3",
+            "nodeType": "ion",
+            "endpointID": "3",
+            "services": []
+        }
+    },
+    "netHops": {
+        "n1-n2": {
+            "hopName": "n1n2",
+            "hopDesc": "n1n2 description",
+            "fromNode": "n1",
+            "toNode": "n2",
+            "bpLayer": "udp",
+            "ltpLayer": "",
+            "symmetric": true,
+            "maxRate": "1000000"
+        },
+        "n2-n3": {
+            "hopName": "n2n3",
+            "hopDesc": "n2n3 description",
+            "fromNode": "n2",
+            "toNode": "n3",
+            "bpLayer": "tcp",
+            "ltpLayer": "",
+            "symmetric": true,
+            "maxRate": "1000000"
+        }
+    }
+}

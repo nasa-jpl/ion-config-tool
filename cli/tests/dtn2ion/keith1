@@ -1,0 +1,3 @@
+progs=../../bin
+files=../dtn
+$progs/dtn2ion.js -m $files/with_udp_fail.json
