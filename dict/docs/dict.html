@@ -1,0 +1,2120 @@
+<STYLE type="text/css">
+img {
+	border:2px solid black;
+	width: 100%;
+}
+table {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table th {
+	border-width: 1px;
+	padding: 2px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table td {
+	border-width: 1px;
+	padding: 2px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+</STYLE>
+<h1>ION Config Dictionary Report</h1>
+<h3>ION Version: 4.1.0</h3>
+<h3>ION Release Date: 2021-05-31</h3>
+<h4>Dictionary Seq No: 13</h4>
+<h4>Configuration Files: 20</h4>
+<h4>Commands: 195</h4>
+<h3>Introduction</h3>
+<p>
+The dictionary describes the configuration files and commands supported by ION Configuration Tool. The version is important.  The configuration commands supported by ION can and usually do evolve with each new version, and so it does also for the configuration tool.  It is not easy to spot the changes from version to version, so new releases of the tool also provide delta reports summarizing the changes between successive versions.
+</p>
+<p>
+The purpose of the tool is to build correct initial configurations for a network of ION Nodes more easily and correctly.  It is not necessary for the tool to support all known ION configuration commands, since many of those commands are queries, change requests and similar actions not relevant to defining an initial configuration.  Otherwise, each new release of the tool strives to keep up with all relevant changes to ION configuration options.
+</p>
+The mapping of tool configuration commands to ION commands as defined in the ION man pages is not always one-to-one.  In some cases there are muliple variants of a tool command type to make editing more efficient.  For example, the command might be specialized to a specific protocol so that the editor can reduce the number of user-supplied inputs to complete the command.  In other cases, multiple variants can exist to allow for optional value types for a parameter.  For example, some datetime parameters can be specified either as an exact date/time or as a relative time from the time of an ION start.  These would appear as two distinct command types for the configuration tool.
+</p>
+<h3>ION Command File Types</h3>
+<table>
+<thead><tr class="header"><th align="left">Config File</th><th align="left">Program</th><th align="left">Description</th></tr></thead>
+<tbody>
+<tr><td>acsrc</td><td>acsadmin</td><td>Aggregate Custody Signal management commands file</td></tr>
+<tr><td>biberc</td><td>bibeadmin</td><td>Bundle-in-Bundle Encapsulation management commands file</td></tr>
+<tr><td>bpsecv6rc</td><td>bpsecadmin</td><td>BP V6 security policy management commands file</td></tr>
+<tr><td>bpsecv7rc</td><td>bpsecadmin</td><td>BP V7 security policy management commands file</td></tr>
+<tr><td>bpv6rc</td><td>bpadmin</td><td>Bundle Protocol V6 management commands file</td></tr>
+<tr><td>bpv7rc</td><td>bpadmin</td><td>Bundle Protocol V7 management commands file</td></tr>
+<tr><td>bssprc</td><td>bsspadmin</td><td>Bundle Streaming Service Protocol management commands file</td></tr>
+<tr><td>cfdprc</td><td>cfdpadmin</td><td>CCSDS File Delivery Protocol management commands file</td></tr>
+<tr><td>contacts</td><td>ionadmin</td><td>ION contact graph commands file</td></tr>
+<tr><td>dtkarc</td><td>dtkaadmin</td><td>DTKA user configuration commands file</td></tr>
+<tr><td>dtpcrc</td><td>dtpcadmin</td><td>Delay-Tolerant Payload Conditioning management commands file</td></tr>
+<tr><td>imcrc</td><td>ipnadmin</td><td>IMC scheme configuration commands file</td></tr>
+<tr><td>ionconfig</td><td>ionadmin</td><td>ION node configuration parameters file</td></tr>
+<tr><td>ionrc</td><td>ionadmin</td><td>ION node management commands file</td></tr>
+<tr><td>ionsecrc</td><td>ionsecadmin</td><td>ION security policy management commands file</td></tr>
+<tr><td>ipnrc</td><td>ipnadmin</td><td>IPN scheme configuration commands file</td></tr>
+<tr><td>ltprc</td><td>ltpadmin</td><td>Licklider Transmission Protocol management commands file</td></tr>
+<tr><td>ltpsecrc</td><td>ltpsecadmin</td><td>LTP security policy management commands file</td></tr>
+<tr><td>tcarc</td><td>tcaadmin</td><td>Trusted Collective authority configuration commands file</td></tr>
+<tr><td>tccrc</td><td>tccadmin</td><td>Trusted Collective client configuration commands file</td></tr>
+</tbody>
+</table>
+<br>
+<h3>Describing Command Parameters</h3>
+<p>
+Most of the dictionary is dedicated to carefully describing each parameter for each configuration command.  These settings are important for the tool, so that editting can be done more easily and safely.The following explains each column heading for describing parameters.  One key tool idea is the use of so-called <b>clone</b> values.  Often a parameter value references an identifier established elsewhere in the model, such as a node number or a port number.  These special values are called clones, so that if the original identifier is later changed (e.g. a port number re-assigned), all of its clones are automaticaly changed as well.  This is a key technique for maintaining the correctness of the complete configuration.
+</p>
+<table>
+<tbody>
+<tr><td><b>Parameters</b></td><td>Short description of the parameter.</td>
+</tr>
+<tr><td><b>Required</b></td><td>Is the parameter value required or optional.</td>
+</tr>
+<tr><td><b>ValueType</b></td><td>Is value text, number, datetime or special. Supports editing control.</td>
+</tr>
+<tr><td><b>Units</b></td><td>Numeric values can have units (secs, bytes, ...).</td>
+</tr>
+<tr><td><b>Default</b></td><td>The default value when the command is omitted.</td>
+</tr>
+<tr><td><b>CopyClone</b></td><td>The parameter is automatically assigned a clone value. (e.g.node num).</td>
+</tr>
+<tr><td><b>PickClone</b></td><td>The user selects the clone value from a model-based list.</td>
+</tr>
+</tbody>
+</table>  
+<hr>
+<h3>ION Command File Type: acsrc</h3>
+</br><b>ION Config Command Name: </b>bundle_lifetime</br>
+<b>ION Command Pattern: </b><code>t  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>bundle life time</td><td>true</td><td>number</td><td>secs</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>custodian</br>
+<b>ION Command Pattern: </b><code>a  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>custodian endpoint</td><td>true</td><td>ionEndpoint</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>ACS bundle size</td><td>true</td><td>number</td><td>bytes</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>maximum acs delay</td><td>false</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>initialize</br>
+<b>ION Command Pattern: </b><code>1  [1]  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>log level</td><td>true</td><td>select</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>heap memory words</td><td>true</td><td>number</td><td>words</td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>mincustodyid</br>
+<b>ION Command Pattern: </b><code>s  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>min custody id</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: biberc</h3>
+</br><b>ION Config Command Name: </b>dest_endpoint</br>
+<b>ION Command Pattern: </b><code>a bcla  [1]  [2]  [3]  [4]  [5]  [6]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>destination node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>forward latency</td><td>true</td><td>number</td><td>secs</td><td>0</td><td>false</td><td>false</td></tr>
+<tr><td>return latency</td><td>true</td><td>number</td><td>secs</td><td>0</td><td>false</td><td>false</td></tr>
+<tr><td>priority</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+<tr><td>ordinal</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+<tr><td>data label</td><td>false</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: bpsecv6rc</h3>
+</br><b>ION Config Command Name: </b>bspbcbrule</br>
+<b>ION Command Pattern: </b><code>a bspbcbrule  [1]  [2]  [3]  [4]  [5]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>source endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>destination endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>block type number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>ciphersuite name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>key name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>bspbcbrule_nocheck</br>
+<b>ION Command Pattern: </b><code>a bspbcbrule  [1]  [2]  [3]  ''</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>sender endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>receiver endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>block type number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>bspbibrule</br>
+<b>ION Command Pattern: </b><code>a bspbibrule  [1]  [2]  [3]  [4]  [5]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>source endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>destination endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>block type number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>ciphersuite name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>key name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>bspbibrule_nocheck</br>
+<b>ION Command Pattern: </b><code>a bspbibrule  [1]  [2]  [3]  ''</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>sender endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>receiver endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>block type number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: bpsecv7rc</h3>
+</br><b>ION Config Command Name: </b>bcbrule</br>
+<b>ION Command Pattern: </b><code>a bcbrule  [1]  [2]  [3]  [4]  [5]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>source endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>destination endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>block type number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>ciphersuite name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>key name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>bcbrule_nocheck</br>
+<b>ION Command Pattern: </b><code>a bcbrule  [1]  [2]  [3]  ''</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>sender endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>receiver endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>block type number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>bibrule</br>
+<b>ION Command Pattern: </b><code>a bibrule  [1]  [2]  [3]  [4]  [5]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>source endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>destination endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>block type number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>ciphersuite name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>key name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>bibrule_nocheck</br>
+<b>ION Command Pattern: </b><code>a bibrule  [1]  [2]  [3]  ''</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>sender endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>receiver endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>block type number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: bpv6rc</h3>
+</br><b>ION Config Command Name: </b>add_plan</br>
+<b>ION Command Pattern: </b><code>a plan  [1] [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>transmission rate</td><td>false</td><td>number</td><td>bytes per sec</td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_any</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>protocol name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_bssp</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] bssp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>bsspOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_dccp</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] dccp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>dccpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_ltp</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] ltp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>ltpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_stcp</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] stcp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>stcpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_tcp</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] tcp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>tcpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_udp</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] udp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>udpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>endpoint</br>
+<b>ION Command Pattern: </b><code>a endpoint  ipn:[1].[2]  [3]  [4]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>node num</td><td>true</td><td>nodeNum</td><td></td><td>[cloned from Node]</td><td>true</td><td>false</td></tr>
+<tr><td>service num</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>bundle disposition</td><td>true</td><td>select</td><td></td><td>x</td><td>false</td><td>false</td></tr>
+<tr><td>queue receiver task</td><td>false</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>gateway_plan</br>
+<b>ION Command Pattern: </b><code>g plan  [1] [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>gateway endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>heapmax</br>
+<b>ION Command Pattern: </b><code>m heapmax  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>max database heap per acquisition</td><td>true</td><td>number</td><td>bytes</td><td>560</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_any</br>
+<b>ION Command Pattern: </b><code>a induct  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>protocol name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>duct name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>cli task name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_bssp</br>
+<b>ION Command Pattern: </b><code>a induct  bssp  [1]  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>bssp duct name</td><td>true</td><td>nodeNum</td><td></td><td>[cloned from Node]</td><td>true</td><td>false</td></tr>
+<tr><td>bssp cli task name</td><td>true</td><td>text</td><td></td><td>bsspcli</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_dccp</br>
+<b>ION Command Pattern: </b><code>a induct  dccp  [1]:[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>4556</td><td>false</td><td>false</td></tr>
+<tr><td>dccp cli task name</td><td>true</td><td>text</td><td></td><td>dccpcli</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_ltp</br>
+<b>ION Command Pattern: </b><code>a induct  ltp  [1]  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ltp duct name</td><td>true</td><td>nodeNum</td><td></td><td>[cloned from Node]</td><td>true</td><td>false</td></tr>
+<tr><td>ltp cli task name</td><td>true</td><td>text</td><td></td><td>ltpcli</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_stcp</br>
+<b>ION Command Pattern: </b><code>a induct  stcp  [1]:[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>4556</td><td>false</td><td>false</td></tr>
+<tr><td>stcp cli task name</td><td>true</td><td>text</td><td></td><td>stcpcli</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_tcp</br>
+<b>ION Command Pattern: </b><code>a induct  tcp  [1]:[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>4556</td><td>false</td><td>false</td></tr>
+<tr><td>tcp cli task name</td><td>true</td><td>text</td><td></td><td>tcpcli</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_udp</br>
+<b>ION Command Pattern: </b><code>a induct  udp  [1]:[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>4556</td><td>false</td><td>false</td></tr>
+<tr><td>udp cli task name</td><td>true</td><td>text</td><td></td><td>udpcli</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>initialize</br>
+<b>ION Command Pattern: </b><code>1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>maxcount</br>
+<b>ION Command Pattern: </b><code>m maxcount  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>max bundle ID seq number</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_any</br>
+<b>ION Command Pattern: </b><code>a outduct  [1]  [2]  [3]  [4]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>protocol name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>duct name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>clo task name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_bssp</br>
+<b>ION Command Pattern: </b><code>a outduct  bssp  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>bssp duct name</td><td>true</td><td>bsspInduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>bssp clo task name</td><td>true</td><td>text</td><td></td><td>bsspclo</td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_dccp</br>
+<b>ION Command Pattern: </b><code>a outduct  dccp  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>dccp duct name</td><td>true</td><td>dccpInduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>dccp clo task name</td><td>true</td><td>text</td><td></td><td>dccpclo</td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_ltp</br>
+<b>ION Command Pattern: </b><code>a outduct  ltp  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ltp duct name</td><td>true</td><td>ltpInduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>ltp clo task name</td><td>true</td><td>text</td><td></td><td>ltpclo</td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_stcp</br>
+<b>ION Command Pattern: </b><code>a outduct  stcp  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>stcp duct name</td><td>true</td><td>stcpInduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>stcp clo task name</td><td>true</td><td>text</td><td></td><td>stcpclo</td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_tcp</br>
+<b>ION Command Pattern: </b><code>a outduct  tcp  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>tcp duct name</td><td>true</td><td>tcpInduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>tcp clo task name</td><td>true</td><td>text</td><td></td><td>tcpclo</td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_udp</br>
+<b>ION Command Pattern: </b><code>a outduct  udp  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>udp duct name</td><td>true</td><td>udpInduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>udp clo task name</td><td>true</td><td>text</td><td></td><td>udpclo</td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>protocol</br>
+<b>ION Command Pattern: </b><code>a protocol  [1]  [2]  [3]  [4]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>protocol name</td><td>true</td><td>select</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>payload bytes per frame</td><td>true</td><td>number</td><td>bytes</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>overhead bytes per frame</td><td>true</td><td>number</td><td>bytes</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>protocol class</td><td>false</td><td>select</td><td></td><td>8</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>run</br>
+<b>ION Command Pattern: </b><code>r '[1]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>command text</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>run_ipnadmin</br>
+<b>ION Command Pattern: </b><code>r 'ipnadmin  [1].ipnrc'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>node id</td><td>true</td><td>nodeKey</td><td></td><td>[cloned from Node]</td><td>true</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>scheme</br>
+<b>ION Command Pattern: </b><code>a scheme  [1]  '[2]'  '[3]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>scheme name</td><td>true</td><td>select</td><td></td><td>ipn</td><td>false</td><td>false</td></tr>
+<tr><td>forwarder command</td><td>true</td><td>select</td><td></td><td>ipnfw</td><td>false</td><td>false</td></tr>
+<tr><td>admin app command</td><td>true</td><td>select</td><td></td><td>ipnadminep</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start</br>
+<b>ION Command Pattern: </b><code>s</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>watch</br>
+<b>ION Command Pattern: </b><code>w '[1]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>watch characters</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>watch_all</br>
+<b>ION Command Pattern: </b><code>w 1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: bpv7rc</h3>
+</br><b>ION Config Command Name: </b>add_plan</br>
+<b>ION Command Pattern: </b><code>a plan  [1] [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>transmission rate</td><td>false</td><td>number</td><td>bytes per sec</td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_any</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>protocol name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_bssp</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] bssp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>bsspOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_dccp</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] dccp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>dccpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_ltp</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] ltp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>ltpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_stcp</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] stcp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>stcpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_tcp</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] tcp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>tcpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>attach_outduct_udp</br>
+<b>ION Command Pattern: </b><code>a planduct  [1] udp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outduct name</td><td>true</td><td>udpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>endpoint</br>
+<b>ION Command Pattern: </b><code>a endpoint  ipn:[1].[2]  [3]  [4]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>node num</td><td>true</td><td>nodeNum</td><td></td><td>[cloned from Node]</td><td>true</td><td>false</td></tr>
+<tr><td>service num</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>bundle disposition</td><td>true</td><td>select</td><td></td><td>x</td><td>false</td><td>false</td></tr>
+<tr><td>queue receiver task</td><td>false</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>gateway_plan</br>
+<b>ION Command Pattern: </b><code>g plan  [1] [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>gateway endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>heapmax</br>
+<b>ION Command Pattern: </b><code>m heapmax  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>max database heap per acquisition</td><td>true</td><td>number</td><td>bytes</td><td>560</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_any</br>
+<b>ION Command Pattern: </b><code>a induct  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>protocol name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>duct name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>cli task name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_bssp</br>
+<b>ION Command Pattern: </b><code>a induct  bssp  [1]  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>bssp duct name</td><td>true</td><td>nodeNum</td><td></td><td>[cloned from Node]</td><td>true</td><td>false</td></tr>
+<tr><td>bssp cli task name</td><td>true</td><td>text</td><td></td><td>bsspcli</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_dccp</br>
+<b>ION Command Pattern: </b><code>a induct  dccp  [1]:[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>4556</td><td>false</td><td>false</td></tr>
+<tr><td>dccp cli task name</td><td>true</td><td>text</td><td></td><td>dccpcli</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_ltp</br>
+<b>ION Command Pattern: </b><code>a induct  ltp  [1]  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ltp duct name</td><td>true</td><td>nodeNum</td><td></td><td>[cloned from Node]</td><td>true</td><td>false</td></tr>
+<tr><td>ltp cli task name</td><td>true</td><td>text</td><td></td><td>ltpcli</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_stcp</br>
+<b>ION Command Pattern: </b><code>a induct  stcp  [1]:[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>4556</td><td>false</td><td>false</td></tr>
+<tr><td>stcp cli task name</td><td>true</td><td>text</td><td></td><td>stcpcli</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_tcp</br>
+<b>ION Command Pattern: </b><code>a induct  tcp  [1]:[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>4556</td><td>false</td><td>false</td></tr>
+<tr><td>tcp cli task name</td><td>true</td><td>text</td><td></td><td>tcpcli</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>induct_udp</br>
+<b>ION Command Pattern: </b><code>a induct  udp  [1]:[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>4556</td><td>false</td><td>false</td></tr>
+<tr><td>udp cli task name</td><td>true</td><td>text</td><td></td><td>udpcli</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>initialize</br>
+<b>ION Command Pattern: </b><code>1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>maxcount</br>
+<b>ION Command Pattern: </b><code>m maxcount  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>max bundle ID seq number</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_any</br>
+<b>ION Command Pattern: </b><code>a outduct  [1]  [2]  [3]  [4]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>protocol name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>duct name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>clo task name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_bssp</br>
+<b>ION Command Pattern: </b><code>a outduct  bssp  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>bssp duct name</td><td>true</td><td>bsspInduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>bssp clo task name</td><td>true</td><td>text</td><td></td><td>bsspclo</td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_dccp</br>
+<b>ION Command Pattern: </b><code>a outduct  dccp  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>dccp duct name</td><td>true</td><td>dccpInduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>dccp clo task name</td><td>true</td><td>text</td><td></td><td>dccpclo</td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_ltp</br>
+<b>ION Command Pattern: </b><code>a outduct  ltp  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ltp duct name</td><td>true</td><td>ltpInduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>ltp clo task name</td><td>true</td><td>text</td><td></td><td>ltpclo</td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_stcp</br>
+<b>ION Command Pattern: </b><code>a outduct  stcp  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>stcp duct name</td><td>true</td><td>stcpInduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>stcp clo task name</td><td>true</td><td>text</td><td></td><td>stcpclo</td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_tcp</br>
+<b>ION Command Pattern: </b><code>a outduct  tcp  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>tcp duct name</td><td>true</td><td>tcpInduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>tcp clo task name</td><td>true</td><td>text</td><td></td><td>tcpclo</td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outduct_udp</br>
+<b>ION Command Pattern: </b><code>a outduct  udp  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>udp duct name</td><td>true</td><td>udpInduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>udp clo task name</td><td>true</td><td>text</td><td></td><td>udpclo</td><td>false</td><td>false</td></tr>
+<tr><td>max payload length</td><td>false</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>protocol</br>
+<b>ION Command Pattern: </b><code>a protocol  [1]  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>protocol name</td><td>true</td><td>select</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>protocol class</td><td>false</td><td>select</td><td></td><td>8</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>run</br>
+<b>ION Command Pattern: </b><code>r '[1]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>command text</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>run_ipnadmin</br>
+<b>ION Command Pattern: </b><code>r 'ipnadmin  [1].ipnrc'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>node id</td><td>true</td><td>nodeKey</td><td></td><td>[cloned from Node]</td><td>true</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>scheme</br>
+<b>ION Command Pattern: </b><code>a scheme  [1]  '[2]'  '[3]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>scheme name</td><td>true</td><td>select</td><td></td><td>ipn</td><td>false</td><td>false</td></tr>
+<tr><td>forwarder command</td><td>true</td><td>select</td><td></td><td>ipnfw</td><td>false</td><td>false</td></tr>
+<tr><td>admin app command</td><td>true</td><td>select</td><td></td><td>ipnadminep</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start</br>
+<b>ION Command Pattern: </b><code>s</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>watch</br>
+<b>ION Command Pattern: </b><code>w '[1]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>watch characters</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>watch_all</br>
+<b>ION Command Pattern: </b><code>w 1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: bssprc</h3>
+</br><b>ION Config Command Name: </b>initialize</br>
+<b>ION Command Pattern: </b><code>1  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>est max sessions</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>ownqtime</br>
+<b>ION Command Pattern: </b><code>m ownqtime  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>own queuing time</td><td>true</td><td>number</td><td>secs</td><td>1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>seat</br>
+<b>ION Command Pattern: </b><code>a seat  '[1]'  '[2]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>best-effort bso command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>reliable bso command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>span_any</br>
+<b>ION Command Pattern: </b><code>a span  [1]  [2]  [3]  '[4]'  '[5]'  [6]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>peer engine number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>max export sessions</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>max block size</td><td>true</td><td>number</td><td>bytes</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>best-effort link output command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>reliable link output command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>queueing latency</td><td>false</td><td>number</td><td>secs</td><td>1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>span_udp_tcp</br>
+<b>ION Command Pattern: </b><code>a span  [1]  [2]  [3]  'udpbso [4]:[5]  [6]'  'tcpbso [7]:[8]'  [9]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>peer engine number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>max export sessions</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>max block size</td><td>true</td><td>number</td><td>bytes</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>best-effort dest ipaddr</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>best-effort dest port number</td><td>true</td><td>number</td><td></td><td>6001</td><td>false</td><td>false</td></tr>
+<tr><td>transmission rate</td><td>true</td><td>number</td><td>bits per sec</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>reliable dest ipaddr</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>reliable dest port number</td><td>true</td><td>number</td><td></td><td>4556</td><td>false</td><td>false</td></tr>
+<tr><td>queueing latency</td><td>false</td><td>number</td><td>secs</td><td>1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start_any</br>
+<b>ION Command Pattern: </b><code>s  '[1]'  '[2]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>best-effort link input command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>reliable link input command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start_udp_tcp</br>
+<b>ION Command Pattern: </b><code>s  'udpbsi [1]:[2]'  'tcpbsi  [3]:[4]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>best-effort local ip addr</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>best-effort local port number</td><td>true</td><td>number</td><td></td><td>6001</td><td>false</td><td>false</td></tr>
+<tr><td>reliable local ip addr</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>reliable local port number</td><td>true</td><td>number</td><td></td><td>4556</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>watch</br>
+<b>ION Command Pattern: </b><code>w '[1]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>watch characters</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>watch_all</br>
+<b>ION Command Pattern: </b><code>w 1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: cfdprc</h3>
+</br><b>ION Config Command Name: </b>ckperiod</br>
+<b>ION Command Pattern: </b><code>m ckperiod  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>period to check file completion</td><td>true</td><td>number</td><td>secs</td><td>86400</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>discard</br>
+<b>ION Command Pattern: </b><code>m discard  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>discard partially received file</td><td>true</td><td>select</td><td></td><td>1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>entity_bp</br>
+<b>ION Command Pattern: </b><code>a entity [1]  bp  [2]  [3]  [4]  [5] </code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>remote entity number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>UT endpoint name</td><td>true</td><td>ionEndpoint</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>round-trip time</td><td>true</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>incoming checksum type</td><td>true</td><td>select</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>outgoing checksum type</td><td>true</td><td>select</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>fillchar</br>
+<b>ION Command Pattern: </b><code>m fillchar  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>fill char for incomplete files</td><td>true</td><td>text</td><td>hex</td><td>0xaa</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>inactivity</br>
+<b>ION Command Pattern: </b><code>m inactivity  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>max idle time til cancel</td><td>true</td><td>number</td><td>secs</td><td>86400</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>initialize</br>
+<b>ION Command Pattern: </b><code>1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>maxtimeouts</br>
+<b>ION Command Pattern: </b><code>m maxtimeouts  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>check cycle limit</td><td>true</td><td>number</td><td></td><td>7</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>maxtrnbr</br>
+<b>ION Command Pattern: </b><code>m maxtrnbr  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>max transaction number</td><td>true</td><td>number</td><td></td><td>999999999</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>requirerc</br>
+<b>ION Command Pattern: </b><code>m requirerc  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>require CRC data integrity</td><td>true</td><td>select</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>segsize</br>
+<b>ION Command Pattern: </b><code>m segsize  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>max bytes per file segment size</td><td>true</td><td>number</td><td>bytes</td><td>65000</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start_any</br>
+<b>ION Command Pattern: </b><code>s  '[1]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>UTS command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start_bputa</br>
+<b>ION Command Pattern: </b><code>s  bputa</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>watch_all</br>
+<b>ION Command Pattern: </b><code>w 1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: contacts</h3>
+</br><b>ION Config Command Name: </b>announce</br>
+<b>ION Command Pattern: </b><code>!  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>announce</td><td>true</td><td>select</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>at</br>
+<b>ION Command Pattern: </b><code>@  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>reference time</td><td>true</td><td>datetime</td><td>UTC</td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>contact_abs_abs_time</br>
+<b>ION Command Pattern: </b><code>a contact [1]  [2]  [3]  [4]  [5]  [6]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>start time</td><td>true</td><td>datetime</td><td>UTC</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>stop time</td><td>true</td><td>datetime</td><td>UTC</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>source node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>destination node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>transmission data rate</td><td>true</td><td>number</td><td>bytes per sec</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>contact confidence</td><td>false</td><td>number</td><td>fraction</td><td>1.00</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>contact_abs_rel_time</br>
+<b>ION Command Pattern: </b><code>a contact [1]  +[2]  [3]  [4]  [5]  [6]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>start time</td><td>true</td><td>datetime</td><td>UTC</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>relative stop time</td><td>true</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>source node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>destination node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>transmission data rate</td><td>true</td><td>number</td><td>bytes per sec</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>contact confidence</td><td>false</td><td>number</td><td>fraction</td><td>1.00</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>contact_rel_abs_time</br>
+<b>ION Command Pattern: </b><code>a contact +[1]  [2]  [3]  [4]  [5]  [6]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>relative start time</td><td>true</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>stop time</td><td>true</td><td>datetime</td><td>UTC</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>source node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>destination node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>transmission data rate</td><td>true</td><td>number</td><td>bytes per sec</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>contact confidence</td><td>false</td><td>number</td><td>fraction</td><td>1.00</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>contact_rel_rel_time</br>
+<b>ION Command Pattern: </b><code>a contact +[1]  +[2]  [3]  [4]  [5]  [6]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>relative start time</td><td>true</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>relative stop time</td><td>true</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>source node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>destination node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>transmission data rate</td><td>true</td><td>number</td><td>bytes per sec</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>contact confidence</td><td>false</td><td>number</td><td>fraction</td><td>1.00</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>hypothetical</br>
+<b>ION Command Pattern: </b><code>a contact 0  0  [1]  [2]  0  0.0</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>source node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>destination node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>range_abs_abs_time</br>
+<b>ION Command Pattern: </b><code>a range [1]  [2]  [3]  [4]  [5]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>start time</td><td>true</td><td>datetime</td><td>UTC</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>stop time</td><td>true</td><td>datetime</td><td>UTC</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>one node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>other node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>transmission distance</td><td>true</td><td>number</td><td>light secs</td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>range_abs_rel_time</br>
+<b>ION Command Pattern: </b><code>a range [1]  +[2]  [3]  [4]  [5]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>start time</td><td>true</td><td>datetime</td><td>UTC</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>relative stop time</td><td>true</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>one node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>other node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>transmission distance</td><td>true</td><td>number</td><td>light secs</td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>range_rel_abs_time</br>
+<b>ION Command Pattern: </b><code>a range +[1]  [2]  [3]  [4]  [5]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>relative start time</td><td>true</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>stop time</td><td>true</td><td>datetime</td><td>UTC</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>one node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>other node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>transmission distance</td><td>true</td><td>number</td><td>light secs</td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>range_rel_rel_time</br>
+<b>ION Command Pattern: </b><code>a range +[1]  +[2]  [3]  [4]  [5]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>relative start time</td><td>true</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>relative stop time</td><td>true</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>one node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>other node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>transmission distance</td><td>true</td><td>number</td><td>light secs</td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>region</br>
+<b>ION Command Pattern: </b><code>^  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>region</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>contact_registration</br>
+<b>ION Command Pattern: </b><code>a contact -1  -1  [1]  [2]  0</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>region member node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>node (must match above)</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: dtkarc</h3>
+</br><b>ION Config Command Name: </b>gen_interval</br>
+<b>ION Command Pattern: </b><code>m interval  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>gen interval</td><td>true</td><td>number</td><td>secs</td><td>604800</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>initialize</br>
+<b>ION Command Pattern: </b><code>1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>keygen_time</br>
+<b>ION Command Pattern: </b><code>m keygentime  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>keygen time</td><td>true</td><td>datetime</td><td>UTC</td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>lead_time</br>
+<b>ION Command Pattern: </b><code>m leadtime  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>lead time</td><td>true</td><td>number</td><td>secs</td><td>345600</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: dtpcrc</h3>
+</br><b>ION Config Command Name: </b>initialize</br>
+<b>ION Command Pattern: </b><code>1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>profile</br>
+<b>ION Command Pattern: </b><code>a profile  [1]  [2]  [3]  [4]  [5]  [6]  dtn:[7]  [8]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>profile id num</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+<tr><td>max times retransmit ADU</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+<tr><td>aggregrate size limit</td><td>true</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+<tr><td>aggregate time limit</td><td>true</td><td>number</td><td>secs</td><td>0</td><td>false</td><td>false</td></tr>
+<tr><td>total time to live</td><td>true</td><td>number</td><td>secs</td><td>0</td><td>false</td><td>false</td></tr>
+<tr><td>class of service</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>report dtn endpoint</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>status report flags</td><td>true</td><td>text</td><td>rcv,ct,fwd,dlv,del</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start</br>
+<b>ION Command Pattern: </b><code>s</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>watch_all</br>
+<b>ION Command Pattern: </b><code>w 1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: imcrc</h3>
+</br><b>ION Config Command Name: </b>kin</br>
+<b>ION Command Pattern: </b><code>a kin  [1]  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>related node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>kinship of related node</td><td>true</td><td>select</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: ionconfig</h3>
+</br><b>ION Config Command Name: </b>configFlags</br>
+<b>ION Command Pattern: </b><code>configFlags  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ion configuration flags</td><td>true</td><td>select</td><td></td><td>13</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>heapKey</br>
+<b>ION Command Pattern: </b><code>heapKey  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ion heap key</td><td>true</td><td>number</td><td></td><td>-1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>heapWords</br>
+<b>ION Command Pattern: </b><code>heapWords  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ion heap words</td><td>true</td><td>number</td><td>words</td><td>250000</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>logKey</br>
+<b>ION Command Pattern: </b><code>logKey  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ion log key</td><td>true</td><td>number</td><td></td><td>-1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>logSize</br>
+<b>ION Command Pattern: </b><code>logSize  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ion log size</td><td>true</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>pathName</br>
+<b>ION Command Pattern: </b><code>pathName  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ion path name of heap file</td><td>true</td><td>text</td><td></td><td>/tmp</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>sdrName</br>
+<b>ION Command Pattern: </b><code>sdrName  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ion heap key</td><td>true</td><td>text</td><td></td><td>ion</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>sdrWmSize</br>
+<b>ION Command Pattern: </b><code>sdrWmSize  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ion SDR working memory size</td><td>true</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>wmAddress</br>
+<b>ION Command Pattern: </b><code>wmAddress  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ion working memory address</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>wmKey</br>
+<b>ION Command Pattern: </b><code>wmKey  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ion working memory key</td><td>true</td><td>number</td><td></td><td>65281</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>wmSize</br>
+<b>ION Command Pattern: </b><code>wmSize  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ion working memory size</td><td>true</td><td>number</td><td>bytes</td><td>5000000</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: ionrc</h3>
+</br><b>ION Config Command Name: </b>alarm</br>
+<b>ION Command Pattern: </b><code>m alarm   [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>congestion alarm command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>clockerr</br>
+<b>ION Command Pattern: </b><code>m clockerr  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>max clock error</td><td>true</td><td>number</td><td>secs</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>clocksync</br>
+<b>ION Command Pattern: </b><code>m clocksync  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>has synchronized clock</td><td>true</td><td>number</td><td>(0 or 1)</td><td>1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>consumption</br>
+<b>ION Command Pattern: </b><code>m consumption  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>planned consumption rate</td><td>true</td><td>number</td><td>bytes per sec</td><td>-1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>home</br>
+<b>ION Command Pattern: </b><code>m home   [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>home region number</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>horizon</br>
+<b>ION Command Pattern: </b><code>m horizon  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>congestion horizon</td><td>true</td><td>number</td><td>secs</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>hypothetical</br>
+<b>ION Command Pattern: </b><code>a contact 0  0  [1]  [2]  0  0.0</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>source node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>destination node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>inbound</br>
+<b>ION Command Pattern: </b><code>m inbound  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>inbound heap (or file) limit</td><td>true</td><td>number</td><td>megabytes</td><td>-1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>initialize</br>
+<b>ION Command Pattern: </b><code>1  [1]  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ion node number</td><td>true</td><td>nodeNum</td><td></td><td>[cloned from Node]</td><td>true</td><td>false</td></tr>
+<tr><td>ionconfig file name</td><td>false</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outbound</br>
+<b>ION Command Pattern: </b><code>m outbound  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>outbound heap (or file) limit</td><td>true</td><td>number</td><td>megabytes</td><td>-1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>outer</br>
+<b>ION Command Pattern: </b><code>m outer   [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>outer region number</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>passageway</br>
+<b>ION Command Pattern: </b><code>m passageway   [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>node number</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+<tr><td>home region number</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+<tr><td>outer region number</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>production</br>
+<b>ION Command Pattern: </b><code>m production  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>planned production rate</td><td>true</td><td>number</td><td>bytes per sec</td><td>-1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>search</br>
+<b>ION Command Pattern: </b><code>m search  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>max free blocks to search</td><td>true</td><td>number</td><td>blocks</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start</br>
+<b>ION Command Pattern: </b><code>s</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>usage</br>
+<b>ION Command Pattern: </b><code>m usage</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>utcdelta</br>
+<b>ION Command Pattern: </b><code>m utcdelta  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>local time after utc</td><td>true</td><td>number</td><td>secs</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: ionsecrc</h3>
+</br><b>ION Config Command Name: </b>initialize</br>
+<b>ION Command Pattern: </b><code>1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>key</br>
+<b>ION Command Pattern: </b><code>a key  [1]  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>key name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>key file name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: ipnrc</h3>
+</br><b>ION Config Command Name: </b>cosovrd</br>
+<b>ION Command Pattern: </b><code>a cosovrd  [1]  [2]  [3]  [4]  [5]  [6]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>data label</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>dest node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>src node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>priority</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>ordinal</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>qos flags</td><td>false</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>exit_ion</br>
+<b>ION Command Pattern: </b><code>a exit  [1]  [2]  ipn.[3].0</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>first node number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>last node number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>gateway node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>plan_any</br>
+<b>ION Command Pattern: </b><code>a plan  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>to node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>default any outduct name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>nominal data rate</td><td>false</td><td>number</td><td>bytes per sec</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>plan_bssp</br>
+<b>ION Command Pattern: </b><code>a plan  [1]  bssp/[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>to node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>default bssp outduct name</td><td>true</td><td>bsspOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>nominal data rate</td><td>false</td><td>number</td><td>bytes per sec</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>plan_dccp</br>
+<b>ION Command Pattern: </b><code>a plan  [1]  dccp/[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>to node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>default dccp outduct name</td><td>true</td><td>dccpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>nominal data rate</td><td>false</td><td>number</td><td>bytes per sec</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>plan_ltp</br>
+<b>ION Command Pattern: </b><code>a plan  [1]  ltp/[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>to node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>default ltp outduct name</td><td>true</td><td>ltpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>nominal data rate</td><td>false</td><td>number</td><td>bytes per sec</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>plan_stcp</br>
+<b>ION Command Pattern: </b><code>a plan  [1]  stcp/[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>to node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>default stcp outduct name</td><td>true</td><td>stcpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>nominal data rate</td><td>false</td><td>number</td><td>bytes per sec</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>plan_tcp</br>
+<b>ION Command Pattern: </b><code>a plan  [1]  tcp/[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>to node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>default tcp outduct name</td><td>true</td><td>tcpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>nominal data rate</td><td>false</td><td>number</td><td>bytes per sec</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>plan_udp</br>
+<b>ION Command Pattern: </b><code>a plan  [1]  udp/[2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>to node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>default udp outduct name</td><td>true</td><td>udpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>nominal data rate</td><td>false</td><td>number</td><td>bytes per sec</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>rtovrd</br>
+<b>ION Command Pattern: </b><code>a rtovrd  [1]  [2]  [3]  [4]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>data label</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>dest node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>src node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>neighbor node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: ltprc</h3>
+</br><b>ION Config Command Name: </b>heapmax</br>
+<b>ION Command Pattern: </b><code>m heapmax  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>max database heap per acquisition</td><td>true</td><td>number</td><td>bytes</td><td>560</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>initialize</br>
+<b>ION Command Pattern: </b><code>1  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>est max export sessions</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>maxbacklog</br>
+<b>ION Command Pattern: </b><code>m maxbacklog  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>max delivery backlog</td><td>true</td><td>number</td><td>blocks</td><td>10</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>maxber</br>
+<b>ION Command Pattern: </b><code>m maxber  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>max bit error rate</td><td>true</td><td>number</td><td>decimal fraction</td><td>.000001</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>ownqtime</br>
+<b>ION Command Pattern: </b><code>m ownqtime  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>own queuing time</td><td>true</td><td>number</td><td>secs</td><td>1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>screening</br>
+<b>ION Command Pattern: </b><code>m screening  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>enable screening of ltp segments</td><td>true</td><td>select</td><td></td><td>n</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>seat_any</br>
+<b>ION Command Pattern: </b><code>a seat  '[1]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>LSI command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>seat_dccp</br>
+<b>ION Command Pattern: </b><code>a seat  'dccplsi [1]:[2]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>1113</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>seat_udp</br>
+<b>ION Command Pattern: </b><code>a seat  'udplsi [1]:[2]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>1113</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>span_any</br>
+<b>ION Command Pattern: </b><code>a span  [1]  [2]  [3]  [4]  [5]  [6]  '[7]'  [8]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>peer engine number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>max export sessions</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>max import sessions</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>max segment size</td><td>true</td><td>number</td><td>bytes</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>aggregation size limit</td><td>true</td><td>number</td><td>bytes</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>aggregation time limit</td><td>true</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>lso command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>queueing latency</td><td>false</td><td>number</td><td>secs</td><td>1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>span_dccp</br>
+<b>ION Command Pattern: </b><code>a span  [1]  [2]  [3]  [4]  [5]  [6]  'dccplso [7]'  [8]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>peer engine number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>max export sessions</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>max import sessions</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>max segment size</td><td>true</td><td>number</td><td>bytes</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>aggregation size threshold</td><td>true</td><td>number</td><td>bytes</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>aggregation time limit</td><td>true</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>dccp link service name</td><td>true</td><td>dccpLink</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>queueing latency</td><td>false</td><td>number</td><td>secs</td><td>1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>span_udp</br>
+<b>ION Command Pattern: </b><code>a span  [1]  [2]  [3]  [4]  [5]  [6]  'udplso [7]'  [8]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>peer engine number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>max export sessions</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>max import sessions</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>max segment size</td><td>true</td><td>number</td><td>bytes</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>aggregation size threshold</td><td>true</td><td>number</td><td>bytes</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>aggregation time limit</td><td>true</td><td>number</td><td>secs</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>udp link service name</td><td>true</td><td>udpLink</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>queueing latency</td><td>false</td><td>number</td><td>secs</td><td>1</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start_all</br>
+<b>ION Command Pattern: </b><code>s</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start_any</br>
+<b>ION Command Pattern: </b><code>s  '[1]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>lsi command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start_dccp</br>
+<b>ION Command Pattern: </b><code>s  'dccplsi [1]:[2]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>1113</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start_udp</br>
+<b>ION Command Pattern: </b><code>s  'udplsi [1]:[2]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>1113</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>watch</br>
+<b>ION Command Pattern: </b><code>w '[1]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>watch characters</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>watch_all</br>
+<b>ION Command Pattern: </b><code>w 1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: ltpsecrc</h3>
+</br><b>ION Config Command Name: </b>ltprecvauthrule</br>
+<b>ION Command Pattern: </b><code>a ltprecvauthrule  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>LTP engine id (node num)</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>ciphersuite number</td><td>true</td><td>select</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>key name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>ltpxmitauthrule</br>
+<b>ION Command Pattern: </b><code>a ltpxmitauthrule  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>LTP engine id (node num)</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>ciphersuite number</td><td>true</td><td>select</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>key name</td><td>false</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: tcarc</h3>
+</br><b>ION Config Command Name: </b>auth_index</br>
+<b>ION Command Pattern: </b><code>+  [1]  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>authority index</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>auth_node</br>
+<b>ION Command Pattern: </b><code>a  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>compile_time</br>
+<b>ION Command Pattern: </b><code>m compiletime  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>bulletin compile time</td><td>true</td><td>datetime</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>grace_period</br>
+<b>ION Command Pattern: </b><code>m grace  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>bulletin grace period</td><td>true</td><td>number</td><td>secs</td><td>60</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>initialize</br>
+<b>ION Command Pattern: </b><code>1  [1]  [2]  [3]  [4]  [5]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>mc group num bulletins</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>mc group num records</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>number of authorities</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>diffusion num of blocks</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>redundancy percentage</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>interval</br>
+<b>ION Command Pattern: </b><code>m interval  [1]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>bulletin compile interval</td><td>true</td><td>number</td><td>secs</td><td>3600</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start</br>
+<b>ION Command Pattern: </b><code>s</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>
+<hr>
+<h3>ION Command File Type: tccrc</h3>
+</br><b>ION Config Command Name: </b>authority</br>
+<b>ION Command Pattern: </b><code>m authority  [1]  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>authority index</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>node number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>initialize</br>
+<b>ION Command Pattern: </b><code>1  [1]  [2]  [3]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>number of authorities</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>diffusion num of blocks</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>redundancy percentage</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>start</br>
+<b>ION Command Pattern: </b><code>s</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+<br>

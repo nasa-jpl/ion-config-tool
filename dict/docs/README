@@ -1,0 +1,15 @@
+The two command dictionary documents are delivered as html documents.
+
+   dict.html  - full current dictionary of ion commands
+   delta.html - ion command changes from prior version
+
+The 'dict.html' is the main dictionary doc, describing all of the ION configuration
+files and commands supported by the current release.  The dictionary is generated 
+from the JSON files used by the IonConfig tools. These JSON files declaratively 
+specify the ION config file types, commands, parameters and versions.  
+
+The 'delta.html' is a supplementary dictionary doc, providing a delta report with
+respect to the immediately preceding ION version. It describes each new command plus 
+each obsolete command replaced or dropped in the current release.
+
+View each html doc by simply loading the file into any standard web browser.

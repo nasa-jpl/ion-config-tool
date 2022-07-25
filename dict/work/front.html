@@ -1,0 +1,92 @@
+<STYLE type="text/css">
+img {
+	border:2px solid black;
+	width: 100%;
+}
+table {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table th {
+	border-width: 1px;
+	padding: 2px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table td {
+	border-width: 1px;
+	padding: 2px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+</STYLE>
+<h1>ION Config Dictionary Report</h1>
+<h3>ION Version: 4.1.0</h3>
+<h3>ION Release Date: 2021-05-31</h3>
+<h4>Dictionary Seq No: 13</h4>
+<h4>Configuration Files: 20</h4>
+<h4>Commands: 195</h4>
+<h3>Introduction</h3>
+<p>
+The dictionary describes the configuration files and commands supported by ION Configuration Tool. The version is important.  The configuration commands supported by ION can and usually do evolve with each new version, and so it does also for the configuration tool.  It is not easy to spot the changes from version to version, so new releases of the tool also provide delta reports summarizing the changes between successive versions.
+</p>
+<p>
+The purpose of the tool is to build correct initial configurations for a network of ION Nodes more easily and correctly.  It is not necessary for the tool to support all known ION configuration commands, since many of those commands are queries, change requests and similar actions not relevant to defining an initial configuration.  Otherwise, each new release of the tool strives to keep up with all relevant changes to ION configuration options.
+</p>
+The mapping of tool configuration commands to ION commands as defined in the ION man pages is not always one-to-one.  In some cases there are muliple variants of a tool command type to make editing more efficient.  For example, the command might be specialized to a specific protocol so that the editor can reduce the number of user-supplied inputs to complete the command.  In other cases, multiple variants can exist to allow for optional value types for a parameter.  For example, some datetime parameters can be specified either as an exact date/time or as a relative time from the time of an ION start.  These would appear as two distinct command types for the configuration tool.
+</p>
+<h3>ION Command File Types</h3>
+<table>
+<thead><tr class="header"><th align="left">Config File</th><th align="left">Program</th><th align="left">Description</th></tr></thead>
+<tbody>
+<tr><td>acsrc</td><td>acsadmin</td><td>Aggregate Custody Signal management commands file</td></tr>
+<tr><td>biberc</td><td>bibeadmin</td><td>Bundle-in-Bundle Encapsulation management commands file</td></tr>
+<tr><td>bpsecv6rc</td><td>bpsecadmin</td><td>BP V6 security policy management commands file</td></tr>
+<tr><td>bpsecv7rc</td><td>bpsecadmin</td><td>BP V7 security policy management commands file</td></tr>
+<tr><td>bpv6rc</td><td>bpadmin</td><td>Bundle Protocol V6 management commands file</td></tr>
+<tr><td>bpv7rc</td><td>bpadmin</td><td>Bundle Protocol V7 management commands file</td></tr>
+<tr><td>bssprc</td><td>bsspadmin</td><td>Bundle Streaming Service Protocol management commands file</td></tr>
+<tr><td>cfdprc</td><td>cfdpadmin</td><td>CCSDS File Delivery Protocol management commands file</td></tr>
+<tr><td>contacts</td><td>ionadmin</td><td>ION contact graph commands file</td></tr>
+<tr><td>dtkarc</td><td>dtkaadmin</td><td>DTKA user configuration commands file</td></tr>
+<tr><td>dtpcrc</td><td>dtpcadmin</td><td>Delay-Tolerant Payload Conditioning management commands file</td></tr>
+<tr><td>imcrc</td><td>ipnadmin</td><td>IMC scheme configuration commands file</td></tr>
+<tr><td>ionconfig</td><td>ionadmin</td><td>ION node configuration parameters file</td></tr>
+<tr><td>ionrc</td><td>ionadmin</td><td>ION node management commands file</td></tr>
+<tr><td>ionsecrc</td><td>ionsecadmin</td><td>ION security policy management commands file</td></tr>
+<tr><td>ipnrc</td><td>ipnadmin</td><td>IPN scheme configuration commands file</td></tr>
+<tr><td>ltprc</td><td>ltpadmin</td><td>Licklider Transmission Protocol management commands file</td></tr>
+<tr><td>ltpsecrc</td><td>ltpsecadmin</td><td>LTP security policy management commands file</td></tr>
+<tr><td>tcarc</td><td>tcaadmin</td><td>Trusted Collective authority configuration commands file</td></tr>
+<tr><td>tccrc</td><td>tccadmin</td><td>Trusted Collective client configuration commands file</td></tr>
+</tbody>
+</table>
+<br>
+<h3>Describing Command Parameters</h3>
+<p>
+Most of the dictionary is dedicated to carefully describing each parameter for each configuration command.  These settings are important for the tool, so that editting can be done more easily and safely.The following explains each column heading for describing parameters.  One key tool idea is the use of so-called <b>clone</b> values.  Often a parameter value references an identifier established elsewhere in the model, such as a node number or a port number.  These special values are called clones, so that if the original identifier is later changed (e.g. a port number re-assigned), all of its clones are automaticaly changed as well.  This is a key technique for maintaining the correctness of the complete configuration.
+</p>
+<table>
+<tbody>
+<tr><td><b>Parameters</b></td><td>Short description of the parameter.</td>
+</tr>
+<tr><td><b>Required</b></td><td>Is the parameter value required or optional.</td>
+</tr>
+<tr><td><b>ValueType</b></td><td>Is value text, number, datetime or special. Supports editing control.</td>
+</tr>
+<tr><td><b>Units</b></td><td>Numeric values can have units (secs, bytes, ...).</td>
+</tr>
+<tr><td><b>Default</b></td><td>The default value when the command is omitted.</td>
+</tr>
+<tr><td><b>CopyClone</b></td><td>The parameter is automatically assigned a clone value. (e.g.node num).</td>
+</tr>
+<tr><td><b>PickClone</b></td><td>The user selects the clone value from a model-based list.</td>
+</tr>
+</tbody>
+</table>  

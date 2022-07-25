@@ -1,0 +1,62 @@
+{
+  "bssprc_seat": {
+    "configType": "bssprc",
+    "multiple": true,
+    "name": "seat",
+    "order": 20,
+    "paramCnt": 2,
+    "paramTypes": [],
+    "verFrom": 13,
+    "verThru": 999
+  },
+  "contacts_announce": {
+    "configType": "contacts",
+    "name": "announce",
+    "order": 16,
+    "paramCnt": 1,
+    "paramTypes": [],
+    "verFrom": 13,
+    "verThru": 999
+  },
+  "ltprc_seat_any": {
+    "configType": "ltprc",
+    "multiple": true,
+    "name": "seat_any",
+    "order": 22,
+    "paramCnt": 1,
+    "paramTypes": [],
+    "verFrom": 13,
+    "verThru": 999
+  },
+  "ltprc_seat_dccp": {
+    "configType": "ltprc",
+    "multiple": true,
+    "name": "seat_dccp",
+    "order": 22,
+    "paramCnt": 2,
+    "paramTypes": [],
+    "pickClone": true,
+    "verFrom": 13,
+    "verThru": 999
+  },
+  "ltprc_seat_udp": {
+    "configType": "ltprc",
+    "multiple": true,
+    "name": "seat_udp",
+    "order": 22,
+    "paramCnt": 2,
+    "paramTypes": [],
+    "pickClone": true,
+    "verFrom": 13,
+    "verThru": 999
+  },
+  "ltprc_start_all": {
+    "configType": "ltprc",
+    "name": "start_all",
+    "order": 39,
+    "paramCnt": 0,
+    "paramTypes": [],
+    "verFrom": 13,
+    "verThru": 999
+  }
+}

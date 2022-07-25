@@ -1,0 +1,33 @@
+   Description of scripts, programs and other files.
+
+checkjson.py    Checks for errors in the latest json config files.
+
+cmds2html.py    Build html for each command. Used by makeDict.sh and makeDelta.sh.
+
+cmdsbyver.py    Extract command definitions for this version. Used by makeDict.sh.
+
+cmdsdelta.py    Extract command differences vs. prior version. Used by makeDelta.sh.
+
+deltahdrs.py    Build html front material for the delta dict. Used by makeDelta.sh.
+
+dict_notes.html Html front material for the full dictionary.  Used by makeDict.sh.
+
+dicthdrs.py     Build html front material for the full dictionary. Used by makeDict.sh.
+
+diff.sh         Compares local json config files to official set (at ../json).
+
+init.py         Set up version-specific json dir and clear work areas.
+
+makeDelta.sh    Build the command delta dictionary document (html).
+
+makeDict.sh     Build the full command dictionary document (html).
+
+param_notes.html Html front material for the full dictionary.  Used by makeDict.sh.
+
+pull.sh         Pulls the official json config files (../json) to local dir.
+
+push.sh         Pushes  local json config files to official set (at ../json).
+
+table.css       Formatting information for the full dictionary.  Used by makeDict.sh.
+
+

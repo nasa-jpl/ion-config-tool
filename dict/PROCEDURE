@@ -1,0 +1,30 @@
+   Dictionary build procedure
+
+The build procedure is semi-manual so that any errors in the json
+configuration files can be discovered and corrected. Each new release
+will usually have some updates to the json configurations and it is 
+easy for small errors to creep in.  These dictionary scripts will report
+any errors encountered.
+
+1) Initialize the build process.
+   Creates release-specific json dir, and clears work dirs.
+
+   > init.py
+
+2) Pull the official json config files to local directory.
+
+   > pull.sh
+
+3) [Optional] Verify the json files.
+
+   > checkjson.py
+
+4) Build the full version-specific command dictionary.
+
+   > makeDict.sh
+
+5) Build the changes-only delta command dictionary.
+
+   > makeDelta.sh
+
+The final html documents are saved in the docs subdirectory.

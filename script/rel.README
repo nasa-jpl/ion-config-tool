@@ -1,0 +1,16 @@
+This directory holds all IonConfig programs and documentation.
+
+Much of the documentation is in subdirectories directly related to 
+a sub-capability.
+
+The contents:
+
+/editor     - the web browser app for editing dtn network models and ion models.
+
+/dictionary - html docs for the full command dictionary and 
+              the version delta dictionary
+
+/json       - json files for configuring ion commands and files (used by programs)
+
+/cli        - command line programs for operating on dtn network models and
+              ion models

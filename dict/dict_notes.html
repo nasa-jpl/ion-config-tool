@@ -1,0 +1,9 @@
+<h3>Introduction</h3>
+<p>
+The dictionary describes the configuration files and commands supported by ION Configuration Tool. The version is important.  The configuration commands supported by ION can and usually do evolve with each new version, and so it does also for the configuration tool.  It is not easy to spot the changes from version to version, so new releases of the tool also provide delta reports summarizing the changes between successive versions.
+</p>
+<p>
+The purpose of the tool is to build correct initial configurations for a network of ION Nodes more easily and correctly.  It is not necessary for the tool to support all known ION configuration commands, since many of those commands are queries, change requests and similar actions not relevant to defining an initial configuration.  Otherwise, each new release of the tool strives to keep up with all relevant changes to ION configuration options.
+</p>
+The mapping of tool configuration commands to ION commands as defined in the ION man pages is not always one-to-one.  In some cases there are muliple variants of a tool command type to make editing more efficient.  For example, the command might be specialized to a specific protocol so that the editor can reduce the number of user-supplied inputs to complete the command.  In other cases, multiple variants can exist to allow for optional value types for a parameter.  For example, some datetime parameters can be specified either as an exact date/time or as a relative time from the time of an ION start.  These would appear as two distinct command types for the configuration tool.
+</p>

@@ -1,0 +1,22 @@
+<h3>Describing Command Parameters</h3>
+<p>
+Most of the dictionary is dedicated to carefully describing each parameter for each configuration command.  These settings are important for the tool, so that editting can be done more easily and safely.The following explains each column heading for describing parameters.  One key tool idea is the use of so-called <b>clone</b> values.  Often a parameter value references an identifier established elsewhere in the model, such as a node number or a port number.  These special values are called clones, so that if the original identifier is later changed (e.g. a port number re-assigned), all of its clones are automaticaly changed as well.  This is a key technique for maintaining the correctness of the complete configuration.
+</p>
+<table>
+<tbody>
+<tr><td><b>Parameters</b></td><td>Short description of the parameter.</td>
+</tr>
+<tr><td><b>Required</b></td><td>Is the parameter value required or optional.</td>
+</tr>
+<tr><td><b>ValueType</b></td><td>Is value text, number, datetime or special. Supports editing control.</td>
+</tr>
+<tr><td><b>Units</b></td><td>Numeric values can have units (secs, bytes, ...).</td>
+</tr>
+<tr><td><b>Default</b></td><td>The default value when the command is omitted.</td>
+</tr>
+<tr><td><b>CopyClone</b></td><td>The parameter is automatically assigned a clone value. (e.g.node num).</td>
+</tr>
+<tr><td><b>PickClone</b></td><td>The user selects the clone value from a model-based list.</td>
+</tr>
+</tbody>
+</table>  
