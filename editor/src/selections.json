@@ -1,0 +1,204 @@
+{
+  "bpv6rc_scheme_p0" : [
+    { "ipn" : "Interplanetary Overlay Network Scheme" },
+    { "imc" : "ION Multi-Cast Scheme" },
+    { "dtn2" : "Disruption Tolerant Network Scheme" }
+  ],
+  "bpv6rc_scheme_p1" : [
+    { "ipnfw" : "ION Forwarder" },
+    { "imcfw" : "ION Multi-Cast Forwarder" },
+    { "dtn2fw" : "DTN Forwarder" }
+  ],
+  "bpv6rc_scheme_p2" : [
+    { "ipnadminep" : "ION Admin Endpoints" },
+    { "imcadminep" : "ION Multi-Cast Admin Endpoints" },
+    { "dtn2adminep" : "DTN Admin Endpoints" }
+  ],
+  "bpv6rc_endpoint_p1" : [
+    { "0" : "ION engine" },
+    { "1" : "BP Echo" },
+    { "64" : "CFDP Service 1" },
+    { "65" : "CFDP Service 2" }
+  ],
+  "bpv6rc_endpoint_p2" : [
+    { "x" : "discard undeliverable bundles" },
+    { "q" : "queue undeliverable bundles" }
+  ],
+  "bpv6rc_commands" : [
+    { "initialize" : "Initialize bundle protocol task." },
+    { "scheme"     : "Declare an endpoint scheme for the local node." },
+    { "endpoint"   : "Define a local endpoint." }
+  ],
+  "bpv6rc_protocol_p0" : [
+    { "tcp"  : "TCP Protocol" },
+    { "stcp" : "Simple TCP Protocol" },
+    { "udp"  : "UDP Protocol" },
+    { "ltp"  : "Licklider Transmission Protocol"},
+    { "dccp" : "Datagram Congestion Control Protocol"},
+    { "bssp" : "Bundle Streaming Service Protocol"}
+  ],
+  "bpv6rc_protocol_p3" : [
+    { "1" : "Protocol supports bundle streaming (e.g. bssp)"},
+    { "2" : "Protocol performs NO retransmission (e.g. udp)" },
+    { "8" : "Protocol performs error detection and retransmission (e.g. tcp)" }
+  ],
+  "bpv7rc_scheme_p0" : [
+    { "ipn" : "Interplanetary Overlay Network Scheme" },
+    { "imc" : "ION Multi-Cast Scheme" },
+    { "dtn2" : "Disruption Tolerant Network Scheme" }
+  ],
+  "bpv7rc_scheme_p1" : [
+    { "ipnfw" : "ION Forwarder" },
+    { "imcfw" : "ION Multi-Cast Forwarder" },
+    { "dtn2fw" : "DTN Forwarder" }
+  ],
+  "bpv7rc_scheme_p2" : [
+    { "ipnadminep" : "ION Admin Endpoints" },
+    { "imcadminep" : "ION Multi-Cast Admin Endpoints" },
+    { "dtn2adminep" : "DTN Admin Endpoints" }
+  ],
+  "bpv7rc_endpoint_p1" : [
+    { "0" : "ION engine" },
+    { "1" : "BP Echo" },
+    { "64" : "CFDP Service 1" },
+    { "65" : "CFDP Service 2" }
+  ],
+  "bpv7rc_endpoint_p2" : [
+    { "x" : "discard undeliverable bundles" },
+    { "q" : "queue undeliverable bundles" }
+  ],
+  "bpv7rc_commands" : [
+    { "initialize" : "Initialize bundle protocol task." },
+    { "scheme"     : "Declare an endpoint scheme for the local node." },
+    { "endpoint"   : "Define a local endpoint." }
+  ],
+  "bpv7rc_protocol_p0" : [
+    { "tcp"  : "TCP Protocol" },
+    { "stcp" : "Simple TCP Protocol" },
+    { "udp"  : "UDP Protocol" },
+    { "ltp"  : "Licklider Transmission Protocol"},
+    { "dccp" : "Datagram Congestion Control Protocol"},
+    { "bssp" : "Bundle Streaming Service Protocol"}
+  ],
+  "bpv7rc_protocol_p3" : [
+    { "1" : "Protocol supports bundle streaming (e.g. bssp)"},
+    { "2" : "Protocol performs NO retransmission (e.g. udp)" },
+    { "8" : "Protocol performs error detection and retransmission (e.g. tcp)" }
+  ],
+  "bpv7rc_protocol_v12_p0" : [
+    { "tcp"  : "TCP Protocol" },
+    { "stcp" : "Simple TCP Protocol" },
+    { "udp"  : "UDP Protocol" },
+    { "ltp"  : "Licklider Transmission Protocol"},
+    { "dccp" : "Datagram Congestion Control Protocol"},
+    { "bssp" : "Bundle Streaming Service Protocol"}
+  ],
+  "bpv7rc_protocol_v12_p1" : [
+    { "1" : "Protocol supports bundle streaming (e.g. bssp)"},
+    { "2" : "Protocol performs NO retransmission (e.g. udp)" },
+    { "8" : "Protocol performs error detection and retransmission (e.g. tcp)" }
+  ],
+  "ionconfig_configFlags_p0" : [
+    {  "0" : "0000" },
+    {  "1" : "0001                                              SDR_IN_DRAM" },
+    {  "2" : "0010                                SDR_IN_FILE"               },
+    {  "3" : "0011                                SDR_IN_FILE + SDR_IN_DRAM" },
+    {  "4" : "0100               SDR_REVERSIBLE"                             },
+    {  "5" : "0101               SDR_REVERSIBLE +               SDR_IN_DRAM" },
+    {  "6" : "0110               SDR_REVERSIBLE + SDR_IN_FILE"               },
+    {  "7" : "0111               SDR_REVERSIBLE + SDR_IN_FILE + SDR_IN_DRAM" },
+    {  "8" : "1000 SDR_BOUNDED"                                              },
+    {  "9" : "1001 SDR_BOUNDED +                                SDR_IN_DRAM" },
+    { "10" : "1010 SDR_BOUNDED +                  SDR_IN_FILE"               },
+    { "11" : "1011 SDR_BOUNDED +                  SDR_IN_FILE + SDR_IN_DRAM" },
+    { "12" : "1100 SDR_BOUNDED + SDR_REVERSIBLE"                             },
+    { "13" : "1101 SDR_BOUNDED + SDR_REVERSIBLE +               SDR_IN_DRAM" },
+    { "14" : "1110 SDR_BOUNDED + SDR_REVERSIBLE + SDR_IN_FILE"               },
+    { "15" : "1111 SDR_BOUNDED + SDR_REVERSIBLE + SDR_IN_FILE + SDR_IN_DRAM" }
+  ],
+  "ltprc_screening_p0" : [
+    { "y" : "discard out-of-schedule segments" },
+    { "n" : "accept out-of-schedule segments" }
+  ],
+  "cfdprc_entity_bp_p3" : [
+    { "0" : "modular checksum" },
+    { "2" : "CRC32 checksum" },
+    { "15" : "null checksum" }
+  ],
+  "cfdprc_entity_bp_p4" : [
+    { "0"  : "modular checksum" },
+    { "2"  : "CRC32 checksum" },
+    { "15" : "null checksum" }
+  ],
+  "cfdprc_discard_p0" : [
+    { "0" : "disable discarding" },
+    { "1" : "enable discarding" }
+  ],
+  "cfdprc_requirerc_p0" : [
+    { "0" : "disable CRC with PDU" },
+    { "1" : "enable CRC with PDU" }
+  ],
+  "acsrc_initialize_p0" : [
+    { "0x00" : "[none]" },
+    { "0x01" : "ERROR"  },
+    { "0x02" : "        WARN" },
+    { "0x03" : "ERROR + WARN" },
+    { "0x04" : "               INFO" },
+    { "0x05" : "ERROR +        INFO" },
+    { "0x06" : "        WARN + INFO" },
+    { "0x07" : "ERROR + WARN + INFO" },
+    { "0x08" : "                      DEBUG" },
+    { "0x09" : "ERROR +               DEBUG" },
+    { "0x0a" : "        WARN +        DEBUG" },
+    { "0x0b" : "ERROR + WARN +        DEBUG" },
+    { "0x0c" : "               INFO + DEBUG" },
+    { "0x0d" : "ERROR +        INFO + DEBUG" },
+    { "0x0e" : "        WARN + INFO + DEBUG" },
+    { "0x0f" : "ERROR + WARN + INFO + DEBUG" }
+  ],
+  "imcrc_kin_p1" : [
+    { "0"   : "child of local node"  },
+    { "1"   : "parent of local node"  }
+  ],
+  "ltpsecrc_ltprecvauthrule_p1" : [
+    { "0"   : "HMAC_SHA1-80"  },
+    { "1"   : "RSA_SHA256"  },
+    { "255" : "NULL"  }
+  ],
+  "ltpsecrc_ltpxmitauthrule_p1" : [
+    { "0"   : "HMAC_SHA1-80"  },
+    { "1"   : "RSA_SHA256"  },
+    { "255" : "NULL"  }
+  ],
+  "bpLayer" : [
+    { "tcp"  : "TCP Protocol" },
+    { "stcp" : "Simple TCP Protocol" },
+    { "udp"  : "UDP Protocol" },
+    { "ltp"  : "Licklider Transmission Protocol"},
+    { "dccp" : "Datagram Congestion Control Protocol"},
+    { "bssp" : "Bundle Streaming Service Protocol"}
+  ],
+  "ltpLayer" : [
+    { "udp"  : "UDP Protocol" },
+    { "dccp" : "Datagram Congestion Control Protocol"}
+  ],
+  "services" : [
+    { "cfdp" : "CCSDS File Delivery Protocol"},
+    { "ams"  : "Asynchronous Messaging Service" },
+    { "amp"  : "Asynchronous Management Protocol" }
+  ],
+  "symmetric" : [
+    { "false" : "one-way hop" },
+    { "true"  : "symmetric two-way hop"}
+  ],
+  "host_linefeed" : [
+    { "unix"    : "unix-style (LF)" },
+    { "windows" : "windows-style (CR+LF)" }
+  ],
+  "node_version" : [
+    { "4.1.0"    : "ION 4.1.0   release 2021-05-31" },
+    { "4.0.2"    : "ION 4.0.2   release 2021-02-26" },
+    { "4.0.1"    : "ION 4.0.1   release 2020-11-23" },
+    { "4.0.0"    : "ION 4.0.0   release 2020-04-07" }
+  ]
+}

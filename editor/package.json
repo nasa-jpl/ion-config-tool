@@ -1,0 +1,35 @@
+{
+  "name": "webict",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "date-format-lite": "^17.7.0",
+    "file-api": "^0.10.4",
+    "file-saver": "^1.3.8",
+    "filereader": "^0.10.3",
+    "fs": "0.0.1-security",
+    "fs.js": "0.0.1",
+    "graceful-fs": "^4.1.11",
+    "jszip": "^3.1.5",
+    "markdown-to-html": "0.0.13",
+    "moment": "^2.18.1",
+    "react": "^15.5.4",
+    "react-bootstrap": "^0.31.5",
+    "react-datetime": "^2.10.1",
+    "react-dom": "^15.5.4",
+    "tar": "^4.4.8"
+  },
+  "devDependencies": {
+    "babel-jest": "^20.0.3",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1",
+    "react-popout": "^1.0.1",
+    "react-scripts": "1.0.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest",
+    "eject": "react-scripts eject"
+  }
+}
