@@ -29,7 +29,7 @@ cp ./script/rel.README $rel/README
 echo "Adding json config files."
 cp -R json $rel
 
-echo "Adding command-line files."
+echo "Adding command-line programs & docs."
 mkdir $rel/cli
 cd cli
 cp package*        $rel/cli
@@ -38,9 +38,10 @@ cp -R bin          $rel/cli
 cp -R docs         $rel/cli
 cd ..
 
-echo "Adding editor files."
+echo "Adding editor program & doc."
 mkdir $rel/editor
 cp -R manual $rel/editor
+cp -R editor/build/* $rel/editor
 
 echo "Adding dictionary docs."
 mkdir $rel/dictionary
