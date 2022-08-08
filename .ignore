@@ -1,0 +1,2 @@
+# any errors.log should be ignored by the repo
+**/errors.log
