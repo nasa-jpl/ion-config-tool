@@ -1,11 +1,11 @@
-'use strict';
-var readerFor = require('./reader/readerFor');
-var utils = require('./utils');
-var CompressedObject = require('./compressedObject');
-var crc32fn = require('./crc32');
-var utf8 = require('./utf8');
-var compressions = require('./compressions');
-var support = require('./support');
+"use strict";
+var readerFor = require("./reader/readerFor");
+var utils = require("./utils");
+var CompressedObject = require("./compressedObject");
+var crc32fn = require("./crc32");
+var utf8 = require("./utf8");
+var compressions = require("./compressions");
+var support = require("./support");
 
 var MADE_BY_DOS = 0x00;
 var MADE_BY_UNIX = 0x03;
@@ -17,7 +17,7 @@ var MADE_BY_UNIX = 0x03;
  */
 var findCompression = function(compressionMethod) {
     for (var method in compressions) {
-        if (!compressions.hasOwnProperty(method)) {
+        if (!Object.prototype.hasOwnProperty.call(compressions, method)) {
             continue;
         }
         if (compressions[method].magic === compressionMethod) {
@@ -86,7 +86,7 @@ ZipEntry.prototype = {
         reader.skip(localExtraFieldsLength);
 
         if (this.compressedSize === -1 || this.uncompressedSize === -1) {
-            throw new Error("Bug or corrupted zip : didn't get enough informations from the central directory " + "(compressedSize === -1 || uncompressedSize === -1)");
+            throw new Error("Bug or corrupted zip : didn't get enough information from the central directory " + "(compressedSize === -1 || uncompressedSize === -1)");
         }
 
         compression = findCompression(this.compressionMethod);
@@ -153,7 +153,7 @@ ZipEntry.prototype = {
         }
 
         // fail safe : if the name ends with a / it probably means a folder
-        if (!this.dir && this.fileNameStr.slice(-1) === '/') {
+        if (!this.dir && this.fileNameStr.slice(-1) === "/") {
             this.dir = true;
         }
     },
@@ -162,8 +162,7 @@ ZipEntry.prototype = {
      * Parse the ZIP64 extra field and merge the info in the current ZipEntry.
      * @param {DataReader} reader the reader to use.
      */
-    parseZIP64ExtraField: function(reader) {
-
+    parseZIP64ExtraField: function() {
         if (!this.extraFields[0x0001]) {
             return;
         }
@@ -200,7 +199,7 @@ ZipEntry.prototype = {
             this.extraFields = {};
         }
 
-        while (reader.index < end) {
+        while (reader.index + 4 < end) {
             extraFieldId = reader.readInt(2);
             extraFieldLength = reader.readInt(2);
             extraFieldValue = reader.readData(extraFieldLength);
@@ -211,6 +210,8 @@ ZipEntry.prototype = {
                 value: extraFieldValue
             };
         }
+
+        reader.setIndex(end);
     },
     /**
      * Apply an UTF8 transformation if needed.

@@ -1,5 +1,3 @@
-import getValue from './index';
-
 /**
  * Extractor function for an ArrayExpression type value node.
  * An array expression is an expression with [] syntax.
@@ -7,5 +5,10 @@ import getValue from './index';
  * @returns - An array of the extracted elements.
  */
 export default function extractValueFromArrayExpression(value) {
-  return value.elements.map(element => getValue(element));
+  // eslint-disable-next-line global-require
+  const getValue = require('.').default;
+  return value.elements.map((element) => {
+    if (element === null) return undefined;
+    return getValue(element);
+  });
 }

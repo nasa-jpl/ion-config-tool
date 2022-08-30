@@ -4,6 +4,80 @@ layout: default
 section: main
 ---
 
+### v3.10.1 2022-08-02
+
+- Add sponsorship files.
+    + If you appreciate the time spent maintaining JSZip then I would really appreciate [your sponsorship](https://github.com/sponsors/Stuk).
+- Consolidate metadata types and expose OnUpdateCallback [#851](https://github.com/Stuk/jszip/pull/851) and [#852](https://github.com/Stuk/jszip/pull/852)
+- use `const` instead `var` in example from README.markdown [#828](https://github.com/Stuk/jszip/pull/828)
+- Switch manual download link to HTTPS [#839](https://github.com/Stuk/jszip/pull/839)
+
+Internals:
+
+- Replace jshint with eslint [#842](https://github.com/Stuk/jszip/pull/842)
+- Add performance tests [#834](https://github.com/Stuk/jszip/pull/834)
+
+### v3.10.0 2022-05-20
+
+- Change setimmediate dependency to more efficient one. Fixes https://github.com/Stuk/jszip/issues/617 (see [#829](https://github.com/Stuk/jszip/pull/829))
+- Update types of `currentFile` metadata to include `null` (see [#826](https://github.com/Stuk/jszip/pull/826))
+
+### v3.9.1 2022-04-06
+
+- Fix recursive definition of `InputFileFormat` introduced in 3.9.0.
+
+### v3.9.0 2022-04-04
+
+- Update types JSZip#loadAsync to accept a promise for data, and remove arguments from `new JSZip()` (see [#752](https://github.com/Stuk/jszip/pull/752))
+- Update types for `compressionOptions` to JSZipFileOptions and JSZipGeneratorOptions (see [#722](https://github.com/Stuk/jszip/pull/722))
+- Add types for `generateInternalStream` (see [#774](https://github.com/Stuk/jszip/pull/774))
+
+### v3.8.0 2022-03-30
+
+- Santize filenames when files are loaded with `loadAsync`, to avoid ["zip slip" attacks](https://snyk.io/research/zip-slip-vulnerability). The original filename is available on each zip entry as `unsafeOriginalName`. See the [documentation](https://stuk.github.io/jszip/documentation/api_jszip/load_async.html). Many thanks to McCaulay Hudson for reporting.
+
+### v3.7.1 2021-08-05
+
+- Fix build of `dist` files.
+    + Note: this version ensures the changes from 3.7.0 are actually included in the `dist` files. Thanks to Evan W for reporting.
+
+### v3.7.0 2021-07-23
+
+- Fix: Use a null prototype object for this.files  (see [#766](https://github.com/Stuk/jszip/pull/766))
+    + This change might break existing code if it uses prototype methods on the `.files` property of a zip object, for example `zip.files.toString()`. This approach is taken to prevent files in the zip overriding object methods that would exist on a normal object.
+
+### v3.6.0 2021-02-09
+
+- Fix: redirect main to dist on browsers (see [#742](https://github.com/Stuk/jszip/pull/742))
+- Fix duplicate require DataLengthProbe, utils (see [#734](https://github.com/Stuk/jszip/pull/734))
+- Fix small error in read_zip.md (see [#703](https://github.com/Stuk/jszip/pull/703))
+
+### v3.5.0 2020-05-31
+
+- Fix 'End of data reached' error when file extra field is invalid (see [#544](https://github.com/Stuk/jszip/pull/544)).
+- Typescript definitions: Add null to return types of functions that may return null (see [#669](https://github.com/Stuk/jszip/pull/669)).
+- Typescript definitions: Correct nodeStream's type (see [#682](https://github.com/Stuk/jszip/pull/682))
+- Typescript definitions: Add string output type (see [#666](https://github.com/Stuk/jszip/pull/666))
+
+### v3.4.0 2020-04-19
+
+- Add Typescript type definitions (see [#601](https://github.com/Stuk/jszip/pull/601)).
+
+### v3.3.0 2020-04-1
+
+- Change browser module resolution to support Angular packager (see [#614](https://github.com/Stuk/jszip/pull/614)).
+
+### v3.2.2 2019-07-04
+- No public changes, but a number of testing dependencies have been updated.
+- Tested browsers are now: Internet Explorer 11, Chrome (most recent) and Firefox (most recent). Other browsers (specifically Safari) are still supported however testing them on Saucelabs is broken and so they were removed from the test matrix.
+
+### v3.2.1 2019-03-22
+- Corrected built dist files
+
+### v3.2.0 2019-02-21
+- Update dependencies to reduce bundle size (see [#532](https://github.com/Stuk/jszip/pull/532)).
+- Fix deprecated Buffer constructor usage and add safeguards (see [#506](https://github.com/Stuk/jszip/pull/506)).
+
 ### v3.1.5 2017-11-09
 - Fix IE11 memory leak (see [#429](https://github.com/Stuk/jszip/pull/429)).
 - Handle 2 nodejs deprecations (see [#459](https://github.com/Stuk/jszip/pull/459)).
@@ -128,4 +202,3 @@ This release changes a lot of methods, please see [the upgrade guide](http://stu
 # v1.0.0, 2013-02-14
 
 - First release after a long period without version.
-
