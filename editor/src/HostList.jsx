@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -15,17 +16,7 @@ import {Alert} from 'react-bootstrap';
 import Host from './Host.jsx';
 
 export default class HostList  extends React.Component {
-  propTypes: {
-    name:  React.PropTypes.string.isRequired,         // user model - model name
 
-    hosts: React.PropTypes.array.isRequired,          // host objects of the ION network
-    ipaddrs: React.PropTypes.array.isRequired,        // ipaddr objects of the ION network
-
-    isGoodName: React.PropTypes.func.isRequired,      // func to validate name
-    makeOptionElems: React.PropTypes.func.isRequired, // func to provide options
-
-    dispatch: React.PropTypes.func.isRequired
-  }
   constructor (props) {
     super(props);
     console.log("HostList ctor");
@@ -205,4 +196,16 @@ export default class HostList  extends React.Component {
     }
     e.preventDefault();
   };
+}
+
+HostList.propTypes = {
+  name:  PropTypes.string.isRequired,         // user model - model name
+
+  hosts: PropTypes.array.isRequired,          // host objects of the ION network
+  ipaddrs: PropTypes.array.isRequired,        // ipaddr objects of the ION network
+
+  isGoodName: PropTypes.func.isRequired,      // func to validate name
+  makeOptionElems: PropTypes.func.isRequired, // func to provide options
+
+  dispatch: PropTypes.func.isRequired
 }

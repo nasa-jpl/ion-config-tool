@@ -7,12 +7,12 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import CreateReactCLass from 'create-react-class';
 import {Form,FormGroup,FormControl} from 'react-bootstrap';
 import {ControlLabel} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button} from 'react-bootstrap';
-import PropTypes from 'prop-types';
 
 export default class Param  extends React.Component {
 

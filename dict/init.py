@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #
-#     ini.py
+#     init.py
 #
 #  set up release-based json directory
 #
@@ -61,14 +61,13 @@ except FileNotFoundError:
 jsondir = "json-" + configver
 print("Make json subdir   cmd: os.mkdir(%s)" % jsondir);
 try:
-es.mkdirse();
-ionver = rel["ionVersion"];j(jsondir)
+  os.mkdir(jsondir);
   print("Directory created.")
 except FileExistsError:
   print("%s already exists." % jsondir)
   pass
 
-linkcmd = 'ln -s %s json_latest' % jsondir
+linkcmd = 'ln -s $(pwd)/%s json_latest' % jsondir
 print("Make sym link   cmd: '%s'" % linkcmd);
 try:
   process=subprocess.Popen(linkcmd,shell=True,stdout=subprocess.PIPE,universal_newlines=True)

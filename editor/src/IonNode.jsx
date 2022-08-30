@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -18,28 +19,6 @@ import JSZip from "jszip";
 import configTypes from './configTypes.json';
 
 export default class IonNode  extends React.Component {
-  propTypes: { 
-    node: React.PropTypes.object.isRequired,          // user model - node object
-    name: React.PropTypes.string.isRequired,
-    desc: React.PropTypes.string.isRequired,
-    nodeNum: React.PropTypes.number.isRequired,
-    version: React.PropTypes.string.isRequired,
-    hostKey: React.PropTypes.string.isRequired,
-    host:  React.PropTypes.object.isRequired,          // user model - host object of node
-    currentContacts: React.PropTypes.string.isRequired, // network contacts name
-
-    configKeys: React.PropTypes.array.isRequired,     // config file names of this node
-    configNames: React.PropTypes.array.isRequired,    // config type names of this node
-
-    isGoodNodeNum: React.PropTypes.func.isRequired,   // checks that node num not yet assigned
-    makeCmdLines: React.PropTypes.func.isRequired,    // func to format all lines of config file
-    makeStartLines: React.PropTypes.func.isRequired,  // func to format all lines of start file
-    makeTypeOptions: React.PropTypes.func.isRequired, // func to get dynamic (cloned) options
-    makeOptionElems: React.PropTypes.func.isRequired, // func to get static options
-    dispatch: React.PropTypes.func.isRequired,
-
-    children: React.PropTypes.array.isRequired,      // config elements of this node
-  }
   constructor (props) {
     super(props);
     // props
@@ -455,3 +434,26 @@ export default class IonNode  extends React.Component {
     e.preventDefault();
   };
 }
+
+IonNode.propTypes = { 
+  node: PropTypes.object.isRequired,          // user model - node object
+  name: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
+  nodeNum: PropTypes.number.isRequired,
+  version: PropTypes.string.isRequired,
+  hostKey: PropTypes.string.isRequired,
+  host:  PropTypes.object.isRequired,          // user model - host object of node
+  currentContacts: PropTypes.string.isRequired, // network contacts name
+
+  configKeys: PropTypes.array.isRequired,     // config file names of this node
+  configNames: PropTypes.array.isRequired,    // config type names of this node
+
+  isGoodNodeNum: PropTypes.func.isRequired,   // checks that node num not yet assigned
+  makeCmdLines: PropTypes.func.isRequired,    // func to format all lines of config file
+  makeStartLines: PropTypes.func.isRequired,  // func to format all lines of start file
+  makeTypeOptions: PropTypes.func.isRequired, // func to get dynamic (cloned) options
+  makeOptionElems: PropTypes.func.isRequired, // func to get static options
+  dispatch: PropTypes.func.isRequired,
+
+  children: PropTypes.array.isRequired,      // config elements of this node
+};

@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -15,17 +16,6 @@ import {Alert} from 'react-bootstrap';
 import NetAddr from './NetAddr.jsx';
 
 export default class NetHost  extends React.Component {
-  propTypes: {   
-    hostKey: React.PropTypes.object.isRequired,         // user model - netHost key
-    desc: React.PropTypes.string.isRequired,
-
-    netHost: React.PropTypes.object.isRequired,         // user model - net host object
-    netaddrs: React.PropTypes.array.isRequired,         // user model - net ipaddr names list
-
-    isGoodName: React.PropTypes.func.isRequired,        // func to validate name
-
-    dispatch: React.PropTypes.func.isRequired
-  }
   constructor (props) {
     super(props);
     // props
@@ -282,4 +272,16 @@ export default class NetHost  extends React.Component {
     this.setState (newState);
     e.preventDefault();
   };
+}
+
+NetHost.propTypes = {   
+  hostKey: PropTypes.object.isRequired,         // user model - netHost key
+  desc: PropTypes.string.isRequired,
+
+  netHost: PropTypes.object.isRequired,         // user model - net host object
+  netaddrs: PropTypes.array.isRequired,         // user model - net ipaddr names list
+
+  isGoodName: PropTypes.func.isRequired,        // func to validate name
+
+  dispatch: PropTypes.func.isRequired
 }

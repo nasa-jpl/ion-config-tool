@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import "date-format-lite";
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
@@ -18,19 +19,6 @@ import {saveAs} from "file-saver";
 import cmdTypes from './cmdTypes.json';
 
 export default class Config  extends React.Component {
-  propTypes: {
-    name: React.PropTypes.string.isRequired,        // unique name of this config file
-    configType: React.PropTypes.object.isRequired,  // schema: info of this config type
-    nodeKey: React.PropTypes.string.isRequired,     // user model - node key
-    host: React.PropTypes.object.isRequired,        // user model - host object of node
-    cmdKeys: React.PropTypes.array.isRequired,      // cmdKeys of this config file
-
-    makeCmdLines: React.PropTypes.func.isRequired,  // func to format all lines of config file
-    getIonVerSeqNo: React.PropTypes.func.isRequired,// func to get ion version seq num
-    dispatch: React.PropTypes.func.isRequired,      // func to handle transactions centrally
-
-    children: React.PropTypes.array.isRequired,     // command elements of this config file
-  }
   constructor (props) {
     super(props);
     console.log("Config ctor " + props.name);
@@ -369,4 +357,18 @@ export default class Config  extends React.Component {
     this.setState (newState);
     e.preventDefault();
   };
+}
+
+Config.propTypes =  {
+  name: PropTypes.string.isRequired,        // unique name of this config file
+  configType: PropTypes.object.isRequired,  // schema: info of this config type
+  nodeKey: PropTypes.string.isRequired,     // user model - node key
+  host: PropTypes.object.isRequired,        // user model - host object of node
+  cmdKeys: PropTypes.array.isRequired,      // cmdKeys of this config file
+
+  makeCmdLines: PropTypes.func.isRequired,  // func to format all lines of config file
+  getIonVerSeqNo: PropTypes.func.isRequired,// func to get ion version seq num
+  dispatch: PropTypes.func.isRequired,      // func to handle transactions centrally
+
+  children: PropTypes.array.isRequired,     // command elements of this config file
 }

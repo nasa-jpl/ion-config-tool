@@ -7,24 +7,13 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
 import {Glyphicon,Panel} from 'react-bootstrap';
 
 export default class Graph  extends React.Component {
-  propTypes: {   
-    name: React.PropTypes.string.isRequired,
-    desc: React.PropTypes.string.isRequired,
-    version: React.PropTypes.string.isRequired,
-
-    configKey: React.PropTypes.string.isRequired,     // config file name 
-
-    makeOptionElems: React.PropTypes.func.isRequired, // func to get static options
-    dispatch: React.PropTypes.func.isRequired,
-
-    children: React.PropTypes.array.isRequired,      // config elements of this Graph
-  }
   constructor (props) {
     super(props);
     // props
@@ -233,4 +222,17 @@ export default class Graph  extends React.Component {
     this.render();
     e.preventDefault();
   };
+}
+
+Graph.propTypes = {   
+  name: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
+  version: PropTypes.string.isRequired,
+
+  configKey: PropTypes.string.isRequired,     // config file name 
+
+  makeOptionElems: PropTypes.func.isRequired, // func to get static options
+  dispatch: PropTypes.func.isRequired,
+
+  children: PropTypes.array.isRequired,       // config elements of this Graph
 }

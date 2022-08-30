@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -18,34 +19,8 @@ import 'react-datetime/css/react-datetime.css';
 import 'moment';
 
 export default class Command  extends React.Component {
-  propTypes: {
-    cmdKey: React.PropTypes.string.isRequired,      // user model - cmd key
-    nodeKey: React.PropTypes.string.isRequired,     // user model - node key
-    hostKey: React.PropTypes.string.isRequired,     // user model - host key
-    configKey: React.PropTypes.string.isRequired,   // user model - config key
-    cmdTypeKey: React.PropTypes.string.isRequired,
-    cmdType: React.PropTypes.object.isRequired,     // schema
-    cmdPattern: React.PropTypes.string.isRequired,  // schema
-    initValues:  React.PropTypes.Arrays.isRequired,
-    cloneValues: React.PropTypes.Arrays.isRequired,   
-
-    makeCmd: React.PropTypes.func.isRequired,
-    getValues: React.PropTypes.func.isRequired,
-    usedNodeKey: React.PropTypes.func.isRequired,
-    makeTypeOptions: React.PropTypes.func.isRequired,
-    makeOptionElems: React.PropTypes.func.isRequired,
-    getOptionText: React.PropTypes.func.isRequired,
-    makeParamNote: React.PropTypes.func.isRequired,
-    dispatch: React.PropTypes.func.isRequired,
-    lastUpdate: React.PropTypes.string.isRequired,
-    params: React.PropTypes.array.isRequired,
-  }
   constructor (props) {
     super(props);
-
-    //console.log("Command ctor");
-    //console.log("Command props: " + JSON.stringify(props) );
-    // Track 'editing' state
 
     let vals = props.initValues.slice(0);
     this.state = {
@@ -674,5 +649,27 @@ export default class Command  extends React.Component {
     newState.entryMode = !entryMode;
     this.setState (newState);
   };
-
 }
+
+Command.propTypes = {
+  cmdKey: PropTypes.string.isRequired,     // user model - cmd key
+  nodeKey: PropTypes.string.isRequired,    // user model - node key
+  hostKey: PropTypes.string.isRequired,    // user model - host key
+  configKey: PropTypes.string.isRequired,  // user model - config key
+  cmdTypeKey: PropTypes.string.isRequired,
+  cmdType: PropTypes.object.isRequired,    // schema
+  cmdPattern: PropTypes.string.isRequired, // schema
+  initValues:  PropTypes.Arrays.isRequired,
+  cloneValues: PropTypes.Arrays.isRequired,   
+
+  makeCmd: PropTypes.func.isRequired,
+  getValues: PropTypes.func.isRequired,
+  usedNodeKey: PropTypes.func.isRequired,
+  makeTypeOptions: PropTypes.func.isRequired,
+  makeOptionElems: PropTypes.func.isRequired,
+  getOptionText: PropTypes.func.isRequired,
+  makeParamNote: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  lastUpdate: PropTypes.string.isRequired,
+  params: PropTypes.array.isRequired,
+};

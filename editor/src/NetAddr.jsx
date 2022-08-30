@@ -7,24 +7,13 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Button,ButtonToolbar} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
 export default class NetAddr  extends React.Component {
-  propTypes: {
-    hostKey: React.PropTypes.string.isRequired,      // user model - host name
-    ipAddr: React.PropTypes.string.isRequired,       // user model - ipAddr
-    addMode: React.PropTypes.string.isRequired,      // true  - elem is for adding a new ipaddr
-                                                     // false - elem is for change/delete of existing ipaddr
-    netHost:  React.PropTypes.object.isRequired,     // user model - net host object
-    netAddrs: React.PropTypes.array.isRequired,      // user model - net ipaddr names
-
-    isGoodName: React.PropTypes.func.isRequired,     // func to validate name
-
-    dispatch: React.PropTypes.func.isRequired,
-  }
   constructor (props) {
     super(props);
     // props
@@ -183,4 +172,17 @@ export default class NetAddr  extends React.Component {
     this.setState (newState);
     e.preventDefault();
   };
+}
+
+NetAddr.propTypes = {
+  hostKey: PropTypes.string.isRequired,      // user model - host name
+  ipAddr: PropTypes.string.isRequired,       // user model - ipAddr
+  addMode: PropTypes.string.isRequired,      // true  - elem is for adding a new ipaddr
+                                             // false - elem is for change/delete of existing ipaddr
+  netHost:  PropTypes.object.isRequired,     // user model - net host object
+  netAddrs: PropTypes.array.isRequired,      // user model - net ipaddr names
+
+  isGoodName: PropTypes.func.isRequired,     // func to validate name
+
+  dispatch: PropTypes.func.isRequired,
 }

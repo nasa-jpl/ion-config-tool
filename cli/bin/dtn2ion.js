@@ -493,27 +493,27 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
 
     // build of plan cmds happens later with hop analysis
 
-    // build bpv6rc 
-    configName = nodeKey + ".bpv6rc";
+    // build bpv7rc 
+    configName = nodeKey + ".bpv7rc";
     configs[configName] = {
       "id" : configName,
       "nodeKey": nodeKey,
-      "configType" : "bpv6rc",
+      "configType" : "bpv7rc",
       "cmdKeys" : [] 
     };
     nodes[nodeKey].configKeys.push(configName);
-    // build bpv6rc initialize cmd
+    // build bpv7rc initialize cmd
     vals = [];
-    cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","initialize",vals);
+    cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","initialize",vals);
     addCommandKey(configs,configName,cmdKey);
-    // build bpv6rc scheme cmd
+    // build bpv7rc scheme cmd
     vals = ["ipn","ipnfw","ipnadminep"];
-    cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","scheme",vals);
+    cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","scheme",vals);
     addCommandKey(configs,configName,cmdKey);
-    // build bpv6rc "low" endpoint cmds  [0...6]
+    // build bpv7rc "low" endpoint cmds  [0...6]
     for (var i=0; i<7; i++) {
       vals = [nodeNum,i,"x",""];
-      cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+      cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
       addCommandKey(configs,configName,cmdKey);
     }
     // provide endpoints per service
@@ -522,26 +522,26 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
       var aservice = services[i];
       if (aservice === 'cfdp') {   // CFDP: endpoints 64 & 65
         vals = [nodeNum,64,"x",""];
-        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
         addCommandKey(configs,configName,cmdKey);
         vals = [nodeNum,65,"x",""];
-        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
         addCommandKey(configs,configName,cmdKey);
       }
       if (aservice === 'ams') {   // AMS: endpoints 71 & 72
         vals = [nodeNum,71,"x",""];
-        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
         addCommandKey(configs,configName,cmdKey);
         vals = [nodeNum,72,"x",""];
-        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
         addCommandKey(configs,configName,cmdKey);
       }
       if (aservice === 'amp') {   // AMS: endpoints 101 & 102
         vals = [nodeNum,101,"x",""];
-        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
         addCommandKey(configs,configName,cmdKey);
         vals = [nodeNum,102,"x",""];
-        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
         addCommandKey(configs,configName,cmdKey);
       }
     }
@@ -556,18 +556,18 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
      // build protocol cmds
     for (let i=0; i<protocols.length; i++) {
       var prot = protocols[i];
-      vals = [prot,1400,100,""];
-      cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","protocol",vals);
+      vals = [prot,""];
+      cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","protocol",vals);
       addCommandKey(configs,configName,cmdKey);
     }
     // build of induct cmds happens later with hop analysis
 
     // build of outduct cmds happens later with hop analysis
 
-    // build bpv6rc run ipnadmin cmd  (NOTE: not needed since included in our start script)
+    // build bpv7rc run ipnadmin cmd  (NOTE: not needed since included in our start script)
     // var cmd = "ipnadmin " + ipnrc;
     // vals = [cmd];
-    // cmdKey = makeIonCommand(commands,clones,configName,"bpv6rc","run",vals);
+    // cmdKey = makeIonCommand(commands,clones,configName,"bpv7rc","run",vals);
     // configs[configName].cmdKeys.push(cmdKey);
 
     // build ltprc (if needed)
@@ -664,10 +664,10 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
       induct = "induct_any";
       vals = [bpLayer, "", cli];
     }
-    configName = nodeKey + ".bpv6rc";
+    configName = nodeKey + ".bpv7rc";
     var inKey = configName + bpLayer;
     if(!inductKeys.hasOwnProperty(inKey)) {
-      cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc",induct,vals);
+      cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc",induct,vals);
       addCommandKey(configs,configName,cmdKey);
       inductKeys[inKey] = cmdKey;   // actual value not important, just know one exists
     }
@@ -729,8 +729,8 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
       outduct = "outduct_any";     // use general format
       vals = [bpLayer,"",clo,""];
     };
-    configName = nodeKey + ".bpv6rc";
-    cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc",outduct,vals);
+    configName = nodeKey + ".bpv7rc";
+    cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc",outduct,vals);
     addCommandKey(configs,configName,cmdKey);
     //configs[configName].cmdKeys.push(cmdKey);
     // build ltp spans as necessary
@@ -801,11 +801,11 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
     addCommandKey(configs,configName,cmdKey);
   };
 
-  // build bpv6rc start cmd, now that the duct cmds are done
+  // build bpv7rc start cmd, now that the duct cmds are done
   for (nodeKey in netNodes) {
     vals = [];
-    configName = nodeKey + ".bpv6rc";
-    cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","start",vals);
+    configName = nodeKey + ".bpv7rc";
+    cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","start",vals);
     addCommandKey(configs,configName,cmdKey);
   };
   debug("makeIonModel...  nodes:   " + JSON.stringify(nodes));

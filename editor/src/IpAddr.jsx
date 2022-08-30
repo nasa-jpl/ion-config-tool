@@ -7,25 +7,13 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Button,ButtonToolbar} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
 export default class IpAddr  extends React.Component {
-  propTypes: {
-    hostKey: React.PropTypes.string.isRequired,      // user model - host name
-    ipAddrKey:  React.PropTypes.string.isRequired,   // user model - ipAddr key
-    ipAddr: React.PropTypes.string.isRequired,       // user model - ipAddr
-    addMode: React.PropTypes.string.isRequired,      // true  - elem is for adding a new ipaddr
-                                                     // false - elem is for change/delete of existing ipaddr
-    host:  React.PropTypes.object.isRequired,        // user model - host object
-    ipaddrs: React.PropTypes.array.isRequired,       // user model - ipaddr objects 
-
-    isGoodName: React.PropTypes.func.isRequired,     // func to validate name
-
-    dispatch: React.PropTypes.func.isRequired,
-  }
   constructor (props) {
     super(props);
     // props
@@ -186,4 +174,18 @@ export default class IpAddr  extends React.Component {
     this.setState (newState);
     e.preventDefault();
   };
+}
+
+IpAddr.propTypes = {
+  hostKey: PropTypes.string.isRequired,      // user model - host name
+  ipAddrKey:  PropTypes.string.isRequired,   // user model - ipAddr key
+  ipAddr: PropTypes.string.isRequired,       // user model - ipAddr
+  addMode: PropTypes.string.isRequired,      // true  - elem is for adding a new ipaddr
+                                                     // false - elem is for change/delete of existing ipaddr
+  host:  PropTypes.object.isRequired,        // user model - host object
+  ipaddrs: PropTypes.array.isRequired,       // user model - ipaddr objects 
+
+  isGoodName: PropTypes.func.isRequired,     // func to validate name
+
+  dispatch: PropTypes.func.isRequired,
 }

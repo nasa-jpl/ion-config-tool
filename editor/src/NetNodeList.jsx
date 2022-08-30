@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -15,16 +16,6 @@ import {Alert} from 'react-bootstrap';
 import NetNode from './NetNode.jsx';
 
 export default class NetNodeList  extends React.Component {
-  propTypes: {
-    name:  React.PropTypes.string.isRequired,           // user model - model name
-    netNodes: React.PropTypes.object.isRequired,         // node elements of this node
-
-    isGoodName: React.PropTypes.func.isRequired,        // func to validate name
-    isGoodNetNodeKey: React.PropTypes.func.isRequired,  // func to validate nodeKey not in use
-    makeOptionElems: React.PropTypes.func.isRequired,   // func to get static options
-    makeNetHostOptions: React.PropTypes.func.isRequired,// func to build hostkey options
-    dispatch: React.PropTypes.func.isRequired,
-  }
   constructor (props) {
     super(props);
     console.log("NetNodeList ctor");
@@ -191,4 +182,15 @@ export default class NetNodeList  extends React.Component {
     }
     e.preventDefault();
   };
+}
+
+NetNodeList.propTypes = {
+  name:  PropTypes.string.isRequired,           // user model - model name
+  netNodes: PropTypes.object.isRequired,         // node elements of this node
+
+  isGoodName: PropTypes.func.isRequired,        // func to validate name
+  isGoodNetNodeKey: PropTypes.func.isRequired,  // func to validate nodeKey not in use
+  makeOptionElems: PropTypes.func.isRequired,   // func to get static options
+  makeNetHostOptions: PropTypes.func.isRequired,// func to build hostkey options
+  dispatch: PropTypes.func.isRequired,
 }

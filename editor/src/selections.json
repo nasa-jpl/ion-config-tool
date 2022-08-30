@@ -72,6 +72,19 @@
     { "scheme"     : "Declare an endpoint scheme for the local node." },
     { "endpoint"   : "Define a local endpoint." }
   ],
+  "bpv7rc_protocol_v11_p0" : [
+    { "tcp"  : "TCP Protocol" },
+    { "stcp" : "Simple TCP Protocol" },
+    { "udp"  : "UDP Protocol" },
+    { "ltp"  : "Licklider Transmission Protocol"},
+    { "dccp" : "Datagram Congestion Control Protocol"},
+    { "bssp" : "Bundle Streaming Service Protocol"}
+  ],
+  "bpv7rc_protocol_v11_p3" : [
+    { "1" : "Protocol supports bundle streaming (e.g. bssp)"},
+    { "2" : "Protocol performs NO retransmission (e.g. udp)" },
+    { "8" : "Protocol performs error detection and retransmission (e.g. tcp)" }
+  ],
   "bpv7rc_protocol_p0" : [
     { "tcp"  : "TCP Protocol" },
     { "stcp" : "Simple TCP Protocol" },
@@ -80,20 +93,7 @@
     { "dccp" : "Datagram Congestion Control Protocol"},
     { "bssp" : "Bundle Streaming Service Protocol"}
   ],
-  "bpv7rc_protocol_p3" : [
-    { "1" : "Protocol supports bundle streaming (e.g. bssp)"},
-    { "2" : "Protocol performs NO retransmission (e.g. udp)" },
-    { "8" : "Protocol performs error detection and retransmission (e.g. tcp)" }
-  ],
-  "bpv7rc_protocol_v12_p0" : [
-    { "tcp"  : "TCP Protocol" },
-    { "stcp" : "Simple TCP Protocol" },
-    { "udp"  : "UDP Protocol" },
-    { "ltp"  : "Licklider Transmission Protocol"},
-    { "dccp" : "Datagram Congestion Control Protocol"},
-    { "bssp" : "Bundle Streaming Service Protocol"}
-  ],
-  "bpv7rc_protocol_v12_p1" : [
+  "bpv7rc_protocol_p1" : [
     { "1" : "Protocol supports bundle streaming (e.g. bssp)"},
     { "2" : "Protocol performs NO retransmission (e.g. udp)" },
     { "8" : "Protocol performs error detection and retransmission (e.g. tcp)" }

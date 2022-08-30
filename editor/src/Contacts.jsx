@@ -7,24 +7,13 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
 import {Glyphicon,Panel} from 'react-bootstrap';
 
 export default class Contacts  extends React.Component {
-  propTypes: {   
-    contacts: React.PropTypes.object.isRequired,     // user model - contacts object
-    name: React.PropTypes.string.isRequired,
-    desc: React.PropTypes.string.isRequired,
-
-    configKey: React.PropTypes.string.isRequired,    // config file name 
-    configType: React.PropTypes.array.isRequired,    // config type name
-
-    dispatch: React.PropTypes.func.isRequired,
-
-    children: React.PropTypes.array.isRequired,      // config elements of this Contacts
-  }
   constructor (props) {
     super(props);
     // props
@@ -178,4 +167,17 @@ export default class Contacts  extends React.Component {
     this.render();
     e.preventDefault();
   };
+}
+
+Contacts.propTypes = {   
+  contacts: PropTypes.object.isRequired,     // user model - contacts object
+  name: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
+
+  configKey: PropTypes.string.isRequired,    // config file name 
+  configType: PropTypes.array.isRequired,    // config type name
+
+  dispatch: PropTypes.func.isRequired,
+
+  children: PropTypes.array.isRequired,      // config elements of this Contacts
 }

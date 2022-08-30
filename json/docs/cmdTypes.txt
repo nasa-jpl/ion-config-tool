@@ -44,7 +44,11 @@ Sample entries follow:
 
 The name of each sub-object corresponds to the command type, e.g., "bpv6rc_induct_ltp".
 Note that config file type is always included in the name. When a new version of a
-command arises due to ION changes, a version is added to the name, e.g., "ipnrc_cosovrd_v12".
+command arises due to ION changes, a new entry is created so that it is still possible to
+build ionconfig files of older versions. The prior command version is distinguished by adding
+a version suffix to the base name.  The version suffix identifies the last version to which
+it applied. e.g., "ipnrc_cosovrd_v11".  By convention, the simple base name always identifies
+the most current version of the command.
 
 Properties:
 

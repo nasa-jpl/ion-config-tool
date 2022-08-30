@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -14,21 +15,6 @@ import {Glyphicon,Panel} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
 export default class NetHop  extends React.Component {
-  propTypes: {   
-    hopKey: React.PropTypes.object.isRequired,         // user model - netHop key
-    desc: React.PropTypes.string.isRequired,
-    fromHop: React.PropTypes.string.isRequired,
-    toHop: React.PropTypes.string.isRequired,
-    bpLayer: React.PropTypes.string.isRequired,
-    ltpLayer: React.PropTypes.string.isRequired,
-    maxRate: React.PropTypes.number.isRequired,
-    symmetric: React.PropTypes.bool.isRequired,
-
-    makeTypeOptions: React.PropTypes.func.isRequired,    // func to get dynamic (cloned) options
-    makeOptionElems: React.PropTypes.func.isRequired,    // func to get static options
-    makeNetNodeOptions: React.PropTypes.func.isRequired, // func to build hostkey options
-    dispatch: React.PropTypes.func.isRequired
-  }
   constructor (props) {
     super(props);
     // props
@@ -333,4 +319,20 @@ export default class NetHop  extends React.Component {
     this.setState (newState);
     e.preventDefault();
   };
+}
+
+NetHop.propTypes = {   
+  hopKey: PropTypes.object.isRequired,         // user model - netHop key
+  desc: PropTypes.string.isRequired,
+  fromHop: PropTypes.string.isRequired,
+  toHop: PropTypes.string.isRequired,
+  bpLayer: PropTypes.string.isRequired,
+  ltpLayer: PropTypes.string.isRequired,
+  maxRate: PropTypes.number.isRequired,
+  symmetric: PropTypes.bool.isRequired,
+
+  makeTypeOptions: PropTypes.func.isRequired,    // func to get dynamic (cloned) options
+  makeOptionElems: PropTypes.func.isRequired,    // func to get static options
+  makeNetNodeOptions: PropTypes.func.isRequired, // func to build hostkey options
+  dispatch: PropTypes.func.isRequired
 }

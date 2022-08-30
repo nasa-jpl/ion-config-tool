@@ -12,7 +12,7 @@
 #
 # author: Rick Borgen
 #
-echo "Makng all ionconfig cli programs"
+echo "Making all ionconfig cli programs"
 cd script
 
 ./bind_checkdtn.sh

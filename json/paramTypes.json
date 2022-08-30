@@ -1656,6 +1656,43 @@
     "optional":  true,
     "defaultValue":  ""
   },
+  "bpv7rc_protocol_v11_p0" : {
+    "id" :  "bpv7rc_protocol_v11_p0",
+    "name":  "protocol name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_protocol_v11",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_protocol_v11_p1" : {
+    "id" :  "bpv7rc_protocol_v11_p1",
+    "name":  "payload bytes per frame",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_protocol_v11",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "bpv7rc_protocol_v11_p2" : {
+    "id" :  "bpv7rc_protocol_v11_p2",
+    "name":  "overhead bytes per frame",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_protocol_v11",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "bpv7rc_protocol_v11_p3" : {
+    "id" :  "bpv7rc_protocol_v11_p3",
+    "name":  "protocol class",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_protocol_v11",
+    "valType":  "select",
+    "units":  "",
+    "optional": true,
+    "defaultValue":  "8"
+  },
   "bpv7rc_protocol_p0" : {
     "id" :  "bpv7rc_protocol_p0",
     "name":  "protocol name",
@@ -1667,46 +1704,9 @@
   },
   "bpv7rc_protocol_p1" : {
     "id" :  "bpv7rc_protocol_p1",
-    "name":  "payload bytes per frame",
-    "configType":  "bpv7rc",
-    "cmdType":  "bpv7rc_protocol",
-    "valType":  "number",
-    "units":  "bytes",
-    "defaultValue":  ""
-  },
-  "bpv7rc_protocol_p2" : {
-    "id" :  "bpv7rc_protocol_p2",
-    "name":  "overhead bytes per frame",
-    "configType":  "bpv7rc",
-    "cmdType":  "bpv7rc_protocol",
-    "valType":  "number",
-    "units":  "bytes",
-    "defaultValue":  ""
-  },
-  "bpv7rc_protocol_p3" : {
-    "id" :  "bpv7rc_protocol_p3",
     "name":  "protocol class",
     "configType":  "bpv7rc",
     "cmdType":  "bpv7rc_protocol",
-    "valType":  "select",
-    "units":  "",
-    "optional": true,
-    "defaultValue":  "8"
-  },
-  "bpv7rc_protocol_v12_p0" : {
-    "id" :  "bpv7rc_protocol_v12_p0",
-    "name":  "protocol name",
-    "configType":  "bpv7rc",
-    "cmdType":  "bpv7rc_protocol_v12",
-    "valType":  "select",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpv7rc_protocol_v12_p1" : {
-    "id" :  "bpv7rc_protocol_v12_p1",
-    "name":  "protocol class",
-    "configType":  "bpv7rc",
-    "cmdType":  "bpv7rc_protocol_v12",
     "valType":  "select",
     "units":  "",
     "optional": true,
@@ -2430,6 +2430,53 @@
     "units":  "",
     "defaultValue":  ""
   },
+  "ipnrc_cosovrd_v11_p0" : {
+    "id" :  "ipnrc_cosovrd_v11_p0",
+    "name" :  "data label",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd_v11",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_v11_p1" : {
+    "id" :  "ipnrc_cosovrd_v11_p1",
+    "name" :  "dest node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd_v11",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_v11_p2" : {
+    "id" :  "ipnrc_cosovrd_v11_p2",
+    "name" :  "src node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd_v11",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_v11_p3" : {
+    "id" :  "ipnrc_cosovrd_v11_p3",
+    "name" :  "priority",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd_v11",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_v11_p4" : {
+    "id" :  "ipnrc_cosovrd_v11_p4",
+    "name" :  "ordinal",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd_v11",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
   "ipnrc_cosovrd_p0" : {
     "id" :  "ipnrc_cosovrd_p0",
     "name" :  "data label",
@@ -2477,58 +2524,11 @@
     "units":  "",
     "defaultValue":  ""
   },
-  "ipnrc_cosovrd_v12_p0" : {
-    "id" :  "ipnrc_cosovrd_v12_p0",
-    "name" :  "data label",
-    "configType":  "ipnrc",
-    "cmdType":  "ipnrc_cosovrd_v12",
-    "valType":  "number",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "ipnrc_cosovrd_v12_p1" : {
-    "id" :  "ipnrc_cosovrd_v12_p1",
-    "name" :  "dest node number",
-    "configType":  "ipnrc",
-    "cmdType":  "ipnrc_cosovrd_v12",
-    "valType":  "nodeNum",
-    "pickClone": true,
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "ipnrc_cosovrd_v12_p2" : {
-    "id" :  "ipnrc_cosovrd_v12_p2",
-    "name" :  "src node number",
-    "configType":  "ipnrc",
-    "cmdType":  "ipnrc_cosovrd_v12",
-    "valType":  "nodeNum",
-    "pickClone": true,
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "ipnrc_cosovrd_v12_p3" : {
-    "id" :  "ipnrc_cosovrd_v12_p3",
-    "name" :  "priority",
-    "configType":  "ipnrc",
-    "cmdType":  "ipnrc_cosovrd_v12",
-    "valType":  "number",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "ipnrc_cosovrd_v12_p4" : {
-    "id" :  "ipnrc_cosovrd_v12_p4",
-    "name" :  "ordinal",
-    "configType":  "ipnrc",
-    "cmdType":  "ipnrc_cosovrd_v12",
-    "valType":  "number",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "ipnrc_cosovrd_v12_p5" : {
-    "id" :  "ipnrc_cosovrd_v12_p5",
+  "ipnrc_cosovrd_p5" : {
+    "id" :  "ipnrc_cosovrd_p5",
     "name" :  "qos flags",
     "configType":  "ipnrc",
-    "cmdType":  "ipnrc_cosovrd_v12",
+    "cmdType":  "ipnrc_cosovrd",
     "optional": true,
     "valType":  "number",
     "units":  "",

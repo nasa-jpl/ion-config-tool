@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -15,17 +16,6 @@ import {Alert} from 'react-bootstrap';
 import NetHop from './NetHop.jsx';
 
 export default class NetHopList  extends React.Component {
-  propTypes: {
-    name:  React.PropTypes.string.isRequired,          // user model - model name
-    netHops: React.PropTypes.object.isRequired,        // hop dict
-
-    isGoodName: React.PropTypes.func.isRequired,       // func to validate name
-    isGoodNetHopKey: React.PropTypes.func.isRequired,  // func to validate hopKey not in use
-    makeTypeOptions: React.PropTypes.func.isRequired,  // func to get dynamic (cloned) options
-    makeOptionElems: React.PropTypes.func.isRequired,  // func to get static options
-    makeNetNodeOptions: React.PropTypes.func.isRequired,// func to build nodekey options
-    dispatch: React.PropTypes.func.isRequired,
-  }
   constructor (props) {
     super(props);
     console.log("NetHopList ctor");
@@ -198,4 +188,16 @@ export default class NetHopList  extends React.Component {
     }
     e.preventDefault();
   };
+}
+
+NetHopList.propTypes = {
+  name:  PropTypes.string.isRequired,          // user model - model name
+  netHops: PropTypes.object.isRequired,        // hop dict
+
+  isGoodName: PropTypes.func.isRequired,       // func to validate name
+  isGoodNetHopKey: PropTypes.func.isRequired,  // func to validate hopKey not in use
+  makeTypeOptions: PropTypes.func.isRequired,  // func to get dynamic (cloned) options
+  makeOptionElems: PropTypes.func.isRequired,  // func to get static options
+  makeNetNodeOptions: PropTypes.func.isRequired,// func to build nodekey options
+  dispatch: PropTypes.func.isRequired,
 }

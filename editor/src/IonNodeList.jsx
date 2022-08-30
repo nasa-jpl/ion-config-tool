@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -17,29 +18,6 @@ import IonNode from './IonNode.jsx';
 import cmdTypes    from './cmdTypes.json';
 
 export default class IonNodeList  extends React.Component {
-  propTypes: {
-    name: React.PropTypes.string.isRequired,            // user model - model name
-    currentContacts: React.PropTypes.string.isRequired, // user model - network contacts name
-
-    nodes: React.PropTypes.array.isRequired,          // node objects of the ION network
-    hosts: React.PropTypes.array.isRequired,          // host objects of the ION network
-    configs: React.PropTypes.array.isRequired,        // config objects of the ION network
-    commands: React.PropTypes.array.isRequired,       // config objects of the ION network
-    ipaddrs: React.PropTypes.array.isRequired,        // ipaddr objects of the ION network
-
-    isGoodName: React.PropTypes.func.isRequired,      // validate name format
-    isGoodNodeNum: React.PropTypes.func.isRequired,   // validate node num
-    usedNodeKey: React.PropTypes.func.isRequired,     // used as node key?
-    makeCmdLines: React.PropTypes.func.isRequired,    // all lines formatting of config file
-    makeStartLines: React.PropTypes.func.isRequired,  // all lines for a start script
-    makeTypeOptions: React.PropTypes.func.isRequired, // get dynamic (cloned) options
-    makeOptionElems: React.PropTypes.func.isRequired, // func to provide options
-    makeConfigElem: React.PropTypes.func.isRequired,  // build config element
-    makeCommandElem: React.PropTypes.func.isRequired, // build command element
-    makeParamProps: React.PropTypes.func.isRequired,  // build param props
-
-    dispatch: React.PropTypes.func.isRequired
-  }
   constructor (props) {
     super(props);
     console.log("IonNodeList ctor");
@@ -275,4 +253,28 @@ export default class IonNodeList  extends React.Component {
     }
     e.preventDefault();
   };
+}
+
+IonNodeList.propTypes = {
+  name: PropTypes.string.isRequired,            // user model - model name
+  currentContacts: PropTypes.string.isRequired, // user model - network contacts name
+
+  nodes: PropTypes.array.isRequired,          // node objects of the ION network
+  hosts: PropTypes.array.isRequired,          // host objects of the ION network
+  configs: PropTypes.array.isRequired,        // config objects of the ION network
+  commands: PropTypes.array.isRequired,       // config objects of the ION network
+  ipaddrs: PropTypes.array.isRequired,        // ipaddr objects of the ION network
+
+  isGoodName: PropTypes.func.isRequired,      // validate name format
+  isGoodNodeNum: PropTypes.func.isRequired,   // validate node num
+  usedNodeKey: PropTypes.func.isRequired,     // used as node key?
+  makeCmdLines: PropTypes.func.isRequired,    // all lines formatting of config file
+  makeStartLines: PropTypes.func.isRequired,  // all lines for a start script
+  makeTypeOptions: PropTypes.func.isRequired, // get dynamic (cloned) options
+  makeOptionElems: PropTypes.func.isRequired, // func to provide options
+  makeConfigElem: PropTypes.func.isRequired,  // build config element
+  makeCommandElem: PropTypes.func.isRequired, // build command element
+  makeParamProps: PropTypes.func.isRequired,  // build param props
+
+  dispatch: PropTypes.func.isRequired
 }

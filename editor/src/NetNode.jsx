@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -14,18 +15,6 @@ import {Glyphicon,Panel} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
 export default class NetNode  extends React.Component {
-  propTypes: {   
-    nodeKey: React.PropTypes.object.isRequired,         // user model - netNode key
-    desc: React.PropTypes.string.isRequired,
-    nodeHost: React.PropTypes.string.isRequired,
-    nodeType: React.PropTypes.string.isRequired,
-    endpointID: React.PropTypes.string.isRequired,
-    services: React.PropTypes.array.isRequired,
-
-    makeOptionElems: React.PropTypes.func.isRequired,   // func to get static options
-    makeNetHostOptions: React.PropTypes.func.isRequired,// func to build hostkey options
-    dispatch: React.PropTypes.func.isRequired
-  }
   constructor (props) {
     super(props);
     // props
@@ -304,4 +293,17 @@ export default class NetNode  extends React.Component {
     this.setState (newState);
     e.preventDefault();
   };
+}
+
+NetNode.propTypes = {   
+  nodeKey: PropTypes.object.isRequired,         // user model - netNode key
+  desc: PropTypes.string.isRequired,
+  nodeHost: PropTypes.string.isRequired,
+  nodeType: PropTypes.string.isRequired,
+  endpointID: PropTypes.string.isRequired,
+  services: PropTypes.array.isRequired,
+
+  makeOptionElems: PropTypes.func.isRequired,   // func to get static options
+  makeNetHostOptions: PropTypes.func.isRequired,// func to build hostkey options
+  dispatch: PropTypes.func.isRequired
 }

@@ -1,13 +1,24 @@
-Release Notes 4.6.1
+Release Notes 4.6.2
 
-- Restructured form and content of deliverable tar ball.
+- Upgraded to recent package versions of React, Babel, etc.
+    this is a major upgrade since many were quite old
+    the upgrade was motivated by secuirty warnings on somae packages
 
-- Consolidated browser program, command-line programs plus documentation.
+- React upgrade required code changes for propTypes in the editor
 
-- Augmented documentation throughout.
+- Revised cmdTypes.json convention:
+    the latest command name has no version suffix, 
+    the older command versions have the _vxx suffix
+    showing the last version it supported
+    this helped implement the switch from bpv6rc to bpv7rc
 
-- Command-line tools (javascript) runnable without explicit node command.
+- Revised the IonConfig editor DTN Net Model to ION Model conversion
+   old default: build an bpv6rc file
+   new default: build an bpv7rc file
 
-- Implemented more practical default values for span max segment size (udp & dccp).
-  These are assigned when generating an ION model from a DTN Network Model.
+- Revised the dtn2ion comman-line program
+   old default: build an bpv6rc file
+   new default: build an bpv7rc file
 
+- Fixed several bugs in dict/init.py so that
+  the json_latest link builds correctly

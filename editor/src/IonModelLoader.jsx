@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Col} from 'react-bootstrap';
 import {Button, ButtonToolbar} from 'react-bootstrap';
@@ -17,14 +18,6 @@ import cmdTypes     from './cmdTypes.json';
 import paramTypes   from './paramTypes.json';
 
 export default class IonModelLoader extends React.Component {
-  propTypes: {
-    getUniqId: React.PropTypes.func.isRequired,     // func to make a uniq id
-    makeCloneVal: React.PropTypes.func.isRequired,  // func to make a cloneVal
-    findCloneVal: React.PropTypes.func.isRequired,  // func to find a cloneVal
-    noLoadIonModel: React.PropTypes.func.isRequired,// func to cancle load of model
-    dispatch: React.PropTypes.func.isRequired       // func to handle transactions centrally
-  };
-
   constructor (props) {
     super(props);
     console.log("IonModelLoader ctor");
@@ -401,3 +394,11 @@ export default class IonModelLoader extends React.Component {
     }
   };
 }
+
+IonModelLoader.propTypes = {
+  getUniqId: PropTypes.func.isRequired,     // func to make a uniq id
+  makeCloneVal: PropTypes.func.isRequired,  // func to make a cloneVal
+  findCloneVal: PropTypes.func.isRequired,  // func to find a cloneVal
+  noLoadIonModel: PropTypes.func.isRequired,// func to cancle load of model
+  dispatch: PropTypes.func.isRequired       // func to handle transactions centrally
+};

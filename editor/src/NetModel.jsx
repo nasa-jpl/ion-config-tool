@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -24,32 +25,7 @@ import NetNodeList  from './NetNodeList.jsx';
 import NetHopList   from './NetHopList.jsx';
 
 export default class NetModel  extends React.Component {
-  propTypes: {
 
-    name: React.PropTypes.string.isRequired,
-    desc: React.PropTypes.string.isRequired,
-
-    netHosts: React.PropTypes.Arrays.isRequired,
-    netNodes: React.PropTypes.Arrays.isRequired,
-    netHops: React.PropTypes.Arrays.isRequired,
-    netAddrs: React.PropTypes.Arrays.isRequired,
-
-    getIonModel: React.PropTypes.func.isRequired,      // func to get ion model handle
-    isGoodName: React.PropTypes.func.isRequired,       // func to validate name
-    isGoodNetHostKey: React.PropTypes.func.isRequired, // func to validate hostKey not in use
-    isGoodNetNodeKey: React.PropTypes.func.isRequired, // func to validate nodeKey not in use
-    isGoodNetHopKey: React.PropTypes.func.isRequired,  // func to validate hopKey not in use
-    makeTypeOptions: React.PropTypes.func.isRequired,  // func to get dynamic (cloned) options
-    makeOptionElems: React.PropTypes.func.isRequired,  // func to get static options
-    mapOptionElems: React.PropTypes.func.isRequired,   // func map option elems
-    getUniqId: React.PropTypes.func.isRequired,        // func to make a uniq id
-    makeCloneVal: React.PropTypes.func.isRequired,     // func to make a cloneVal
-    findCloneVal: React.PropTypes.func.isRequired,     // func to find a cloneVal
-    isStandardProtocol:  React.PropTypes.func.isRequired,  // func to check protocol type
-
-    //checkModel: React.PropTypes.func.isRequired,    // func to check the entire model
-    dispatch: React.PropTypes.func.isRequired,        // func to handle transactions centrally
-  }
   constructor (props) {
     super(props);
     // props
@@ -367,27 +343,27 @@ export default class NetModel  extends React.Component {
 
       // build of plan cmds happens later with hop analysis
 
-      // build bpv6rc 
-      configName = nodeKey + ".bpv6rc";
+      // build bpv7rc 
+      configName = nodeKey + ".bpv7rc";
       configs[configName] = {
         "id" : configName,
         "nodeKey": nodeKey,
-        "configType" : "bpv6rc",
+        "configType" : "bpv7rc",
         "cmdKeys" : [] 
       };
       nodes[nodeKey].configKeys.push(configName);
-      // build bpv6rc initialize cmd
+      // build bpv7rc initialize cmd
       vals = [];
-      cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","initialize",vals);
+      cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","initialize",vals);
       this.addCommandKey(configs,configName,cmdKey);
-      // build bpv6rc scheme cmd
+      // build bpv7rc scheme cmd
       vals = ["ipn","ipnfw","ipnadminep"];
-      cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","scheme",vals);
+      cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","scheme",vals);
       this.addCommandKey(configs,configName,cmdKey);
-      // build bpv6rc "low" endpoint cmds  [0...6]
+      // build bpv7rc "low" endpoint cmds  [0...6]
       for (var i=0; i<7; i++) {
         vals = [nodeNum,i,"x",""];
-        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
         this.addCommandKey(configs,configName,cmdKey);
       }
       // provide endpoints per service
@@ -396,26 +372,26 @@ export default class NetModel  extends React.Component {
         var aservice = services[i];
         if (aservice === 'cfdp') {   // CFDP: endpoints 64 & 65
           vals = [nodeNum,64,"x",""];
-          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
           this.addCommandKey(configs,configName,cmdKey);
           vals = [nodeNum,65,"x",""];
-          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
           this.addCommandKey(configs,configName,cmdKey);
         }
         if (aservice === 'ams') {   // AMS: endpoints 71 & 72
           vals = [nodeNum,71,"x",""];
-          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
           this.addCommandKey(configs,configName,cmdKey);
           vals = [nodeNum,72,"x",""];
-          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
           this.addCommandKey(configs,configName,cmdKey);
         }
         if (aservice === 'amp') {   // AMS: endpoints 101 & 102
           vals = [nodeNum,101,"x",""];
-          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
           this.addCommandKey(configs,configName,cmdKey);
           vals = [nodeNum,102,"x",""];
-          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","endpoint",vals);
+          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
           this.addCommandKey(configs,configName,cmdKey);
         }
       }
@@ -430,18 +406,18 @@ export default class NetModel  extends React.Component {
        // build protocol cmds
       for (let i=0; i<protocols.length; i++) {
         var prot = protocols[i];
-        vals = [prot,1400,100,""];
-        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","protocol",vals);
+        vals = [prot,""];
+        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","protocol",vals);
         this.addCommandKey(configs,configName,cmdKey);
       }
       // build of induct cmds happens later with hop analysis
 
       // build of outduct cmds happens later with hop analysis
 
-      // build bpv6rc run ipnadmin cmd  (NOTE: not needed since included in our start script)
+      // build bpv7rc run ipnadmin cmd  (NOTE: not needed since included in our start script)
       // var cmd = "ipnadmin " + ipnrc;
       // vals = [cmd];
-      // cmdKey = this.makeIonCommand(commands,clones,configName,"bpv6rc","run",vals);
+      // cmdKey = this.makeIonCommand(commands,clones,configName,"bpv7rc","run",vals);
       // configs[configName].cmdKeys.push(cmdKey);
 
       // build ltprc (if needed)
@@ -538,10 +514,10 @@ export default class NetModel  extends React.Component {
         induct = "induct_any";
         vals = [bpLayer, "", cli];
       }
-      configName = nodeKey + ".bpv6rc";
+      configName = nodeKey + ".bpv7rc";
       var inKey = configName + bpLayer;
       if(!inductKeys.hasOwnProperty(inKey)) {
-        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc",induct,vals);
+        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc",induct,vals);
         this.addCommandKey(configs,configName,cmdKey);
         inductKeys[inKey] = cmdKey;   // actual value not important, just know one exists
       }
@@ -600,8 +576,8 @@ export default class NetModel  extends React.Component {
         outduct = "outduct_any";     // use general format
         vals = [bpLayer,"",clo,""];
       };
-      configName = nodeKey + ".bpv6rc";
-      cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc",outduct,vals);
+      configName = nodeKey + ".bpv7rc";
+      cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc",outduct,vals);
       this.addCommandKey(configs,configName,cmdKey);
       //configs[configName].cmdKeys.push(cmdKey);
       // build ltp spans as necessary
@@ -670,11 +646,11 @@ export default class NetModel  extends React.Component {
       this.addCommandKey(configs,configName,cmdKey);
     };
 
-    // build bpv6rc start cmd, now that the duct cmds are done
+    // build bpv7rc start cmd, now that the duct cmds are done
     for (nodeKey in netNodes) {
       vals = [];
-      configName = nodeKey + ".bpv6rc";
-      cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv6rc","start",vals);
+      configName = nodeKey + ".bpv7rc";
+      cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","start",vals);
       this.addCommandKey(configs,configName,cmdKey);
     };
     console.log("makeIonModel...  nodes:   " + JSON.stringify(nodes));
@@ -749,6 +725,9 @@ export default class NetModel  extends React.Component {
   }
   // build an ion command object
   makeIonCommand(commands,clones,groupKey,configKey,configType,cmdName,values) {
+    // NOTE: the default behavior is to use the latest version of each command type
+    // By convention, the latest command is simply the configType + cmdName
+    // Prior command versions have _vxx suffix showing the last version supported
     let cmdTypeKey = configType + "_" + cmdName;
     let uniqid = this.props.getUniqId();
     let cmdKey = "cmd_" + uniqid;
@@ -1193,4 +1172,30 @@ export default class NetModel  extends React.Component {
     this.setState (newState);
     e.preventDefault();
   };
+}
+
+NetModel.propTypes = {
+  name: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
+
+  netHosts: PropTypes.Arrays.isRequired,
+  netNodes: PropTypes.Arrays.isRequired,
+  netHops: PropTypes.Arrays.isRequired,
+  netAddrs: PropTypes.Arrays.isRequired,
+
+  getIonModel: PropTypes.func.isRequired,      // func to get ion model handle
+  isGoodName: PropTypes.func.isRequired,       // func to validate name
+  isGoodNetHostKey: PropTypes.func.isRequired, // func to validate hostKey not in use
+  isGoodNetNodeKey: PropTypes.func.isRequired, // func to validate nodeKey not in use
+  isGoodNetHopKey: PropTypes.func.isRequired,  // func to validate hopKey not in use
+  makeTypeOptions: PropTypes.func.isRequired,  // func to get dynamic (cloned) options
+  makeOptionElems: PropTypes.func.isRequired,  // func to get static options
+  mapOptionElems: PropTypes.func.isRequired,   // func map option elems
+  getUniqId: PropTypes.func.isRequired,        // func to make a uniq id
+  makeCloneVal: PropTypes.func.isRequired,     // func to make a cloneVal
+  findCloneVal: PropTypes.func.isRequired,     // func to find a cloneVal
+  isStandardProtocol:  PropTypes.func.isRequired,  // func to check protocol type
+
+  //checkModel: PropTypes.func.isRequired,    // func to check the entire model
+  dispatch: PropTypes.func.isRequired,        // func to handle transactions centrally
 }

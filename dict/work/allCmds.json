@@ -777,7 +777,7 @@
     "verFrom": 10,
     "verThru": 999
   },
-  "bpv7rc_protocol_v12": {
+  "bpv7rc_protocol": {
     "configType": "bpv7rc",
     "multiple": true,
     "name": "protocol",
@@ -1545,7 +1545,7 @@
     "verFrom": 10,
     "verThru": 999
   },
-  "ipnrc_cosovrd_v12": {
+  "ipnrc_cosovrd": {
     "configType": "ipnrc",
     "multiple": true,
     "name": "cosovrd",

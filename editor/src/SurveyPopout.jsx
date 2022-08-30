@@ -7,14 +7,11 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Button} from 'react-bootstrap';
 import PopoutWindow from 'react-popout';
 
 export default class SurveyPopout extends React.Component {
-  propTypes: {
-  	label: React.PropTypes.string.isRequired,
-    showSurvey: React.PropTypes.func.isRequired      // func for survey content
-  }
   constructor(props) {
     super(props);
     this.popout = this.popout.bind(this);
@@ -49,4 +46,9 @@ export default class SurveyPopout extends React.Component {
     }
   }
   //        <PopoutWindow url="./local.html" title={label} onClosing={this.popoutClosed}>
-};
+}
+
+SurveyPopout.propTypes = {
+  label: PropTypes.string.isRequired,
+  showSurvey: PropTypes.func.isRequired      // func for survey content
+}

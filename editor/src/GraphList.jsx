@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -17,23 +18,6 @@ import Graph from './Graph.jsx';
 import cmdTypes    from './cmdTypes.json';
 
 export default class GraphList  extends React.Component {
-  propTypes: {
-    name:  React.PropTypes.string.isRequired,         // user model - model name
-
-    graphs: React.PropTypes.array.isRequired,         // graph objects of the ION network
-    configs: React.PropTypes.array.isRequired,        // config objects of the ION network
-    commands: React.PropTypes.array.isRequired,       // config objects of the ION network
-
-    isGoodName: React.PropTypes.func.isRequired,      // validate name format
-    makeCmdLines: React.PropTypes.func.isRequired,    // all lines formatting of config file
-    makeTypeOptions: React.PropTypes.func.isRequired, // get dynamic (cloned) options
-    makeOptionElems: React.PropTypes.func.isRequired, // func to provide options
-    makeConfigElem: React.PropTypes.func.isRequired,  // build config element
-    makeCommandElem: React.PropTypes.func.isRequired, // build command element
-    makeParamProps: React.PropTypes.func.isRequired,  // build param props
-
-    dispatch: React.PropTypes.func.isRequired
-  }
   constructor (props) {
     super(props);
     console.log("GraphList ctor");
@@ -240,4 +224,22 @@ export default class GraphList  extends React.Component {
     }
     e.preventDefault();
   };
+}
+
+GraphList.propTypes = {
+  name:  PropTypes.string.isRequired,         // user model - model name
+
+  graphs: PropTypes.array.isRequired,         // graph objects of the ION network
+  configs: PropTypes.array.isRequired,        // config objects of the ION network
+  commands: PropTypes.array.isRequired,       // config objects of the ION network
+
+  isGoodName: PropTypes.func.isRequired,      // validate name format
+  makeCmdLines: PropTypes.func.isRequired,    // all lines formatting of config file
+  makeTypeOptions: PropTypes.func.isRequired, // get dynamic (cloned) options
+  makeOptionElems: PropTypes.func.isRequired, // func to provide options
+  makeConfigElem: PropTypes.func.isRequired,  // build config element
+  makeCommandElem: PropTypes.func.isRequired, // build command element
+  makeParamProps: PropTypes.func.isRequired,  // build param props
+
+  dispatch: PropTypes.func.isRequired
 }

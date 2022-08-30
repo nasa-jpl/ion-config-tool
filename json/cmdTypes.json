@@ -697,7 +697,7 @@
     "verFrom": 10, 
     "verThru": 999
   }, 
-  "bpv7rc_protocol": {
+  "bpv7rc_protocol_v11": {
     "configType": "bpv7rc", 
     "multiple": true, 
     "name": "protocol", 
@@ -707,7 +707,7 @@
     "verFrom": 10, 
     "verThru": 11
   }, 
-  "bpv7rc_protocol_v12": {
+  "bpv7rc_protocol": {
     "configType": "bpv7rc", 
     "multiple": true, 
     "name": "protocol", 
@@ -1639,7 +1639,7 @@
     "verFrom": 10, 
     "verThru": 999
   }, 
-  "ipnrc_cosovrd": {
+  "ipnrc_cosovrd_v11": {
     "configType": "ipnrc", 
     "multiple": true, 
     "name": "cosovrd", 
@@ -1650,7 +1650,7 @@
     "verFrom": 10, 
     "verThru": 11
   }, 
-  "ipnrc_cosovrd_v12": {
+  "ipnrc_cosovrd": {
     "configType": "ipnrc", 
     "multiple": true, 
     "name": "cosovrd", 

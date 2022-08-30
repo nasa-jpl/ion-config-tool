@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -32,33 +33,6 @@ import selections   from './selections.json';
 import versions     from './ionVersions.json';
 
 export default class IonModel  extends React.Component {
-  propTypes: {
-
-    name: React.PropTypes.string.isRequired,
-    desc: React.PropTypes.string.isRequired,
-    nextNodeNum: React.PropTypes.number.isRequired,
-    currentContacts: React.PropTypes.string.isRequired,
-
-    hosts: React.PropTypes.Arrays.isRequired,
-    ipaddrs: React.PropTypes.Arrays.isRequired,
-    graphs: React.PropTypes.Arrays.isRequired,
-    nodes: React.PropTypes.Arrays.isRequired,
-    configs: React.PropTypes.Arrays.isRequired,
-    commands: React.PropTypes.Arrays.isRequired,
-    cloneValues: React.PropTypes.Arrays.isRequired,
-
-    getNodeKey: React.PropTypes.func.isRequired,        // func to find nodeKey from a cmdKey
-    isGoodName: React.PropTypes.func.isRequired,        // func to validate name
-    isGoodNodeKey: React.PropTypes.func.isRequired,     // func to validate nodeKey not in use
-    isGoodNodeNum: React.PropTypes.func.isRequired,     // func to validate node num not in use
-    checkModel: React.PropTypes.func.isRequired,        // func to check the entire model
-    getValues:  React.PropTypes.func.isRequired,        // get command value list
-    makeOptionElems: React.PropTypes.func.isRequired,   // func to provide options
-    makeTypeOptions: React.PropTypes.func.isRequired,   // func to make type options
-    getOptionText: React.PropTypes.func.isRequired,     // func to get option text
-
-    dispatch: React.PropTypes.func.isRequired,          // func to handle transactions centrally
-  };
   constructor (props) {
     super(props);
     // props
@@ -1384,3 +1358,30 @@ export default class IonModel  extends React.Component {
     e.preventDefault();
   };
 }
+
+IonModel.propTypes = {
+  name: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
+  nextNodeNum: PropTypes.number.isRequired,
+  currentContacts: PropTypes.string.isRequired,
+
+  hosts: PropTypes.Arrays.isRequired,
+  ipaddrs: PropTypes.Arrays.isRequired,
+  graphs: PropTypes.Arrays.isRequired,
+  nodes: PropTypes.Arrays.isRequired,
+  configs: PropTypes.Arrays.isRequired,
+  commands: PropTypes.Arrays.isRequired,
+  cloneValues: PropTypes.Arrays.isRequired,
+
+  getNodeKey: PropTypes.func.isRequired,      // func to find nodeKey from a cmdKey
+  isGoodName: PropTypes.func.isRequired,      // func to validate name
+  isGoodNodeKey: PropTypes.func.isRequired,   // func to validate nodeKey not in use
+  isGoodNodeNum: PropTypes.func.isRequired,   // func to validate node num not in use
+  checkModel: PropTypes.func.isRequired,      // func to check the entire model
+  getValues:  PropTypes.func.isRequired,      // get command value list
+  makeOptionElems: PropTypes.func.isRequired, // func to provide options
+  makeTypeOptions: PropTypes.func.isRequired, // func to make type options
+  getOptionText: PropTypes.func.isRequired,   // func to get option text
+
+  dispatch: PropTypes.func.isRequired,        // func to handle transactions centrally
+};

@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsnet Laboratory         +
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Col} from 'react-bootstrap';
 import {Button, ButtonToolbar} from 'react-bootstrap';
@@ -14,12 +15,6 @@ import {Glyphicon} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
 export default class NetModelLoader extends React.Component {
-  propTypes: {
-    netAddrs:  React.PropTypes.array.isRequired,    // user model - net ipaddr names
-    noLoadNetModel: React.PropTypes.func.isRequired,// func to cancel load of model
-    dispatch: React.PropTypes.func.isRequired       // func to handle transactnets centrally
-  };
-
   constructor (props) {
     super(props);
     console.log("NetModelLoader ctor");
@@ -261,4 +256,10 @@ export default class NetModelLoader extends React.Component {
       this.setError("Failed to load the Net Model file.");
     }
   };
+}
+
+NetModelLoader.propTypes = {
+  netAddrs:  PropTypes.array.isRequired,    // user model - net ipaddr names
+  noLoadNetModel: PropTypes.func.isRequired,// func to cancel load of model
+  dispatch: PropTypes.func.isRequired       // func to handle transactnets centrally
 }

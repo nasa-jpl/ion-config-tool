@@ -7,6 +7,7 @@
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Label,Button,ButtonToolbar} from 'react-bootstrap';
@@ -15,19 +16,6 @@ import {Alert} from 'react-bootstrap';
 import IpAddr from './IpAddr.jsx';
 
 export default class Host  extends React.Component {
-  propTypes: { 
-    name: React.PropTypes.string.isRequired,         // user model - host name
-    desc: React.PropTypes.string.isRequired,
-    linefeed: React.PropTypes.string.isRequired,     // linefeed style for text files
-
-    host: React.PropTypes.object.isRequired,         // user model - host object
-    ipaddrs: React.PropTypes.array.isRequired,       // user model - ipaddr objects 
-
-    isGoodName: React.PropTypes.func.isRequired,     // func to validate name
-    makeOptionElems: React.PropTypes.func.isRequired,
-
-    dispatch: React.PropTypes.func.isRequired,
-  }
   constructor (props) {
     super(props);
     // props
@@ -303,4 +291,18 @@ export default class Host  extends React.Component {
     this.setState (newState);
     e.preventDefault();
   };
+}
+
+Host.propTypes = { 
+  name: PropTypes.string.isRequired,         // user model - host name
+  desc: PropTypes.string.isRequired,
+  linefeed: PropTypes.string.isRequired,     // linefeed style for text files
+
+  host: PropTypes.object.isRequired,         // user model - host object
+  ipaddrs: PropTypes.array.isRequired,       // user model - ipaddr objects 
+
+  isGoodName: PropTypes.func.isRequired,     // func to validate name
+  makeOptionElems: PropTypes.func.isRequired,
+
+  dispatch: PropTypes.func.isRequired,
 }
