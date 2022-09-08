@@ -50,6 +50,8 @@ print("  ionConfig release    %s" % configver);
 
 print("------");
 
+dictdir = os.getcwd() 
+print ("dictdir: %s" % dictdir)
 delcmd =  '/bin/rm json_latest'
 print("Drop sym link   cmd: '%s'" % delcmd);
 try:
@@ -58,6 +60,7 @@ try:
 except FileNotFoundError:
   print("File not found.")
 
+os.chdir(dictdir)    # ensure home dir
 jsondir = "json-" + configver
 print("Make json subdir   cmd: os.mkdir(%s)" % jsondir);
 try:
@@ -67,7 +70,8 @@ except FileExistsError:
   print("%s already exists." % jsondir)
   pass
 
-linkcmd = 'ln -s $(pwd)/%s json_latest' % jsondir
+os.chdir(dictdir)    # ensure home dir
+linkcmd = 'ln -s %s/%s json_latest' % (dictdir,jsondir)
 print("Make sym link   cmd: '%s'" % linkcmd);
 try:
   process=subprocess.Popen(linkcmd,shell=True,stdout=subprocess.PIPE,universal_newlines=True)
@@ -75,6 +79,7 @@ try:
 except FileNotFoundError:
   print("File not found.")
 
+os.chdir(dictdir)    # ensure home dir
 clearcmd = '/bin/rm work/* docs/*.html' 
 print("Clear work & docs dirs   cmd: '%s'" % clearcmd);
 try:
