@@ -1,8 +1,25 @@
+Release Notes 4.7
+
+- Added support for ION version 4.1.1
+  (NOTE: There were no configuration command changes in ION 4.1.1)
+
+- Reworked the ionconfig.js command-line program to no longer
+  display internal debug messages.
+
+- Fixed a bug in dict/init.py so that
+  the json_latest link builds correctly
+
+- Improved the editor/make.sh to insert the
+  new tool release version automatically
+
+- Release 4.7 also incorporates changes made to the internal releases
+  of 4.6.1 and 4.6.2.   See below.
+
 Release Notes 4.6.2
 
 - Upgraded to recent package versions of React, Babel, etc.
     this is a major upgrade since many were quite old
-    the upgrade was motivated by secuirty warnings on somae packages
+    the upgrade was motivated by security warnings on somae packages
 
 - React upgrade required code changes for propTypes in the editor
 
@@ -22,3 +39,16 @@ Release Notes 4.6.2
 
 - Fixed several bugs in dict/init.py so that
   the json_latest link builds correctly
+
+Release Notes 4.6.1
+
+- Restructured form and content of deliverable tar ball.
+
+- Consolidated browser program, command-line programs plus documentation.
+
+- Augmented documentation throughout.
+
+- Command-line tools (javascript) runnable without explicit node command.
+
+- Implemented more practical default values for span max segment size (udp & dccp).
+  These are assigned when generating an ION model from a DTN Network Model.
