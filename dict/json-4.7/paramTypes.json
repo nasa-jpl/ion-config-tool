@@ -1,0 +1,4152 @@
+{
+  "ionrc_initialize_p0" : {
+    "id" :  "ionrc_initialize_p0",
+    "name":  "ion node number",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_initialize",
+    "valType":  "nodeNum",
+    "copyClone": true,
+    "units":  "",
+    "defaultValue":  "[cloned from Node]"
+  },
+  "ionrc_initialize_p1" : {
+    "id" :  "ionrc_initialize_p1",
+    "name":  "ionconfig file name",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_initialize",
+    "valType":  "text",
+    "units":  "",
+    "optional": true,
+    "defaultValue":  ""
+  },
+  "ionrc_hypothetical_p0" : {
+    "id" :  "ionrc_hypothetical_p0",
+    "name":  "source node",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_hypothetical",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ionrc_hypothetical_p1" : {
+    "id" :  "ionrc_hypothetical_p1",
+    "name":  "destination node",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_hypothetical",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ionrc_utcdelta_p0" : {
+    "id" :  "ionrc_utcdelta_p0",
+    "name":  "local time after utc",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_utcdelta",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "0"
+  },
+  "ionrc_clockerr_p0" : {
+    "id" :  "ionrc_clockerr_p0",
+    "name":  "max clock error",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_clockerr",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "0"
+  },
+  "ionrc_clocksync_p0" : {
+    "id" :  "ionrc_clocksync_p0",
+    "name":  "has synchronized clock",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_clocksync",
+    "valType":  "number",
+    "units":  "(0 or 1)",
+    "defaultValue":  "1"
+  },
+  "ionrc_production_p0" : {
+    "id" :  "ionrc_production_p0",
+    "name":  "planned production rate",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_production",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "defaultValue":  "-1"
+  },
+  "ionrc_consumption_p0" : {
+    "id" :  "ionrc_consumption_p0",
+    "name":  "planned consumption rate",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_consumption",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "defaultValue":  "-1"
+  },
+  "ionrc_inbound_p0" : {
+    "id" :  "ionrc_inbound_p0",
+    "name":  "inbound heap (or file) limit",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_inbound",
+    "valType":  "number",
+    "units":  "megabytes",
+    "defaultValue":  "-1"
+  },
+  "ionrc_outbound_p0" : {
+    "id" :  "ionrc_outbound_p0",
+    "name":  "outbound heap (or file) limit",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_outbound",
+    "valType":  "number",
+    "units":  "megabytes",
+    "defaultValue":  "-1"
+  },
+  "ionrc_search_p0" : {
+    "id" :  "ionrc_search_p0",
+    "name":  "max free blocks to search",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_search",
+    "valType":  "number",
+    "units":  "blocks",
+    "defaultValue":  "0"
+  },
+  "ionrc_horizon_p0" : {
+    "id" :  "ionrc_horizon_p0",
+    "name":  "congestion horizon",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_horizon",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "0"
+  },
+  "ionrc_alarm_p0" : {
+    "id" :  "ionrc_alarm_p0",
+    "name":  "congestion alarm command",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_alarm",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ionrc_home_p0" : {
+    "id" :  "ionrc_home_p0",
+    "name":  "home region number",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_home",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "0"
+  },
+  "ionrc_outer_p0" : {
+    "id" :  "ionrc_outer_p0",
+    "name":  "outer region number",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_outer",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "0"
+  },
+  "ionrc_passageway_p0" : {
+    "id" :  "ionrc_passageway_p0",
+    "name":  "node number",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_passageway",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "0"
+  },
+  "ionrc_passageway_p1" : {
+    "id" :  "ionrc_passageway_p1",
+    "name":  "home region number",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_passageway",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "0"
+  },
+  "ionrc_passageway_p2" : {
+    "id" :  "ionrc_passageway_p2",
+    "name":  "outer region number",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_passageway",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "0"
+  },
+  "contacts_at_p0" : {
+    "id" :  "contacts_at_p0",
+    "name":  "reference time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_at",
+    "valType":  "datetime",
+    "units":  "UTC",
+    "defaultValue":  ""
+  },
+  "contacts_announce_p0" : {
+    "id" :  "contacts_announce_p0",
+    "name":  "announce",
+    "configType":  "contacts",
+    "cmdType":  "contacts_announce",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_region_p0" : {
+    "id" :  "contacts_region_p0",
+    "name":  "region",
+    "configType":  "contacts",
+    "cmdType":  "contacts_region",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_registration_p0" : {
+    "id" :  "contacts_registration_p0",
+    "name":  "region member node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_registration",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_registration_p1" : {
+    "id" :  "contacts_registration_p1",
+    "name":  "node (must match above)",
+    "configType":  "contacts",
+    "cmdType":  "contacts_registration",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_hypothetical_p0" : {
+    "id" :  "contacts_hypothetical_p0",
+    "name":  "source node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_hypothetical",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_hypothetical_p1" : {
+    "id" :  "contacts_hypothetical_p1",
+    "name":  "destination node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_hypothetical",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_contact_abs_abs_time_p0" : {
+    "id" :  "contacts_contact_abs_abs_time_p0",
+    "name":  "start time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_abs_abs_time",
+    "valType":  "datetime",
+    "units":  "UTC",
+    "defaultValue":  ""
+  },
+  "contacts_contact_abs_abs_time_p1" : {
+    "id" :  "contacts_contact_abs_abs_time_p1",
+    "name":  "stop time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_abs_abs_time",
+    "valType":  "datetime",
+    "units":  "UTC",
+    "defaultValue":  ""
+  },
+  "contacts_contact_abs_abs_time_p2" : {
+    "id" :  "contacts_contact_abs_abs_time_p2",
+    "name":  "source node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_abs_abs_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_contact_abs_abs_time_p3" : {
+    "id" :  "contacts_contact_abs_abs_time_p3",
+    "name":  "destination node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_abs_abs_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_contact_abs_abs_time_p4" : {
+    "id" :  "contacts_contact_abs_abs_time_p4",
+    "name":  "transmission data rate",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_abs_abs_time",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "defaultValue":  ""
+  },
+  "contacts_contact_abs_abs_time_p5" : {
+    "id" :  "contacts_contact_abs_abs_time_p5",
+    "name":  "contact confidence",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_abs_abs_time",
+    "valType":  "number",
+    "optional": true,
+    "units":  "fraction",
+    "defaultValue":  "1.00"
+  },
+  "contacts_contact_abs_rel_time_p0" : {
+    "id" :  "contacts_contact_abs_rel_time_p0",
+    "name":  "start time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_abs_rel_time",
+    "valType":  "datetime",
+    "units":  "UTC",
+    "defaultValue":  ""
+  },
+  "contacts_contact_abs_rel_time_p1" : {
+    "id" :  "contacts_contact_abs_rel_time_p1",
+    "name":  "relative stop time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_abs_rel_time",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "contacts_contact_abs_rel_time_p2" : {
+    "id" :  "contacts_contact_abs_rel_time_p2",
+    "name":  "source node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_abs_rel_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_contact_abs_rel_time_p3" : {
+    "id" :  "contacts_contact_abs_rel_time_p3",
+    "name":  "destination node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_abs_rel_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_contact_abs_rel_time_p4" : {
+    "id" :  "contacts_contact_abs_rel_time_p4",
+    "name":  "transmission data rate",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_abs_rel_time",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "defaultValue":  ""
+  },
+  "contacts_contact_abs_rel_time_p5" : {
+    "id" :  "contacts_contact_abs_rel_time_p5",
+    "name":  "contact confidence",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_abs_rel_time",
+    "valType":  "number",
+    "optional": true,
+    "units":  "fraction",
+    "defaultValue":  "1.00"
+  },
+  "contacts_contact_rel_rel_time_p0" : {
+    "id" :  "contacts_contact_rel_rel_time_p0",
+    "name":  "relative start time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_rel_rel_time",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "contacts_contact_rel_rel_time_p1" : {
+    "id" :  "contacts_contact_rel_rel_time_p1",
+    "name":  "relative stop time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_rel_rel_time",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "contacts_contact_rel_rel_time_p2" : {
+    "id" :  "contacts_contact_rel_rel_time_p2",
+    "name":  "source node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_rel_rel_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_contact_rel_rel_time_p3" : {
+    "id" :  "contacts_contact_rel_rel_time_p3",
+    "name":  "destination node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_rel_rel_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_contact_rel_rel_time_p4" : {
+    "id" :  "contacts_contact_rel_rel_time_p4",
+    "name":  "transmission data rate",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_rel_rel_time",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "defaultValue":  ""
+  },
+  "contacts_contact_rel_rel_time_p5" : {
+    "id" :  "contacts_contact_rel_rel_time_p5",
+    "name":  "contact confidence",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_rel_rel_time",
+    "valType":  "number",
+    "optional": true,
+    "units":  "fraction",
+    "defaultValue":  "1.00"
+  },
+  "contacts_contact_rel_abs_time_p0" : {
+    "id" :  "contacts_contact_rel_abs_time_p0",
+    "name":  "relative start time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_rel_abs_time",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "contacts_contact_rel_abs_time_p1" : {
+    "id" :  "contacts_contact_rel_abs_time_p1",
+    "name":  "stop time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_rel_abs_time",
+    "valType":  "datetime",
+    "units":  "UTC",
+    "defaultValue":  ""
+  },
+  "contacts_contact_rel_abs_time_p2" : {
+    "id" :  "contacts_contact_rel_abs_time_p2",
+    "name":  "source node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_rel_abs_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_contact_rel_abs_time_p3" : {
+    "id" :  "contacts_contact_rel_abs_time_p3",
+    "name":  "destination node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_rel_abs_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_contact_rel_abs_time_p4" : {
+    "id" :  "contacts_contact_rel_abs_time_p4",
+    "name":  "transmission data rate",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_rel_abs_time",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "defaultValue":  ""
+  },
+  "contacts_contact_rel_abs_time_p5" : {
+    "id" :  "contacts_contact_rel_abs_time_p5",
+    "name":  "contact confidence",
+    "configType":  "contacts",
+    "cmdType":  "contacts_contact_rel_abs_time",
+    "valType":  "number",
+    "optional": true,
+    "units":  "fraction",
+    "defaultValue":  "1.00"
+  },
+  "contacts_range_abs_abs_time_p0" : {
+    "id" :  "contacts_range_abs_abs_time_p0",
+    "name":  "start time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_abs_abs_time",
+    "valType":  "datetime",
+    "units":  "UTC",
+    "defaultValue":  ""
+  },
+  "contacts_range_abs_abs_time_p1" : {
+    "id" :  "contacts_range_abs_abs_time_p1",
+    "name":  "stop time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_abs_abs_time",
+    "valType":  "datetime",
+    "units":  "UTC",
+    "defaultValue":  ""
+  },
+  "contacts_range_abs_abs_time_p2" : {
+    "id" :  "contacts_range_abs_abs_time_p2",
+    "name":  "one node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_abs_abs_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_range_abs_abs_time_p3" : {
+    "id" :  "contacts_range_abs_abs_time_p3",
+    "name":  "other node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_abs_abs_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_range_abs_abs_time_p4" : {
+    "id" :  "contacts_range_abs_abs_time_p4",
+    "name":  "transmission distance",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_abs_abs_time",
+    "valType":  "number",
+    "units":  "light secs",
+    "defaultValue":  ""
+  },
+  "contacts_range_abs_rel_time_p0" : {
+    "id" :  "contacts_range_abs_rel_time_p0",
+    "name":  "start time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_abs_rel_time",
+    "valType":  "datetime",
+    "units":  "UTC",
+    "defaultValue":  ""
+  },
+  "contacts_range_abs_rel_time_p1" : {
+    "id" :  "contacts_range_abs_rel_time_p1",
+    "name":  "relative stop time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_abs_rel_time",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "contacts_range_abs_rel_time_p2" : {
+    "id" :  "contacts_range_abs_rel_time_p2",
+    "name":  "one node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_abs_rel_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_range_abs_rel_time_p3" : {
+    "id" :  "contacts_range_abs_rel_time_p3",
+    "name":  "other node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_abs_rel_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_range_abs_rel_time_p4" : {
+    "id" :  "contacts_range_abs_rel_time_p4",
+    "name":  "transmission distance",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_abs_rel_time",
+    "valType":  "number",
+    "units":  "light secs",
+    "defaultValue":  ""
+  },
+  "contacts_range_rel_rel_time_p0" : {
+    "id" :  "contacts_range_rel_rel_time_p0",
+    "name":  "relative start time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_rel_rel_time",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "contacts_range_rel_rel_time_p1" : {
+    "id" :  "contacts_range_rel_rel_time_p1",
+    "name":  "relative stop time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_rel_rel_time",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "contacts_range_rel_rel_time_p2" : {
+    "id" :  "contacts_range_rel_rel_time_p2",
+    "name":  "one node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_rel_rel_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_range_rel_rel_time_p3" : {
+    "id" :  "contacts_range_rel_rel_time_p3",
+    "name":  "other node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_rel_rel_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_range_rel_rel_time_p4" : {
+    "id" :  "contacts_range_rel_rel_time_p4",
+    "name":  "transmission distance",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_rel_rel_time",
+    "valType":  "number",
+    "units":  "light secs",
+    "defaultValue":  ""
+  },
+  "contacts_range_rel_abs_time_p0" : {
+    "id" :  "contacts_range_rel_abs_time_p0",
+    "name":  "relative start time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_rel_abs_time",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "contacts_range_rel_abs_time_p1" : {
+    "id" :  "contacts_range_rel_abs_time_p1",
+    "name":  "stop time",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_rel_abs_time",
+    "valType":  "datetime",
+    "units":  "UTC",
+    "defaultValue":  ""
+  },
+  "contacts_range_rel_abs_time_p2" : {
+    "id" :  "contacts_range_rel_abs_time_p2",
+    "name":  "one node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_rel_abs_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_range_rel_abs_time_p3" : {
+    "id" :  "contacts_range_rel_abs_time_p3",
+    "name":  "other node",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_rel_abs_time",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "contacts_range_rel_abs_time_p4" : {
+    "id" :  "contacts_range_rel_abs_time_p4",
+    "name":  "transmission distance",
+    "configType":  "contacts",
+    "cmdType":  "contacts_range_rel_abs_time",
+    "valType":  "number",
+    "units":  "light secs",
+    "defaultValue":  ""
+  },
+  "bpv6rc_add_plan_p0" : {
+    "id" :  "bpv6rc_add_plan_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_add_plan",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_add_plan_p1" : {
+    "id" :  "bpv6rc_add_plan_p1",
+    "name":  "transmission rate",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_add_plan",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "optional":  true,
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_tcp_p0" : {
+    "id" :  "bpv6rc_attach_outduct_tcp_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_tcp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_tcp_p1" : {
+    "id" :  "bpv6rc_attach_outduct_tcp_p1",
+    "name":  "outduct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_tcp",
+    "valType":  "tcpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_stcp_p0" : {
+    "id" :  "bpv6rc_attach_outduct_stcp_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_stcp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_stcp_p1" : {
+    "id" :  "bpv6rc_attach_outduct_stcp_p1",
+    "name":  "outduct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_stcp",
+    "valType":  "stcpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_udp_p0" : {
+    "id" :  "bpv6rc_attach_outduct_udp_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_udp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_udp_p1" : {
+    "id" :  "bpv6rc_attach_outduct_udp_p1",
+    "name":  "outduct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_udp",
+    "valType":  "udpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_ltp_p0" : {
+    "id" :  "bpv6rc_attach_outduct_ltp_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_ltp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_ltp_p1" : {
+    "id" :  "bpv6rc_attach_outduct_ltp_p1",
+    "name":  "outduct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_ltp",
+    "valType":  "ltpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_dccp_p0" : {
+    "id" :  "bpv6rc_attach_outduct_dccp_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_dccp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_dccp_p1" : {
+    "id" :  "bpv6rc_attach_outduct_dccp_p1",
+    "name":  "outduct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_dccp",
+    "valType":  "dccpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_bssp_p0" : {
+    "id" :  "bpv6rc_attach_outduct_bssp_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_bssp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_bssp_p1" : {
+    "id" :  "bpv6rc_attach_outduct_bssp_p1",
+    "name":  "outduct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_bssp",
+    "valType":  "bsspOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_any_p0" : {
+    "id" :  "bpv6rc_attach_outduct_any_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_any_p1" : {
+    "id" :  "bpv6rc_attach_outduct_any_p1",
+    "name":  "protocol name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_attach_outduct_any_p2" : {
+    "id" :  "bpv6rc_attach_outduct_any_p2",
+    "name":  "outduct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_attach_outduct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_heapmax_p0" : {
+    "id" :  "bpv6rc_heapmax_p0",
+    "name":  "max database heap per acquisition",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_heapmax",
+    "valType":  "number",
+    "units":  "bytes",
+    "showDefault": true,
+    "defaultValue":  "560"
+  },
+  "bpv6rc_maxcount_p0" : {
+    "id" :  "bpv6rc_maxcount_p0",
+    "name":  "max bundle ID seq number",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_maxcount",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "0"
+  },
+  "bpv6rc_gateway_plan_p0" : {
+    "id" :  "bpv6rc_gateway_plan_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_gateway_plan",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_gateway_plan_p1" : {
+    "id" :  "bpv6rc_gateway_plan_p1",
+    "name":  "gateway endpoint name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_gateway_plan",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_scheme_p0" : {
+    "id" :  "bpv6rc_scheme_p0",
+    "name":  "scheme name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_scheme",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  "ipn"
+  },
+  "bpv6rc_scheme_p1" : {
+    "id" :  "bpv6rc_scheme_p1",
+    "name":  "forwarder command",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_scheme",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  "ipnfw"
+  },
+  "bpv6rc_scheme_p2" : {
+    "id" :  "bpv6rc_scheme_p2",
+    "name":  "admin app command",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_scheme",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  "ipnadminep"
+  },
+  "bpv6rc_endpoint_p0" : {
+    "id" :  "bpv6rc_endpoint_p0",
+    "name":  "node num",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_endpoint",
+    "valType":  "nodeNum",
+    "copyClone": true,
+    "units":  "",
+    "defaultValue":  "[cloned from Node]"
+  },
+  "bpv6rc_endpoint_p1" : {
+    "id" :  "bpv6rc_endpoint_p1",
+    "name":  "service num",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_endpoint",
+    "valType":  "number",
+    "showDefault": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_endpoint_p2" : {
+    "id" :  "bpv6rc_endpoint_p2",
+    "name":  "bundle disposition",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_endpoint",
+    "valType":  "select",
+    "showDefault": true,
+    "units":  "",
+    "defaultValue":  "x"
+  },
+  "bpv6rc_endpoint_p3" : {
+    "id" :  "bpv6rc_endpoint_p3",
+    "name":  "queue receiver task",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_endpoint",
+    "valType":  "text",
+    "units":  "",
+    "optional":  true,
+    "defaultValue":  ""
+  },
+  "bpv6rc_protocol_p0" : {
+    "id" :  "bpv6rc_protocol_p0",
+    "name":  "protocol name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_protocol",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_protocol_p1" : {
+    "id" :  "bpv6rc_protocol_p1",
+    "name":  "payload bytes per frame",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_protocol",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "bpv6rc_protocol_p2" : {
+    "id" :  "bpv6rc_protocol_p2",
+    "name":  "overhead bytes per frame",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_protocol",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "bpv6rc_protocol_p3" : {
+    "id" :  "bpv6rc_protocol_p3",
+    "name":  "protocol class",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_protocol",
+    "valType":  "select",
+    "units":  "",
+    "optional": true,
+    "defaultValue":  "8"
+  },
+  "bpv6rc_induct_tcp_p0" : {
+    "id" :  "bpv6rc_induct_tcp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_tcp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_induct_tcp_p1" : {
+    "id" :  "bpv6rc_induct_tcp_p1",
+    "name":  "local port number",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_tcp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "4556"
+  },
+  "bpv6rc_induct_tcp_p2" : {
+    "id" :  "bpv6rc_induct_tcp_p2",
+    "name":  "tcp cli task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_tcp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "tcpcli"
+  },
+  "bpv6rc_induct_stcp_p0" : {
+    "id" :  "bpv6rc_induct_stcp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_stcp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_induct_stcp_p1" : {
+    "id" :  "bpv6rc_induct_stcp_p1",
+    "name":  "local port number",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_stcp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "4556"
+  },
+  "bpv6rc_induct_stcp_p2" : {
+    "id" :  "bpv6rc_induct_stcp_p2",
+    "name":  "stcp cli task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_stcp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "stcpcli"
+  },
+  "bpv6rc_induct_udp_p0" : {
+    "id" :  "bpv6rc_induct_udp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_udp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_induct_udp_p1" : {
+    "id" :  "bpv6rc_induct_udp_p1",
+    "name":  "local port number",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_udp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "4556"
+  },
+  "bpv6rc_induct_udp_p2" : {
+    "id" :  "bpv6rc_induct_udp_p2",
+    "name":  "udp cli task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_udp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "udpcli"
+  },
+  "bpv6rc_induct_ltp_p0" : {
+    "id" :  "bpv6rc_induct_ltp_p0",
+    "name":  "ltp duct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_ltp",
+    "valType":  "nodeNum",
+    "copyClone": true,
+    "units":  "",
+    "defaultValue":  "[cloned from Node]"
+  },
+  "bpv6rc_induct_ltp_p1" : {
+    "id" :  "bpv6rc_induct_ltp_p1",
+    "name":  "ltp cli task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_ltp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "ltpcli"
+  },
+  "bpv6rc_induct_dccp_p0" : {
+    "id" :  "bpv6rc_induct_dccp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_dccp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_induct_dccp_p1" : {
+    "id" :  "bpv6rc_induct_dccp_p1",
+    "name":  "local port number",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_dccp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "4556"
+  },
+  "bpv6rc_induct_dccp_p2" : {
+    "id" :  "bpv6rc_induct_dccp_p2",
+    "name":  "dccp cli task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_dccp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "dccpcli"
+  },
+  "bpv6rc_induct_bssp_p0" : {
+    "id" :  "bpv6rc_induct_bssp_p0",
+    "name":  "bssp duct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_bssp",
+    "valType":  "nodeNum",
+    "copyClone": true,
+    "units":  "",
+    "defaultValue":  "[cloned from Node]"
+  },
+  "bpv6rc_induct_bssp_p1" : {
+    "id" :  "bpv6rc_induct_bssp_p1",
+    "name":  "bssp cli task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_bssp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "bsspcli"
+  },
+  "bpv6rc_induct_any_p0" : {
+    "id" :  "bpv6rc_induct_any_p0",
+    "name":  "protocol name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_induct_any_p1" : {
+    "id" :  "bpv6rc_induct_any_p1",
+    "name":  "duct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_induct_any_p2" : {
+    "id" :  "bpv6rc_induct_any_p2",
+    "name":  "cli task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_induct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_outduct_tcp_p0" : {
+    "id" :  "bpv6rc_outduct_tcp_p0",
+    "name":  "tcp duct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_tcp",
+    "valType":  "tcpInduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_outduct_tcp_p1" : {
+    "id" :  "bpv6rc_outduct_tcp_p1",
+    "name":  "tcp clo task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_tcp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "tcpclo"
+  },
+  "bpv6rc_outduct_tcp_p2" : {
+    "id" :  "bpv6rc_outduct_tcp_p2",
+    "name":  "max payload length",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_tcp",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv6rc_outduct_stcp_p0" : {
+    "id" :  "bpv6rc_outduct_stcp_p0",
+    "name":  "stcp duct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_stcp",
+    "valType":  "stcpInduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_outduct_stcp_p1" : {
+    "id" :  "bpv6rc_outduct_stcp_p1",
+    "name":  "stcp clo task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_stcp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "stcpclo"
+  },
+  "bpv6rc_outduct_stcp_p2" : {
+    "id" :  "bpv6rc_outduct_stcp_p2",
+    "name":  "max payload length",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_stcp",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv6rc_outduct_udp_p0" : {
+    "id" :  "bpv6rc_outduct_udp_p0",
+    "name":  "udp duct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_udp",
+    "valType":  "udpInduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_outduct_udp_p1" : {
+    "id" :  "bpv6rc_outduct_udp_p1",
+    "name":  "udp clo task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_udp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "udpclo"
+  },
+  "bpv6rc_outduct_udp_p2" : {
+    "id" :  "bpv6rc_outduct_udp_p2",
+    "name":  "max payload length",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_udp",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv6rc_outduct_ltp_p0" : {
+    "id" :  "bpv6rc_outduct_ltp_p0",
+    "name":  "ltp duct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_ltp",
+    "valType":  "ltpInduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_outduct_ltp_p1" : {
+    "id" :  "bpv6rc_outduct_ltp_p1",
+    "name":  "ltp clo task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_ltp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "ltpclo"
+  },
+  "bpv6rc_outduct_ltp_p2" : {
+    "id" :  "bpv6rc_outduct_ltp_p2",
+    "name":  "max payload length",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_ltp",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv6rc_outduct_dccp_p0" : {
+    "id" :  "bpv6rc_outduct_dccp_p0",
+    "name":  "dccp duct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_dccp",
+    "valType":  "dccpInduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_outduct_dccp_p1" : {
+    "id" :  "bpv6rc_outduct_dccp_p1",
+    "name":  "dccp clo task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_dccp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "dccpclo"
+  },
+  "bpv6rc_outduct_dccp_p2" : {
+    "id" :  "bpv6rc_outduct_dccp_p2",
+    "name":  "max payload length",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_dccp",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv6rc_outduct_bssp_p0" : {
+    "id" :  "bpv6rc_outduct_bssp_p0",
+    "name":  "bssp duct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_bssp",
+    "valType":  "bsspInduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_outduct_bssp_p1" : {
+    "id" :  "bpv6rc_outduct_bssp_p1",
+    "name":  "bssp clo task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_bssp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "bsspclo"
+  },
+  "bpv6rc_outduct_bssp_p2" : {
+    "id" :  "bpv6rc_outduct_bssp_p2",
+    "name":  "max payload length",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_bssp",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv6rc_outduct_any_p0" : {
+    "id" :  "bpv6rc_outduct_any_p0",
+    "name":  "protocol name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_outduct_any_p1" : {
+    "id" :  "bpv6rc_outduct_any_p1",
+    "name":  "duct name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_outduct_any_p2" : {
+    "id" :  "bpv6rc_outduct_any_p2",
+    "name":  "clo task name",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_outduct_any_p3" : {
+    "id" :  "bpv6rc_outduct_any_p3",
+    "name":  "max payload length",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_outduct_any",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv6rc_run_ipnadmin_p0" : {
+    "id" :  "bpv6rc_run_ipnadmin_p0",
+    "name":  "node id",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_run_ipnadmin",
+    "valType":  "nodeKey",
+    "copyClone": true,
+    "units":  "",
+    "defaultValue":  "[cloned from Node]"
+  },
+  "bpv6rc_run_p0" : {
+    "id" :  "bpv6rc_run_p0",
+    "name":  "command text",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_run",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv6rc_watch_p0" : {
+    "id" :  "bpv6rc_watch_p0",
+    "name":  "watch characters",
+    "configType":  "bpv6rc",
+    "cmdType":  "bpv6rc_watch",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_add_plan_p0" : {
+    "id" :  "bpv7rc_add_plan_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_add_plan",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_add_plan_p1" : {
+    "id" :  "bpv7rc_add_plan_p1",
+    "name":  "transmission rate",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_add_plan",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "optional":  true,
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_tcp_p0" : {
+    "id" :  "bpv7rc_attach_outduct_tcp_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_tcp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_tcp_p1" : {
+    "id" :  "bpv7rc_attach_outduct_tcp_p1",
+    "name":  "outduct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_tcp",
+    "valType":  "tcpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_stcp_p0" : {
+    "id" :  "bpv7rc_attach_outduct_stcp_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_stcp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_stcp_p1" : {
+    "id" :  "bpv7rc_attach_outduct_stcp_p1",
+    "name":  "outduct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_stcp",
+    "valType":  "stcpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_udp_p0" : {
+    "id" :  "bpv7rc_attach_outduct_udp_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_udp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_udp_p1" : {
+    "id" :  "bpv7rc_attach_outduct_udp_p1",
+    "name":  "outduct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_udp",
+    "valType":  "udpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_ltp_p0" : {
+    "id" :  "bpv7rc_attach_outduct_ltp_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_ltp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_ltp_p1" : {
+    "id" :  "bpv7rc_attach_outduct_ltp_p1",
+    "name":  "outduct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_ltp",
+    "valType":  "ltpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_dccp_p0" : {
+    "id" :  "bpv7rc_attach_outduct_dccp_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_dccp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_dccp_p1" : {
+    "id" :  "bpv7rc_attach_outduct_dccp_p1",
+    "name":  "outduct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_dccp",
+    "valType":  "dccpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_bssp_p0" : {
+    "id" :  "bpv7rc_attach_outduct_bssp_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_bssp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_bssp_p1" : {
+    "id" :  "bpv7rc_attach_outduct_bssp_p1",
+    "name":  "outduct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_bssp",
+    "valType":  "bsspOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_any_p0" : {
+    "id" :  "bpv7rc_attach_outduct_any_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_any_p1" : {
+    "id" :  "bpv7rc_attach_outduct_any_p1",
+    "name":  "protocol name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_attach_outduct_any_p2" : {
+    "id" :  "bpv7rc_attach_outduct_any_p2",
+    "name":  "outduct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_attach_outduct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_heapmax_p0" : {
+    "id" :  "bpv7rc_heapmax_p0",
+    "name":  "max database heap per acquisition",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_heapmax",
+    "valType":  "number",
+    "units":  "bytes",
+    "showDefault": true,
+    "defaultValue":  "560"
+  },
+  "bpv7rc_maxcount_p0" : {
+    "id" :  "bpv7rc_maxcount_p0",
+    "name":  "max bundle ID seq number",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_maxcount",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "0"
+  },
+  "bpv7rc_gateway_plan_p0" : {
+    "id" :  "bpv7rc_gateway_plan_p0",
+    "name":  "endpoint name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_gateway_plan",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_gateway_plan_p1" : {
+    "id" :  "bpv7rc_gateway_plan_p1",
+    "name":  "gateway endpoint name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_gateway_plan",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_scheme_p0" : {
+    "id" :  "bpv7rc_scheme_p0",
+    "name":  "scheme name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_scheme",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  "ipn"
+  },
+  "bpv7rc_scheme_p1" : {
+    "id" :  "bpv7rc_scheme_p1",
+    "name":  "forwarder command",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_scheme",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  "ipnfw"
+  },
+  "bpv7rc_scheme_p2" : {
+    "id" :  "bpv7rc_scheme_p2",
+    "name":  "admin app command",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_scheme",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  "ipnadminep"
+  },
+  "bpv7rc_endpoint_p0" : {
+    "id" :  "bpv7rc_endpoint_p0",
+    "name":  "node num",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_endpoint",
+    "valType":  "nodeNum",
+    "copyClone": true,
+    "units":  "",
+    "defaultValue":  "[cloned from Node]"
+  },
+  "bpv7rc_endpoint_p1" : {
+    "id" :  "bpv7rc_endpoint_p1",
+    "name":  "service num",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_endpoint",
+    "valType":  "number",
+    "showDefault": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_endpoint_p2" : {
+    "id" :  "bpv7rc_endpoint_p2",
+    "name":  "bundle disposition",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_endpoint",
+    "valType":  "select",
+    "showDefault": true,
+    "units":  "",
+    "defaultValue":  "x"
+  },
+  "bpv7rc_endpoint_p3" : {
+    "id" :  "bpv7rc_endpoint_p3",
+    "name":  "queue receiver task",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_endpoint",
+    "valType":  "text",
+    "units":  "",
+    "optional":  true,
+    "defaultValue":  ""
+  },
+  "bpv7rc_protocol_v11_p0" : {
+    "id" :  "bpv7rc_protocol_v11_p0",
+    "name":  "protocol name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_protocol_v11",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_protocol_v11_p1" : {
+    "id" :  "bpv7rc_protocol_v11_p1",
+    "name":  "payload bytes per frame",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_protocol_v11",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "bpv7rc_protocol_v11_p2" : {
+    "id" :  "bpv7rc_protocol_v11_p2",
+    "name":  "overhead bytes per frame",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_protocol_v11",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "bpv7rc_protocol_v11_p3" : {
+    "id" :  "bpv7rc_protocol_v11_p3",
+    "name":  "protocol class",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_protocol_v11",
+    "valType":  "select",
+    "units":  "",
+    "optional": true,
+    "defaultValue":  "8"
+  },
+  "bpv7rc_protocol_p0" : {
+    "id" :  "bpv7rc_protocol_p0",
+    "name":  "protocol name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_protocol",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_protocol_p1" : {
+    "id" :  "bpv7rc_protocol_p1",
+    "name":  "protocol class",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_protocol",
+    "valType":  "select",
+    "units":  "",
+    "optional": true,
+    "defaultValue":  "8"
+  },
+  "bpv7rc_induct_tcp_p0" : {
+    "id" :  "bpv7rc_induct_tcp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_tcp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_induct_tcp_p1" : {
+    "id" :  "bpv7rc_induct_tcp_p1",
+    "name":  "local port number",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_tcp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "4556"
+  },
+  "bpv7rc_induct_tcp_p2" : {
+    "id" :  "bpv7rc_induct_tcp_p2",
+    "name":  "tcp cli task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_tcp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "tcpcli"
+  },
+  "bpv7rc_induct_stcp_p0" : {
+    "id" :  "bpv7rc_induct_stcp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_stcp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_induct_stcp_p1" : {
+    "id" :  "bpv7rc_induct_stcp_p1",
+    "name":  "local port number",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_stcp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "4556"
+  },
+  "bpv7rc_induct_stcp_p2" : {
+    "id" :  "bpv7rc_induct_stcp_p2",
+    "name":  "stcp cli task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_stcp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "stcpcli"
+  },
+  "bpv7rc_induct_udp_p0" : {
+    "id" :  "bpv7rc_induct_udp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_udp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_induct_udp_p1" : {
+    "id" :  "bpv7rc_induct_udp_p1",
+    "name":  "local port number",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_udp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "4556"
+  },
+  "bpv7rc_induct_udp_p2" : {
+    "id" :  "bpv7rc_induct_udp_p2",
+    "name":  "udp cli task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_udp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "udpcli"
+  },
+  "bpv7rc_induct_ltp_p0" : {
+    "id" :  "bpv7rc_induct_ltp_p0",
+    "name":  "ltp duct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_ltp",
+    "valType":  "nodeNum",
+    "copyClone": true,
+    "units":  "",
+    "defaultValue":  "[cloned from Node]"
+  },
+  "bpv7rc_induct_ltp_p1" : {
+    "id" :  "bpv7rc_induct_ltp_p1",
+    "name":  "ltp cli task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_ltp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "ltpcli"
+  },
+  "bpv7rc_induct_dccp_p0" : {
+    "id" :  "bpv7rc_induct_dccp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_dccp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_induct_dccp_p1" : {
+    "id" :  "bpv7rc_induct_dccp_p1",
+    "name":  "local port number",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_dccp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "4556"
+  },
+  "bpv7rc_induct_dccp_p2" : {
+    "id" :  "bpv7rc_induct_dccp_p2",
+    "name":  "dccp cli task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_dccp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "dccpcli"
+  },
+  "bpv7rc_induct_bssp_p0" : {
+    "id" :  "bpv7rc_induct_bssp_p0",
+    "name":  "bssp duct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_bssp",
+    "valType":  "nodeNum",
+    "copyClone": true,
+    "units":  "",
+    "defaultValue":  "[cloned from Node]"
+  },
+  "bpv7rc_induct_bssp_p1" : {
+    "id" :  "bpv7rc_induct_bssp_p1",
+    "name":  "bssp cli task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_bssp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "bsspcli"
+  },
+  "bpv7rc_induct_any_p0" : {
+    "id" :  "bpv7rc_induct_any_p0",
+    "name":  "protocol name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_induct_any_p1" : {
+    "id" :  "bpv7rc_induct_any_p1",
+    "name":  "duct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_induct_any_p2" : {
+    "id" :  "bpv7rc_induct_any_p2",
+    "name":  "cli task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_induct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_outduct_tcp_p0" : {
+    "id" :  "bpv7rc_outduct_tcp_p0",
+    "name":  "tcp duct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_tcp",
+    "valType":  "tcpInduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_outduct_tcp_p1" : {
+    "id" :  "bpv7rc_outduct_tcp_p1",
+    "name":  "tcp clo task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_tcp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "tcpclo"
+  },
+  "bpv7rc_outduct_tcp_p2" : {
+    "id" :  "bpv7rc_outduct_tcp_p2",
+    "name":  "max payload length",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_tcp",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv7rc_outduct_stcp_p0" : {
+    "id" :  "bpv7rc_outduct_stcp_p0",
+    "name":  "stcp duct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_stcp",
+    "valType":  "stcpInduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_outduct_stcp_p1" : {
+    "id" :  "bpv7rc_outduct_stcp_p1",
+    "name":  "stcp clo task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_stcp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "stcpclo"
+  },
+  "bpv7rc_outduct_stcp_p2" : {
+    "id" :  "bpv7rc_outduct_stcp_p2",
+    "name":  "max payload length",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_stcp",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv7rc_outduct_udp_p0" : {
+    "id" :  "bpv7rc_outduct_udp_p0",
+    "name":  "udp duct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_udp",
+    "valType":  "udpInduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_outduct_udp_p1" : {
+    "id" :  "bpv7rc_outduct_udp_p1",
+    "name":  "udp clo task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_udp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "udpclo"
+  },
+  "bpv7rc_outduct_udp_p2" : {
+    "id" :  "bpv7rc_outduct_udp_p2",
+    "name":  "max payload length",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_udp",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv7rc_outduct_ltp_p0" : {
+    "id" :  "bpv7rc_outduct_ltp_p0",
+    "name":  "ltp duct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_ltp",
+    "valType":  "ltpInduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_outduct_ltp_p1" : {
+    "id" :  "bpv7rc_outduct_ltp_p1",
+    "name":  "ltp clo task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_ltp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "ltpclo"
+  },
+  "bpv7rc_outduct_ltp_p2" : {
+    "id" :  "bpv7rc_outduct_ltp_p2",
+    "name":  "max payload length",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_ltp",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv7rc_outduct_dccp_p0" : {
+    "id" :  "bpv7rc_outduct_dccp_p0",
+    "name":  "dccp duct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_dccp",
+    "valType":  "dccpInduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_outduct_dccp_p1" : {
+    "id" :  "bpv7rc_outduct_dccp_p1",
+    "name":  "dccp clo task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_dccp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "dccpclo"
+  },
+  "bpv7rc_outduct_dccp_p2" : {
+    "id" :  "bpv7rc_outduct_dccp_p2",
+    "name":  "max payload length",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_dccp",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv7rc_outduct_bssp_p0" : {
+    "id" :  "bpv7rc_outduct_bssp_p0",
+    "name":  "bssp duct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_bssp",
+    "valType":  "bsspInduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_outduct_bssp_p1" : {
+    "id" :  "bpv7rc_outduct_bssp_p1",
+    "name":  "bssp clo task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_bssp",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "bsspclo"
+  },
+  "bpv7rc_outduct_bssp_p2" : {
+    "id" :  "bpv7rc_outduct_bssp_p2",
+    "name":  "max payload length",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_bssp",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv7rc_outduct_any_p0" : {
+    "id" :  "bpv7rc_outduct_any_p0",
+    "name":  "protocol name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_outduct_any_p1" : {
+    "id" :  "bpv7rc_outduct_any_p1",
+    "name":  "duct name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_outduct_any_p2" : {
+    "id" :  "bpv7rc_outduct_any_p2",
+    "name":  "clo task name",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_outduct_any_p3" : {
+    "id" :  "bpv7rc_outduct_any_p3",
+    "name":  "max payload length",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_outduct_any",
+    "valType":  "number",
+    "units":  "bytes",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "bpv7rc_run_ipnadmin_p0" : {
+    "id" :  "bpv7rc_run_ipnadmin_p0",
+    "name":  "node id",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_run_ipnadmin",
+    "valType":  "nodeKey",
+    "copyClone": true,
+    "units":  "",
+    "defaultValue":  "[cloned from Node]"
+  },
+  "bpv7rc_run_p0" : {
+    "id" :  "bpv7rc_run_p0",
+    "name":  "command text",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_run",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_watch_p0" : {
+    "id" :  "bpv7rc_watch_p0",
+    "name":  "watch characters",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_watch",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_tcp_p0" : {
+    "id" :  "ipnrc_plan_tcp_p0",
+    "name" :  "to node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_tcp",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_tcp_p1" : {
+    "id" :  "ipnrc_plan_tcp_p1",
+    "name" :  "default tcp outduct name",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_tcp",
+    "valType":  "tcpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_tcp_p2" : {
+    "id" :  "ipnrc_plan_tcp_p2",
+    "name" :  "nominal data rate",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_tcp",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "ipnrc_plan_stcp_p0" : {
+    "id" :  "ipnrc_plan_stcp_p0",
+    "name" :  "to node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_stcp",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_stcp_p1" : {
+    "id" :  "ipnrc_plan_stcp_p1",
+    "name" :  "default stcp outduct name",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_stcp",
+    "valType":  "stcpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_stcp_p2" : {
+    "id" :  "ipnrc_plan_stcp_p2",
+    "name" :  "nominal data rate",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_stcp",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "ipnrc_plan_udp_p0" : {
+    "id" :  "ipnrc_plan_udp_p0",
+    "name" :  "to node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_udp",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_udp_p1" : {
+    "id" :  "ipnrc_plan_udp_p1",
+    "name" :  "default udp outduct name",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_udp",
+    "valType":  "udpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_udp_p2" : {
+    "id" :  "ipnrc_plan_udp_p2",
+    "name" :  "nominal data rate",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_udp",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "ipnrc_plan_ltp_p0" : {
+    "id" :  "ipnrc_plan_ltp_p0",
+    "name" :  "to node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_ltp",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_ltp_p1" : {
+    "id" :  "ipnrc_plan_ltp_p1",
+    "name" :  "default ltp outduct name",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_ltp",
+    "valType":  "ltpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_ltp_p2" : {
+    "id" :  "ipnrc_plan_ltp_p2",
+    "name" :  "nominal data rate",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_ltp",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "ipnrc_plan_dccp_p0" : {
+    "id" :  "ipnrc_plan_dccp_p0",
+    "name" :  "to node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_dccp",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_dccp_p1" : {
+    "id" :  "ipnrc_plan_dccp_p1",
+    "name" :  "default dccp outduct name",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_dccp",
+    "valType":  "dccpOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_dccp_p2" : {
+    "id" :  "ipnrc_plan_dccp_p2",
+    "name" :  "nominal data rate",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_dccp",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "ipnrc_plan_bssp_p0" : {
+    "id" :  "ipnrc_plan_bssp_p0",
+    "name" :  "to node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_bssp",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_bssp_p1" : {
+    "id" :  "ipnrc_plan_bssp_p1",
+    "name" :  "default bssp outduct name",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_bssp",
+    "valType":  "bsspOutduct",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_bssp_p2" : {
+    "id" :  "ipnrc_plan_bssp_p2",
+    "name" :  "nominal data rate",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_bssp",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "ipnrc_plan_any_p0" : {
+    "id" :  "ipnrc_plan_any_p0",
+    "name" :  "to node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_any",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_any_p1" : {
+    "id" :  "ipnrc_plan_any_p1",
+    "name" :  "default any outduct name",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_plan_any_p2" : {
+    "id" :  "ipnrc_plan_any_p2",
+    "name" :  "nominal data rate",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_plan_any",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "ipnrc_exit_ion_p0" : {
+    "id" :  "ipnrc_exit_ion_p0",
+    "name" :  "first node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_exit_ion",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_exit_ion_p1" : {
+    "id" :  "ipnrc_exit_ion_p1",
+    "name":  "last node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_exit_ion",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_exit_ion_p2" : {
+    "id" :  "ipnrc_exit_ion_p2",
+    "name":  "gateway node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_exit_ion",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "imcrc_kin_p0" : {
+    "id" :  "imcrc_kin_p0",
+    "name":  "related node number",
+    "configType":  "imcrc",
+    "cmdType":  "imcrc_kin",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_rtovrd_p0" : {
+    "id" :  "ipnrc_rtovrd_p0",
+    "name" :  "data label",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_rtovrd",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_rtovrd_p1" : {
+    "id" :  "ipnrc_rtovrd_p1",
+    "name" :  "dest node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_rtovrd",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_rtovrd_p2" : {
+    "id" :  "ipnrc_rtovrd_p2",
+    "name" :  "src node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_rtovrd",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_rtovrd_p3" : {
+    "id" :  "ipnrc_rtovrd_p3",
+    "name" :  "neighbor node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_rtovrd",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_v11_p0" : {
+    "id" :  "ipnrc_cosovrd_v11_p0",
+    "name" :  "data label",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd_v11",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_v11_p1" : {
+    "id" :  "ipnrc_cosovrd_v11_p1",
+    "name" :  "dest node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd_v11",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_v11_p2" : {
+    "id" :  "ipnrc_cosovrd_v11_p2",
+    "name" :  "src node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd_v11",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_v11_p3" : {
+    "id" :  "ipnrc_cosovrd_v11_p3",
+    "name" :  "priority",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd_v11",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_v11_p4" : {
+    "id" :  "ipnrc_cosovrd_v11_p4",
+    "name" :  "ordinal",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd_v11",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_p0" : {
+    "id" :  "ipnrc_cosovrd_p0",
+    "name" :  "data label",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_p1" : {
+    "id" :  "ipnrc_cosovrd_p1",
+    "name" :  "dest node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_p2" : {
+    "id" :  "ipnrc_cosovrd_p2",
+    "name" :  "src node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_p3" : {
+    "id" :  "ipnrc_cosovrd_p3",
+    "name" :  "priority",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_p4" : {
+    "id" :  "ipnrc_cosovrd_p4",
+    "name" :  "ordinal",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_cosovrd_p5" : {
+    "id" :  "ipnrc_cosovrd_p5",
+    "name" :  "qos flags",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_cosovrd",
+    "optional": true,
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "imcrc_kin_p1" : {
+    "id" :  "imcrc_kin_p1",
+    "name":  "kinship of related node",
+    "configType":  "imcrc",
+    "cmdType":  "imcrc_kin",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  "0"
+  },
+  "dtpcrc_profile_p0" : {
+    "id" :  "dtpcrc_profile_p0",
+    "name":  "profile id num",
+    "configType":  "dtpcrc",
+    "cmdType":  "dtpcrc_profile",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "0"
+  },
+  "dtpcrc_profile_p1" : {
+    "id" :  "dtpcrc_profile_p1",
+    "name":  "max times retransmit ADU",
+    "configType":  "dtpcrc",
+    "cmdType":  "dtpcrc_profile",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "0"
+  },
+  "dtpcrc_profile_p2" : {
+    "id" :  "dtpcrc_profile_p2",
+    "name":  "aggregrate size limit",
+    "configType":  "dtpcrc",
+    "cmdType":  "dtpcrc_profile",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  "0"
+  },
+  "dtpcrc_profile_p3" : {
+    "id" :  "dtpcrc_profile_p3",
+    "name":  "aggregate time limit",
+    "configType":  "dtpcrc",
+    "cmdType":  "dtpcrc_profile",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "0"
+  },
+  "dtpcrc_profile_p4" : {
+    "id" :  "dtpcrc_profile_p4",
+    "name":  "total time to live",
+    "configType":  "dtpcrc",
+    "cmdType":  "dtpcrc_profile",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "0"
+  },
+  "dtpcrc_profile_p5" : {
+    "id" :  "dtpcrc_profile_p5",
+    "name":  "class of service",
+    "configType":  "dtpcrc",
+    "cmdType":  "dtpcrc_profile",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "dtpcrc_profile_p6" : {
+    "id" :  "dtpcrc_profile_p6",
+    "name":  "report dtn endpoint",
+    "configType":  "dtpcrc",
+    "cmdType":  "dtpcrc_profile",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "dtpcrc_profile_p7" : {
+    "id" :  "dtpcrc_profile_p7",
+    "name":  "status report flags",
+    "configType":  "dtpcrc",
+    "cmdType":  "dtpcrc_profile",
+    "valType":  "text",
+    "units":  "rcv,ct,fwd,dlv,del",
+    "defaultValue":  "0"
+  },
+  "ionconfig_configFlags_p0" : {
+    "id" :  "ionconfig_configFlags_p0",
+    "name":  "ion configuration flags",
+    "configType":  "ionconfig",
+    "cmdType":  "ionconfig_configFlags",
+    "valType":  "select",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue" : "13"
+  },
+  "ionconfig_heapKey_p0" : {
+    "id" :  "ionconfig_heapKey_p0",
+    "name":  "ion heap key",
+    "configType":  "ionconfig",
+    "cmdType":  "ionconfig_heapKey",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue" : -1
+  },
+  "ionconfig_heapWords_p0" : {
+    "id" :  "ionconfig_heapWords_p0",
+    "name":  "ion heap words",
+    "configType":  "ionconfig",
+    "cmdType":  "ionconfig_heapWords",
+    "valType":  "number",
+    "units":  "words",
+    "showDefault": true,
+    "defaultValue" : 250000
+  },
+  "ionconfig_logKey_p0" : {
+    "id" :  "ionconfig_logKey_p0",
+    "name":  "ion log key",
+    "configType":  "ionconfig",
+    "cmdType":  "ionconfig_logKey",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue" : -1
+  },
+  "ionconfig_logSize_p0" : {
+    "id" :  "ionconfig_logSize_p0",
+    "name":  "ion log size",
+    "configType":  "ionconfig",
+    "cmdType":  "ionconfig_logSize",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue" : 0
+  },
+  "ionconfig_pathName_p0" : {
+    "id" :  "ionconfig_pathName_p0",
+    "name":  "ion path name of heap file",
+    "configType":  "ionconfig",
+    "cmdType":  "ionconfig_pathName",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue" : "/tmp"
+  },
+  "ionconfig_sdrName_p0" : {
+    "id" :  "ionconfig_sdrName_p0",
+    "name":  "ion heap key",
+    "configType":  "ionconfig",
+    "cmdType":  "ionconfig_sdrName",
+    "valType":  "text",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue" : "ion"
+  },
+  "ionconfig_sdrWmSize_p0" : {
+    "id" :  "ionconfig_sdrWmSize_p0",
+    "name":  "ion SDR working memory size",
+    "configType":  "ionconfig",
+    "cmdType":  "ionconfig_sdrWmSize",
+    "valType":  "number",
+    "units":  "bytes",
+    "showDefault": true,
+    "defaultValue" : 0
+  },
+  "ionconfig_wmAddress_p0" : {
+    "id" :  "ionconfig_wmAddress_p0",
+    "name":  "ion working memory address",
+    "configType":  "ionconfig",
+    "cmdType":  "ionconfig_wmAddress",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue" : 0
+  },
+  "ionconfig_wmKey_p0" : {
+    "id" :  "ionconfig_wmKey_p0",
+    "name":  "ion working memory key",
+    "configType":  "ionconfig",
+    "cmdType":  "ionconfig_wmKey",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue" : 65281
+  },
+  "ionconfig_wmSize_p0" : {
+    "id" :  "ionconfig_wmSize_p0",
+    "name":  "ion working memory size",
+    "configType":  "ionconfig",
+    "cmdType":  "ionconfig_wmSize",
+    "valType":  "number",
+    "units":  "bytes",
+    "showDefault": true,
+    "defaultValue" : 5000000
+  },
+  "bssprc_initialize_p0" : {
+    "id" :  "bssprc_initialize_p0",
+    "name":  "est max sessions",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_initialize",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_seat_p0" : {
+    "id" :  "bssprc_seat_p0",
+    "name":  "best-effort bso command",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_seat",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_seat_p1" : {
+    "id" :  "bssprc_seat_p1",
+    "name":  "reliable bso command",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_seat",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_span_udp_tcp_p0" : {
+    "id" :  "bssprc_span_udp_tcp_p0",
+    "name":  "peer engine number",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_udp_tcp",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_span_udp_tcp_p1" : {
+    "id" :  "bssprc_span_udp_tcp_p1",
+    "name":  "max export sessions",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_udp_tcp",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_span_udp_tcp_p2" : {
+    "id" :  "bssprc_span_udp_tcp_p2",
+    "name":  "max block size",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_udp_tcp",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "bssprc_span_udp_tcp_p3" : {
+    "id" :  "bssprc_span_udp_tcp_p3",
+    "name":  "best-effort dest ipaddr",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_udp_tcp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_span_udp_tcp_p4" : {
+    "id" :  "bssprc_span_udp_tcp_p4",
+    "name":  "best-effort dest port number",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_udp_tcp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "6001"
+  },
+  "bssprc_span_udp_tcp_p5" : {
+    "id" :  "bssprc_span_udp_tcp_p5",
+    "name":  "transmission rate",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_udp_tcp",
+    "valType":  "number",
+    "units":  "bits per sec",
+    "defaultValue":  ""
+  },
+  "bssprc_span_udp_tcp_p6" : {
+    "id" :  "bssprc_span_udp_tcp_p6",
+    "name":  "reliable dest ipaddr",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_udp_tcp",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_span_udp_tcp_p7" : {
+    "id" :  "bssprc_span_udp_tcp_p7",
+    "name":  "reliable dest port number",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_udp_tcp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "4556"
+  },
+  "bssprc_span_udp_tcp_p8" : {
+    "id" :  "bssprc_span_udp_tcp_p8",
+    "name":  "queueing latency",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_udp_tcp",
+    "valType":  "number",
+    "units":  "secs",
+    "optional": true,
+    "showDefault": true,
+    "defaultValue":  "1"
+  },
+  "bssprc_span_any_p0" : {
+    "id" :  "bssprc_span_any_p0",
+    "name":  "peer engine number",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_any",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_span_any_p1" : {
+    "id" :  "bssprc_span_any_p1",
+    "name":  "max export sessions",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_any",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_span_any_p2" : {
+    "id" :  "bssprc_span_any_p2",
+    "name":  "max block size",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_any",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "bssprc_span_any_p3" : {
+    "id" :  "bssprc_span_any_p3",
+    "name":  "best-effort link output command",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_any",
+    "valType":  "text",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_span_any_p4" : {
+    "id" :  "bssprc_span_any_p4",
+    "name":  "reliable link output command",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_span_any_p5" : {
+    "id" :  "bssprc_span_any_p5",
+    "name":  "queueing latency",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_span_any",
+    "valType":  "number",
+    "units":  "secs",
+    "optional": true,
+    "showDefault": true,
+    "defaultValue":  "1"
+  },
+  "bssprc_start_udp_tcp_p0" : {
+    "id" :  "bssprc_start_udp_tcp_p0",
+    "name":  "best-effort local ip addr",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_start_udp_tcp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_start_udp_tcp_p1" : {
+    "id" :  "bssprc_start_udp_tcp_p1",
+    "name":  "best-effort local port number",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_start_udp_tcp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "6001"
+  },
+  "bssprc_start_udp_tcp_p2" : {
+    "id" :  "bssprc_start_udp_tcp_p2",
+    "name":  "reliable local ip addr",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_start_udp_tcp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_start_udp_tcp_p3" : {
+    "id" :  "bssprc_start_udp_tcp_p3",
+    "name":  "reliable local port number",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_start_udp_tcp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "4556"
+  },
+  "bssprc_start_any_p0" : {
+    "id" :  "bssprc_start_any_p0",
+    "name":  "best-effort link input command",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_start_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_start_any_p1" : {
+    "id" :  "bssprc_start_any_p1",
+    "name":  "reliable link input command",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_start_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bssprc_ownqtime_p0" : {
+    "id" :  "bssprc_ownqtime_p0",
+    "name":  "own queuing time",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_ownqtime",
+    "valType":  "number",
+    "units":  "secs",
+    "showDefault": true,
+    "defaultValue":  "1"
+  },
+  "bssprc_watch_p0" : {
+    "id" :  "bssprc_watch_p0",
+    "name":  "watch characters",
+    "configType":  "bssprc",
+    "cmdType":  "bssprc_watch",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_initialize_p0" : {
+    "id" :  "ltprc_initialize_p0",
+    "name":  "est max export sessions",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_initialize",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_udp_p0" : {
+    "id" :  "ltprc_span_udp_p0",
+    "name":  "peer engine number",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_udp",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_udp_p1" : {
+    "id" :  "ltprc_span_udp_p1",
+    "name":  "max export sessions",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_udp",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_udp_p2" : {
+    "id" :  "ltprc_span_udp_p2",
+    "name":  "max import sessions",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_udp",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_udp_p3" : {
+    "id" :  "ltprc_span_udp_p3",
+    "name":  "max segment size",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_udp",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "ltprc_span_udp_p4" : {
+    "id" :  "ltprc_span_udp_p4",
+    "name":  "aggregation size threshold",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_udp",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "ltprc_span_udp_p5" : {
+    "id" :  "ltprc_span_udp_p5",
+    "name":  "aggregation time limit",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_udp",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "ltprc_span_udp_p6" : {
+    "id" :  "ltprc_span_udp_p6",
+    "name":  "udp link service name",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_udp",
+    "valType":  "udpLink",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_udp_p7" : {
+    "id" :  "ltprc_span_udp_p7",
+    "name":  "queueing latency",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_udp",
+    "valType":  "number",
+    "units":  "secs",
+    "optional": true,
+    "defaultValue":  "1"
+  },
+  "ltprc_span_dccp_p0" : {
+    "id" :  "ltprc_span_dccp_p0",
+    "name":  "peer engine number",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_dccp",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_dccp_p1" : {
+    "id" :  "ltprc_span_dccp_p1",
+    "name":  "max export sessions",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_dccp",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_dccp_p2" : {
+    "id" :  "ltprc_span_dccp_p2",
+    "name":  "max import sessions",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_dccp",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_dccp_p3" : {
+    "id" :  "ltprc_span_dccp_p3",
+    "name":  "max segment size",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_dccp",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "ltprc_span_dccp_p4" : {
+    "id" :  "ltprc_span_dccp_p4",
+    "name":  "aggregation size threshold",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_dccp",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "ltprc_span_dccp_p5" : {
+    "id" :  "ltprc_span_dccp_p5",
+    "name":  "aggregation time limit",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_dccp",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "ltprc_span_dccp_p6" : {
+    "id" :  "ltprc_span_dccp_p6",
+    "name":  "dccp link service name",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_dccp",
+    "valType":  "dccpLink",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_dccp_p7" : {
+    "id" :  "ltprc_span_dccp_p7",
+    "name":  "queueing latency",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_dccp",
+    "valType":  "number",
+    "units":  "secs",
+    "optional": true,
+    "defaultValue":  "1"
+  },
+  "ltprc_span_any_p0" : {
+    "id" :  "ltprc_span_any_p0",
+    "name":  "peer engine number",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_any",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_any_p1" : {
+    "id" :  "ltprc_span_any_p1",
+    "name":  "max export sessions",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_any",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_any_p2" : {
+    "id" :  "ltprc_span_any_p2",
+    "name":  "max import sessions",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_any",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_any_p3" : {
+    "id" :  "ltprc_span_any_p3",
+    "name":  "max segment size",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_any",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "ltprc_span_any_p4" : {
+    "id" :  "ltprc_span_any_p4",
+    "name":  "aggregation size limit",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_any",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "ltprc_span_any_p5" : {
+    "id" :  "ltprc_span_any_p5",
+    "name":  "aggregation time limit",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_any",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "ltprc_span_any_p6" : {
+    "id" :  "ltprc_span_any_p6",
+    "name":  "lso command",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_span_any_p7" : {
+    "id" :  "ltprc_span_any_p7",
+    "name":  "queueing latency",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_any",
+    "valType":  "number",
+    "units":  "secs",
+    "optional": true,
+    "defaultValue":  "1"
+  },
+  "ltprc_seat_udp_p0" : {
+    "id" :  "ltprc_seat_udp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_seat_udp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_seat_udp_p1" : {
+    "id" :  "ltprc_seat_udp_p1",
+    "name":  "local port number",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_seat_udp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "1113"
+  },
+  "ltprc_seat_dccp_p0" : {
+    "id" :  "ltprc_seat_dccp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_seat_dccp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_seat_dccp_p1" : {
+    "id" :  "ltprc_seat_dccp_p1",
+    "name":  "local port number",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_seat_dccp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "1113"
+  },
+  "ltprc_seat_any_p0" : {
+    "id" :  "ltprc_seat_any_p0",
+    "name":  "LSI command",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_seat_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_start_udp_p0" : {
+    "id" :  "ltprc_start_udp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_start_udp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_start_udp_p1" : {
+    "id" :  "ltprc_start_udp_p1",
+    "name":  "local port number",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_start_udp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "1113"
+  },
+  "ltprc_start_dccp_p0" : {
+    "id" :  "ltprc_start_dccp_p0",
+    "name":  "ip address (or name)",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_start_dccp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_start_dccp_p1" : {
+    "id" :  "ltprc_start_dccp_p1",
+    "name":  "local port number",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_start_dccp",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "1113"
+  },
+  "ltprc_start_any_p0" : {
+    "id" :  "ltprc_start_any_p0",
+    "name":  "lsi command",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_start_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_heapmax_p0" : {
+    "id" :  "ltprc_heapmax_p0",
+    "name":  "max database heap per acquisition",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_heapmax",
+    "valType":  "number",
+    "units":  "bytes",
+    "showDefault": true,
+    "defaultValue":  "560"
+  },
+  "ltprc_screening_p0" : {
+    "id" :  "ltprc_screening_p0",
+    "name":  "enable screening of ltp segments",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_screening",
+    "valType":  "select",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "n"
+  },
+  "ltprc_ownqtime_p0" : {
+    "id" :  "ltprc_ownqtime_p0",
+    "name":  "own queuing time",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_ownqtime",
+    "valType":  "number",
+    "units":  "secs",
+    "showDefault": true,
+    "defaultValue":  "1"
+  },
+  "ltprc_maxbacklog_p0" : {
+    "id" :  "ltprc_maxbacklog_p0",
+    "name":  "max delivery backlog",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_maxbacklog",
+    "valType":  "number",
+    "units":  "blocks",
+    "showDefault": true,
+    "defaultValue":  "10"
+  },
+  "ltprc_maxber_p0" : {
+    "id" :  "ltprc_maxber_p0",
+    "name":  "max bit error rate",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_maxber",
+    "valType":  "number",
+    "units":  "decimal fraction",
+    "showDefault": true,
+    "defaultValue":  ".000001"  
+  },
+  "ltprc_watch_p0" : {
+    "id" :  "ltprc_watch_p0",
+    "name":  "watch characters",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_watch",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "cfdprc_entity_bp_p0" : {
+    "id" :  "cfdprc_entity_bp_p0",
+    "name":  "remote entity number",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_entity_bp",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "cfdprc_entity_bp_p1" : {
+    "id" :  "cfdprc_entity_bp_p1",
+    "name":  "UT endpoint name",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_entity_bp",
+    "valType":  "ionEndpoint",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "cfdprc_entity_bp_p2" : {
+    "id" :  "cfdprc_entity_bp_p2",
+    "name":  "round-trip time",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_entity_bp",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "cfdprc_entity_bp_p3" : {
+    "id" :  "cfdprc_entity_bp_p3",
+    "name":  "incoming checksum type",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_entity_bp",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "cfdprc_entity_bp_p4" : {
+    "id" :  "cfdprc_entity_bp_p4",
+    "name":  "outgoing checksum type",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_entity_bp",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "cfdprc_start_any_p0" : {
+    "id" :  "cfdprc_start_any_p0",
+    "name":  "UTS command",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_start_any",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "cfdprc_discard_p0" : {
+    "id" :  "cfdprc_discard_p0",
+    "name":  "discard partially received file",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_discard",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  "1"
+  },
+  "cfdprc_requirerc_p0" : {
+    "id" :  "cfdprc_requirerc_p0",
+    "name":  "require CRC data integrity",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_requirerc",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  "0"
+  },
+  "cfdprc_fillchar_p0" : {
+    "id" :  "cfdprc_fillchar_p0",
+    "name":  "fill char for incomplete files",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_fillchar",
+    "valType":  "text",
+    "units":  "hex",
+    "defaultValue":  "0xaa"
+  },
+  "cfdprc_ckperiod_p0" : {
+    "id" :  "cfdprc_ckperiod_p0",
+    "name":  "period to check file completion",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_ckperiod",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "86400"
+  },
+  "cfdprc_maxtimeouts_p0" : {
+    "id" :  "cfdprc_maxtimeouts_p0",
+    "name":  "check cycle limit",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_maxtimeouts",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "7"
+  },
+  "cfdprc_maxtrnbr_p0" : {
+    "id" :  "cfdprc_maxtrnbr_p0",
+    "name":  "max transaction number",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_maxtrnbr",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "999999999"
+  },
+  "cfdprc_segsize_p0" : {
+    "id" :  "cfdprc_segsize_p0",
+    "name":  "max bytes per file segment size",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_segsize",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  "65000"
+  },
+  "cfdprc_inactivity_p0" : {
+    "id" :  "cfdprc_inactivity_p0",
+    "name":  "max idle time til cancel",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_inactivity",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "86400"
+  },
+  "acsrc_initialize_p0" : {
+    "id" :  "acsrc_initialize_p0",
+    "name":  "log level",
+    "configType":  "acsrc",
+    "cmdType":  "acsrc_initialize",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "acsrc_initialize_p1" : {
+    "id" :  "acsrc_initialize_p1",
+    "name":  "heap memory words",
+    "configType":  "acsrc",
+    "cmdType":  "acsrc_initialize",
+    "valType":  "number",
+    "units":  "words",
+    "defaultValue":  ""
+  },
+  "acsrc_bundle_lifetime_p0" : {
+    "id" :  "acsrc_bundle_lifetime_p0",
+    "name":  "bundle life time",
+    "configType":  "acsrc",
+    "cmdType":  "acsrc_bundle_lifetime",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "0"
+  },
+  "acsrc_mincustodyid_p0" : {
+    "id" :  "acsrc_mincustodyid_p0",
+    "name":  "min custody id",
+    "configType":  "acsrc",
+    "cmdType":  "acsrc_mincustodyid",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "acsrc_custodian_p0" : {
+    "id" :  "acsrc_custodian_p0",
+    "name":  "custodian endpoint",
+    "configType":  "acsrc",
+    "cmdType":  "acsrc_custodian",
+    "valType":  "ionEndpoint",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "acsrc_custodian_p1" : {
+    "id" :  "acsrc_custodian_p1",
+    "name":  "ACS bundle size",
+    "configType":  "acsrc",
+    "cmdType":  "acsrc_custodian",
+    "valType":  "number",
+    "units":  "bytes",
+    "defaultValue":  ""
+  },
+  "acsrc_custodian_p2" : {
+    "id" :  "acsrc_custodian_p2",
+    "name":  "maximum acs delay",
+    "configType":  "acsrc",
+    "cmdType":  "acsrc_custodian",
+    "valType":  "number",
+    "units":  "secs",
+    "optional": true,
+    "defaultValue":  ""
+  },
+  "biberc_dest_endpoint_p0" : {
+    "id" :  "biberc_dest_endpoint_p0",
+    "name":  "destination node",
+    "configType":  "biberc",
+    "cmdType":  "biberc_dest_endpoint",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "biberc_dest_endpoint_p1" : {
+    "id" :  "biberc_dest_endpoint_p1",
+    "name":  "forward latency",
+    "configType":  "biberc",
+    "cmdType":  "biberc_dest_endpoint",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "0"
+  },
+  "biberc_dest_endpoint_p2" : {
+    "id" :  "biberc_dest_endpoint_p2",
+    "name":  "return latency",
+    "configType":  "biberc",
+    "cmdType":  "biberc_dest_endpoint",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "0"
+  },
+  "biberc_dest_endpoint_p3" : {
+    "id" :  "biberc_dest_endpoint_p3",
+    "name":  "priority",
+    "configType":  "biberc",
+    "cmdType":  "biberc_dest_endpoint",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "0"
+  },
+  "biberc_dest_endpoint_p4" : {
+    "id" :  "biberc_dest_endpoint_p4",
+    "name":  "ordinal",
+    "configType":  "biberc",
+    "cmdType":  "biberc_dest_endpoint",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "0"
+  },
+  "biberc_dest_endpoint_p5" : {
+    "id" :  "biberc_dest_endpoint_p5",
+    "name":  "data label",
+    "configType":  "biberc",
+    "cmdType":  "biberc_dest_endpoint",
+    "valType":  "number",
+    "units":  "",
+    "optional": true,
+    "defaultValue":  "0"
+  },
+  "ionsecrc_key_p0" : {
+    "id" :  "ionsecrc_key_p0",
+    "name":  "key name",
+    "configType":  "ionsecrc",
+    "cmdType":  "ionsecrc_key",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ionsecrc_key_p1" : {
+    "id" :  "ionsecrc_key_p1",
+    "name":  "key file name",
+    "configType":  "ionsecrc",
+    "cmdType":  "ionsecrc_key",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbibrule_p0" : {
+    "id" :  "bpsecv6rc_bspbibrule_p0",
+    "name":  "source endpoint expression",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbibrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbibrule_p1" : {
+    "id" :  "bpsecv6rc_bspbibrule_p1",
+    "name":  "destination endpoint expression",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbibrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbibrule_p2" : {
+    "id" :  "bpsecv6rc_bspbibrule_p2",
+    "name":  "block type number",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbibrule",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbibrule_p3" : {
+    "id" :  "bpsecv6rc_bspbibrule_p3",
+    "name":  "ciphersuite name",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbibrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbibrule_p4" : {
+    "id" :  "bpsecv6rc_bspbibrule_p4",
+    "name":  "key name",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbibrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbibrule_nocheck_p0" : {
+    "id" :  "bpsecv6rc_bspbibrule_nocheck_p0",
+    "name":  "sender endpoint expression",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbibrule_nocheck",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbibrule_nocheck_p1" : {
+    "id" :  "bpsecv6rc_bspbibrule_nocheck_p1",
+    "name":  "receiver endpoint expression",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbibrule_nocheck",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbibrule_nocheck_p2" : {
+    "id" :  "bpsecv6rc_bspbibrule_nocheck_p2",
+    "name":  "block type number",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbibrule_nocheck",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbcbrule_p0" : {
+    "id" :  "bpsecv6rc_bspbcbrule_p0",
+    "name":  "source endpoint expression",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbcbrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbcbrule_p1" : {
+    "id" :  "bpsecv6rc_bspbcbrule_p1",
+    "name":  "destination endpoint expression",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbcbrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbcbrule_p2" : {
+    "id" :  "bpsecv6rc_bspbcbrule_p2",
+    "name":  "block type number",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbcbrule",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbcbrule_p3" : {
+    "id" :  "bpsecv6rc_bspbcbrule_p3",
+    "name":  "ciphersuite name",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbcbrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbcbrule_p4" : {
+    "id" :  "bpsecv6rc_bspbcbrule_p4",
+    "name":  "key name",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbcbrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbcbrule_nocheck_p0" : {
+    "id" :  "bpsecv6rc_bspbcbrule_nocheck_p0",
+    "name":  "sender endpoint expression",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbcbrule_nocheck",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbcbrule_nocheck_p1" : {
+    "id" :  "bpsecv6rc_bspbcbrule_nocheck_p1",
+    "name":  "receiver endpoint expression",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbcbrule_nocheck",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv6rc_bspbcbrule_nocheck_p2" : {
+    "id" :  "bpsecv6rc_bspbcbrule_nocheck_p2",
+    "name":  "block type number",
+    "configType":  "bpsecv6rc",
+    "cmdType":  "bpsecv6rc_bspbcbrule_nocheck",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bibrule_p0" : {
+    "id" :  "bpsecv7rc_bibrule_p0",
+    "name":  "source endpoint expression",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bibrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bibrule_p1" : {
+    "id" :  "bpsecv7rc_bibrule_p1",
+    "name":  "destination endpoint expression",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bibrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bibrule_p2" : {
+    "id" :  "bpsecv7rc_bibrule_p2",
+    "name":  "block type number",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bibrule",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bibrule_p3" : {
+    "id" :  "bpsecv7rc_bibrule_p3",
+    "name":  "ciphersuite name",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bibrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bibrule_p4" : {
+    "id" :  "bpsecv7rc_bibrule_p4",
+    "name":  "key name",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bibrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bibrule_nocheck_p0" : {
+    "id" :  "bpsecv7rc_bibrule_nocheck_p0",
+    "name":  "sender endpoint expression",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bibrule_nocheck",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bibrule_nocheck_p1" : {
+    "id" :  "bpsecv7rc_bibrule_nocheck_p1",
+    "name":  "receiver endpoint expression",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bibrule_nocheck",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bibrule_nocheck_p2" : {
+    "id" :  "bpsecv7rc_bibrule_nocheck_p2",
+    "name":  "block type number",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bibrule_nocheck",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bcbrule_p0" : {
+    "id" :  "bpsecv7rc_bcbrule_p0",
+    "name":  "source endpoint expression",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bcbrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bcbrule_p1" : {
+    "id" :  "bpsecv7rc_bcbrule_p1",
+    "name":  "destination endpoint expression",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bcbrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bcbrule_p2" : {
+    "id" :  "bpsecv7rc_bcbrule_p2",
+    "name":  "block type number",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bcbrule",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bcbrule_p3" : {
+    "id" :  "bpsecv7rc_bcbrule_p3",
+    "name":  "ciphersuite name",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bcbrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bcbrule_p4" : {
+    "id" :  "bpsecv7rc_bcbrule_p4",
+    "name":  "key name",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bcbrule",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bcbrule_nocheck_p0" : {
+    "id" :  "bpsecv7rc_bcbrule_nocheck_p0",
+    "name":  "sender endpoint expression",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bcbrule_nocheck",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bcbrule_nocheck_p1" : {
+    "id" :  "bpsecv7rc_bcbrule_nocheck_p1",
+    "name":  "receiver endpoint expression",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bcbrule_nocheck",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpsecv7rc_bcbrule_nocheck_p2" : {
+    "id" :  "bpsecv7rc_bcbrule_nocheck_p2",
+    "name":  "block type number",
+    "configType":  "bpsecv7rc",
+    "cmdType":  "bpsecv7rc_bcbrule_nocheck",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltpsecrc_ltprecvauthrule_p0" : {
+    "id" :  "ltpsecrc_ltprecvauthrule_p0",
+    "name":  "LTP engine id (node num)",
+    "configType":  "ltpsecrc",
+    "cmdType":  "ltpsecrc_ltprecvauthrule",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltpsecrc_ltprecvauthrule_p1" : {
+    "id" :  "ltpsecrc_ltprecvauthrule_p1",
+    "name":  "ciphersuite number",
+    "configType":  "ltpsecrc",
+    "cmdType":  "ltpsecrc_ltprecvauthrule",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltpsecrc_ltprecvauthrule_p2" : {
+    "id" :  "ltpsecrc_ltprecvauthrule_p2",
+    "name":  "key name",
+    "configType":  "ltpsecrc",
+    "cmdType":  "ltpsecrc_ltprecvauthrule",
+    "valType":  "text",
+    "units":  "",
+    "optltpal": true,
+    "defaultValue":  ""
+  },
+  "ltpsecrc_ltpxmitauthrule_p0" : {
+    "id" :  "ltpsecrc_ltpxmitauthrule_p0",
+    "name":  "LTP engine id (node num)",
+    "configType":  "ltpsecrc",
+    "cmdType":  "ltpsecrc_ltpxmitauthrule",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltpsecrc_ltpxmitauthrule_p1" : {
+    "id" :  "ltpsecrc_ltpxmitauthrule_p1",
+    "name":  "ciphersuite number",
+    "configType":  "ltpsecrc",
+    "cmdType":  "ltpsecrc_ltpxmitauthrule",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltpsecrc_ltpxmitauthrule_p2" : {
+    "id" :  "ltpsecrc_ltpxmitauthrule_p2",
+    "name":  "key name",
+    "configType":  "ltpsecrc",
+    "cmdType":  "ltpsecrc_ltpxmitauthrule",
+    "valType":  "text",
+    "units":  "",
+    "optional": true,
+    "defaultValue":  ""
+  },
+  "dtkarc_keygen_time_p0" : {
+    "id" :  "dtkarc_keygen_time_p0",
+    "name":  "keygen time",
+    "configType":  "dtkarc",
+    "cmdType":  "dtkarc_keygen_time",
+    "valType":  "datetime",
+    "units":  "UTC",
+    "defaultValue":  ""
+  },
+  "dtkarc_gen_interval_p0" : {
+    "id" :  "dtkarc_gen_interval_p0",
+    "name":  "gen interval",
+    "configType":  "dtkarc",
+    "cmdType":  "dtkarc_gen_interval",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "604800"
+  },
+  "dtkarc_lead_time_p0" : {
+    "id" :  "dtkarc_lead_time_p0",
+    "name":  "lead time",
+    "configType":  "dtkarc",
+    "cmdType":  "dtkarc_lead_time",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "345600"
+  },
+  "tcarc_initialize_p0" : {
+    "id" :  "tcarc_initialize_p0",
+    "name":  "mc group num bulletins",
+    "configType":  "tcarc",
+    "cmdType":  "tcarc_initialize",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tcarc_initialize_p1" : {
+    "id" :  "tcarc_initialize_p1",
+    "name":  "mc group num records",
+    "configType":  "tcarc",
+    "cmdType":  "tcarc_initialize",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tcarc_initialize_p2" : {
+    "id" :  "tcarc_initialize_p2",
+    "name":  "number of authorities",
+    "configType":  "tcarc",
+    "cmdType":  "tcarc_initialize",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tcarc_initialize_p3" : {
+    "id" :  "tcarc_initialize_p3",
+    "name":  "diffusion num of blocks",
+    "configType":  "tcarc",
+    "cmdType":  "tcarc_initialize",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tcarc_initialize_p4" : {
+    "id" :  "tcarc_initialize_p4",
+    "name":  "redundancy percentage",
+    "configType":  "tcarc",
+    "cmdType":  "tcarc_initialize",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tcarc_compile_time_p0" : {
+    "id" :  "tcarc_compile_time_p0",
+    "name":  "bulletin compile time",
+    "configType":  "tcarc",
+    "cmdType":  "tcarc_compile_time",
+    "valType":  "datetime",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tcarc_interval_p0" : {
+    "id" :  "tcarc_interval_p0",
+    "name":  "bulletin compile interval",
+    "configType":  "tcarc",
+    "cmdType":  "tcarc_interval",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "3600"
+  },
+  "tcarc_grace_period_p0" : {
+    "id" :  "tcarc_grace_period_p0",
+    "name":  "bulletin grace period",
+    "configType":  "tcarc",
+    "cmdType":  "tcarc_grace_period",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "60"
+  },
+  "tcarc_auth_index_p0" : {
+    "id" :  "tcarc_auth_index_p0",
+    "name":  "authority index",
+    "configType":  "tcarc",
+    "cmdType":  "tcarc_auth_index",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tcarc_auth_index_p1" : {
+    "id" :  "tcarc_auth_index_p1",
+    "name":  "node number",
+    "configType":  "tcarc",
+    "cmdType":  "tcarc_auth_index",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tcarc_auth_node_p0" : {
+    "id" :  "tcarc_auth_node_p0",
+    "name":  "node number",
+    "configType":  "tcarc",
+    "cmdType":  "tcarc_auth_node",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tccrc_initialize_p0" : {
+    "id" :  "tccrc_initialize_p0",
+    "name":  "number of authorities",
+    "configType":  "tccrc",
+    "cmdType":  "tccrc_initialize",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tccrc_initialize_p1" : {
+    "id" :  "tccrc_initialize_p1",
+    "name":  "diffusion num of blocks",
+    "configType":  "tccrc",
+    "cmdType":  "tccrc_initialize",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tccrc_initialize_p2" : {
+    "id" :  "tccrc_initialize_p2",
+    "name":  "redundancy percentage",
+    "configType":  "tccrc",
+    "cmdType":  "tccrc_initialize",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tccrc_authority_p0" : {
+    "id" :  "tccrc_authority_p0",
+    "name":  "authority index",
+    "configType":  "tccrc",
+    "cmdType":  "tccrc_authority",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "tccrc_authority_p1" : {
+    "id" :  "tccrc_authority_p1",
+    "name":  "node number",
+    "configType":  "tccrc",
+    "cmdType":  "tccrc_authority",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  }
+}
