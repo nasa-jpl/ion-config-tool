@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 //
-//    ionconfig.js
+//    ionsurvey.js
 //
-//  generate full set of ion config files based on ion model
+//  generate full set of ion survey reports based on ion model
 //
-//  usage:  ionconfig.js -m [ionmodelfile]
+//  usage:  ionsurvey.js -m [ionmodelfile]
 //
 //  inputs: ion_model.json  (or alternative name)
 //
-//  outputs: ion_model directory,    (using model name)
-//           ion_model/node1 subdir, (per node using node names from model)
-//           ion_model/node1/node1.xxxrc,   (per node per config file)
-//           ion_model/node1/start_node1.sh, (start script per node)
+//  outputs: ion_model-survey directory,    (using model name)
+//           ion_model-survey/nodes.txt,    (nodes survey report)
+//           ion_model-survey/xxx.txt,      (other survey report)
+//           ...
 //           progress messages,
 //           error messages
 //
@@ -47,9 +47,9 @@ var hosts = {};
 var ipaddrs = {};
 var cloneValues = {}
 
-var DEBUG_MODE = false;  // No debug messages to the console is default.
+var DEBUG_MODE = false;   // disable debug msgs by default
 
-console.log("Build ION Configurations from an ION Model");
+console.log("Build network survey reports from an ION Model");
 
 var argv = mm(process.argv.slice(2));
 var long = argv.l;
@@ -82,6 +82,8 @@ for (var pType in paramTypes) {
 
 // build hosts, nodes, configs, etc. from model
 extractIonModel(json);
+console.log("ION Model extraction successful.");
+console.log("---");
 console.log("Checking user ion model.");
 var errors = checkIonModel();
 if (errors.length) {
@@ -102,11 +104,6 @@ console.log("config count:  " + Object.keys(configs).length);
 console.log("ipaddr count:  " + Object.keys(ipaddrs).length);
 console.log("command count: " + Object.keys(commands).length );
 console.log("config files:  " + Object.keys(configs));
-
-console.log("---");
-
-console.log("Build and save all configurations.");
-saveAllConfigs();
 
 console.log("---");
 console.log("Done.");

@@ -1,20 +1,20 @@
 // NOTE: compare to getIonVerSeqNo of IonConfig IonModel.jsx
 function getIonVerSeqNo(nodeKey) {
   // translate version to sequence number for command effectivity
-  console.log("getIonVerSeqNo for:" + nodeKey);
+  debug_log("getIonVerSeqNo for:" + nodeKey);
   if (!(nodes.hasOwnProperty(nodeKey) || graphs.hasOwnProperty(nodeKey) ) )
     return 0;
   var ver = 0;
   if (nodeKey in nodes) {
     const node = nodes[nodeKey];
-    console.log("??? node: " + JSON.stringify(node));
+    debug_log("??? node: " + JSON.stringify(node));
     ver = node.ionVersion;
   } else {
     const graph = graphs[nodeKey];
-    console.log("??? graph: " + JSON.stringify(graph));
+    debug_log("??? graph: " + JSON.stringify(graph));
     ver = graph.ionVersion;
   }
-  console.log("???nodeKey: " + nodeKey + " ionVer: "+ ver);
+  debug_log("???nodeKey: " + nodeKey + " ionVer: "+ ver);
   for (var seqno in versions) {
     if (ver === versions[seqno].ionVersion)
       return seqno;
@@ -23,15 +23,15 @@ function getIonVerSeqNo(nodeKey) {
 };
 // NOTE: compare to makeCmdLine of IonConfig IonModel.jsx
 function makeCmdLine(cmdTypeKey,cmdParams) {
-  // console.log("makeCmdLine cmdTypeKey: " + cmdTypeKey + "  Params : " + JSON.stringify(cmdParams));
+  // debug_log("makeCmdLine cmdTypeKey: " + cmdTypeKey + "  Params : " + JSON.stringify(cmdParams));
   const targets = [ "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" ];
   var cmdPattern = patterns[cmdTypeKey];
   let cmdType = cmdTypes[cmdTypeKey];
   for (var i = 0; i < cmdParams.length; i++) {
-    console.log("makeCmdLine Pattern: " + cmdPattern + " tgt: " + cmdTypeKey + "  " + targets[i] + "  " + cmdParams[i]);
+    debug_log("makeCmdLine Pattern: " + cmdPattern + " tgt: " + cmdTypeKey + "  " + targets[i] + "  " + cmdParams[i]);
     let paramTypeKey = cmdType.paramTypes[i];
     if (paramTypeKey === undefined) {
-      console.log("ERROR: ignoring bad parameter " + cmdTypeKey + "  " + targets[i] + "  " + cmdParams[i]);
+      debug_log("ERROR: ignoring bad parameter " + cmdTypeKey + "  " + targets[i] + "  " + cmdParams[i]);
       continue;
     }
     let paramType = paramTypes[paramTypeKey];
@@ -43,18 +43,18 @@ function makeCmdLine(cmdTypeKey,cmdParams) {
     else
       cmdPattern = cmdPattern.replace(targets[i],cmdParams[i]);
   }
-  //console.log("cmd Type pattern " + cmdTypeKey + " " + cmd);
+  //debug_log("cmd Type pattern " + cmdTypeKey + " " + cmd);
   return cmdPattern;
 };
 
 // NOTE: compare to makeCmdLines of IonConfig IonModel.jsx
 function makeCmdLines(configKey) {
-  console.log("makeCmdLines for: " + configKey);
+  debug_log("makeCmdLines for: " + configKey);
   const configObj = configs[configKey];
   const cmdKeys = configObj.cmdKeys;
   const configTypeKey = configObj.configType;
   const configTypeObj = configTypes[configTypeKey];
-  //console.log("makeConfigElem configType:" + JSON.stringify(configType));
+  //debug_log("makeConfigElem configType:" + JSON.stringify(configType));
   const modelName = ion.name;
   const modelDesc = ion.desc;
   const nodeKey = configObj.nodeKey;
@@ -130,11 +130,11 @@ function makeStartLines(nodeKey) {
        nodeConfigs.push(nodeConfig);
   }
   nodeConfigs.sort( (a,b) => (a.order > b.order) ? 1 : -1);
-  console.log("makeStartLines sortConfigs: " + JSON.stringify(nodeConfigs));
+  debug_log("makeStartLines sortConfigs: " + JSON.stringify(nodeConfigs));
   for (var j=0; j<nodeConfigs.length; j++) {
     let configObj = nodeConfigs[j];
     let configKey = configObj.id;
-    console.log("makeStartLines configKey: " + configKey);
+    debug_log("makeStartLines configKey: " + configKey);
     let configTypeKey = configObj.configType;
     let configTypeObj = configTypes[configTypeKey];
     let prog = configTypeObj.program;

@@ -39,7 +39,7 @@ function checkIonModel() {
     var ionVer = versions[ionVerSeqNo].ionVersion;
     let protFlags = {};  // dict for protocol cmd existence
     let ductFlags = {};  // dict for duct cmd existence by protocol
-    console.log("checking commands for version seq: " + ionVerSeqNo.toString())
+    debug_log("checking commands for version seq: " + ionVerSeqNo.toString())
     var nconfs = node.configKeys;
     for (let i=0; i<reqConfigs.length; i++) {
       let chkConf = reqConfigs[i];
@@ -53,7 +53,7 @@ function checkIonModel() {
         alerts.push({"type": "Node", "name": nodeKey, "level":"warn", "msg": msg});
       }
     }
-    console.log("+++ conf count: " + nconfs.length);
+    debug_log("+++ conf count: " + nconfs.length);
     // node configs loop
     for (let k=0; k<nconfs.length; k++) {
       let confKey = nconfs[k];
@@ -64,13 +64,13 @@ function checkIonModel() {
       let missed = [];   // assume all required commands missing...will drop from list if found
       if (reqCmds.hasOwnProperty(chkConf) ) 
         missed = reqCmds[chkConf];
-      console.log("+++ checking reqd cmds" + missed.toString());
+      debug_log("+++ checking reqd cmds" + missed.toString());
       // node config commands loop
       for (let n=0; n<configObj.cmdKeys.length; n++) { 
         let cmdKey = configObj.cmdKeys[n];
         let cmdTypeKey = commands[cmdKey].typeKey;
         var cmdType = cmdTypes[cmdTypeKey];
-        console.log("checking command type: " + cmdTypeKey + " " );
+        debug_log("checking command type: " + cmdTypeKey + " " );
         if (cmdType.verFrom > ionVerSeqNo) {
           let msg = "Node " + nodeKey + "(" + ionVer + ") needs earlier variant of this command";
           alerts.push({"type": "Command", "name": cmdTypeKey, "level":"warn", "msg": msg});
@@ -114,10 +114,10 @@ function checkIonModel() {
         }
       }  // end of command loop
       // check for incorrect command duplicates
-      console.log("***** cmdCounts " + JSON.stringify(cmdCounts));
+      debug_log("***** cmdCounts " + JSON.stringify(cmdCounts));
       for (var cntKey in cmdCounts) {
         if (cmdCounts[cntKey] > 1) {
-          console.log("***** " + cntKey + " count =" + cmdCounts[cntKey].toString() );
+          debug_log("***** " + cntKey + " count =" + cmdCounts[cntKey].toString() );
           if (!cmdTypes[cntKey].hasOwnProperty("multiple")) {   // singleton command?
             let msg = "Improper duplicate command: " + cntKey;
             alerts.push({"type": "Config", "name": confKey, "level":"warn", "msg": msg});
@@ -131,8 +131,8 @@ function checkIonModel() {
         alerts.push({"type": "Config", "name": confKey, "level":"warn", "msg": msg});
       }
     } //end of config loop
-    console.log("***** ductFlags " + JSON.stringify(ductFlags));
-    console.log("***** protFlags " + JSON.stringify(protFlags));
+    debug_log("***** ductFlags " + JSON.stringify(ductFlags));
+    debug_log("***** protFlags " + JSON.stringify(protFlags));
     // alert any missing protocol commands
     for (var prot in ductFlags) {
       if (!protFlags.hasOwnProperty(prot)) {

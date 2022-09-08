@@ -853,6 +853,11 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
   assignClones(commands,clones);   //  map cloneVal to using clones (command params)
   return null;
 };
+// Special wrapper function for console.log debug messages
+function debug_log(msg) {
+  if (DEBUG_MODE)
+     console.log(msg);
+}
 // NOTE: compare to isGoodName of IonConfig App.js
 function isGoodName(name) {
 // check if a new name is valid

@@ -6,7 +6,7 @@ function extractIonModel (modelObj) {
   if(modelObj.hasOwnProperty("ionModelName"))
     ion.name = modelObj["ionModelName"];
   else {
-     console.log("The json file is not an Ion Model.");
+     debug_log("The json file is not an Ion Model.");
      return false;
   }
   if(modelObj.hasOwnProperty("ionModelDesc"))
@@ -52,7 +52,7 @@ function extractIonModel (modelObj) {
       cloneValues[ipCmdKey] = cloneVal;
     }
   };
-  console.log("ion IS:  " + JSON.stringify(ion));
+  debug_log("ion IS:  " + JSON.stringify(ion));
   var nodeList = [];
   if(modelObj.hasOwnProperty("nodes"))  // optional for now.
     nodeList = modelObj.nodes;
@@ -78,14 +78,14 @@ function extractIonModel (modelObj) {
     cloneVal = makeCloneVal(nodeKey,cmdObj);
     cloneValues[nodeCmdKey] = cloneVal;
 
-    console.log("node item=" + JSON.stringify(nodeObj) );
+    debug_log("node item=" + JSON.stringify(nodeObj) );
     var configsObj = nodeObj.configs;
-    console.log("node configs=" + JSON.stringify(configsObj) );
+    debug_log("node configs=" + JSON.stringify(configsObj) );
     const configKeyList = extractConfigs(nodeKey,configsObj);
-    console.log("Node got configKeys: " + configKeyList);
+    debug_log("Node got configKeys: " + configKeyList);
     nodes[nodeKey].configKeys = configKeyList;
   }
-  console.log("=== Ingesting contacts.");
+  debug_log("=== Ingesting contacts.");
   var graphList = [];
   if (modelObj.hasOwnProperty("graphs"))  // optional for now.
     graphList = modelObj.graphs
@@ -100,11 +100,11 @@ function extractIonModel (modelObj) {
       "ionVersion" : graphObj["ionVersion"],
       "configKey" : ""
     };
-    console.log("graph item=" + JSON.stringify(graphObj) );
+    debug_log("graph item=" + JSON.stringify(graphObj) );
     configsObj = graphObj.configs;
-    console.log("graph configs=" + JSON.stringify(configsObj) );
+    debug_log("graph configs=" + JSON.stringify(configsObj) );
     const configKeyList = extractConfigs(graphKey,configsObj);
-    console.log("Node got configKeys: " + configKeyList);
+    debug_log("Node got configKeys: " + configKeyList);
     graphs[graphKey].configKey = configKeyList[0];   // assuming just one
   }
   // NOTE: contacts was old name with old attributes
@@ -121,11 +121,11 @@ function extractIonModel (modelObj) {
       "desc" : graphObj["graphDesc"],
       "configKey" : ""
     };
-    console.log("graph item=" + JSON.stringify(graphObj) );
+    debug_log("graph item=" + JSON.stringify(graphObj) );
     configsObj = graphObj.configs;
-    console.log("contacts configs=" + JSON.stringify(configsObj) );
+    debug_log("contacts configs=" + JSON.stringify(configsObj) );
     const configKeyList = extractConfigs(graphKey,configsObj);
-    console.log("Node got configKeys: " + configKeyList);
+    debug_log("Node got configKeys: " + configKeyList);
     graphs[graphKey].configKey = configKeyList[0];   // assuming just one
   }
   assignClones();   // analyze full new command set for cloneVal dependents
@@ -135,14 +135,13 @@ function extractIonModel (modelObj) {
 // NOTE: compare to extractConfigs of IonConfig IonModelLoader.jsx
 function extractConfigs(groupKey,configsObj) {
   // groupKey is for a group of configs (a node or contacts)
-  console.log("extractConfigs groupKey:" + groupKey);
-  //console.log("extractConfigs configsObj:" + JSON.stringify(configsObj) );
+  debug_log("extractConfigs groupKey:" + groupKey);
   // make short names for state objects
 
   if (configsObj === undefined) { configsObj = {}; }
   var keyList = [];  // save generated keys for caller
   for (var configType in configsObj) {   // object names are configTypes
-    //console.log("loop for configType:" + configType);
+    debug_log("loop for configType:" + configType);
     var configKey = groupKey + "." + configType;
     if (configType === "contacts")   // special case for ionrc used for contacts
       configKey = groupKey + ".cg";
@@ -156,7 +155,7 @@ function extractConfigs(groupKey,configsObj) {
     };
     var commandsList = configsObj[configType].commands;
     const cmdKeyList = extractCommands(groupKey,configType,configKey,commandsList);
-    //console.log("Config got cmdKeys: " + cmdKeyList);
+    //debug_log("Config got cmdKeys: " + cmdKeyList);
     configs[configKey].cmdKeys = cmdKeyList;
   }
   return keyList;   // return list of configKeys
@@ -165,18 +164,18 @@ function extractConfigs(groupKey,configsObj) {
 // NOTE: compare to extractCommands of IonConfig IonModelLoader.jsx
 function extractCommands(groupKey,configType,configKey,commandsList) {
   // extract JSON config definition & build config with commands & cloneValues
-  console.log("extractCommands groupKey:" + groupKey);
-  console.log("extractCommands configType:" + configType);
-  console.log("extractCommands configKey:" + configKey);
+  debug_log("extractCommands groupKey:" + groupKey);
+  debug_log("extractCommands configType:" + configType);
+  debug_log("extractCommands configKey:" + configKey);
   if (commandsList === undefined) { commandsList = []; }
   var keyList = [];
   // make short names for state objects
 
-  //console.log("commands list=" + JSON.stringify(commandsList) );
+  //debug_log("commands list=" + JSON.stringify(commandsList) );
   for (let i = 0; i < commandsList.length; i++) {
     const cmdObj = commandsList[i];
     const cmdTypeKey = cmdObj.type;
-    console.log("cmdTypeKey: " + cmdTypeKey);
+    debug_log("cmdTypeKey: " + cmdTypeKey);
     const uniqid = getUniqId();
     const cmdKey = "cmd_" + uniqid;
     keyList.push(cmdKey);
@@ -190,7 +189,7 @@ function extractCommands(groupKey,configType,configKey,commandsList) {
       "lastUpdate" : cmdObj.lastUpdate,
       "values" : []
     };
-    //console.log("command item=" + JSON.stringify(commands[cmdKey]) );
+    //debug_log("command item=" + JSON.stringify(commands[cmdKey]) );
     for (var j = 0; j < cmdObj.parameters.length; j++) {
       const pVal = cmdObj.parameters[j];
       commands[cmdKey].values.push(pVal);
@@ -212,26 +211,26 @@ function assignClones() {
 
   // identify commands dependent on cloneValues
   // and push them on to the cloneValue list for update notifications
-  console.log("=== Identify clones using cloneValues from user ion model.");
+  debug_log("=== Identify clones using cloneValues from user ion model.");
   for (var cmdKey in commands) {
     let cmd = commands[cmdKey];
     let cmdTypeKey = cmd.typeKey;
-    console.log("$$$ cmdKey: " + cmdKey + " has type: " + cmdTypeKey);
+    debug_log("$$$ cmdKey: " + cmdKey + " has type: " + cmdTypeKey);
     let cmdType = cmdTypes[cmd.typeKey];
     if(cmdType.copyClone  || cmdType.pickClone) {
       for (let i = 0; i < cmdType.paramTypes.length; i++) {
          let paramTypeKey = cmdType.paramTypes[i];
          let paramType = paramTypes[paramTypeKey];
-         console.log("$$$ consider paramType " + paramType.id + " for cloning.")
+         debug_log("$$$ consider paramType " + paramType.id + " for cloning.")
          if (paramType.copyClone || paramType.pickClone) { 
             let val = cmd.values[i];
             let type = paramType.valType;
-            console.log("$$$ seeking clone value for type: " + type + " with value of " + val);
+            debug_log("$$$ seeking clone value for type: " + type + " with value of " + val);
             let cloneVal = findCloneVal(cloneValues,type,val);
             if(cloneVal) {
-              console.log("=== building clone.");
+              debug_log("=== building clone.");
               let clone = { "cmdKey" : cmdKey, "valIdx" : i };
-              console.log ("$$$ created clone key: " + JSON.stringify(clone));
+              debug_log ("$$$ created clone key: " + JSON.stringify(clone));
               cloneVal.clones.push(clone);
             }
          }
