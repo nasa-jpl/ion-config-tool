@@ -34,6 +34,13 @@
         "start_order": 25,
         "cmdTypes": [ ]  
     },
+    "bssprc" : {
+        "id": "bssprc",
+        "content": "Bundle Streaming Service Protocol management commands file",
+        "program": "bsspadmin",
+        "start_order": 27,
+        "cmdTypes": [ ]  
+    },
     "bpv6rc" :  {
     	"id": "bpv6rc",
     	"content": "Bundle Protocol V6 management commands file",
@@ -88,13 +95,6 @@
         "content": "Aggregate Custody Signal management commands file",
         "program": "acsadmin",
         "start_order": 55,
-        "cmdTypes": [ ]  
-    },
-    "bssprc" : {
-        "id": "bssprc",
-        "content": "Bundle Streaming Service Protocol management commands file",
-        "program": "bsspadmin",
-        "start_order": 56,
         "cmdTypes": [ ]  
     },
     "biberc" : {

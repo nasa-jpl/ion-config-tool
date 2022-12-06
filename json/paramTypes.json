@@ -657,24 +657,24 @@
     "units":  "light secs",
     "defaultValue":  ""
   },
-  "bpv6rc_add_plan_p0" : {
-    "id" :  "bpv6rc_add_plan_p0",
+  "bpv6rc_plan_p0" : {
+    "id" :  "bpv6rc_plan_p0",
     "name":  "endpoint name",
     "configType":  "bpv6rc",
-    "cmdType":  "bpv6rc_add_plan",
+    "cmdType":  "bpv6rc_plan",
     "valType":  "text",
     "units":  "",
     "defaultValue":  ""
   },
-  "bpv6rc_add_plan_p1" : {
-    "id" :  "bpv6rc_add_plan_p1",
+  "bpv6rc_plan_p1" : {
+    "id" :  "bpv6rc_plan_p1",
     "name":  "transmission rate",
     "configType":  "bpv6rc",
-    "cmdType":  "bpv6rc_add_plan",
+    "cmdType":  "bpv6rc_plan",
     "valType":  "number",
     "units":  "bytes per sec",
     "optional":  true,
-    "defaultValue":  ""
+    "defaultValue":  "0"
   },
   "bpv6rc_attach_outduct_tcp_p0" : {
     "id" :  "bpv6rc_attach_outduct_tcp_p0",
@@ -1391,31 +1391,52 @@
     "units":  "",
     "defaultValue":  ""
   },
-  "bpv7rc_add_plan_p0" : {
-    "id" :  "bpv7rc_add_plan_p0",
+  "bpv7rc_ion_plan_p0" : {
+    "id" :  "bpv7rc_ion_plan_p0",
+    "name":  "node num",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_ion_plan",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_ion_plan_p1" : {
+    "id" :  "bpv7rc_ion_plan_p1",
+    "name":  "transmission rate",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_ion_plan",
+    "valType":  "number",
+    "units":  "bytes per sec",
+    "optional":  true,
+    "defaultValue":  "0"
+  },
+  "bpv7rc_dtn_plan_p0" : {
+    "id" :  "bpv7rc_dtn_plan_p0",
     "name":  "endpoint name",
     "configType":  "bpv7rc",
-    "cmdType":  "bpv7rc_add_plan",
+    "cmdType":  "bpv7rc_dtn_plan",
     "valType":  "text",
     "units":  "",
     "defaultValue":  ""
   },
-  "bpv7rc_add_plan_p1" : {
-    "id" :  "bpv7rc_add_plan_p1",
+  "bpv7rc_dtn_plan_p1" : {
+    "id" :  "bpv7rc_dtn_plan_p1",
     "name":  "transmission rate",
     "configType":  "bpv7rc",
-    "cmdType":  "bpv7rc_add_plan",
+    "cmdType":  "bpv7rc_dtn_plan",
     "valType":  "number",
     "units":  "bytes per sec",
     "optional":  true,
-    "defaultValue":  ""
+    "defaultValue":  "0"
   },
   "bpv7rc_attach_outduct_tcp_p0" : {
     "id" :  "bpv7rc_attach_outduct_tcp_p0",
-    "name":  "endpoint name",
+    "name":  "node num",
     "configType":  "bpv7rc",
     "cmdType":  "bpv7rc_attach_outduct_tcp",
-    "valType":  "text",
+    "valType":  "nodeNum",
+    "pickClone": true,
     "units":  "",
     "defaultValue":  ""
   },
@@ -1431,10 +1452,12 @@
   },
   "bpv7rc_attach_outduct_stcp_p0" : {
     "id" :  "bpv7rc_attach_outduct_stcp_p0",
-    "name":  "endpoint name",
+    "name":  "node num",
     "configType":  "bpv7rc",
     "cmdType":  "bpv7rc_attach_outduct_stcp",
     "valType":  "text",
+    "valType":  "nodeNum",
+    "pickClone": true,
     "units":  "",
     "defaultValue":  ""
   },
@@ -1450,10 +1473,12 @@
   },
   "bpv7rc_attach_outduct_udp_p0" : {
     "id" :  "bpv7rc_attach_outduct_udp_p0",
-    "name":  "endpoint name",
+    "name":  "node num",
     "configType":  "bpv7rc",
     "cmdType":  "bpv7rc_attach_outduct_udp",
     "valType":  "text",
+    "valType":  "nodeNum",
+    "pickClone": true,
     "units":  "",
     "defaultValue":  ""
   },
@@ -1469,10 +1494,12 @@
   },
   "bpv7rc_attach_outduct_ltp_p0" : {
     "id" :  "bpv7rc_attach_outduct_ltp_p0",
-    "name":  "endpoint name",
+    "name":  "node num",
     "configType":  "bpv7rc",
     "cmdType":  "bpv7rc_attach_outduct_ltp",
     "valType":  "text",
+    "valType":  "nodeNum",
+    "pickClone": true,
     "units":  "",
     "defaultValue":  ""
   },
@@ -1488,10 +1515,12 @@
   },
   "bpv7rc_attach_outduct_dccp_p0" : {
     "id" :  "bpv7rc_attach_outduct_dccp_p0",
-    "name":  "endpoint name",
+    "name":  "node num",
     "configType":  "bpv7rc",
     "cmdType":  "bpv7rc_attach_outduct_dccp",
     "valType":  "text",
+    "valType":  "nodeNum",
+    "pickClone": true,
     "units":  "",
     "defaultValue":  ""
   },
@@ -1507,10 +1536,12 @@
   },
   "bpv7rc_attach_outduct_bssp_p0" : {
     "id" :  "bpv7rc_attach_outduct_bssp_p0",
-    "name":  "endpoint name",
+    "name":  "node num",
     "configType":  "bpv7rc",
     "cmdType":  "bpv7rc_attach_outduct_bssp",
     "valType":  "text",
+    "valType":  "nodeNum",
+    "pickClone": true,
     "units":  "",
     "defaultValue":  ""
   },
@@ -1524,29 +1555,29 @@
     "units":  "",
     "defaultValue":  ""
   },
-  "bpv7rc_attach_outduct_any_p0" : {
-    "id" :  "bpv7rc_attach_outduct_any_p0",
+  "bpv7rc_attach_dtn_outduct_p0" : {
+    "id" :  "bpv7rc_attach_dtn_outduct_p0",
     "name":  "endpoint name",
     "configType":  "bpv7rc",
-    "cmdType":  "bpv7rc_attach_outduct_any",
+    "cmdType":  "bpv7rc_attach_dtn_outduct",
     "valType":  "text",
     "units":  "",
     "defaultValue":  ""
   },
-  "bpv7rc_attach_outduct_any_p1" : {
-    "id" :  "bpv7rc_attach_outduct_any_p1",
+  "bpv7rc_attach_dtn_outduct_p1" : {
+    "id" :  "bpv7rc_attach_dtn_outduct_p1",
     "name":  "protocol name",
     "configType":  "bpv7rc",
-    "cmdType":  "bpv7rc_attach_outduct_any",
+    "cmdType":  "bpv7rc_attach_dtn_outduct",
     "valType":  "text",
     "units":  "",
     "defaultValue":  ""
   },
-  "bpv7rc_attach_outduct_any_p2" : {
-    "id" :  "bpv7rc_attach_outduct_any_p2",
+  "bpv7rc_attach_dtn_outduct_p2" : {
+    "id" :  "bpv7rc_attach_dtn_outduct_p2",
     "name":  "outduct name",
     "configType":  "bpv7rc",
-    "cmdType":  "bpv7rc_attach_outduct_any",
+    "cmdType":  "bpv7rc_attach_dtn_outduct",
     "valType":  "text",
     "units":  "",
     "defaultValue":  ""
@@ -1571,21 +1602,41 @@
     "showDefault": true,
     "defaultValue":  "0"
   },
-  "bpv7rc_gateway_plan_p0" : {
-    "id" :  "bpv7rc_gateway_plan_p0",
+  "bpv7rc_gateway_dtn_plan_p0" : {
+    "id" :  "bpv7rc_gateway_dtn_plan_p0",
     "name":  "endpoint name",
     "configType":  "bpv7rc",
-    "cmdType":  "bpv7rc_gateway_plan",
+    "cmdType":  "bpv7rc_gateway_dtn_plan",
     "valType":  "text",
     "units":  "",
     "defaultValue":  ""
   },
-  "bpv7rc_gateway_plan_p1" : {
-    "id" :  "bpv7rc_gateway_plan_p1",
+  "bpv7rc_gateway_dtn_plan_p1" : {
+    "id" :  "bpv7rc_gateway_dtn_plan_p1",
     "name":  "gateway endpoint name",
     "configType":  "bpv7rc",
-    "cmdType":  "bpv7rc_gateway_plan",
+    "cmdType":  "bpv7rc_gateway_dtn_plan",
     "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_gateway_ion_plan_p0" : {
+    "id" :  "bpv7rc_gateway_ion_plan_p0",
+    "name":  "node num",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_gateway_ion_plan",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "bpv7rc_gateway_ion_plan_p1" : {
+    "id" :  "bpv7rc_gateway_ion_plan_p1",
+    "name":  "gateway node num",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_gateway_ion_plan",
+    "valType":  "nodeNum",
+    "pickClone": true,
     "units":  "",
     "defaultValue":  ""
   },
@@ -2784,7 +2835,8 @@
     "name":  "best-effort dest ipaddr",
     "configType":  "bssprc",
     "cmdType":  "bssprc_span_udp_tcp",
-    "valType":  "text",
+    "valType":  "ipAddr",
+    "pickClone": true,
     "units":  "",
     "defaultValue":  ""
   },
@@ -2805,6 +2857,7 @@
     "cmdType":  "bssprc_span_udp_tcp",
     "valType":  "number",
     "units":  "bits per sec",
+    "optional": true,
     "defaultValue":  ""
   },
   "bssprc_span_udp_tcp_p6" : {
@@ -2812,7 +2865,8 @@
     "name":  "reliable dest ipaddr",
     "configType":  "bssprc",
     "cmdType":  "bssprc_span_udp_tcp",
-    "valType":  "text",
+    "valType":  "ipAddr",
+    "pickClone": true,
     "units":  "",
     "defaultValue":  ""
   },
