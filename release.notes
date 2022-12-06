@@ -1,3 +1,27 @@
+Release Notes 4.8
+
+- Revised the generation of the ION Model from the Net Model to
+  favor the new bpv7 "plan" and "attach_duct" instead of the old
+  ipnrc "plan" commands.  No ipnrc file is generated now.
+
+- Dropped the validation requirement for an ipnrc file.
+
+- Adjusted the start order for the bsspadmin to precede bpadmin.
+
+- Updated bpv7 "plan" and "attach_outduct" commands: 
+  Dropped unnecessary "add" prefix in bp plans.
+  Split new plan commands into ion and dtn versions.
+  The ion versions of plan enforce use of model-defined ion nodes
+  to form ipn endpoints, so simplifying editing.
+
+- Eliminated problematic extra space from tcpbsi portion of bssp start.
+
+- Made bssp span rate optional.  Provided selection menus for induct names.
+
+- Assigned "from other nodes only" for span ipAddr selection menus.
+
+- Fixed a bpv7 bug affecting udpDuct clone construction.
+
 Release Notes 4.7
 
 - Added support for ION version 4.1.1
