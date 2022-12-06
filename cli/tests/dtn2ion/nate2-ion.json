@@ -26,14 +26,14 @@
       "nodeName": "central",
       "nodeDesc": "central control",
       "nodeNum": 2001,
-      "ionVersion": "4.1.0",
+      "ionVersion": "4.1.1",
       "hostName": "host1",
       "configs": {
         "ionconfig": {
           "commands": [
             {
               "type": "ionconfig_configFlags",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 "13"
               ]
@@ -44,7 +44,7 @@
           "commands": [
             {
               "type": "ionrc_initialize",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 "central.ionconfig"
@@ -52,30 +52,8 @@
             },
             {
               "type": "ionrc_start",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": []
-            }
-          ]
-        },
-        "ipnrc": {
-          "commands": [
-            {
-              "type": "ipnrc_plan_ltp",
-              "lastUpdate": "2022-08-29T16:45",
-              "parameters": [
-                2002,
-                2002,
-                0
-              ]
-            },
-            {
-              "type": "ipnrc_plan_ltp",
-              "lastUpdate": "2022-08-29T16:45",
-              "parameters": [
-                2003,
-                2003,
-                0
-              ]
             }
           ]
         },
@@ -83,12 +61,12 @@
           "commands": [
             {
               "type": "bpv7rc_initialize",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": []
             },
             {
               "type": "bpv7rc_scheme",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 "ipn",
                 "ipnfw",
@@ -97,7 +75,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 0,
@@ -107,7 +85,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 1,
@@ -117,7 +95,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 2,
@@ -127,7 +105,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 3,
@@ -137,7 +115,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 4,
@@ -147,7 +125,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 5,
@@ -157,7 +135,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 6,
@@ -167,7 +145,7 @@
             },
             {
               "type": "bpv7rc_protocol",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 "ltp",
                 ""
@@ -175,7 +153,7 @@
             },
             {
               "type": "bpv7rc_induct_ltp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 "ltpcli"
@@ -183,7 +161,7 @@
             },
             {
               "type": "bpv7rc_outduct_ltp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2002,
                 "ltpclo",
@@ -192,7 +170,7 @@
             },
             {
               "type": "bpv7rc_outduct_ltp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2003,
                 "ltpclo",
@@ -200,8 +178,40 @@
               ]
             },
             {
+              "type": "bpv7rc_ion_plan",
+              "lastUpdate": "2022-11-22T13:58",
+              "parameters": [
+                2002,
+                0
+              ]
+            },
+            {
+              "type": "bpv7rc_attach_outduct_ltp",
+              "lastUpdate": "2022-11-22T13:58",
+              "parameters": [
+                2002,
+                2002
+              ]
+            },
+            {
+              "type": "bpv7rc_ion_plan",
+              "lastUpdate": "2022-11-22T13:58",
+              "parameters": [
+                2003,
+                0
+              ]
+            },
+            {
+              "type": "bpv7rc_attach_outduct_ltp",
+              "lastUpdate": "2022-11-22T13:58",
+              "parameters": [
+                2003,
+                2003
+              ]
+            },
+            {
               "type": "bpv7rc_start",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": []
             }
           ]
@@ -210,14 +220,14 @@
           "commands": [
             {
               "type": "ltprc_initialize",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 100
               ]
             },
             {
               "type": "ltprc_span_udp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2002,
                 100,
@@ -231,7 +241,7 @@
             },
             {
               "type": "ltprc_span_udp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2003,
                 100,
@@ -245,7 +255,7 @@
             },
             {
               "type": "ltprc_start_udp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 "198.75.10.1",
                 1113
@@ -257,7 +267,7 @@
           "commands": [
             {
               "type": "ionsecrc_initialize",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": []
             }
           ]
@@ -268,14 +278,14 @@
       "nodeName": "ltpstub",
       "nodeDesc": "ltp terminal",
       "nodeNum": 2002,
-      "ionVersion": "4.1.0",
+      "ionVersion": "4.1.1",
       "hostName": "host2",
       "configs": {
         "ionconfig": {
           "commands": [
             {
               "type": "ionconfig_configFlags",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 "13"
               ]
@@ -286,7 +296,7 @@
           "commands": [
             {
               "type": "ionrc_initialize",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2002,
                 "ltpstub.ionconfig"
@@ -294,21 +304,8 @@
             },
             {
               "type": "ionrc_start",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": []
-            }
-          ]
-        },
-        "ipnrc": {
-          "commands": [
-            {
-              "type": "ipnrc_plan_ltp",
-              "lastUpdate": "2022-08-29T16:45",
-              "parameters": [
-                2001,
-                2001,
-                0
-              ]
             }
           ]
         },
@@ -316,12 +313,12 @@
           "commands": [
             {
               "type": "bpv7rc_initialize",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": []
             },
             {
               "type": "bpv7rc_scheme",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 "ipn",
                 "ipnfw",
@@ -330,7 +327,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2002,
                 0,
@@ -340,7 +337,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2002,
                 1,
@@ -350,7 +347,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2002,
                 2,
@@ -360,7 +357,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2002,
                 3,
@@ -370,7 +367,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2002,
                 4,
@@ -380,7 +377,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2002,
                 5,
@@ -390,7 +387,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2002,
                 6,
@@ -400,7 +397,7 @@
             },
             {
               "type": "bpv7rc_protocol",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 "ltp",
                 ""
@@ -408,7 +405,7 @@
             },
             {
               "type": "bpv7rc_induct_ltp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2002,
                 "ltpcli"
@@ -416,7 +413,7 @@
             },
             {
               "type": "bpv7rc_outduct_ltp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 "ltpclo",
@@ -424,8 +421,24 @@
               ]
             },
             {
+              "type": "bpv7rc_ion_plan",
+              "lastUpdate": "2022-11-22T13:58",
+              "parameters": [
+                2001,
+                0
+              ]
+            },
+            {
+              "type": "bpv7rc_attach_outduct_ltp",
+              "lastUpdate": "2022-11-22T13:58",
+              "parameters": [
+                2001,
+                2001
+              ]
+            },
+            {
               "type": "bpv7rc_start",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": []
             }
           ]
@@ -434,14 +447,14 @@
           "commands": [
             {
               "type": "ltprc_initialize",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 100
               ]
             },
             {
               "type": "ltprc_span_udp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 100,
@@ -455,7 +468,7 @@
             },
             {
               "type": "ltprc_start_udp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 "198.75.10.2",
                 1113
@@ -467,7 +480,7 @@
           "commands": [
             {
               "type": "ionsecrc_initialize",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": []
             }
           ]
@@ -478,14 +491,14 @@
       "nodeName": "stubtwo",
       "nodeDesc": "another ltp termianal",
       "nodeNum": 2003,
-      "ionVersion": "4.1.0",
+      "ionVersion": "4.1.1",
       "hostName": "host2",
       "configs": {
         "ionconfig": {
           "commands": [
             {
               "type": "ionconfig_configFlags",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 "13"
               ]
@@ -496,7 +509,7 @@
           "commands": [
             {
               "type": "ionrc_initialize",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2003,
                 "stubtwo.ionconfig"
@@ -504,21 +517,8 @@
             },
             {
               "type": "ionrc_start",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": []
-            }
-          ]
-        },
-        "ipnrc": {
-          "commands": [
-            {
-              "type": "ipnrc_plan_ltp",
-              "lastUpdate": "2022-08-29T16:45",
-              "parameters": [
-                2001,
-                2001,
-                0
-              ]
             }
           ]
         },
@@ -526,12 +526,12 @@
           "commands": [
             {
               "type": "bpv7rc_initialize",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": []
             },
             {
               "type": "bpv7rc_scheme",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 "ipn",
                 "ipnfw",
@@ -540,7 +540,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2003,
                 0,
@@ -550,7 +550,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2003,
                 1,
@@ -560,7 +560,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2003,
                 2,
@@ -570,7 +570,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2003,
                 3,
@@ -580,7 +580,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2003,
                 4,
@@ -590,7 +590,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2003,
                 5,
@@ -600,7 +600,7 @@
             },
             {
               "type": "bpv7rc_endpoint",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2003,
                 6,
@@ -610,7 +610,7 @@
             },
             {
               "type": "bpv7rc_protocol",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 "ltp",
                 ""
@@ -618,7 +618,7 @@
             },
             {
               "type": "bpv7rc_induct_ltp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2003,
                 "ltpcli"
@@ -626,7 +626,7 @@
             },
             {
               "type": "bpv7rc_outduct_ltp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 "ltpclo",
@@ -634,8 +634,24 @@
               ]
             },
             {
+              "type": "bpv7rc_ion_plan",
+              "lastUpdate": "2022-11-22T13:58",
+              "parameters": [
+                2001,
+                0
+              ]
+            },
+            {
+              "type": "bpv7rc_attach_outduct_ltp",
+              "lastUpdate": "2022-11-22T13:58",
+              "parameters": [
+                2001,
+                2001
+              ]
+            },
+            {
               "type": "bpv7rc_start",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": []
             }
           ]
@@ -644,14 +660,14 @@
           "commands": [
             {
               "type": "ltprc_initialize",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 100
               ]
             },
             {
               "type": "ltprc_span_udp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 2001,
                 100,
@@ -665,7 +681,7 @@
             },
             {
               "type": "ltprc_start_udp",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 "198.75.10.2",
                 1114
@@ -677,7 +693,7 @@
           "commands": [
             {
               "type": "ionsecrc_initialize",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": []
             }
           ]
@@ -689,13 +705,13 @@
     {
       "graphName": "nate2-graph",
       "graphDesc": "ION Test nate2 problem Contacts",
-      "ionVersion": "4.1.0",
+      "ionVersion": "4.1.1",
       "configs": {
         "contacts": {
           "commands": [
             {
               "type": "contacts_contact_rel_rel_time",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 0,
                 50000000,
@@ -707,7 +723,7 @@
             },
             {
               "type": "contacts_contact_rel_rel_time",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 0,
                 50000000,
@@ -719,7 +735,7 @@
             },
             {
               "type": "contacts_contact_rel_rel_time",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 0,
                 50000000,
@@ -731,7 +747,7 @@
             },
             {
               "type": "contacts_contact_rel_rel_time",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 0,
                 50000000,
@@ -743,7 +759,7 @@
             },
             {
               "type": "contacts_range_rel_rel_time",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 0,
                 50000000,
@@ -754,7 +770,7 @@
             },
             {
               "type": "contacts_range_rel_rel_time",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 0,
                 50000000,
@@ -765,7 +781,7 @@
             },
             {
               "type": "contacts_range_rel_rel_time",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 0,
                 50000000,
@@ -776,7 +792,7 @@
             },
             {
               "type": "contacts_range_rel_rel_time",
-              "lastUpdate": "2022-08-29T16:45",
+              "lastUpdate": "2022-11-22T13:58",
               "parameters": [
                 0,
                 50000000,

@@ -34,14 +34,14 @@
       "nodeName": "n1",
       "nodeDesc": "n1 description",
       "nodeNum": 1,
-      "ionVersion": "4.1.0",
+      "ionVersion": "4.1.1",
       "hostName": "host1",
       "configs": {
         "ionconfig": {
           "commands": [
             {
               "type": "ionconfig_configFlags",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "13"
               ]
@@ -52,7 +52,7 @@
           "commands": [
             {
               "type": "ionrc_initialize",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 1,
                 "n1.ionconfig"
@@ -60,34 +60,21 @@
             },
             {
               "type": "ionrc_start",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": []
             }
           ]
         },
-        "ipnrc": {
+        "bpv7rc": {
           "commands": [
             {
-              "type": "ipnrc_plan_udp",
-              "lastUpdate": "2022-05-24T15:53",
-              "parameters": [
-                2,
-                "10.0.0.2:4556",
-                "1000000"
-              ]
-            }
-          ]
-        },
-        "bpv6rc": {
-          "commands": [
-            {
-              "type": "bpv6rc_initialize",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_initialize",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": []
             },
             {
-              "type": "bpv6rc_scheme",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_scheme",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "ipn",
                 "ipnfw",
@@ -95,8 +82,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 1,
                 0,
@@ -105,8 +92,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 1,
                 1,
@@ -115,8 +102,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 1,
                 2,
@@ -125,8 +112,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 1,
                 3,
@@ -135,8 +122,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 1,
                 4,
@@ -145,8 +132,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 1,
                 5,
@@ -155,8 +142,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 1,
                 6,
@@ -165,18 +152,16 @@
               ]
             },
             {
-              "type": "bpv6rc_protocol",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_protocol",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "udp",
-                1400,
-                100,
                 ""
               ]
             },
             {
-              "type": "bpv6rc_induct_udp",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_induct_udp",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "10.0.0.1",
                 4556,
@@ -184,8 +169,8 @@
               ]
             },
             {
-              "type": "bpv6rc_outduct_udp",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_outduct_udp",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "10.0.0.2:4556",
                 "udpclo",
@@ -193,8 +178,24 @@
               ]
             },
             {
-              "type": "bpv6rc_start",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_ion_plan",
+              "lastUpdate": "2022-11-22T13:45",
+              "parameters": [
+                2,
+                "1000000"
+              ]
+            },
+            {
+              "type": "bpv7rc_attach_outduct_udp",
+              "lastUpdate": "2022-11-22T13:45",
+              "parameters": [
+                2,
+                "10.0.0.2:4556"
+              ]
+            },
+            {
+              "type": "bpv7rc_start",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": []
             }
           ]
@@ -203,7 +204,7 @@
           "commands": [
             {
               "type": "ionsecrc_initialize",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": []
             }
           ]
@@ -214,14 +215,14 @@
       "nodeName": "n2",
       "nodeDesc": "n2 description",
       "nodeNum": 2,
-      "ionVersion": "4.1.0",
+      "ionVersion": "4.1.1",
       "hostName": "host2",
       "configs": {
         "ionconfig": {
           "commands": [
             {
               "type": "ionconfig_configFlags",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "13"
               ]
@@ -232,7 +233,7 @@
           "commands": [
             {
               "type": "ionrc_initialize",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 2,
                 "n2.ionconfig"
@@ -240,43 +241,21 @@
             },
             {
               "type": "ionrc_start",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": []
             }
           ]
         },
-        "ipnrc": {
+        "bpv7rc": {
           "commands": [
             {
-              "type": "ipnrc_plan_udp",
-              "lastUpdate": "2022-05-24T15:53",
-              "parameters": [
-                1,
-                "10.0.0.1:4556",
-                "1000000"
-              ]
-            },
-            {
-              "type": "ipnrc_plan_tcp",
-              "lastUpdate": "2022-05-24T15:53",
-              "parameters": [
-                3,
-                "10.0.1.2:4556",
-                "1000000"
-              ]
-            }
-          ]
-        },
-        "bpv6rc": {
-          "commands": [
-            {
-              "type": "bpv6rc_initialize",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_initialize",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": []
             },
             {
-              "type": "bpv6rc_scheme",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_scheme",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "ipn",
                 "ipnfw",
@@ -284,8 +263,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 2,
                 0,
@@ -294,8 +273,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 2,
                 1,
@@ -304,8 +283,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 2,
                 2,
@@ -314,8 +293,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 2,
                 3,
@@ -324,8 +303,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 2,
                 4,
@@ -334,8 +313,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 2,
                 5,
@@ -344,8 +323,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 2,
                 6,
@@ -354,28 +333,24 @@
               ]
             },
             {
-              "type": "bpv6rc_protocol",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_protocol",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "udp",
-                1400,
-                100,
                 ""
               ]
             },
             {
-              "type": "bpv6rc_protocol",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_protocol",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "tcp",
-                1400,
-                100,
                 ""
               ]
             },
             {
-              "type": "bpv6rc_induct_udp",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_induct_udp",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "10.0.0.2",
                 4556,
@@ -383,8 +358,8 @@
               ]
             },
             {
-              "type": "bpv6rc_induct_tcp",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_induct_tcp",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "10.0.0.2",
                 4557,
@@ -392,8 +367,8 @@
               ]
             },
             {
-              "type": "bpv6rc_outduct_udp",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_outduct_udp",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "10.0.0.1:4556",
                 "udpclo",
@@ -401,8 +376,8 @@
               ]
             },
             {
-              "type": "bpv6rc_outduct_tcp",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_outduct_tcp",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "10.0.1.2:4556",
                 "tcpclo",
@@ -410,8 +385,40 @@
               ]
             },
             {
-              "type": "bpv6rc_start",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_ion_plan",
+              "lastUpdate": "2022-11-22T13:45",
+              "parameters": [
+                1,
+                "1000000"
+              ]
+            },
+            {
+              "type": "bpv7rc_attach_outduct_udp",
+              "lastUpdate": "2022-11-22T13:45",
+              "parameters": [
+                1,
+                "10.0.0.1:4556"
+              ]
+            },
+            {
+              "type": "bpv7rc_ion_plan",
+              "lastUpdate": "2022-11-22T13:45",
+              "parameters": [
+                3,
+                "1000000"
+              ]
+            },
+            {
+              "type": "bpv7rc_attach_outduct_tcp",
+              "lastUpdate": "2022-11-22T13:45",
+              "parameters": [
+                3,
+                "10.0.1.2:4556"
+              ]
+            },
+            {
+              "type": "bpv7rc_start",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": []
             }
           ]
@@ -420,7 +427,7 @@
           "commands": [
             {
               "type": "ionsecrc_initialize",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": []
             }
           ]
@@ -431,14 +438,14 @@
       "nodeName": "n3",
       "nodeDesc": "n3 description",
       "nodeNum": 3,
-      "ionVersion": "4.1.0",
+      "ionVersion": "4.1.1",
       "hostName": "host3",
       "configs": {
         "ionconfig": {
           "commands": [
             {
               "type": "ionconfig_configFlags",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "13"
               ]
@@ -449,7 +456,7 @@
           "commands": [
             {
               "type": "ionrc_initialize",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 3,
                 "n3.ionconfig"
@@ -457,34 +464,21 @@
             },
             {
               "type": "ionrc_start",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": []
             }
           ]
         },
-        "ipnrc": {
+        "bpv7rc": {
           "commands": [
             {
-              "type": "ipnrc_plan_tcp",
-              "lastUpdate": "2022-05-24T15:53",
-              "parameters": [
-                2,
-                "10.0.0.2:4557",
-                "1000000"
-              ]
-            }
-          ]
-        },
-        "bpv6rc": {
-          "commands": [
-            {
-              "type": "bpv6rc_initialize",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_initialize",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": []
             },
             {
-              "type": "bpv6rc_scheme",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_scheme",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "ipn",
                 "ipnfw",
@@ -492,8 +486,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 3,
                 0,
@@ -502,8 +496,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 3,
                 1,
@@ -512,8 +506,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 3,
                 2,
@@ -522,8 +516,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 3,
                 3,
@@ -532,8 +526,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 3,
                 4,
@@ -542,8 +536,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 3,
                 5,
@@ -552,8 +546,8 @@
               ]
             },
             {
-              "type": "bpv6rc_endpoint",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 3,
                 6,
@@ -562,28 +556,24 @@
               ]
             },
             {
-              "type": "bpv6rc_protocol",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_protocol",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "udp",
-                1400,
-                100,
                 ""
               ]
             },
             {
-              "type": "bpv6rc_protocol",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_protocol",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "tcp",
-                1400,
-                100,
                 ""
               ]
             },
             {
-              "type": "bpv6rc_induct_tcp",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_induct_tcp",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "10.0.1.2",
                 4556,
@@ -591,8 +581,8 @@
               ]
             },
             {
-              "type": "bpv6rc_outduct_tcp",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_outduct_tcp",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 "10.0.0.2:4557",
                 "tcpclo",
@@ -600,8 +590,24 @@
               ]
             },
             {
-              "type": "bpv6rc_start",
-              "lastUpdate": "2022-05-24T15:53",
+              "type": "bpv7rc_ion_plan",
+              "lastUpdate": "2022-11-22T13:45",
+              "parameters": [
+                2,
+                "1000000"
+              ]
+            },
+            {
+              "type": "bpv7rc_attach_outduct_tcp",
+              "lastUpdate": "2022-11-22T13:45",
+              "parameters": [
+                2,
+                "10.0.0.2:4557"
+              ]
+            },
+            {
+              "type": "bpv7rc_start",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": []
             }
           ]
@@ -610,7 +616,7 @@
           "commands": [
             {
               "type": "ionsecrc_initialize",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": []
             }
           ]
@@ -622,13 +628,13 @@
     {
       "graphName": "with_udp_fail-graph",
       "graphDesc": "ION UDP CLA fails? Contacts",
-      "ionVersion": "4.1.0",
+      "ionVersion": "4.1.1",
       "configs": {
         "contacts": {
           "commands": [
             {
               "type": "contacts_contact_rel_rel_time",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 0,
                 50000000,
@@ -640,7 +646,7 @@
             },
             {
               "type": "contacts_contact_rel_rel_time",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 0,
                 50000000,
@@ -652,7 +658,7 @@
             },
             {
               "type": "contacts_contact_rel_rel_time",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 0,
                 50000000,
@@ -664,7 +670,7 @@
             },
             {
               "type": "contacts_contact_rel_rel_time",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 0,
                 50000000,
@@ -676,7 +682,7 @@
             },
             {
               "type": "contacts_range_rel_rel_time",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 0,
                 50000000,
@@ -687,7 +693,7 @@
             },
             {
               "type": "contacts_range_rel_rel_time",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 0,
                 50000000,
@@ -698,7 +704,7 @@
             },
             {
               "type": "contacts_range_rel_rel_time",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 0,
                 50000000,
@@ -709,7 +715,7 @@
             },
             {
               "type": "contacts_range_rel_rel_time",
-              "lastUpdate": "2022-05-24T15:53",
+              "lastUpdate": "2022-11-22T13:45",
               "parameters": [
                 0,
                 50000000,
