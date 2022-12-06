@@ -353,7 +353,7 @@ export default class App extends React.Component {
           || type === "bpv6rc_induct_stcp"
           || type === "bpv6rc_induct_tcp"
           || type === "bpv6rc_induct_dccp" 
-          || type === "bpv7rc_induct_tcp"
+          || type === "bpv7rc_induct_udp"
           || type === "bpv7rc_induct_stcp"
           || type === "bpv7rc_induct_tcp"
           || type === "bpv7rc_induct_dccp" )
@@ -1689,7 +1689,7 @@ export default class App extends React.Component {
     return (
       <div>
         <Navbar>
-          <h3>ION Configuration Editor  4.7</h3>
+          <h3>ION Configuration Editor  4.8</h3>
         </Navbar>
         <Grid fluid>
           {modelBtnsElem}

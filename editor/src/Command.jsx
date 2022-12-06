@@ -176,7 +176,7 @@ export default class Command  extends React.Component {
         note = "";
       } else
       if (param.valueType.indexOf("nodeNum") >= 0) { // nodes should be external
-        if (param.typeKey.indexOf("ovrd") >= 0) {             // except for override commands (ipn)
+        if (param.typeKey.indexOf("ovrd") >= 0) {    // except for override commands (ipn)
           matchType = "all"
         } else
         if (this.props.usedNodeKey(this.props.nodeKey)) { // if this nodeKey is "real",need to exclude
@@ -185,8 +185,13 @@ export default class Command  extends React.Component {
         };
       } else 
       if (param.valueType.indexOf("ipAddr") >= 0) { // ipAddrs should be local
-        matchType ="match"; 
-        note = "from this host only";
+        if (param.typeKey.indexOf("span") >= 0) {   // except for span commands (bssp)
+          matchType ="exclude";
+          note = "from other nodes only";
+        } else {
+          matchType ="match"; 
+          note = "from this host only";
+        };
       } else 
       if (param.valueType.indexOf("Induct")   >= 0    // inducts should be external
        || param.valueType.indexOf("Link")     >= 0    // links should be external

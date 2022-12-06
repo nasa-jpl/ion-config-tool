@@ -46,10 +46,10 @@
     "verFrom": 10, 
     "verThru": 999
   },
-  "bpv6rc_add_plan": {
+  "bpv6rc_plan": {
     "configType": "bpv6rc", 
     "multiple": true, 
-    "name": "add_plan", 
+    "name": "plan", 
     "order": 70, 
     "paramCnt": 2, 
     "paramTypes": [], 
@@ -404,10 +404,21 @@
     "verFrom": 10, 
     "verThru": 999
   }, 
-  "bpv7rc_add_plan": {
+  "bpv7rc_ion_plan": {
     "configType": "bpv7rc", 
     "multiple": true, 
-    "name": "add_plan", 
+    "name": "ion_plan", 
+    "order": 70, 
+    "paramCnt": 2, 
+    "paramTypes": [], 
+    "pickClone": true, 
+    "verFrom": 10, 
+    "verThru": 999
+  },
+  "bpv7rc_dtn_plan": {
+    "configType": "bpv7rc", 
+    "multiple": true, 
+    "name": "dtn_plan", 
     "order": 70, 
     "paramCnt": 2, 
     "paramTypes": [], 
@@ -480,20 +491,31 @@
     "verFrom": 10, 
     "verThru": 999
   },
-  "bpv7rc_attach_outduct_any": {
+  "bpv7rc_attach_dtn_outduct": {
     "configType": "bpv7rc", 
     "multiple": true, 
-    "name": "attach_outduct_any", 
+    "name": "attach_dtn_outduct", 
     "order": 79, 
     "paramCnt": 3, 
     "paramTypes": [], 
     "verFrom": 10, 
     "verThru": 999
   },
-  "bpv7rc_gateway_plan": {
+  "bpv7rc_gateway_ion_plan": {
     "configType": "bpv7rc", 
     "multiple": true, 
-    "name": "gateway_plan", 
+    "name": "gateway_ion_plan", 
+    "order": 80, 
+    "paramCnt": 2, 
+    "paramTypes": [], 
+    "pickClone": true, 
+    "verFrom": 10, 
+    "verThru": 999
+  },  
+  "bpv7rc_gateway_dtn_plan": {
+    "configType": "bpv7rc", 
+    "multiple": true, 
+    "name": "gateway_dtn_plan", 
     "order": 80, 
     "paramCnt": 2, 
     "paramTypes": [], 

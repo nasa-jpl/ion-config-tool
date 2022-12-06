@@ -5,7 +5,7 @@
 # script to make browser-based ionconfig editor
 #
 # inputs:  ../json/*json   (config files)
-#          ../release.josn (release info)
+#          ../release.json (release info)
 #          src/*           (jsx files)
 #
 # outputs: /build/*

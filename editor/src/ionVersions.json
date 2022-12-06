@@ -1,4 +1,10 @@
 {
+  "14" : {
+     "seqNum": 14,
+     "ionVersion": "4.1.1",
+     "desc": "ION 4.1.1 release",
+     "released": "2022-03-15"
+   },
   "13" : {
      "seqNum": 13,
      "ionVersion": "4.1.0",
