@@ -19,6 +19,7 @@ import os
 import sys 
 import subprocess
 import json
+import time
 from operator import itemgetter
 
 # track counts of error messages by json file type
@@ -62,6 +63,18 @@ except FileNotFoundError:
 
 os.chdir(dictdir)    # ensure home dir
 jsondir = "json-" + configver
+
+delcmd =  '/bin/rm -r %s' % jsondir
+print("Drop json version cmd: '%s'" % delcmd);
+try:
+  process=subprocess.Popen(delcmd,shell=True,stdout=subprocess.PIPE,universal_newlines=True)
+  print("json dir dropped.")
+except FileNotFoundError:
+  print("File not found.")
+
+print("Take a short break...")
+time.sleep(1)
+
 print("Make json subdir   cmd: os.mkdir(%s)" % jsondir);
 try:
   os.mkdir(jsondir);

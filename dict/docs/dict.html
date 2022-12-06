@@ -27,11 +27,11 @@ table td {
 }
 </STYLE>
 <h1>ION Config Dictionary Report</h1>
-<h3>ION Version: 4.1.0</h3>
-<h3>ION Release Date: 2021-05-31</h3>
-<h4>Dictionary Seq No: 13</h4>
+<h3>ION Version: 4.1.1</h3>
+<h3>ION Release Date: 2022-03-15</h3>
+<h4>Dictionary Seq No: 14</h4>
 <h4>Configuration Files: 20</h4>
-<h4>Commands: 195</h4>
+<h4>Commands: 197</h4>
 <h3>Introduction</h3>
 <p>
 The dictionary describes the configuration files and commands supported by ION Configuration Tool. The version is important.  The configuration commands supported by ION can and usually do evolve with each new version, and so it does also for the configuration tool.  It is not easy to spot the changes from version to version, so new releases of the tool also provide delta reports summarizing the changes between successive versions.
@@ -249,16 +249,6 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 <br>
 <hr>
 <h3>ION Command File Type: bpv6rc</h3>
-</br><b>ION Config Command Name: </b>add_plan</br>
-<b>ION Command Pattern: </b><code>a plan  [1] [2]</code></br>
-<table>
-<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
-<tbody>
-<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>transmission rate</td><td>false</td><td>number</td><td>bytes per sec</td><td></td><td>false</td><td>false</td></tr>
-</tbody>
-</table>
-<br>
 </br><b>ION Config Command Name: </b>attach_outduct_any</br>
 <b>ION Command Pattern: </b><code>a planduct  [1] [2]  [3]</code></br>
 <table>
@@ -531,6 +521,16 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 </tbody>
 </table>
 <br>
+</br><b>ION Config Command Name: </b>plan</br>
+<b>ION Command Pattern: </b><code>a plan  [1] [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>transmission rate</td><td>false</td><td>number</td><td>bytes per sec</td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
 </br><b>ION Config Command Name: </b>protocol</br>
 <b>ION Command Pattern: </b><code>a protocol  [1]  [2]  [3]  [4]</code></br>
 <table>
@@ -599,17 +599,7 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 <br>
 <hr>
 <h3>ION Command File Type: bpv7rc</h3>
-</br><b>ION Config Command Name: </b>add_plan</br>
-<b>ION Command Pattern: </b><code>a plan  [1] [2]</code></br>
-<table>
-<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
-<tbody>
-<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>transmission rate</td><td>false</td><td>number</td><td>bytes per sec</td><td></td><td>false</td><td>false</td></tr>
-</tbody>
-</table>
-<br>
-</br><b>ION Config Command Name: </b>attach_outduct_any</br>
+</br><b>ION Config Command Name: </b>attach_dtn_outduct</br>
 <b>ION Command Pattern: </b><code>a planduct  [1] [2]  [3]</code></br>
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
@@ -621,62 +611,72 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 </table>
 <br>
 </br><b>ION Config Command Name: </b>attach_outduct_bssp</br>
-<b>ION Command Pattern: </b><code>a planduct  [1] bssp  [2]</code></br>
+<b>ION Command Pattern: </b><code>a planduct  ipn:[1].0 bssp  [2]</code></br>
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
-<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>node num</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
 <tr><td>outduct name</td><td>true</td><td>bsspOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
 </tbody>
 </table>
 <br>
 </br><b>ION Config Command Name: </b>attach_outduct_dccp</br>
-<b>ION Command Pattern: </b><code>a planduct  [1] dccp  [2]</code></br>
+<b>ION Command Pattern: </b><code>a planduct  ipn:[1].0 dccp  [2]</code></br>
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
-<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>node num</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
 <tr><td>outduct name</td><td>true</td><td>dccpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
 </tbody>
 </table>
 <br>
 </br><b>ION Config Command Name: </b>attach_outduct_ltp</br>
-<b>ION Command Pattern: </b><code>a planduct  [1] ltp  [2]</code></br>
+<b>ION Command Pattern: </b><code>a planduct  ipn:[1].0 ltp  [2]</code></br>
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
-<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>node num</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
 <tr><td>outduct name</td><td>true</td><td>ltpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
 </tbody>
 </table>
 <br>
 </br><b>ION Config Command Name: </b>attach_outduct_stcp</br>
-<b>ION Command Pattern: </b><code>a planduct  [1] stcp  [2]</code></br>
+<b>ION Command Pattern: </b><code>a planduct  ipn:[1].0 stcp  [2]</code></br>
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
-<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>node num</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
 <tr><td>outduct name</td><td>true</td><td>stcpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
 </tbody>
 </table>
 <br>
 </br><b>ION Config Command Name: </b>attach_outduct_tcp</br>
-<b>ION Command Pattern: </b><code>a planduct  [1] tcp  [2]</code></br>
+<b>ION Command Pattern: </b><code>a planduct  ipn:[1].0 tcp  [2]</code></br>
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
-<tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>node num</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
 <tr><td>outduct name</td><td>true</td><td>tcpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
 </tbody>
 </table>
 <br>
 </br><b>ION Config Command Name: </b>attach_outduct_udp</br>
-<b>ION Command Pattern: </b><code>a planduct  [1] udp  [2]</code></br>
+<b>ION Command Pattern: </b><code>a planduct  ipn:[1].0 udp  [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>node num</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>outduct name</td><td>true</td><td>udpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>dtn_plan</br>
+<b>ION Command Pattern: </b><code>a plan  [1] [2]</code></br>
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
 <tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>outduct name</td><td>true</td><td>udpOutduct</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>transmission rate</td><td>false</td><td>number</td><td>bytes per sec</td><td>0</td><td>false</td><td>false</td></tr>
 </tbody>
 </table>
 <br>
@@ -692,13 +692,23 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 </tbody>
 </table>
 <br>
-</br><b>ION Config Command Name: </b>gateway_plan</br>
+</br><b>ION Config Command Name: </b>gateway_dtn_plan</br>
 <b>ION Command Pattern: </b><code>g plan  [1] [2]</code></br>
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
 <tr><td>endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
 <tr><td>gateway endpoint name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>gateway_ion_plan</br>
+<b>ION Command Pattern: </b><code>g plan  ipn:[1].0 [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>node num</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>gateway node num</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
 </tbody>
 </table>
 <br>
@@ -791,6 +801,16 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>ion_plan</br>
+<b>ION Command Pattern: </b><code>a plan  ipn:[1].0 [2]</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>node num</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>transmission rate</td><td>false</td><td>number</td><td>bytes per sec</td><td>0</td><td>false</td><td>false</td></tr>
 </tbody>
 </table>
 <br>
@@ -997,10 +1017,10 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 <tr><td>peer engine number</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
 <tr><td>max export sessions</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
 <tr><td>max block size</td><td>true</td><td>number</td><td>bytes</td><td></td><td>false</td><td>false</td></tr>
-<tr><td>best-effort dest ipaddr</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>best-effort dest ipaddr</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
 <tr><td>best-effort dest port number</td><td>true</td><td>number</td><td></td><td>6001</td><td>false</td><td>false</td></tr>
-<tr><td>transmission rate</td><td>true</td><td>number</td><td>bits per sec</td><td></td><td>false</td><td>false</td></tr>
-<tr><td>reliable dest ipaddr</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>transmission rate</td><td>false</td><td>number</td><td>bits per sec</td><td></td><td>false</td><td>false</td></tr>
+<tr><td>reliable dest ipaddr</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
 <tr><td>reliable dest port number</td><td>true</td><td>number</td><td></td><td>4556</td><td>false</td><td>false</td></tr>
 <tr><td>queueing latency</td><td>false</td><td>number</td><td>secs</td><td>1</td><td>false</td><td>false</td></tr>
 </tbody>
@@ -1017,7 +1037,7 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 </table>
 <br>
 </br><b>ION Config Command Name: </b>start_udp_tcp</br>
-<b>ION Command Pattern: </b><code>s  'udpbsi [1]:[2]'  'tcpbsi  [3]:[4]'</code></br>
+<b>ION Command Pattern: </b><code>s  'udpbsi [1]:[2]'  'tcpbsi [3]:[4]'</code></br>
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>

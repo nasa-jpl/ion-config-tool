@@ -28,72 +28,10 @@ table td {
 </STYLE>
 <h1>ION Config Version Delta Report</h1>
 <table><tr>
-<tr><td><b>Later ION Version:</b> 4.1.0 </td>   <td><b>Released:</b> 2021-05-31 </td><td><b>Seqno:</b> 13 </td></tr>
-<tr><td><b>Prior ION Version:</b> 4.0.2 </td>    <td><b>Released:</b> 2021-02-26 </td><td><b>Seqno:</b> 12 </td></tr>
+<tr><td><b>Later ION Version:</b> 4.1.1 </td>   <td><b>Released:</b> 2022-03-15 </td><td><b>Seqno:</b> 14 </td></tr>
+<tr><td><b>Prior ION Version:</b> 4.1.0 </td>    <td><b>Released:</b> 2021-05-31 </td><td><b>Seqno:</b> 13 </td></tr>
 </table>
 <hr>
 <h2>New commands</h2>
-<hr>
-<h3>ION Command File Type: bssprc</h3>
-</br><b>ION Config Command Name: </b>seat</br>
-<b>ION Command Pattern: </b><code>a seat  '[1]'  '[2]'</code></br>
-<table>
-<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
-<tbody>
-<tr><td>best-effort bso command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>reliable bso command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-</tbody>
-</table>
-<br>
-<hr>
-<h3>ION Command File Type: contacts</h3>
-</br><b>ION Config Command Name: </b>announce</br>
-<b>ION Command Pattern: </b><code>!  [1]</code></br>
-<table>
-<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
-<tbody>
-<tr><td>announce</td><td>true</td><td>select</td><td></td><td></td><td>false</td><td>false</td></tr>
-</tbody>
-</table>
-<br>
-<hr>
-<h3>ION Command File Type: ltprc</h3>
-</br><b>ION Config Command Name: </b>seat_any</br>
-<b>ION Command Pattern: </b><code>a seat  '[1]'</code></br>
-<table>
-<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
-<tbody>
-<tr><td>LSI command</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-</tbody>
-</table>
-<br>
-</br><b>ION Config Command Name: </b>seat_dccp</br>
-<b>ION Command Pattern: </b><code>a seat  'dccplsi [1]:[2]'</code></br>
-<table>
-<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
-<tbody>
-<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
-<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>1113</td><td>false</td><td>false</td></tr>
-</tbody>
-</table>
-<br>
-</br><b>ION Config Command Name: </b>seat_udp</br>
-<b>ION Command Pattern: </b><code>a seat  'udplsi [1]:[2]'</code></br>
-<table>
-<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
-<tbody>
-<tr><td>ip address (or name)</td><td>true</td><td>ipAddr</td><td></td><td></td><td>false</td><td>true</td></tr>
-<tr><td>local port number</td><td>true</td><td>number</td><td></td><td>1113</td><td>false</td><td>false</td></tr>
-</tbody>
-</table>
-<br>
-</br><b>ION Config Command Name: </b>start_all</br>
-<b>ION Command Pattern: </b><code>s</code></br>
-<table>
-<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
-<tbody>
-</tbody>
-</table>
-<br>
 <hr>
 <h2>Obsolete commands</h2>
