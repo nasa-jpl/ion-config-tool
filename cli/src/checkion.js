@@ -9,7 +9,7 @@ function checkIonModel() {
   if (Object.keys(nodes).length === 0)
     alerts.push({"type": "IonModel", "name": modelName, "level":"warn", "msg":"No nodes created."});
   // Node-level   required configs
-  const reqConfigs = ["ionrc", "ionconfig","ipnrc"];
+  const reqConfigs = ["ionrc", "ionconfig"];
   // TODO : add req for bprc of either v6 or v7
   // Config-level required command types
   var reqCmds = {}; 

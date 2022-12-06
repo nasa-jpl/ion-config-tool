@@ -132,7 +132,7 @@ function makeComboValue(cmd,type) {
         || type === "bpv6rc_induct_stcp"
         || type === "bpv6rc_induct_tcp"
         || type === "bpv6rc_induct_dccp" 
-        || type === "bpv7rc_induct_tcp"
+        || type === "bpv7rc_induct_udp"
         || type === "bpv7rc_induct_stcp"
         || type === "bpv7rc_induct_tcp"
         || type === "bpv7rc_induct_dccp" )

@@ -154,15 +154,15 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
     cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"ionrc","start",vals);
     addCommandKey(configs,configName,cmdKey);
     // build ipnrc 
-    configName = nodeKey + ".ipnrc";
-    //  var ipnrc = configName;  (only needed if building a "r ipnadmin")
-    configs[configName] = {
-      "id" : configName,
-      "nodeKey": nodeKey,
-      "configType" : "ipnrc",
-      "cmdKeys" : [] 
-    };
-    nodes[nodeKey].configKeys.push(configName);
+    // configName = nodeKey + ".ipnrc";
+    // var ipnrc = configName;  (only needed if building a "r ipnadmin")
+    //configs[configName] = {
+    //  "id" : configName,
+    //  "nodeKey": nodeKey,
+    //  "configType" : "ipnrc",
+    //  "cmdKeys" : [] 
+    //};
+    //nodes[nodeKey].configKeys.push(configName);
 
     // build of plan cmds happens later with hop analysis
 
@@ -449,28 +449,31 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
     toNodeNum = toNode.ionNodeNum;
     rate = netHop.maxRate;
     bpLayer = netHop.bpLayer;
-    var plan = "plan_" + bpLayer;
-    // assume new plan format with rate parameter...ION supporting?
+
+    configName = nodeKey + ".bpv7rc";
+    var planvals = [toNodeNum,rate];
+    cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","ion_plan",planvals);
+    addCommandKey(configs,configName,cmdKey);
+
+    // determine outduct name
+    var outductName = '';
     if (bpLayer === "ltp" ||
         bpLayer === "bssp") {
-      vals = [toNodeNum,toNodeNum,rate];
+      outductName = toNodeNum;
     } else 
     if (bpLayer === "udp") {   //udp depends on induct
       cloneVal = getNodeInduct(clones,toNode.id,bpLayer);
-      var outductName = cloneVal.value;
-      vals = [toNodeNum,outductName,rate];
+      outductName = cloneVal.value;
     } else 
     if (isStandardProtocol(bpLayer)) {
       cloneVal = getNodeOutduct(clones,nodeKey,toAddr,bpLayer);
       //debug ("???? cloneVal: " + JSON.stringify(cloneVal));
       outductName = cloneVal.value;
-      vals = [toNodeNum,outductName,rate];
-    } else {
-      plan = "plan_any";
-      vals = [toNodeNum,"",rate];
     };
-    configName = nodeKey + ".ipnrc";
-    cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"ipnrc",plan,vals);
+    // build attach outduct command
+    var vals = [toNodeNum,outductName];
+    var attach = "attach_outduct_" + bpLayer;
+    cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc",attach,vals);
     addCommandKey(configs,configName,cmdKey);
   };
 
