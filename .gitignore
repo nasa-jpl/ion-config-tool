@@ -4,3 +4,5 @@
 ./cli/tests/ionconfig/nate1-ion
 ./cli/tests/ionconfig/with_udp_fail-ion
 ./editor/build
+editor/node_modules/
+
