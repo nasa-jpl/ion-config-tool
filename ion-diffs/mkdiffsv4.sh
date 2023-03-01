@@ -2,7 +2,8 @@
 v1=$1
 v2=$2
 # assign root dir of ion distros
-root=/Users/rlborgen/Desktop
+# TBD: make the root directory refer to an environment variable.
+root=/Users/dhanks/Desktop
 # create report name
 rpt=$v1-vs-$v2.diffs
 
