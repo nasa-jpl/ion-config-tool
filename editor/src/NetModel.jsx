@@ -588,7 +588,7 @@ export default class NetModel  extends React.Component {
         console.log ("???? cloneVal: " + JSON.stringify(cloneVal));
         linkName = cloneVal.value;
         if (netHop.ltpLayer === "udp") {
-          vals = [toNodeNum,100,100,64000,100000,1,linkName,1]
+          vals = [toNodeNum,100,100,1482,100000,1,linkName,1]
           cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","span_udp",vals);
           this.addCommandKey(configs,configName,cmdKey);
         };

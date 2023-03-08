@@ -3070,7 +3070,7 @@
     "cmdType":  "ltprc_span_udp",
     "valType":  "number",
     "units":  "bytes",
-    "defaultValue":  ""
+    "defaultValue":  "1482"
   },
   "ltprc_span_udp_p4" : {
     "id" :  "ltprc_span_udp_p4",

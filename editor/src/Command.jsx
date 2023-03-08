@@ -102,7 +102,19 @@ export default class Command  extends React.Component {
     var param = this.props.params[idx];
     var justread = !this.state.editMode || param.copyClone;
     //const cmdKey = this.props.cmdKey;
-    const value = this.state.values[idx];
+
+    // pick up the current value and, if it has not yet been specified, use the default.
+    // Note: the default may be the empty string if the param dict does not have one specified.
+    var usrval = this.state.values[idx];
+    var value = "";
+    if (usrval !== "") {
+      // has been specified
+      value = usrval;
+    } else {
+      // pick up default and set it in the form and the command state.
+      value = param.defaultValue;
+      this.state.values[idx] = param.defaultValue;
+    }
     var form =
       <FormControl
         readOnly={justread}
