@@ -2674,7 +2674,7 @@
     "valType":  "select",
     "units":  "",
     "showDefault": true,
-    "defaultValue" : "13"
+    "defaultValue" : "1"
   },
   "ionconfig_heapKey_p0" : {
     "id" :  "ionconfig_heapKey_p0",
