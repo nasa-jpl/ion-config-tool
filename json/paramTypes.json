@@ -1968,7 +1968,7 @@
     "valType":  "text",
     "units":  "",
     "showDefault": true,
-    "defaultValue":  "tcpclo"
+    "defaultValue":  "''"
   },
   "bpv7rc_outduct_tcp_p2" : {
     "id" :  "bpv7rc_outduct_tcp_p2",
