@@ -1365,13 +1365,13 @@ IonModel.propTypes = {
   nextNodeNum: PropTypes.number.isRequired,
   currentContacts: PropTypes.string.isRequired,
 
-  hosts: PropTypes.Arrays.isRequired,
-  ipaddrs: PropTypes.Arrays.isRequired,
-  graphs: PropTypes.Arrays.isRequired,
-  nodes: PropTypes.Arrays.isRequired,
-  configs: PropTypes.Arrays.isRequired,
-  commands: PropTypes.Arrays.isRequired,
-  cloneValues: PropTypes.Arrays.isRequired,
+  hosts: PropTypes.array.isRequired,
+  ipaddrs: PropTypes.array.isRequired,
+  graphs: PropTypes.array.isRequired,
+  nodes: PropTypes.array.isRequired,
+  configs: PropTypes.array.isRequired,
+  commands: PropTypes.array.isRequired,
+  cloneValues: PropTypes.array.isRequired,
 
   getNodeKey: PropTypes.func.isRequired,      // func to find nodeKey from a cmdKey
   isGoodName: PropTypes.func.isRequired,      // func to validate name

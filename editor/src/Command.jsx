@@ -676,8 +676,8 @@ Command.propTypes = {
   cmdTypeKey: PropTypes.string.isRequired,
   cmdType: PropTypes.object.isRequired,    // schema
   cmdPattern: PropTypes.string.isRequired, // schema
-  initValues:  PropTypes.Arrays.isRequired,
-  cloneValues: PropTypes.Arrays.isRequired,   
+  initValues:  PropTypes.array.isRequired,
+  cloneValues: PropTypes.array.isRequired,
 
   makeCmd: PropTypes.func.isRequired,
   getValues: PropTypes.func.isRequired,

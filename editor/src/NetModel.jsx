@@ -150,6 +150,7 @@ export default class NetModel  extends React.Component {
       return null;
     }
     var errs = this.checkNetModel();
+    debugger;
     if (errs.length) {
       console.log("*** net model errors:" + errs);
       this.setError("Build ION Model stopped. " + errs[0]);  // 1st error is enough
@@ -1181,10 +1182,10 @@ NetModel.propTypes = {
   name: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
 
-  netHosts: PropTypes.Arrays.isRequired,
-  netNodes: PropTypes.Arrays.isRequired,
-  netHops: PropTypes.Arrays.isRequired,
-  netAddrs: PropTypes.Arrays.isRequired,
+  netHosts: PropTypes.array.isRequired,
+  netNodes: PropTypes.array.isRequired,
+  netHops: PropTypes.array.isRequired,
+  netAddrs: PropTypes.array.isRequired,
 
   getIonModel: PropTypes.func.isRequired,      // func to get ion model handle
   isGoodName: PropTypes.func.isRequired,       // func to validate name
