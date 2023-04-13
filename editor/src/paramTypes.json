@@ -286,7 +286,7 @@
     "cmdType":  "contacts_contact_abs_abs_time",
     "valType":  "number",
     "units":  "bytes per sec",
-    "defaultValue":  ""
+    "defaultValue":  "25000000"
   },
   "contacts_contact_abs_abs_time_p5" : {
     "id" :  "contacts_contact_abs_abs_time_p5",
@@ -343,7 +343,7 @@
     "cmdType":  "contacts_contact_abs_rel_time",
     "valType":  "number",
     "units":  "bytes per sec",
-    "defaultValue":  ""
+    "defaultValue":  "25000000"
   },
   "contacts_contact_abs_rel_time_p5" : {
     "id" :  "contacts_contact_abs_rel_time_p5",
@@ -400,7 +400,7 @@
     "cmdType":  "contacts_contact_rel_rel_time",
     "valType":  "number",
     "units":  "bytes per sec",
-    "defaultValue":  ""
+    "defaultValue":  "25000000"
   },
   "contacts_contact_rel_rel_time_p5" : {
     "id" :  "contacts_contact_rel_rel_time_p5",
@@ -457,7 +457,7 @@
     "cmdType":  "contacts_contact_rel_abs_time",
     "valType":  "number",
     "units":  "bytes per sec",
-    "defaultValue":  ""
+    "defaultValue":  "25000000"
   },
   "contacts_contact_rel_abs_time_p5" : {
     "id" :  "contacts_contact_rel_abs_time_p5",
