@@ -4,18 +4,14 @@
 #
 # script to make browser-based ionconfig editor
 #
-# inputs:  ../json/*json   (config files)
+# inputs:  src/json/*json  (config files)
 #          ../release.json (release info)
 #          src/*           (jsx files)
 #
 # outputs: /build/*
 #
-# author: Rick Borgen
+# authors: Rick Borgen, Dave Hanks
 #
-
-# stage the current json config files
-echo 'Staging current json config files.'
-cp -p ../json/*json src
 
 # get the current release version
 toolver=$(./toolver.py)

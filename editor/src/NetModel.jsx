@@ -16,9 +16,9 @@ import {Glyphicon} from 'react-bootstrap';
 import {saveAs} from "file-saver";
 import {Alert} from 'react-bootstrap';
 
-import cmdTypes     from './cmdTypes.json';
-import paramTypes   from './paramTypes.json'
-import ionVersions  from './ionVersions.json'
+import cmdTypes     from './json/cmdTypes.json';
+import paramTypes   from './json/paramTypes.json'
+import ionVersions  from './json/ionVersions.json'
 
 import NetHostList  from './NetHostList.jsx';
 import NetNodeList  from './NetNodeList.jsx';

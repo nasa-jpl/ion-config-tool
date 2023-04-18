@@ -15,7 +15,7 @@ import {Glyphicon,Panel} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import Graph from './Graph.jsx';
 
-import cmdTypes    from './cmdTypes.json';
+import cmdTypes    from './json/cmdTypes.json';
 
 export default class GraphList  extends React.Component {
   constructor (props) {

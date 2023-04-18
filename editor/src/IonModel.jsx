@@ -25,12 +25,12 @@ import HostList     from './HostList.jsx';
 import IonNodeList  from './IonNodeList.jsx';
 import GraphList    from './GraphList.jsx';
 
-import cmdTypes     from './cmdTypes.json';
-import configTypes  from './configTypes.json';
-import paramTypes   from './paramTypes.json';
-import patterns     from './patterns.json';
-import selections   from './selections.json';
-import versions     from './ionVersions.json';
+import cmdTypes     from './json/cmdTypes.json';
+import configTypes  from './json/configTypes.json';
+import paramTypes   from './json/paramTypes.json';
+import patterns     from './json/patterns.json';
+import selections   from './json/selections.json';
+import versions     from './json/ionVersions.json';
 
 export default class IonModel  extends React.Component {
   constructor (props) {

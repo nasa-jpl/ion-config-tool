@@ -14,8 +14,8 @@ import {Button, ButtonToolbar} from 'react-bootstrap';
 import {Glyphicon} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
-import cmdTypes     from './cmdTypes.json';
-import paramTypes   from './paramTypes.json';
+import cmdTypes     from './json/cmdTypes.json';
+import paramTypes   from './json/paramTypes.json';
 
 export default class IonModelLoader extends React.Component {
   constructor (props) {

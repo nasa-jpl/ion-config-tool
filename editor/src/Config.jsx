@@ -16,7 +16,7 @@ import {Glyphicon,Panel} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import {saveAs} from "file-saver";
 
-import cmdTypes from './cmdTypes.json';
+import cmdTypes from './json/cmdTypes.json';
 
 export default class Config  extends React.Component {
   constructor (props) {

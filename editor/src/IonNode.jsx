@@ -16,7 +16,7 @@ import {Alert} from 'react-bootstrap';
 import {saveAs} from "file-saver";
 import JSZip from "jszip";
 
-import configTypes from './configTypes.json';
+import configTypes from './json/configTypes.json';
 
 export default class IonNode  extends React.Component {
   constructor (props) {

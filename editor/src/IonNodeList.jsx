@@ -15,7 +15,7 @@ import {Glyphicon,Panel} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import IonNode from './IonNode.jsx';
 
-import cmdTypes    from './cmdTypes.json';
+import cmdTypes    from './json/cmdTypes.json';
 
 export default class IonNodeList  extends React.Component {
   constructor (props) {

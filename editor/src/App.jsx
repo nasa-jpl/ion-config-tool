@@ -23,10 +23,10 @@ import {Glyphicon} from 'react-bootstrap';
 import "date-format-lite";
 
 // schema imports
-import configTypes from './configTypes.json';
-import cmdTypes    from './cmdTypes.json';
-import paramTypes  from './paramTypes.json';
-import selections  from './selections.json';
+import configTypes from './json/configTypes.json';
+import cmdTypes    from './json/cmdTypes.json';
+import paramTypes  from './json/paramTypes.json';
+import selections  from './json/selections.json';
 
  // non-render state
  var uniqId = 0;       // counter used to make unique names
