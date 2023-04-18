@@ -3,7 +3,7 @@
 #  push local json files (json_latest) to  master (../json)
 
 local=json_latest
-master=../json  
+master=../editor/src/json  
 
 echo 'push local json files (json_latest) to  master (../json)'
 echo ''

@@ -23,8 +23,8 @@ description in DORELEASE.
    the json configuration files.  This helps restrain the growth of the source
    code.
 
-   The latest version of the json configuration files in found in ./json.
-   Further description of the configuration files is at ./json/README and ./json/docs/*.
+   The latest version of the json configuration files in found in ./editor/src/json.
+   Further description of the configuration files is at ./editor/src/json/README and ./editor/src/json/docs/*.
 
 3) Build the dictionary docs.
 

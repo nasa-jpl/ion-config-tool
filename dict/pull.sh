@@ -2,10 +2,10 @@
 #
 #  pull json files from master (../json) to local (json_latest)
 
-master=../json
+master=../editor/src/json
 local=json_latest
 
-echo 'Pull json files from master (../json) to local (json_latest)'
+echo 'Pull json files from master (../editor/src/json) to local (json_latest)'
 echo ''
 
 echo "pulling configTypes.json from $master to $local"
