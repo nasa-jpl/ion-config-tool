@@ -150,7 +150,7 @@ export default class NetModel  extends React.Component {
       return null;
     }
     var errs = this.checkNetModel();
-    debugger;
+  
     if (errs.length) {
       console.log("*** net model errors:" + errs);
       this.setError("Build ION Model stopped. " + errs[0]);  // 1st error is enough
