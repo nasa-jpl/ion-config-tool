@@ -362,16 +362,21 @@ export default class NetModel  extends React.Component {
       cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","scheme",vals);
       this.addCommandKey(configs,configName,cmdKey);
       // build bpv7rc "low" endpoint cmds  [0...6]
+      let autoIDs = [];  //keep track of automatically created endpoint IDs
       for (var i=0; i<7; i++) {
         vals = [nodeNum,i,"x",""];
         cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
         this.addCommandKey(configs,configName,cmdKey);
+
+        //storing them as a string array for max flexibility, may need to support alphanumerics
+        autoIDs.push(i.toString());
       }
       // provide endpoints per service
       const services = netNode.services;
       for (i=0; i<services.length; i++) {
         var aservice = services[i];
         if (aservice === 'cfdp') {   // CFDP: endpoints 64 & 65
+          autoIDs.push("64","65");
           vals = [nodeNum,64,"x",""];
           cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
           this.addCommandKey(configs,configName,cmdKey);
@@ -380,6 +385,7 @@ export default class NetModel  extends React.Component {
           this.addCommandKey(configs,configName,cmdKey);
         }
         if (aservice === 'ams') {   // AMS: endpoints 71 & 72
+          autoIDs.push("71","72");
           vals = [nodeNum,71,"x",""];
           cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
           this.addCommandKey(configs,configName,cmdKey);
@@ -388,6 +394,7 @@ export default class NetModel  extends React.Component {
           this.addCommandKey(configs,configName,cmdKey);
         }
         if (aservice === 'amp') {   // AMS: endpoints 101 & 102
+          autoIDs.push("101","102");
           vals = [nodeNum,101,"x",""];
           cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
           this.addCommandKey(configs,configName,cmdKey);
@@ -395,6 +402,12 @@ export default class NetModel  extends React.Component {
           cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
           this.addCommandKey(configs,configName,cmdKey);
         }
+      }
+      // check for user specified endpoint IDs, and create as necessary
+      if (!autoIDs.includes(netNode.endpointID)) {
+        vals = [nodeNum,netNode.endpointID,"x",""];
+        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
+        this.addCommandKey(configs, configName, cmdKey);
       }
       // build protocol list for the node
       for (var hKey in netHops) {
