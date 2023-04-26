@@ -1,8 +1,16 @@
 # any errors.log should be ignored by the repo
 **/errors.log
-./dict/work
+/dict/work
 ./cli/tests/ionconfig/nate1-ion
 ./cli/tests/ionconfig/with_udp_fail-ion
-./editor/build
-editor/node_modules/
-
+/editor/build
+/editor/node_modules
+/editor/package-lock.json
+package-lock.json
+/node_modules
+/dict/cmdTypes.rows
+/dict/dict.html
+/dict/front.html
+/dict/paramTypes.rows
+/docs
+/*.swp
