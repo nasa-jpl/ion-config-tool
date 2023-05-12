@@ -6,7 +6,7 @@
 //                                                                   
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
@@ -17,6 +17,7 @@ import PopoutWindow from 'react-popout';
 import {saveAs} from "file-saver";
 import JSZip from "jszip";
 import {Alert} from 'react-bootstrap';
+import {Modal} from 'react-bootstrap';
 
 import SurveyPopout from './SurveyPopout.jsx';
 import Config       from './Config.jsx';
@@ -48,6 +49,7 @@ export default class IonModel  extends React.Component {
       viewMode: false,
       surveyMode: false,
       showPopoutMode: false,
+      deleteModelMode: false,
       expandMode: false
     }
   };
@@ -577,6 +579,34 @@ export default class IonModel  extends React.Component {
         {report}
       </PopoutWindow>
     );
+  };
+  makeDeleteModelWarn() {
+    console.log("Delete Model: popup the modal delete warn");
+    //const [show, setShow] = useState(false);
+
+    //const handleClose = () => setShow(false);
+    //const handleShow = () => setShow(true);
+
+    return (
+      <Modal show={this.state.deleteModelMode}>
+        <Modal.Header closeButton>
+          <Modal.Title>Warning</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete the Ion Model?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={ () => this.deleteModelState(true)}>
+            Ok 
+          </Button>
+          <Button variant="primary" onClick={ () => this.deleteModelState(false)}>
+            Cancel Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+    //this.setState({
+    //  deleteModelMode: false
+    //});
+
   };
   makeShowEndpoints() {
     //console.log("makeShowEndpoints");
@@ -1163,6 +1193,7 @@ export default class IonModel  extends React.Component {
     const viewMode = this.state.viewMode;
     const surveyMode = this.state.surveyMode;
     const showPopoutMode = this.state.showPopoutMode;
+    const deleteModelMode = this.state.deleteModelMode;
     const expandMode = this.state.expandMode;
 
     const ionHosts    = expandMode? this.makeHostListElem(name) : "";
@@ -1172,6 +1203,7 @@ export default class IonModel  extends React.Component {
     const showSurveyTag = surveyMode?  "Hide Surveys" : "Show Surveys" ;
     const offerSurveys = surveyMode? this.makeSurveyElem() : "";
     const showPopoutWin = showPopoutMode? this.makeShowPopout() : "";
+    const deleteModelWarn = deleteModelMode? this.makeDeleteModelWarn() : "";
     const editLabel = editMode?  'Submit' : 'Edit'
     const viewLabel = viewMode?  'Hide' : 'Show'
     const expandIcon = expandMode? 'chevron-down' : 'chevron-right';
@@ -1204,6 +1236,7 @@ export default class IonModel  extends React.Component {
               <Button bsSize="sm" bsStyle="info" onClick={this.showSurveys}>{showSurveyTag}</Button>
               <Button bsSize="sm" bsStyle="primary" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
               <Button bsSize="sm" bsStyle="primary" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
+              <Button bsSize="sm" bsStyle="danger" onClick={this.deleteModel}>Delete Model</Button>
               <Button bsSize="sm" bsStyle="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
             </ButtonToolbar>
           </Col>
@@ -1211,6 +1244,7 @@ export default class IonModel  extends React.Component {
         </Row>
         {offerSurveys}
         {showPopoutWin}
+        {deleteModelWarn}
         <Panel collapsible expanded={viewMode}>
           {viewPanel}
         </Panel>
@@ -1297,6 +1331,18 @@ export default class IonModel  extends React.Component {
     }
     this.setState({
       showPopoutMode: newMode
+    });
+  };
+  deleteModel = () => {
+    console.log("Delete Model pressed.");
+    this.setState({
+      deleteModelMode: true
+    });
+  };
+  deleteModelState = (toggle) => {
+    console.log("delete model state: "+toggle)
+    this.setState({
+      deleteModelMode: false
     });
   };
   saveModel = () => {
