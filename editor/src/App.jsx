@@ -1617,6 +1617,25 @@ export default class App extends React.Component {
         });
         break;
 
+      case "DELETE-ION-MODEL":
+        console.log("dispath DELETE-ION-MODEL called "+transaction.ionModelName);
+        this.setState ({
+          loadIonModel: false,
+          ionModelActive: false,
+          makeNewIonModel: false,
+          makeNewModelName: "",
+          ionModel: null,
+          hosts: {},
+          ipaddrs: {},
+          graphs: {},
+          nodes: {},
+          configs: {},
+          commands: {},
+          cloneValues: {}
+        });
+
+        break;
+
       default:
         console.log("dispatch action unknown!!");
         break;
