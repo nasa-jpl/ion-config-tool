@@ -310,8 +310,8 @@ export default class NetModel  extends React.Component {
       };
       nodes[nodeKey].configKeys.push(configName);
       var ionconfig = configName;
-      // build ionconfig configFlags cmd
-      var vals = ["13"];
+      // build ionconfig configFlags cmd, use default of 1
+      var vals = ["1"];
       var cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ionconfig","configFlags",vals);
       this.addCommandKey(configs,configName,cmdKey);
       // build ionrc 
