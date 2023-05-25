@@ -403,8 +403,9 @@ export default class NetModel  extends React.Component {
           this.addCommandKey(configs,configName,cmdKey);
         }
       }
-      // check for user specified endpoint IDs, and create as necessary
-      if (!autoIDs.includes(netNode.endpointID)) {
+      // check for user specified endpoint IDs, and create as necessary being careful to not create
+      // endpoints for IDs that are the empty string
+      if (!autoIDs.includes(netNode.endpointID) && netNode.endpointID !== "") {
         vals = [nodeNum,netNode.endpointID,"x",""];
         cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
         this.addCommandKey(configs, configName, cmdKey);
