@@ -586,7 +586,14 @@ export default class NetModel  extends React.Component {
         var cloneVal = this.getNodeInduct(clones,toNode.id,bpLayer);
         console.log ("???? cloneVal: " + JSON.stringify(cloneVal));
         var inductName = cloneVal.value;
-        vals = [inductName,clo,""];
+
+        //Bit of a hack -- if the BP layer is TCP, no tcpclo in command
+        //since it's been deprecated in ION versions 4 and up
+        if (bpLayer === "tcp") {
+          vals = [inductName,"''",""];
+        } else {
+          vals = [inductName,clo,""];
+        }
       } else {                       // won't know the induct name here
         outduct = "outduct_any";     // use general format
         vals = [bpLayer,"",clo,""];
