@@ -24,6 +24,7 @@ export default class NetHop  extends React.Component {
     const toNode = this.props.toNode;
     const bpLayer = this.props.bpLayer;
     const ltpLayer = this.props.ltpLayer;
+    const portNum = this.props.portNum;
     const maxRate = this.props.maxRate;
     const symmetric = this.props.symmetric;
     console.log("NetHop ctor " + desc + ' ' + hopKey);
@@ -39,6 +40,7 @@ export default class NetHop  extends React.Component {
       toNode: toNode,
       bpLayer: bpLayer,
       ltpLayer: ltpLayer,
+      portNum: portNum,
       maxRate: maxRate,
       symmetric: symmetric
     }
@@ -155,6 +157,9 @@ export default class NetHop  extends React.Component {
     const ltpLayerElem = this.makeSelectElem(value,'LTP Protocol Layer',showform,selform);
     hopElems.push(ltpLayerElem);
 
+    const portNumElem = this.makeHopElem("portNum", "number", this.state.portNum,"Port Number",1,false,"");
+    hopElems.push(portNumElem);
+
     const rateElem = this.makeHopElem("maxRate","number",this.state.maxRate,"Max Transmission Rate",1,false,"(bytes per sec)");
     hopElems.push(rateElem);
     // build ltpLayer selector
@@ -194,6 +199,8 @@ export default class NetHop  extends React.Component {
     hopElems.push(bpLayerElem);
     const ltpLayerElem = this.makeHopElem("ltpLayer","text",this.state.ltpLayer,"LTP Layer Protocol",1,true,"");
     hopElems.push(ltpLayerElem);
+    const portNumElem = this.makeHopElem("portNum","number",this.state.portNum,"Port Number",1,true,"");
+    hopElems.push(portNumElem);
     const rateElem = this.makeHopElem("maxRate","number",this.state.maxRate,"Max Transmission Rate",1,true,"(bytes per sec)");
     hopElems.push(rateElem);
     var symStr = this.getBoolStr(this.state.symmetric);
@@ -286,6 +293,7 @@ export default class NetHop  extends React.Component {
       toNode: this.state.toNode,
       bpLayer: this.state.bpLayer,
       ltpLayer: this.state.ltpLayer,
+      portNum: this.state.portNum,
       maxRate: this.state.maxRate,
       symmetric: sym
     };
@@ -328,6 +336,7 @@ NetHop.propTypes = {
   toHop: PropTypes.string.isRequired,
   bpLayer: PropTypes.string.isRequired,
   ltpLayer: PropTypes.string.isRequired,
+  portNum: PropTypes.number.isRequired,
   maxRate: PropTypes.number.isRequired,
   symmetric: PropTypes.bool.isRequired,
 

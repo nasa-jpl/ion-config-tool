@@ -96,6 +96,7 @@ export default class NetModel  extends React.Component {
         toNode: hopObj.toNode,
         bpLayer: hopObj.bpLayer,
         ltpLayer: hopObj.ltpLayer,
+        portNum: hopObj.portNum,
         maxRate: hopObj.maxRate,
         symmetric: hopObj.symmetric
       }
