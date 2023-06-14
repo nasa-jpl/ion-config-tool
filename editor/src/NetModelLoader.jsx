@@ -143,6 +143,9 @@ export default class NetModelLoader extends React.Component {
       var ltp = '';
       if(hopObj.hasOwnProperty("ltpLayer"))
         ltp = hopObj["ltpLayer"];
+      var port = '';
+      if(hopObj.hasOwnProperty("portNum"))
+        port = hopObj["portNum"];
       var rate = 0;
       if(hopObj.hasOwnProperty("maxRate"))
         rate = hopObj["maxRate"];
@@ -158,6 +161,7 @@ export default class NetModelLoader extends React.Component {
         "toNode": tonode,
         "bpLayer": bp,
         "ltpLayer": ltp,
+        "portNum": port,
         "maxRate": rate,
         "symmetric": sym
       };
