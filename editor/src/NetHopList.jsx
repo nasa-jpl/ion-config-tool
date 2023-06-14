@@ -51,6 +51,7 @@ export default class NetHopList  extends React.Component {
         toNode={hop.toNode}           // state
         bpLayer={hop.bpLayer}         // state
         ltpLayer={hop.ltpLayer}       // state
+        portNum={hop.portNum}         // state
         maxRate={hop.maxRate}         // state
         symmetric={hop.symmetric}     // state
 
