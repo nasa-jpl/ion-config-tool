@@ -542,7 +542,7 @@ export default class NetModel  extends React.Component {
         configName = nodeKey + ".ltprc";
         toHostKey = toNode.hostKey;
         // if port not specified, use default
-        if (netHop.portNum === "") {
+        if (netHop.portNum === undefined || netHop.portNum === "") {
           ports = this.getHostPorts(toHostKey,hosts,ipaddrs,commands);
           nextPort = 1113;
           while (ports.includes(nextPort))
