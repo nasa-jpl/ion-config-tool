@@ -17,6 +17,9 @@ import {Alert} from 'react-bootstrap';
 export default class NetHop  extends React.Component {
   constructor (props) {
     super(props);
+    // defaults if not specified
+    var portNumDefault = 1113;
+    var maxRateDefault = 2500000;
     // props
     const hopKey = this.props.hopKey;
     const desc = this.props.desc;
@@ -24,8 +27,9 @@ export default class NetHop  extends React.Component {
     const toNode = this.props.toNode;
     const bpLayer = this.props.bpLayer;
     const ltpLayer = this.props.ltpLayer;
-    const portNum = this.props.portNum;
-    const maxRate = this.props.maxRate;
+    const portNum = this.props.portNum === undefined ? portNumDefault : this.props.portNum;
+    const maxRate = this.props.maxRate === undefined ||
+                    this.props.maxRate === 0 ? maxRateDefault : this.props.maxRate;
     const symmetric = this.props.symmetric;
     console.log("NetHop ctor " + desc + ' ' + hopKey);
     this.state = {
