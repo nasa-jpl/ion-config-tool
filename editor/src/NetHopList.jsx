@@ -32,9 +32,6 @@ export default class NetHopList  extends React.Component {
   makeNetHopElem(hopKey) {
     const hop = this.props.netHops[hopKey];
 
-    // Per github issue #7 use default of 2.5MBps for maxRate
-    hop.maxRate = 25000000;
-
     console.log("***makeNetHopElem" + JSON.stringify(hop) );
 
     const makeOptions = this.props.makeTypeOptions;
@@ -51,6 +48,7 @@ export default class NetHopList  extends React.Component {
         toNode={hop.toNode}           // state
         bpLayer={hop.bpLayer}         // state
         ltpLayer={hop.ltpLayer}       // state
+        portNum={hop.portNum}         // state
         maxRate={hop.maxRate}         // state
         symmetric={hop.symmetric}     // state
 

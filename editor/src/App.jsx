@@ -1482,6 +1482,7 @@ export default class App extends React.Component {
           "fromNode": transaction.fromNode,
           "bpLayer" : transaction.bpLayer,
           "ltpLayer" : transaction.ltpLayer,
+          "portNum" : transaction.portNum,
           "maxRate" : transaction.maxRate,
           "symmetric" : transaction.symmetric
         };

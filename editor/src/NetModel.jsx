@@ -96,6 +96,7 @@ export default class NetModel  extends React.Component {
         toNode: hopObj.toNode,
         bpLayer: hopObj.bpLayer,
         ltpLayer: hopObj.ltpLayer,
+        portNum: hopObj.portNum,
         maxRate: hopObj.maxRate,
         symmetric: hopObj.symmetric
       }
@@ -540,22 +541,27 @@ export default class NetModel  extends React.Component {
       if (bpLayer === "ltp") {    // link candidate?
         configName = nodeKey + ".ltprc";
         toHostKey = toNode.hostKey;
-        ports = this.getHostPorts(toHostKey,hosts,ipaddrs,commands);
-        nextPort = 1113;
-        while (ports.includes(nextPort))
-          nextPort++;
-        var linkName  = toHostKey + ":" + nextPort;
+        // if port not specified, use default
+        if (netHop.portNum === undefined || netHop.portNum === "") {
+          ports = this.getHostPorts(toHostKey,hosts,ipaddrs,commands);
+          nextPort = 1113;
+          while (ports.includes(nextPort))
+            nextPort++;
+          netHop.portNum = nextPort;
+        };
+
+        var linkName  = toHostKey + ":" + netHop.portNum;
         if (netHop.ltpLayer === "udp") {
           if (startUdpKeys.hasOwnProperty(configName) )  // already have start udp?
             break;                                       // one is the limit
-          vals = [toAddr,nextPort];
+          vals = [toAddr,netHop.portNum];
           cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","start_udp",vals);
           startUdpKeys[configName] = cmdKey;
         };
         if (netHop.ltpLayer === "dccp") {
           if (startDccpKeys.hasOwnProperty(configName) )  // already have start dccp?
             break;                                        // one is the limit
-          vals = [toAddr,nextPort];
+          vals = [toAddr,netHop.portNum];
           cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","start_dccp",vals);
           startDccpKeys[configName] = cmdKey;
         };
