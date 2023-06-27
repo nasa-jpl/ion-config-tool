@@ -3,10 +3,16 @@
 #  push local json files (json_latest) to  master (../json)
 
 local=json_latest
-master=../editor/src/json  
+master=../json  
+
+echo 'creating ../json directory'
+mkdir -p ../json
 
 echo 'push local json files (json_latest) to  master (../json)'
 echo ''
+
+echo "pushing configTypes.json to $master"
+cp -p $local/configTypes.json $master
 
 echo "pushing cmdTypes.json to $master"
 cp -p $local/cmdTypes.json    $master
@@ -19,3 +25,6 @@ cp -p $local/patterns.json    $master
 
 echo "pushing ionVersions.json to $master"
 cp -p $local/ionVersions.json $master
+
+echo "pushing selections.json to $master"
+cp -p $local/selections.json  $master
