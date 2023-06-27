@@ -147,7 +147,7 @@ export default class NetModel  extends React.Component {
     console.log("*******makeIonModel name:" + this.state.name);
     var ion = this.props.getIonModel();
     if (ion) {  // existing ion model?
-      this.setError("Build stopped.  The ION Model " + ion.name + " already exists.");
+      this.setError("Build stopped.  The ION Model " + ion.name + " already exists. Delete it to allow rebuild.");
       return null;
     }
     var errs = this.checkNetModel();
