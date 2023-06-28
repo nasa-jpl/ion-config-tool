@@ -84,11 +84,9 @@ try {
 // process any requests to set watch flags
 var wflags = {};
 var w = argv.w 
-console.log ("Watch args: " + w);
 
 if (w) {
   var wflags = w.split(" ");
-  console.log ("there are " + wflags.length + " watch flags");
 
   // exit on unrecognized watch flag, no guessing what user wants
   for (i = 0; i < wflags.length; i++) {
@@ -116,7 +114,7 @@ if (w) {
     }
     if (wflags.includes("bp")) {
       wflags.bpv7rc={"type":"bpv7rc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
-      wcwflagsmds.bpv6rc={"type":"bpv6rc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+      wflags.bpv6rc={"type":"bpv6rc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
     }
     if (wflags.includes("bssp")) {
       wflags.bssprc={"type":"bssprc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
