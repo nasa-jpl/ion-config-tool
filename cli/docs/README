@@ -42,11 +42,11 @@ Program details
 //  inputs: ion_model.json  (or alternative name)
 //  
 //  optional:
-//           -w configfiles  configs files is a list of the config file types
+//           -w configfiles  configfiles is a list of the config file types
 //                           for which the watch flag should be set to enable
 //                           watch characters in ION. Valid values are:
 //                           all - set the watch in all config files that 
-//                                 support it.
+//                                 support it. 
 //                           bp - set the watch in all versions of bprc
 //                           bssp - set the watch in bssprc
 //                           cfdp - set the watch in cfdprc
