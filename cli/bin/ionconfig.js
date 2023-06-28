@@ -387,7 +387,6 @@ function extractCommands(groupKey,configType,configKey,commandsList) {
       const pVal = cmdObj.parameters[j];
       commands[cmdKey].values.push(pVal);
     };
-    console.log("command item=" + JSON.stringify(commands[cmdKey]) );
     // build object with all clone-able values
     if (cmdTypes[cmdTypeKey].isCloned) {
       var cloneVal = makeCloneVal(groupKey,commands[cmdKey]);
