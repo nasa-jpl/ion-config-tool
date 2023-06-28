@@ -45,9 +45,12 @@ var configs = {};
 var commands = {};
 var hosts = {};
 var ipaddrs = {};
-var cloneValues = {}
+var cloneValues = {};
 
 var DEBUG_MODE = false;  // No debug messages to the console is default.
+
+// watch flag initialization, passed in on command line
+var watchables = ["all", "cfdp", "ltp", "bp", "bssp", "dtpc"];
 
 console.log("Build ION Configurations from an ION Model");
 
@@ -65,6 +68,53 @@ try {
   console.log("" + err);
   process.exit();
 }
+
+// process any requests to set watch flags
+var wflags = {};
+var w = argv.w 
+console.log ("Watch args: " + w);
+
+if (w) {
+  var wflags = w.split(" ");
+  console.log ("there are " + wflags.length + " watch flags");
+
+  // exit on unrecognized watch flag, no guessing what user wants
+  for (i = 0; i < wflags.length; i++) {
+    if (!watchables.includes(wflags[i])) {
+      console.log("Unrecognized watch flag request: " + wflags[i]);
+      process.exit();
+    }
+  }
+
+  // Set up the watch commands object for easy access later
+  if (wflags.includes("all")) {
+    wflags.cfdprc={"type":"cfdprc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    wflags.ltprc={"type":"ltprc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    wflags.bpv7rc={"type":"bpv7rc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    wflags.bpv6rc={"type":"bpv6rc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    wflags.bssprc={"type":"bssprc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    wflags.dtpcrc={"type":"dtpcrc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    wcfgs = ["cfdprc","ltprc","bpv6rc","bpv7rc","bssprc","dtprc"];
+  } else {
+    if (wflags.includes("cfdp")) {
+      wflags.cfdprc={"type":"cfdprc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    }
+    if (wflags.includes("ltp")) {
+      wflags.ltprc={"type":"ltprc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    }
+    if (wflags.includes("bp")) {
+      wflags.bpv7rc={"type":"bpv7rc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+      wcwflagsmds.bpv6rc={"type":"bpv6rc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    }
+    if (wflags.includes("bssp")) {
+      wflags.bssprc={"type":"bssprc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    }
+    if (wflags.includes("dtpc")) {
+      wflags.dtpcrc={"type":"dtpcrc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    }
+  }
+}
+
 console.log("JSON parsing successful.");
 console.log("---");
 
@@ -204,6 +254,14 @@ function extractIonModel (modelObj) {
 
     debug_log("node item=" + JSON.stringify(nodeObj) );
     var configsObj = nodeObj.configs;
+    
+    // check for watch flags requested on the command line
+    for (cfg in configsObj) {
+      fname = cfg.toString();
+      if (wflags[fname]) {
+        configsObj[fname].commands.push(wflags[fname]);
+      }
+    }
     debug_log("node configs=" + JSON.stringify(configsObj) );
     const configKeyList = extractConfigs(nodeKey,configsObj);
     debug_log("Node got configKeys: " + configKeyList);
@@ -314,10 +372,12 @@ function extractCommands(groupKey,configType,configKey,commandsList) {
       "values" : []
     };
     //debug_log("command item=" + JSON.stringify(commands[cmdKey]) );
+    //console.log("command item=" + JSON.stringify(commands[cmdKey]) );
     for (var j = 0; j < cmdObj.parameters.length; j++) {
       const pVal = cmdObj.parameters[j];
       commands[cmdKey].values.push(pVal);
     };
+    console.log("command item=" + JSON.stringify(commands[cmdKey]) );
     // build object with all clone-able values
     if (cmdTypes[cmdTypeKey].isCloned) {
       var cloneVal = makeCloneVal(groupKey,commands[cmdKey]);
