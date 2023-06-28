@@ -52,6 +52,10 @@ Program details
 //                           cfdp - set the watch in cfdprc
 //                           dtpc - set the watch in dtpcrc
 //                           ltp - set the watch in ltprc
+//           NOTE: to enble watch characters in more that one type of config
+//                 file set the option to a space delimited list of config 
+//                 file types. Ex: -w "bp ltp" will enable watch characters
+//                 for bpv6rc, bpv7rc and ltprc only.
 //                                                           
 //  outputs: ion_model directory,    (using model name)
 //           ion_model/node1 subdir, (per node using node names from model)
