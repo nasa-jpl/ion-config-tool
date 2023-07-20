@@ -151,7 +151,7 @@
   "cfdprc_start_bputa"   : "s  bputa",
   "cfdprc_start_any"     : "s  '[1]'",
   "cfdprc_discard"       : "m discard  [1]",
-  "cfdprc_requirerc"     : "m requirerc  [1]",
+  "cfdprc_requirecrc"    : "m requirecrc  [1]",
   "cfdprc_fillchar"      : "m fillchar  [1]",
   "cfdprc_ckperiod"      : "m ckperiod  [1]",
   "cfdprc_maxtimeouts"   : "m maxtimeouts  [1]",

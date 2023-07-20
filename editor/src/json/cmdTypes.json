@@ -956,9 +956,9 @@
     "verFrom": 10, 
     "verThru": 999
   }, 
-  "cfdprc_requirerc": {
+  "cfdprc_requirecrc": {
     "configType": "cfdprc", 
-    "name": "requirerc", 
+    "name": "requirecrc", 
     "order": 33, 
     "paramCnt": 1, 
     "paramTypes": [], 

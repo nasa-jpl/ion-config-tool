@@ -134,7 +134,7 @@
     { "0" : "disable discarding" },
     { "1" : "enable discarding" }
   ],
-  "cfdprc_requirerc_p0" : [
+  "cfdprc_requirecrc_p0" : [
     { "0" : "disable CRC with PDU" },
     { "1" : "enable CRC with PDU" }
   ],

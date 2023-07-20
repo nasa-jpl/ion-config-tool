@@ -3481,11 +3481,11 @@
     "units":  "",
     "defaultValue":  "1"
   },
-  "cfdprc_requirerc_p0" : {
-    "id" :  "cfdprc_requirerc_p0",
+  "cfdprc_requirecrc_p0" : {
+    "id" :  "cfdprc_requirecrc_p0",
     "name":  "require CRC data integrity",
     "configType":  "cfdprc",
-    "cmdType":  "cfdprc_requirerc",
+    "cmdType":  "cfdprc_requirecrc",
     "valType":  "select",
     "units":  "",
     "defaultValue":  "0"
