@@ -18,6 +18,7 @@ View each html doc by simply loading the file into any standard web browser.
 The command definition JSON files are listed below.
 
   cmdTypes.json
+  cmdMsgs.json
   configTypes.json
   ionVersions.json
   paramTypes.json
