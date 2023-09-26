@@ -1,0 +1,807 @@
+{
+  "ionModelName": "ion3node-ion",
+  "ionModelDesc": "ION ",
+  "nextNodeNum": 1000,
+  "currentContacts": "ion3node-graph",
+  "hosts": [
+    {
+      "hostName": "spacecraft",
+      "hostDesc": "",
+      "linefeed": "unix",
+      "ipAddrs": [
+        "192.168.56.101"
+      ]
+    },
+    {
+      "hostName": "ground",
+      "hostDesc": "",
+      "linefeed": "unix",
+      "ipAddrs": [
+        "192.168.56.102"
+      ]
+    },
+    {
+      "hostName": "missionops",
+      "hostDesc": "",
+      "linefeed": "unix",
+      "ipAddrs": [
+        "192.168.56.103"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "nodeName": "spacecraft",
+      "nodeDesc": "",
+      "nodeNum": 1,
+      "ionVersion": "4.1.1",
+      "hostName": "spacecraft",
+      "configs": {
+        "ionconfig": {
+          "commands": [
+            {
+              "type": "ionconfig_configFlags",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "1"
+              ]
+            }
+          ]
+        },
+        "ionrc": {
+          "commands": [
+            {
+              "type": "ionrc_initialize",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                "spacecraft.ionconfig"
+              ]
+            },
+            {
+              "type": "ionrc_start",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": []
+            }
+          ]
+        },
+        "bpv7rc": {
+          "commands": [
+            {
+              "type": "bpv7rc_initialize",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": []
+            },
+            {
+              "type": "bpv7rc_scheme",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "ipn",
+                "ipnfw",
+                "ipnadminep"
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                0,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                1,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                2,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                3,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                4,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                5,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                6,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_protocol",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "ltp",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_induct_ltp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                "ltpcli"
+              ]
+            },
+            {
+              "type": "bpv7rc_outduct_ltp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                "ltpclo",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_ion_plan",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                "100000"
+              ]
+            },
+            {
+              "type": "bpv7rc_attach_outduct_ltp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                2
+              ]
+            },
+            {
+              "type": "bpv7rc_start",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": []
+            }
+          ]
+        },
+        "ltprc": {
+          "commands": [
+            {
+              "type": "ltprc_initialize",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                100
+              ]
+            },
+            {
+              "type": "ltprc_span_udp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                100,
+                100,
+                1482,
+                100000,
+                1,
+                "192.168.56.102:1113",
+                1
+              ]
+            },
+            {
+              "type": "ltprc_start_udp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "192.168.56.101",
+                1113
+              ]
+            }
+          ]
+        },
+        "ionsecrc": {
+          "commands": [
+            {
+              "type": "ionsecrc_initialize",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "nodeName": "ground",
+      "nodeDesc": "",
+      "nodeNum": 2,
+      "ionVersion": "4.1.1",
+      "hostName": "ground",
+      "configs": {
+        "ionconfig": {
+          "commands": [
+            {
+              "type": "ionconfig_configFlags",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "1"
+              ]
+            }
+          ]
+        },
+        "ionrc": {
+          "commands": [
+            {
+              "type": "ionrc_initialize",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                "ground.ionconfig"
+              ]
+            },
+            {
+              "type": "ionrc_start",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": []
+            }
+          ]
+        },
+        "bpv7rc": {
+          "commands": [
+            {
+              "type": "bpv7rc_initialize",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": []
+            },
+            {
+              "type": "bpv7rc_scheme",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "ipn",
+                "ipnfw",
+                "ipnadminep"
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                0,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                1,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                2,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                3,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                4,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                5,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                6,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_protocol",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "ltp",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_protocol",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "stcp",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_induct_ltp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                "ltpcli"
+              ]
+            },
+            {
+              "type": "bpv7rc_induct_stcp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "192.168.56.102",
+                4556,
+                "stcpcli"
+              ]
+            },
+            {
+              "type": "bpv7rc_outduct_ltp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                "ltpclo",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_outduct_stcp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "192.168.56.103:4556",
+                "stcpclo",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_ion_plan",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                "100000"
+              ]
+            },
+            {
+              "type": "bpv7rc_attach_outduct_ltp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                1
+              ]
+            },
+            {
+              "type": "bpv7rc_ion_plan",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                3,
+                "100000"
+              ]
+            },
+            {
+              "type": "bpv7rc_attach_outduct_stcp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                3,
+                "192.168.56.103:4556"
+              ]
+            },
+            {
+              "type": "bpv7rc_start",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": []
+            }
+          ]
+        },
+        "ltprc": {
+          "commands": [
+            {
+              "type": "ltprc_initialize",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                100
+              ]
+            },
+            {
+              "type": "ltprc_span_udp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                1,
+                100,
+                100,
+                1482,
+                100000,
+                1,
+                "192.168.56.101:1113",
+                1
+              ]
+            },
+            {
+              "type": "ltprc_start_udp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "192.168.56.102",
+                1113
+              ]
+            }
+          ]
+        },
+        "ionsecrc": {
+          "commands": [
+            {
+              "type": "ionsecrc_initialize",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "nodeName": "missionops",
+      "nodeDesc": "",
+      "nodeNum": 3,
+      "ionVersion": "4.1.1",
+      "hostName": "missionops",
+      "configs": {
+        "ionconfig": {
+          "commands": [
+            {
+              "type": "ionconfig_configFlags",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "1"
+              ]
+            }
+          ]
+        },
+        "ionrc": {
+          "commands": [
+            {
+              "type": "ionrc_initialize",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                3,
+                "missionops.ionconfig"
+              ]
+            },
+            {
+              "type": "ionrc_start",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": []
+            }
+          ]
+        },
+        "bpv7rc": {
+          "commands": [
+            {
+              "type": "bpv7rc_initialize",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": []
+            },
+            {
+              "type": "bpv7rc_scheme",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "ipn",
+                "ipnfw",
+                "ipnadminep"
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                3,
+                0,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                3,
+                1,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                3,
+                2,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                3,
+                3,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                3,
+                4,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                3,
+                5,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_endpoint",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                3,
+                6,
+                "x",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_protocol",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "ltp",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_protocol",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "stcp",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_induct_stcp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "192.168.56.103",
+                4556,
+                "stcpcli"
+              ]
+            },
+            {
+              "type": "bpv7rc_outduct_stcp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                "192.168.56.102:4556",
+                "stcpclo",
+                ""
+              ]
+            },
+            {
+              "type": "bpv7rc_ion_plan",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                "100000"
+              ]
+            },
+            {
+              "type": "bpv7rc_attach_outduct_stcp",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                2,
+                "192.168.56.102:4556"
+              ]
+            },
+            {
+              "type": "bpv7rc_start",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": []
+            }
+          ]
+        },
+        "ltprc": {
+          "commands": [
+            {
+              "type": "ltprc_initialize",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                100
+              ]
+            }
+          ]
+        },
+        "ionsecrc": {
+          "commands": [
+            {
+              "type": "ionsecrc_initialize",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": []
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "graphs": [
+    {
+      "graphName": "ion3node-graph",
+      "graphDesc": "ION  Contacts",
+      "ionVersion": "4.1.1",
+      "configs": {
+        "contacts": {
+          "commands": [
+            {
+              "type": "contacts_contact_rel_rel_time",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                0,
+                50000000,
+                1,
+                2,
+                "100000",
+                1
+              ]
+            },
+            {
+              "type": "contacts_contact_rel_rel_time",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                0,
+                50000000,
+                2,
+                1,
+                "100000",
+                1
+              ]
+            },
+            {
+              "type": "contacts_contact_rel_rel_time",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                0,
+                50000000,
+                2,
+                3,
+                "100000",
+                1
+              ]
+            },
+            {
+              "type": "contacts_contact_rel_rel_time",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                0,
+                50000000,
+                3,
+                2,
+                "100000",
+                1
+              ]
+            },
+            {
+              "type": "contacts_range_rel_rel_time",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                0,
+                50000000,
+                1,
+                2,
+                1
+              ]
+            },
+            {
+              "type": "contacts_range_rel_rel_time",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                0,
+                50000000,
+                2,
+                1,
+                1
+              ]
+            },
+            {
+              "type": "contacts_range_rel_rel_time",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                0,
+                50000000,
+                2,
+                3,
+                1
+              ]
+            },
+            {
+              "type": "contacts_range_rel_rel_time",
+              "lastUpdate": "2023-09-06T08:15",
+              "parameters": [
+                0,
+                50000000,
+                3,
+                2,
+                1
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

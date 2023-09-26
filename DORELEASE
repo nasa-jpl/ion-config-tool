@@ -5,6 +5,10 @@ release.json should already exist from the build process. See RELEASE for the
 description of release.json. Now summarize the release updates in the release.notes
 text file.
 
+Open the sample ION model called rel.ion3node.json found in the /script sub-directory
+and make sure it loads without error. Fix any errors by editing the ION model in the
+GUI and save it to rel.ion3node.json and commit to github.
+
 The release product is a versioned tar ball of end user software and documentation.
 Running the release script will deposit the new tar ball in the ./tars subdirectory,
 like so:

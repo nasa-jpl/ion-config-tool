@@ -1,5 +1,12 @@
 This directory holds all IonConfig programs and documentation.
 
+QUICK START
+1) Bring up a browser (IONconfig is tested with Chrome and Safari, but any should work).
+2) Use the browser to open index.html found in the /editor sub-directory. The IONconfig
+   GUI should appear.
+3) Next to ION Model File press the "Load" button and select ion3node.json sample input
+   file and then press submit. The sample ION model should appear in the GUI.
+
 Much of the documentation is in subdirectories directly related to 
 a sub-capability.
 

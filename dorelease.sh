@@ -25,6 +25,7 @@ echo "Adding standard release files."
 cp release.json  $rel
 cp release.notes $rel
 cp ./script/rel.README $rel/README
+cp ./script/rel.ion3node.json $rel/ion3node.json
 
 echo "Adding json config files."
 cp -R json $rel
