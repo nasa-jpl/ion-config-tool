@@ -1,0 +1,9 @@
+// foo bar baz
+
+{
+  "bpv7rc_scheme" : {
+    "id" :  "bpv7rc_scheme_p0",
+    "value":  "imc",
+    "msg" : "For this scheme, it is recommended that a loopback TCP or UDP connection be configured"
+  }
+}
