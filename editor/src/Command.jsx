@@ -14,6 +14,7 @@ import {Label,Button,ButtonToolbar} from 'react-bootstrap';
 import {Panel} from 'react-bootstrap';
 import {Glyphicon} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
+import {Badge} from 'react-bootstrap';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import 'moment';
@@ -490,6 +491,39 @@ export default class Command  extends React.Component {
       );
   }
     
+  // makeCmdMessage
+  //
+  // Composes and returns a message to be displayed for a specific command.
+  // Since there is only one command at this time that requires this, this
+  // function is customized for that command only. If these messages become
+  // more widespread then the logic should be updated to be more general by
+  // having this component load the messages from an external JSON file,
+  // looking to see if a message is present for any of the parameters 
+  // associated with the command and retrieving the message from there,
+  // formatting it and returning the HTML formatted message to the caller.
+  makeCmdMessage() {
+    // See if there is a message to display for this command
+    if (this.props.cmdTypeKey !== "bpv7rc_scheme") {
+      return "";
+    }
+
+    // Find messages for each param in the command (there is probably only one)
+    var params = this.props.params;
+
+    for (var i=0; i<params.length; i++) {
+      if (params[i].typeKey === "bpv7rc_scheme_p0" && params[i].initVal === "imc") {
+        return <Label>
+                 For this scheme, it is recommended that a <br/>
+                 loopback TCP or UDP connection be configured.<br/>
+                 Add a loopback contact and range, and a set<br/>
+                 of protocol, induct, outduct, plan and planduct<br/>
+                 commands in the .bprc file.
+               </Label>
+      }
+
+    }    
+  }
+
   render() {
     // const cmdKey = this.props.cmdKey;
     // console.log("Command render " + cmdKey);
@@ -514,7 +548,9 @@ export default class Command  extends React.Component {
         // check if this command should be flagged for editing
     var editFlag = false;
     if (cmdStr.indexOf("??") > -1)
-      editFlag = true;  
+      editFlag = true;
+
+    var cmdMsg = this.makeCmdMessage();
 
     return (
       <Grid fluid>
@@ -530,6 +566,7 @@ export default class Command  extends React.Component {
               <Button bsSize="sm" bsStyle="info" onClick={this.view}>{viewLabel}</Button>
             </ButtonToolbar>
           </Col>
+          <Col sm={2}> {cmdMsg} </Col>
           {this.makeEditFlagElem(editFlag)}
         </Row>
         <Panel collapsible expanded={viewMode}>

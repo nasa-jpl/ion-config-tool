@@ -14,6 +14,9 @@ cp -p $master/configTypes.json $local
 echo "pulling cmdTypes.json    from $master to $local"
 cp -p $master/cmdTypes.json    $local
 
+echo "pulling cmdMsgs.json    from $master to $local"
+cp -p $master/cmdMsgs.json    $local
+
 echo "pulling paramTypes.json  from $master to $local"
 cp -p $master/paramTypes.json  $local
 
