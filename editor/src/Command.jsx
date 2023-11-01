@@ -553,6 +553,7 @@ export default class Command  extends React.Component {
     var cmdMsg = this.makeCmdMessage();
 
     return (
+    <div style={{backgroundColor: '#E1FAD2'}}>
       <Grid fluid>
         <Row>
           <Col className="text-right" sm={1}><Label bsSize="lg" bsStyle="default">Command</Label></Col>
@@ -573,6 +574,7 @@ export default class Command  extends React.Component {
          {viewPanel}
         </Panel>
       </Grid>
+      </div>
     )
   };
   // handles value changes for a child parameter

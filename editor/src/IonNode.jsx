@@ -256,6 +256,7 @@ export default class IonNode  extends React.Component {
 
 
     return (
+    <div style={{backgroundColor: '#DBF4DC'}}>
       <Grid fluid>
         <Row>
           <div className="row mt-4">
@@ -284,6 +285,7 @@ export default class IonNode  extends React.Component {
           {this.props.children}
         </Panel>
       </Grid>
+      </div>
     )
   };
 
