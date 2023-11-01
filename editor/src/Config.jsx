@@ -193,7 +193,7 @@ export default class Config  extends React.Component {
         viewPanel = this.makeConfigViewer();
 
     return (
-    <div style={{backgroundColor: '#F2F9C8'}}>
+    <div style={{backgroundColor: '#E1FAD2'}}>
       <Grid fluid>
         <Row>
           <div className="row mt-4">

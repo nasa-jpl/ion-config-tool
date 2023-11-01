@@ -215,7 +215,7 @@ export default class Host  extends React.Component {
         viewPanel = this.makeHostViewer();
 
     return (
-    <div style={{backgroundColor: '#BAF4F5'}}>
+    <div style={{backgroundColor: '#DBF4DC'}}>
      <Grid fluid>
         <Row>
           <div className="row mt-4">

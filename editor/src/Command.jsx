@@ -553,7 +553,7 @@ export default class Command  extends React.Component {
     var cmdMsg = this.makeCmdMessage();
 
     return (
-    <div style={{backgroundColor: '#E1FAD2'}}>
+    <div style={{backgroundColor: '#F2F9C8'}}>
       <Grid fluid>
         <Row>
           <Col className="text-right" sm={1}><Label bsSize="lg" bsStyle="default">Command</Label></Col>

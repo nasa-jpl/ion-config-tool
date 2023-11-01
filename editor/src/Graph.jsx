@@ -123,6 +123,7 @@ export default class Graph  extends React.Component {
     const viewPanel = this.makeGraphEditorElem();
 
     return (
+    <div style={{backgroundColor: '#DBF4DC'}}>
       <Grid fluid>
         <Row>
           <div className="row mt-4">
@@ -146,6 +147,7 @@ export default class Graph  extends React.Component {
           {this.props.children}
         </Panel>
       </Grid>
+    </div>
     );
   };
 
