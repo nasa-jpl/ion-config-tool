@@ -215,7 +215,8 @@ export default class Host  extends React.Component {
         viewPanel = this.makeHostViewer();
 
     return (
-      <Grid fluid>
+    <div style={{backgroundColor: '#DBF4DC'}}>
+     <Grid fluid>
         <Row>
           <div className="row mt-4">
             <Col className="text-right" sm={1}><Label bsSize="lg" bsStyle="default">ION Host</Label></Col>
@@ -233,6 +234,7 @@ export default class Host  extends React.Component {
          {viewPanel}
         </Panel>
       </Grid>
+      </div>
     )
   };
 

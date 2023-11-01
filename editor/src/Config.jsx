@@ -193,6 +193,7 @@ export default class Config  extends React.Component {
         viewPanel = this.makeConfigViewer();
 
     return (
+    <div style={{backgroundColor: '#E1FAD2'}}>
       <Grid fluid>
         <Row>
           <div className="row mt-4">
@@ -224,6 +225,7 @@ export default class Config  extends React.Component {
           {this.props.children}
         </Panel>
       </Grid>
+      </div>
     )
   };
   edit = () => {   // activated by Edit/Submit button
