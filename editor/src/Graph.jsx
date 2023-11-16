@@ -123,7 +123,7 @@ export default class Graph  extends React.Component {
     const viewPanel = this.makeGraphEditorElem();
 
     return (
-    <div style={{backgroundColor: '#DBF4DC'}}>
+    <div style={{backgroundColor: '#9DD1A0'}}>
       <Grid fluid>
         <Row>
           <div className="row mt-4">

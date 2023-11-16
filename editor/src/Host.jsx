@@ -177,7 +177,7 @@ export default class Host  extends React.Component {
       ipAddrList.push(ipAddrElem);
     }
     return (
-      <div>
+      <div style={{backgroundColor: '#E1FAD2'}}>
         {hostElems}
         <hr />
         {listline}
