@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 //
 //    dtn2ion.js
 //
