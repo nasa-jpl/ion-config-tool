@@ -41,22 +41,22 @@ export default class NetHost  extends React.Component {
     const netHost = this.props.netHost;
     console.log("host: " + hostKey + "  ipAddr: " + ipAddr + "  mode: " + addMode );
 
-    const isGoodName = this.props.isGoodName;
+    const isValidIPAddr = this.props.isValidIPAddr;
     const dispatch = this.props.dispatch;  // make sure dispatch remembers "this"
 
     return (
       <NetAddr
-        key={ipAddr}                // unique id
-        hostKey={hostKey}           // host name
-        ipAddr={ipAddr}             // ip addr
-        addMode={addMode}           // true: add  false: change/delete
+        key={ipAddr}                  // unique id
+        hostKey={hostKey}             // host name
+        ipAddr={ipAddr}               // ip addr
+        addMode={addMode}             // true: add  false: change/delete
 
-        netHost={netHost}           // net host object
-        netAddrs={netaddrs}         // ipaddr array
+        netHost={netHost}             // net host object
+        netAddrs={netaddrs}           // ipaddr array
 
-        isGoodName={isGoodName}     // verify name string is valid
+        isValidIPAddr={isValidIPAddr} // IP address validator
 
-        dispatch={dispatch}         // dispatch func for new hosts
+        dispatch={dispatch}           // dispatch func for new hosts
       />
     );  
   }
@@ -281,7 +281,7 @@ NetHost.propTypes = {
   netHost: PropTypes.object.isRequired,         // user model - net host object
   netaddrs: PropTypes.array.isRequired,         // user model - net ipaddr names list
 
-  isGoodName: PropTypes.func.isRequired,        // func to validate name
+  isValidIPAddr: PropTypes.func.isRequired,     // func to validate IP address
 
   dispatch: PropTypes.func.isRequired
 }

@@ -957,6 +957,7 @@ export default class NetModel  extends React.Component {
     const netAddrs = this.props.netAddrs;
     const isGoodName = this.props.isGoodName;
     const isGoodNetHostKey = this.props.isGoodNetHostKey;
+    const isValidIPAddr = this.props.isValidIPAddr;
     const dispatch = this.props.dispatch;      // make sure dispatch remembers "this"
 
     return (
@@ -968,6 +969,7 @@ export default class NetModel  extends React.Component {
 
         isGoodName={isGoodName}              // verify name string is valid
         isGoodNetHostKey={isGoodNetHostKey}  // verify hostKey not in use
+        isValidIPAddr={isValidIPAddr}        // verify IP address is valid
         dispatch={dispatch}                  // dispatch func for new hosts
       />
     );
@@ -1216,6 +1218,7 @@ NetModel.propTypes = {
 
   getIonModel: PropTypes.func.isRequired,      // func to get ion model handle
   isGoodName: PropTypes.func.isRequired,       // func to validate name
+  isValidIPAddr: PropTypes.func.isRequired,     // func to validate IP address
   isGoodNetHostKey: PropTypes.func.isRequired, // func to validate hostKey not in use
   isGoodNetNodeKey: PropTypes.func.isRequired, // func to validate nodeKey not in use
   isGoodNetHopKey: PropTypes.func.isRequired,  // func to validate hopKey not in use

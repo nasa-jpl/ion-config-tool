@@ -159,6 +159,16 @@ export default class App extends React.Component {
       return false;
     return true;
   }
+  // check IP address agains regexp
+  isValidIPAddr(ipaddr)
+  {
+    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddr))
+    {
+      return (true)
+    }
+    return (false)
+  }
+
   // check if a new node name is valid
   isGoodNodeKey(newNodeKey) {
     console.log("isGoodNodeKey ?? " + newNodeKey);
@@ -655,6 +665,7 @@ export default class App extends React.Component {
     const isGoodNetHostKey = this.isGoodNetHostKey.bind(this);
     const isGoodNetNodeKey = this.isGoodNetNodeKey.bind(this);
     const isGoodNetHopKey = this.isGoodNetHopKey.bind(this);
+    const isValidIPAddr = this.isValidIPAddr.bind(this);
     const makeOptElems = this.makeOptionElems.bind(this);
     const mapOptElems = this.mapOptionElems.bind(this);
     const makeTypeOpts = this.makeTypeOptions.bind(this);
@@ -681,6 +692,7 @@ export default class App extends React.Component {
         isGoodNetHostKey={isGoodNetHostKey}  // verify hostKey not in use
         isGoodNetNodeKey={isGoodNetNodeKey}  // verify nodeKey not in use
         isGoodNetHopKey={isGoodNetHopKey}    // verify hopKey not in use
+        isValidIPAddr={isValidIPAddr}        // verify IP address is valid
         dispatch={dispatch}                  // dispatch func for new configs
         makeOptionElems={makeOptElems}       // make static options 
         mapOptionElems={mapOptElems}         // map options elems

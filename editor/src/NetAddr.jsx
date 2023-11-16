@@ -12,6 +12,7 @@ import {FormControl} from 'react-bootstrap';
 import {Grid,Row,Col} from 'react-bootstrap';
 import {Button,ButtonToolbar} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
+import {Modal} from 'react-bootstrap';
 
 export default class NetAddr  extends React.Component {
   constructor (props) {
@@ -23,22 +24,40 @@ export default class NetAddr  extends React.Component {
       changeMode: false,
       wasIpAddr: ipAddr,     // remember old ip addr while in change mode
       ipAddr: ipAddr,
-      nameMsg: ""
+      errMsg: "",
+      warnMsg: "",
+      showWarnMsg: false
     }
   }
   makeAlertElem(msg) {
     return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
   }
-  // check if a new ipAddr is valid
-  isGoodIpAddr(ipAddr) {
+  // check if a new ipAddr is duplicated
+  isDuplicateIpAddr(ipAddr) {
     const ipaddrs = this.props.netAddrs;
-    console.log("isGoodIpAddr ?? " + ipAddr + " in " + ipaddrs);
+    console.log("isDuplicateIpAddr ?? " + ipAddr + " in " + ipaddrs);
     for (var i=0; i<ipaddrs.length; i++) {
       if (ipaddrs[i] === ipAddr)
         return false;
     }
     return true;
   }
+  makeDuplicateIPWarn(warnmsg) {
+    console.log("Delete Model: popup the modal delete warn");
+    return (
+      <Modal show={this.state.showWarnMsg}>
+        <Modal.Header closeButton>
+          <Modal.Title>Warning</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{warnmsg}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" bsSize="sm" bsStyle="success" onClick={ () => this.setState({showWarnMsg : false})}>
+            Ok 
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  };
   // gets current position in array (which could change)
   getPosition() {
     var position = 1;
@@ -73,13 +92,24 @@ export default class NetAddr  extends React.Component {
     const delbtn = addMode? "" : <Button bsSize="sm" bsStyle="danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
     const addbtn = addMode? <Button bsSize="sm" bsStyle="primary" onClick={this.add}>Add</Button> : "";
 
-    let msg = this.state.nameMsg;
-    var alert = (msg === "")?  "" : this.makeAlertElem(msg);
+    let errmsg = this.state.errMsg;
+    let warnmsg = this.state.warnMsg;
+    var alert;
+    var warnpopup;
+    if (errmsg !== '') {
+      alert = this.makeAlertElem(errmsg);
+    } else if (warnmsg !== '') {
+      warnpopup = this.makeDuplicateIPWarn(warnmsg);
+    }
+
+    this.state.errMsg = '';
+    this.state.warnMsg = '';
 
     const form =
       <FormControl readOnly={read} bsSize="sm" type="text" value={ipAddr} spellCheck="false" onChange={this.handleChange.bind(null)} />;
 
     return (
+      <div>
       <Grid fluid>
         <Row>
           <div className="row mt-4">
@@ -96,6 +126,8 @@ export default class NetAddr  extends React.Component {
           </div>
         </Row>
       </Grid>
+      {warnpopup}
+      </div>
     )
   };
   change = () => {   // activated by Change/Submit button
@@ -146,22 +178,29 @@ export default class NetAddr  extends React.Component {
     const hostKey = this.props.hostKey;
     const ipAddr = this.state.ipAddr;
     let msg = "";
-    if (!this.props.isGoodName(ipAddr) )
-      msg = "ipAddr name is mal-formed.";
-    if (!this.isGoodIpAddr(ipAddr) )
-      msg = "ipAddr already used." ;
-    if (msg === "") {  // all good!
-      newState.ipAddr = "";  // clear the name for the next add
-      const tran = {
-        action: "NEW-NETADDR",
-        hostKey: hostKey,
-        ipAddr: ipAddr
-      };
-      this.props.dispatch(tran);
-      newState.nameMsg = "";
-    } else {        // set msg to show problem
-      newState.nameMsg = msg;
+
+    // Error in IP address takes precedent
+    if (!this.props.isValidIPAddr(ipAddr) ) {
+      newState.errMsg = "IP Address is mal-formed.";
+      this.setState (newState);
+
+      //Quick exit.
+      return;
+    }
+
+    // Check for duplicate and warn if necessary
+    if (!this.isDuplicateIpAddr(ipAddr) ) {
+      newState.warnMsg = "IP Address is already used." ;
+      newState.showWarnMsg = true;
+    }
+    newState.ipAddr = "";  // clear the name for the next add
+    const tran = {
+      action: "NEW-NETADDR",
+      hostKey: hostKey,
+      ipAddr: ipAddr
     };
+    this.props.dispatch(tran);
+    newState.errMsg = "";
     this.setState (newState);
   };
   handleChange = (e) => {
@@ -182,7 +221,7 @@ NetAddr.propTypes = {
   netHost:  PropTypes.object.isRequired,     // user model - net host object
   netAddrs: PropTypes.array.isRequired,      // user model - net ipaddr names
 
-  isGoodName: PropTypes.func.isRequired,     // func to validate name
+  isValidIPAddr: PropTypes.func.isRequired,  // func to validate IP address
 
   dispatch: PropTypes.func.isRequired,
 }
