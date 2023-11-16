@@ -35,8 +35,9 @@ export default class NetHostList  extends React.Component {
     const desc = host.hostDesc;
     const netaddrs = this.props.netAddrs;
     const isGoodName = this.props.isGoodName;
-    const makeOptElems = this.props.makeOptElems;  // pass through
-    const dispatch = this.props.dispatch;          // pass dispatch through
+    const isValidIPAddr = this.props.isValidIPAddr; // pass through
+    const makeOptElems = this.props.makeOptElems;   // pass through
+    const dispatch = this.props.dispatch;           // pass dispatch through
 
     return (
       <NetHost
@@ -46,7 +47,7 @@ export default class NetHostList  extends React.Component {
         netHost={host}             // net host object
         netaddrs={netaddrs}        // net ip addrs
 
-        isGoodName={isGoodName}        // verify name string is valid
+        isValidIPAddr={isValidIPAddr}  // verify IP address is valid
         makeOptionElems={makeOptElems} // static options building func
 
         dispatch={dispatch}        // dispatch func for host transactions
@@ -191,6 +192,7 @@ NetHostList.propTypes = {
 
   isGoodName: PropTypes.func.isRequired,        // func to validate name
   isGoodNetHostKey: PropTypes.func.isRequired,  // func to validate hostKey not in use
+  isValidIPAddr: PropTypes.func.isRequired,     // func to validate IP address
   makeOptionElems: PropTypes.func.isRequired,   // func to provide options
 
   dispatch: PropTypes.func.isRequired
