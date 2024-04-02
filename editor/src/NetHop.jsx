@@ -149,16 +149,22 @@ export default class NetHop  extends React.Component {
     opts     = this.props.makeOptionElems(param);
     selform  = this.makeSelectForm(value,handler,opts);
     showform = this.makeShowForm(value);
-    const bpLayerElem = this.makeSelectElem(value,'BP Protocol Layer',showform,selform);
+    const bpLayerElem = this.makeSelectElem(value,'BP Protocol Layer CLA',showform,selform);
     hopElems.push(bpLayerElem);
     // build ltpLayer selector
     param    = "ltpLayer";
-    value    = this.state.ltpLayer;
+    if (this.state.bpLayer !== "ltp") {
+      // Anything other than LTP for the BP layer results in LTP layer being blank
+      value = "";
+      this.state.ltpLayer = "";
+    } else {
+      value = this.state.ltpLayer;
+    }
     handler  = this.handleHopChange.bind(null,param);
     opts     = this.props.makeOptionElems(param);
     selform  = this.makeSelectForm(value,handler,opts);
     showform = this.makeShowForm(value);
-    const ltpLayerElem = this.makeSelectElem(value,'LTP Protocol Layer',showform,selform);
+    const ltpLayerElem = this.makeSelectElem(value,'LTP Underlying Protocol Layer',showform,selform);
     hopElems.push(ltpLayerElem);
 
     const portNumElem = this.makeHopElem("portNum", "number", this.state.portNum,"Port Number",1,false,"");
@@ -199,9 +205,9 @@ export default class NetHop  extends React.Component {
     hopElems.push(fromNodeElem);
     const toNodeElem = this.makeHopElem("toNode","text",this.state.toNode,"To Node Name",1,true,"");
     hopElems.push(toNodeElem);
-    const bpLayerElem = this.makeHopElem("bpLayer","text",this.state.bpLayer,"BP Layer Protocol",1,true,"");
+    const bpLayerElem = this.makeHopElem("bpLayer","text",this.state.bpLayer,"BP Layer Protocol CLA",1,true,"");
     hopElems.push(bpLayerElem);
-    const ltpLayerElem = this.makeHopElem("ltpLayer","text",this.state.ltpLayer,"LTP Layer Protocol",1,true,"");
+    const ltpLayerElem = this.makeHopElem("ltpLayer","text",this.state.ltpLayer,"LTP Underlying Layer Protocol",1,true,"");
     hopElems.push(ltpLayerElem);
     const portNumElem = this.makeHopElem("portNum","number",this.state.portNum,"Port Number",1,true,"");
     hopElems.push(portNumElem);

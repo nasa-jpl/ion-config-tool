@@ -77,8 +77,7 @@
     { "stcp" : "Simple TCP Protocol" },
     { "udp"  : "UDP Protocol" },
     { "ltp"  : "Licklider Transmission Protocol"},
-    { "dccp" : "Datagram Congestion Control Protocol"},
-    { "bssp" : "Bundle Streaming Service Protocol"}
+    { "dccp" : "Datagram Congestion Control Protocol"}
   ],
   "bpv7rc_protocol_v11_p3" : [
     { "1" : "Protocol supports bundle streaming (e.g. bssp)"},
@@ -90,8 +89,7 @@
     { "stcp" : "Simple TCP Protocol" },
     { "udp"  : "UDP Protocol" },
     { "ltp"  : "Licklider Transmission Protocol"},
-    { "dccp" : "Datagram Congestion Control Protocol"},
-    { "bssp" : "Bundle Streaming Service Protocol"}
+    { "dccp" : "Datagram Congestion Control Protocol"}
   ],
   "bpv7rc_protocol_p1" : [
     { "1" : "Protocol supports bundle streaming (e.g. bssp)"},
@@ -175,8 +173,7 @@
     { "stcp" : "Simple TCP Protocol" },
     { "udp"  : "UDP Protocol" },
     { "ltp"  : "Licklider Transmission Protocol"},
-    { "dccp" : "Datagram Congestion Control Protocol"},
-    { "bssp" : "Bundle Streaming Service Protocol"}
+    { "dccp" : "Datagram Congestion Control Protocol"}
   ],
   "ltpLayer" : [
     { "udp"  : "UDP Protocol" },

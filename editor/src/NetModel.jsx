@@ -110,6 +110,7 @@ export default class NetModel  extends React.Component {
     const netHosts = this.props.netHosts;
     const netNodes = this.props.netNodes;
     const netHops  = this.props.netHops;
+    const isStandardProtocol = this.props.isStandardProtocol;
 
     // do some sanity checking on net model
     if (!netHosts)  // no host object?
@@ -128,17 +129,19 @@ export default class NetModel  extends React.Component {
       if (!hostObj)
         errors.push("Invalid hostKey for node " + nodeKey + ".");
     }
-    // verify node keys of each hop
+    // sanity checking on each hop
     for (var hopKey in netHops) {
       var netHop = netHops[hopKey];
       var fromNode = netNodes[netHop.fromNode];
       if (!fromNode) 
-        errors.push("Invalid fromNode for hop " + hopKey + ".");
+        errors.push("Invalid From Node Name for Net Hop " + hopKey + ".");
       var toNode = netNodes[netHop.toNode];
       if (!toNode) 
-        errors.push("Invalid toNode for hop " + hopKey + ".");
+        errors.push("Invalid To Node Name for Net Hop " + hopKey + ".");
       if (!netHop.bpLayer)
-        errors.push("Invalid bpLayer for hop " + hopKey + ".");
+        errors.push("Missing BP Layer Protocol CLA for Net Hop " + hopKey + ".");
+      if (netHop.bpLayer && !isStandardProtocol(netHop.bpLayer)) 
+        errors.push("Unrecognized BP Layer Protocol CLA for Net Hop: "+ hopKey +". Should be one of: tcp, stcp, udp, dccp or ltp.");
     }
     return errors;
   }

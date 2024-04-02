@@ -456,7 +456,7 @@ export default class App extends React.Component {
   }
   // use list of value objects to build selector option elements
   mapOptionElems(values) {
-    console.log("makeOptionElems " + JSON.stringify(values))
+    console.log("mapOptionElems " + JSON.stringify(values))
     var optionItems = values.map( 
       (val) => {
         var option = val.value;
