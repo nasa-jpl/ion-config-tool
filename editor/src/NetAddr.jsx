@@ -137,7 +137,7 @@ export default class NetAddr  extends React.Component {
     if (changeMode) {
       // Error in IP address takes precedent
       if (!this.props.isValidIPAddr(isIpAddr) ) {
-        newState.errMsg = "IP Address is mal-formed.";
+        newState.errMsg = "IP Address or DNS Name is mal-formed.";
         this.setState (newState);
 
         //Quick exit.
@@ -194,7 +194,7 @@ export default class NetAddr  extends React.Component {
 
     // Error in IP address takes precedent
     if (!this.props.isValidIPAddr(ipAddr) ) {
-      newState.errMsg = "IP Address is mal-formed.";
+      newState.errMsg = "IP Address or DNS Name is mal-formed.";
       this.setState (newState);
 
       //Quick exit.
