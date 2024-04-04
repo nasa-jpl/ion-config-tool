@@ -159,13 +159,18 @@ export default class App extends React.Component {
       return false;
     return true;
   }
-  // check IP address agains regexp
+  // check IP address against regexp
   isValidIPAddr(ipaddr)
   {
     if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddr))
     {
       return (true)
     }
+    if (/^(((http|https):\/\/|)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}(:[0-9]{1,5})?(\/.*)?)$/.test(ipaddr))
+    {
+      return (true)
+    }
+
     return (false)
   }
 

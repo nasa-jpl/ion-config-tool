@@ -133,22 +133,35 @@ export default class NetAddr  extends React.Component {
   change = () => {   // activated by Change/Submit button
     var newState = Object.assign({},this.state);
     const changeMode = this.state.changeMode;
-    if (changeMode)
+    const isIpAddr = this.state.ipAddr;
+    if (changeMode) {
+      // Error in IP address takes precedent
+      if (!this.props.isValidIPAddr(isIpAddr) ) {
+        newState.errMsg = "IP Address is mal-formed.";
+        this.setState (newState);
+
+        //Quick exit.
+        return;
+      }
+      
+      // All is good, submit
       this.submit();
-    else {
+    } else {
       console.log("let's edit!");
       newState.viewMode = true;   // force viewing
     }
     newState.changeMode = !changeMode;  // toggle mode
     this.setState (newState);
   };
-  submit = () => {   // activated by submit button
+  submit = () => {   // Used by change function
     var newState = Object.assign({},this.state);
     newState.changeMode = false;
+    const isIpAddr = this.state.ipAddr;
+
     newState.wasIpAddr = newState.ipAddr;
     const hostKey = this.props.hostKey;
-    const isIpAddr = this.state.ipAddr;
     const wasIpAddr = this.state.wasIpAddr;
+
     var tran = {
       action: "CHANGE-NETADDR",
       hostKey: hostKey,
