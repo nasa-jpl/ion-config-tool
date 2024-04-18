@@ -187,6 +187,7 @@ export default class IonModel  extends React.Component {
     const hosts = this.props.hosts;                   // host objects
     const ipaddrs = this.props.ipaddrs;               // ipaddr objects
     const isGoodName = this.props.isGoodName;         // pass through
+    const isValidIPAddr = this.props.isValidIPAddr    // pass through
     const makeOptElems = this.props.makeOptionElems;  // pass through
     const dispatch = this.props.dispatch;             // pass through
     return (
@@ -197,6 +198,7 @@ export default class IonModel  extends React.Component {
         ipaddrs={ipaddrs}              // user model - ipaddrs
 
         isGoodName={isGoodName}        // verify name string is valid
+        isValidIPAddr={isValidIPAddr}  // verify IP address is valid
         makeOptionElems={makeOptElems} // static options building func
 
         dispatch={dispatch}            // dispatch func for new hosts/ipaddrs
@@ -1426,6 +1428,7 @@ IonModel.propTypes = {
   isGoodName: PropTypes.func.isRequired,      // func to validate name
   isGoodNodeKey: PropTypes.func.isRequired,   // func to validate nodeKey not in use
   isGoodNodeNum: PropTypes.func.isRequired,   // func to validate node num not in use
+  isValidIPAddr: PropTypes.func.isRequired,     // func to validate IP address
   checkModel: PropTypes.func.isRequired,      // func to check the entire model
   getValues:  PropTypes.func.isRequired,      // get command value list
   makeOptionElems: PropTypes.func.isRequired, // func to provide options

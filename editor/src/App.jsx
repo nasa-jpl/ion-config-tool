@@ -607,6 +607,7 @@ export default class App extends React.Component {
     const usedNodeKey = this.usedNodeKey.bind(this);
     const isGoodNodeKey = this.isGoodNodeKey.bind(this);
     const isGoodNodeNum = this.isGoodNodeNum.bind(this);
+    const isValidIPAddr = this.isValidIPAddr.bind(this);
     const getValues = this.getValues.bind(this);
     const makeOptElems = this.makeOptionElems.bind(this);
     const makeTypeOpts = this.makeTypeOptions.bind(this); 
@@ -633,6 +634,7 @@ export default class App extends React.Component {
         usedNodeKey={usedNodeKey}         // used as a node key?
         isGoodNodeKey={isGoodNodeKey}     // verify nodeKey not in use
         isGoodNodeNum={isGoodNodeNum}     // verify node num not in use
+        isValidIPAddr={isValidIPAddr}        // verify IP address is valid
         getNodeKey={getNodeKey}           // find nodeKey from cmdKey
         getValues={getValues}             // get command value list
         makeOptionElems={makeOptElems}    // options selector

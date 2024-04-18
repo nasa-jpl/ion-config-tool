@@ -46,7 +46,8 @@ export default class HostList  extends React.Component {
     const desc = host.desc;
     const linefeed = host.linefeed;
 
-    const isGoodName = this.props.isGoodName;         // pass throufh
+    const isGoodName = this.props.isGoodName;         // pass through
+    const isValidIPAddr = this.props.isValidIPAddr;   // pass through
     const makeOptElems = this.props.makeOptionElems;  // pass through
     const dispatch = this.props.dispatch;             // pass through
 
@@ -61,6 +62,7 @@ export default class HostList  extends React.Component {
         ipaddrs={ipaddrs}              // ipaddr objects list
 
         isGoodName={isGoodName}        // general name validation
+        isValidIPAddr={isValidIPAddr}  // IP address validation
         makeOptionElems={makeOptElems} // static options building func
 
         dispatch={dispatch}            // dispatch func for host transactions
@@ -205,6 +207,7 @@ HostList.propTypes = {
   ipaddrs: PropTypes.array.isRequired,        // ipaddr objects of the ION network
 
   isGoodName: PropTypes.func.isRequired,      // func to validate name
+  isValidIPAddr: PropTypes.func.isRequired,   // func to validate IP address
   makeOptionElems: PropTypes.func.isRequired, // func to provide options
 
   dispatch: PropTypes.func.isRequired
