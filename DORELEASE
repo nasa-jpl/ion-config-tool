@@ -15,3 +15,6 @@ like so:
 
 > ./dorelease.sh
 
+After the script runs, be sure to commit the files that were changed by the release
+process to the master branch.
+
