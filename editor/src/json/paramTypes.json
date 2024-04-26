@@ -2694,7 +2694,7 @@
     "valType":  "number",
     "units":  "words",
     "showDefault": true,
-    "defaultValue" : 250000
+    "defaultValue" : 50000000
   },
   "ionconfig_logKey_p0" : {
     "id" :  "ionconfig_logKey_p0",
@@ -2743,7 +2743,7 @@
     "valType":  "number",
     "units":  "bytes",
     "showDefault": true,
-    "defaultValue" : 0
+    "defaultValue" : 10000000
   },
   "ionconfig_wmAddress_p0" : {
     "id" :  "ionconfig_wmAddress_p0",
@@ -2773,7 +2773,7 @@
     "valType":  "number",
     "units":  "bytes",
     "showDefault": true,
-    "defaultValue" : 5000000
+    "defaultValue" : 50000000
   },
   "bssprc_initialize_p0" : {
     "id" :  "bssprc_initialize_p0",
