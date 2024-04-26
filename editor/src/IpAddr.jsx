@@ -30,8 +30,8 @@ export default class IpAddr  extends React.Component {
     return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
   }
   // check if a new ipAddr is valid
-  isGoodIpAddr(ipAddr) {
-    console.log("isGoodIpAddr ?? " + ipAddr);
+  isDuplicateIpAddr(ipAddr) {
+    console.log("isDuplicateIpAddr ?? " + ipAddr);
     const ipaddrs = this.props.ipaddrs;
     for (var key in ipaddrs) {
       const addr = ipaddrs[key];
@@ -77,6 +77,8 @@ export default class IpAddr  extends React.Component {
     let msg = this.state.nameMsg;
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
 
+    this.state.nameMsg = '';
+    
     const form =
       <FormControl readOnly={read} bsSize="sm" type="text" value={ipAddr} spellCheck="false" onChange={this.handleChange.bind(null)} />;
 
@@ -102,8 +104,17 @@ export default class IpAddr  extends React.Component {
   change = () => {   // activated by Change/Submit button
     var newState = Object.assign({},this.state);
     const changeMode = this.state.changeMode;
-    if (changeMode)
+    const ipAddr = this.state.ipAddr;
+    if (changeMode) {
+      if (!this.props.isValidIPAddr(ipAddr)) {
+        newState.nameMsg = "IP Address or DNS Name is mal-formed";
+        this.setState(newState);
+
+        //Quick exit
+        return;
+      }
       this.submit();
+    }
     else {
       console.log("let's edit!");
       newState.viewMode = true;   // force viewing
@@ -149,10 +160,15 @@ export default class IpAddr  extends React.Component {
     const hostKey = this.props.hostKey;
     const ipAddr = this.state.ipAddr;
     let msg = "";
-    if (!this.props.isGoodName(ipAddr) )
-      msg = "ipAddr name is mal-formed.";
-    if (!this.isGoodIpAddr(ipAddr) )
-      msg = "ipAddr already used." ;
+    if (!this.props.isValidIPAddr(ipAddr) ) {
+      newState.nameMsg = "IP Address or DNS Name is mal-formed";
+      this.setState (newState);
+
+      //Quick exit
+      return;
+    }
+    if (!this.isDuplicateIpAddr(ipAddr) )
+      msg = "IP Address is already used." ;
     if (msg === "") {  // all good!
       const tran = {
         action: "NEW-IPADDR",
@@ -186,6 +202,7 @@ IpAddr.propTypes = {
   ipaddrs: PropTypes.array.isRequired,       // user model - ipaddr objects 
 
   isGoodName: PropTypes.func.isRequired,     // func to validate name
+  isValidIPAddr: PropTypes.func.isRequired,  // func to validate IP address
 
   dispatch: PropTypes.func.isRequired,
 }

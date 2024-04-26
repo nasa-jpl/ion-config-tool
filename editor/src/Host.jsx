@@ -45,20 +45,22 @@ export default class Host  extends React.Component {
     console.log("host: " + JSON.stringify(host));
 
     const isGoodName = this.props.isGoodName;
+    const isValidIPAddr = this.props.isValidIPAddr;
     const dispatch = this.props.dispatch;  // make sure dispatch remembers "this"
 
     return (
       <IpAddr
-        key={ipAddrKey}             // unique id
-        ipAddrKey={ipAddrKey}       // ipAddr Key
-        hostKey={hostKey}           // host name
-        ipAddr={ipAddr}             // ip addr
-        addMode={addMode}           // true: add  false: change/delete
+        key={ipAddrKey}               // unique id
+        ipAddrKey={ipAddrKey}         // ipAddr Key
+        hostKey={hostKey}             // host name
+        ipAddr={ipAddr}               // ip addr
+        addMode={addMode}             // true: add  false: change/delete
 
-        host={host}                 // host object
-        ipaddrs={ipaddrs}           // ipaddr objects
+        host={host}                   // host object
+        ipaddrs={ipaddrs}             // ipaddr objects
 
-        isGoodName={isGoodName}     // verify name string is valid
+        isGoodName={isGoodName}       // verify name string is valid
+        isValidIPAddr={isValidIPAddr} // validate IP address
 
         dispatch={dispatch}         // dispatch func for new hosts
       />
@@ -304,6 +306,7 @@ Host.propTypes = {
   ipaddrs: PropTypes.array.isRequired,       // user model - ipaddr objects 
 
   isGoodName: PropTypes.func.isRequired,     // func to validate name
+  isValidIPAddr: PropTypes.func.isRequired,  // func to validate IP address
   makeOptionElems: PropTypes.func.isRequired,
 
   dispatch: PropTypes.func.isRequired,
