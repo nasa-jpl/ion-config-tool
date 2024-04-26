@@ -30,7 +30,13 @@ export default class NetNodeList  extends React.Component {
     return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
   }
   makeNetNodeElem(nodeKey) {
-    const node = this.props.netNodes[nodeKey];
+    let node = {};
+    node = this.props.netNodes[nodeKey];
+
+    // Check if nodeType is set and default to "ion" if not.
+    if (node.nodeType === "") {
+      node.nodeType = "ion";
+    }
     console.log("***makeNetNodeElem" + JSON.stringify(node) );
     const makeOptElems = this.props.makeOptionElems;
     const makeNetHostOptions = this.props.makeNetHostOptions;

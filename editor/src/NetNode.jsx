@@ -116,7 +116,7 @@ export default class NetNode  extends React.Component {
     nodeElems.push(nodeHostElem);
     const typeElem = this.makeNodeElem("nodeType","text",this.state.nodeType,"Net Node Type",1,false,"");
     nodeElems.push(typeElem);
-    const endElem = this.makeNodeElem("endpointID","text",this.state.endpointID,"Endpoint ID",1,false,"");
+    const endElem = this.makeNodeElem("endpointID","text",this.state.endpointID,"Net Node Number",1,false,"");
     nodeElems.push(endElem);
     // read-only services list
     let servList = this.state.services.join(',');
@@ -158,7 +158,7 @@ export default class NetNode  extends React.Component {
     nodeElems.push(hostElem);
     const typeElem = this.makeNodeElem("nodeType","text",this.state.nodeType,"Net Node Type",1,true,"");
     nodeElems.push(typeElem);
-    const endElem = this.makeNodeElem("endpointID","text",this.state.endpointID,"Endpoint ID",1,true,"");
+    const endElem = this.makeNodeElem("endpointID","text",this.state.endpointID,"Net Node Number",1,true,"");
     nodeElems.push(endElem);
     let servList = this.state.services.join(',');
     const servElem = this.makeNodeElem("services","text",servList,"ION Services",2,true,"");
@@ -307,3 +307,4 @@ NetNode.propTypes = {
   makeNetHostOptions: PropTypes.func.isRequired,// func to build hostkey options
   dispatch: PropTypes.func.isRequired
 }
+
