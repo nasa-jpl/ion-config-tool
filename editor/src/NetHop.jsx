@@ -18,7 +18,6 @@ export default class NetHop  extends React.Component {
   constructor (props) {
     super(props);
     // defaults if not specified
-    var portNumDefault = 1113;
     var maxRateDefault = 2500000;
     // props
     const hopKey = this.props.hopKey;
@@ -27,7 +26,7 @@ export default class NetHop  extends React.Component {
     const toNode = this.props.toNode;
     const bpLayer = this.props.bpLayer;
     const ltpLayer = this.props.ltpLayer;
-    const portNum = this.props.portNum === undefined ? portNumDefault : this.props.portNum;
+    const portNum = this.props.portNum;
     const maxRate = this.props.maxRate === undefined ||
                     this.props.maxRate === 0 ? maxRateDefault : this.props.maxRate;
     const symmetric = this.props.symmetric;
@@ -334,6 +333,24 @@ export default class NetHop  extends React.Component {
     var newState = Object.assign({},this.state);
     console.log(">>> param old value = " + newState[prop]);
     newState[prop] = e.target.value;
+
+    // Set a default port number based on protocol selection
+    // User can override if desired
+    if (prop === "bpLayer") {
+      switch(newState[prop]) {
+      case "tcp":
+      case "stcp":
+      case "dccp":
+        newState["portNum"] = 4556;
+        break;
+      case "ltp":
+      case "udp":
+        newState["portNum"] = 1113;
+        break;
+      default:
+        break;
+      }
+    }
     this.setState (newState);
     e.preventDefault();
   };
