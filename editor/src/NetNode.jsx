@@ -93,7 +93,7 @@ export default class NetNode  extends React.Component {
         </Col>
       </Row>;
     nodeElems.push(head);
-    const keyElem = this.makeNodeElem("","text",this.state.nodeKey,"Net Node Name",1,true,"");
+    const keyElem = this.makeNodeElem("","text",this.state.nodeKey,"Node Name",1,true,"");
     nodeElems.push(keyElem);
     const descElem = this.makeNodeElem("desc","text",this.state.desc,"Description",2,false,"");
     nodeElems.push(descElem);
@@ -112,11 +112,11 @@ export default class NetNode  extends React.Component {
     opts = this.props.makeNetHostOptions();
     selform  = this.makeSelectForm(value,handler,opts);
     showform = this.makeShowForm(value);
-    const nodeHostElem = this.makeSelectElem(value,'Node Host Name',showform,selform);
+    const nodeHostElem = this.makeSelectElem(value,'Host Name',showform,selform);
     nodeElems.push(nodeHostElem);
-    const typeElem = this.makeNodeElem("nodeType","text",this.state.nodeType,"Net Node Type",1,false,"");
+    const typeElem = this.makeNodeElem("nodeType","text",this.state.nodeType,"Node Type",1,false,"");
     nodeElems.push(typeElem);
-    const endElem = this.makeNodeElem("endpointID","text",this.state.endpointID,"Net Node Number",1,false,"");
+    const endElem = this.makeNodeElem("endpointID","text",this.state.endpointID,"Node Number",1,false,"");
     nodeElems.push(endElem);
     // read-only services list
     let servList = this.state.services.join(',');
@@ -150,15 +150,15 @@ export default class NetNode  extends React.Component {
     var nodeElems = [];
     const head  = <Row key="head"><Col sm={2}> <Label bsSize="lg" bsStyle="default">Net Node Viewer</Label></Col></Row>;
     nodeElems.push(head);
-    const keyElem = this.makeNodeElem("","text",this.state.nodeKey,"Net Node Name",1,true,"");
+    const keyElem = this.makeNodeElem("","text",this.state.nodeKey,"Node Name",1,true,"");
     nodeElems.push(keyElem);
     const descElem = this.makeNodeElem("desc","text",this.state.desc,"Description",2,true,"");
     nodeElems.push(descElem);
-    const hostElem = this.makeNodeElem("nodeHost","text",this.state.nodeHost,"Net Host Name",1,true,"");
+    const hostElem = this.makeNodeElem("nodeHost","text",this.state.nodeHost,"Host Name",1,true,"");
     nodeElems.push(hostElem);
-    const typeElem = this.makeNodeElem("nodeType","text",this.state.nodeType,"Net Node Type",1,true,"");
+    const typeElem = this.makeNodeElem("nodeType","text",this.state.nodeType,"Node Type",1,true,"");
     nodeElems.push(typeElem);
-    const endElem = this.makeNodeElem("endpointID","text",this.state.endpointID,"Net Node Number",1,true,"");
+    const endElem = this.makeNodeElem("endpointID","text",this.state.endpointID,"Node Number",1,true,"");
     nodeElems.push(endElem);
     let servList = this.state.services.join(',');
     const servElem = this.makeNodeElem("services","text",servList,"ION Services",2,true,"");

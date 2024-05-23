@@ -101,7 +101,7 @@ export default class NetHost  extends React.Component {
         </Col>
       </Row>;
     hostElems.push(head);
-    const keyElem = this.makeHostElem("","text",this.state.hostKey,"Net Host Name",1,true,"");
+    const keyElem = this.makeHostElem("","text",this.state.hostKey,"Host Name",1,true,"");
     hostElems.push(keyElem);
     const descElem = this.makeHostElem("desc","text",this.state.desc,"Description",2,false,"");
     hostElems.push(descElem);
@@ -136,7 +136,7 @@ export default class NetHost  extends React.Component {
     var hostElems = [];
     const head  = <Row key="head"><Col sm={2}> <Label bsSize="lg" bsStyle="default">Net Host Viewer</Label></Col></Row>;
     hostElems.push(head);
-    const keyElem = this.makeHostElem("","text",this.state.hostKey,"Net Host Name",1,true,"");
+    const keyElem = this.makeHostElem("","text",this.state.hostKey,"Host Name",1,true,"");
     hostElems.push(keyElem);
     const descElem = this.makeHostElem("desc","text",this.state.desc,"Description",2,true,"");
     hostElems.push(descElem);

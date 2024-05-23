@@ -112,7 +112,7 @@ export default class NetHop  extends React.Component {
         </Col>
       </Row>;
     hopElems.push(head);
-    const keyElem = this.makeHopElem("","text",this.state.hopKey,"Net Hop Name",2,true,"");
+    const keyElem = this.makeHopElem("","text",this.state.hopKey,"Hop Name",2,true,"");
     hopElems.push(keyElem);
     const descElem = this.makeHopElem("desc","text",this.state.desc,"Description",3,false,"");
     hopElems.push(descElem);
