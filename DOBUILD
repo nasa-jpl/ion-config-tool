@@ -26,7 +26,11 @@ description in DORELEASE.
    The latest version of the json configuration files in found in ./editor/src/json.
    Further description of the configuration files is at ./editor/src/json/README and ./editor/src/json/docs/*.
 
-3) Build the dictionary docs.
+3) If the intent is to do a release, edit release.json to reflect the proper 
+   versions of ION and ION Config. For ION Config it will be the version that
+   is meant for test (pre-release) and/or release.
+
+4) Build the dictionary docs.
 
    These docs are intended for the end user.  The full dictionary defines the full
    suite of ION config files and ION commands supported by IonConfig.  The delta
@@ -43,15 +47,14 @@ description in DORELEASE.
    For more information see ./dict/README, ./dict/PROCEDURE, ./dict/LISTING and
    ./dict/docs/README.
 
-4) Update and re-build the IonConfig Editor (the web browser tool).
+5) Update and re-build the IonConfig Editor (the web browser tool).
 
    The source code is in ./editor/src.  The final "executable" is found in ./build/index.html.
 
    The executable index.html & support files are built with the script ./editor/make.sh.
 
-   For more information, see ./editor/README and ./editor/README.
 
-5) Update the IonConfig Editor Manual.
+6) Update the IonConfig Editor Manual.
 
    The IonConfig Editor manual is an html document with supporting png files. 
    The basic functions do not change much, so the manual does not change often.
@@ -60,7 +63,7 @@ description in DORELEASE.
 
    For more information, see ./manual/README.
 
-6) Update and re-build the IonConfig command-line tools.
+7) Update and re-build the IonConfig command-line tools.
 
    The source code is in ./cli/src.  The final executables are put to ./cli/bin.
 
