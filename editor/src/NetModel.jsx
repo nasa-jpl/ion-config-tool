@@ -525,7 +525,9 @@ export default class NetModel  extends React.Component {
       } else 
       if (isStandardProtocol(bpLayer)) {  // the other protocols are port-based
         var ports = this.getHostPorts(toHostKey,hosts,ipaddrs,commands);
-        var nextPort = 4556;
+
+        // If the user has specified a port number, use it. Otherwise, default
+        var nextPort = netHop.portNum === "" ? 4556 : netHop.portNum;
         while (ports.includes(nextPort))
           nextPort++;
         vals = [toAddr,nextPort,cli];
@@ -547,7 +549,9 @@ export default class NetModel  extends React.Component {
         // if port not specified, use default
         if (netHop.portNum === undefined || netHop.portNum === "") {
           ports = this.getHostPorts(toHostKey,hosts,ipaddrs,commands);
-          nextPort = 1113;
+
+          // If the user has specified a port number, use it. Otherwise, default
+          nextPort =  netHop.portNum === "" ? 1113 : netHop.portNum;
           while (ports.includes(nextPort))
             nextPort++;
           netHop.portNum = nextPort;
