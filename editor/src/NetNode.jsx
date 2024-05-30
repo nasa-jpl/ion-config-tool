@@ -116,7 +116,10 @@ export default class NetNode  extends React.Component {
     nodeElems.push(nodeHostElem);
     const typeElem = this.makeNodeElem("nodeType","text",this.state.nodeType,"Node Type",1,false,"");
     nodeElems.push(typeElem);
-    const endElem = this.makeNodeElem("endpointID","text",this.state.endpointID,"Node Number",1,false,"");
+
+    // Node Number is read-only if Node Type is *not* "ion"
+    let read_only = this.state.nodeType !== "ion";
+    const endElem = this.makeNodeElem("endpointID","text",this.state.endpointID,"Node Number",1,read_only,"");
     nodeElems.push(endElem);
     // read-only services list
     let servList = this.state.services.join(',');
@@ -290,6 +293,12 @@ export default class NetNode  extends React.Component {
     newState[prop] = e.target.value;
     if (prop === "aService")
       this.updateServices(newState);
+
+    // If anything but "ion" is specified in Node Type, blank out the 
+    // Node Number field because a default will be used during ION
+    // model generation, not whatever is in Node Number
+    if (prop === "nodeType" && e.target.value !== "ion")
+      newState["endpointID"] = "";
     this.setState (newState);
     e.preventDefault();
   };
