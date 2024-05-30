@@ -177,7 +177,8 @@ export default class NetModel  extends React.Component {
     var commands = {};
     var hosts = {};
     var ipaddrs = {};
-    var clones = {}
+    var clones = {};
+    var myParams = paramTypes;
 
     // default values
     const ionName   = this.state.name + "-ion";
@@ -314,10 +315,28 @@ export default class NetModel  extends React.Component {
       };
       nodes[nodeKey].configKeys.push(configName);
       var ionconfig = configName;
-      // build ionconfig configFlags cmd, use default of 1
-      var vals = ["1"];
-      var cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ionconfig","configFlags",vals);
-      this.addCommandKey(configs,configName,cmdKey);
+
+      // The array of ionconfig variables to assume default values
+      var ionconfig_parms = ["configFlags", "sdrWmSize", "heapWords", "wmSize"];
+      var default_val = "";
+      var vals = [];
+      var cmdKey = "";
+
+      // Loop thru the list of ionconfig variables and build the variable names for default values
+      for (i in ionconfig_parms) {
+
+        // Variable string to evaluate
+        let varstr = "myParams.ionconfig_"+ionconfig_parms[i]+"_p0.defaultValue;";
+
+        // Grab the default value and place it in the vals array
+        default_val = eval(varstr);
+        vals = [default_val];
+
+        // Make and add the ION command
+        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ionconfig",ionconfig_parms[i],vals);
+        this.addCommandKey(configs,configName,cmdKey);
+      }
+
       // build ionrc 
       configName = nodeKey + ".ionrc";
       configs[configName] = {
