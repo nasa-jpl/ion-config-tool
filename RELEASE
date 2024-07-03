@@ -19,7 +19,7 @@ ionConfigVersion: the release version of the IonConfig tools.  There will normal
   for bug fixes or new features.  A dictionary is built per IonConfig tool release, 
   since the dictionary could also have bug fixes unrelated to changes to ION.
 
-ionVersion: the release version of ION via SourceForge.
+ionVersion: the release version of ION via Git Hub (https://github.com/nasa-jpl/ION-DTN).
 
 seqNum: The IonConfig tools use a simple integer to correspond to the ION version.
   This makes it easier to map a specific command type to ION versions.  The IonConfig
