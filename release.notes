@@ -1,5 +1,57 @@
 Release Notes 4.8.2
 
+WHAT'S NEW:
+- The nested areas for the ION Model GUI are color coded to make easier
+  for users to see what part of the model they are working with.
+
+- Better validation of IP address/hostnames. The application will
+  recognize 'localhost' as a valid hostname. Raw IP addresses
+  are checked to ensure that individual octets are in the range
+  0-255 and hostnames such as 'www.example.com' are valid.
+
+- Uses have the option to delete an ION Model after it has been
+  built. This allows a user to not have to use the refresh
+  button in the browser. This means that if a user is building
+  and rebuilding an ION Model from a Net Model the ION Model
+  can be deleted and rebuilt. Previously the only way to delete
+  an ION Model was to use the browsers reload button which results
+  in both the ION Model and Net Model being deleted. If a user
+  attempts to build an ION Model that already exists, the user
+  is prompted to use the delete button for the ION Model before
+  rebuilding.
+
+- In the Net Model, if a user specifies 'ion' (it is defaulted to this)
+  in the Node Type field the Node Number field is no longer
+  editable since the code knows which Node Number to assign and 
+  does it automatically. If a user changes the Node Type field
+  to something other than 'ion' arbitrary Node Numbers can be
+  assigned to the node.
+
+- Port numbers in the Net Model are defaulted for Net Hops depending 
+  on the protocol selected. For Licklider Transmission Protocol (LTP)
+  over UDP, the default is 1113. For TCP the default is 4556.
+
+- configFlags is now defaulted to 1 instead of 13 to favor throughput
+  rate over reversibility.
+
+- For the command line interface (CLI) tools, watch characters can
+  be set via the command line. See the ionconfig.js script located
+  in cli/bin directory in the installed version for details.
+
+- Max Transmission Rate is defaulted to 25 Mbytes/sec for contact
+  graphs.
+
+KNOWN ISSUE:
+- As of Release 4.8.2, the application does not support assigning
+  multiple IP addresses to a single Net Hop. It does support
+  assigning multiple nodes, but the IP addresses in the ION
+  Model built from that Net Model will show 'undefined' for IP
+  addresses if there is more than one. The workaround is to
+  manually edit the commands that contain 'undefined' in the ION
+  Model to the correct IP address before generating ION config files. 
+  Multiple IP addresses for one Net Hop will be supported in a future 
+  release.
+
 Release Notes 4.8
 
 - Revised the generation of the ION Model from the Net Model to
