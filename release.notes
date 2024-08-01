@@ -21,11 +21,11 @@ WHAT'S NEW:
   rebuilding.
 
 - In the Net Model, if a user specifies 'ion' (it is defaulted to this)
-  in the Node Type field the Node Number field is no longer
-  editable since the code knows which Node Number to assign and 
-  does it automatically. If a user changes the Node Type field
-  to something other than 'ion' arbitrary Node Numbers can be
-  assigned to the node.
+  in the Node Type field the Node Number field is editable. This
+  allows arbitrary node numbers to be assigned to nodes. 
+  If a user changes the Node Type field to something other than 'ion'
+  the node number is assigned automatically upon ION model 
+  creation.
 
 - Port numbers in the Net Model are defaulted for Net Hops depending 
   on the protocol selected. For Licklider Transmission Protocol (LTP)
