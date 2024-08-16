@@ -37,6 +37,8 @@ export default class NetHopList  extends React.Component {
     const makeOptions = this.props.makeTypeOptions;
     const makeOptElems = this.props.makeOptionElems;
     const makeNetNodeOptions = this.props.makeNetNodeOptions;
+    const makeNetIPOptions = this.props.makeNetIPOptions;
+    const getDefaultIPforNode = this.props.getDefaultIPforNode;
     const dispatch = this.props.dispatch;  // pass dispatch through
 
     return (
@@ -45,7 +47,9 @@ export default class NetHopList  extends React.Component {
         hopKey={hopKey}               // state
         desc={hop.hopDesc}            // state
         fromNode={hop.fromNode}       // state
+        fromIP={hop.fromIP}           // state
         toNode={hop.toNode}           // state
+        toIP={hop.toIP}               // state
         bpLayer={hop.bpLayer}         // state
         ltpLayer={hop.ltpLayer}       // state
         portNum={hop.portNum}         // state
@@ -56,6 +60,8 @@ export default class NetHopList  extends React.Component {
         makeOptionElems={makeOptElems}
 
         makeNetNodeOptions = {makeNetNodeOptions}
+        makeNetIPOptions = {makeNetIPOptions}
+        getDefaultIPforNode = {getDefaultIPforNode}
         dispatch={dispatch}           // dispatch func for hop updates
       />
     );  
@@ -193,13 +199,15 @@ export default class NetHopList  extends React.Component {
 }
 
 NetHopList.propTypes = {
-  name:  PropTypes.string.isRequired,          // user model - model name
-  netHops: PropTypes.object.isRequired,        // hop dict
+  name:  PropTypes.string.isRequired,            // user model - model name
+  netHops: PropTypes.object.isRequired,          // hop dict
 
-  isGoodName: PropTypes.func.isRequired,       // func to validate name
-  isGoodNetHopKey: PropTypes.func.isRequired,  // func to validate hopKey not in use
-  makeTypeOptions: PropTypes.func.isRequired,  // func to get dynamic (cloned) options
-  makeOptionElems: PropTypes.func.isRequired,  // func to get static options
-  makeNetNodeOptions: PropTypes.func.isRequired,// func to build nodekey options
+  isGoodName: PropTypes.func.isRequired,         // func to validate name
+  isGoodNetHopKey: PropTypes.func.isRequired,    // func to validate hopKey not in use
+  makeTypeOptions: PropTypes.func.isRequired,    // func to get dynamic (cloned) options
+  makeOptionElems: PropTypes.func.isRequired,    // func to get static options
+  makeNetNodeOptions: PropTypes.func.isRequired, // func to build nodekey options
+  makeNetIPOptions: PropTypes.func.isRequired,   // func to build IP address options
+  getDefaultIPforNode: PropTypes.func.isRequired,// func to get default IP for given node
   dispatch: PropTypes.func.isRequired,
 }

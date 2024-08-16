@@ -93,7 +93,9 @@ export default class NetModel  extends React.Component {
         hopName: hopKey,
         hopDesc: hopObj.hopDesc,
         fromNode: hopObj.fromNode,
+        fromIP: hopObj.fromIP,
         toNode: hopObj.toNode,
+        toIP: hopObj.toIP,
         bpLayer: hopObj.bpLayer,
         ltpLayer: hopObj.ltpLayer,
         portNum: hopObj.portNum,
@@ -884,7 +886,7 @@ export default class NetModel  extends React.Component {
     }
     console.log("host: " + hostKey + " ports: " + ports.toString() );
     return ports;
-  } 
+  };
   // find an Induct cloneValue based on nodeKey & type (bpLayer)
   getNodeInduct(cloneVals,nodeKey,bpLayer) {
     var cloneType = bpLayer + "Induct";
@@ -897,7 +899,7 @@ export default class NetModel  extends React.Component {
     }
     console.log ("!!! failed to get cloneVal for nodeKey: " + nodeKey + " cloneType: " + cloneType);
     return "";
-  }
+  };
   // find a Link cloneValue based on nodeKey & type (ltpLayer)
   getNodeLink(cloneVals,nodeKey,ltpLayer) {
     var cloneType = ltpLayer + "Link";
@@ -910,7 +912,7 @@ export default class NetModel  extends React.Component {
     }
     console.log ("!!! failed to get cloneVal for nodeKey: " + nodeKey + " cloneType: " + cloneType);
     return "";
-  }
+  };
   // find an Outduct cloneValue based on nodeKey & toHostKey & type (bpLayer)
   getNodeOutduct(cloneVals,nodeKey,toAddr,bpLayer) {
     var cloneType = bpLayer + "Outduct";
@@ -927,7 +929,18 @@ export default class NetModel  extends React.Component {
     console.log ("!!! failed to get cloneVal for nodeKey: " + nodeKey 
                  + " toAddr: " + toAddr + " cloneType: " + cloneType) ;
     return "";
-  }
+  };
+  getDefaultIPforNode(netNode) {
+    const netNodes = this.props.netNodes;
+    const netHosts = this.props.netHosts;
+    if (netNode === "")
+      return "";
+
+    var netNedHost = netNodes[netNode].nodeHost;
+    var netHostIPs = netHosts[netNode].ipAddrs;
+
+    return netHostIPs[0];
+  };
   makeNetHostOptions() {
     const netHosts = this.props.netHosts;
     console.log("makeNetHostOptions " + JSON.stringify(netHosts));
@@ -943,7 +956,7 @@ export default class NetModel  extends React.Component {
     console.log(JSON.stringify(vals))
     var optionItems = this.props.mapOptionElems(vals);
     return optionItems;
-  }
+  };
   makeNetNodeOptions() {
     const netNodes = this.props.netNodes;
     console.log("makeNetNodeOptions " + JSON.stringify(netNodes));
@@ -959,7 +972,28 @@ export default class NetModel  extends React.Component {
     console.log(JSON.stringify(vals))
     var optionItems = this.props.mapOptionElems(vals);
     return optionItems;
-  }
+  };
+  makeNetIPOptions(netNode) {
+    const netNodes = this.props.netNodes;
+    const netHosts = this.props.netHosts;
+    let vals = [];
+    let noneVal = {"value" : '??', "label" : 'None selected'};
+    vals.push(noneVal);
+
+    // If node not yet selected, nothing to build
+    if (netNode !== "") {
+      var netNodeHost = netNodes[netNode].nodeHost;
+      var netHostIPs = netHosts[netNodeHost].ipAddrs;
+
+      for (var idx in netHostIPs) {
+        let value = netHostIPs[idx];
+        let label = netNode;
+        vals.push({"value": value, "label": label});
+      }
+    }
+    var optionItems = this.props.mapOptionElems(vals);
+    return optionItems;
+  };
   makeAlertElem(msg) {
     return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
   };
@@ -1033,6 +1067,8 @@ export default class NetModel  extends React.Component {
     const makeOptions = this.props.makeTypeOptions;
     const makeOptElems = this.props.makeOptionElems;
     const makeNetNodeOptions = this.makeNetNodeOptions.bind(this);
+    const makeNetIPOptions = this.makeNetIPOptions.bind(this);
+    const getDefaultIPforNode = this.getDefaultIPforNode.bind(this);
 
     const dispatch = this.props.dispatch;      // make sure dispatch remembers "this"
 
@@ -1047,6 +1083,8 @@ export default class NetModel  extends React.Component {
         makeTypeOptions={makeOptions} 
         makeOptionElems={makeOptElems}
         makeNetNodeOptions = {makeNetNodeOptions} // make options list of node keys
+        makeNetIPOptions= {makeNetIPOptions}      // make options list of IP addresses
+        getDefaultIPforNode= {getDefaultIPforNode} // return first IP address for net node 
         dispatch={dispatch}                       // dispatch func for new hosts
       />
     );

@@ -1507,7 +1507,9 @@ export default class App extends React.Component {
           "id" : hopKey,
           "hopDesc": transaction.desc,
           "toNode": transaction.toNode,
+          "toIP" : transaction.toIP,
           "fromNode": transaction.fromNode,
+          "fromIP": transaction.fromIP,
           "bpLayer" : transaction.bpLayer,
           "ltpLayer" : transaction.ltpLayer,
           "portNum" : transaction.portNum,
@@ -1737,7 +1739,7 @@ export default class App extends React.Component {
     return (
       <div>
         <Navbar>
-          <h3>ION Configuration Editor  4.8.2b6</h3>
+          <h3>ION Configuration Editor  4.8.3b0</h3>
         </Navbar>
         <Grid fluid>
           {modelBtnsElem}
