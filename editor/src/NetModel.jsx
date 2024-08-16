@@ -936,7 +936,6 @@ export default class NetModel  extends React.Component {
     if (netNode === "")
       return "";
 
-    var netNedHost = netNodes[netNode].nodeHost;
     var netHostIPs = netHosts[netNode].ipAddrs;
 
     return netHostIPs[0];
