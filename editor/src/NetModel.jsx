@@ -140,6 +140,24 @@ export default class NetModel  extends React.Component {
       var toNode = netNodes[netHop.toNode];
       if (!toNode) 
         errors.push("Invalid To Node Name for Net Hop " + hopKey + ".");
+
+      var toIP = netHop.toIP;
+      var fromIP = netHop.fromIP;
+
+      for (var netHostKey in netHosts) {
+        var netHost = netHosts[netHostKey];
+        if (netHostKey === fromNode.nodeHost) {
+          if (!netHost.ipAddrs.includes(fromIP))
+            errors.push("Invalid 'From IP Addr': " + fromIP + " for Net Hop " + hopKey + ".");
+        }
+
+        if (netHostKey === toNode.nodeHost) {
+          if (!netHost.ipAddrs.includes(toIP))
+            errors.push("Invalid 'To IP Addr': " + toIP + " for Net Hop " + hopKey + ".");
+        }
+      }
+
+
       if (!netHop.bpLayer)
         errors.push("Missing BP Layer Protocol CLA for Net Hop " + hopKey + ".");
       if (netHop.bpLayer && !isStandardProtocol(netHop.bpLayer)) 
