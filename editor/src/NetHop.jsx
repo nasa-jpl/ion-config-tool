@@ -380,7 +380,8 @@ export default class NetHop  extends React.Component {
         default:
           break;
         }
-      // Change in fromNode --> change in default fromIP
+        break;
+      // Change in fromNode/toNode --> change in default fromIP/toIP
       case "fromNode":
         var defaultIP = this.props.getDefaultIPforNode(newState[prop]);
         newState["fromIP"] = defaultIP;

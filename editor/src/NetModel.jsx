@@ -526,12 +526,16 @@ export default class NetModel  extends React.Component {
       netHop = netHops[hKey];
       oneWays[hKey] = Object.assign({},netHop);
       if (netHop.symmetric) {  // symmetric implies a reverse hop also
+        // append -2 to key to indicate reverse hop
         var newKey = hKey + "-2";
         oneWays[newKey] = Object.assign({},netHop);
         var newWay = oneWays[newKey];
         newWay.id = newKey;
+        // switch from --> to and to --> from for reverse hop
         newWay.fromNode = netHop.toNode;
+        newWay.fromIP = netHop.toIP;
         newWay.toNode = netHop.fromNode;
+        newWay.toIP = netHop.fromIP;
       }
     };
     for (hKey in oneWays )
@@ -552,10 +556,7 @@ export default class NetModel  extends React.Component {
       var cli = bpLayer + "cli";
       var toNodeNum = toNode.ionNodeNum;
       var toHostKey = toNode.hostKey;
-      var toAddr = toHostKey;            // default, just in case
-      var toHost = netHosts[toHostKey];  // same as ion hosts
-      if (toHost.ipAddrs.length > 0)
-        toAddr = toHost.ipAddrs[0];
+      var toAddr = netHop.toIP;
       var rate = netHop.maxRate;
       var induct = "induct_" + bpLayer;
       if (bpLayer === "ltp" ||
@@ -576,10 +577,11 @@ export default class NetModel  extends React.Component {
       }
       configName = nodeKey + ".bpv7rc";
       var inKey = configName + bpLayer;
+
       if(!inductKeys.hasOwnProperty(inKey)) {
         cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc",induct,vals);
         this.addCommandKey(configs,configName,cmdKey);
-        inductKeys[inKey] = cmdKey;   // actual value not important, just know one exists
+        inductKeys[inKey] = cmdKey;   // actual value not important, just know one exists.
       }
       // build ltp links as necessary
       if (bpLayer === "ltp") {    // link candidate?
@@ -598,15 +600,17 @@ export default class NetModel  extends React.Component {
 
         var linkName  = toHostKey + ":" + netHop.portNum;
         if (netHop.ltpLayer === "udp") {
-          if (startUdpKeys.hasOwnProperty(configName) )  // already have start udp?
-            break;                                       // one is the limit
+          if (startUdpKeys.hasOwnProperty(configName) ) {  // already have start udp?
+            continue;                                      // one is the limit
+          }
           vals = [toAddr,netHop.portNum];
           cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","start_udp",vals);
           startUdpKeys[configName] = cmdKey;
         };
         if (netHop.ltpLayer === "dccp") {
-          if (startDccpKeys.hasOwnProperty(configName) )  // already have start dccp?
-            break;                                        // one is the limit
+          if (startDccpKeys.hasOwnProperty(configName) ) {  // already have start dccp?
+            continue;                                        // one is the limit
+          }
           vals = [toAddr,netHop.portNum];
           cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","start_dccp",vals);
           startDccpKeys[configName] = cmdKey;
@@ -623,6 +627,8 @@ export default class NetModel  extends React.Component {
       var fromNode = nodes[netHop.fromNode];
       nodeKey = fromNode.id;
       toNode = nodes[netHop.toNode];
+      toAddr = netHop.toIP;
+      var portNum = netHop.portNum;
       rate = netHop.maxRate;
       bpLayer = netHop.bpLayer;
       var outduct = "outduct_" + bpLayer;
@@ -634,17 +640,15 @@ export default class NetModel  extends React.Component {
       //} else if (bpLayer === "udp") {   //old udp promiscuous mode
       //  vals = ["udpclo",""]
       } else 
-      if (isStandardProtocol(bpLayer)) {   // assume valid induct name
-        var cloneVal = this.getNodeInduct(clones,toNode.id,bpLayer);
-        console.log ("???? cloneVal: " + JSON.stringify(cloneVal));
-        var inductName = cloneVal.value;
+      if (isStandardProtocol(bpLayer)) {   // assume valid toAddr and portNum
+        var outductName = toAddr + ":" + portNum;
 
         //Bit of a hack -- if the BP layer is TCP, no tcpclo in command
         //since it's been deprecated in ION versions 4 and up
         if (bpLayer === "tcp") {
-          vals = [inductName,"''",""];
+          vals = [outductName,"''",""];
         } else {
-          vals = [inductName,clo,""];
+          vals = [outductName,clo,""];
         }
       } else {                       // won't know the induct name here
         outduct = "outduct_any";     // use general format
@@ -658,7 +662,7 @@ export default class NetModel  extends React.Component {
       if (bpLayer === "ltp") {    // link candidate?
         configName = nodeKey + ".ltprc";
         toHostKey = toNode.hostKey;
-        cloneVal = this.getNodeLink(clones,toNode.id,netHop.ltpLayer);
+        var cloneVal = this.getNodeLink(clones,toNode.id,netHop.ltpLayer);
         console.log ("???? cloneVal: " + JSON.stringify(cloneVal));
         linkName = cloneVal.value;
         if (netHop.ltpLayer === "udp") {
@@ -687,12 +691,9 @@ export default class NetModel  extends React.Component {
       fromNode = nodes[netHop.fromNode];
       nodeKey = fromNode.id;
       toNode = nodes[netHop.toNode]
-      toHostKey = toNode.hostKey;
-      toAddr = toHostKey;            // default, just in case
-      toHost = netHosts[toHostKey];  // same as ion hosts
-      if (toHost.ipAddrs.length > 0)
-        toAddr = toHost.ipAddrs[0];
       toNodeNum = toNode.ionNodeNum;
+      //toHostKey = toNode.hostKey;
+      toAddr = netHop.toIP;
       rate = netHop.maxRate;
       bpLayer = netHop.bpLayer;
 
