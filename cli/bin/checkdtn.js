@@ -180,7 +180,8 @@ function extractModel (modelObj) {
   console.log("Ingesting netHops.");
   var hopList = [];
   var hopAttrs = ["hopName","hopDesc","fromNode","toNode",
-        "bpLayer","ltpLayer","maxRate","symmetric"];
+        "bpLayer","ltpLayer","maxRate","symmetric", "fromIP",
+        "toIP", "portNum"];
   if(modelObj.hasOwnProperty("netHops"))  // optional for now.
     hopList = modelObj.netHops;
   for (var hopKey in hopList) {
