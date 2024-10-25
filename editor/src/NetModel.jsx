@@ -93,7 +93,9 @@ export default class NetModel  extends React.Component {
         hopName: hopKey,
         hopDesc: hopObj.hopDesc,
         fromNode: hopObj.fromNode,
+        fromIP: hopObj.fromIP,
         toNode: hopObj.toNode,
+        toIP: hopObj.toIP,
         bpLayer: hopObj.bpLayer,
         ltpLayer: hopObj.ltpLayer,
         portNum: hopObj.portNum,
@@ -138,6 +140,24 @@ export default class NetModel  extends React.Component {
       var toNode = netNodes[netHop.toNode];
       if (!toNode) 
         errors.push("Invalid To Node Name for Net Hop " + hopKey + ".");
+
+      var toIP = netHop.toIP;
+      var fromIP = netHop.fromIP;
+
+      for (var netHostKey in netHosts) {
+        var netHost = netHosts[netHostKey];
+        if (netHostKey === fromNode.nodeHost) {
+          if (!netHost.ipAddrs.includes(fromIP))
+            errors.push("Invalid 'From IP Addr': " + fromIP + " for Net Hop " + hopKey + ".");
+        }
+
+        if (netHostKey === toNode.nodeHost) {
+          if (!netHost.ipAddrs.includes(toIP))
+            errors.push("Invalid 'To IP Addr': " + toIP + " for Net Hop " + hopKey + ".");
+        }
+      }
+
+
       if (!netHop.bpLayer)
         errors.push("Missing BP Layer Protocol CLA for Net Hop " + hopKey + ".");
       if (netHop.bpLayer && !isStandardProtocol(netHop.bpLayer)) 
@@ -506,12 +526,16 @@ export default class NetModel  extends React.Component {
       netHop = netHops[hKey];
       oneWays[hKey] = Object.assign({},netHop);
       if (netHop.symmetric) {  // symmetric implies a reverse hop also
+        // append -2 to key to indicate reverse hop
         var newKey = hKey + "-2";
         oneWays[newKey] = Object.assign({},netHop);
         var newWay = oneWays[newKey];
         newWay.id = newKey;
+        // switch from --> to and to --> from for reverse hop
         newWay.fromNode = netHop.toNode;
+        newWay.fromIP = netHop.toIP;
         newWay.toNode = netHop.fromNode;
+        newWay.toIP = netHop.fromIP;
       }
     };
     for (hKey in oneWays )
@@ -532,10 +556,7 @@ export default class NetModel  extends React.Component {
       var cli = bpLayer + "cli";
       var toNodeNum = toNode.ionNodeNum;
       var toHostKey = toNode.hostKey;
-      var toAddr = toHostKey;            // default, just in case
-      var toHost = netHosts[toHostKey];  // same as ion hosts
-      if (toHost.ipAddrs.length > 0)
-        toAddr = toHost.ipAddrs[0];
+      var toAddr = netHop.toIP;
       var rate = netHop.maxRate;
       var induct = "induct_" + bpLayer;
       if (bpLayer === "ltp" ||
@@ -556,10 +577,11 @@ export default class NetModel  extends React.Component {
       }
       configName = nodeKey + ".bpv7rc";
       var inKey = configName + bpLayer;
+
       if(!inductKeys.hasOwnProperty(inKey)) {
         cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc",induct,vals);
         this.addCommandKey(configs,configName,cmdKey);
-        inductKeys[inKey] = cmdKey;   // actual value not important, just know one exists
+        inductKeys[inKey] = cmdKey;   // actual value not important, just know one exists.
       }
       // build ltp links as necessary
       if (bpLayer === "ltp") {    // link candidate?
@@ -578,15 +600,17 @@ export default class NetModel  extends React.Component {
 
         var linkName  = toHostKey + ":" + netHop.portNum;
         if (netHop.ltpLayer === "udp") {
-          if (startUdpKeys.hasOwnProperty(configName) )  // already have start udp?
-            break;                                       // one is the limit
+          if (startUdpKeys.hasOwnProperty(configName) ) {  // already have start udp?
+            continue;                                      // one is the limit
+          }
           vals = [toAddr,netHop.portNum];
           cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","start_udp",vals);
           startUdpKeys[configName] = cmdKey;
         };
         if (netHop.ltpLayer === "dccp") {
-          if (startDccpKeys.hasOwnProperty(configName) )  // already have start dccp?
-            break;                                        // one is the limit
+          if (startDccpKeys.hasOwnProperty(configName) ) {  // already have start dccp?
+            continue;                                        // one is the limit
+          }
           vals = [toAddr,netHop.portNum];
           cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","start_dccp",vals);
           startDccpKeys[configName] = cmdKey;
@@ -603,6 +627,8 @@ export default class NetModel  extends React.Component {
       var fromNode = nodes[netHop.fromNode];
       nodeKey = fromNode.id;
       toNode = nodes[netHop.toNode];
+      toAddr = netHop.toIP;
+      var portNum = netHop.portNum;
       rate = netHop.maxRate;
       bpLayer = netHop.bpLayer;
       var outduct = "outduct_" + bpLayer;
@@ -614,17 +640,15 @@ export default class NetModel  extends React.Component {
       //} else if (bpLayer === "udp") {   //old udp promiscuous mode
       //  vals = ["udpclo",""]
       } else 
-      if (isStandardProtocol(bpLayer)) {   // assume valid induct name
-        var cloneVal = this.getNodeInduct(clones,toNode.id,bpLayer);
-        console.log ("???? cloneVal: " + JSON.stringify(cloneVal));
-        var inductName = cloneVal.value;
+      if (isStandardProtocol(bpLayer)) {   // assume valid toAddr and portNum
+        var outductName = toAddr + ":" + portNum;
 
         //Bit of a hack -- if the BP layer is TCP, no tcpclo in command
         //since it's been deprecated in ION versions 4 and up
         if (bpLayer === "tcp") {
-          vals = [inductName,"''",""];
+          vals = [outductName,"''",""];
         } else {
-          vals = [inductName,clo,""];
+          vals = [outductName,clo,""];
         }
       } else {                       // won't know the induct name here
         outduct = "outduct_any";     // use general format
@@ -638,7 +662,7 @@ export default class NetModel  extends React.Component {
       if (bpLayer === "ltp") {    // link candidate?
         configName = nodeKey + ".ltprc";
         toHostKey = toNode.hostKey;
-        cloneVal = this.getNodeLink(clones,toNode.id,netHop.ltpLayer);
+        var cloneVal = this.getNodeLink(clones,toNode.id,netHop.ltpLayer);
         console.log ("???? cloneVal: " + JSON.stringify(cloneVal));
         linkName = cloneVal.value;
         if (netHop.ltpLayer === "udp") {
@@ -667,12 +691,9 @@ export default class NetModel  extends React.Component {
       fromNode = nodes[netHop.fromNode];
       nodeKey = fromNode.id;
       toNode = nodes[netHop.toNode]
-      toHostKey = toNode.hostKey;
-      toAddr = toHostKey;            // default, just in case
-      toHost = netHosts[toHostKey];  // same as ion hosts
-      if (toHost.ipAddrs.length > 0)
-        toAddr = toHost.ipAddrs[0];
       toNodeNum = toNode.ionNodeNum;
+      //toHostKey = toNode.hostKey;
+      toAddr = netHop.toIP;
       rate = netHop.maxRate;
       bpLayer = netHop.bpLayer;
 
@@ -884,7 +905,7 @@ export default class NetModel  extends React.Component {
     }
     console.log("host: " + hostKey + " ports: " + ports.toString() );
     return ports;
-  } 
+  };
   // find an Induct cloneValue based on nodeKey & type (bpLayer)
   getNodeInduct(cloneVals,nodeKey,bpLayer) {
     var cloneType = bpLayer + "Induct";
@@ -897,7 +918,7 @@ export default class NetModel  extends React.Component {
     }
     console.log ("!!! failed to get cloneVal for nodeKey: " + nodeKey + " cloneType: " + cloneType);
     return "";
-  }
+  };
   // find a Link cloneValue based on nodeKey & type (ltpLayer)
   getNodeLink(cloneVals,nodeKey,ltpLayer) {
     var cloneType = ltpLayer + "Link";
@@ -910,7 +931,7 @@ export default class NetModel  extends React.Component {
     }
     console.log ("!!! failed to get cloneVal for nodeKey: " + nodeKey + " cloneType: " + cloneType);
     return "";
-  }
+  };
   // find an Outduct cloneValue based on nodeKey & toHostKey & type (bpLayer)
   getNodeOutduct(cloneVals,nodeKey,toAddr,bpLayer) {
     var cloneType = bpLayer + "Outduct";
@@ -927,7 +948,17 @@ export default class NetModel  extends React.Component {
     console.log ("!!! failed to get cloneVal for nodeKey: " + nodeKey 
                  + " toAddr: " + toAddr + " cloneType: " + cloneType) ;
     return "";
-  }
+  };
+  getDefaultIPforNode(netNode) {
+    const netNodes = this.props.netNodes;
+    const netHosts = this.props.netHosts;
+    if (netNode === "")
+      return "";
+
+    var netHostIPs = netHosts[netNode].ipAddrs;
+
+    return netHostIPs[0];
+  };
   makeNetHostOptions() {
     const netHosts = this.props.netHosts;
     console.log("makeNetHostOptions " + JSON.stringify(netHosts));
@@ -943,7 +974,7 @@ export default class NetModel  extends React.Component {
     console.log(JSON.stringify(vals))
     var optionItems = this.props.mapOptionElems(vals);
     return optionItems;
-  }
+  };
   makeNetNodeOptions() {
     const netNodes = this.props.netNodes;
     console.log("makeNetNodeOptions " + JSON.stringify(netNodes));
@@ -959,7 +990,28 @@ export default class NetModel  extends React.Component {
     console.log(JSON.stringify(vals))
     var optionItems = this.props.mapOptionElems(vals);
     return optionItems;
-  }
+  };
+  makeNetIPOptions(netNode) {
+    const netNodes = this.props.netNodes;
+    const netHosts = this.props.netHosts;
+    let vals = [];
+    let noneVal = {"value" : '??', "label" : 'None selected'};
+    vals.push(noneVal);
+
+    // If node not yet selected, nothing to build
+    if (netNode !== "") {
+      var netNodeHost = netNodes[netNode].nodeHost;
+      var netHostIPs = netHosts[netNodeHost].ipAddrs;
+
+      for (var idx in netHostIPs) {
+        let value = netHostIPs[idx];
+        let label = netNode;
+        vals.push({"value": value, "label": label});
+      }
+    }
+    var optionItems = this.props.mapOptionElems(vals);
+    return optionItems;
+  };
   makeAlertElem(msg) {
     return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
   };
@@ -1033,6 +1085,8 @@ export default class NetModel  extends React.Component {
     const makeOptions = this.props.makeTypeOptions;
     const makeOptElems = this.props.makeOptionElems;
     const makeNetNodeOptions = this.makeNetNodeOptions.bind(this);
+    const makeNetIPOptions = this.makeNetIPOptions.bind(this);
+    const getDefaultIPforNode = this.getDefaultIPforNode.bind(this);
 
     const dispatch = this.props.dispatch;      // make sure dispatch remembers "this"
 
@@ -1047,6 +1101,8 @@ export default class NetModel  extends React.Component {
         makeTypeOptions={makeOptions} 
         makeOptionElems={makeOptElems}
         makeNetNodeOptions = {makeNetNodeOptions} // make options list of node keys
+        makeNetIPOptions= {makeNetIPOptions}      // make options list of IP addresses
+        getDefaultIPforNode= {getDefaultIPforNode} // return first IP address for net node 
         dispatch={dispatch}                       // dispatch func for new hosts
       />
     );

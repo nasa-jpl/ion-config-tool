@@ -23,7 +23,9 @@ export default class NetHop  extends React.Component {
     const hopKey = this.props.hopKey;
     const desc = this.props.desc;
     const fromNode = this.props.fromNode;
+    const fromIP = this.props.fromIP;
     const toNode = this.props.toNode;
+    const toIP = this.props.toIP;
     const bpLayer = this.props.bpLayer;
     const ltpLayer = this.props.ltpLayer;
     const portNum = this.props.portNum;
@@ -40,7 +42,9 @@ export default class NetHop  extends React.Component {
       hopKey: hopKey,
       desc: desc,
       fromNode: fromNode,
+      fromIP: fromIP,
       toNode: toNode,
+      toIP: toIP,
       bpLayer: bpLayer,
       ltpLayer: ltpLayer,
       portNum: portNum,
@@ -132,6 +136,15 @@ export default class NetHop  extends React.Component {
     showform = this.makeShowForm(value);
     const fromNodeElem = this.makeSelectElem(value,'From Node Name',showform,selform);
     hopElems.push(fromNodeElem);
+    // build fromIP selector
+    param    = "fromIP";
+    value    = this.state.fromIP;
+    handler  = this.handleHopChange.bind(null,param);
+    opts     = this.props.makeNetIPOptions(this.state.fromNode);
+    selform  = this.makeSelectForm(value,handler,opts);
+    showform = this.makeShowForm(value);
+    const fromIPElem = this.makeSelectElem(value,'From IP',showform,selform);
+    hopElems.push(fromIPElem);
     // build toNode selector
     param    = "toNode";
     value    = this.state.toNode;
@@ -141,6 +154,15 @@ export default class NetHop  extends React.Component {
     showform = this.makeShowForm(value);
     const toNodeElem = this.makeSelectElem(value,'To Node Name',showform,selform);
     hopElems.push(toNodeElem);
+    // build toIP selector
+    param    = "toIP";
+    value    = this.state.toIP;
+    handler  = this.handleHopChange.bind(null,param);
+    opts     = this.props.makeNetIPOptions(this.state.toNode);
+    selform  = this.makeSelectForm(value,handler,opts);
+    showform = this.makeShowForm(value);
+    const toIPElem = this.makeSelectElem(value,'To IP',showform,selform);
+    hopElems.push(toIPElem);
     // build bpLayer selector
     param    = "bpLayer";
     value    = this.state.bpLayer;
@@ -202,8 +224,12 @@ export default class NetHop  extends React.Component {
     hopElems.push(descElem);
     const fromNodeElem = this.makeHopElem("fromNode","text",this.state.fromNode,"From Node Name",1,true,"");
     hopElems.push(fromNodeElem);
+    const fromIPElem = this.makeHopElem("fromIP", "text",this.state.fromIP,"From IP Addr",1,true,"");
+    hopElems.push(fromIPElem);
     const toNodeElem = this.makeHopElem("toNode","text",this.state.toNode,"To Node Name",1,true,"");
     hopElems.push(toNodeElem);
+    const toIPElem = this.makeHopElem("toIP","text",this.state.toIP,"To IP Addr",1,true,"");
+    hopElems.push(toIPElem);
     const bpLayerElem = this.makeHopElem("bpLayer","text",this.state.bpLayer,"BP Layer Protocol CLA",1,true,"");
     hopElems.push(bpLayerElem);
     const ltpLayerElem = this.makeHopElem("ltpLayer","text",this.state.ltpLayer,"LTP Underlying Layer Protocol",1,true,"");
@@ -299,7 +325,9 @@ export default class NetHop  extends React.Component {
       hopKey: this.props.hopKey,
       desc: this.state.desc,
       fromNode: this.state.fromNode,
+      fromIP: this.state.fromIP,
       toNode: this.state.toNode,
+      toIP: this.state.toIP,
       bpLayer: this.state.bpLayer,
       ltpLayer: this.state.ltpLayer,
       portNum: this.state.portNum,
@@ -336,21 +364,35 @@ export default class NetHop  extends React.Component {
 
     // Set a default port number based on protocol selection
     // User can override if desired
-    if (prop === "bpLayer") {
-      switch(newState[prop]) {
-      case "tcp":
-      case "stcp":
-      case "dccp":
-        newState["portNum"] = 4556;
+    switch(prop) {
+      // A change in bpLayer may require change in port number
+      case "bpLayer":
+        switch(newState[prop]) {
+        case "tcp":
+        case "stcp":
+        case "dccp":
+          newState["portNum"] = 4556;
+          break;
+        case "ltp":
+        case "udp":
+          newState["portNum"] = 1113;
+          break;
+        default:
+          break;
+        }
         break;
-      case "ltp":
-      case "udp":
-        newState["portNum"] = 1113;
+      // Change in fromNode/toNode --> change in default fromIP/toIP
+      case "fromNode":
+        var defaultIP = this.props.getDefaultIPforNode(newState[prop]);
+        newState["fromIP"] = defaultIP;
+        break;
+      case "toNode":
+        var defaultIP = this.props.getDefaultIPforNode(newState[prop]);
+        newState["toIP"] = defaultIP;
         break;
       default:
         break;
       }
-    }
     this.setState (newState);
     e.preventDefault();
   };
@@ -360,7 +402,9 @@ NetHop.propTypes = {
   hopKey: PropTypes.object.isRequired,         // user model - netHop key
   desc: PropTypes.string.isRequired,
   fromHop: PropTypes.string.isRequired,
+  fromIP: PropTypes.string.isRequired,
   toHop: PropTypes.string.isRequired,
+  toIP: PropTypes.string.isRequired,
   bpLayer: PropTypes.string.isRequired,
   ltpLayer: PropTypes.string.isRequired,
   portNum: PropTypes.number.isRequired,
@@ -369,6 +413,8 @@ NetHop.propTypes = {
 
   makeTypeOptions: PropTypes.func.isRequired,    // func to get dynamic (cloned) options
   makeOptionElems: PropTypes.func.isRequired,    // func to get static options
-  makeNetNodeOptions: PropTypes.func.isRequired, // func to build hostkey options
+  makeNetNodeOptions: PropTypes.func.isRequired, // func to build node options
+  makeNetIPOptions: PropTypes.func.isRequired,   // func to build node IP options
+  getDefaultIPforNode: PropTypes.func.isRequired,// func to get default IP given a node
   dispatch: PropTypes.func.isRequired
 }

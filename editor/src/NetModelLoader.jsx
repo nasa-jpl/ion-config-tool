@@ -134,9 +134,15 @@ export default class NetModelLoader extends React.Component {
       var fromnode = '';
       if(hopObj.hasOwnProperty("fromNode"))
         fromnode = hopObj["fromNode"];
+      var fromip = '';
+      if(hopObj.hasOwnProperty("fromIP"))
+        fromip = hopObj["fromIP"];
       var tonode = '';
       if(hopObj.hasOwnProperty("toNode"))
         tonode = hopObj["toNode"];
+      var toip = '';
+      if(hopObj.hasOwnProperty("toIP"))
+        toip = hopObj["toIP"];
       var bp = '';
       if(hopObj.hasOwnProperty("bpLayer"))
         bp = hopObj["bpLayer"];
@@ -158,7 +164,9 @@ export default class NetModelLoader extends React.Component {
         "hopName": hopKey,
         "hopDesc": desc,
         "fromNode": fromnode,
+        "fromIP": fromip,
         "toNode": tonode,
+        "toIP": toip,
         "bpLayer": bp,
         "ltpLayer": ltp,
         "portNum": port,
