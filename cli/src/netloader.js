@@ -109,7 +109,8 @@ function extractModel (modelObj) {
   console.log("Ingesting netHops.");
   var hopList = [];
   var hopAttrs = ["hopName","hopDesc","fromNode","toNode",
-        "bpLayer","ltpLayer","maxRate","symmetric"];
+        "bpLayer","ltpLayer","maxRate","symmetric", "portNum",
+        "fromIP","toIP"];
   if(modelObj.hasOwnProperty("netHops"))  // optional for now.
     hopList = modelObj.netHops;
   for (var hopKey in hopList) {
@@ -131,15 +132,24 @@ function extractModel (modelObj) {
     var fromnode = '';
     if(hopObj.hasOwnProperty("fromNode"))
       fromnode = hopObj["fromNode"];
+    var fromip = '';
+    if(hopObj.hasOwnProperty("fromIP"))
+      fromip = hopObj["fromIP"];
     var tonode = '';
     if(hopObj.hasOwnProperty("toNode"))
       tonode = hopObj["toNode"];
+    var toip = '';
+    if(hopObj.hasOwnProperty("toIP"))
+      toip = hopObj["toIP"];
     var bp = '';
     if(hopObj.hasOwnProperty("bpLayer"))
       bp = hopObj["bpLayer"];
     var ltp = '';
     if(hopObj.hasOwnProperty("ltpLayer"))
       ltp = hopObj["ltpLayer"];
+    var port = '';
+    if(hopObj.hasOwnProperty("portNum"))
+      port = hopObj["portNum"];
     var rate = 0;
     if(hopObj.hasOwnProperty("maxRate"))
       rate = hopObj["maxRate"];
@@ -150,17 +160,20 @@ function extractModel (modelObj) {
     if (!flag || flag === "false" || flag === "no")
       sym = false;
     // build the nodes state object
-    hops[hopKey] = { 
-      "id" : hopKey, 
-      "hopName": hopKey,
-      "hopDesc": desc,
-      "fromNode": fromnode,
-      "toNode": tonode,
-      "bpLayer": bp,
-      "ltpLayer": ltp,
-      "maxRate": rate,
-      "symmetric": sym
-    };
+      hops[hopKey] = { 
+        "id" : hopKey, 
+        "hopName": hopKey,
+        "hopDesc": desc,
+        "fromNode": fromnode,
+        "fromIP": fromip,
+        "toNode": tonode,
+        "toIP": toip,
+        "bpLayer": bp,
+        "ltpLayer": ltp,
+        "portNum": port,
+        "maxRate": rate,
+        "symmetric": sym
+      };
   };
   console.log("Ingestion complete.");
   return [ net, hosts, nodes, hops, addrs];
