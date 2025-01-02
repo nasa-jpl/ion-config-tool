@@ -268,6 +268,8 @@ export default class NetModel  extends React.Component {
           cloneVal = this.props.makeCloneVal(hostKey,ipClone);
           clones[ipAddrKey] = cloneVal;
         }
+
+        // Now add in the IP addresses each host has been configured with
         for (let i = 0; i < netHost.ipAddrs.length; i++) {
           let addr = netHost.ipAddrs[i];
           let uniqid = this.props.getUniqId();
@@ -535,6 +537,14 @@ export default class NetModel  extends React.Component {
 
     };  // end of nodes loop
 
+    // Initialize an array by host key to keep track
+    // of the number of TCP (or STCP) connections
+    // per host.
+    let tcpConnCount = [];
+    for (hostKey in hosts) {
+      tcpConnCount[hostKey] = 0;
+    };
+
     // build hop-related commands in two passes
     // ...this is necessary to ensure the inducts are all defined first 
     // ...so that outducts can be connected properly in 2nd pass
@@ -543,6 +553,14 @@ export default class NetModel  extends React.Component {
     var oneWays = {};
     for (hKey in netHops) {
       netHop = netHops[hKey];
+      netHop.tcpConnCount = 0;
+
+      // See if we have a TCP or STCP connection and bump
+      // the count for that host
+      if (netHop.bpLayer === "tcp" || netHop.bpLayer === "stcp") {
+        tcpConnCount[nodes[netHop.toNode].hostKey]++;
+      }
+
       oneWays[hKey] = Object.assign({},netHop);
       if (netHop.symmetric) {  // symmetric implies a reverse hop also
         // append -2 to key to indicate reverse hop
@@ -555,13 +573,18 @@ export default class NetModel  extends React.Component {
         newWay.fromIP = netHop.toIP;
         newWay.toNode = netHop.fromNode;
         newWay.toIP = netHop.fromIP;
+
+        // May need to bump the connection counter for TCP or
+        // STCP hops
+        if (netHop.bpLayer === "tcp" || netHop.bpLayer === "stcp") {
+          tcpConnCount[nodes[newWay.toNode].hostKey]++;
+        }
       }
     };
     for (hKey in oneWays )
        console.log("oneWay hop: " + JSON.stringify(oneWays[hKey]) );
 
     // pass 1 - build inducts
-    // var toNode;
     console.log("@@@@@ building inducts and links!");
     var inductKeys = {};     // record inducts to avoid duplicate inducts per protocol
     var startUdpKeys = {};   // hold ltp start udp commands for later (follows spans) per config
@@ -576,6 +599,7 @@ export default class NetModel  extends React.Component {
       var toNodeNum = toNode.ionNodeNum;
       var toHostKey = toNode.hostKey;
       var toAddr = netHop.toIP;
+
       var rate = netHop.maxRate;
       var induct = "induct_" + bpLayer;
       if (bpLayer === "ltp" ||
@@ -583,6 +607,12 @@ export default class NetModel  extends React.Component {
         vals = [toNodeNum,cli]
       } else 
       if (isStandardProtocol(bpLayer)) {  // the other protocols are port-based
+        // Special case for net hosts that have more than one TCP (or STCP)
+        // connection AND the hop BP Layer is over one of those protocols
+        if (tcpConnCount[toHostKey] > 1 && (bpLayer === "tcp" ||
+                                            bpLayer === "stcp")) {
+          toAddr = "0.0.0.0"
+        } 
         var ports = this.getHostPorts(toHostKey,hosts,ipaddrs,commands);
 
         // If the user has specified a port number, use it. Otherwise, default

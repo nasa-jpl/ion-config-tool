@@ -387,6 +387,27 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
       // build ion ipaddrs
       if (netHost.hasOwnProperty("ipAddrs")) {
         console.log("****** netHost has ipAddrs!! " + hostKey);
+
+        // If host has more than one IP addr, automatically add
+        // 0.0.0.0 to IP address list in case a TCP induct 
+        // needs to use it.
+        if (netHost.ipAddrs.length > 1) {
+          let addr = "0.0.0.0"
+          let uniqid = getUniqId();
+          let ipAddrKey = "ipAddr_" + uniqid;
+          ipaddrs[ipAddrKey] = {
+            "id" : ipAddrKey,
+            "hostKey" : hostKey,
+            "ipAddr" : addr
+          };
+          hosts[hostKey].ipAddrKeys.push(ipAddrKey);
+
+          let ipClone = { "id": ipAddrKey, "typeKey": "host_ipaddr", "values":[ addr ] };
+          cloneVal = makeCloneVal(hostKey,ipClone);
+          clones[ipAddrKey] = cloneVal;
+        }
+
+        // Now add in the IP addresses each host has been configured with
         for (let i = 0; i < netHost.ipAddrs.length; i++) {
           let addr = netHost.ipAddrs[i];
           let uniqid = getUniqId();
@@ -654,6 +675,14 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
 
     };  // end of nodes loop
 
+    // Initialize an array by host key to keep track
+    // of the number of TCP (or STCP) connections
+    // per host.
+    let tcpConnCount = [];
+    for (hostKey in hosts) {
+      tcpConnCount[hostKey] = 0;
+    };
+
     // build hop-related commands in two passes
     // ...this is necessary to ensure the inducts are all defined first 
     // ...so that outducts can be connected properly in 2nd pass
@@ -662,6 +691,14 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
     var oneWays = {};
     for (hKey in netHops) {
       netHop = netHops[hKey];
+      netHop.tcpConnCount = 0;
+
+      // See if we have a TCP or STCP connection and bump
+      // the count for that host
+      if (netHop.bpLayer === "tcp" || netHop.bpLayer === "stcp") {
+        tcpConnCount[nodes[netHop.toNode].hostKey]++;
+      }
+
       oneWays[hKey] = Object.assign({},netHop);
       if (netHop.symmetric) {  // symmetric implies a reverse hop also
         // append -2 to key to indicate reverse hop
@@ -674,13 +711,18 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
         newWay.fromIP = netHop.toIP;
         newWay.toNode = netHop.fromNode;
         newWay.toIP = netHop.fromIP;
+
+        // May need to bump the connection counter for TCP or
+        // STCP hops
+        if (netHop.bpLayer === "tcp" || netHop.bpLayer === "stcp") {
+          tcpConnCount[nodes[newWay.toNode].hostKey]++;
+        }
       }
     };
     for (hKey in oneWays )
        console.log("oneWay hop: " + JSON.stringify(oneWays[hKey]) );
 
     // pass 1 - build inducts
-    // var toNode;
     console.log("@@@@@ building inducts and links!");
     var inductKeys = {};     // record inducts to avoid duplicate inducts per protocol
     var startUdpKeys = {};   // hold ltp start udp commands for later (follows spans) per config
@@ -695,6 +737,7 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
       var toNodeNum = toNode.ionNodeNum;
       var toHostKey = toNode.hostKey;
       var toAddr = netHop.toIP;
+
       var rate = netHop.maxRate;
       var induct = "induct_" + bpLayer;
       if (bpLayer === "ltp" ||
@@ -702,6 +745,12 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
         vals = [toNodeNum,cli]
       } else 
       if (isStandardProtocol(bpLayer)) {  // the other protocols are port-based
+        // Special case for net hosts that have more than one TCP (or STCP)
+        // connection AND the hop BP Layer is over one of those protocols
+        if (tcpConnCount[toHostKey] > 1 && (bpLayer === "tcp" ||
+                                            bpLayer === "stcp")) {
+          toAddr = "0.0.0.0"
+        } 
         var ports = getHostPorts(toHostKey,hosts,ipaddrs,commands);
 
         // If the user has specified a port number, use it. Otherwise, default
