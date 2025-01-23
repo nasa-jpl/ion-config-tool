@@ -158,6 +158,7 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
       var default_val = "";
       var vals = [];
       var cmdKey = "";
+      var needCfdp = false;
 
       // Loop thru the list of ionconfig variables and build the variable names for default values
       for (i in ionconfig_parms) {
@@ -236,6 +237,8 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
       for (i=0; i<services.length; i++) {
         var aservice = services[i];
         if (aservice === 'cfdp') {   // CFDP: endpoints 64 & 65
+          // Set the flag to indicate the need for a cfdprc file.
+          needCfdp = true; 
           autoIDs.push("64","65");
           vals = [nodeNum,64,"x",""];
           cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
@@ -330,6 +333,28 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
       vals = [];
       cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"ionsecrc","initialize",vals);
       addCommandKey(configs,configName,cmdKey);
+
+      //build cfdprc, if necessary
+      if (needCfdp) {
+        configName = nodeKey + ".cfdprc";
+        configs[configName] = {
+          "id" : configName,
+          "nodeKey" : nodeKey,
+          "configType" : "cfdprc",
+          "cmdKeys" : []
+        };
+
+        nodes[nodeKey].configKeys.push(configName);
+        // build cfdprc initialize command
+        vals = [];
+        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"cfdprc","initialize",vals);
+        addCommandKey(configs,configName,cmdKey);
+
+        // build cfdprc start bputa command
+        vals = [];
+        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"cfdprc","start_bputa",vals);
+        addCommandKey(configs,configName,cmdKey); 
+      };
 
     };  // end of nodes loop
 

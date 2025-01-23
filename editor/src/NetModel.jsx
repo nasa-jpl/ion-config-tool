@@ -362,6 +362,7 @@ export default class NetModel  extends React.Component {
       var default_val = "";
       var vals = [];
       var cmdKey = "";
+      var needCfdp = false;
 
       // Loop thru the list of ionconfig variables and build the variable names for default values
       for (i in ionconfig_parms) {
@@ -440,6 +441,8 @@ export default class NetModel  extends React.Component {
       for (i=0; i<services.length; i++) {
         var aservice = services[i];
         if (aservice === 'cfdp') {   // CFDP: endpoints 64 & 65
+          // Set the flag to indicate the need for a cfdprc file.
+          needCfdp = true; 
           autoIDs.push("64","65");
           vals = [nodeNum,64,"x",""];
           cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","endpoint",vals);
@@ -534,6 +537,28 @@ export default class NetModel  extends React.Component {
       vals = [];
       cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ionsecrc","initialize",vals);
       this.addCommandKey(configs,configName,cmdKey);
+
+      //build cfdprc, if necessary
+      if (needCfdp) {
+        configName = nodeKey + ".cfdprc";
+        configs[configName] = {
+          "id" : configName,
+          "nodeKey" : nodeKey,
+          "configType" : "cfdprc",
+          "cmdKeys" : []
+        };
+
+        nodes[nodeKey].configKeys.push(configName);
+        // build cfdprc initialize command
+        vals = [];
+        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"cfdprc","initialize",vals);
+        this.addCommandKey(configs,configName,cmdKey);
+
+        // build cfdprc start bputa command
+        vals = [];
+        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"cfdprc","start_bputa",vals);
+        this.addCommandKey(configs,configName,cmdKey); 
+      };
 
     };  // end of nodes loop
 
