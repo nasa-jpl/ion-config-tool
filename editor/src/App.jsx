@@ -1739,7 +1739,7 @@ export default class App extends React.Component {
     return (
       <div>
         <Navbar>
-          <h3>ION Configuration Editor  4.8.3b2</h3>
+          <h3>ION Configuration Editor  4.8.3b3</h3>
         </Navbar>
         <Grid fluid>
           {modelBtnsElem}
