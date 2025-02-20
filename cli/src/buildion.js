@@ -351,8 +351,8 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
         addCommandKey(configs,configName,cmdKey);
 
         // build cfdprc start bputa command
-        vals = [];
-        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"cfdprc","start_bputa",vals);
+        vals = ["bputa"];
+        cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"cfdprc","start_any",vals);
         addCommandKey(configs,configName,cmdKey); 
       };
 

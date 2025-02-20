@@ -555,8 +555,8 @@ export default class NetModel  extends React.Component {
         this.addCommandKey(configs,configName,cmdKey);
 
         // build cfdprc start bputa command
-        vals = [];
-        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"cfdprc","start_bputa",vals);
+        vals = ["bputa"];
+        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"cfdprc","start_any",vals);
         this.addCommandKey(configs,configName,cmdKey); 
       };
 
