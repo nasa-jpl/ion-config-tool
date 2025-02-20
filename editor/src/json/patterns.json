@@ -164,6 +164,8 @@
   "acsrc_bundle_lifetime": "t  [1]",
   "acsrc_custodian"      : "a  [1]  [2]  [3]",
   "biberc_dest_endpoint" : "a bcla  [1]  [2]  [3]  [4]  [5]  [6]",
+  "biberc_watch"         : "w '[1]'",
+  "biberc_watch_all"     : "w 1",
   "bssprc_initialize"    : "1  [1]",
   "bssprc_seat"          : "a seat  '[1]'  '[2]'",
   "bssprc_span_udp_tcp"  : "a span  [1]  [2]  [3]  'udpbso [4]:[5]  [6]'  'tcpbso [7]:[8]'  [9]",

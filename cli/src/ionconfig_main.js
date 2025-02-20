@@ -13,6 +13,7 @@
 //                           watch characters in ION. Valid values are:
 //                           all - set the watch in all config files that 
 //                                 support it.
+//                           bibe - set the watch in biberc
 //                           bp - set the watch in all versions of bprc
 //                           bssp - set the watch in bssprc
 //                           cfdp - set the watch in cfdprc
@@ -60,7 +61,7 @@ var cloneValues = {}
 
 var DEBUG_MODE = false;  // No debug messages to the console is default.
 
-var watchables = ["all", "cfdp", "ltp", "bp", "bssp", "dtpc"];
+var watchables = ["all", "cfdp", "ltp", "bp", "bssp", "dtpc", "bibe"];
 // watch flag initialization, passed in on command line
 
 console.log("Build ION Configurations from an ION Model");
@@ -104,6 +105,7 @@ if (w) {
     wflags.bpv6rc={"type":"bpv6rc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
     wflags.bssprc={"type":"bssprc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
     wflags.dtpcrc={"type":"dtpcrc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    wflags.biberc={"type":"biberc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
     wcfgs = ["cfdprc","ltprc","bpv6rc","bpv7rc","bssprc","dtprc"];
   } else {
     if (wflags.includes("cfdp")) {
@@ -121,6 +123,9 @@ if (w) {
     }
     if (wflags.includes("dtpc")) {
       wflags.dtpcrc={"type":"dtpcrc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
+    }
+    if (wflags.includes("bibe")) {
+      wflags.biberc={"type":"biberc_watch_all","lastUpdate":"2000-01-01T00:00","parameters":[]};
     }
   }
 }

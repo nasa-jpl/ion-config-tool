@@ -46,6 +46,24 @@
     "verFrom": 10, 
     "verThru": 999
   },
+  "biberc_watch": {
+    "configType": "biberc", 
+    "name": "watch", 
+    "order": 31, 
+    "paramCnt": 1, 
+    "paramTypes": [], 
+    "verFrom": 10, 
+    "verThru": 999
+  }, 
+  "biberc_watch_all": {
+    "configType": "biberc", 
+    "name": "watch_all", 
+    "order": 30, 
+    "paramCnt": 0, 
+    "paramTypes": [], 
+    "verFrom": 10, 
+    "verThru": 999
+  }, 
   "bpv6rc_plan": {
     "configType": "bpv6rc", 
     "multiple": true, 

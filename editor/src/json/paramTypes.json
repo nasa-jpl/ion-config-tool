@@ -2694,7 +2694,7 @@
     "valType":  "number",
     "units":  "words",
     "showDefault": true,
-    "defaultValue" : 50000000
+    "defaultValue" : 250000
   },
   "ionconfig_logKey_p0" : {
     "id" :  "ionconfig_logKey_p0",
@@ -2743,7 +2743,7 @@
     "valType":  "number",
     "units":  "bytes",
     "showDefault": true,
-    "defaultValue" : 10000000
+    "defaultValue" : 0
   },
   "ionconfig_wmAddress_p0" : {
     "id" :  "ionconfig_wmAddress_p0",
@@ -2773,7 +2773,7 @@
     "valType":  "number",
     "units":  "bytes",
     "showDefault": true,
-    "defaultValue" : 50000000
+    "defaultValue" : 5000000
   },
   "bssprc_initialize_p0" : {
     "id" :  "bssprc_initialize_p0",
@@ -3607,6 +3607,15 @@
     "valType":  "number",
     "units":  "secs",
     "optional": true,
+    "defaultValue":  ""
+  },
+  "biberc_watch_p0" : {
+    "id" :  "biberc_watch_p0",
+    "name":  "watch characters",
+    "configType":  "biberc",
+    "cmdType":  "biberc_watch",
+    "valType":  "text",
+    "units":  "",
     "defaultValue":  ""
   },
   "biberc_dest_endpoint_p0" : {
