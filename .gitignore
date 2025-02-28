@@ -7,6 +7,7 @@
 /editor/node_modules
 /editor/package-lock.json
 package-lock.json
+package.json
 /node_modules
 /dict/cmdTypes.rows
 /dict/dict.html
@@ -15,4 +16,5 @@ package-lock.json
 /docs
 /json
 /tars
+/test
 /*.swp
