@@ -31,7 +31,7 @@ table td {
 <h3>ION Release Date: 2022-03-15</h3>
 <h4>Dictionary Seq No: 14</h4>
 <h4>Configuration Files: 20</h4>
-<h4>Commands: 197</h4>
+<h4>Commands: 199</h4>
 <h3>Introduction</h3>
 <p>
 The dictionary describes the configuration files and commands supported by ION Configuration Tool. The version is important.  The configuration commands supported by ION can and usually do evolve with each new version, and so it does also for the configuration tool.  It is not easy to spot the changes from version to version, so new releases of the tool also provide delta reports summarizing the changes between successive versions.
@@ -144,6 +144,23 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 <tr><td>priority</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
 <tr><td>ordinal</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
 <tr><td>data label</td><td>false</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>watch</br>
+<b>ION Command Pattern: </b><code>w '[1]'</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
+<tr><td>watch characters</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+</tbody>
+</table>
+<br>
+</br><b>ION Config Command Name: </b>watch_all</br>
+<b>ION Command Pattern: </b><code>w 1</code></br>
+<table>
+<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
+<tbody>
 </tbody>
 </table>
 <br>
@@ -1458,7 +1475,7 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
-<tr><td>ion heap words</td><td>true</td><td>number</td><td>words</td><td>50000000</td><td>false</td><td>false</td></tr>
+<tr><td>ion heap words</td><td>true</td><td>number</td><td>words</td><td>250000</td><td>false</td><td>false</td></tr>
 </tbody>
 </table>
 <br>
@@ -1503,7 +1520,7 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
-<tr><td>ion SDR working memory size</td><td>true</td><td>number</td><td>bytes</td><td>10000000</td><td>false</td><td>false</td></tr>
+<tr><td>ion SDR working memory size</td><td>true</td><td>number</td><td>bytes</td><td>0</td><td>false</td><td>false</td></tr>
 </tbody>
 </table>
 <br>
@@ -1530,7 +1547,7 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
-<tr><td>ion working memory size</td><td>true</td><td>number</td><td>bytes</td><td>50000000</td><td>false</td><td>false</td></tr>
+<tr><td>ion working memory size</td><td>true</td><td>number</td><td>bytes</td><td>5000000</td><td>false</td><td>false</td></tr>
 </tbody>
 </table>
 <br>
