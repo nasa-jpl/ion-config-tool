@@ -107,6 +107,10 @@ export default class NetModel  extends React.Component {
     return model;
   };
   // make list of errors in net model
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // Do not delete the comment below, it is used by the build process
+  // to extract code common to both the GUI and CLI tools
+  // EXTRACT checkNetModel
   checkNetModel() {
     var errors = [];   // list of messages (strings)
     const netHosts = this.props.netHosts;
@@ -165,6 +169,11 @@ export default class NetModel  extends React.Component {
     }
     return errors;
   }
+  // END EXTRACT
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // Do not delete the comment above, it is used by the build process
+  // to extract code common to both the GUI and CLI tools
+
   // if net model is okay, proceed with build
   makeIonModel() {
     console.log("*******makeIonModel name:" + this.state.name);
