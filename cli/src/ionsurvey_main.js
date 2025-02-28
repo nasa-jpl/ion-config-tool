@@ -81,11 +81,21 @@ for (var pType in paramTypes) {
 }
 
 // build hosts, nodes, configs, etc. from model
+
+////////////////////////
+// In ionloader.js
 extractIonModel(json);
+////////////////////////
+
 console.log("ION Model extraction successful.");
 console.log("---");
 console.log("Checking user ion model.");
+
+///////////////////////
+// In checkion.js
 var errors = checkIonModel();
+///////////////////////
+
 if (errors.length) {
   console.log("Validation errors.");
   for (let i=0; i<errors.length; i++) {

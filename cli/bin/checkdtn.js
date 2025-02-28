@@ -41,7 +41,12 @@ var netHosts = {};
 var netNodes = {};
 var netHops  = {};
 var netAddrs = {};
+
+////////////////////////
+// In netloader.js
 [netHosts,netNodes,netHops,netAddrs] = extractModel(json);
+////////////////////////
+
 console.log("---");
 console.log("Ingestion summary:");
 console.log("netHosts: " + Object.keys(netHosts));
@@ -50,7 +55,13 @@ console.log("netHops: "  + Object.keys(netHops));
 console.log("netAddrs: " + netAddrs);
 console.log("---");
 console.log("Checking user net model.");
+
+///////////////////////
+// In checknet.js
 var errors = checkNetModel(netHosts,netNodes,netHops);
+///////////////////////
+
+
 if (errors.length) {
   console.log("Validation errors.");   
   for (let i=0; i<errors.length; i++) {
@@ -86,7 +97,7 @@ function extractModel (modelObj) {
     net.name = modelObj["netModelName"];
   else {
     warn("The json file is not a Net Model.");
-    return [ hosts, nodes, hops, addrs];
+    return [ net, hosts, nodes, hops, addrs];
   }
   if(modelObj.hasOwnProperty("netModelDesc"))
     net.desc = modelObj["netModelDesc"];
@@ -180,8 +191,8 @@ function extractModel (modelObj) {
   console.log("Ingesting netHops.");
   var hopList = [];
   var hopAttrs = ["hopName","hopDesc","fromNode","toNode",
-        "bpLayer","ltpLayer","maxRate","symmetric", "fromIP",
-        "toIP", "portNum"];
+        "bpLayer","ltpLayer","maxRate","symmetric", "portNum",
+        "fromIP","toIP"];
   if(modelObj.hasOwnProperty("netHops"))  // optional for now.
     hopList = modelObj.netHops;
   for (var hopKey in hopList) {
@@ -203,15 +214,24 @@ function extractModel (modelObj) {
     var fromnode = '';
     if(hopObj.hasOwnProperty("fromNode"))
       fromnode = hopObj["fromNode"];
+    var fromip = '';
+    if(hopObj.hasOwnProperty("fromIP"))
+      fromip = hopObj["fromIP"];
     var tonode = '';
     if(hopObj.hasOwnProperty("toNode"))
       tonode = hopObj["toNode"];
+    var toip = '';
+    if(hopObj.hasOwnProperty("toIP"))
+      toip = hopObj["toIP"];
     var bp = '';
     if(hopObj.hasOwnProperty("bpLayer"))
       bp = hopObj["bpLayer"];
     var ltp = '';
     if(hopObj.hasOwnProperty("ltpLayer"))
       ltp = hopObj["ltpLayer"];
+    var port = '';
+    if(hopObj.hasOwnProperty("portNum"))
+      port = hopObj["portNum"];
     var rate = 0;
     if(hopObj.hasOwnProperty("maxRate"))
       rate = hopObj["maxRate"];
@@ -222,27 +242,30 @@ function extractModel (modelObj) {
     if (!flag || flag === "false" || flag === "no")
       sym = false;
     // build the nodes state object
-    hops[hopKey] = { 
-      "id" : hopKey, 
-      "hopName": hopKey,
-      "hopDesc": desc,
-      "fromNode": fromnode,
-      "toNode": tonode,
-      "bpLayer": bp,
-      "ltpLayer": ltp,
-      "maxRate": rate,
-      "symmetric": sym
-    };
+      hops[hopKey] = { 
+        "id" : hopKey, 
+        "hopName": hopKey,
+        "hopDesc": desc,
+        "fromNode": fromnode,
+        "fromIP": fromip,
+        "toNode": tonode,
+        "toIP": toip,
+        "bpLayer": bp,
+        "ltpLayer": ltp,
+        "portNum": port,
+        "maxRate": rate,
+        "symmetric": sym
+      };
   };
   console.log("Ingestion complete.");
-  return [ hosts, nodes, hops, addrs];
+  return [ net, hosts, nodes, hops, addrs];
 };
-
 //        checknet.js  
 //
 
-// make list of errors in net model
+// NOTE: compare to checkNetModel of IonConfig NetModel.jsx
 function checkNetModel(netHosts,netNodes,netHops) {
+// make list of errors in net model
   var errors = [];   // list of messages (strings)
 
   // do some sanity checking on net model
@@ -259,7 +282,7 @@ function checkNetModel(netHosts,netNodes,netHops) {
     var hostKey = netNode.nodeHost;
     var hostObj = netHosts[hostKey];
     if (!hostObj)
-      errors.push(hostKey + " is invalid hostKey for node " + nodeKey + ".");
+      errors.push("Invalid hostKey for node " + nodeKey + ".");
   }
   // verify node keys of each hop
   for (var hopKey in netHops) {
@@ -269,7 +292,7 @@ function checkNetModel(netHosts,netNodes,netHops) {
       errors.push("Invalid fromNode for hop " + hopKey + ".");
     var toNode = netNodes[netHop.toNode];
     if (!toNode) 
-      errors.push(netHop.toNode + " is invalid toNode for hop " + hopKey + ".");
+      errors.push("Invalid toNode for hop " + hopKey + ".");
     if (!netHop.bpLayer)
       errors.push("Invalid bpLayer for hop " + hopKey + ".");
   }

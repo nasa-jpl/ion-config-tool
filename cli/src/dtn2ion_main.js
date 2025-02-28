@@ -65,7 +65,12 @@ var netHosts = {};
 var netNodes = {};
 var netHops  = {};
 var netAddrs = {};
+
+///////////////////
+// In netloader.js
 [net,netHosts,netNodes,netHops,netAddrs] = extractModel(json);
+///////////////////
+
 console.log("---");
 console.log("DTN Network Model summary:");
 console.log("netHosts: " + Object.keys(netHosts));
@@ -74,7 +79,12 @@ console.log("netHops: "  + Object.keys(netHops));
 console.log("netAddrs: " + netAddrs);
 console.log("---");
 console.log("Checking user net model.");
+
+///////////////////
+// In checknet.js
 var errors = checkNetModel(netHosts,netNodes,netHops);
+//////////////////
+
 if (errors.length) {
   console.log("Validation errors.");
   for (let i=0; i<errors.length; i++) {
@@ -85,7 +95,11 @@ if (errors.length) {
 }
 console.log("---");
 console.log("Building user ion model components.");
+
+////////////////////
+// In buildion.js
 buildIonModel(net.name,net.desc,netHosts,netNodes,netHops);
+////////////////////
 
 console.log("ION Model summary:");
 console.log("hosts: "  + Object.keys(hosts));
