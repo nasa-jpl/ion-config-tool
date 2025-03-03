@@ -106,11 +106,14 @@ export default class NetModel  extends React.Component {
     }
     return model;
   };
-  // make list of errors in net model
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // Do not delete the comment below, it is used by the build process
-  // to extract code common to both the GUI and CLI tools
+  // WARNING This function is automatically extracted and
+  // converted for use by the CLI tools. Any comment with
+  // the string 'EXTRACT' in it should not be removed or
+  // modified an any way or the automatic CLI tool build 
+  // process will fail or will result in unusable code. 
+  // See the AUTOBUILD file in the cli directory for more
   // EXTRACT checkNetModel
+  // make list of errors in net model
   checkNetModel() {
     var errors = [];   // list of messages (strings)
     const netHosts = this.props.netHosts;
@@ -161,11 +164,12 @@ export default class NetModel  extends React.Component {
         }
       }
 
-
+      // NO EXTRACT
       if (!netHop.bpLayer)
         errors.push("Missing BP Layer Protocol CLA for Net Hop " + hopKey + ".");
       if (netHop.bpLayer && !isStandardProtocol(netHop.bpLayer)) 
         errors.push("Unrecognized BP Layer Protocol CLA for Net Hop: "+ hopKey +". Should be one of: tcp, stcp, udp, dccp or ltp.");
+      // END NO EXTRACT
     }
     return errors;
   }
