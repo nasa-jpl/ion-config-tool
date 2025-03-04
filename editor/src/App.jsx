@@ -118,12 +118,14 @@ export default class App extends React.Component {
        cloneValues: cloneValues    // derived
     };
   };
+  // EXTRACT getUniqId
   // generate next uniq id...used by all types
   getUniqId() {
      let nextId = uniqId + 1;
      uniqId = nextId;
      return nextId;
   }
+  // END EXTRACT
   // get Ion Model handle
   getIonModel() {
      return this.state.ionModel;
@@ -150,6 +152,7 @@ export default class App extends React.Component {
      let cmdType = cmdTypes[cmdTypeKey];
      return cmdType;
   }
+  // EXTRACT isGoodName
   // check if a new name is valid
   isGoodName(name) {
   console.log("isGoodName ?? " + name);
@@ -159,6 +162,8 @@ export default class App extends React.Component {
       return false;
     return true;
   }
+  // END EXTRACT
+
   // check IP address/URL for validity
   isValidIPAddr(ipaddr)
   {
@@ -226,6 +231,7 @@ export default class App extends React.Component {
     }
     return true;
   }
+  // EXTRACT isStandardProtocol
   //check if protocol has a standard ION CLI
   isStandardProtocol(protocol) {
     if (protocol === "tcp"  ||
@@ -238,6 +244,7 @@ export default class App extends React.Component {
     else
       return false;
   }
+  // END EXTRACT
   // check if a candidate nodeKey exists
   usedNodeKey(myNodeKey) {
     console.log("usedNodeKey ?? " + myNodeKey);

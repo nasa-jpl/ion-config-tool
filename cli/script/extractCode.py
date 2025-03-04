@@ -4,7 +4,14 @@
 
 import os
 
-srcAndDest =[["../../editor/src/NetModel.jsx", "checkNetModel", ["netHosts","netNodes","netHops"], "../src/checknet-x.js"]]
+srcAndDest =[
+			["../../editor/src/NetModel.jsx", "checkNetModel",      ["netHosts","netNodes","netHops"], "../src/checknet-x.js"],
+			["../../editor/src/App.jsx",      "isGoodName",         ["name"],                          "../src/appfunc-x.js"],
+			["../../editor/src/App.jsx",      "isStandardProtocol", ["protocol"],                      "../src/appfunc-x.js"],
+			["../../editor/src/App.jsx",      "getUniqId",          [],                                "../src/appfunc-x.js"],
+			["../../editor/src/NetModel.jsx", "addCommandKey",      ["configs","configName","cmdKey"], "../src/appfunc-x.js"],
+			["../../editor/src/NetModel.jsx", "makeIonCommand",     ["commands","clones","groupKey","configKey","configType","cmdName","values"],"../src/appfunc-x.js"]
+			]
 extractedLines = []
 
 def processLine(in_line):
@@ -20,7 +27,18 @@ def processLine(in_line):
 		out_line = in_line.replace("this.props.", "")
 		return out_line
 
+def removeFiles():
+	for a, b, c, file in srcAndDest:
+		if os.path.exists(file):
+			os.remove(file)
+		else:
+			print(file+" not found.")
+	return
+
+removeFiles()
+
 for inputf, func, fargs, outputf in srcAndDest:
+	print("Deleting files...")
 	print("opening " +inputf+" looking for "+func)
 	print("opening "+outputf+" for "+inputf)
 	print(fargs)
@@ -32,7 +50,7 @@ for inputf, func, fargs, outputf in srcAndDest:
 		exit()
 
 	try:
-		outpf = open(outputf, "w")
+		outpf = open(outputf, "a")
 	except:
 		print("Error opening "+outputf)
 		inpf.close()
@@ -50,7 +68,7 @@ for inputf, func, fargs, outputf in srcAndDest:
 				# Skip the line that contains the function 
 				# being extracted; it gets written below
 				# with the args
-				if (line.find(func) > -1):
+				if (line.find(func+"(") > -1):
 					continue
 
 				# If done extracting this function set
@@ -96,18 +114,22 @@ for inputf, func, fargs, outputf in srcAndDest:
 			if (line.find(searchStr) > -1):
 				print (line)
 				outpf.write("// Automatically extracted from source file "+inputf+"\n")
-				outpf.write("function "+func+"("+delimeter.join(fargs)+")\n")
+				outpf.write("function "+func+"("+delimeter.join(fargs)+") {\n")
 				extract_flag = True
-				
+		
+
 	except Exception as err:
 		print("Encountered err ", err)
 		inpf.close()
 		outpf.close()
 		exit()
 
+	print("Closing "+inputf)
 	inpf.close()
-	print("Done processing "+inputf)
+	print("Closing "+outputf)
+	outpf.close()
 
+print("All processing finished.")
 
 
 

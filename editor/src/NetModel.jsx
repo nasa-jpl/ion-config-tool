@@ -164,12 +164,10 @@ export default class NetModel  extends React.Component {
         }
       }
 
-      // NO EXTRACT
       if (!netHop.bpLayer)
         errors.push("Missing BP Layer Protocol CLA for Net Hop " + hopKey + ".");
       if (netHop.bpLayer && !isStandardProtocol(netHop.bpLayer)) 
         errors.push("Unrecognized BP Layer Protocol CLA for Net Hop: "+ hopKey +". Should be one of: tcp, stcp, udp, dccp or ltp.");
-      // END NO EXTRACT
     }
     return errors;
   }
@@ -880,6 +878,8 @@ export default class NetModel  extends React.Component {
     this.setState (newState);
     return null;
   };
+
+  // EXTRACT addCommandKey
   // add commmand to a configuration, unless its null
   addCommandKey(configs,configName,cmdKey) {
     if (cmdKey == null) {
@@ -888,6 +888,9 @@ export default class NetModel  extends React.Component {
     }
     configs[configName].cmdKeys.push(cmdKey);
   }
+  // END EXTRACT
+
+  // EXTRACT makeIonCommand
   // build an ion command object
   makeIonCommand(commands,clones,groupKey,configKey,configType,cmdName,values) {
     // NOTE: the default behavior is to use the latest version of each command type
@@ -937,6 +940,8 @@ export default class NetModel  extends React.Component {
     } 
     return cmdKey;
   };
+  // END EXTRACT
+  
   // build clone list for each new cloneVal  (a duplicate of the ionModelLoader function)
   assignClones(commands,cloneValues) {
     const findCloneVal = this.props.findCloneVal;
