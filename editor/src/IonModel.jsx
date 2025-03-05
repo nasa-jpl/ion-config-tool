@@ -416,7 +416,7 @@ export default class IonModel  extends React.Component {
     cmdLines.push('echo "Clearing old ion.log"');
     cmdLines.push("echo > ion.log");
 
-    let nodeConfigs = [];
+    let configFiles = [];
     let configs = this.props.configs;
     for (var i=0; i<node.configKeys.length; i++) {
       let configKey = node.configKeys[i];
@@ -425,12 +425,26 @@ export default class IonModel  extends React.Component {
       let nodeConfig = configs[configKey];
       nodeConfig.order = order;
       if (configKey.indexOf("ionconfig") < 0)  // add all except ionconfig
-         nodeConfigs.push(nodeConfig);
+         configFiles.push(nodeConfig);
     }
-    nodeConfigs.sort( (a,b) => (a.order > b.order) ? 1 : -1);
-    console.log("makeStartLines sortConfigs: " + JSON.stringify(nodeConfigs));
-    for (var j=0; j<nodeConfigs.length; j++) {
-      let configObj = nodeConfigs[j];
+
+    // Global contact graph not associated with a node
+    // so must treat differently
+    let contacts = this.state.currentContacts;
+    if (contacts !== "") {
+      let configKey = this.state.currentContacts + ".cg";
+      let configType = "contacts";
+      let order = configTypes[configType].start_order;
+      let nodeConfig = configs[configKey];
+      nodeConfig.order = order;
+      configFiles.push(nodeConfig);
+    }
+
+    
+    configFiles.sort( (a,b) => (a.order > b.order) ? 1 : -1);
+    console.log("makeStartLines sortConfigs: " + JSON.stringify(configFiles));
+    for (var j=0; j<configFiles.length; j++) {
+      let configObj = configFiles[j];
       let configKey = configObj.id;
       console.log("makeStartLines configKey: " + configKey);
       let configTypeKey = configObj.configType;
@@ -443,13 +457,13 @@ export default class IonModel  extends React.Component {
       cmdLines.push(prog + "  " + configKey);
     }
     // special case for (global) graphs file
-    let contacts = this.state.currentContacts;
-    if (contacts !== "") {
-      let contactsFile = contacts + ".cg";
-      cmdLines.push("sleep  1");
-      cmdLines.push("# global contact graph");
-      cmdLines.push("ionadmin  " + contactsFile);
-    }
+    //let contacts = this.state.currentContacts;
+    //if (contacts !== "") {
+    //  let contactsFile = contacts + ".cg";
+    //  cmdLines.push("sleep  1");
+    //  cmdLines.push("# global contact graph");
+    //  cmdLines.push("ionadmin  " + contactsFile);
+    //}
     let nodeId = node.ionNodeNum;
     cmdLines.push('echo "Startup of ION node ' + nodeLabel + ' on $host complete!"');
     cmdLines.push('echo "Starting bpecho on ipn:' + nodeId + '.3."');
