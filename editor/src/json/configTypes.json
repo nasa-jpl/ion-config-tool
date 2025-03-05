@@ -136,7 +136,7 @@
         "id": "contacts",
         "content": "ION contact graph commands file",
         "program": "ionadmin",
-        "start_order": 37,
+        "start_order": 90,
         "cmdTypes": [ ]  
     } 
 }
