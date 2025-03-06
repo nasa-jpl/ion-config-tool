@@ -69,13 +69,6 @@
         "start_order": 35,
         "cmdTypes": [ ]  
     },
-    "cfdprc" : {
-        "id": "cfdpprc",
-        "content": "CCSDS File Delivery Protocol management commands file",
-        "program": "cfdpadmin",
-         "start_order": 40,
-        "cmdTypes": [ ]  
-    },
     "ipnrc" : {
     	"id": "ipnrc",
     	"content": "IPN scheme configuration commands file",
@@ -138,5 +131,12 @@
         "program": "ionadmin",
         "start_order": 90,
         "cmdTypes": [ ]  
-    } 
+    }, 
+    "cfdprc" : {
+        "id": "cfdpprc",
+        "content": "CCSDS File Delivery Protocol management commands file",
+        "program": "cfdpadmin",
+         "start_order": 91,
+        "cmdTypes": [ ]  
+    }
 }
