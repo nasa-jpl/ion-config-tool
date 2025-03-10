@@ -5,43 +5,65 @@
 import os
 
 srcAndDest =[
-			["../../editor/src/NetModel.jsx", "checkNetModel",      ["netHosts","netNodes","netHops"], "../src/checknet-x.js"],
-			["../../editor/src/App.jsx",      "isGoodName",         ["name"],                          "../src/appfunc-x.js"],
-			["../../editor/src/App.jsx",      "isStandardProtocol", ["protocol"],                      "../src/appfunc-x.js"],
-			["../../editor/src/App.jsx",      "getUniqId",          [],                                "../src/appfunc-x.js"],
-			["../../editor/src/NetModel.jsx", "addCommandKey",      ["configs","configName","cmdKey"], "../src/appfunc-x.js"],
-			["../../editor/src/NetModel.jsx", "makeIonCommand",     ["commands","clones","groupKey","configKey","configType","cmdName","values"],"../src/appfunc-x.js"]
+				["../../editor/src/NetModel.jsx", "checkNetModel",      ["netHosts","netNodes","netHops"], "../src/checknet-x.js",{}],
+				["../../editor/src/App.jsx",      "isGoodName",         ["name"],                          "../src/appfunc-x.js",{}],
+				["../../editor/src/App.jsx",      "isStandardProtocol", ["protocol"],                      "../src/appfunc-x.js",{}],
+				["../../editor/src/App.jsx",      "getUniqId",          [],                                "../src/appfunc-x.js",{}],
+				["../../editor/src/NetModel.jsx", "addCommandKey",      ["configs","configName","cmdKey"], "../src/appfunc-x.js",{}],
+				["../../editor/src/NetModel.jsx", "makeIonCommand",     ["commands","clones","groupKey","configKey","configType","cmdName","values"],"../src/appfunc-x.js",{}],
+				["../../editor/src/NetModel.jsx", "buildIonModel",      ["netName","netDesc","netHosts","netNodes","netHops"],"../src/buildion-x.js",\
+					{'this.state.name': 'netName', 'this.state.desc': 'netDesc'}]			
 			]
 extractedLines = []
 
-def processLine(in_line):
-	out_line = ""
+def replace_strs(line, strmap):
+    for old_value, new_value in strmap.items():
+        line = line.replace(old_value, new_value)
+    return line
+
+def processLine(in_line, strmap):
+	# Set the output to the unprocessed input
+	out_line = in_line
 
 	# Any line with 'this.props' that is not also a function 
 	# must be passed into the non-GUI function
-	if (in_line.find("this.props.") > -1 and in_line.find("(") == -1 ):
+	if (out_line.find("this.props.") > -1 and out_line.find("(") == -1 ):
 		## skip line
 		return("")
 	else:
 		## strip out "this.props."
-		out_line = in_line.replace("this.props.", "")
-		return out_line
+		out_line = out_line.replace("this.props.", "")
+
+	# Any line with "this." not followed by "props." is a function
+	# call, strip out "this."
+	if  (out_line.find("this.") > -1 and out_line.find("props.") == -1):
+		out_line = out_line.replace("this.", "")
+
+    # Any line with state variables must be replaced with a local
+    # variable (probably passed in) according to the supplied
+    # string map.
+	if (in_line.find("this.state.") > -1):
+		out_line = replace_strs(out_line, strmap)
+
+	return(out_line)
+
 
 def removeFiles():
-	for a, b, c, file in srcAndDest:
+	for w, x, y, file, z in srcAndDest:
 		if os.path.exists(file):
 			os.remove(file)
 		else:
 			print(file+" not found.")
 	return
 
+print("Deleting files...")
+
 removeFiles()
 
-for inputf, func, fargs, outputf in srcAndDest:
-	print("Deleting files...")
+for inputf, func, fargs, outputf, strmap in srcAndDest:
 	print("opening " +inputf+" looking for "+func)
 	print("opening "+outputf+" for "+inputf)
-	print(fargs)
+	print("****** "+str(strmap))
 
 	try:
 		inpf = open(inputf, "r")
@@ -97,7 +119,7 @@ for inputf, func, fargs, outputf in srcAndDest:
 
 				# Process line for output file, if 
 				# nothing is returned, continue
-				proc_line = processLine(line)
+				proc_line = processLine(line, strmap)
 				if (proc_line == ""):
 					continue
 

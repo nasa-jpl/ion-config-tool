@@ -195,11 +195,13 @@ export default class NetModel  extends React.Component {
     this.setError("");   // might be a rerun, so clear any prior errors
     return null;
   }
+  // EXTRACT buildIonModel
   // build ion model
   buildIonModel() {
     // translate the net model to a full ion model
     // using best-guess defaults
 
+    // NO EXTRACT
     // ion model objects
     var ion = {};
     var graphs = {};
@@ -210,6 +212,7 @@ export default class NetModel  extends React.Component {
     var ipaddrs = {};
     var clones = {};
     var myParams = paramTypes;
+    // END NO EXTRACT
 
     // default values
     const ionName   = this.state.name + "-ion";
@@ -859,7 +862,7 @@ export default class NetModel  extends React.Component {
       this.addCommandKey(configs,graphConfig,cmdKey);
     };
     this.assignClones(commands,clones);   //  map cloneVal to using clones (command params)
-
+    // NO EXTRACT
     var tran = {
       action: "LOAD-ION-MODEL",
       ionModel: ion,
@@ -876,8 +879,10 @@ export default class NetModel  extends React.Component {
     var newState = Object.assign({},this.state);
     newState.buildMode = false;  // just build once 
     this.setState (newState);
+    // END NO EXTRACT
     return null;
   };
+  // END EXTRACT
 
   // EXTRACT addCommandKey
   // add commmand to a configuration, unless its null
