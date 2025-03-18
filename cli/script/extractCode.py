@@ -32,7 +32,10 @@ srcAndDest =[
 				["../../editor/src/App.jsx",            "makeComboValue",     ["cmd","type"],                    "../src/clone-x.js",{}],
 				["../../editor/src/App.jsx",            "findCloneVal",       ["cloneVals","type","value"],      "../src/clone-x.js",{}],
 				["../../editor/src/App.jsx",            "getAnyCloneVal",     ["cloneVals","type"],              "../src/clone-x.js",{}],
-				["../../editor/src/App.jsx",            "getCloneVal",        ["cloneVals","cmdKey"],            "../src/clone-x.js",{}]
+				["../../editor/src/App.jsx",            "getCloneVal",        ["cloneVals","cmdKey"],            "../src/clone-x.js",{}],
+ 				["../../editor/src/IonModel.jsx",       "makeModelObj",       ["nodeKey"],                       "../src/makeobj-x.js",\
+ 				  {'this.state': 'ion'}],
+ 				["../../editor/src/IonModel.jsx",       "makeConfigObj",      ["configKey"],                       "../src/makeobj-x.js",{}]
 			]
 extractedLines = []
 

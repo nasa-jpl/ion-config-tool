@@ -62,13 +62,18 @@ export default class IonModel  extends React.Component {
     }
     return null;
   }
+
+  // EXTRACT makeModelObj
   makeModelObj() {
     console.log("makeUserModel net:" + this.state.name);
+
+    // NO EXTRACT
     const hosts = this.props.hosts;
     const ipaddrs = this.props.ipaddrs;
     const graphs = this.props.graphs;
     const nodes = this.props.nodes;
     const configs = this.props.configs;
+    // END NO EXTRACT
     var model = {};    // user model built from current state
 
     model["ionModelName"] = this.state.name;
@@ -131,9 +136,13 @@ export default class IonModel  extends React.Component {
     }
     return model;
   };
+  // END EXTRACT
+  // EXTRACT makeConfigObj
   makeConfigObj(configKey) {
+    // NO EXTRACT
     const configs = this.props.configs;
     const commands = this.props.commands;
+    // END NO EXTRACT
     var config = { commands: [] };
 
     const configObj = configs[configKey];
@@ -151,6 +160,7 @@ export default class IonModel  extends React.Component {
     }
     return config;
   };
+  // END EXTRACT
   makeAlertElem(msg) {
     return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
   };
