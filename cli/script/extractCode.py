@@ -35,7 +35,12 @@ srcAndDest =[
 				["../../editor/src/App.jsx",            "getCloneVal",        ["cloneVals","cmdKey"],            "../src/clone-x.js",{}],
  				["../../editor/src/IonModel.jsx",       "makeModelObj",       ["nodeKey"],                       "../src/makeobj-x.js",\
  				  {'this.state': 'ion'}],
- 				["../../editor/src/IonModel.jsx",       "makeConfigObj",      ["configKey"],                       "../src/makeobj-x.js",{}]
+ 				["../../editor/src/IonModel.jsx",       "makeConfigObj",      ["configKey"],                     "../src/makeobj-x.js",{}],
+				["../../editor/src/NetModel.jsx",       "assignClones",       ["commands","cloneValues"],        "../src/getfunc-x.js",{}],
+				["../../editor/src/NetModel.jsx",       "getHostPorts",       ["hostKey","hosts","ipaddrs","commands"],  "../src/getfunc-x.js",{}],
+				["../../editor/src/NetModel.jsx",       "getNodeInduct",      ["cloneVals","nodeKey","bpLayer"], "../src/getfunc-x.js",{}],
+				["../../editor/src/NetModel.jsx",       "getNodeLink",        ["cloneVals","nodeKey","ltpLayer"],"../src/getfunc-x.js",{}],
+				["../../editor/src/NetModel.jsx",       "getNodeOutduct",     ["cloneVals","nodeKey","toAddr","bpLayer"],"../src/getfunc-x.js",{}]
 			]
 extractedLines = []
 
@@ -135,8 +140,9 @@ for inputf, func, fargs, outputf, strmap in srcAndDest:
 			if (extract_flag):
 				# Skip the line that contains the function 
 				# being extracted; it gets written below
-				# with the args
-				if (line.find(func+"(") > -1):
+				# with the args. Remove all internal space chars
+				# before looking in case the code has them
+				if (line.replace(" ","").find(func+"(") > -1):
 					continue
 
 				# If done extracting this function set

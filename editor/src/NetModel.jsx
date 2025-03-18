@@ -947,6 +947,8 @@ export default class NetModel  extends React.Component {
   };
   // END EXTRACT
   
+
+  // EXTRACT assignClones
   // build clone list for each new cloneVal  (a duplicate of the ionModelLoader function)
   assignClones(commands,cloneValues) {
     const findCloneVal = this.props.findCloneVal;
@@ -980,6 +982,8 @@ export default class NetModel  extends React.Component {
       }
     }
   };
+  // END EXTRACT
+  // EXTRACT getHostPorts
   // get assigned ports of a host
   getHostPorts (hostKey, hosts, ipaddrs, commands) {
     var ports = [];
@@ -1003,6 +1007,9 @@ export default class NetModel  extends React.Component {
     console.log("host: " + hostKey + " ports: " + ports.toString() );
     return ports;
   };
+  // END EXTRACT
+
+  // EXTRACT getNodeInduct
   // find an Induct cloneValue based on nodeKey & type (bpLayer)
   getNodeInduct(cloneVals,nodeKey,bpLayer) {
     var cloneType = bpLayer + "Induct";
@@ -1016,6 +1023,9 @@ export default class NetModel  extends React.Component {
     console.log ("!!! failed to get cloneVal for nodeKey: " + nodeKey + " cloneType: " + cloneType);
     return "";
   };
+  // END EXTRACT
+
+  // EXTRACT getNodeLink
   // find a Link cloneValue based on nodeKey & type (ltpLayer)
   getNodeLink(cloneVals,nodeKey,ltpLayer) {
     var cloneType = ltpLayer + "Link";
@@ -1029,6 +1039,9 @@ export default class NetModel  extends React.Component {
     console.log ("!!! failed to get cloneVal for nodeKey: " + nodeKey + " cloneType: " + cloneType);
     return "";
   };
+  // END EXTRACT
+
+  // EXTRACT getNodeOutduct
   // find an Outduct cloneValue based on nodeKey & toHostKey & type (bpLayer)
   getNodeOutduct(cloneVals,nodeKey,toAddr,bpLayer) {
     var cloneType = bpLayer + "Outduct";
@@ -1046,6 +1059,8 @@ export default class NetModel  extends React.Component {
                  + " toAddr: " + toAddr + " cloneType: " + cloneType) ;
     return "";
   };
+  // END EXTRACT
+  
   getDefaultIPforNode(netNode) {
     const netNodes = this.props.netNodes;
     const netHosts = this.props.netHosts;
