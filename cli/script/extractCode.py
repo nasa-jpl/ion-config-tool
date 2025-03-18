@@ -27,9 +27,15 @@ srcAndDest =[
 					{}],
 				["../../editor/src/IonModelLoader.jsx", "extractCommands",    ["groupKey","configType","configKey","commandsList"],     "../src/ionloader-x.js",\
 					{}],
-				["../../editor/src/IonModelLoader.jsx", "assignClones",       [],                                "../src/ionloader-x.js",{}]
+				["../../editor/src/IonModelLoader.jsx", "assignClones",       [],                                "../src/ionloader-x.js",{}],
+				["../../editor/src/App.jsx",            "makeCloneVal",       ["nodeKey","cmd"],                 "../src/clone-x.js",{}],
+				["../../editor/src/App.jsx",            "makeComboValue",     ["cmd","type"],                    "../src/clone-x.js",{}],
+				["../../editor/src/App.jsx",            "findCloneVal",       ["cloneVals","type","value"],      "../src/clone-x.js",{}],
+				["../../editor/src/App.jsx",            "getAnyCloneVal",     ["cloneVals","type"],              "../src/clone-x.js",{}],
+				["../../editor/src/App.jsx",            "getCloneVal",        ["cloneVals","cmdKey"],            "../src/clone-x.js",{}]
 			]
 extractedLines = []
+
 
 def replace_strs(line, strmap):
     for old_value, new_value in strmap.items():
@@ -43,14 +49,13 @@ def replace_strs(line, strmap):
 #      strmap   - dict of mappings from one string to another
 #
 #  output
-#      out_line - the processed line of text base on order of
+#      out_line - the processed line of text based on order of
 #                 processing rules
 #
 #  This function takes an input string from a file and processes
 #  it according to rules with an implied priority as set out in the
 #  function itself.
 #
-#  The order is as follows:
 #
 def processLine(in_line, strmap):
 	# Set the output to the unprocessed input

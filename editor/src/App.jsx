@@ -252,6 +252,8 @@ export default class App extends React.Component {
       return true;
     return false;
   }
+
+  // EXTRACT makeCloneVal
   // make a clone-able value object (or expression) based on special command types
   makeCloneVal(nodeKey,cmd) {
     var cloneVal = {};
@@ -360,6 +362,9 @@ export default class App extends React.Component {
     console.log("$$$ new cloneVal = " + JSON.stringify(cloneVal));
     return cloneVal;
   }
+  // END EXTRACT
+
+  // EXTRACT makeComboValue
   // make a combined value used for cloning (duct names, endpoints, etc.)
   makeComboValue(cmd,type) {
     console.log("$$$ makeComboVal = " + type + ' ' + cmd.values[0]);
@@ -408,6 +413,9 @@ export default class App extends React.Component {
       combo = cmd.values[0] + ':' + cmd.values[1];
     return combo;
   }
+  // END EXTRACT
+
+  // EXTRACT findCloneVal
   // find a cloneValue based on type & value
   findCloneVal(cloneVals,type,value) {
     if (value === '??')   // just a fake default value
@@ -422,6 +430,8 @@ export default class App extends React.Component {
     console.log ("!!! failed to find cloneVal for type: " + type + "  value: " + value);
     return null;
   }
+  // END EXTRACT
+  // EXTRACT getAnyCloneVal
   // find any cloneValue based on type (defaults for new commands)
   getAnyCloneVal(cloneVals,type) {
     for (var key in cloneVals) {
@@ -433,6 +443,9 @@ export default class App extends React.Component {
     console.log ("!!! found no cloneVal for type: " + type);
     return "";
   }
+  // END EXTRACT
+
+  // EXTRACT getCloneVal
   // find a cloneValue based on type & value
   getCloneVal(cloneVals,cmdKey) {
     for (var key in cloneVals) {
@@ -445,6 +458,7 @@ export default class App extends React.Component {
     console.log ("!!! failed to get cloneVal for cmdKey: " + cmdKey);
     return null;
   }
+  // END EXTRACT
   // delete cloneVals for a deleted Command
   deleteCloneVals(cloneVals,cmdKey) {
     console.log ("!!! deleting cloneVals for cmd: " + cmdKey);
