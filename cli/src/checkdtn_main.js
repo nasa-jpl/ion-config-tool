@@ -76,4 +76,7 @@ function warn(s) {
 function error(s) {
   console.log("Error: "  + s);
 }
+function setError(s) {
+  console.log("Error: "  + s);
+}
 

@@ -43,7 +43,8 @@ export default class NetModelLoader extends React.Component {
       return false;
     return true;
   }
-  extractModel () {
+  // EXTRACT extractModel
+  extractModel() {
     // extract the Net config JSON structure &
     // flatten the data structures for efficient access
 
@@ -55,8 +56,8 @@ export default class NetModelLoader extends React.Component {
     var hops = this.state.netHops;
     var netaddrs = this.props.netAddrs;
 
-    console.log("=== Ingesting user net model.  net: " + JSON.stringify(net));
-    console.log("net WAS: " + JSON.stringify(net));
+    //console.log("=== Ingesting user net model.  net: " + JSON.stringify(net));
+    //console.log("net WAS: " + JSON.stringify(net));
     if(modelObj.hasOwnProperty("netModelName"))
       net.name = modelObj["netModelName"];
     else {
@@ -176,7 +177,7 @@ export default class NetModelLoader extends React.Component {
     };
     return true;
   };
-
+  // END EXTRACT
   makeAlertElem(msg) {
     return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
   };

@@ -197,7 +197,25 @@ function warn(s) {
 function error(s) {
   console.log("Error: "  + s);
 }
+function setError(s) {
+  console.log("Error: "  + s);
+}
 function debug(s) {
   if (debugFlag) 
     console.log("$$$ " + s);
+}
+
+// Called from within extractModel in ionloader.js
+// This is also called in extractModel in IonLoaderModel.js
+// but is treated as a no-op in the UI since there is 
+// already a mechanism to set watch flags there
+function setWatchFlags(configsObj, wflags) {
+    var fname = "";
+    for (cfg in configsObj) {
+    fname = cfg.toString();
+    if (wflags[fname]) {
+      configsObj[fname].commands.push(wflags[fname]);
+    }
+  }
+  return configsObj;
 }

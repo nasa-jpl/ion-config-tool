@@ -5,14 +5,26 @@
 import os
 
 srcAndDest =[
-				["../../editor/src/NetModel.jsx", "checkNetModel",      ["netHosts","netNodes","netHops"], "../src/checknet-x.js",{}],
-				["../../editor/src/App.jsx",      "isGoodName",         ["name"],                          "../src/appfunc-x.js",{}],
-				["../../editor/src/App.jsx",      "isStandardProtocol", ["protocol"],                      "../src/appfunc-x.js",{}],
-				["../../editor/src/App.jsx",      "getUniqId",          [],                                "../src/appfunc-x.js",{}],
-				["../../editor/src/NetModel.jsx", "addCommandKey",      ["configs","configName","cmdKey"], "../src/appfunc-x.js",{}],
-				["../../editor/src/NetModel.jsx", "makeIonCommand",     ["commands","clones","groupKey","configKey","configType","cmdName","values"],"../src/appfunc-x.js",{}],
-				["../../editor/src/NetModel.jsx", "buildIonModel",      ["netName","netDesc","netHosts","netNodes","netHops"],"../src/buildion-x.js",\
-					{'this.state.name': 'netName', 'this.state.desc': 'netDesc'}]			
+				["../../editor/src/NetModel.jsx",       "checkNetModel",      ["netHosts","netNodes","netHops"], "../src/checknet-x.js",{}],
+				["../../editor/src/App.jsx",            "isGoodName",         ["name"],                          "../src/appfunc-x.js",{}],
+				["../../editor/src/App.jsx",            "isStandardProtocol", ["protocol"],                      "../src/appfunc-x.js",{}],
+				["../../editor/src/App.jsx",            "getUniqId",          [],                                "../src/appfunc-x.js",{}],
+				["../../editor/src/NetModel.jsx",       "addCommandKey",      ["configs","configName","cmdKey"], "../src/appfunc-x.js",{}],
+				["../../editor/src/NetModel.jsx",       "makeIonCommand",     ["commands","clones","groupKey","configKey","configType","cmdName","values"],"../src/appfunc-x.js",{}],
+				["../../editor/src/NetModel.jsx",       "buildIonModel",      ["netName","netDesc","netHosts","netNodes","netHops"],"../src/buildion-x.js",\
+					{'this.state.name': 'netName', 'this.state.desc': 'netDesc'}],
+				["../../editor/src/IonModel.jsx",       "getIonVerSeqNo",     ["nodeKey"],                       "../src/ionfunc-x.js",{}],
+				["../../editor/src/IonModel.jsx",       "makeCmdLine",        ["cmdTypeKey","cmdParams"],        "../src/ionfunc-x.js",{}],
+				["../../editor/src/IonModel.jsx",       "makeCmdLines",       ["configKey"],                     "../src/ionfunc-x.js",\
+					{'this.state.name': 'ion.name', 'this.state.desc': 'ion.desc'}],
+				["../../editor/src/IonModel.jsx",       "makeStartLines",     ["nodeKey"],                       "../src/ionfunc-x.js",\
+					{'this.state.name': 'ion.name', 'this.state.currentContacts': 'ion.currentContacts', 'this.props.nodes': 'nodes'}],
+				["../../editor/src/IonModel.jsx",       "makeParamNote",     ["pTypeKey","pIdx","paramVal"],     "../src/ionfunc-x.js",\
+					{}],
+				["../../editor/src/NetModelLoader.jsx", "extractModel",     ["modelObj"],     "../src/netloader-x.js",\
+					{'this.state.modelJson': 'modelObj','this.state.netHosts': '{}', 'this.state.netNodes': '{}','this.state.netHops': '{}','this.state.net': '{}','this.props.netAddrs': '[]', 'return true': 'return [ net, hosts, nodes, hops, addrs]'}],
+				["../../editor/src/IonModelLoader.jsx", "extractModel",     ["modelObj"],     "../src/ionloader-x.js",\
+					{}]
 			]
 extractedLines = []
 
@@ -21,12 +33,39 @@ def replace_strs(line, strmap):
         line = line.replace(old_value, new_value)
     return line
 
+## processLine
+#
+#  inputs
+#      in_line  - line of text to be processed
+#      strmap   - dict of mappings from one string to another
+#
+#  output
+#      out_line - the processed line of text base on order of
+#                 processing rules
+#
+#  This function takes an input string from a file and processes
+#  it according to rules with an implied priority as set out in the
+#  function itself.
+#
+#  The order is as follows:
+#
 def processLine(in_line, strmap):
 	# Set the output to the unprocessed input
 	out_line = in_line
 
-	# Any line with 'this.props' that is not also a function 
+    # PRIORITY 1
+    # Any line with variables must be replaced with a local
+    # variable (probably passed in) according to the supplied
+    # string map. NOTE: All state variables *must* be accounted
+    # for, some property variables *may* be accounted for
+	if (out_line.find("this.state.") > -1 or out_line.find("this.props.")):
+		out_line = replace_strs(out_line, strmap)
+
+    # PRIORITY 2
+	# Any line with 'this.props' AND is not a function 
 	# must be passed into the non-GUI function
+	# NOTE: string replacements from the strmap input have already
+	# been done, so looking for 'this.props' should be benign
 	if (out_line.find("this.props.") > -1 and out_line.find("(") == -1 ):
 		## skip line
 		return("")
@@ -34,16 +73,12 @@ def processLine(in_line, strmap):
 		## strip out "this.props."
 		out_line = out_line.replace("this.props.", "")
 
+    # PRIORITY 3
 	# Any line with "this." not followed by "props." is a function
 	# call, strip out "this."
 	if  (out_line.find("this.") > -1 and out_line.find("props.") == -1):
 		out_line = out_line.replace("this.", "")
 
-    # Any line with state variables must be replaced with a local
-    # variable (probably passed in) according to the supplied
-    # string map.
-	if (in_line.find("this.state.") > -1):
-		out_line = replace_strs(out_line, strmap)
 
 	return(out_line)
 
@@ -130,11 +165,12 @@ for inputf, func, fargs, outputf, strmap in srcAndDest:
 
 			searchStr = "// EXTRACT "+func
 
-			# If the EXTRACT key is found with the function
-			# being extracted, format function call with args
-			# write it and set the extract flag
-			if (line.find(searchStr) > -1):
-				print (line)
+			# If the EXTRACT key with the function
+			# being extracted has an exact match, format
+			# function call with args write it and set
+			# the extract flag
+			if (line.strip() == searchStr):
+				# print (line)
 				outpf.write("// Automatically extracted from source file "+inputf+"\n")
 				outpf.write("function "+func+"("+delimeter.join(fargs)+") {\n")
 				extract_flag = True

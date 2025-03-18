@@ -155,6 +155,7 @@ export default class IonModel  extends React.Component {
     return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
   };
   // tranlsate version to sequence number for command effectivity
+  // EXTRACT getIonVerSeqNo
   getIonVerSeqNo(nodeKey) {
     console.log("getIonVerSeqNo for:" + nodeKey);
     const nodes = this.props.nodes;
@@ -178,6 +179,7 @@ export default class IonModel  extends React.Component {
     }
     return 0;                       
   };
+  // END EXTRACT
   isOptional(paramTypeKey) {
     const paramType = paramTypes[paramTypeKey];
     return paramType.optional;
@@ -285,6 +287,8 @@ export default class IonModel  extends React.Component {
       />  
     );  
   }
+
+  // EXTRACT makeParamNote
   // build ION parameter annotation (commands file format)
   makeParamNote(pTypeKey,pIdx,paramVal) {
     // define padit here, because "this" can be weird
@@ -319,6 +323,8 @@ export default class IonModel  extends React.Component {
     //console.log("param Note " + pTypeKey + " " + note);
     return note;
   }
+  // END EXTRACT
+  // EXTRACT makeCmdLine
   // builds ION command text (commands file format)
   makeCmdLine(cmdTypeKey,cmdParams) {
     // console.log("makeCmdLine cmdTypeKey: " + cmdTypeKey + "  Params : " + JSON.stringify(cmdParams));
@@ -329,8 +335,9 @@ export default class IonModel  extends React.Component {
     for (var i = 0; i < cmdParams.length; i++) {
       //console.log("makeCmdLine Pattern: " + cmdPattern + " tgt: " + cmdTypeKey + "  " + targets[i] + "  " + cmdParams[i]);
       var paramTypeKey = cmdType.paramTypes[i];
+      let paramType = paramTypes[paramTypeKey];
       if (cmdParams[i] === "")
-        if (this.isOptional(paramTypeKey))
+        if (paramType.optional)
           cmdPattern = cmdPattern.replace(targets[i],"");
         else
           cmdPattern = cmdPattern.replace(targets[i],"??");
@@ -339,7 +346,10 @@ export default class IonModel  extends React.Component {
     }
     //console.log("cmd Type pattern " + cmdTypeKey + " " + cmd);
     return cmdPattern;
-  }
+  };
+  // END EXTRACT
+
+  // EXTRACT makeCmdLines
   makeCmdLines(configKey) {
     console.log("makeCmdLines for: " + configKey);
     const configObj = this.props.configs[configKey];
@@ -397,7 +407,10 @@ export default class IonModel  extends React.Component {
       cmdLines.push(this.makeCmdLine(cmdTypeKey,cmdVals));
     }
     return cmdLines;
-  }
+  };
+  // END EXTRACT
+
+  // EXTRACT makeStartLines
   // build the start script text lines for a node
   makeStartLines(nodeKey) {
     let node = this.props.nodes[nodeKey];
@@ -456,6 +469,7 @@ export default class IonModel  extends React.Component {
     cmdLines.push('bpecho   ipn:' + nodeId + '.3 &');
     return cmdLines;
   }
+  // END EXTRACT
   // build and return a Config file element
   makeConfigElem(configKey,cmdKeys,cmdsList) {
     const config = this.props.configs[configKey];

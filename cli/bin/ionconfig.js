@@ -149,9 +149,19 @@ for (var pType in paramTypes) {
 }
 
 // build hosts, nodes, configs, etc. from model
+
+////////////////////////
+// In ionloader.js
 extractIonModel(json);
+////////////////////////
+
 console.log("Checking user ion model.");
+
+///////////////////////
+// In checkion.js
 var errors = checkIonModel();
+///////////////////////
+
 if (errors.length) {
   console.log("Validation errors.");
   for (let i=0; i<errors.length; i++) {
@@ -174,7 +184,11 @@ console.log("config files:  " + Object.keys(configs));
 console.log("---");
 
 console.log("Build and save all configurations.");
+
+//////////////////////
+// In allconfigs.js
 saveAllConfigs();
+/////////////////////
 
 console.log("---");
 console.log("Done.");
@@ -186,9 +200,27 @@ function warn(s) {
 function error(s) {
   console.log("Error: "  + s);
 }
+function setError(s) {
+  console.log("Error: "  + s);
+}
 function debug(s) {
   if (debugFlag) 
     console.log("$$$ " + s);
+}
+
+// Called from within extractModel in ionloader.js
+// This is also called in extractModel in IonLoaderModel.js
+// but is treated as a no-op in the UI since there is 
+// already a mechanism to set watch flags there
+function setWatchFlags(configsObj, wflags) {
+    var fname = "";
+    for (cfg in configsObj) {
+    fname = cfg.toString();
+    if (wflags[fname]) {
+      configsObj[fname].commands.push(wflags[fname]);
+    }
+  }
+  return configsObj;
 }
 // NOTE: compare to extractModel of IonConfig IonModelLoader.jsx
 function extractIonModel (modelObj) {
@@ -274,12 +306,7 @@ function extractIonModel (modelObj) {
     var configsObj = nodeObj.configs;
 
     // check for watch flags requested on the command line
-    for (cfg in configsObj) {
-      fname = cfg.toString();
-      if (wflags[fname]) {
-        configsObj[fname].commands.push(wflags[fname]);
-      }
-    }
+    configsObj = setWatchFlags(configsObj, wflags);
 
     debug_log("node configs=" + JSON.stringify(configsObj) );
     const configKeyList = extractConfigs(nodeKey,configsObj);

@@ -44,10 +44,13 @@ export default class IonModelLoader extends React.Component {
     newState.errMsg = msg;
     this.setState (newState);
   };
-  extractModel () {
+
+  // EXTRACT extractModel
+  extractModel() {
     // extract the Ion config JSON structure &
     // flatten the data structures for efficient access
 
+    // NO EXTRACT
     // make short names for state objects
     const modelObj = this.state.modelJson;
     var ion = this.state.ion;
@@ -59,6 +62,7 @@ export default class IonModelLoader extends React.Component {
 
     console.log("=== Ingesting user ion model.  ion: " + JSON.stringify(ion));
     console.log("ion WAS: " + JSON.stringify(ion));
+    // END NO EXTRACT
     if(modelObj.hasOwnProperty("ionModelName"))
       ion.name = modelObj["ionModelName"];
     else {
@@ -136,6 +140,10 @@ export default class IonModelLoader extends React.Component {
 
       console.log("node item=" + JSON.stringify(nodeObj) );
       var configsObj = nodeObj.configs;
+      // NO EXTRACT
+      var wflags = {};
+      // END NO EXTRACT
+      configsObj = this.setWatchFlags(configsObj, wflags);
       console.log("node configs=" + JSON.stringify(configsObj) );
       const configKeyList = this.extractConfigs(nodeKey,configsObj);
       console.log("Node got configKeys: " + configKeyList);
@@ -187,6 +195,7 @@ export default class IonModelLoader extends React.Component {
     this.assignClones();   // analyze full new command set for cloneVal dependents
     return true;
   };
+  // END EXTRACT
   extractConfigs(groupKey,configsObj) {
     // groupKey is for a group of configs (a node or contacts)
     console.log("extractConfigs groupKey:" + groupKey);
@@ -393,8 +402,12 @@ export default class IonModelLoader extends React.Component {
       this.setError("Failed to load the Ion Model file.");
     }
   };
-}
+  setWatchFlags(configsObj, dummy) {
+    // No-op in GUI code, see CLI code ionconfig.js for function
+    return(configsObj);
+  };
 
+}
 IonModelLoader.propTypes = {
   getUniqId: PropTypes.func.isRequired,     // func to make a uniq id
   makeCloneVal: PropTypes.func.isRequired,  // func to make a cloneVal
