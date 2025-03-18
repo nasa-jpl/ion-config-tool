@@ -226,6 +226,7 @@ export default class IonModelLoader extends React.Component {
     return keyList;   // return list of configKeys
   }
 
+  // EXTRACT extractCommands
   // extract JSON config definition & build config with commands & cloneValues
  // extractCommands (nodeIdx,configKey) {
   extractCommands(groupKey,configType,configKey,commandsList) {
@@ -235,9 +236,12 @@ export default class IonModelLoader extends React.Component {
     //console.log("extractCommands commandsObj:" + JSON.stringify(commandsList) );
     if (commandsList === undefined) { commandsList = []; }
     var keyList = [];
+
+    // NO EXTRACT
     // make short names for state objects
     var commands = this.state.commands;
     var cloneValues = this.state.cloneValues;
+    // END NO EXTRACT
 
     //console.log("commands list=" + JSON.stringify(commandsList) );
     for (let i = 0; i < commandsList.length; i++) {
@@ -271,13 +275,19 @@ export default class IonModelLoader extends React.Component {
     }
     return keyList;    // return list of cmdKeys
   };
+  // END EXTRACT
+
+  // EXTRACT assignClones
   // review all commands for cloneVal sources and cloneVal dependents
   assignClones() {
+
+    // NO EXTRACT
     // make short names for state objects
     var commands = this.state.commands;
     var cloneValues = this.state.cloneValues;
     const findCloneVal = this.props.findCloneVal;
-
+    // END NO EXTRACT
+    
    // identify commands dependent on cloneValues
     // and push them on to the cloneValue list for update notifications
     console.log("=== Identify clones using cloneValues from user ion model.");
@@ -307,6 +317,7 @@ export default class IonModelLoader extends React.Component {
       }
     }
   };
+  // END EXTRACT
   makeAlertElem(msg) {
     return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
   };

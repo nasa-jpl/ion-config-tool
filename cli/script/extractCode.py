@@ -19,12 +19,15 @@ srcAndDest =[
 					{'this.state.name': 'ion.name', 'this.state.desc': 'ion.desc'}],
 				["../../editor/src/IonModel.jsx",       "makeStartLines",     ["nodeKey"],                       "../src/ionfunc-x.js",\
 					{'this.state.name': 'ion.name', 'this.state.currentContacts': 'ion.currentContacts', 'this.props.nodes': 'nodes'}],
-				["../../editor/src/IonModel.jsx",       "makeParamNote",     ["pTypeKey","pIdx","paramVal"],     "../src/ionfunc-x.js",\
+				["../../editor/src/IonModel.jsx",       "makeParamNote",      ["pTypeKey","pIdx","paramVal"],    "../src/ionfunc-x.js",\
 					{}],
-				["../../editor/src/NetModelLoader.jsx", "extractModel",     ["modelObj"],     "../src/netloader-x.js",\
+				["../../editor/src/NetModelLoader.jsx", "extractModel",       ["modelObj"],                      "../src/netloader-x.js",\
 					{'this.state.modelJson': 'modelObj','this.state.netHosts': '{}', 'this.state.netNodes': '{}','this.state.netHops': '{}','this.state.net': '{}','this.props.netAddrs': '[]', 'return true': 'return [ net, hosts, nodes, hops, addrs]'}],
-				["../../editor/src/IonModelLoader.jsx", "extractModel",     ["modelObj"],     "../src/ionloader-x.js",\
-					{}]
+				["../../editor/src/IonModelLoader.jsx", "extractModel",       ["modelObj"],                      "../src/ionloader-x.js",\
+					{}],
+				["../../editor/src/IonModelLoader.jsx", "extractCommands",    ["groupKey","configType","configKey","commandsList"],     "../src/ionloader-x.js",\
+					{}],
+				["../../editor/src/IonModelLoader.jsx", "assignClones",       [],                                "../src/ionloader-x.js",{}]
 			]
 extractedLines = []
 
