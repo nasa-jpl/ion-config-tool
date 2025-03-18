@@ -1,3 +1,4 @@
+// Not automatically extracted. CLI specific code.
 function saveModel(modelName, modelObj) {
   debug("save ION model!");
   const modelJson = JSON.stringify(modelObj,null,2);

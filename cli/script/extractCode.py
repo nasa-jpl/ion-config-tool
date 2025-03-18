@@ -40,7 +40,9 @@ srcAndDest =[
 				["../../editor/src/NetModel.jsx",       "getHostPorts",       ["hostKey","hosts","ipaddrs","commands"],  "../src/getfunc-x.js",{}],
 				["../../editor/src/NetModel.jsx",       "getNodeInduct",      ["cloneVals","nodeKey","bpLayer"], "../src/getfunc-x.js",{}],
 				["../../editor/src/NetModel.jsx",       "getNodeLink",        ["cloneVals","nodeKey","ltpLayer"],"../src/getfunc-x.js",{}],
-				["../../editor/src/NetModel.jsx",       "getNodeOutduct",     ["cloneVals","nodeKey","toAddr","bpLayer"],"../src/getfunc-x.js",{}]
+				["../../editor/src/NetModel.jsx",       "getNodeOutduct",     ["cloneVals","nodeKey","toAddr","bpLayer"],"../src/getfunc-x.js",{}],
+				["../../editor/src/IonModel.jsx",       "checkModel",         [],                                "../src/checkion-x.js",\
+					{"this.props.name": "ion.name"}]
 			]
 extractedLines = []
 
