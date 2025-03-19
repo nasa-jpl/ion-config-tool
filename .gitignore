@@ -18,3 +18,5 @@ package.json
 /tars
 /test
 /*.swp
+/cli/src/auto/*.js
+
