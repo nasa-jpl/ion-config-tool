@@ -924,15 +924,19 @@ export default class IonModel  extends React.Component {
     }
     return <Table striped condensed hover>{headElem}<tbody>{alertElemList}</tbody></Table>;
   };
+
+  // EXTRACT checkModel
   // check model for errors
   checkModel() {
     let alerts = [];
     const modelName = this.props.name;
+    // NO EXTRACT
     const hosts = this.props.hosts;
     const nodes = this.props.nodes;
     const graphs = this.props.graphs;
     const configs = this.props.configs;
     const commands = this.props.commands;
+    // END NO EXTRACT
     // Model-level
     if (Object.keys(graphs).length === 0)
       alerts.push({"type": "IonModel", "name": modelName, "level":"warn", "msg":"No graphs created."});
@@ -1025,7 +1029,6 @@ export default class IonModel  extends React.Component {
           // check for missing command parameters
           let cmdObj = commands[cmdKey];
           let cmdStr = this.makeCmdLine(cmdTypeKey,cmdObj.values);
-          console.log("cmdStr: " + cmdStr);
           if (cmdStr.indexOf("??") > -1) {
             let msg = "Missing parameter(s).";
             let cmdTag = nodeKey + "." + cmdTypeKey;
@@ -1075,6 +1078,7 @@ export default class IonModel  extends React.Component {
 
     return alerts;
   }
+  // END EXTRACT
   makeSelectFormElem(val,handler,options) {
     var form =
       <FormControl

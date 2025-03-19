@@ -1104,13 +1104,10 @@ function makeParamNote(pTypeKey,pIdx,paramVal) {
   return note;
 }
 // NOTE: compare to makecCmdLine of IonConfig IonModel.jsx
-//  NOTE: Conpare to saveConfigs of IonModel.jsx
+// Not automatically extracted, likely not to change in GUI
+// See saveConfigs in IonModel.jsx for similarities and
+// differences.
 function saveAllConfigs() {
-  console.log("let's save all config files in a zip file!");
-  //var zip = new JSZip();
-  //var rootdir = zip.folder(ion.name);   // the network name
-  // fs.mkdirsSync(ion.name);   // the network name
-  // build common contact graph
   try 
     { fs.mkdirSync(ion.name); }  // the network name
   catch (err)

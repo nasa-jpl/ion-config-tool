@@ -1,52 +1,346 @@
 #! /usr/bin/python3
 #
 #
-
+#
+# extractCode.py
+#
+# This script is run as part of the build process to extract code from
+# the GUI editor source and format it appropriately for use by the
+# CLI tools. This ensures that if changes are made to the GUI code
+# the CLI tools are kept up to date. Proir to this script, the process
+# was manual and error prone causing updates to the CLI tools
+# to be incorrect or completely missed altogether. 
+#
+# The parts of the GUI code to be extracted are marked by keywords
+# in the comments to indicate that they are part of the CLI tools.
+# 
+# The keywords in the GUI code and their meanings:
+#
+#    // EXTRACT theFunctionName - indicates that the following
+#                                 function called 'theFunctionName'
+#                                 is used by the CLI tools and is part
+#                                 of the extraction. 'theFunctionName'
+#                                 needs to be specified in the Python
+#                                 array defined in this script to be
+#                                 successfully extracted.
+#    // END EXTRACT             - indicates the end of the extraction
+#                                 and should appear after the last
+#                                 close squiggly bracket for the
+#                                 function being extracted.
+#    // NO EXTRACT              - appears between the EXTRACT and
+#                                 END EXTRACT keywords indicating
+#                                 that the code immediately following
+#                                 is NOT part of the CLI tools and
+#                                 should not be extracted
+#    // END NO EXTRACT          - appears after the NO EXTRACT keyword
+#                                 but before the end of the function
+#                                 being extracted indicating that the
+#                                 code extraction should continue
+#
+# SPECIFYING WHAT GETS EXTRACTED
+#
+# The srcAndDest Python array is used to specify what functions in the
+# GUI code are to be extracted, optional parameters to be added to the
+# function call that are needed by the CLI tools, any string substitutions
+# that need to be made to make the function work properly and the 
+# destination script that the extracted code is appended to.
+#
+# EXTRACTION ARRAY DEFINITION
+#
+# srcAndDest is an array of arrays where each array has five
+# elements as defined below:
+#
+# ELEMENT 1 - STRING: The GUI source file from which code is to be extracted
+# ELEMENT 2 - STRING: The name of the function to be extracted. It should 
+#                     match exactly the name found in the GUI code. The name 
+#                     is preserved during the extraction
+# ELEMENT 3 - ARRAY:  The arguments to be specified as part of the function
+#                     definition. These may be different from the GUI code
+#                     since the CLI code may not have access to React objects
+#                     that are defined in the GUI and, thus, must be passed
+#                     to the function to operate correctly. This array may
+#                     be empty if the function has no arguments
+# ELEMENT 4 - STRING: The destination script for the extracted code. The
+#                     files are opened as 'append'.
+# ELEMENT 4 - OBJECT: A dictionary that specified strings in the source script
+#                     that should be replaced with strings for the CLI
+#                     script.
+#
+# EXAMPLE srcAndDest ARRAY:
+#
+# srcAndDest = [
+#                [
+#                  "MySourceFile.jsx", 
+#                  "theFunctionName", 
+#                  ["arg1","arg2","arg3"], 
+#                  "MyDestFile.js", 
+#                  {"this string": "that string"}
+#                ],
+#                [
+#                  "MySourceFile2.jsx". 
+#                  "theOtherFunction", 
+#                  [], 
+#                  "MyDestFile.js", 
+#                  {}
+#                ]
+#              ]
+#
+# In regular English:
+# MySourceFile.jsx contains a function called theFunctionName
+# that should be extracted with the arguments arg1, arg2 and arg3 
+# appearing in the destination script. The function should be appended 
+# to MyDestFile.js and all instances of 'this string' should be 
+# replaced with 'that string'.
+# 
+# MySourceFile2.jsx contains a function called theOtherFunction that
+# has no arguments in the destination script. The function should be 
+# appended to MyDestFile.js and there are no string replacements.
+#                        
 import os
 
-srcAndDest =[
-				["../../editor/src/NetModel.jsx",       "checkNetModel",      ["netHosts","netNodes","netHops"], "../src/checknet-x.js",{}],
-				["../../editor/src/App.jsx",            "isGoodName",         ["name"],                          "../src/appfunc-x.js",{}],
-				["../../editor/src/App.jsx",            "isStandardProtocol", ["protocol"],                      "../src/appfunc-x.js",{}],
-				["../../editor/src/App.jsx",            "getUniqId",          [],                                "../src/appfunc-x.js",{}],
-				["../../editor/src/NetModel.jsx",       "addCommandKey",      ["configs","configName","cmdKey"], "../src/appfunc-x.js",{}],
-				["../../editor/src/NetModel.jsx",       "makeIonCommand",     ["commands","clones","groupKey","configKey","configType","cmdName","values"],"../src/appfunc-x.js",{}],
-				["../../editor/src/NetModel.jsx",       "buildIonModel",      ["netName","netDesc","netHosts","netNodes","netHops"],"../src/buildion-x.js",\
-					{'this.state.name': 'netName', 'this.state.desc': 'netDesc'}],
-				["../../editor/src/IonModel.jsx",       "getIonVerSeqNo",     ["nodeKey"],                       "../src/ionfunc-x.js",{}],
-				["../../editor/src/IonModel.jsx",       "makeCmdLine",        ["cmdTypeKey","cmdParams"],        "../src/ionfunc-x.js",{}],
-				["../../editor/src/IonModel.jsx",       "makeCmdLines",       ["configKey"],                     "../src/ionfunc-x.js",\
-					{'this.state.name': 'ion.name', 'this.state.desc': 'ion.desc'}],
-				["../../editor/src/IonModel.jsx",       "makeStartLines",     ["nodeKey"],                       "../src/ionfunc-x.js",\
-					{'this.state.name': 'ion.name', 'this.state.currentContacts': 'ion.currentContacts', 'this.props.nodes': 'nodes'}],
-				["../../editor/src/IonModel.jsx",       "makeParamNote",      ["pTypeKey","pIdx","paramVal"],    "../src/ionfunc-x.js",\
-					{}],
-				["../../editor/src/NetModelLoader.jsx", "extractModel",       ["modelObj"],                      "../src/netloader-x.js",\
-					{'this.state.modelJson': 'modelObj','this.state.netHosts': '{}', 'this.state.netNodes': '{}','this.state.netHops': '{}','this.state.net': '{}','this.props.netAddrs': '[]', 'return true': 'return [ net, hosts, nodes, hops, addrs]'}],
-				["../../editor/src/IonModelLoader.jsx", "extractModel",       ["modelObj"],                      "../src/ionloader-x.js",\
-					{}],
-				["../../editor/src/IonModelLoader.jsx", "extractCommands",    ["groupKey","configType","configKey","commandsList"],     "../src/ionloader-x.js",\
-					{}],
-				["../../editor/src/IonModelLoader.jsx", "assignClones",       [],                                "../src/ionloader-x.js",{}],
-				["../../editor/src/App.jsx",            "makeCloneVal",       ["nodeKey","cmd"],                 "../src/clone-x.js",{}],
-				["../../editor/src/App.jsx",            "makeComboValue",     ["cmd","type"],                    "../src/clone-x.js",{}],
-				["../../editor/src/App.jsx",            "findCloneVal",       ["cloneVals","type","value"],      "../src/clone-x.js",{}],
-				["../../editor/src/App.jsx",            "getAnyCloneVal",     ["cloneVals","type"],              "../src/clone-x.js",{}],
-				["../../editor/src/App.jsx",            "getCloneVal",        ["cloneVals","cmdKey"],            "../src/clone-x.js",{}],
- 				["../../editor/src/IonModel.jsx",       "makeModelObj",       ["nodeKey"],                       "../src/makeobj-x.js",\
- 				  {'this.state': 'ion'}],
- 				["../../editor/src/IonModel.jsx",       "makeConfigObj",      ["configKey"],                     "../src/makeobj-x.js",{}],
-				["../../editor/src/NetModel.jsx",       "assignClones",       ["commands","cloneValues"],        "../src/getfunc-x.js",{}],
-				["../../editor/src/NetModel.jsx",       "getHostPorts",       ["hostKey","hosts","ipaddrs","commands"],  "../src/getfunc-x.js",{}],
-				["../../editor/src/NetModel.jsx",       "getNodeInduct",      ["cloneVals","nodeKey","bpLayer"], "../src/getfunc-x.js",{}],
-				["../../editor/src/NetModel.jsx",       "getNodeLink",        ["cloneVals","nodeKey","ltpLayer"],"../src/getfunc-x.js",{}],
-				["../../editor/src/NetModel.jsx",       "getNodeOutduct",     ["cloneVals","nodeKey","toAddr","bpLayer"],"../src/getfunc-x.js",{}],
-				["../../editor/src/IonModel.jsx",       "checkModel",         [],                                "../src/checkion-x.js",\
-					{"this.props.name": "ion.name"}]
-			]
-extractedLines = []
+# Description of this array is in the header
+srcAndDest = [
+				[
+				  "../../editor/src/NetModel.jsx",
+				  "checkNetModel",
+				  ["netHosts","netNodes","netHops"], 
+				  "../src/auto/checknet-x.js",
+				  {}
+				],
 
+				[
+				  "../../editor/src/App.jsx",
+				  "isGoodName",
+				  ["name"],
+				  "../src/auto/appfunc-x.js",
+				  {}
+				 ],
 
+				[
+				  "../../editor/src/App.jsx",
+				  "isStandardProtocol",
+				  ["protocol"],
+				  "../src/auto/appfunc-x.js",
+				  {}
+				 ],
+				
+				[
+				  "../../editor/src/App.jsx",
+				  "getUniqId",
+				  [],
+				  "../src/auto/appfunc-x.js",
+				  {}
+				 ],
+				
+				[
+				  "../../editor/src/NetModel.jsx",
+				  "addCommandKey",
+				  ["configs","configName","cmdKey"],
+				  "../src/auto/appfunc-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/NetModel.jsx",
+				  "makeIonCommand",
+				  [
+				    "commands","clones","groupKey","configKey","configType",
+				    "cmdName","values"
+				  ],
+				  "../src/auto/appfunc-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/NetModel.jsx",
+				  "buildIonModel",
+				  ["netName","netDesc","netHosts","netNodes","netHops"],
+				  "../src/auto/buildion-x.js",
+				  {'this.state.name': 'netName',
+				   'this.state.desc': 'netDesc'}
+				],
+				
+				["../../editor/src/IonModel.jsx",
+				 "getIonVerSeqNo",
+				  ["nodeKey"],
+				  "../src/auto/ionfunc-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/IonModel.jsx",
+				  "makeCmdLine",
+				  ["cmdTypeKey","cmdParams"],
+				  "../src/auto/ionfunc-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/IonModel.jsx",
+				  "makeCmdLines",
+				  ["configKey"],
+				  "../src/auto/ionfunc-x.js",
+				  {'this.state.name': 'ion.name',
+				   'this.state.desc': 'ion.desc'}
+				],
+				
+				[
+				  "../../editor/src/IonModel.jsx",
+				  "makeStartLines",
+				  ["nodeKey"],
+				  "../src/auto/ionfunc-x.js",
+				  {'this.state.name':            'ion.name', 
+				   'this.state.currentContacts': 'ion.currentContacts', 
+				   'this.props.nodes':           'nodes'}
+				],
+				
+				[
+				  "../../editor/src/IonModel.jsx",
+				  "makeParamNote",
+				  ["pTypeKey","pIdx","paramVal"],
+				  "../src/auto/ionfunc-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/NetModelLoader.jsx",
+				  "extractModel",
+				  ["modelObj"],
+				  "../src/auto/netloader-x.js",
+				  {'this.state.modelJson': 'modelObj',
+				   'this.state.netHosts':  '{}',
+				   'this.state.netNodes':  '{}',
+				   'this.state.netHops':   '{}',
+				   'this.state.net':       '{}',
+				   'this.props.netAddrs':  '[]',
+				   'return true':          'return [net,hosts,nodes,hops,addrs]'}
+				],
+				
+				[
+				  "../../editor/src/IonModelLoader.jsx",
+				  "extractModel",
+				  ["modelObj"],
+				  "../src/auto/ionloader-x.js",
+				  {}
+				],
+				
+				["../../editor/src/IonModelLoader.jsx",
+				 "extractCommands",
+				 ["groupKey","configType","configKey","commandsList"],"../src/auto/ionloader-x.js",
+				 {}
+				],
+				
+				["../../editor/src/IonModelLoader.jsx",
+				 "assignClones",
+				 [],"../src/auto/ionloader-x.js",
+				 {}
+				],
+				
+				[
+				  "../../editor/src/App.jsx",
+				  "makeCloneVal",
+				  ["nodeKey","cmd"],
+				  "../src/auto/clone-x.js",
+				  {}
+				],
+				
+				[
+				 "../../editor/src/App.jsx",
+				 "makeComboValue",
+				  ["cmd","type"],
+				  "../src/auto/clone-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/App.jsx","findCloneVal",
+				  ["cloneVals","type","value"],
+				  "../src/auto/clone-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/App.jsx",
+				  "getAnyCloneVal",
+				  ["cloneVals","type"],
+				  "../src/auto/clone-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/App.jsx",
+				  "getCloneVal",
+				  ["cloneVals","cmdKey"],            
+				  "../src/auto/clone-x.js",{}
+				],
+ 				
+ 				[
+ 				  "../../editor/src/IonModel.jsx",       
+ 				  "makeModelObj",
+ 				  ["nodeKey"],                       
+ 				  "../src/auto/makeobj-x.js",
+ 				  {'this.state': 'ion'}
+ 				],
+ 				
+ 				[
+ 				  "../../editor/src/IonModel.jsx",
+ 				  "makeConfigObj",
+ 				  ["configKey"],
+ 				  "../src/auto/makeobj-x.js",
+ 				  {}
+ 				],
+				
+				[
+				  "../../editor/src/NetModel.jsx",       
+				  "assignClones",
+				  ["commands","cloneValues"],        
+				  "../src/auto/getfunc-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/NetModel.jsx",       
+				  "getHostPorts",
+				  ["hostKey","hosts","ipaddrs","commands"], 
+				  "../src/auto/getfunc-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/NetModel.jsx",       
+				  "getNodeInduct",
+				  ["cloneVals","nodeKey","bpLayer"], 
+				  "../src/auto/getfunc-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/NetModel.jsx",       
+				  "getNodeLink",
+				  ["cloneVals","nodeKey","ltpLayer"],
+				  "../src/auto/getfunc-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/NetModel.jsx",       
+				  "getNodeOutduct",
+				  ["cloneVals","nodeKey","toAddr","bpLayer"],
+				  "../src/auto/getfunc-x.js",
+				  {}
+				],
+				
+				[
+				  "../../editor/src/IonModel.jsx",       
+				  "checkModel",
+				  [],                                
+				  "../src/auto/checkion-x.js",
+				  {"this.props.name": "ion.name"}
+				]
+			 ]
+
+# Utility function for replacing strings according
+# to a string map expressed as a dictionary
 def replace_strs(line, strmap):
     for old_value, new_value in strmap.items():
         line = line.replace(old_value, new_value)
@@ -100,30 +394,48 @@ def processLine(in_line, strmap):
 
 	return(out_line)
 
-
+## removeFiles
+#
+# inputs none
+# outputs none
+#
+# This function deletes the destination scripts from
+# the filesystem in preparation for regeneration.
+#
 def removeFiles():
 	for w, x, y, file, z in srcAndDest:
 		if os.path.exists(file):
 			os.remove(file)
 		else:
-			print(file+" not found.")
+			print(file+" not found, continuing.")
 	return
+
+# Main script logic
 
 print("Deleting files...")
 
+# Delete the destination scripts, they are about
+# to be regenerated.
 removeFiles()
 
+# Got through the srcAndDest specification and generate
+# all CLI source scripts.
 for inputf, func, fargs, outputf, strmap in srcAndDest:
 	print("opening " +inputf+" looking for "+func)
 	print("opening "+outputf+" for "+inputf)
-	print("****** "+str(strmap))
 
+    # Open the input GUI source file. Any
+    # error encountered results in script
+    # termination.
 	try:
 		inpf = open(inputf, "r")
 	except:
 		print("Error opening "+inputf)
 		exit()
 
+    # Open the output file for append.
+    # Any error encountered results
+    # in script termination.
 	try:
 		outpf = open(outputf, "a")
 	except:
@@ -133,11 +445,23 @@ for inputf, func, fargs, outputf, strmap in srcAndDest:
 
 	print("Opened "+inputf+" and "+outputf)
 
+    # Set up for the extraction by setting the flag
+    # to indicate extraction is not active.
 	extract_flag = False
+
+	# The delimeter between function arguments.
 	delimeter =","
 
+    # Begin extraction one by one according to the
+    # srcAndDest array. Any errors are reported back
+    # and script is terminated. 
 	try:
+		# Set the mid extraction temporary pause
+		# flag
 		no_extract = False
+
+		# Go through the source looking for the function
+		# to extract
 		for line in inpf:
 			if (extract_flag):
 				# Skip the line that contains the function 
@@ -190,8 +514,12 @@ for inputf, func, fargs, outputf, strmap in srcAndDest:
 			# the extract flag
 			if (line.strip() == searchStr):
 				# print (line)
+				# Begin the extraction by setting the extract flag and writing
+				# the first line which is the function name with any args.
 				outpf.write("// Automatically extracted from source file "+inputf+"\n")
 				outpf.write("function "+func+"("+delimeter.join(fargs)+") {\n")
+
+				# Set the extract flag to indicate extraction is active
 				extract_flag = True
 		
 
