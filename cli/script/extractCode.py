@@ -1,8 +1,8 @@
 #! /usr/bin/python3
 #
-#
-#
 # extractCode.py
+#
+# Author: David Hanks david.r.hanks@jpl.nasa.gov
 #
 # This script is run as part of the build process to extract code from
 # the GUI editor source and format it appropriately for use by the
@@ -62,7 +62,7 @@
 #                     be empty if the function has no arguments
 # ELEMENT 4 - STRING: The destination script for the extracted code. The
 #                     files are opened as 'append'.
-# ELEMENT 4 - OBJECT: A dictionary that specified strings in the source script
+# ELEMENT 4 - OBJECT: A dictionary that specifies strings in the source script
 #                     that should be replaced with strings for the CLI
 #                     script.
 #
@@ -213,7 +213,7 @@ srcAndDest = [
 				   'this.state.netHops':   '{}',
 				   'this.state.net':       '{}',
 				   'this.props.netAddrs':  '[]',
-				   'return true':          'return [net,hosts,nodes,hops,addrs]'}
+				   'return true':          'return [net,hosts,nodes,hops,netaddrs]'}
 				],
 				
 				[
@@ -418,7 +418,7 @@ print("Deleting files...")
 # to be regenerated.
 removeFiles()
 
-# Got through the srcAndDest specification and generate
+# Go through the srcAndDest specification and generate
 # all CLI source scripts.
 for inputf, func, fargs, outputf, strmap in srcAndDest:
 	print("opening " +inputf+" looking for "+func)

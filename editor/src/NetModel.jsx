@@ -153,14 +153,17 @@ export default class NetModel  extends React.Component {
 
       for (var netHostKey in netHosts) {
         var netHost = netHosts[netHostKey];
-        if (netHostKey === fromNode.nodeHost) {
-          if (!netHost.ipAddrs.includes(fromIP))
-            errors.push("Invalid 'From IP Addr': " + fromIP + " for Net Hop " + hopKey + ".");
+        if (fromNode) {
+          if (netHostKey === fromNode.nodeHost) {
+            if (!netHost.ipAddrs.includes(fromIP))
+              errors.push("Invalid 'From IP Addr': " + fromIP + " for Net Hop " + hopKey + ".");
+          }
         }
-
-        if (netHostKey === toNode.nodeHost) {
-          if (!netHost.ipAddrs.includes(toIP))
-            errors.push("Invalid 'To IP Addr': " + toIP + " for Net Hop " + hopKey + ".");
+        if (toNode) {
+          if (netHostKey === toNode.nodeHost) {
+            if (!netHost.ipAddrs.includes(toIP))
+              errors.push("Invalid 'To IP Addr': " + toIP + " for Net Hop " + hopKey + ".");
+          }
         }
       }
 

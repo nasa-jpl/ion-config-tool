@@ -43,6 +43,7 @@ var netAddrs = {};
 // In netloader.js
 [netHosts,netNodes,netHops,netAddrs] = extractModel(json);
 ////////////////////////
+console.log("Ingestion complete.");
 
 console.log("---");
 console.log("Ingestion summary:");
