@@ -214,8 +214,8 @@ export default class NetModel  extends React.Component {
     var hosts = {};
     var ipaddrs = {};
     var clones = {};
-    var myParams = paramTypes;
     // END NO EXTRACT
+    var myParams = paramTypes;
 
     // default values
     const ionName   = this.state.name + "-ion";
@@ -930,8 +930,7 @@ export default class NetModel  extends React.Component {
         } // end cmdTypeKey check
       }   // end configKey check
     }     // end commands loop
-    let now = new Date();
-    let tranTime = now.format("YYYY-MM-DDThh:mm");
+    let tranTime = this.getNow();
     commands[cmdKey] = {
       "id" : cmdKey,
       "configKey" : configKey,
@@ -949,7 +948,13 @@ export default class NetModel  extends React.Component {
     return cmdKey;
   };
   // END EXTRACT
-  
+
+  // Utility function. This is different in CLI tools.
+  getNow() {
+    let now = new Date();
+    let tranTime = now.format("YYYY-MM-DDThh:mm");
+    return tranTime;
+  }
 
   // EXTRACT assignClones
   // build clone list for each new cloneVal  (a duplicate of the ionModelLoader function)
