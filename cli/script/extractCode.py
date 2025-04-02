@@ -113,7 +113,7 @@ srcAndDest = [
 				  "isGoodName",
 				  ["name"],
 				  "../src/auto/appfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				 ],
 
 				[
@@ -137,7 +137,7 @@ srcAndDest = [
 				  "addCommandKey",
 				  ["configs","configName","cmdKey"],
 				  "../src/auto/appfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -148,7 +148,7 @@ srcAndDest = [
 				    "cmdName","values"
 				  ],
 				  "../src/auto/appfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -226,13 +226,15 @@ srcAndDest = [
 				
 				["../../editor/src/IonModelLoader.jsx",
 				 "extractCommands",
-				 ["groupKey","configType","configKey","commandsList"],"../src/auto/ionloader-x.js",
+				 ["groupKey","configType","configKey","commandsList"],
+				 "../src/auto/ionloader-x.js",
 				 {}
 				],
 				
 				["../../editor/src/IonModelLoader.jsx",
 				 "assignClones",
-				 [],"../src/auto/ionloader-x.js",
+				 [],
+				 "../src/auto/ionloader-x.js",
 				 {}
 				],
 				
@@ -241,7 +243,7 @@ srcAndDest = [
 				  "makeCloneVal",
 				  ["nodeKey","cmd"],
 				  "../src/auto/clone-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -249,14 +251,15 @@ srcAndDest = [
 				 "makeComboValue",
 				  ["cmd","type"],
 				  "../src/auto/clone-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
-				  "../../editor/src/App.jsx","findCloneVal",
+				  "../../editor/src/App.jsx",
+				  "findCloneVal",
 				  ["cloneVals","type","value"],
 				  "../src/auto/clone-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -279,7 +282,8 @@ srcAndDest = [
  				  "makeModelObj",
  				  ["nodeKey"],                       
  				  "../src/auto/makeobj-x.js",
- 				  {'this.state': 'ion'}
+ 				  {'this.state': 'ion',
+ 				   'console.log' : 'debug'}
  				],
  				
  				[
@@ -287,7 +291,7 @@ srcAndDest = [
  				  "makeConfigObj",
  				  ["configKey"],
  				  "../src/auto/makeobj-x.js",
- 				  {}
+				  {'console.log' : 'debug'}
  				],
 				
 				[
@@ -295,7 +299,7 @@ srcAndDest = [
 				  "assignClones",
 				  ["commands","cloneValues"],        
 				  "../src/auto/getfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -303,7 +307,7 @@ srcAndDest = [
 				  "getHostPorts",
 				  ["hostKey","hosts","ipaddrs","commands"], 
 				  "../src/auto/getfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -311,7 +315,7 @@ srcAndDest = [
 				  "getNodeInduct",
 				  ["cloneVals","nodeKey","bpLayer"], 
 				  "../src/auto/getfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -319,7 +323,7 @@ srcAndDest = [
 				  "getNodeLink",
 				  ["cloneVals","nodeKey","ltpLayer"],
 				  "../src/auto/getfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -327,7 +331,7 @@ srcAndDest = [
 				  "getNodeOutduct",
 				  ["cloneVals","nodeKey","toAddr","bpLayer"],
 				  "../src/auto/getfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
