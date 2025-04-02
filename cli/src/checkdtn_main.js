@@ -34,6 +34,7 @@ try {
 console.log("JSON parsing successful.");
 console.log("Object: " + JSON.stringify(json) );
 console.log("---");
+var netName  = {};
 var netHosts = {};
 var netNodes = {};
 var netHops  = {};
@@ -41,7 +42,7 @@ var netAddrs = {};
 
 ////////////////////////
 // In netloader.js
-[netHosts,netNodes,netHops,netAddrs] = extractModel(json);
+[netName,netHosts,netNodes,netHops,netAddrs] = extractModel(json);
 ////////////////////////
 console.log("Ingestion complete.");
 

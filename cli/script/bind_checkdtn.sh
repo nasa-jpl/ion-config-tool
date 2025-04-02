@@ -35,5 +35,6 @@ echo "// SEE THE MAKE SCRIPT FOR WHICH SOURCE FILES ARE USED TO BUILD IT" >> $bi
 cat $src/checkdtn_main.js  >> $bin/checkdtn-x.js
 cat $src2/netloader-x.js   >> $bin/checkdtn-x.js
 cat $src2/checknet-x.js    >> $bin/checkdtn-x.js
+cat $src2/appfunc-x.js     >> $bin/checkdtn-x.js
 
 chmod +x  $bin/checkdtn-x.js
