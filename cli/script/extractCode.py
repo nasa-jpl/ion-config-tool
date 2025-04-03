@@ -105,7 +105,7 @@ srcAndDest = [
 				  "checkNetModel",
 				  ["netHosts","netNodes","netHops"], 
 				  "../src/auto/checknet-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 
 				[
@@ -121,7 +121,7 @@ srcAndDest = [
 				  "isStandardProtocol",
 				  ["protocol"],
 				  "../src/auto/appfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				 ],
 				
 				[
@@ -129,7 +129,7 @@ srcAndDest = [
 				  "getUniqId",
 				  [],
 				  "../src/auto/appfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				 ],
 				
 				[
@@ -157,14 +157,15 @@ srcAndDest = [
 				  ["netName","netDesc","netHosts","netNodes","netHops"],
 				  "../src/auto/buildion-x.js",
 				  {'this.state.name': 'netName',
-				   'this.state.desc': 'netDesc'}
+				   'this.state.desc': 'netDesc',
+				   'console.log' : 'debug'}
 				],
 				
 				["../../editor/src/IonModel.jsx",
 				 "getIonVerSeqNo",
 				  ["nodeKey"],
 				  "../src/auto/ionfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -172,7 +173,7 @@ srcAndDest = [
 				  "makeCmdLine",
 				  ["cmdTypeKey","cmdParams"],
 				  "../src/auto/ionfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -202,7 +203,7 @@ srcAndDest = [
 				  "makeParamNote",
 				  ["pTypeKey","pIdx","paramVal"],
 				  "../src/auto/ionfunc-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -224,28 +225,28 @@ srcAndDest = [
 				  "extractModel",
 				  ["modelObj"],
 				  "../src/auto/ionloader-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				["../../editor/src/IonModelLoader.jsx",
 				 "extractCommands",
 				 ["groupKey","configType","configKey","commandsList"],
 				 "../src/auto/ionloader-x.js",
-				 {}
+				  {'console.log' : 'debug'}
 				],
 				
 				["../../editor/src/IonModelLoader.jsx",
 				 "assignClones",
 				 [],
 				 "../src/auto/ionloader-x.js",
-				 {}
+				  {'console.log' : 'debug'}
 				],
 
 				["../../editor/src/IonModelLoader.jsx",
 				 "extractConfigs",
 				 ["groupKey","configsObj"],
 				 "../src/auto/ionloader-x.js",
-				 {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -277,7 +278,7 @@ srcAndDest = [
 				  "getAnyCloneVal",
 				  ["cloneVals","type"],
 				  "../src/auto/clone-x.js",
-				  {}
+				  {'console.log' : 'debug'}
 				],
 				
 				[
@@ -349,8 +350,9 @@ srcAndDest = [
 				  "checkModel",
 				  [],                                
 				  "../src/auto/checkion-x.js",
-				  {"this.props.name": "ion.name"}
-				]
+				  {'this.props.name': 'ion.name',
+  				   'console.log' : 'debug'}
+				] 
 			 ]
 
 # Utility function for replacing strings according
