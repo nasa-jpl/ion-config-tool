@@ -162,10 +162,6 @@ export default class App extends React.Component {
   // check IP address/URL for validity
   isValidIPAddr(ipaddr)
   {
-    // Special case for "localhost"
-    if (ipaddr.trim() === "localhost") {
-      return (true)
-    }
 
     // Valid set of four octets
     if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddr))
@@ -173,10 +169,13 @@ export default class App extends React.Component {
       return (true)
     }
 
-    // Valid URL (ie. www.example.com)
-    if (/^(((http|https):\/\/|)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}(:[0-9]{1,5})?(\/.*)?)$/.test(ipaddr))
+    // Hostname validity per RFC 1123 
+    // Note: it's possible to have a hostname called, for example, 0.foo.bar.2342343 so the above regex will fail
+    // but this one succeeds.
+    if (/^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/.test(ipaddr))
     {
       return (true)
+
     }
 
     // Don't know what it is, no good.
