@@ -190,21 +190,6 @@ saveAllConfigs();
 console.log("---");
 console.log("Done.");
 
-//----functions---
-function warn(s) {
-  console.log("Warning: "  + s);
-}
-function error(s) {
-  console.log("Error: "  + s);
-}
-function setError(s) {
-  console.log("Error: "  + s);
-}
-function debug(s) {
-  if (debugFlag) 
-    console.log("$$$ " + s);
-}
-
 // Called from within extractModel in ionloader.js
 // This is also called in extractModel in IonLoaderModel.js
 // but is treated as a no-op in the UI since there is 

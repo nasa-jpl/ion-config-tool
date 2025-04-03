@@ -125,27 +125,7 @@ saveModel(modelName,modelObj);
 console.log("---");
 console.log("Done.");
 
-//----functions---
-// get now date-time in standard format
-function getNow() {
-  const now = new Date();
-  var goodNow = df.formatISO(now); 
-  goodNow = goodNow.substring(0,16);
-  return goodNow;
-};
-function warn(s) {
-  console.log("Warning: "  + s);
-}
-function error(s) {
-  console.log("Error: "  + s);
-}
-function setError(s) {
-  console.log("Error: "  + s);
-}
-function debug(s) {
-  if (debugFlag) 
-    console.log("$$$ " + s);
-}
+
 //        netloader.js    
 //
 function extractModel (modelObj) {
@@ -1017,11 +997,6 @@ function debug_log(msg) {
   if (DEBUG_MODE)
      console.log(msg);
 }
-// Special wrapper function for console.log debug messages
-function debug_log(msg) {
-  if (DEBUG_MODE)
-     console.log(msg);
-}
 // NOTE: compare to isGoodName of IonConfig App.js
 function isGoodName(name) {
 // check if a new name is valid
@@ -1512,4 +1487,34 @@ function saveModel(modelName, modelObj) {
   const modelJson = JSON.stringify(modelObj,null,2);
   //const buff = new buf.Buffer( [modelJson], {type: "text/plain; charset=utf-8"} );
   fs.writeFileSync(modelName,modelJson); 
+};
+// Utility functions used by all CLI apps that are not part
+// of the automatic extraction
+
+// Special wrapper function for console.log debug messages
+function debug_log(msg) {
+  if (DEBUG_MODE)
+     console.log(msg);
+}
+
+function warn(s) {
+  console.log("Warning: "  + s);
+}
+function error(s) {
+  console.log("Error: "  + s);
+}
+function setError(s) {
+  console.log("Error: "  + s);
+}
+function debug(s) {
+  if (debugFlag) 
+    console.log("$$$ " + s);
+}
+
+// get now date-time in standard format
+function getNow() {
+  const now = new Date();
+  var goodNow = df.formatISO(now); 
+  goodNow = goodNow.substring(0,16);
+  return goodNow;
 };

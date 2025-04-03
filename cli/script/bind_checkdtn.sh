@@ -23,6 +23,7 @@ echo "// SEE THE MAKE SCRIPT FOR WHICH SOURCE FILES ARE USED TO BUILD IT" >> $bi
 cat $src/checkdtn_main.js  >> $bin/checkdtn.js
 cat $src/netloader.js      >> $bin/checkdtn.js
 cat $src/checknet.js       >> $bin/checkdtn.js
+cat $src/utilfunc.js       >> $bin/checkdtn.js
 
 chmod +x  $bin/checkdtn.js
 
@@ -36,5 +37,6 @@ cat $src/checkdtn_main.js  >> $bin/checkdtn-x.js
 cat $src2/netloader-x.js   >> $bin/checkdtn-x.js
 cat $src2/checknet-x.js    >> $bin/checkdtn-x.js
 cat $src2/appfunc-x.js     >> $bin/checkdtn-x.js
+cat $src/utilfunc.js       >> $bin/checkdtn-x.js
 
 chmod +x  $bin/checkdtn-x.js

@@ -15,6 +15,9 @@
 
 const mm = require('minimist');
 const fs = require('fs');
+
+var debugFlag = false;
+
 console.log("DTN Network Model Validation");
 
 var argv = mm(process.argv.slice(2));
@@ -60,7 +63,6 @@ console.log("Checking user net model.");
 var errors = checkNetModel(netHosts,netNodes,netHops);
 ///////////////////////
 
-
 if (errors.length) {
   console.log("Validation errors.");   
   for (let i=0; i<errors.length; i++) {
@@ -71,14 +73,4 @@ if (errors.length) {
 }
 console.log("Done.");
 
-//----functions---
-function warn(s) {
-  console.log("Warning: "  + s);
-}
-function error(s) {
-  console.log("Error: "  + s);
-}
-function setError(s) {
-  console.log("Error: "  + s);
-}
 

@@ -29,6 +29,7 @@ cat $src/clone.js        >> $bin/dtn2ion.js
 cat $src/getfunc.js      >> $bin/dtn2ion.js
 cat $src/makeobj.js      >> $bin/dtn2ion.js
 cat $src/savemodel.js    >> $bin/dtn2ion.js
+cat $src/utilfunc.js     >> $bin/dtn2ion.js
 
 chmod +x $bin/dtn2ion.js
 
@@ -47,5 +48,6 @@ cat $src2/clone-x.js     >> $bin/dtn2ion-x.js
 cat $src2/getfunc-x.js   >> $bin/dtn2ion-x.js
 cat $src2/makeobj-x.js   >> $bin/dtn2ion-x.js
 cat $src/savemodel.js    >> $bin/dtn2ion-x.js
+cat $src/utilfunc.js     >> $bin/dtn2ion-x.js
 
 chmod +x $bin/dtn2ion-x.js

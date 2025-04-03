@@ -18,6 +18,9 @@
 
 const mm = require('minimist');
 const fs = require('fs');
+
+var debugFlag = false;
+
 console.log("DTN Network Model Validation");
 
 var argv = mm(process.argv.slice(2));
@@ -63,7 +66,6 @@ console.log("Checking user net model.");
 var errors = checkNetModel(netHosts,netNodes,netHops);
 ///////////////////////
 
-
 if (errors.length) {
   console.log("Validation errors.");   
   for (let i=0; i<errors.length; i++) {
@@ -74,16 +76,6 @@ if (errors.length) {
 }
 console.log("Done.");
 
-//----functions---
-function warn(s) {
-  console.log("Warning: "  + s);
-}
-function error(s) {
-  console.log("Error: "  + s);
-}
-function setError(s) {
-  console.log("Error: "  + s);
-}
 
 //        netloader.js    
 //
@@ -303,3 +295,33 @@ function checkNetModel(netHosts,netNodes,netHops) {
   }
   return errors;
 }
+// Utility functions used by all CLI apps that are not part
+// of the automatic extraction
+
+// Special wrapper function for console.log debug messages
+function debug_log(msg) {
+  if (DEBUG_MODE)
+     console.log(msg);
+}
+
+function warn(s) {
+  console.log("Warning: "  + s);
+}
+function error(s) {
+  console.log("Error: "  + s);
+}
+function setError(s) {
+  console.log("Error: "  + s);
+}
+function debug(s) {
+  if (debugFlag) 
+    console.log("$$$ " + s);
+}
+
+// get now date-time in standard format
+function getNow() {
+  const now = new Date();
+  var goodNow = df.formatISO(now); 
+  goodNow = goodNow.substring(0,16);
+  return goodNow;
+};
