@@ -7,7 +7,7 @@ function saveAllConfigs() {
   catch (err)
     { console.log(ion.name + " dir already exists."); }
   const graphKey = ion.currentContacts + ".cg";
-  var graphLines = makeCmdLines(graphKey);
+  var graphLines = makeCmdLines(configs[graphKey]);
 
   // build config files node-by-node
   for (var nodeKey in nodes) {
@@ -26,7 +26,7 @@ function saveAllConfigs() {
     for (let j=0; j<confKeys.length; j++) {
       var configKey = confKeys[j];
       console.log("Saving config file: " + configKey);
-      const cmdLines = makeCmdLines(configKey);
+      const cmdLines = makeCmdLines(configs[configKey]);
       const page = cmdLines.join(lf) + lf;
       var configFile = ion.name + '/' + node.id + '/' + configKey;
       try 

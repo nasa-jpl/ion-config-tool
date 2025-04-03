@@ -361,8 +361,10 @@ export default class IonModel  extends React.Component {
 
   // EXTRACT makeCmdLines
   makeCmdLines(configKey) {
+    // NO EXTRACT
     console.log("makeCmdLines for: " + configKey);
     const configObj = this.props.configs[configKey];
+    // END NO EXTRACT
     const cmdKeys = configObj.cmdKeys;
     const configTypeKey = configObj.configType;
     const configTypeObj = configTypes[configTypeKey];
@@ -381,8 +383,8 @@ export default class IonModel  extends React.Component {
     const program = configTypeObj.program;
     const commands = this.props.commands;
 
-    const now = new Date();
-    const fileDate = now.format("YYYY-MM-DD hh:mm");
+    const fileDate = this.getNow();
+    //const fileDate = now.format("YYYY-MM-DD hh:mm");
     var cmdLines = [];
     // build header 
     cmdLines.push("#  FILE:      " + configObj.id);
@@ -426,8 +428,9 @@ export default class IonModel  extends React.Component {
     let node = this.props.nodes[nodeKey];
     let fileName = "start_" + nodeKey + ".sh";
     let nodeLabel = "ipn:" + node.ionNodeNum;
-    const now = new Date();
-    const fileDate = now.format("YYYY-MM-DD hh:mm");
+    //const now = new Date();
+    //const fileDate = now.format("YYYY-MM-DD hh:mm");
+    const fileDate = this.getNow();
     var cmdLines = [];
     cmdLines.push("#!/bin/bash");
     cmdLines.push("#  FILE:  " + fileName);
@@ -480,6 +483,13 @@ export default class IonModel  extends React.Component {
     return cmdLines;
   }
   // END EXTRACT
+  // Utility function. This is different in CLI tools.
+  getNow() {
+    let now = new Date();
+    let tranTime = now.format("YYYY-MM-DDThh:mm");
+    return tranTime;
+  }
+
   // build and return a Config file element
   makeConfigElem(configKey,cmdKeys,cmdsList) {
     const config = this.props.configs[configKey];

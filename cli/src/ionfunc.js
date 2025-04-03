@@ -48,9 +48,9 @@ function makeCmdLine(cmdTypeKey,cmdParams) {
 };
 
 // NOTE: compare to makeCmdLines of IonConfig IonModel.jsx
-function makeCmdLines(configKey) {
-  debug_log("makeCmdLines for: " + configKey);
-  const configObj = configs[configKey];
+function makeCmdLines(configObj) {
+  //debug_log("makeCmdLines for: " + configKey);
+  //const configObj = configs[configKey];
   const cmdKeys = configObj.cmdKeys;
   const configTypeKey = configObj.configType;
   const configTypeObj = configTypes[configTypeKey];

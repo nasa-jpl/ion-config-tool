@@ -196,12 +196,16 @@ export default class IonModelLoader extends React.Component {
     return true;
   };
   // END EXTRACT
+  // EXTRACT extractConfigs
   extractConfigs(groupKey,configsObj) {
     // groupKey is for a group of configs (a node or contacts)
     console.log("extractConfigs groupKey:" + groupKey);
     //console.log("extractConfigs configsObj:" + JSON.stringify(configsObj) );
     // make short names for state objects
+    
+    // NO EXTRACT
     var configs  = this.state.configs;
+    // END NO EXTRACT
 
     if (configsObj === undefined) { configsObj = {}; }
     var keyList = [];  // save generated keys for caller
@@ -225,7 +229,7 @@ export default class IonModelLoader extends React.Component {
     }
     return keyList;   // return list of configKeys
   }
-
+  // END EXTRACT
   // EXTRACT extractCommands
   // extract JSON config definition & build config with commands & cloneValues
  // extractCommands (nodeIdx,configKey) {

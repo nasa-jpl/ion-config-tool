@@ -178,10 +178,12 @@ srcAndDest = [
 				[
 				  "../../editor/src/IonModel.jsx",
 				  "makeCmdLines",
-				  ["configKey"],
+				  ["configObj"],
 				  "../src/auto/ionfunc-x.js",
-				  {'this.state.name': 'ion.name',
-				   'this.state.desc': 'ion.desc'}
+				  {'this.state.name':  'ion.name',
+				   'this.state.desc':  'ion.desc',
+				   'this.props.nodes': 'nodes',
+				   'console.log':      'debug'}
 				],
 				
 				[
@@ -191,7 +193,8 @@ srcAndDest = [
 				  "../src/auto/ionfunc-x.js",
 				  {'this.state.name':            'ion.name', 
 				   'this.state.currentContacts': 'ion.currentContacts', 
-				   'this.props.nodes':           'nodes'}
+				   'this.props.nodes':           'nodes',
+				   'console.log':               'debug'}
 				],
 				
 				[
@@ -234,6 +237,13 @@ srcAndDest = [
 				["../../editor/src/IonModelLoader.jsx",
 				 "assignClones",
 				 [],
+				 "../src/auto/ionloader-x.js",
+				 {}
+				],
+
+				["../../editor/src/IonModelLoader.jsx",
+				 "extractConfigs",
+				 ["groupKey","configsObj"],
 				 "../src/auto/ionloader-x.js",
 				 {}
 				],
