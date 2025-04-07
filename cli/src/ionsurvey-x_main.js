@@ -47,6 +47,7 @@ var cloneValues = {};
 var wflags = {};
 
 var DEBUG_MODE = false;   // disable debug msgs by default
+var dummy = {}; // this keeps the ION GUI source happy
 
 console.log("Build network survey reports from an ION Model");
 
@@ -80,21 +81,11 @@ for (var pType in paramTypes) {
 }
 
 // build hosts, nodes, configs, etc. from model
-
-////////////////////////
-// In ionloader.js
-extractIonModel(json);
-////////////////////////
-
+extractModel(json);
 console.log("ION Model extraction successful.");
 console.log("---");
 console.log("Checking user ion model.");
-
-///////////////////////
-// In checkion.js
-var errors = checkIonModel();
-///////////////////////
-
+var errors = checkModel();
 if (errors.length) {
   console.log("Validation errors.");
   for (let i=0; i<errors.length; i++) {
@@ -116,8 +107,10 @@ console.log("config files:  " + Object.keys(configs));
 
 console.log("---");
 console.log("Done.");
-
-// For the ionsurvey CLI tool, this is a no-op
-function setWatchFlags(configsObj, wflags) {
-  return configsObj;
+// Called from within extractModel in ionloader.js
+// This is also called in extractModel in IonLoaderModel.js
+// but is treated as a no-op in the UI since there is 
+// already a mechanism to set watch flags there
+function setWatchFlags(configsObj, wlags) {
+  return configsObj; // no-op
 }

@@ -18,3 +18,4 @@ cd script
 ./bind_checkdtn.sh
 ./bind_dtn2ion.sh
 ./bind_ionconfig.sh
+./bind_ionsurvey.sh
