@@ -419,11 +419,17 @@ def processLine(in_line, strmap):
 # the filesystem in preparation for regeneration.
 #
 def removeFiles():
+	files_to_delete = []
 	for w, x, y, file, z in srcAndDest:
-		if os.path.exists(file):
-			os.remove(file)
+		if not file in files_to_delete:
+			files_to_delete.append(file)
+
+	for f in files_to_delete:
+		if os.path.exists(f):
+			os.remove(f)
+			print("Removed "+f)
 		else:
-			print(file+" not found, continuing.")
+			print(f+" not found, continuing.")
 	return
 
 # Main script logic

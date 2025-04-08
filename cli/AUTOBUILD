@@ -1,8 +1,6 @@
 The CLI tools use many functions found in the GUI code with 
 some modifications. These modifications are necessary because
-of the dependency of the GUI code on React. The list of GUI
-source files that are part of this process are in the list
-below. 
+of the dependency of the GUI code on React. 
 
 Those source files contain special markers in comment blocks
 to enable the successful automatic extraction and conversion
@@ -11,7 +9,10 @@ CLI tools. Do NOT remove these special comments or the CLI
 tools will be broken and unusable. When changing functions
 that contain these comments, take care to be sure that if
 you introduce new code that contains React based dependencies
-that the CLI tools still work correctly.
+that the CLI tools still work correctly. The way to accomplish
+this is once you have finished modifying the GUI code, run
+the build process on the CLI tools and verify they still
+run and have the expected output.
 
 The motivation for this is simple. Prior to the automatic 
 extraction of the GUI source into acceptable CLI form the
@@ -20,9 +21,7 @@ the code has to remember which functions in which source
 files contain code that is shared so that when changes are
 made the CLI code and GUI code are kept consistent.
 
-List of GUI source files that contain shared code:
-
-Source file               Function
----------------------     ----------------------
-NetModel.jsx              checkNetModel
+Refer to the extractCode.py Python script in the /script
+subdirectory to see which GUI source files and functions 
+are automatically extracted and formatted for the CLI tools.
 
