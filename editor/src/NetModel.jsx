@@ -106,6 +106,13 @@ export default class NetModel  extends React.Component {
     }
     return model;
   };
+  // WARNING This function is automatically extracted and
+  // converted for use by the CLI tools. Any comment with
+  // the string 'EXTRACT' in it should not be removed or
+  // modified an any way or the automatic CLI tool build 
+  // process will fail or will result in unusable code. 
+  // See the AUTOBUILD file in the cli directory for more
+  // EXTRACT checkNetModel
   // make list of errors in net model
   checkNetModel() {
     var errors = [];   // list of messages (strings)
@@ -146,17 +153,19 @@ export default class NetModel  extends React.Component {
 
       for (var netHostKey in netHosts) {
         var netHost = netHosts[netHostKey];
-        if (netHostKey === fromNode.nodeHost) {
-          if (!netHost.ipAddrs.includes(fromIP))
-            errors.push("Invalid 'From IP Addr': " + fromIP + " for Net Hop " + hopKey + ".");
+        if (fromNode) {
+          if (netHostKey === fromNode.nodeHost) {
+            if (!netHost.ipAddrs.includes(fromIP))
+              errors.push("Invalid 'From IP Addr': " + fromIP + " for Net Hop " + hopKey + ".");
+          }
         }
-
-        if (netHostKey === toNode.nodeHost) {
-          if (!netHost.ipAddrs.includes(toIP))
-            errors.push("Invalid 'To IP Addr': " + toIP + " for Net Hop " + hopKey + ".");
+        if (toNode) {
+          if (netHostKey === toNode.nodeHost) {
+            if (!netHost.ipAddrs.includes(toIP))
+              errors.push("Invalid 'To IP Addr': " + toIP + " for Net Hop " + hopKey + ".");
+          }
         }
       }
-
 
       if (!netHop.bpLayer)
         errors.push("Missing BP Layer Protocol CLA for Net Hop " + hopKey + ".");
@@ -165,6 +174,11 @@ export default class NetModel  extends React.Component {
     }
     return errors;
   }
+  // END EXTRACT
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // Do not delete the comment above, it is used by the build process
+  // to extract code common to both the GUI and CLI tools
+
   // if net model is okay, proceed with build
   makeIonModel() {
     console.log("*******makeIonModel name:" + this.state.name);
@@ -184,11 +198,13 @@ export default class NetModel  extends React.Component {
     this.setError("");   // might be a rerun, so clear any prior errors
     return null;
   }
+  // EXTRACT buildIonModel
   // build ion model
   buildIonModel() {
     // translate the net model to a full ion model
     // using best-guess defaults
 
+    // NO EXTRACT
     // ion model objects
     var ion = {};
     var graphs = {};
@@ -198,6 +214,7 @@ export default class NetModel  extends React.Component {
     var hosts = {};
     var ipaddrs = {};
     var clones = {};
+    // END NO EXTRACT
     var myParams = paramTypes;
 
     // default values
@@ -848,7 +865,7 @@ export default class NetModel  extends React.Component {
       this.addCommandKey(configs,graphConfig,cmdKey);
     };
     this.assignClones(commands,clones);   //  map cloneVal to using clones (command params)
-
+    // NO EXTRACT
     var tran = {
       action: "LOAD-ION-MODEL",
       ionModel: ion,
@@ -865,8 +882,12 @@ export default class NetModel  extends React.Component {
     var newState = Object.assign({},this.state);
     newState.buildMode = false;  // just build once 
     this.setState (newState);
+    // END NO EXTRACT
     return null;
   };
+  // END EXTRACT
+
+  // EXTRACT addCommandKey
   // add commmand to a configuration, unless its null
   addCommandKey(configs,configName,cmdKey) {
     if (cmdKey == null) {
@@ -875,6 +896,9 @@ export default class NetModel  extends React.Component {
     }
     configs[configName].cmdKeys.push(cmdKey);
   }
+  // END EXTRACT
+
+  // EXTRACT makeIonCommand
   // build an ion command object
   makeIonCommand(commands,clones,groupKey,configKey,configType,cmdName,values) {
     // NOTE: the default behavior is to use the latest version of each command type
@@ -906,8 +930,7 @@ export default class NetModel  extends React.Component {
         } // end cmdTypeKey check
       }   // end configKey check
     }     // end commands loop
-    let now = new Date();
-    let tranTime = now.format("YYYY-MM-DDThh:mm");
+    let tranTime = this.getNow();
     commands[cmdKey] = {
       "id" : cmdKey,
       "configKey" : configKey,
@@ -924,6 +947,16 @@ export default class NetModel  extends React.Component {
     } 
     return cmdKey;
   };
+  // END EXTRACT
+
+  // Utility function. This is different in CLI tools.
+  getNow() {
+    let now = new Date();
+    let tranTime = now.format("YYYY-MM-DDThh:mm");
+    return tranTime;
+  }
+
+  // EXTRACT assignClones
   // build clone list for each new cloneVal  (a duplicate of the ionModelLoader function)
   assignClones(commands,cloneValues) {
     const findCloneVal = this.props.findCloneVal;
@@ -957,6 +990,8 @@ export default class NetModel  extends React.Component {
       }
     }
   };
+  // END EXTRACT
+  // EXTRACT getHostPorts
   // get assigned ports of a host
   getHostPorts (hostKey, hosts, ipaddrs, commands) {
     var ports = [];
@@ -980,6 +1015,9 @@ export default class NetModel  extends React.Component {
     console.log("host: " + hostKey + " ports: " + ports.toString() );
     return ports;
   };
+  // END EXTRACT
+
+  // EXTRACT getNodeInduct
   // find an Induct cloneValue based on nodeKey & type (bpLayer)
   getNodeInduct(cloneVals,nodeKey,bpLayer) {
     var cloneType = bpLayer + "Induct";
@@ -993,6 +1031,9 @@ export default class NetModel  extends React.Component {
     console.log ("!!! failed to get cloneVal for nodeKey: " + nodeKey + " cloneType: " + cloneType);
     return "";
   };
+  // END EXTRACT
+
+  // EXTRACT getNodeLink
   // find a Link cloneValue based on nodeKey & type (ltpLayer)
   getNodeLink(cloneVals,nodeKey,ltpLayer) {
     var cloneType = ltpLayer + "Link";
@@ -1006,6 +1047,9 @@ export default class NetModel  extends React.Component {
     console.log ("!!! failed to get cloneVal for nodeKey: " + nodeKey + " cloneType: " + cloneType);
     return "";
   };
+  // END EXTRACT
+
+  // EXTRACT getNodeOutduct
   // find an Outduct cloneValue based on nodeKey & toHostKey & type (bpLayer)
   getNodeOutduct(cloneVals,nodeKey,toAddr,bpLayer) {
     var cloneType = bpLayer + "Outduct";
@@ -1023,6 +1067,8 @@ export default class NetModel  extends React.Component {
                  + " toAddr: " + toAddr + " cloneType: " + cloneType) ;
     return "";
   };
+  // END EXTRACT
+  
   getDefaultIPforNode(netNode) {
     const netNodes = this.props.netNodes;
     const netHosts = this.props.netHosts;

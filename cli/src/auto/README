@@ -1,0 +1,6 @@
+The files in this folder are automatically generated from the GUI code
+in editor/src/ and should not be added to the repo and/or edited directly 
+since they are generated every time a software build is performed.
+
+See extractCode.py in the cli/script/ directory for the code that
+does this generation and a complete description of how it is done.

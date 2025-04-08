@@ -62,13 +62,18 @@ export default class IonModel  extends React.Component {
     }
     return null;
   }
+
+  // EXTRACT makeModelObj
   makeModelObj() {
     console.log("makeUserModel net:" + this.state.name);
+
+    // NO EXTRACT
     const hosts = this.props.hosts;
     const ipaddrs = this.props.ipaddrs;
     const graphs = this.props.graphs;
     const nodes = this.props.nodes;
     const configs = this.props.configs;
+    // END NO EXTRACT
     var model = {};    // user model built from current state
 
     model["ionModelName"] = this.state.name;
@@ -131,9 +136,13 @@ export default class IonModel  extends React.Component {
     }
     return model;
   };
+  // END EXTRACT
+  // EXTRACT makeConfigObj
   makeConfigObj(configKey) {
+    // NO EXTRACT
     const configs = this.props.configs;
     const commands = this.props.commands;
+    // END NO EXTRACT
     var config = { commands: [] };
 
     const configObj = configs[configKey];
@@ -151,10 +160,12 @@ export default class IonModel  extends React.Component {
     }
     return config;
   };
+  // END EXTRACT
   makeAlertElem(msg) {
     return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
   };
   // tranlsate version to sequence number for command effectivity
+  // EXTRACT getIonVerSeqNo
   getIonVerSeqNo(nodeKey) {
     console.log("getIonVerSeqNo for:" + nodeKey);
     const nodes = this.props.nodes;
@@ -178,6 +189,7 @@ export default class IonModel  extends React.Component {
     }
     return 0;                       
   };
+  // END EXTRACT
   isOptional(paramTypeKey) {
     const paramType = paramTypes[paramTypeKey];
     return paramType.optional;
@@ -285,6 +297,8 @@ export default class IonModel  extends React.Component {
       />  
     );  
   }
+
+  // EXTRACT makeParamNote
   // build ION parameter annotation (commands file format)
   makeParamNote(pTypeKey,pIdx,paramVal) {
     // define padit here, because "this" can be weird
@@ -319,6 +333,8 @@ export default class IonModel  extends React.Component {
     //console.log("param Note " + pTypeKey + " " + note);
     return note;
   }
+  // END EXTRACT
+  // EXTRACT makeCmdLine
   // builds ION command text (commands file format)
   makeCmdLine(cmdTypeKey,cmdParams) {
     // console.log("makeCmdLine cmdTypeKey: " + cmdTypeKey + "  Params : " + JSON.stringify(cmdParams));
@@ -329,8 +345,9 @@ export default class IonModel  extends React.Component {
     for (var i = 0; i < cmdParams.length; i++) {
       //console.log("makeCmdLine Pattern: " + cmdPattern + " tgt: " + cmdTypeKey + "  " + targets[i] + "  " + cmdParams[i]);
       var paramTypeKey = cmdType.paramTypes[i];
+      let paramType = paramTypes[paramTypeKey];
       if (cmdParams[i] === "")
-        if (this.isOptional(paramTypeKey))
+        if (paramType.optional)
           cmdPattern = cmdPattern.replace(targets[i],"");
         else
           cmdPattern = cmdPattern.replace(targets[i],"??");
@@ -339,10 +356,15 @@ export default class IonModel  extends React.Component {
     }
     //console.log("cmd Type pattern " + cmdTypeKey + " " + cmd);
     return cmdPattern;
-  }
+  };
+  // END EXTRACT
+
+  // EXTRACT makeCmdLines
   makeCmdLines(configKey) {
+    // NO EXTRACT
     console.log("makeCmdLines for: " + configKey);
     const configObj = this.props.configs[configKey];
+    // END NO EXTRACT
     const cmdKeys = configObj.cmdKeys;
     const configTypeKey = configObj.configType;
     const configTypeObj = configTypes[configTypeKey];
@@ -361,8 +383,8 @@ export default class IonModel  extends React.Component {
     const program = configTypeObj.program;
     const commands = this.props.commands;
 
-    const now = new Date();
-    const fileDate = now.format("YYYY-MM-DD hh:mm");
+    const fileDate = this.getNow();
+    //const fileDate = now.format("YYYY-MM-DD hh:mm");
     var cmdLines = [];
     // build header 
     cmdLines.push("#  FILE:      " + configObj.id);
@@ -397,14 +419,18 @@ export default class IonModel  extends React.Component {
       cmdLines.push(this.makeCmdLine(cmdTypeKey,cmdVals));
     }
     return cmdLines;
-  }
+  };
+  // END EXTRACT
+
+  // EXTRACT makeStartLines
   // build the start script text lines for a node
   makeStartLines(nodeKey) {
     let node = this.props.nodes[nodeKey];
     let fileName = "start_" + nodeKey + ".sh";
     let nodeLabel = "ipn:" + node.ionNodeNum;
-    const now = new Date();
-    const fileDate = now.format("YYYY-MM-DD hh:mm");
+    //const now = new Date();
+    //const fileDate = now.format("YYYY-MM-DD hh:mm");
+    const fileDate = this.getNow();
     var cmdLines = [];
     cmdLines.push("#!/bin/bash");
     cmdLines.push("#  FILE:  " + fileName);
@@ -470,6 +496,14 @@ export default class IonModel  extends React.Component {
     cmdLines.push('bpecho   ipn:' + nodeId + '.3 &');
     return cmdLines;
   }
+  // END EXTRACT
+  // Utility function. This is different in CLI tools.
+  getNow() {
+    let now = new Date();
+    let tranTime = now.format("YYYY-MM-DDThh:mm");
+    return tranTime;
+  }
+
   // build and return a Config file element
   makeConfigElem(configKey,cmdKeys,cmdsList) {
     const config = this.props.configs[configKey];
@@ -914,15 +948,19 @@ export default class IonModel  extends React.Component {
     }
     return <Table striped condensed hover>{headElem}<tbody>{alertElemList}</tbody></Table>;
   };
+
+  // EXTRACT checkModel
   // check model for errors
   checkModel() {
     let alerts = [];
     const modelName = this.props.name;
+    // NO EXTRACT
     const hosts = this.props.hosts;
     const nodes = this.props.nodes;
     const graphs = this.props.graphs;
     const configs = this.props.configs;
     const commands = this.props.commands;
+    // END NO EXTRACT
     // Model-level
     if (Object.keys(graphs).length === 0)
       alerts.push({"type": "IonModel", "name": modelName, "level":"warn", "msg":"No graphs created."});
@@ -1015,7 +1053,6 @@ export default class IonModel  extends React.Component {
           // check for missing command parameters
           let cmdObj = commands[cmdKey];
           let cmdStr = this.makeCmdLine(cmdTypeKey,cmdObj.values);
-          console.log("cmdStr: " + cmdStr);
           if (cmdStr.indexOf("??") > -1) {
             let msg = "Missing parameter(s).";
             let cmdTag = nodeKey + "." + cmdTypeKey;
@@ -1065,6 +1102,7 @@ export default class IonModel  extends React.Component {
 
     return alerts;
   }
+  // END EXTRACT
   makeSelectFormElem(val,handler,options) {
     var form =
       <FormControl

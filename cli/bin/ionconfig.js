@@ -149,9 +149,19 @@ for (var pType in paramTypes) {
 }
 
 // build hosts, nodes, configs, etc. from model
+
+////////////////////////
+// In ionloader.js
 extractIonModel(json);
+////////////////////////
+
 console.log("Checking user ion model.");
+
+///////////////////////
+// In checkion.js
 var errors = checkIonModel();
+///////////////////////
+
 if (errors.length) {
   console.log("Validation errors.");
   for (let i=0; i<errors.length; i++) {
@@ -174,21 +184,28 @@ console.log("config files:  " + Object.keys(configs));
 console.log("---");
 
 console.log("Build and save all configurations.");
+
+//////////////////////
+// In allconfigs.js
 saveAllConfigs();
+/////////////////////
 
 console.log("---");
 console.log("Done.");
 
-//----functions---
-function warn(s) {
-  console.log("Warning: "  + s);
-}
-function error(s) {
-  console.log("Error: "  + s);
-}
-function debug(s) {
-  if (debugFlag) 
-    console.log("$$$ " + s);
+// Called from within extractModel in ionloader.js
+// This is also called in extractModel in IonLoaderModel.js
+// but is treated as a no-op in the UI since there is 
+// already a mechanism to set watch flags there
+function setWatchFlags(configsObj, wflags) {
+    var fname = "";
+    for (cfg in configsObj) {
+    fname = cfg.toString();
+    if (wflags[fname]) {
+      configsObj[fname].commands.push(wflags[fname]);
+    }
+  }
+  return configsObj;
 }
 // NOTE: compare to extractModel of IonConfig IonModelLoader.jsx
 function extractIonModel (modelObj) {
@@ -274,12 +291,7 @@ function extractIonModel (modelObj) {
     var configsObj = nodeObj.configs;
 
     // check for watch flags requested on the command line
-    for (cfg in configsObj) {
-      fname = cfg.toString();
-      if (wflags[fname]) {
-        configsObj[fname].commands.push(wflags[fname]);
-      }
-    }
+    configsObj = setWatchFlags(configsObj, wflags);
 
     debug_log("node configs=" + JSON.stringify(configsObj) );
     const configKeyList = extractConfigs(nodeKey,configsObj);
@@ -584,11 +596,6 @@ function checkIonModel() {
   } // end of node loop
 
   return alerts;
-}
-// Special wrapper function for console.log debug messages
-function debug_log(msg) {
-  if (DEBUG_MODE)
-     console.log(msg);
 }
 // NOTE: compare to isGoodName of IonConfig App.js
 function isGoodName(name) {
@@ -934,9 +941,9 @@ function makeCmdLine(cmdTypeKey,cmdParams) {
 };
 
 // NOTE: compare to makeCmdLines of IonConfig IonModel.jsx
-function makeCmdLines(configKey) {
-  debug_log("makeCmdLines for: " + configKey);
-  const configObj = configs[configKey];
+function makeCmdLines(configObj) {
+  //debug_log("makeCmdLines for: " + configKey);
+  //const configObj = configs[configKey];
   const cmdKeys = configObj.cmdKeys;
   const configTypeKey = configObj.configType;
   const configTypeObj = configTypes[configTypeKey];
@@ -1084,19 +1091,16 @@ function makeParamNote(pTypeKey,pIdx,paramVal) {
   return note;
 }
 // NOTE: compare to makecCmdLine of IonConfig IonModel.jsx
-//  NOTE: Conpare to saveConfigs of IonModel.jsx
+// Not automatically extracted, likely not to change in GUI
+// See saveConfigs in IonModel.jsx for similarities and
+// differences.
 function saveAllConfigs() {
-  console.log("let's save all config files in a zip file!");
-  //var zip = new JSZip();
-  //var rootdir = zip.folder(ion.name);   // the network name
-  // fs.mkdirsSync(ion.name);   // the network name
-  // build common contact graph
   try 
     { fs.mkdirSync(ion.name); }  // the network name
   catch (err)
     { console.log(ion.name + " dir already exists."); }
   const graphKey = ion.currentContacts + ".cg";
-  var graphLines = makeCmdLines(graphKey);
+  var graphLines = makeCmdLines(configs[graphKey]);
 
   // build config files node-by-node
   for (var nodeKey in nodes) {
@@ -1115,7 +1119,7 @@ function saveAllConfigs() {
     for (let j=0; j<confKeys.length; j++) {
       var configKey = confKeys[j];
       console.log("Saving config file: " + configKey);
-      const cmdLines = makeCmdLines(configKey);
+      const cmdLines = makeCmdLines(configs[configKey]);
       const page = cmdLines.join(lf) + lf;
       var configFile = ion.name + '/' + node.id + '/' + configKey;
       try 
@@ -1141,4 +1145,34 @@ function saveAllConfigs() {
     catch (err)
       { console.log(err); }
   };
+};
+// Utility functions used by all CLI apps that are not part
+// of the automatic extraction
+
+// Special wrapper function for console.log debug messages
+function debug_log(msg) {
+  if (DEBUG_MODE)
+     console.log(msg);
+}
+
+function warn(s) {
+  console.log("Warning: "  + s);
+}
+function error(s) {
+  console.log("Error: "  + s);
+}
+function setError(s) {
+  console.log("Error: "  + s);
+}
+function debug(s) {
+  if (debugFlag) 
+    console.log("$$$ " + s);
+}
+
+// get now date-time in standard format
+function getNow() {
+  const now = new Date();
+  var goodNow = df.formatISO(now); 
+  goodNow = goodNow.substring(0,16);
+  return goodNow;
 };

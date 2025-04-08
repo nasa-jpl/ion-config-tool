@@ -43,20 +43,23 @@ export default class NetModelLoader extends React.Component {
       return false;
     return true;
   }
-  extractModel () {
+  // EXTRACT extractModel
+  extractModel() {
     // extract the Net config JSON structure &
     // flatten the data structures for efficient access
 
     // make short names for state objects
+    // NO EXTRACT
     const modelObj = this.state.modelJson;
+    // END NO EXTRACT
     var net = this.state.net;
     var hosts = this.state.netHosts;
     var nodes = this.state.netNodes;
     var hops = this.state.netHops;
     var netaddrs = this.props.netAddrs;
 
-    console.log("=== Ingesting user net model.  net: " + JSON.stringify(net));
-    console.log("net WAS: " + JSON.stringify(net));
+    //console.log("=== Ingesting user net model.  net: " + JSON.stringify(net));
+    //console.log("net WAS: " + JSON.stringify(net));
     if(modelObj.hasOwnProperty("netModelName"))
       net.name = modelObj["netModelName"];
     else {
@@ -156,8 +159,12 @@ export default class NetModelLoader extends React.Component {
       if(hopObj.hasOwnProperty("maxRate"))
         rate = hopObj["maxRate"];
       var sym = "no";
+      var flag = false;
       if(hopObj.hasOwnProperty("symmetric"))
-        sym = this.getBool(hopObj["symmetric"]);
+        flag = hopObj["symmetric"];
+      var sym = true;
+      if (!flag || flag === "false" || flag === "no")
+        sym = false;
       // build the nodes state object
       hops[hopKey] = { 
         "id" : hopKey, 
@@ -176,7 +183,7 @@ export default class NetModelLoader extends React.Component {
     };
     return true;
   };
-
+  // END EXTRACT
   makeAlertElem(msg) {
     return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
   };

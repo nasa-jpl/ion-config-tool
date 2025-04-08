@@ -1,13 +1,15 @@
+//    ionsurvey.js
 //
-//    dtn2ion.js
+//  generate full set of ion survey reports based on ion model
 //
-//  generate an ion model from a dtn network model
+//  usage:  ionsurvey.js -m [ionmodelfile]
 //
-//  usage:  dtn2ion.js -m [netmodelfile]
+//  inputs: ion_model.json  (or alternative name)
 //
-//  inputs: net_model.json  (or alternative name)
-//
-//  outputs: net_model-ion.json,  [related to input name]
+//  outputs: ion_model-survey directory,    (using model name)
+//           ion_model-survey/nodes.txt,    (nodes survey report)
+//           ion_model-survey/xxx.txt,      (other survey report)
+//           ...
 //           progress messages,
 //           error messages
 //
@@ -15,10 +17,11 @@
 //
 
 // module imports
-const mm = require('minimist');
-const fs = require('fs');
-const df = require('date-fns');
+const mm  = require('minimist');
+const fs  = require('fs');
+const df  = require('date-fns');
 const buf = require('buffer');
+const zip = require('jszip');
 
 var debugFlag = false
 
@@ -28,7 +31,7 @@ const cmdTypes    = require('../../json/cmdTypes.json');
 const paramTypes  = require('../../json/paramTypes.json');
 const selections  = require('../../json/selections.json');
 const patterns    = require('../../json/patterns.json');
-const ionVersions = require('../../json/ionVersions.json');
+const versions    = require('../../json/ionVersions.json');
 
 var uniqId = 0;       // counter used to make unique names
 
@@ -40,9 +43,13 @@ var configs = {};
 var commands = {};
 var hosts = {};
 var ipaddrs = {};
-var clones = {}
+var cloneValues = {};
+var wflags = {};
 
-console.log("Build ION Model from a DTN Network Model");
+var DEBUG_MODE = false;   // disable debug msgs by default
+var dummy = {}; // this keeps the ION GUI source happy
+
+console.log("Build network survey reports from an ION Model");
 
 var argv = mm(process.argv.slice(2));
 var long = argv.l;
@@ -60,31 +67,25 @@ try {
 }
 console.log("JSON parsing successful.");
 console.log("---");
-var net = {};
-var netHosts = {};
-var netNodes = {};
-var netHops  = {};
-var netAddrs = {};
 
-///////////////////
-// In netloader.js
-[net,netHosts,netNodes,netHops,netAddrs] = extractModel(json);
-///////////////////
+// complete initialization of policy objects
+// assign cmdTypes list to each configType
+for (var cmdType in cmdTypes) {
+  let confType = cmdTypes[cmdType].configType;
+  configTypes[confType].cmdTypes.push(cmdType);
+}
+// assign paramTypes list to each cmdType
+for (var pType in paramTypes) {
+  let cType = paramTypes[pType].cmdType;
+  cmdTypes[cType].paramTypes.push(pType);
+}
 
+// build hosts, nodes, configs, etc. from model
+extractModel(json);
+console.log("ION Model extraction successful.");
 console.log("---");
-console.log("DTN Network Model summary:");
-console.log("netHosts: " + Object.keys(netHosts));
-console.log("netNodes: " + Object.keys(netNodes));
-console.log("netHops: "  + Object.keys(netHops));
-console.log("netAddrs: " + netAddrs);
-console.log("---");
-console.log("Checking user net model.");
-
-///////////////////
-// In checknet.js
-var errors = checkNetModel(netHosts,netNodes,netHops);
-//////////////////
-
+console.log("Checking user ion model.");
+var errors = checkModel();
 if (errors.length) {
   console.log("Validation errors.");
   for (let i=0; i<errors.length; i++) {
@@ -94,12 +95,6 @@ if (errors.length) {
   console.log("Validation successful.");
 }
 console.log("---");
-console.log("Building user ion model components.");
-
-////////////////////
-// In buildion.js
-buildIonModel(net.name,net.desc,netHosts,netNodes,netHops);
-////////////////////
 
 console.log("ION Model summary:");
 console.log("hosts: "  + Object.keys(hosts));
@@ -111,15 +106,11 @@ console.log("command count: " + Object.keys(commands).length );
 console.log("config files:  " + Object.keys(configs));
 
 console.log("---");
-console.log("Combining single ion model object.");
-var modelObj = makeModelObj();
-
-console.log("---");
-const modelName = ion.name + ".json";
-console.log("Writing json model to " + modelName);
-saveModel(modelName,modelObj);
-
-console.log("---");
 console.log("Done.");
-
-
+// Called from within extractModel in ionloader.js
+// This is also called in extractModel in IonLoaderModel.js
+// but is treated as a no-op in the UI since there is 
+// already a mechanism to set watch flags there
+function setWatchFlags(configsObj, wlags) {
+  return configsObj; // no-op
+}

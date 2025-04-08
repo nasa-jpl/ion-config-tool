@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-//
 //    ionsurvey.js
 //
 //  generate full set of ion survey reports based on ion model
@@ -45,7 +43,8 @@ var configs = {};
 var commands = {};
 var hosts = {};
 var ipaddrs = {};
-var cloneValues = {}
+var cloneValues = {};
+var wflags = {};
 
 var DEBUG_MODE = false;   // disable debug msgs by default
 
@@ -81,11 +80,21 @@ for (var pType in paramTypes) {
 }
 
 // build hosts, nodes, configs, etc. from model
+
+////////////////////////
+// In ionloader.js
 extractIonModel(json);
+////////////////////////
+
 console.log("ION Model extraction successful.");
 console.log("---");
 console.log("Checking user ion model.");
+
+///////////////////////
+// In checkion.js
 var errors = checkIonModel();
+///////////////////////
+
 if (errors.length) {
   console.log("Validation errors.");
   for (let i=0; i<errors.length; i++) {
@@ -108,14 +117,7 @@ console.log("config files:  " + Object.keys(configs));
 console.log("---");
 console.log("Done.");
 
-//----functions---
-function warn(s) {
-  console.log("Warning: "  + s);
-}
-function error(s) {
-  console.log("Error: "  + s);
-}
-function debug(s) {
-  if (debugFlag) 
-    console.log("$$$ " + s);
+// For the ionsurvey CLI tool, this is a no-op
+function setWatchFlags(configsObj, wflags) {
+  return configsObj;
 }

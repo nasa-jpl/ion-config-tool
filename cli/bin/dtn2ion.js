@@ -68,7 +68,12 @@ var netHosts = {};
 var netNodes = {};
 var netHops  = {};
 var netAddrs = {};
+
+///////////////////
+// In netloader.js
 [net,netHosts,netNodes,netHops,netAddrs] = extractModel(json);
+///////////////////
+
 console.log("---");
 console.log("DTN Network Model summary:");
 console.log("netHosts: " + Object.keys(netHosts));
@@ -77,7 +82,12 @@ console.log("netHops: "  + Object.keys(netHops));
 console.log("netAddrs: " + netAddrs);
 console.log("---");
 console.log("Checking user net model.");
+
+///////////////////
+// In checknet.js
 var errors = checkNetModel(netHosts,netNodes,netHops);
+//////////////////
+
 if (errors.length) {
   console.log("Validation errors.");
   for (let i=0; i<errors.length; i++) {
@@ -88,7 +98,11 @@ if (errors.length) {
 }
 console.log("---");
 console.log("Building user ion model components.");
+
+////////////////////
+// In buildion.js
 buildIonModel(net.name,net.desc,netHosts,netNodes,netHops);
+////////////////////
 
 console.log("ION Model summary:");
 console.log("hosts: "  + Object.keys(hosts));
@@ -111,17 +125,7 @@ saveModel(modelName,modelObj);
 console.log("---");
 console.log("Done.");
 
-//----functions---
-function warn(s) {
-  console.log("Warning: "  + s);
-}
-function error(s) {
-  console.log("Error: "  + s);
-}
-function debug(s) {
-  if (debugFlag) 
-    console.log("$$$ " + s);
-}
+
 //        netloader.js    
 //
 function extractModel (modelObj) {
@@ -386,7 +390,7 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
 
       // build ion ipaddrs
       if (netHost.hasOwnProperty("ipAddrs")) {
-        console.log("****** netHost has ipAddrs!! " + hostKey);
+        debug("****** netHost has ipAddrs!! " + hostKey);
 
         // If host has more than one IP addr, automatically add
         // 0.0.0.0 to IP address list in case a TCP induct 
@@ -440,9 +444,9 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
         clones[ipAddrKey] = cloneVal;
       }; // end of DNS addr block
     };   // end of netHost loop
-    console.log("makeIonModel...  hosts:   " + JSON.stringify(hosts));
-    console.log("makeIonModel...  ipaddrs: " + JSON.stringify(ipaddrs));
-    console.log("makeIonModel...  clones:  " + JSON.stringify(clones));
+    debug("makeIonModel...  hosts:   " + JSON.stringify(hosts));
+    debug("makeIonModel...  ipaddrs: " + JSON.stringify(ipaddrs));
+    debug("makeIonModel...  clones:  " + JSON.stringify(clones));
 
     // build ion nodes first, to establish all ion node numbers
     for (var nodeKey in netNodes) {
@@ -622,7 +626,7 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
           if(!protocols.includes(netHop.bpLayer))
             protocols.push(netHop.bpLayer);
       }
-      console.log("protocols: " + JSON.stringify(protocols));
+      debug("protocols: " + JSON.stringify(protocols));
        // build protocol cmds
       for (let i=0; i<protocols.length; i++) {
         var prot = protocols[i];
@@ -745,16 +749,16 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
       }
     };
     for (hKey in oneWays )
-       console.log("oneWay hop: " + JSON.stringify(oneWays[hKey]) );
+       debug("oneWay hop: " + JSON.stringify(oneWays[hKey]) );
 
     // pass 1 - build inducts
-    console.log("@@@@@ building inducts and links!");
+    debug("@@@@@ building inducts and links!");
     var inductKeys = {};     // record inducts to avoid duplicate inducts per protocol
     var startUdpKeys = {};   // hold ltp start udp commands for later (follows spans) per config
     var startDccpKeys = {};  // hold ltp start dccp commands for later (follows spans) per config 
     for (hKey in oneWays) {
       netHop = oneWays[hKey];
-      console.log("processing hop: " + JSON.stringify(netHop));
+      debug("processing hop: " + JSON.stringify(netHop));
       var toNode = nodes[netHop.toNode];
       nodeKey = toNode.id;
       var bpLayer = netHop.bpLayer;
@@ -829,13 +833,13 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
         };
       };
     };
-    console.log("$$$$$ startUdpKeys: " + JSON.stringify(startUdpKeys) );
+    debug("$$$$$ startUdpKeys: " + JSON.stringify(startUdpKeys) );
     // pass 2 - build outducts
     // var toNode;
-    console.log("@@@@@ building outducts and spans!");
+    debug("@@@@@ building outducts and spans!");
     for (hKey in oneWays) {
       netHop = oneWays[hKey];
-      console.log("processing hop: " + JSON.stringify(netHop));
+      debug("processing hop: " + JSON.stringify(netHop));
       var fromNode = nodes[netHop.fromNode];
       nodeKey = fromNode.id;
       toNode = nodes[netHop.toNode];
@@ -875,7 +879,7 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
         configName = nodeKey + ".ltprc";
         toHostKey = toNode.hostKey;
         var cloneVal = getNodeLink(clones,toNode.id,netHop.ltpLayer);
-        console.log ("???? cloneVal: " + JSON.stringify(cloneVal));
+        debug ("???? cloneVal: " + JSON.stringify(cloneVal));
         linkName = cloneVal.value;
         if (netHop.ltpLayer === "udp") {
           vals = [toNodeNum,100,100,1482,100000,1,linkName,1]
@@ -899,7 +903,7 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
     // pass 3 - build plan cmds
     for (hKey in oneWays) {
       netHop = oneWays[hKey];
-      console.log("processing hop: " + JSON.stringify(netHop));
+      debug("processing hop: " + JSON.stringify(netHop));
       fromNode = nodes[netHop.fromNode];
       nodeKey = fromNode.id;
       toNode = nodes[netHop.toNode]
@@ -926,7 +930,7 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
       } else 
       if (isStandardProtocol(bpLayer)) {
         cloneVal = getNodeOutduct(clones,nodeKey,toAddr,bpLayer);
-        //console.log ("???? cloneVal: " + JSON.stringify(cloneVal));
+        //debug ("???? cloneVal: " + JSON.stringify(cloneVal));
         outductName = cloneVal.value;
       };
       // build attach outduct command
@@ -943,8 +947,8 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
       cmdKey = makeIonCommand(commands,clones,nodeKey,configName,"bpv7rc","start",vals);
       addCommandKey(configs,configName,cmdKey);
     };
-    console.log("makeIonModel...  nodes:   " + JSON.stringify(nodes));
-    console.log("makeIonModel...  clones:  " + JSON.stringify(clones));
+    debug("makeIonModel...  nodes:   " + JSON.stringify(nodes));
+    debug("makeIonModel...  clones:  " + JSON.stringify(clones));
 
     // build ion contact graph
     graphs[graphName] = { 
@@ -988,16 +992,6 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
     assignClones(commands,clones);   //  map cloneVal to using clones (command params)
     return null;
 };
-// Special wrapper function for console.log debug messages
-function debug_log(msg) {
-  if (DEBUG_MODE)
-     console.log(msg);
-}
-// Special wrapper function for console.log debug messages
-function debug_log(msg) {
-  if (DEBUG_MODE)
-     console.log(msg);
-}
 // NOTE: compare to isGoodName of IonConfig App.js
 function isGoodName(name) {
 // check if a new name is valid
@@ -1482,9 +1476,40 @@ function makeConfigObj(configKey) {
   }
   return config;
 };
+// Not automatically extracted. CLI specific code.
 function saveModel(modelName, modelObj) {
   debug("save ION model!");
   const modelJson = JSON.stringify(modelObj,null,2);
   //const buff = new buf.Buffer( [modelJson], {type: "text/plain; charset=utf-8"} );
   fs.writeFileSync(modelName,modelJson); 
+};
+// Utility functions used by all CLI apps that are not part
+// of the automatic extraction
+
+// Special wrapper function for console.log debug messages
+function debug_log(msg) {
+  if (DEBUG_MODE)
+     console.log(msg);
+}
+
+function warn(s) {
+  console.log("Warning: "  + s);
+}
+function error(s) {
+  console.log("Error: "  + s);
+}
+function setError(s) {
+  console.log("Error: "  + s);
+}
+function debug(s) {
+  if (debugFlag) 
+    console.log("$$$ " + s);
+}
+
+// get now date-time in standard format
+function getNow() {
+  const now = new Date();
+  var goodNow = df.formatISO(now); 
+  goodNow = goodNow.substring(0,16);
+  return goodNow;
 };

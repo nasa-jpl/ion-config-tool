@@ -1,16 +1,13 @@
-//  NOTE: Conpare to saveConfigs of IonModel.jsx
+// Not automatically extracted, likely not to change in GUI
+// See saveConfigs in IonModel.jsx for similarities and
+// differences.
 function saveAllConfigs() {
-  console.log("let's save all config files in a zip file!");
-  //var zip = new JSZip();
-  //var rootdir = zip.folder(ion.name);   // the network name
-  // fs.mkdirsSync(ion.name);   // the network name
-  // build common contact graph
   try 
     { fs.mkdirSync(ion.name); }  // the network name
   catch (err)
     { console.log(ion.name + " dir already exists."); }
   const graphKey = ion.currentContacts + ".cg";
-  var graphLines = makeCmdLines(graphKey);
+  var graphLines = makeCmdLines(configs[graphKey]);
 
   // build config files node-by-node
   for (var nodeKey in nodes) {
@@ -29,7 +26,7 @@ function saveAllConfigs() {
     for (let j=0; j<confKeys.length; j++) {
       var configKey = confKeys[j];
       console.log("Saving config file: " + configKey);
-      const cmdLines = makeCmdLines(configKey);
+      const cmdLines = makeCmdLines(configs[configKey]);
       const page = cmdLines.join(lf) + lf;
       var configFile = ion.name + '/' + node.id + '/' + configKey;
       try 

@@ -82,12 +82,7 @@ function extractIonModel (modelObj) {
     var configsObj = nodeObj.configs;
 
     // check for watch flags requested on the command line
-    for (cfg in configsObj) {
-      fname = cfg.toString();
-      if (wflags[fname]) {
-        configsObj[fname].commands.push(wflags[fname]);
-      }
-    }
+    configsObj = setWatchFlags(configsObj, wflags);
 
     debug_log("node configs=" + JSON.stringify(configsObj) );
     const configKeyList = extractConfigs(nodeKey,configsObj);
