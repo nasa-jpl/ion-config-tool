@@ -2743,7 +2743,7 @@
     "valType":  "number",
     "units":  "bytes",
     "showDefault": true,
-    "defaultValue" : 0
+    "defaultValue" : 1000000
   },
   "ionconfig_wmAddress_p0" : {
     "id" :  "ionconfig_wmAddress_p0",
