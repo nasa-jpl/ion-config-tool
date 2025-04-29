@@ -325,7 +325,6 @@ export default class NetModel  extends React.Component {
 
     // build ion nodes first, to establish all ion node numbers
     for (var nodeKey in netNodes) {
-      var protocols = [];  // init node protocols list
       let netNode = netNodes[nodeKey];
       nodeNum = nextNodeNum;   // default
       if (netNode.nodeType === 'ion' && netNode.endpointID !== '') {
@@ -360,6 +359,7 @@ export default class NetModel  extends React.Component {
     // now build configs and (static) commands per node
     // ...hop-based commands must be done later
     for (nodeKey in netNodes) {
+      var protocols = [];  // init node protocols list
       var netNode = netNodes[nodeKey];
       var ionNode = nodes[nodeKey];
       nodeNum = ionNode.ionNodeNum;
