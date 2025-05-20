@@ -1075,7 +1075,13 @@ export default class NetModel  extends React.Component {
     if (netNode === "")
       return "";
 
-    var netHostIPs = netHosts[netNode].ipAddrs;
+    var hostForNode = netNodes[netNode].nodeHost;
+
+    if (hostForNode === "") {
+      return "";
+    }
+
+    var netHostIPs = netHosts[hostForNode].ipAddrs;
 
     return netHostIPs[0];
   };
@@ -1121,12 +1127,14 @@ export default class NetModel  extends React.Component {
     // If node not yet selected, nothing to build
     if (netNode !== "") {
       var netNodeHost = netNodes[netNode].nodeHost;
-      var netHostIPs = netHosts[netNodeHost].ipAddrs;
+      if (netNodeHost !== "") {
+        var netHostIPs = netHosts[netNodeHost].ipAddrs;
 
-      for (var idx in netHostIPs) {
-        let value = netHostIPs[idx];
-        let label = netNode;
-        vals.push({"value": value, "label": label});
+        for (var idx in netHostIPs) {
+          let value = netHostIPs[idx];
+          let label = netNode;
+          vals.push({"value": value, "label": label});
+        }
       }
     }
     var optionItems = this.props.mapOptionElems(vals);
