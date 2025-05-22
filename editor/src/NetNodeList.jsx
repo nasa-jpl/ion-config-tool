@@ -112,7 +112,7 @@ export default class NetNodeList  extends React.Component {
           <div className="row mt-4">
             <Col className="text-right" sm={1}><Label bsSize="lg" bsStyle="default">Net Node List</Label></Col>
             <Col className="text-right" sm={1}><b>{name}</b></Col>
-            <Col className="text-left"  sm={2}>Network Node Servers  {nodeCnt}</Col>
+            <Col className="text-left"  sm={2}>DTN Nodes  {nodeCnt}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
                 <Button bsSize="sm" bsStyle="primary" disabled={dimNewNode} onClick={this.newnode}>New Node</Button>  
