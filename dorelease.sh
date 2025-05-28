@@ -20,6 +20,7 @@ rel=/tmp/release
 /bin/rm -R $rel
 /bin/rm -R /tmp/ionconfig-*  # prior versioned releases
 mkdir $rel
+mkdir $rel/json
 
 echo "Adding standard release files."
 cp release.json  $rel
@@ -28,7 +29,7 @@ cp ./script/rel.README $rel/README
 cp ./script/rel.ion3node.json $rel/ion3node.json
 
 echo "Adding json config files."
-cp -R json $rel
+cp -R dict/json_latest/* $rel/json
 
 echo "Adding command-line programs & docs."
 mkdir $rel/cli
