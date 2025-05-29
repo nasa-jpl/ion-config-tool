@@ -23,12 +23,12 @@ const buf = require('buffer');
 var debugFlag = false
 
 // schema imports (global)
-const configTypes = require('../../json/configTypes.json');
-const cmdTypes    = require('../../json/cmdTypes.json');
-const paramTypes  = require('../../json/paramTypes.json');
-const selections  = require('../../json/selections.json');
-const patterns    = require('../../json/patterns.json');
-const ionVersions = require('../../json/ionVersions.json');
+const configTypes = require('../json/configTypes.json');
+const cmdTypes    = require('../json/cmdTypes.json');
+const paramTypes  = require('../json/paramTypes.json');
+const selections  = require('../json/selections.json');
+const patterns    = require('../json/patterns.json');
+const ionVersions = require('../json/ionVersions.json');
 
 var uniqId = 0;       // counter used to make unique names
 
