@@ -14,7 +14,7 @@ package.json
 /dict/front.html
 /dict/paramTypes.rows
 /docs
-/json
+/json/*.json
 /tars
 /test
 /*.swp
