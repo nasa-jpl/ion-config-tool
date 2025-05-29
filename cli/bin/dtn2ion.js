@@ -126,168 +126,126 @@ console.log("---");
 console.log("Done.");
 
 
-//        netloader.js    
-//
-function extractModel (modelObj) {
-  // extract the Net config JSON structure &
-  // flatten the data structures for efficient access
+// Automatically extracted from source file ../../editor/src/NetModelLoader.jsx
+function extractModel(modelObj) {
+    // extract the Net config JSON structure &
+    // flatten the data structures for efficient access
 
-  // make short names for state objects
-  var net = {};
-  var hosts = {};
-  var nodes = {};
-  var hops  = {};
-  var addrs = [];
+    // make short names for state objects
+    var net = {};
+    var hosts = {};
+    var nodes = {};
+    var hops = {};
+    var netaddrs = [];
 
-  if(modelObj.hasOwnProperty("netModelName"))
-    net.name = modelObj["netModelName"];
-  else {
-    warn("The json file is not a Net Model.");
-    return [ net, hosts, nodes, hops, addrs];
-  }
-  if(modelObj.hasOwnProperty("netModelDesc"))
-    net.desc = modelObj["netModelDesc"];
-
-  console.log("Ingesting user net model.  net: " + JSON.stringify(net));
-
-  console.log("Ingesting netHosts.");
-  var hostList = [];
-  if(modelObj.hasOwnProperty("netHosts")) 
-    hostList = modelObj.netHosts;
-  var hostAttrs = ["hostName","hostDesc","ipAddrs","platform","hostNodes"];
-  for (var hostKey in hostList) {
-    var hostObj = hostList[hostKey];
-    for (var attr in hostObj) {
-      if (hostAttrs.indexOf(attr) < 0) {
-         warn(attr + " is invalid attribute for host " + hostKey);
-      };
-    };
-    var id = '';
-    if(hostObj.hasOwnProperty("hostName")) {
-      id = hostObj["hostName"];
-      if(id != hostKey)
-        warn(id + " hostName does not match key " + hostKey);
+    //console.log("=== Ingesting user net model.  net: " + JSON.stringify(net));
+    //console.log("net WAS: " + JSON.stringify(net));
+    if(modelObj.hasOwnProperty("netModelName"))
+      net.name = modelObj["netModelName"];
+    else {
+       setError("The json file is not a Net Model.");
+       return false;
     }
-    var desc = '';
-    if(hostObj.hasOwnProperty("hostDesc"))
-      desc = hostObj["hostDesc"];
-    let ipaddrs = [];
-    if(hostObj.hasOwnProperty("ipAddrs"))
-      ipaddrs = hostObj["ipAddrs"];
+    if(modelObj.hasOwnProperty("netModelDesc"))
+      net.desc = modelObj["netModelDesc"];
 
-    // build the hosts state object
-    hosts[hostKey] = { 
-      "id" : hostKey, 
-      "hostDesc" : desc,
-      "ipAddrs" : ipaddrs
-    };
-    // add the ip addrs to master list
-    for (var i=0; i<ipaddrs.length; i++) {
-      if (ipaddrs[i] === "") {
-        warn("Host " + hostKey + " has an empty ip address.");
-        continue;
-      }
-      addrs.push(ipaddrs[i]);
-    };
-  };
-  console.log("Ingesting netNodes.");
-  var nodeList = [];
-  var nodeAttrs = ["nodeName","nodeDesc","nodeHost","nodeType",
-      "endpointID","protocols","services"];
-  if(modelObj.hasOwnProperty("netNodes"))  // optional for now.
-    nodeList = modelObj.netNodes;
-  for (var nodeKey in nodeList) {
-    var nodeObj = nodeList[nodeKey];
-    for (var attr in nodeObj) {
-      if (nodeAttrs.indexOf(attr) < 0) {
-         warn(attr + " is invalid attribute for node " + nodeKey);
+    console.log("=== Ingesting netHosts.");
+    var hostList = [];
+    if(modelObj.hasOwnProperty("netHosts")) 
+      hostList = modelObj.netHosts;
+    for (var hostKey in hostList) {
+      var hostObj = hostList[hostKey];
+      var desc = '';
+      if(hostObj.hasOwnProperty("hostDesc"))
+        desc = hostObj["hostDesc"];
+      let addrs = [];
+      if(hostObj.hasOwnProperty("ipAddrs"))
+        addrs = hostObj["ipAddrs"];
+
+      // build the hosts state object
+      hosts[hostKey] = { 
+        "id" : hostKey, 
+        "hostDesc" : desc,
+        "ipAddrs" : addrs
       };
+      // add the ip addrs to master list
+      for (var i=0; i<addrs.length; i++)
+        netaddrs.push(addrs[i]);
+
     };
-    var id = '';
-    if(nodeObj.hasOwnProperty("nodeName")) {
-      id = nodeObj["nodeName"];
-      if(id != nodeKey)
-        warn(id + " nodeName does not match key " + nodeKey);
-    };
-    var desc = '';
-    if(nodeObj.hasOwnProperty("nodeDesc"))
-      desc = nodeObj["nodeDesc"];
-    var host = '';
-    if(nodeObj.hasOwnProperty("nodeHost"))
-      host = nodeObj["nodeHost"];
-    var type = '';
-    if(nodeObj.hasOwnProperty("nodeType"))
-      type = nodeObj["nodeType"];
-    var ep = '';
-    if(nodeObj.hasOwnProperty("endpointID"))
-       ep = nodeObj["endpointID"];
-    var servs= [];
-    if(nodeObj.hasOwnProperty("services"))
-      servs = nodeObj["services"];
-    // build the nodes state object
-    nodes[nodeKey] = { 
-      "id" : nodeKey, 
-      "nodeDesc" : desc, 
-      "nodeHost" : host,
-      "nodeType" : type,
-      "endpointID" : ep,
-      "services" : servs
-    };
-  }
-  console.log("Ingesting netHops.");
-  var hopList = [];
-  var hopAttrs = ["hopName","hopDesc","fromNode","toNode",
-        "bpLayer","ltpLayer","maxRate","symmetric", "portNum",
-        "fromIP","toIP"];
-  if(modelObj.hasOwnProperty("netHops"))  // optional for now.
-    hopList = modelObj.netHops;
-  for (var hopKey in hopList) {
-    var hopObj = hopList[hopKey];
-    for (var attr in hopObj) {
-      if (hopAttrs.indexOf(attr) < 0) {
-         warn(attr + " is invalid attribute for hop " + hopKey);
+    console.log("net IS:  " + JSON.stringify(net));
+    console.log("=== Ingesting netNodes.");
+    var nodeList = [];
+    if(modelObj.hasOwnProperty("netNodes"))  // optional for now.
+      nodeList = modelObj.netNodes;
+    for (var nodeKey in nodeList) {
+      var nodeObj = nodeList[nodeKey];
+      desc = '';
+      if(nodeObj.hasOwnProperty("nodeDesc"))
+        desc =nodeObj["nodeDesc"];
+      var host = '';
+      if(nodeObj.hasOwnProperty("nodeHost"))
+        host =nodeObj["nodeHost"];
+      var type = '';
+      if(nodeObj.hasOwnProperty("nodeType"))
+        type =nodeObj["nodeType"];
+      var ep = '';
+      if(nodeObj.hasOwnProperty("endpointID"))
+         ep = nodeObj["endpointID"];
+      var servs= [];
+      if(nodeObj.hasOwnProperty("services"))
+        servs = nodeObj["services"];
+      // build the nodes state object
+      nodes[nodeKey] = { 
+        "id" : nodeKey, 
+        "nodeDesc" : desc, 
+        "nodeHost" : host,
+        "nodeType" : type,
+        "endpointID" : ep,
+        "services" : servs
       };
-    };
-    var id = '';
-    if(hopObj.hasOwnProperty("hopName")) {
-      id = hopObj["hopName"];
-      if(id != hopKey)
-        warn(id + " hopName does not match key " + hopKey);
-    };
-    var desc = '';
-    if(hopObj.hasOwnProperty("hopDesc"))
-      desc = hopObj["hopDesc"];
-    var fromnode = '';
-    if(hopObj.hasOwnProperty("fromNode"))
-      fromnode = hopObj["fromNode"];
-    var fromip = '';
-    if(hopObj.hasOwnProperty("fromIP"))
-      fromip = hopObj["fromIP"];
-    var tonode = '';
-    if(hopObj.hasOwnProperty("toNode"))
-      tonode = hopObj["toNode"];
-    var toip = '';
-    if(hopObj.hasOwnProperty("toIP"))
-      toip = hopObj["toIP"];
-    var bp = '';
-    if(hopObj.hasOwnProperty("bpLayer"))
-      bp = hopObj["bpLayer"];
-    var ltp = '';
-    if(hopObj.hasOwnProperty("ltpLayer"))
-      ltp = hopObj["ltpLayer"];
-    var port = '';
-    if(hopObj.hasOwnProperty("portNum"))
-      port = hopObj["portNum"];
-    var rate = 0;
-    if(hopObj.hasOwnProperty("maxRate"))
-      rate = hopObj["maxRate"];
-    var flag = false;
-    if(hopObj.hasOwnProperty("symmetric"))
-      flag = hopObj["symmetric"];
-    var sym  = true;
-    if (!flag || flag === "false" || flag === "no")
-      sym = false;
-    // build the nodes state object
+    }
+    console.log("=== Ingesting netHops.");
+    var hopList = [];
+    if(modelObj.hasOwnProperty("netHops"))  // optional for now.
+      hopList = modelObj.netHops;
+    for (var hopKey in hopList) {
+      var hopObj = hopList[hopKey];
+      desc = '';
+      if(hopObj.hasOwnProperty("hopDesc"))
+        desc = hopObj["hopDesc"];
+      var fromnode = '';
+      if(hopObj.hasOwnProperty("fromNode"))
+        fromnode = hopObj["fromNode"];
+      var fromip = '';
+      if(hopObj.hasOwnProperty("fromIP"))
+        fromip = hopObj["fromIP"];
+      var tonode = '';
+      if(hopObj.hasOwnProperty("toNode"))
+        tonode = hopObj["toNode"];
+      var toip = '';
+      if(hopObj.hasOwnProperty("toIP"))
+        toip = hopObj["toIP"];
+      var bp = '';
+      if(hopObj.hasOwnProperty("bpLayer"))
+        bp = hopObj["bpLayer"];
+      var ltp = '';
+      if(hopObj.hasOwnProperty("ltpLayer"))
+        ltp = hopObj["ltpLayer"];
+      var port = '';
+      if(hopObj.hasOwnProperty("portNum"))
+        port = hopObj["portNum"];
+      var rate = 0;
+      if(hopObj.hasOwnProperty("maxRate"))
+        rate = hopObj["maxRate"];
+      var sym = "no";
+      var flag = false;
+      if(hopObj.hasOwnProperty("symmetric"))
+        flag = hopObj["symmetric"];
+      var sym = true;
+      if (!flag || flag === "false" || flag === "no")
+        sym = false;
+      // build the nodes state object
       hops[hopKey] = { 
         "id" : hopKey, 
         "hopName": hopKey,
@@ -302,51 +260,74 @@ function extractModel (modelObj) {
         "maxRate": rate,
         "symmetric": sym
       };
+    };
+    return [net,hosts,nodes,hops,netaddrs];
   };
-  console.log("Ingestion complete.");
-  return [ net, hosts, nodes, hops, addrs];
-};
-//        checknet.js  
-//
-
-// NOTE: compare to checkNetModel of IonConfig NetModel.jsx
+// Automatically extracted from source file ../../editor/src/NetModel.jsx
 function checkNetModel(netHosts,netNodes,netHops) {
-// make list of errors in net model
-  var errors = [];   // list of messages (strings)
+  // make list of errors in net model
+    var errors = [];   // list of messages (strings)
 
-  // do some sanity checking on net model
-  if (!netHosts)  // no host object?
-    errors.push("The Net Model has no Host list.")
-  if (!Object.keys(netHosts).length)   // no hosts?
-    errors.push("The Net Model has no Hosts.");
-  if (!netNodes)  // no node object?
-    errors.push("The Net Model has no Node list.");
-  if (!Object.keys(netNodes).length)   // no nodes?
-    errors.push("The Net Model has no Nodes.");
-  for (var nodeKey in netNodes) {
-    var netNode = netNodes[nodeKey];
-    var hostKey = netNode.nodeHost;
-    var hostObj = netHosts[hostKey];
-    if (!hostObj)
-      errors.push("Invalid hostKey for node " + nodeKey + ".");
+    // do some sanity checking on net model
+    if (!netHosts)  // no host object?
+      errors.push("The Net Model has no Host list.")
+    if (!Object.keys(netHosts).length)   // no hosts?
+      errors.push("The Net Model has no Hosts.");
+    if (!netNodes)  // no node object?
+      errors.push("The Net Model has no Node list.");
+    if (!Object.keys(netNodes).length)   // no nodes?
+      errors.push("The Net Model has no Nodes.");
+    for (var nodeKey in netNodes) {
+      var netNode = netNodes[nodeKey];
+      var hostKey = netNode.nodeHost;
+      debug("**** hostKey =" + hostKey);
+      var hostObj = netHosts[hostKey];
+      if (!hostObj)
+        errors.push("Invalid hostKey for node " + nodeKey + ".");
+    }
+    // sanity checking on each hop
+    for (var hopKey in netHops) {
+      var netHop = netHops[hopKey];
+      var fromNode = netNodes[netHop.fromNode];
+      if (!fromNode) 
+        errors.push("Invalid From Node Name for Net Hop " + hopKey + ".");
+      var toNode = netNodes[netHop.toNode];
+      if (!toNode) 
+        errors.push("Invalid To Node Name for Net Hop " + hopKey + ".");
+
+      var toIP = netHop.toIP;
+      var fromIP = netHop.fromIP;
+
+      for (var netHostKey in netHosts) {
+        var netHost = netHosts[netHostKey];
+        if (fromNode) {
+          if (netHostKey === fromNode.nodeHost) {
+            if (!netHost.ipAddrs.includes(fromIP))
+              errors.push("Invalid 'From IP Addr': " + fromIP + " for Net Hop " + hopKey + ".");
+          }
+        }
+        if (toNode) {
+          if (netHostKey === toNode.nodeHost) {
+            if (!netHost.ipAddrs.includes(toIP))
+              errors.push("Invalid 'To IP Addr': " + toIP + " for Net Hop " + hopKey + ".");
+          }
+        }
+      }
+
+      if (!netHop.bpLayer)
+        errors.push("Missing BP Layer Protocol CLA for Net Hop " + hopKey + ".");
+      if (netHop.bpLayer && !isStandardProtocol(netHop.bpLayer)) 
+        errors.push("Unrecognized BP Layer Protocol CLA for Net Hop: "+ hopKey +". Should be one of: tcp, stcp, udp, dccp or ltp.");
+    }
+    return errors;
   }
-  // verify node keys of each hop
-  for (var hopKey in netHops) {
-    var netHop = netHops[hopKey];
-    var fromNode = netNodes[netHop.fromNode];
-    if (!fromNode) 
-      errors.push("Invalid fromNode for hop " + hopKey + ".");
-    var toNode = netNodes[netHop.toNode];
-    if (!toNode) 
-      errors.push("Invalid toNode for hop " + hopKey + ".");
-    if (!netHop.bpLayer)
-      errors.push("Invalid bpLayer for hop " + hopKey + ".");
-  }
-  return errors;
-}
-function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
+// Automatically extracted from source file ../../editor/src/NetModel.jsx
+function buildIonModel(netName,netDesc,netHosts,netNodes,netHops) {
+  // build ion model
     // translate the net model to a full ion model
     // using best-guess defaults
+
+    var myParams = paramTypes;
 
     // default values
     const ionName   = netName + "-ion";
@@ -365,6 +346,8 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
         highKey = verKey;
       } 
     }
+
+
 
     // build ion object
     ion["name"] = ionName;
@@ -450,7 +433,6 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
 
     // build ion nodes first, to establish all ion node numbers
     for (var nodeKey in netNodes) {
-      var protocols = [];  // init node protocols list
       let netNode = netNodes[nodeKey];
       nodeNum = nextNodeNum;   // default
       if (netNode.nodeType === 'ion' && netNode.endpointID !== '') {
@@ -485,6 +467,7 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
     // now build configs and (static) commands per node
     // ...hop-based commands must be done later
     for (nodeKey in netNodes) {
+      var protocols = [];  // init node protocols list
       var netNode = netNodes[nodeKey];
       var ionNode = nodes[nodeKey];
       nodeNum = ionNode.ionNodeNum;
@@ -510,7 +493,7 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
       for (i in ionconfig_parms) {
 
         // Variable string to evaluate
-        let varstr = "paramTypes.ionconfig_"+ionconfig_parms[i]+"_p0.defaultValue;";
+        let varstr = "myParams.ionconfig_"+ionconfig_parms[i]+"_p0.defaultValue;";
 
         // Grab the default value and place it in the vals array
         default_val = eval(varstr);
@@ -991,491 +974,481 @@ function buildIonModel(netName, netDesc, netHosts, netNodes, netHops) {
     };
     assignClones(commands,clones);   //  map cloneVal to using clones (command params)
     return null;
-};
-// NOTE: compare to isGoodName of IonConfig App.js
+  };
+// Automatically extracted from source file ../../editor/src/App.jsx
 function isGoodName(name) {
-// check if a new name is valid
-debug("isGoodName ?? " + name);
-  if (name === '')
-    return false;
-  if (name.indexOf(' ') >= 0)
-    return false;
-  return true;
-}
-// NOTE: compare to isStandardProtocol of IonConfig App.js
-function isStandardProtocol(protocol) {
-//check if protocol has a standard ION CLI
-  if (protocol === "tcp"  ||
-      protocol === "stcp" ||
-      protocol === "udp"  ||
-      protocol === "dccp" ||
-      protocol === "bssp" ||
-      protocol === "ltp") 
+  // check if a new name is valid
+  debug("isGoodName ?? " + name);
+    if (name === '')
+      return false;
+    if (name.indexOf(' ') >= 0)
+      return false;
     return true;
-  else
-    return false;
-}
-// NOTE: compare to isStandardProtocol of IonConfig App.js
+  }
+// Automatically extracted from source file ../../editor/src/App.jsx
+function isStandardProtocol(protocol) {
+  //check if protocol has a standard ION CLI
+    if (protocol === "tcp"  ||
+        protocol === "stcp" ||
+        protocol === "udp"  ||
+        protocol === "dccp" ||
+        protocol === "bssp" ||
+        protocol === "ltp") 
+      return true;
+    else
+      return false;
+  }
+// Automatically extracted from source file ../../editor/src/App.jsx
 function getUniqId() {
   // generate next uniq id...used by all types
-  let nextId = uniqId + 1;
-  uniqId = nextId;
-  return nextId;
-}
-// NOTE: compare to addCommandKey of IonConfig NetModel.jsx
-function addCommandKey(configs,configName,cmdKey) {
-// add commmand to a configuration, unless its null
-  if (cmdKey == null) {
-    debug("addCommandKey discarded for configFile: " + configName);
-    return;
+     let nextId = uniqId + 1;
+     uniqId = nextId;
+     return nextId;
   }
-  configs[configName].cmdKeys.push(cmdKey);
-}
-
-// NOTE: compare to makeIonCommand of IonConfig NetModel.jsx
+// Automatically extracted from source file ../../editor/src/NetModel.jsx
+function addCommandKey(configs,configName,cmdKey) {
+  // add commmand to a configuration, unless its null
+    if (cmdKey == null) {
+      debug("addCommandKey discarded for configFile: " + configName);
+      return;
+    }
+    configs[configName].cmdKeys.push(cmdKey);
+  }
+// Automatically extracted from source file ../../editor/src/NetModel.jsx
 function makeIonCommand(commands,clones,groupKey,configKey,configType,cmdName,values) {
-// build an ion command object
-  let cmdTypeKey = configType + "_" + cmdName;
-  let uniqid = getUniqId();
-  let cmdKey = "cmd_" + uniqid;
-  let cmdType = cmdTypes[cmdTypeKey];
-  debug("makeIonCommand ... configType: " + configType + 
-              " groupKey: " + groupKey + " cmdName: " + cmdName +
-              " cmdKey: " + cmdKey + " values: " + values);
-  if (cmdType === null)
-    return null;
-  // check for duplicate command & exit if dup exists
-  for (var cKey in commands) {
-    let cmd = commands[cKey];
-    if (cmd.configKey === configKey) {     // matching config file?
-      if (cmd.typeKey === cmdTypeKey) {    // matching command type
-        var match = true;
-        for (let i = 0; i < cmd.values.length; i++) {
-          if (cmd.values[i] !== values[i])
-            match = false;
-        }
-        if (match) {
-          debug("makeIonCommand duplicate command: " + JSON.stringify(cmd));
-          return null;
-        }
-      } // end cmdTypeKey check
-    }   // end configKey check
-  }     // end commands loop
-  let tranTime = getNow();
-  commands[cmdKey] = {
-    "id" : cmdKey,
-    "configKey" : configKey,
-    "typeKey" : cmdTypeKey,
-    "typeName" : cmdType.name,
-    "order" : cmdType.order,
-    "lastUpdate" : tranTime,
-    "values" : values
+  // build an ion command object
+    // NOTE: the default behavior is to use the latest version of each command type
+    // By convention, the latest command is simply the configType + cmdName
+    // Prior command versions have _vxx suffix showing the last version supported
+    let cmdTypeKey = configType + "_" + cmdName;
+    let uniqid = getUniqId();
+    let cmdKey = "cmd_" + uniqid;
+    let cmdType = cmdTypes[cmdTypeKey];
+    debug("makeIonCommand ... configType: " + configType + 
+                " groupKey: " + groupKey + " cmdName: " + cmdName +
+                " cmdKey: " + cmdKey + " values: " + values);
+    if (cmdType === null)
+      return null;
+    // check for duplicate command & exit if dup exists
+    for (var cKey in commands) {
+      let cmd = commands[cKey];
+      if (cmd.configKey === configKey) {     // matching config file?
+        if (cmd.typeKey === cmdTypeKey) {    // matching command type
+          var match = true;
+          for (let i = 0; i < cmd.values.length; i++) {
+            if (cmd.values[i] !== values[i])
+              match = false;
+          }
+          if (match) {
+            debug("$$$$$$$ makeIonCommand duplicate command: " + JSON.stringify(cmd));
+            return null;
+          }
+        } // end cmdTypeKey check
+      }   // end configKey check
+    }     // end commands loop
+    let tranTime = getNow();
+    commands[cmdKey] = {
+      "id" : cmdKey,
+      "configKey" : configKey,
+      "typeKey" : cmdTypeKey,
+      "typeName" : cmdType.name,
+      "order" : cmdType.order,
+      "lastUpdate" : tranTime,
+      "values" : values
+    };
+    if (cmdType.isCloned) {
+      var cloneVal = makeCloneVal(groupKey,commands[cmdKey]);
+      var cvKey = cloneVal.id;
+      clones[cvKey] = cloneVal;
+    } 
+    return cmdKey;
   };
-  if (cmdType.isCloned) {
-    var cloneVal = makeCloneVal(groupKey,commands[cmdKey]);
-    var cvKey = cloneVal.id;
-    clones[cvKey] = cloneVal;
-  } 
-  return cmdKey;
-};
-// get now date-time in standard format
-function getNow() {
-  const now = new Date();
-  var goodNow = df.formatISO(now); 
-  goodNow = goodNow.substring(0,16);
-  return goodNow;
-};
-// NOTE: compare to makeCloneVal of IonConfig App.jsx
+// Automatically extracted from source file ../../editor/src/App.jsx
 function makeCloneVal(nodeKey,cmd) {
   // make a clone-able value object (or expression) based on special command types
-  var cloneVal = {};
-  // first assign properties not dependent on type
-  cloneVal["id"] = cmd.id;
-  cloneVal["nodeKey"] = nodeKey;
-  cloneVal["clones"] = []     // a list for clone id objects (cmdKey & valIdx)
-  cloneVal["value"] = makeComboValue(cmd,cmd.typeKey);
-  // then check specific type for other init rules
-  if (cmd.typeKey === "node_nodenum") {    /// special model command (not ion)
-    cloneVal["type"] = "nodeNum";
-    cloneVal["label"] = nodeKey;
-  } else
-  if (cmd.typeKey === "node_nodekey") {    /// special model command (not ion)
-    cloneVal["type"] = "nodeKey";
-    cloneVal["label"] = nodeKey;
-  } else
-  if (cmd.typeKey === "host_hostkey") {    /// special model command (not ion)
-    cloneVal["type"] = "hostKey";
-    cloneVal["label"] = 'Host:' + cmd.values[0];
-  } else
-  if (cmd.typeKey === "host_ipaddr") {         /// special model command (not ion)
-    cloneVal["type"] = "ipAddr";
-    cloneVal["label"] = 'Host: ' + nodeKey + ' IpAddr:' + cmd.values[0];
-  } else
-  if (cmd.typeKey === "bpv6rc_endpoint" ||
-      cmd.typeKey === "bpv7rc_endpoint") {
-    cloneVal["type"] = "ionEndpoint";
-    // should annotate endpoint purpose in the the label
-    let suffix = '';
-    if (cmd.values[3] !== "")
-      suffix = ' [' + cmd.values[3] + ']';
-    cloneVal["label"] = 'node:' + nodeKey + ' servNum:' + cmd.values[1] + suffix;
-  } else
-  if (cmd.typeKey === "bpv6rc_induct_ltp" ||
-      cmd.typeKey === "bpv7rc_induct_ltp") {
-    cloneVal["type"] = "ltpInduct";
-    cloneVal["label"] = 'toNode: ' + nodeKey + ' ltpInductName: ' + cloneVal.value;
-  } else
-  if (cmd.typeKey === "bpv6rc_induct_udp" ||
-      cmd.typeKey === "bpv7rc_induct_udp") {
-    cloneVal["type"] = "udpInduct";
-    cloneVal["label"] = 'toNode: ' + nodeKey + ' udpInductName: ' + cloneVal.value;
-  } else 
-  if (cmd.typeKey === "bpv6rc_induct_stcp" ||
-      cmd.typeKey === "bpv7rc_induct_stcp") {
-    cloneVal["type"] = "stcpInduct";
-    cloneVal["label"] = 'toNode:' + nodeKey + ' stcpInductName: ' + cloneVal.value; 
-  } else 
-  if (cmd.typeKey === "bpv6rc_induct_tcp" ||
-      cmd.typeKey === "bpv7rc_induct_tcp") {
-    cloneVal["type"] = "tcpInduct";
-    cloneVal["label"] = 'toNode: ' + nodeKey + ' tcpInductName: ' + cloneVal.value;
-  } else 
-  if (cmd.typeKey === "bpv6rc_induct_dccp" ||
-      cmd.typeKey === "bpv7rc_induct_dccp") {
-    cloneVal["type"] = "dccpInduct";
-    cloneVal["label"] = 'toNode: ' + nodeKey + ' dccpInductName: ' + cloneVal.value; 
-  } else
-  if (cmd.typeKey === "bpv6rc_induct_bssp" ||
-      cmd.typeKey === "bpv7rc_induct_bssp") {
-    cloneVal["type"] = "bsspInduct";
-    cloneVal["label"] = 'toNode: ' + nodeKey + ' bsspInductName: ' + cloneVal.value;
-  } else 
-  if (cmd.typeKey === "bpv6rc_outduct_ltp" ||
-      cmd.typeKey === "bpv7rc_outduct_ltp") {
-    cloneVal["type"] = "ltpOutduct";
-    cloneVal["label"] = 'fromNode: ' + nodeKey + ' ltpOutductName: ' + cloneVal.value;
-  } else
-  if (cmd.typeKey === "bpv6rc_outduct_udp" ||
-      cmd.typeKey === "bpv7rc_outduct_udp") {
-    cloneVal["type"] = "udpOutduct";
-    cloneVal["label"] = 'fromNode: ' + nodeKey + ' udpOutductName: ' + cloneVal.value;
-  } else 
-  if (cmd.typeKey === "bpv6rc_outduct_stcp" ||
-      cmd.typeKey === "bpv7rc_outduct_stcp") {
-    cloneVal["type"] = "stcpOutduct";
-    cloneVal["label"] = 'fromNode:' + nodeKey + ' stcpOutductName: ' + cloneVal.value; 
-  } else 
-  if (cmd.typeKey === "bpv6rc_outduct_tcp" ||
-      cmd.typeKey === "bpv7rc_outduct_tcp") {
-    cloneVal["type"] = "tcpOutduct";
-    cloneVal["label"] = 'fromNode: ' + nodeKey + ' tcpOutductName: ' + cloneVal.value;
-  } else 
-  if (cmd.typeKey === "bpv6rc_outduct_dccp" ||
-      cmd.typeKey === "bpv7rc_outduct_dccp") {
-    cloneVal["type"] = "dccpOutduct";
-    cloneVal["label"] = 'fromNode: ' + nodeKey + ' dccpOutductName: ' + cloneVal.value; 
-  } else 
-  if (cmd.typeKey === "ltprc_start_udp") {
-    cloneVal["type"] = "udpLink";
-    cloneVal["label"] = 'toNode: ' + nodeKey + ' udpLinkName: ' + cloneVal.value;
-  } else 
-  if (cmd.typeKey === "ltprc_start_dccp") {
-    cloneVal["type"] = "dccpLink";
-    cloneVal["label"] = 'toNode: ' + nodeKey + ' dccpLinkName: ' + cloneVal.value;
-  } else
-  if (cmd.typeKey === "bpv6rc_outduct_bssp" ||
-      cmd.typeKey === "bpv7rc_outduct_bssp") {
-    cloneVal["type"] = "bsspOutduct";
-    cloneVal["label"] = 'fromNode: ' + nodeKey + ' bsspOutductName: ' + cloneVal.value;
-  } else {
-    debug("!!! nodeKey: " + nodeKey + " is not clone type!! ");
-    return null;
+    var cloneVal = {};
+    // first assign properties not dependent on type
+    cloneVal["id"] = cmd.id;
+    cloneVal["nodeKey"] = nodeKey;
+    cloneVal["clones"] = []     // a list for clone id objects (cmdKey & valIdx)
+    cloneVal["value"] = makeComboValue(cmd,cmd.typeKey);
+    // then check specific type for other init rules
+    if (cmd.typeKey === "node_nodenum") {    /// special model command (not ion)
+      cloneVal["type"] = "nodeNum";
+      cloneVal["label"] = nodeKey;
+    } else
+    if (cmd.typeKey === "node_nodekey") {    /// special model command (not ion)
+      cloneVal["type"] = "nodeKey";
+      cloneVal["label"] = nodeKey;
+    } else
+    if (cmd.typeKey === "host_hostkey") {    /// special model command (not ion)
+      cloneVal["type"] = "hostKey";
+      cloneVal["label"] = 'Host:' + cmd.values[0];
+    } else
+    if (cmd.typeKey === "host_ipaddr") {         /// special model command (not ion)
+      cloneVal["type"] = "ipAddr";
+      cloneVal["label"] = 'Host: ' + nodeKey + ' IpAddr:' + cmd.values[0];
+    } else
+    if (cmd.typeKey === "bpv6rc_endpoint" ||
+        cmd.typeKey === "bpv7rc_endpoint") {
+      cloneVal["type"] = "ionEndpoint";
+      // should annotate endpoint purpose in the the label
+      let suffix = '';
+      if (cmd.values[3] !== "")
+        suffix = ' [' + cmd.values[3] + ']';
+      cloneVal["label"] = 'node:' + nodeKey + ' servNum:' + cmd.values[1] + suffix;
+    } else
+    if (cmd.typeKey === "bpv6rc_induct_ltp" ||
+        cmd.typeKey === "bpv7rc_induct_ltp") {
+      cloneVal["type"] = "ltpInduct";
+      cloneVal["label"] = 'toNode: ' + nodeKey + ' ltpInductName: ' + cloneVal.value;
+    } else
+    if (cmd.typeKey === "bpv6rc_induct_udp" ||
+        cmd.typeKey === "bpv7rc_induct_udp") {
+      cloneVal["type"] = "udpInduct";
+      cloneVal["label"] = 'toNode: ' + nodeKey + ' udpInductName: ' + cloneVal.value;
+    } else 
+    if (cmd.typeKey === "bpv6rc_induct_stcp" ||
+        cmd.typeKey === "bpv7rc_induct_stcp") {
+      cloneVal["type"] = "stcpInduct";
+      cloneVal["label"] = 'toNode:' + nodeKey + ' stcpInductName: ' + cloneVal.value; 
+    } else 
+    if (cmd.typeKey === "bpv6rc_induct_tcp" ||
+        cmd.typeKey === "bpv7rc_induct_tcp") {
+      cloneVal["type"] = "tcpInduct";
+      cloneVal["label"] = 'toNode: ' + nodeKey + ' tcpInductName: ' + cloneVal.value;
+    } else 
+    if (cmd.typeKey === "bpv6rc_induct_dccp" ||
+        cmd.typeKey === "bpv7rc_induct_dccp") {
+      cloneVal["type"] = "dccpInduct";
+      cloneVal["label"] = 'toNode: ' + nodeKey + ' dccpInductName: ' + cloneVal.value; 
+    } else
+    if (cmd.typeKey === "bpv6rc_induct_bssp" ||
+        cmd.typeKey === "bpv7rc_induct_bssp") {
+      cloneVal["type"] = "bsspInduct";
+      cloneVal["label"] = 'toNode: ' + nodeKey + ' bsspInductName: ' + cloneVal.value;
+    } else 
+    if (cmd.typeKey === "bpv6rc_outduct_ltp" ||
+        cmd.typeKey === "bpv7rc_outduct_ltp") {
+      cloneVal["type"] = "ltpOutduct";
+      cloneVal["label"] = 'fromNode: ' + nodeKey + ' ltpOutductName: ' + cloneVal.value;
+    } else
+    if (cmd.typeKey === "bpv6rc_outduct_udp" ||
+        cmd.typeKey === "bpv7rc_outduct_udp") {
+      cloneVal["type"] = "udpOutduct";
+      cloneVal["label"] = 'fromNode: ' + nodeKey + ' udpOutductName: ' + cloneVal.value;
+    } else 
+    if (cmd.typeKey === "bpv6rc_outduct_stcp" ||
+        cmd.typeKey === "bpv7rc_outduct_stcp") {
+      cloneVal["type"] = "stcpOutduct";
+      cloneVal["label"] = 'fromNode:' + nodeKey + ' stcpOutductName: ' + cloneVal.value; 
+    } else 
+    if (cmd.typeKey === "bpv6rc_outduct_tcp" ||
+        cmd.typeKey === "bpv7rc_outduct_tcp") {
+      cloneVal["type"] = "tcpOutduct";
+      cloneVal["label"] = 'fromNode: ' + nodeKey + ' tcpOutductName: ' + cloneVal.value;
+    } else 
+    if (cmd.typeKey === "bpv6rc_outduct_dccp" ||
+        cmd.typeKey === "bpv7rc_outduct_dccp") {
+      cloneVal["type"] = "dccpOutduct";
+      cloneVal["label"] = 'fromNode: ' + nodeKey + ' dccpOutductName: ' + cloneVal.value; 
+    } else 
+    if (cmd.typeKey === "ltprc_start_udp") {
+      cloneVal["type"] = "udpLink";
+      cloneVal["label"] = 'toNode: ' + nodeKey + ' udpLinkName: ' + cloneVal.value;
+    } else 
+    if (cmd.typeKey === "ltprc_start_dccp") {
+      cloneVal["type"] = "dccpLink";
+      cloneVal["label"] = 'toNode: ' + nodeKey + ' dccpLinkName: ' + cloneVal.value;
+    } else
+    if (cmd.typeKey === "bpv6rc_outduct_bssp" ||
+        cmd.typeKey === "bpv7rc_outduct_bssp") {
+      cloneVal["type"] = "bsspOutduct";
+      cloneVal["label"] = 'fromNode: ' + nodeKey + ' bsspOutductName: ' + cloneVal.value;
+    } else {
+      debug("!!! nodeKey: " + nodeKey + " is not clone type!! ");
+      return null;
+    }
+    debug("$$$ new cloneVal = " + JSON.stringify(cloneVal));
+    return cloneVal;
   }
-  debug(" new cloneVal = " + JSON.stringify(cloneVal));
-  return cloneVal;
-}
-// NOTE: compare to makeComboValue of IonConfig App.jsx
+// Automatically extracted from source file ../../editor/src/App.jsx
 function makeComboValue(cmd,type) {
   // make a combined value used for cloning (duct names, endpoints, etc.)
-  debug(" makeComboVal = " + type + ' ' + cmd.values[0]);
-  let combo = "";
-  if (type === "node_nodenum") 
-    combo = cmd.values[0];
-  else if (type === "node_nodekey") 
-    combo = cmd.values[0];
-  else if (type === "host_hostkey") 
-    combo = cmd.values[0];
-  else if (type === "host_ipaddr") 
-    combo = cmd.values[0];
-  else if (type === "bpv6rc_endpoint"
-        || type === "bpv7rc_endpoint")
-    combo = "ipn:" + cmd.values[0] + '.' + cmd.values[1];
-  else if (type === "bpv6rc_induct_ltp"
-        || type === "bpv6rc_induct_bssp"
-        || type === "bpv7rc_induct_ltp"
-        || type === "bpv7rc_induct_bssp")
-    combo = cmd.values[0];
-  else if (type === "bpv6rc_induct_udp"
-        || type === "bpv6rc_induct_stcp"
-        || type === "bpv6rc_induct_tcp"
-        || type === "bpv6rc_induct_dccp" 
-        || type === "bpv7rc_induct_udp"
-        || type === "bpv7rc_induct_stcp"
-        || type === "bpv7rc_induct_tcp"
-        || type === "bpv7rc_induct_dccp" )
-    combo = cmd.values[0] + ':' + cmd.values[1];
-  else if (type === "bpv6rc_outduct_ltp"
-        || type === "bpv6rc_outduct_bssp"
-        || type === "bpv7rc_outduct_ltp"
-        || type === "bpv7rc_outduct_bssp")
-    combo = cmd.values[0];
-  else if (type === "bpv6rc_outduct_stcp"
-        || type === "bpv6rc_outduct_tcp"
-        || type === "bpv6rc_outduct_dccp" 
-        || type === "bpv6rc_outduct_udp"
-        || type === "bpv7rc_outduct_stcp"
-        || type === "bpv7rc_outduct_tcp"
-        || type === "bpv7rc_outduct_dccp" 
-        || type === "bpv7rc_outduct_udp")
-    combo = cmd.values[0];
-  else if (type === "ltprc_start_udp"
-        || type === "ltprc_start_dccp" )
-    combo = cmd.values[0] + ':' + cmd.values[1];
-  return combo;
-}
-
-// NOTE: compare to findCloneVal of IonConfig App.jsx
+    debug("$$$ makeComboVal = " + type + ' ' + cmd.values[0]);
+    let combo = "";
+    if (type === "node_nodenum") 
+      combo = cmd.values[0];
+    else if (type === "node_nodekey") 
+      combo = cmd.values[0];
+    else if (type === "host_hostkey") 
+      combo = cmd.values[0];
+    else if (type === "host_ipaddr") 
+      combo = cmd.values[0];
+    else if (type === "bpv6rc_endpoint"
+          || type === "bpv7rc_endpoint")
+      combo = "ipn:" + cmd.values[0] + '.' + cmd.values[1];
+    else if (type === "bpv6rc_induct_ltp"
+          || type === "bpv6rc_induct_bssp"
+          || type === "bpv7rc_induct_ltp"
+          || type === "bpv7rc_induct_bssp")
+      combo = cmd.values[0];
+    else if (type === "bpv6rc_induct_udp"
+          || type === "bpv6rc_induct_stcp"
+          || type === "bpv6rc_induct_tcp"
+          || type === "bpv6rc_induct_dccp" 
+          || type === "bpv7rc_induct_udp"
+          || type === "bpv7rc_induct_stcp"
+          || type === "bpv7rc_induct_tcp"
+          || type === "bpv7rc_induct_dccp" )
+      combo = cmd.values[0] + ':' + cmd.values[1];
+    else if (type === "bpv6rc_outduct_ltp"
+          || type === "bpv6rc_outduct_bssp"
+          || type === "bpv7rc_outduct_ltp"
+          || type === "bpv7rc_outduct_bssp")
+      combo = cmd.values[0];
+    else if (type === "bpv6rc_outduct_stcp"
+          || type === "bpv6rc_outduct_tcp"
+          || type === "bpv6rc_outduct_dccp" 
+          || type === "bpv6rc_outduct_udp"
+          || type === "bpv7rc_outduct_stcp"
+          || type === "bpv7rc_outduct_tcp"
+          || type === "bpv7rc_outduct_dccp" 
+          || type === "bpv7rc_outduct_udp")
+      combo = cmd.values[0];
+    else if (type === "ltprc_start_udp"
+          || type === "ltprc_start_dccp" )
+      combo = cmd.values[0] + ':' + cmd.values[1];
+    return combo;
+  }
+// Automatically extracted from source file ../../editor/src/App.jsx
 function findCloneVal(cloneVals,type,value) {
   // find a cloneValue based on type & value
-  if (value === '??')   // just a fake default value
-    return null;
-  let target = String(value);  // force string compare, avoid num issues
-  for (var key in cloneVals) {
-    let cloneVal = cloneVals[key];
-    //debug(" checking cloneVal: " + JSON.stringify(cloneVal));
-    if (cloneVal.type === type && String(cloneVal.value) === target) 
-      return cloneVal;
-  }
-  debug ("!!! failed to find cloneVal for type: " + type + "  value: " + value);
-  return null;
-}
-
-// NOTE: compare to getAnyCloneVal of IonConfig App.jsx
-function getAnyCloneVal(cloneVals,type) {
-  // find any cloneValue based on type (defaults for new commands)
-  for (var key in cloneVals) {
-    let cloneVal = cloneVals[key];
-    //debug(" finding any cloneVal: " + JSON.stringify(cloneVal));
-    if (cloneVal.type === type)
-      return cloneVal.value;
-  }
-  debug ("!!! found no cloneVal for type: " + type);
-  return "";
-}
-
-// NOTE: compare to getCloneVal of IonConfig App.jsx
-function getCloneVal(cloneVals,cmdKey) {
-// find a cloneValue based on type & value
-  for (var key in cloneVals) {
-    let cloneVal = cloneVals[key];
-    //debug(" checking cloneVal: " + JSON.stringify(cloneVal));
-    if (cloneVal.id === cmdKey) {
-      return cloneVal;
-    }
-  }
-  debug ("!!! failed to get cloneVal for cmdKey: " + cmdKey);
-  return null;
-}
-// NOTE: compare to assignClones of IonConfig NetModel.jsx
-function assignClones(commands,cloneValues) {
-  // identify commands dependent on cloneValues
-  // and push them on to the cloneValue list for update notifications
-
-  debug("=== Identify clones using cloneValues from the network model.");
-  for (var cmdKey in commands) {
-    let cmd = commands[cmdKey];
-    let cmdTypeKey = cmd.typeKey;
-    debug(" cmdKey: " + cmdKey + " has type: " + cmdTypeKey);
-    let cmdType = cmdTypes[cmd.typeKey];
-    if(cmdType.copyClone || cmdType.pickClone) {
-      for (let i = 0; i < cmdType.paramTypes.length; i++) {
-         let paramTypeKey = cmdType.paramTypes[i];
-         let paramType = paramTypes[paramTypeKey];
-         debug(" consider paramType " + paramType.id + " for cloning.")
-         if (paramType.copyClone || paramType.pickClone) { 
-            let val = cmd.values[i];
-            let type = paramType.valType;
-            debug(" seeking clone value for type: " + type + " with value of " + val);
-            let cloneVal = findCloneVal(cloneValues,type,val);
-            if(cloneVal) {
-              debug("=== building clone.");
-              let clone = { "cmdKey" : cmdKey, "valIdx" : i };
-              debug (" created clone key: " + JSON.stringify(clone));
-              cloneVal.clones.push(clone);
-            }
-         }
-      }
-    }
-  }
-};
-
-// NOTE: compare to getHostPorts of IonConfig NetModel.jsx
-function getHostPorts (hostKey, hosts, ipaddrs, commands) {
-  // get assigned ports of a host
-  var ports = [];
-  const hostObj = hosts[hostKey];
-  const ipAddrs = hostObj.ipAddrKeys;
-  for (var i=0; i<ipAddrs.length; i++) {
-    var ipAddrKey = ipAddrs[i];
-    var ipAddr = ipaddrs[ipAddrKey].ipAddr;
-    for (var cmdKey in commands) {
-      var cmdObj = commands[cmdKey];        
-      if  ( (cmdObj.typeKey.indexOf("induct") >= 0
-         && cmdObj.typeKey.indexOf("ltp") < 0 ) 
-        || (cmdObj.typeKey.indexOf("start_udp") >= 0) 
-        || (cmdObj.typeKey.indexOf("start_dccp") >= 0) ) {
-        if ( cmdObj.values[0] === ipAddr)    // correct ipAddr?
-          ports.push(cmdObj.values[1]);
-      }
-    }
-  }
-  debug("host: " + hostKey + " ports: " + ports.toString() );
-  return ports;
-} 
-
-// NOTE: compare to getNodeInducts of IonConfig NetModel.jsx
-function getNodeInduct(cloneVals,nodeKey,bpLayer) {
-  // find an Induct cloneValue based on nodeKey & type (bpLayer)
-  var cloneType = bpLayer + "Induct";
-  for (var key in cloneVals) {
-    let cloneVal = cloneVals[key];
-    //debug(" checking cloneVal: " + JSON.stringify(cloneVal));
-    if (cloneVal.type=== cloneType && cloneVal.nodeKey === nodeKey) {
-      return cloneVal;
-    }
-  }
-  debug ("!!! failed to get cloneVal for nodeKey: " + nodeKey + " cloneType: " + cloneType);
-  return "";
-};
-
-// NOTE: compare to getNodeLink of IonConfig NetModel.jsx
-function getNodeLink(cloneVals,nodeKey,ltpLayer) {
-  // find a Link cloneValue based on nodeKey & type (ltpLayer)
-  var cloneType = ltpLayer + "Link";
-  for (var key in cloneVals) {
-    let cloneVal = cloneVals[key];
-    //debug(" checking cloneVal: " + JSON.stringify(cloneVal));
-    if (cloneVal.type=== cloneType && cloneVal.nodeKey === nodeKey) {
-      return cloneVal;
-    }
-  }
-  debug ("!!! failed to get cloneVal for nodeKey: " + nodeKey + " cloneType: " + cloneType);
-  return "";
-};
-
-// NOTE: compare to getNodeOutduct of IonConfig NetModel.jsx
-function getNodeOutduct(cloneVals,nodeKey,toAddr,bpLayer) {
-  // find an Outduct cloneValue based on nodeKey & toHostKey & type (bpLayer)
-  var cloneType = bpLayer + "Outduct";
-  debug ("!!! seeking cloneVal for nodeKey: " + nodeKey 
-               + " toAddr: " + toAddr + " cloneType: " + cloneType) ;
-  for (var key in cloneVals) {
-    let cloneVal = cloneVals[key];
-    //debug(" checking cloneVal: " + JSON.stringify(cloneVal));
-    if (cloneVal.type === cloneType && cloneVal.nodeKey === nodeKey) {
-      if (cloneVal.value.indexOf(toAddr) >= 0)
+    if (value === '??')   // just a fake default value
+      return null;
+    let target = String(value);  // force string compare, avoid num issues
+    for (var key in cloneVals) {
+      let cloneVal = cloneVals[key];
+      //debug("$$$ checking cloneVal: " + JSON.stringify(cloneVal));
+      if (cloneVal.type === type && String(cloneVal.value) === target) 
         return cloneVal;
     }
+    debug ("!!! failed to find cloneVal for type: " + type + "  value: " + value);
+    return null;
   }
-  debug ("!!! failed to get cloneVal for nodeKey: " + nodeKey 
-               + " toAddr: " + toAddr + " cloneType: " + cloneType) ;
-  return "";
-};
-// NOTE: compare to makeModelObj of IonConfig IonModel.jsx
-function makeModelObj() {
-  debug("makeModelObj " + ion.name);
-  var model = {};    // user model built from current state
+// Automatically extracted from source file ../../editor/src/App.jsx
+function getAnyCloneVal(cloneVals,type) {
+  // find any cloneValue based on type (defaults for new commands)
+    for (var key in cloneVals) {
+      let cloneVal = cloneVals[key];
+      //debug("$$$ finding any cloneVal: " + JSON.stringify(cloneVal));
+      if (cloneVal.type === type)
+        return cloneVal.value;
+    }
+    debug ("!!! found no cloneVal for type: " + type);
+    return "";
+  }
+// Automatically extracted from source file ../../editor/src/App.jsx
+function getCloneVal(cloneVals,cmdKey) {
+  // find a cloneValue based on type & value
+    for (var key in cloneVals) {
+      let cloneVal = cloneVals[key];
+      //console.log("$$$ checking cloneVal: " + JSON.stringify(cloneVal));
+      if (cloneVal.id === cmdKey) {
+        return cloneVal;
+      }
+    }
+    console.log ("!!! failed to get cloneVal for cmdKey: " + cmdKey);
+    return null;
+  }
+// Automatically extracted from source file ../../editor/src/NetModel.jsx
+function assignClones(commands,cloneValues) {
+  // build clone list for each new cloneVal  (a duplicate of the ionModelLoader function)
 
-  model["ionModelName"] = ion.name;
-  model["ionModelDesc"] = ion.desc;
-  model["nextNodeNum"] = ion.nextNodeNum;
-  model["currentContacts"] = ion.currentContacts;
-  model["hosts"] = [];
-  model["nodes"] = [];
-  model["graphs"]  = [];
-
-  for (var hostKey in hosts) {
+    // identify commands dependent on cloneValues
+    // and push them on to the cloneValue list for update notifications
+    debug("=== Identify clones using cloneValues from the network model.");
+    for (var cmdKey in commands) {
+      let cmd = commands[cmdKey];
+      let cmdTypeKey = cmd.typeKey;
+      debug("$$$ cmdKey: " + cmdKey + " has type: " + cmdTypeKey);
+      let cmdType = cmdTypes[cmd.typeKey];
+      if(cmdType.copyClone  || cmdType.pickClone) {
+        for (let i = 0; i < cmdType.paramTypes.length; i++) {
+           let paramTypeKey = cmdType.paramTypes[i];
+           let paramType = paramTypes[paramTypeKey];
+           debug("$$$ consider paramType " + paramType.id + " for cloning.")
+           if (paramType.copyClone || paramType.pickClone) { 
+              let val = cmd.values[i];
+              let type = paramType.valType;
+              debug("$$$ seeking clone value for type: " + type + " with value of " + val);
+              let cloneVal = findCloneVal(cloneValues,type,val);
+              if(cloneVal) {
+                debug("=== building clone.");
+                let clone = { "cmdKey" : cmdKey, "valIdx" : i };
+                debug ("$$$ created clone key: " + JSON.stringify(clone));
+                cloneVal.clones.push(clone);
+              }
+           }
+        }
+      }
+    }
+  };
+// Automatically extracted from source file ../../editor/src/NetModel.jsx
+function getHostPorts(hostKey,hosts,ipaddrs,commands) {
+  // get assigned ports of a host
+    var ports = [];
     const hostObj = hosts[hostKey];
-    var hostJson = {
-      hostName: hostKey,
-      hostDesc: hostObj.desc,
-      linefeed: hostObj.linefeed,
-      ipAddrs: []
+    const ipAddrs = hostObj.ipAddrKeys;
+    for (var i=0; i<ipAddrs.length; i++) {
+      var ipAddrKey = ipAddrs[i];
+      var ipAddr = ipaddrs[ipAddrKey].ipAddr;
+      for (var cmdKey in commands) {
+        var cmdObj = commands[cmdKey];        
+        if  ( (cmdObj.typeKey.indexOf("induct") >= 0
+           && cmdObj.typeKey.indexOf("ltp") < 0 ) 
+          || (cmdObj.typeKey.indexOf("start_udp") >= 0) 
+          || (cmdObj.typeKey.indexOf("start_dccp") >= 0) ) {
+          //debug( "#### ipAddr: " +ipAddr + "  val[0]: " + cmdObj.values[0]);
+          if ( cmdObj.values[0] === ipAddr)    // correct ipAddr?
+            ports.push(cmdObj.values[1]);
+        }
+      }
     }
-    for (var addrKey in ipaddrs) {
-      if (ipaddrs[addrKey].hostKey === hostKey)
-        hostJson["ipAddrs"].push(ipaddrs[addrKey].ipAddr)
+    debug("host: " + hostKey + " ports: " + ports.toString() );
+    return ports;
+  };
+// Automatically extracted from source file ../../editor/src/NetModel.jsx
+function getNodeInduct(cloneVals,nodeKey,bpLayer) {
+  // find an Induct cloneValue based on nodeKey & type (bpLayer)
+    var cloneType = bpLayer + "Induct";
+    for (var key in cloneVals) {
+      let cloneVal = cloneVals[key];
+      //debug("$$$ checking cloneVal: " + JSON.stringify(cloneVal));
+      if (cloneVal.type=== cloneType && cloneVal.nodeKey === nodeKey) {
+        return cloneVal;
+      }
     }
-    model["hosts"].push(hostJson);
-  }
-  for (var nodeKey in nodes) {
-    const nodeObj = nodes[nodeKey];
-    var nodeJson = {
-      nodeName: nodeKey,
-      nodeDesc: nodeObj.longName,
-      nodeNum: nodeObj.ionNodeNum,
-      ionVersion: nodeObj.ionVersion,
-      hostName: nodeObj.hostKey,
-      configs: {}
+    debug ("!!! failed to get cloneVal for nodeKey: " + nodeKey + " cloneType: " + cloneType);
+    return "";
+  };
+// Automatically extracted from source file ../../editor/src/NetModel.jsx
+function getNodeLink(cloneVals,nodeKey,ltpLayer) {
+  // find a Link cloneValue based on nodeKey & type (ltpLayer)
+    var cloneType = ltpLayer + "Link";
+    for (var key in cloneVals) {
+      let cloneVal = cloneVals[key];
+      //debug("$$$ checking cloneVal: " + JSON.stringify(cloneVal));
+      if (cloneVal.type=== cloneType && cloneVal.nodeKey === nodeKey) {
+        return cloneVal;
+      }
     }
-    const nodeConfigKeys = nodeObj.configKeys;
-    for (var i=0; i<nodeConfigKeys.length; i++) {
-      const configKey = nodeConfigKeys[i];
+    debug ("!!! failed to get cloneVal for nodeKey: " + nodeKey + " cloneType: " + cloneType);
+    return "";
+  };
+// Automatically extracted from source file ../../editor/src/NetModel.jsx
+function getNodeOutduct(cloneVals,nodeKey,toAddr,bpLayer) {
+  // find an Outduct cloneValue based on nodeKey & toHostKey & type (bpLayer)
+    var cloneType = bpLayer + "Outduct";
+    debug ("!!! seeking cloneVal for nodeKey: " + nodeKey 
+                 + " toAddr: " + toAddr + " cloneType: " + cloneType) ;
+    for (var key in cloneVals) {
+      let cloneVal = cloneVals[key];
+      //debug("$$$ checking cloneVal: " + JSON.stringify(cloneVal));
+      if (cloneVal.type === cloneType && cloneVal.nodeKey === nodeKey) {
+        if (cloneVal.value.indexOf(toAddr) >= 0)
+          return cloneVal;
+      }
+    }
+    debug ("!!! failed to get cloneVal for nodeKey: " + nodeKey 
+                 + " toAddr: " + toAddr + " cloneType: " + cloneType) ;
+    return "";
+  };
+// Automatically extracted from source file ../../editor/src/IonModel.jsx
+function makeModelObj(nodeKey) {
+    debug("makeUserModel net:" + ion.name);
+
+    var model = {};    // user model built from current state
+
+    model["ionModelName"] = ion.name;
+    model["ionModelDesc"] = ion.desc;
+    model["nextNodeNum"] = ion.nextNodeNum;
+    model["currentContacts"] = ion.currentContacts;
+    model["hosts"] = [];
+    model["nodes"] = [];
+    model["graphs"]  = [];
+
+    for (var hostKey in hosts) {
+      const hostObj = hosts[hostKey];
+      var hostJson = {
+        hostName: hostKey,
+        hostDesc: hostObj.desc,
+        linefeed: hostObj.linefeed,
+        ipAddrs: []
+      }
+      for (var addrKey in ipaddrs) {
+        if (ipaddrs[addrKey].hostKey === hostKey)
+          hostJson["ipAddrs"].push(ipaddrs[addrKey].ipAddr)
+      }
+      model["hosts"].push(hostJson);
+    }
+    for (var nodeKey in nodes) {
+      const nodeObj = nodes[nodeKey];
+      var nodeJson = {
+        nodeName: nodeKey,
+        nodeDesc: nodeObj.longName,
+        nodeNum: nodeObj.ionNodeNum,
+        ionVersion: nodeObj.ionVersion,
+        hostName: nodeObj.hostKey,
+        configs: {}
+      }
+      const nodeConfigKeys = nodeObj.configKeys;
+      for (var i=0; i<nodeConfigKeys.length; i++) {
+        const configKey = nodeConfigKeys[i];
+        const configObj = configs[configKey];
+        const configType = configObj.configType;
+        let configJson = makeConfigObj(configKey);
+        nodeJson.configs[configType] =  configJson;
+      }
+      model["nodes"].push(nodeJson);
+    }
+    for (var ctxKey in graphs) {
+      const ctxObj = graphs[ctxKey];
+      var graphsJson = {
+        graphName: ctxKey,
+        graphDesc: ctxObj.desc,
+        ionVersion: ctxObj.ionVersion,
+        configs: {}
+      }
+      const configKey = ctxObj.configKey;  // just one config
+      debug("graph configKey: " + configKey);
       const configObj = configs[configKey];
       const configType = configObj.configType;
       let configJson = makeConfigObj(configKey);
-      nodeJson.configs[configType] =  configJson;
+      graphsJson.configs[configType] =  configJson;
+      model["graphs"].push(graphsJson);
     }
-    model["nodes"].push(nodeJson);
-  }
-  for (var ctxKey in graphs) {
-    const ctxObj = graphs[ctxKey];
-    var graphsJson = {
-      graphName: ctxKey,
-      graphDesc: ctxObj.desc,
-      ionVersion: ctxObj.ionVersion,
-      configs: {}
-    }
-    const configKey = ctxObj.configKey;  // just one config
-    debug("graph configKey: " + configKey);
-    const configObj = configs[configKey];
-    const configType = configObj.configType;
-    let configJson = makeConfigObj(configKey);
-    graphsJson.configs[configType] =  configJson;
-    model["graphs"].push(graphsJson);
-  }
-  return model;
-};
-
-// NOTE: compare to makeConfigObj of IonConfig IonModel.jsx
+    return model;
+  };
+// Automatically extracted from source file ../../editor/src/IonModel.jsx
 function makeConfigObj(configKey) {
-  var config = { commands: [] };
+    var config = { commands: [] };
 
-  const configObj = configs[configKey];
-  const configCmdKeys = configObj.cmdKeys;
-  for (var j=0; j<configCmdKeys.length; j++) {
-    const cmdId = configCmdKeys[j];
-    debug("cmdId: " + cmdId);
-    const cmdObj = commands[cmdId];    
-    const userCmdObj = {
-      type: cmdObj.typeKey,
-      lastUpdate: cmdObj.lastUpdate,
-      parameters: cmdObj.values
-    };
-    config.commands.push(userCmdObj);
-  }
-  return config;
-};
+    const configObj = configs[configKey];
+    const configCmdKeys = configObj.cmdKeys;
+    for (var j=0; j<configCmdKeys.length; j++) {
+      const cmdId = configCmdKeys[j];
+      debug("cmdId: " + cmdId);
+      const cmdObj = commands[cmdId];    
+      const userCmdObj = {
+        type: cmdObj.typeKey,
+        lastUpdate: cmdObj.lastUpdate,
+        parameters: cmdObj.values
+      };
+      config.commands.push(userCmdObj);
+    }
+    return config;
+  };
 // Not automatically extracted. CLI specific code.
 function saveModel(modelName, modelObj) {
   debug("save ION model!");

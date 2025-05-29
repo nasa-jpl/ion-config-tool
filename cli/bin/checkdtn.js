@@ -77,168 +77,126 @@ if (errors.length) {
 console.log("Done.");
 
 
-//        netloader.js    
-//
-function extractModel (modelObj) {
-  // extract the Net config JSON structure &
-  // flatten the data structures for efficient access
+// Automatically extracted from source file ../../editor/src/NetModelLoader.jsx
+function extractModel(modelObj) {
+    // extract the Net config JSON structure &
+    // flatten the data structures for efficient access
 
-  // make short names for state objects
-  var net = {};
-  var hosts = {};
-  var nodes = {};
-  var hops  = {};
-  var addrs = [];
+    // make short names for state objects
+    var net = {};
+    var hosts = {};
+    var nodes = {};
+    var hops = {};
+    var netaddrs = [];
 
-  if(modelObj.hasOwnProperty("netModelName"))
-    net.name = modelObj["netModelName"];
-  else {
-    warn("The json file is not a Net Model.");
-    return [ net, hosts, nodes, hops, addrs];
-  }
-  if(modelObj.hasOwnProperty("netModelDesc"))
-    net.desc = modelObj["netModelDesc"];
-
-  console.log("Ingesting user net model.  net: " + JSON.stringify(net));
-
-  console.log("Ingesting netHosts.");
-  var hostList = [];
-  if(modelObj.hasOwnProperty("netHosts")) 
-    hostList = modelObj.netHosts;
-  var hostAttrs = ["hostName","hostDesc","ipAddrs","platform","hostNodes"];
-  for (var hostKey in hostList) {
-    var hostObj = hostList[hostKey];
-    for (var attr in hostObj) {
-      if (hostAttrs.indexOf(attr) < 0) {
-         warn(attr + " is invalid attribute for host " + hostKey);
-      };
-    };
-    var id = '';
-    if(hostObj.hasOwnProperty("hostName")) {
-      id = hostObj["hostName"];
-      if(id != hostKey)
-        warn(id + " hostName does not match key " + hostKey);
+    //console.log("=== Ingesting user net model.  net: " + JSON.stringify(net));
+    //console.log("net WAS: " + JSON.stringify(net));
+    if(modelObj.hasOwnProperty("netModelName"))
+      net.name = modelObj["netModelName"];
+    else {
+       setError("The json file is not a Net Model.");
+       return false;
     }
-    var desc = '';
-    if(hostObj.hasOwnProperty("hostDesc"))
-      desc = hostObj["hostDesc"];
-    let ipaddrs = [];
-    if(hostObj.hasOwnProperty("ipAddrs"))
-      ipaddrs = hostObj["ipAddrs"];
+    if(modelObj.hasOwnProperty("netModelDesc"))
+      net.desc = modelObj["netModelDesc"];
 
-    // build the hosts state object
-    hosts[hostKey] = { 
-      "id" : hostKey, 
-      "hostDesc" : desc,
-      "ipAddrs" : ipaddrs
-    };
-    // add the ip addrs to master list
-    for (var i=0; i<ipaddrs.length; i++) {
-      if (ipaddrs[i] === "") {
-        warn("Host " + hostKey + " has an empty ip address.");
-        continue;
-      }
-      addrs.push(ipaddrs[i]);
-    };
-  };
-  console.log("Ingesting netNodes.");
-  var nodeList = [];
-  var nodeAttrs = ["nodeName","nodeDesc","nodeHost","nodeType",
-      "endpointID","protocols","services"];
-  if(modelObj.hasOwnProperty("netNodes"))  // optional for now.
-    nodeList = modelObj.netNodes;
-  for (var nodeKey in nodeList) {
-    var nodeObj = nodeList[nodeKey];
-    for (var attr in nodeObj) {
-      if (nodeAttrs.indexOf(attr) < 0) {
-         warn(attr + " is invalid attribute for node " + nodeKey);
+    console.log("=== Ingesting netHosts.");
+    var hostList = [];
+    if(modelObj.hasOwnProperty("netHosts")) 
+      hostList = modelObj.netHosts;
+    for (var hostKey in hostList) {
+      var hostObj = hostList[hostKey];
+      var desc = '';
+      if(hostObj.hasOwnProperty("hostDesc"))
+        desc = hostObj["hostDesc"];
+      let addrs = [];
+      if(hostObj.hasOwnProperty("ipAddrs"))
+        addrs = hostObj["ipAddrs"];
+
+      // build the hosts state object
+      hosts[hostKey] = { 
+        "id" : hostKey, 
+        "hostDesc" : desc,
+        "ipAddrs" : addrs
       };
+      // add the ip addrs to master list
+      for (var i=0; i<addrs.length; i++)
+        netaddrs.push(addrs[i]);
+
     };
-    var id = '';
-    if(nodeObj.hasOwnProperty("nodeName")) {
-      id = nodeObj["nodeName"];
-      if(id != nodeKey)
-        warn(id + " nodeName does not match key " + nodeKey);
-    };
-    var desc = '';
-    if(nodeObj.hasOwnProperty("nodeDesc"))
-      desc = nodeObj["nodeDesc"];
-    var host = '';
-    if(nodeObj.hasOwnProperty("nodeHost"))
-      host = nodeObj["nodeHost"];
-    var type = '';
-    if(nodeObj.hasOwnProperty("nodeType"))
-      type = nodeObj["nodeType"];
-    var ep = '';
-    if(nodeObj.hasOwnProperty("endpointID"))
-       ep = nodeObj["endpointID"];
-    var servs= [];
-    if(nodeObj.hasOwnProperty("services"))
-      servs = nodeObj["services"];
-    // build the nodes state object
-    nodes[nodeKey] = { 
-      "id" : nodeKey, 
-      "nodeDesc" : desc, 
-      "nodeHost" : host,
-      "nodeType" : type,
-      "endpointID" : ep,
-      "services" : servs
-    };
-  }
-  console.log("Ingesting netHops.");
-  var hopList = [];
-  var hopAttrs = ["hopName","hopDesc","fromNode","toNode",
-        "bpLayer","ltpLayer","maxRate","symmetric", "portNum",
-        "fromIP","toIP"];
-  if(modelObj.hasOwnProperty("netHops"))  // optional for now.
-    hopList = modelObj.netHops;
-  for (var hopKey in hopList) {
-    var hopObj = hopList[hopKey];
-    for (var attr in hopObj) {
-      if (hopAttrs.indexOf(attr) < 0) {
-         warn(attr + " is invalid attribute for hop " + hopKey);
+    console.log("net IS:  " + JSON.stringify(net));
+    console.log("=== Ingesting netNodes.");
+    var nodeList = [];
+    if(modelObj.hasOwnProperty("netNodes"))  // optional for now.
+      nodeList = modelObj.netNodes;
+    for (var nodeKey in nodeList) {
+      var nodeObj = nodeList[nodeKey];
+      desc = '';
+      if(nodeObj.hasOwnProperty("nodeDesc"))
+        desc =nodeObj["nodeDesc"];
+      var host = '';
+      if(nodeObj.hasOwnProperty("nodeHost"))
+        host =nodeObj["nodeHost"];
+      var type = '';
+      if(nodeObj.hasOwnProperty("nodeType"))
+        type =nodeObj["nodeType"];
+      var ep = '';
+      if(nodeObj.hasOwnProperty("endpointID"))
+         ep = nodeObj["endpointID"];
+      var servs= [];
+      if(nodeObj.hasOwnProperty("services"))
+        servs = nodeObj["services"];
+      // build the nodes state object
+      nodes[nodeKey] = { 
+        "id" : nodeKey, 
+        "nodeDesc" : desc, 
+        "nodeHost" : host,
+        "nodeType" : type,
+        "endpointID" : ep,
+        "services" : servs
       };
-    };
-    var id = '';
-    if(hopObj.hasOwnProperty("hopName")) {
-      id = hopObj["hopName"];
-      if(id != hopKey)
-        warn(id + " hopName does not match key " + hopKey);
-    };
-    var desc = '';
-    if(hopObj.hasOwnProperty("hopDesc"))
-      desc = hopObj["hopDesc"];
-    var fromnode = '';
-    if(hopObj.hasOwnProperty("fromNode"))
-      fromnode = hopObj["fromNode"];
-    var fromip = '';
-    if(hopObj.hasOwnProperty("fromIP"))
-      fromip = hopObj["fromIP"];
-    var tonode = '';
-    if(hopObj.hasOwnProperty("toNode"))
-      tonode = hopObj["toNode"];
-    var toip = '';
-    if(hopObj.hasOwnProperty("toIP"))
-      toip = hopObj["toIP"];
-    var bp = '';
-    if(hopObj.hasOwnProperty("bpLayer"))
-      bp = hopObj["bpLayer"];
-    var ltp = '';
-    if(hopObj.hasOwnProperty("ltpLayer"))
-      ltp = hopObj["ltpLayer"];
-    var port = '';
-    if(hopObj.hasOwnProperty("portNum"))
-      port = hopObj["portNum"];
-    var rate = 0;
-    if(hopObj.hasOwnProperty("maxRate"))
-      rate = hopObj["maxRate"];
-    var flag = false;
-    if(hopObj.hasOwnProperty("symmetric"))
-      flag = hopObj["symmetric"];
-    var sym  = true;
-    if (!flag || flag === "false" || flag === "no")
-      sym = false;
-    // build the nodes state object
+    }
+    console.log("=== Ingesting netHops.");
+    var hopList = [];
+    if(modelObj.hasOwnProperty("netHops"))  // optional for now.
+      hopList = modelObj.netHops;
+    for (var hopKey in hopList) {
+      var hopObj = hopList[hopKey];
+      desc = '';
+      if(hopObj.hasOwnProperty("hopDesc"))
+        desc = hopObj["hopDesc"];
+      var fromnode = '';
+      if(hopObj.hasOwnProperty("fromNode"))
+        fromnode = hopObj["fromNode"];
+      var fromip = '';
+      if(hopObj.hasOwnProperty("fromIP"))
+        fromip = hopObj["fromIP"];
+      var tonode = '';
+      if(hopObj.hasOwnProperty("toNode"))
+        tonode = hopObj["toNode"];
+      var toip = '';
+      if(hopObj.hasOwnProperty("toIP"))
+        toip = hopObj["toIP"];
+      var bp = '';
+      if(hopObj.hasOwnProperty("bpLayer"))
+        bp = hopObj["bpLayer"];
+      var ltp = '';
+      if(hopObj.hasOwnProperty("ltpLayer"))
+        ltp = hopObj["ltpLayer"];
+      var port = '';
+      if(hopObj.hasOwnProperty("portNum"))
+        port = hopObj["portNum"];
+      var rate = 0;
+      if(hopObj.hasOwnProperty("maxRate"))
+        rate = hopObj["maxRate"];
+      var sym = "no";
+      var flag = false;
+      if(hopObj.hasOwnProperty("symmetric"))
+        flag = hopObj["symmetric"];
+      var sym = true;
+      if (!flag || flag === "false" || flag === "no")
+        sym = false;
+      // build the nodes state object
       hops[hopKey] = { 
         "id" : hopKey, 
         "hopName": hopKey,
@@ -253,48 +211,155 @@ function extractModel (modelObj) {
         "maxRate": rate,
         "symmetric": sym
       };
+    };
+    return [net,hosts,nodes,hops,netaddrs];
   };
-  console.log("Ingestion complete.");
-  return [ net, hosts, nodes, hops, addrs];
-};
-//        checknet.js  
-//
-
-// NOTE: compare to checkNetModel of IonConfig NetModel.jsx
+// Automatically extracted from source file ../../editor/src/NetModel.jsx
 function checkNetModel(netHosts,netNodes,netHops) {
-// make list of errors in net model
-  var errors = [];   // list of messages (strings)
+  // make list of errors in net model
+    var errors = [];   // list of messages (strings)
 
-  // do some sanity checking on net model
-  if (!netHosts)  // no host object?
-    errors.push("The Net Model has no Host list.")
-  if (!Object.keys(netHosts).length)   // no hosts?
-    errors.push("The Net Model has no Hosts.");
-  if (!netNodes)  // no node object?
-    errors.push("The Net Model has no Node list.");
-  if (!Object.keys(netNodes).length)   // no nodes?
-    errors.push("The Net Model has no Nodes.");
-  for (var nodeKey in netNodes) {
-    var netNode = netNodes[nodeKey];
-    var hostKey = netNode.nodeHost;
-    var hostObj = netHosts[hostKey];
-    if (!hostObj)
-      errors.push("Invalid hostKey for node " + nodeKey + ".");
+    // do some sanity checking on net model
+    if (!netHosts)  // no host object?
+      errors.push("The Net Model has no Host list.")
+    if (!Object.keys(netHosts).length)   // no hosts?
+      errors.push("The Net Model has no Hosts.");
+    if (!netNodes)  // no node object?
+      errors.push("The Net Model has no Node list.");
+    if (!Object.keys(netNodes).length)   // no nodes?
+      errors.push("The Net Model has no Nodes.");
+    for (var nodeKey in netNodes) {
+      var netNode = netNodes[nodeKey];
+      var hostKey = netNode.nodeHost;
+      debug("**** hostKey =" + hostKey);
+      var hostObj = netHosts[hostKey];
+      if (!hostObj)
+        errors.push("Invalid hostKey for node " + nodeKey + ".");
+    }
+    // sanity checking on each hop
+    for (var hopKey in netHops) {
+      var netHop = netHops[hopKey];
+      var fromNode = netNodes[netHop.fromNode];
+      if (!fromNode) 
+        errors.push("Invalid From Node Name for Net Hop " + hopKey + ".");
+      var toNode = netNodes[netHop.toNode];
+      if (!toNode) 
+        errors.push("Invalid To Node Name for Net Hop " + hopKey + ".");
+
+      var toIP = netHop.toIP;
+      var fromIP = netHop.fromIP;
+
+      for (var netHostKey in netHosts) {
+        var netHost = netHosts[netHostKey];
+        if (fromNode) {
+          if (netHostKey === fromNode.nodeHost) {
+            if (!netHost.ipAddrs.includes(fromIP))
+              errors.push("Invalid 'From IP Addr': " + fromIP + " for Net Hop " + hopKey + ".");
+          }
+        }
+        if (toNode) {
+          if (netHostKey === toNode.nodeHost) {
+            if (!netHost.ipAddrs.includes(toIP))
+              errors.push("Invalid 'To IP Addr': " + toIP + " for Net Hop " + hopKey + ".");
+          }
+        }
+      }
+
+      if (!netHop.bpLayer)
+        errors.push("Missing BP Layer Protocol CLA for Net Hop " + hopKey + ".");
+      if (netHop.bpLayer && !isStandardProtocol(netHop.bpLayer)) 
+        errors.push("Unrecognized BP Layer Protocol CLA for Net Hop: "+ hopKey +". Should be one of: tcp, stcp, udp, dccp or ltp.");
+    }
+    return errors;
   }
-  // verify node keys of each hop
-  for (var hopKey in netHops) {
-    var netHop = netHops[hopKey];
-    var fromNode = netNodes[netHop.fromNode];
-    if (!fromNode) 
-      errors.push("Invalid fromNode for hop " + hopKey + ".");
-    var toNode = netNodes[netHop.toNode];
-    if (!toNode) 
-      errors.push("Invalid toNode for hop " + hopKey + ".");
-    if (!netHop.bpLayer)
-      errors.push("Invalid bpLayer for hop " + hopKey + ".");
+// Automatically extracted from source file ../../editor/src/App.jsx
+function isGoodName(name) {
+  // check if a new name is valid
+  debug("isGoodName ?? " + name);
+    if (name === '')
+      return false;
+    if (name.indexOf(' ') >= 0)
+      return false;
+    return true;
   }
-  return errors;
-}
+// Automatically extracted from source file ../../editor/src/App.jsx
+function isStandardProtocol(protocol) {
+  //check if protocol has a standard ION CLI
+    if (protocol === "tcp"  ||
+        protocol === "stcp" ||
+        protocol === "udp"  ||
+        protocol === "dccp" ||
+        protocol === "bssp" ||
+        protocol === "ltp") 
+      return true;
+    else
+      return false;
+  }
+// Automatically extracted from source file ../../editor/src/App.jsx
+function getUniqId() {
+  // generate next uniq id...used by all types
+     let nextId = uniqId + 1;
+     uniqId = nextId;
+     return nextId;
+  }
+// Automatically extracted from source file ../../editor/src/NetModel.jsx
+function addCommandKey(configs,configName,cmdKey) {
+  // add commmand to a configuration, unless its null
+    if (cmdKey == null) {
+      debug("addCommandKey discarded for configFile: " + configName);
+      return;
+    }
+    configs[configName].cmdKeys.push(cmdKey);
+  }
+// Automatically extracted from source file ../../editor/src/NetModel.jsx
+function makeIonCommand(commands,clones,groupKey,configKey,configType,cmdName,values) {
+  // build an ion command object
+    // NOTE: the default behavior is to use the latest version of each command type
+    // By convention, the latest command is simply the configType + cmdName
+    // Prior command versions have _vxx suffix showing the last version supported
+    let cmdTypeKey = configType + "_" + cmdName;
+    let uniqid = getUniqId();
+    let cmdKey = "cmd_" + uniqid;
+    let cmdType = cmdTypes[cmdTypeKey];
+    debug("makeIonCommand ... configType: " + configType + 
+                " groupKey: " + groupKey + " cmdName: " + cmdName +
+                " cmdKey: " + cmdKey + " values: " + values);
+    if (cmdType === null)
+      return null;
+    // check for duplicate command & exit if dup exists
+    for (var cKey in commands) {
+      let cmd = commands[cKey];
+      if (cmd.configKey === configKey) {     // matching config file?
+        if (cmd.typeKey === cmdTypeKey) {    // matching command type
+          var match = true;
+          for (let i = 0; i < cmd.values.length; i++) {
+            if (cmd.values[i] !== values[i])
+              match = false;
+          }
+          if (match) {
+            debug("$$$$$$$ makeIonCommand duplicate command: " + JSON.stringify(cmd));
+            return null;
+          }
+        } // end cmdTypeKey check
+      }   // end configKey check
+    }     // end commands loop
+    let tranTime = getNow();
+    commands[cmdKey] = {
+      "id" : cmdKey,
+      "configKey" : configKey,
+      "typeKey" : cmdTypeKey,
+      "typeName" : cmdType.name,
+      "order" : cmdType.order,
+      "lastUpdate" : tranTime,
+      "values" : values
+    };
+    if (cmdType.isCloned) {
+      var cloneVal = makeCloneVal(groupKey,commands[cmdKey]);
+      var cvKey = cloneVal.id;
+      clones[cvKey] = cloneVal;
+    } 
+    return cmdKey;
+  };
 // Utility functions used by all CLI apps that are not part
 // of the automatic extraction
 

@@ -104,7 +104,7 @@ srcAndDest = [
 				  "../../editor/src/NetModel.jsx",
 				  "checkNetModel",
 				  ["netHosts","netNodes","netHops"], 
-				  "../src/auto/checknet-x.js",
+				  "../src/auto/checknet-auto.js",
 				  {'console.log' : 'debug'}
 				],
 
@@ -112,7 +112,7 @@ srcAndDest = [
 				  "../../editor/src/App.jsx",
 				  "isGoodName",
 				  ["name"],
-				  "../src/auto/appfunc-x.js",
+				  "../src/auto/appfunc-auto.js",
 				  {'console.log' : 'debug'}
 				 ],
 
@@ -120,7 +120,7 @@ srcAndDest = [
 				  "../../editor/src/App.jsx",
 				  "isStandardProtocol",
 				  ["protocol"],
-				  "../src/auto/appfunc-x.js",
+				  "../src/auto/appfunc-auto.js",
 				  {'console.log' : 'debug'}
 				 ],
 				
@@ -128,7 +128,7 @@ srcAndDest = [
 				  "../../editor/src/App.jsx",
 				  "getUniqId",
 				  [],
-				  "../src/auto/appfunc-x.js",
+				  "../src/auto/appfunc-auto.js",
 				  {'console.log' : 'debug'}
 				 ],
 				
@@ -136,7 +136,7 @@ srcAndDest = [
 				  "../../editor/src/NetModel.jsx",
 				  "addCommandKey",
 				  ["configs","configName","cmdKey"],
-				  "../src/auto/appfunc-x.js",
+				  "../src/auto/appfunc-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -147,7 +147,7 @@ srcAndDest = [
 				    "commands","clones","groupKey","configKey","configType",
 				    "cmdName","values"
 				  ],
-				  "../src/auto/appfunc-x.js",
+				  "../src/auto/appfunc-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -155,7 +155,7 @@ srcAndDest = [
 				  "../../editor/src/NetModel.jsx",
 				  "buildIonModel",
 				  ["netName","netDesc","netHosts","netNodes","netHops"],
-				  "../src/auto/buildion-x.js",
+				  "../src/auto/buildion-auto.js",
 				  {'this.state.name': 'netName',
 				   'this.state.desc': 'netDesc',
 				   'console.log' : 'debug'}
@@ -164,7 +164,7 @@ srcAndDest = [
 				["../../editor/src/IonModel.jsx",
 				 "getIonVerSeqNo",
 				  ["nodeKey"],
-				  "../src/auto/ionfunc-x.js",
+				  "../src/auto/ionfunc-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -172,7 +172,7 @@ srcAndDest = [
 				  "../../editor/src/IonModel.jsx",
 				  "makeCmdLine",
 				  ["cmdTypeKey","cmdParams"],
-				  "../src/auto/ionfunc-x.js",
+				  "../src/auto/ionfunc-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -180,7 +180,7 @@ srcAndDest = [
 				  "../../editor/src/IonModel.jsx",
 				  "makeCmdLines",
 				  ["configObj"],
-				  "../src/auto/ionfunc-x.js",
+				  "../src/auto/ionfunc-auto.js",
 				  {'this.state.name':  'ion.name',
 				   'this.state.desc':  'ion.desc',
 				   'this.props.nodes': 'nodes',
@@ -191,7 +191,7 @@ srcAndDest = [
 				  "../../editor/src/IonModel.jsx",
 				  "makeStartLines",
 				  ["nodeKey"],
-				  "../src/auto/ionfunc-x.js",
+				  "../src/auto/ionfunc-auto.js",
 				  {'this.state.name':            'ion.name', 
 				   'this.state.currentContacts': 'ion.currentContacts', 
 				   'this.props.nodes':           'nodes',
@@ -202,7 +202,7 @@ srcAndDest = [
 				  "../../editor/src/IonModel.jsx",
 				  "makeParamNote",
 				  ["pTypeKey","pIdx","paramVal"],
-				  "../src/auto/ionfunc-x.js",
+				  "../src/auto/ionfunc-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -210,7 +210,7 @@ srcAndDest = [
 				  "../../editor/src/NetModelLoader.jsx",
 				  "extractModel",
 				  ["modelObj"],
-				  "../src/auto/netloader-x.js",
+				  "../src/auto/netloader-auto.js",
 				  {'this.state.modelJson': 'modelObj',
 				   'this.state.netHosts':  '{}',
 				   'this.state.netNodes':  '{}',
@@ -224,28 +224,28 @@ srcAndDest = [
 				  "../../editor/src/IonModelLoader.jsx",
 				  "extractModel",
 				  ["modelObj"],
-				  "../src/auto/ionloader-x.js",
+				  "../src/auto/ionloader-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
 				["../../editor/src/IonModelLoader.jsx",
 				 "extractCommands",
 				 ["groupKey","configType","configKey","commandsList"],
-				 "../src/auto/ionloader-x.js",
+				 "../src/auto/ionloader-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
 				["../../editor/src/IonModelLoader.jsx",
 				 "assignClones",
 				 [],
-				 "../src/auto/ionloader-x.js",
+				 "../src/auto/ionloader-auto.js",
 				  {'console.log' : 'debug'}
 				],
 
 				["../../editor/src/IonModelLoader.jsx",
 				 "extractConfigs",
 				 ["groupKey","configsObj"],
-				 "../src/auto/ionloader-x.js",
+				 "../src/auto/ionloader-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -253,7 +253,7 @@ srcAndDest = [
 				  "../../editor/src/App.jsx",
 				  "makeCloneVal",
 				  ["nodeKey","cmd"],
-				  "../src/auto/clone-x.js",
+				  "../src/auto/clone-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -261,7 +261,7 @@ srcAndDest = [
 				 "../../editor/src/App.jsx",
 				 "makeComboValue",
 				  ["cmd","type"],
-				  "../src/auto/clone-x.js",
+				  "../src/auto/clone-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -269,7 +269,7 @@ srcAndDest = [
 				  "../../editor/src/App.jsx",
 				  "findCloneVal",
 				  ["cloneVals","type","value"],
-				  "../src/auto/clone-x.js",
+				  "../src/auto/clone-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -277,7 +277,7 @@ srcAndDest = [
 				  "../../editor/src/App.jsx",
 				  "getAnyCloneVal",
 				  ["cloneVals","type"],
-				  "../src/auto/clone-x.js",
+				  "../src/auto/clone-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -285,14 +285,14 @@ srcAndDest = [
 				  "../../editor/src/App.jsx",
 				  "getCloneVal",
 				  ["cloneVals","cmdKey"],            
-				  "../src/auto/clone-x.js",{}
+				  "../src/auto/clone-auto.js",{}
 				],
  				
  				[
  				  "../../editor/src/IonModel.jsx",       
  				  "makeModelObj",
  				  ["nodeKey"],                       
- 				  "../src/auto/makeobj-x.js",
+ 				  "../src/auto/makeobj-auto.js",
  				  {'this.state': 'ion',
  				   'console.log' : 'debug'}
  				],
@@ -301,7 +301,7 @@ srcAndDest = [
  				  "../../editor/src/IonModel.jsx",
  				  "makeConfigObj",
  				  ["configKey"],
- 				  "../src/auto/makeobj-x.js",
+ 				  "../src/auto/makeobj-auto.js",
 				  {'console.log' : 'debug'}
  				],
 				
@@ -309,7 +309,7 @@ srcAndDest = [
 				  "../../editor/src/NetModel.jsx",       
 				  "assignClones",
 				  ["commands","cloneValues"],        
-				  "../src/auto/getfunc-x.js",
+				  "../src/auto/getfunc-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -317,7 +317,7 @@ srcAndDest = [
 				  "../../editor/src/NetModel.jsx",       
 				  "getHostPorts",
 				  ["hostKey","hosts","ipaddrs","commands"], 
-				  "../src/auto/getfunc-x.js",
+				  "../src/auto/getfunc-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -325,7 +325,7 @@ srcAndDest = [
 				  "../../editor/src/NetModel.jsx",       
 				  "getNodeInduct",
 				  ["cloneVals","nodeKey","bpLayer"], 
-				  "../src/auto/getfunc-x.js",
+				  "../src/auto/getfunc-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -333,7 +333,7 @@ srcAndDest = [
 				  "../../editor/src/NetModel.jsx",       
 				  "getNodeLink",
 				  ["cloneVals","nodeKey","ltpLayer"],
-				  "../src/auto/getfunc-x.js",
+				  "../src/auto/getfunc-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -341,7 +341,7 @@ srcAndDest = [
 				  "../../editor/src/NetModel.jsx",       
 				  "getNodeOutduct",
 				  ["cloneVals","nodeKey","toAddr","bpLayer"],
-				  "../src/auto/getfunc-x.js",
+				  "../src/auto/getfunc-auto.js",
 				  {'console.log' : 'debug'}
 				],
 				
@@ -349,7 +349,7 @@ srcAndDest = [
 				  "../../editor/src/IonModel.jsx",       
 				  "checkModel",
 				  [],                                
-				  "../src/auto/checkion-x.js",
+				  "../src/auto/checkion-auto.js",
 				  {'this.props.name': 'ion.name',
   				   'console.log' : 'debug'}
 				] 
