@@ -36,7 +36,7 @@ mkdir $rel/cli
 cd cli
 cp package*        $rel/cli
 cp -R node_modules $rel/cli
-cp -R bin          $rel/cli
+cp -R bin/*.js     $rel/cli
 cp -R docs         $rel/cli
 cd ..
 
