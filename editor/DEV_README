@@ -2,7 +2,7 @@ DEV_README
 
 Author: Dave Hanks
 
-Developers notes after installing npm and cloning repo
+Developers notes after installing node.js and cloning repo
 
 To begin running, modifying and debugging the ION config
 tool, in the editor directory run these commands:

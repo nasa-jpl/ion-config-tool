@@ -2,7 +2,7 @@ DEV_README
 
 Author: Dave Hanks
 
-Developers notes after installing npm and cloning repo
+Developers notes after installing node.js and cloning repo
 
 To create and run the CLI tools do the following steps
 in the cli/ directory
