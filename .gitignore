@@ -8,6 +8,7 @@
 
 /cli/src/auto/*.js
 /cli/json
+/cli/node_modules
 
 /editor/build
 /editor/node_modules
