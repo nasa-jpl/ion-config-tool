@@ -1,0 +1,42 @@
+DEV_README
+
+Author: Dave Hanks
+
+Developers notes after installing node.js and cloning repo
+
+To create and run the CLI tools do the following steps
+in the cli/ directory
+
+     > npm config set legacy-peer-deps true
+     > npm install
+     > ./make.sh
+
+This should bring in all the dependencies that the ION
+config tool command line interface executables need and
+generate the CLI executables. To test the checkout and
+generation of the CLI tools go the the cli/bin directory
+and execute this command:
+
+     > ./checkdtn.js -m <Net Model file>
+
+To get an example Net Model file, you can generate one
+yourself using the GUI version or you can ask around
+for one.
+
+If that command runs without error, try the other CLI
+tools.
+
+    > ./dtn2ion.js -m <Net Model file>
+    > ./ionconfig.js -m <ION Model file>
+    > ./ionsurvey.js -m <ION Model file>
+
+Note that the ./dtn2ion.js script will generate an ION
+Model file appropriate for use in the scripts that need one.
+
+There are other command line options in some of the
+CLI tools, see the top of each CLI executable for them.
+
+For building and deploying the CLI tools for 
+distribution see DOBUILD and DORELEASE in the ionconfig
+directory.
+
