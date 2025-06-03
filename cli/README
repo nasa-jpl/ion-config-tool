@@ -2,19 +2,29 @@ The cli area supports the build and testing of ionconfig command-line programs.
 
 The programs are deposited to /bin:
 
-   checkdtn.js  - verify syntax and content of a dtn network model
-   dtn2ion.js   - generate a full ion model from a dtn network model
-   ionconfig.js - generate full ion config files for all nodes from an ion model
+   checkdtn.js  - verify syntax and content of a DTN network model
+   dtn2ion.js   - generate a full ION model from a DTN network model
+   ionconfig.js - generate full ION config files for all nodes from an ION
+                  model
+   ionsurvey.js - generate a survey report for an ION model
 
 These programs depend on their companion json and node_modules directories.
 Note the json directory is shared at the root level of ionconfig.
 
-The make.sh script builds all of the programs, simply binding together multiple
-script files.
+The make.sh script builds all of the programs by extracting from the ION
+config GUI source files in editor/src the pertinent parts shared by the
+CLI tools, and some CLI specific code in cli/src and binding together the 
+relevent source files into the complete javascript programs in /bin.
 
-The /src subdirectory holds all of the script files used to build the complete
+See the AUTOBUILD file in cli/src for more information.
+
+The /src subdirectory holds the CLI specific script files used to build the
 programs.
+
+The /src/auto directory holds the CLI script files that are automatically
+extracted from the source files in editor/src.
 
 The /script subdirectory holds supporting scripts used by make.sh.
 
-The /tests subdirectory provides test files and test programs for each program.
+The /tests subdirectory provides test files and test programs for each
+program. (TBD)

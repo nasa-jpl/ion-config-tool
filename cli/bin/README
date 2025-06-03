@@ -1,0 +1,10 @@
+IONCONFIG CLI TOOL EXECUTABLES
+
+This directory is the destination directory for the CLI tool
+executables that are automatically generated from a combination
+of GUI source and CLI specific code found in cli/src.
+
+Do not edit these files directly since they will be overwritten
+at build time by the build process. See the AUTOBUILD file
+in the cli/ directory for more information about how the CLI
+tools are built.
