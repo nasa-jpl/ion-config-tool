@@ -1,0 +1,33 @@
+DEV_README
+
+Author: Dave Hanks
+
+Developers notes after installing npm and cloning repo
+
+To begin running, modifying and debugging the ION config
+tool, in the editor directory run these commands:
+
+     > npm config set legacy-peer-deps true
+     > npm install
+
+This should bring in all the dependencies that the ION
+config tool needs to run. To test the checkout of ION
+config tool run this command:
+
+     > npm start
+
+This should start the ION config tool editor in your
+default web browser. Starting this way will also make
+the developer tools in the browser aware of the source
+code. Thus, break points, watches, console output, etc... 
+are available while developing and debugging. It will also
+enable hot reloading when changes to the source are made.
+
+For building and deploying the ION config tool for 
+distribution see DOBUILD and DORELEASE in the ionconfig
+directory.
+
+NOTE: I, Dave Hanks, always used the Chrome browser for
+development and testing. If you do not use Chrome your
+mileage may vary. Happy coding!
+
