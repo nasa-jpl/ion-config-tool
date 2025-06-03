@@ -1,19 +1,28 @@
 # any errors.log should be ignored by the repo
 **/errors.log
-/dict/work
-./cli/tests/ionconfig/nate1-ion
-./cli/tests/ionconfig/with_udp_fail-ion
+/node_modules
+
+# Everything in /cli/bin EXCEPT the README
+/cli/bin/*
+!/cli/bin/README
+
+/cli/src/auto/*.js
+/cli/json
+
 /editor/build
 /editor/node_modules
-/node_modules
+
+/dict/work
 /dict/cmdTypes.rows
 /dict/dict.html
 /dict/front.html
 /dict/paramTypes.rows
+/dict/json-*
+/dict/json_latest
+
 /docs
 /json/*.json
 /tars
 /test
 /*.swp
-/cli/src/auto/*.js
 
