@@ -6,6 +6,6 @@
 //                                                                   
 //      Author: Dave Hanks, Jet Propulsion Laboratory         
 //                                                          
-
-import NetAddr from '../src/NetAddr';
+import React from 'react';
+import NetAddr from '../editor/src/NetAddr';
 
