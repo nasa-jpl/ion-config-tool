@@ -1,4 +1,4 @@
-Copyright (c) 2023-24 California Institute of Technology (“Caltech”). 
+Copyright (c) 2023-25 California Institute of Technology (“Caltech”). 
 U.S. Government sponsorship acknowledged.  All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
