@@ -1,6 +1,6 @@
 {
-  "name": "webict",
-  "version": "0.1.0",
+  "name": "ionconfig",
+  "version": "4.8.3",
   "private": true,
   "dependencies": {
     "date-format-lite": "^17.7.0",
@@ -13,10 +13,10 @@
     "jszip": "^3.1.5",
     "markdown-to-html": "0.0.13",
     "moment": "^2.18.1",
-    "react": "^18.2.0",
+    "react": "19.1.0",
     "react-bootstrap": "^0.31.5",
     "react-datetime": "^2.10.1",
-    "react-dom": "^18.2.0",
+    "react-dom": "19.1.0",
     "tar": "^4.4.8"
   },
   "devDependencies": {
