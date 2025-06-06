@@ -23,7 +23,11 @@
 
 /docs
 /json/*.json
-/tars
+
+# Everything in tars/ except the README
+/tars/*
+!/tars/README
+
 /test
 /*.swp
 
