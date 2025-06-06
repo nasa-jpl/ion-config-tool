@@ -5,3 +5,6 @@ See: https://nodejs.org/en/download
 
 Once node.js is installed, see DEV_README in the editor/ directory and
 see DEV_README in the cli/ directory for more.
+
+This public repo is generally not monitored. 
+You can send bug reports to David.R.Hanks@jpl.nasa.gov
