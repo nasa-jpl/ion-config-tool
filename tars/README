@@ -1,4 +1,4 @@
-This directory contains tar files for staged for upload to github
+This directory contains tar files staged for upload to github
 whenever a build or release is made.
 
 This file is the only file in this directory that should be in github.
