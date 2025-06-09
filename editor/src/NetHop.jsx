@@ -9,9 +9,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
-import {Grid,Row,Col} from 'react-bootstrap';
-import {Label,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon,Panel} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
+import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Glyphicon} from '@strongdm/glyphicon';
+import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
 export default class NetHop  extends React.Component {
@@ -53,7 +54,7 @@ export default class NetHop  extends React.Component {
     }
   }
   makeAlertElem(msg) {
-    return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
+    return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
   }
   getBool(flag) {     // return boolean type
     // could be boolean already, or a boolean string
@@ -73,7 +74,7 @@ export default class NetHop  extends React.Component {
       <FormControl
         readOnly="false"
         bsSize="sm"
-        componentClass="select"
+        as="select"
         value="{val}"
         onChange={handler}
         >{options}
@@ -107,11 +108,11 @@ export default class NetHop  extends React.Component {
     const icon = 'remove';
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Label bsSize="lg" bsStyle="default">Net Hop Editor</Label></Col>
+        <Col sm={5}> <Badge bsSize="lg" variant="default">Net Hop Editor</Badge></Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button bsSize="sm" bsStyle="danger"   onClick={this.delete}>Delete</Button>
-            <Button bsSize="sm" bsStyle="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
+            <Button bsSize="sm" variant="danger"   onClick={this.delete}>Delete</Button>
+            <Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
           </ButtonToolbar>
         </Col>
       </Row>;
@@ -216,7 +217,7 @@ export default class NetHop  extends React.Component {
   makeHopViewer() {
     //console.log(">>makeHopElems " + JSON.stringify(this.state));
     var hopElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Label bsSize="lg" bsStyle="default">Net Hop Viewer</Label></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">Net Hop Viewer</Badge></Col></Row>;
     hopElems.push(head);
     const keyElem = this.makeHopElem("","text",this.state.hopKey,"Hop Name",2,true,"");
     hopElems.push(keyElem);
@@ -278,24 +279,24 @@ export default class NetHop  extends React.Component {
         viewPanel = this.makeHopViewer();
 
     return (
-      <Grid fluid>
+      <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Label bsSize="lg" bsStyle="default">Net Hop</Label></Col>
+            <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">Net Hop</Badge></Col>
             <Col className="text-right" sm={2}><b>{hopKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
-                <Button bsSize="sm" bsStyle="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bsSize="sm" bsStyle="info" onClick={this.view}>{viewLabel}</Button>
+                <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+                <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
               </ButtonToolbar>
             </Col>
           </div>
         </Row>
-        <Panel collapsible expanded={viewMode}>
+        <Card collapsible expanded={viewMode}>
          {viewPanel}
-        </Panel>
-      </Grid>
+        </Card>
+      </Container>
     )
   };
 

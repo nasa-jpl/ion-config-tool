@@ -9,9 +9,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
-import {Grid,Row,Col} from 'react-bootstrap';
-import {Label,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon,Panel} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
+import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Glyphicon} from '@strongdm/glyphicon';
+import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
 export default class NetNode  extends React.Component {
@@ -41,7 +42,7 @@ export default class NetNode  extends React.Component {
     }
   }
   makeAlertElem(msg) {
-    return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
+    return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
   }
   // show choices with selection widget
   makeSelectForm(val,handler,options) {
@@ -50,7 +51,7 @@ export default class NetNode  extends React.Component {
       <FormControl
         readOnly="false"
         bsSize="sm"
-        componentClass="select"
+        as="select"
         value="{val}"
         onChange={handler}
         >{options}
@@ -84,11 +85,11 @@ export default class NetNode  extends React.Component {
     const icon = 'remove';
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Label bsSize="lg" bsStyle="default">Net Node Editor</Label></Col>
+        <Col sm={5}> <Badge bsSize="lg" variant="default">Net Node Editor</Badge></Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button bsSize="sm" bsStyle="danger"   onClick={this.delete}>Delete</Button>
-            <Button bsSize="sm" bsStyle="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
+            <Button bsSize="sm" variant="danger"   onClick={this.delete}>Delete</Button>
+            <Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
           </ButtonToolbar>
         </Col>
       </Row>;
@@ -151,7 +152,7 @@ export default class NetNode  extends React.Component {
   makeNodeViewer() {
     //console.log(">>makeNodeElems " + JSON.stringify(this.state));
     var nodeElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Label bsSize="lg" bsStyle="default">Net Node Viewer</Label></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">Net Node Viewer</Badge></Col></Row>;
     nodeElems.push(head);
     const keyElem = this.makeNodeElem("","text",this.state.nodeKey,"Node Name",1,true,"");
     nodeElems.push(keyElem);
@@ -203,24 +204,24 @@ export default class NetNode  extends React.Component {
         viewPanel = this.makeNodeViewer();
 
     return (
-      <Grid fluid>
+      <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Label bsSize="lg" bsStyle="default">Net Node</Label></Col>
+            <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">Net Node</Badge></Col>
             <Col className="text-right" sm={1}><b>{nodeKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
-                <Button bsSize="sm" bsStyle="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bsSize="sm" bsStyle="info" onClick={this.view}>{viewLabel}</Button>
+                <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+                <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
               </ButtonToolbar>
             </Col>
           </div>
         </Row>
-        <Panel collapsible expanded={viewMode}>
+        <Card collapsible expanded={viewMode}>
          {viewPanel}
-        </Panel>
-      </Grid>
+        </Card>
+      </Container>
     )
   };
 

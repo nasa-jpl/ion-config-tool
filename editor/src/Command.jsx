@@ -9,12 +9,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
-import {Grid,Row,Col} from 'react-bootstrap';
-import {Label,Button,ButtonToolbar} from 'react-bootstrap';
-import {Panel} from 'react-bootstrap';
-import {Glyphicon} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
+import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Card} from 'react-bootstrap';
+import {Glyphicon} from '@strongdm/glyphicon';
 import {Alert} from 'react-bootstrap';
-import {Badge} from 'react-bootstrap';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import 'moment';
@@ -56,7 +55,7 @@ export default class Command  extends React.Component {
     return null;
   }
   makeAlertElem(msg) {
-    return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
+    return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
   }
   // check if this command owns a value that is cloned
   hasClonedValue() {
@@ -77,7 +76,7 @@ export default class Command  extends React.Component {
         readOnly={!this.state.editMode}
         disabled={!this.state.editMode}
         bsSize="sm"
-        componentClass="select"
+        as="select"
         value={value}
         onChange={this.handleParamSelect.bind(null,valIdx)}
         >{options}
@@ -276,7 +275,7 @@ export default class Command  extends React.Component {
     if (editFlag) {
       return (
         <Col sm={1}>
-            <Button bsSize="sm" bsStyle="danger">??</Button>
+            <Button bsSize="sm" variant="danger">??</Button>
         </Col>
       );
     }
@@ -303,13 +302,13 @@ export default class Command  extends React.Component {
     const icon = 'remove';
     const head  =
       <Row key="head">
-        <Col sm={5}> <Label bsSize="lg" bsStyle="default">Command Editor</Label></Col>
+        <Col sm={5}> <Badge bsSize="lg" variant="default">Command Editor</Badge></Col>
         <Col sm={4}>
           <ButtonToolbar>
-            <Button bsSize="sm" bsStyle="info" onClick={this.dict}>{dictLabel}</Button>
-            <Button bsSize="sm" bsStyle="info" onClick={this.entry}>{entryLabel}</Button>
-            <Button bsSize="sm" bsStyle="danger" onClick={this.delete}>Delete</Button>
-            <Button bsSize="sm" bsStyle="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
+            <Button bsSize="sm" variant="info" onClick={this.dict}>{dictLabel}</Button>
+            <Button bsSize="sm" variant="info" onClick={this.entry}>{entryLabel}</Button>
+            <Button bsSize="sm" variant="danger" onClick={this.delete}>Delete</Button>
+            <Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
           </ButtonToolbar>
         </Col>
         <Col sm={4}>{alert}</Col>
@@ -318,8 +317,8 @@ export default class Command  extends React.Component {
     return (
       <div>
         {commandElems}
-        <Panel collapsible expanded={dictMode}>{dictPanel}</Panel>
-        <Panel collapsible expanded={entryMode}>{entryPanel}</Panel>
+        <Card collapsible expanded={dictMode}>{dictPanel}</Card>
+        <Card collapsible expanded={entryMode}>{entryPanel}</Card>
       </div>);
   }
   makeCommandViewer(paramKeys) {
@@ -338,11 +337,11 @@ export default class Command  extends React.Component {
       entryPanel = this.makeFileEntry();
     const head  =
       <Row key="head">
-        <Col sm={5}><Label bsSize="lg" bsStyle="default">Command Viewer</Label></Col>
+        <Col sm={5}><Badge bsSize="lg" variant="default">Command Viewer</Badge></Col>
         <Col sm={3}>
           <ButtonToolbar>
-            <Button bsSize="sm" bsStyle="info" onClick={this.dict}>{dictLabel}</Button>
-            <Button bsSize="sm" bsStyle="info" onClick={this.entry}>{entryLabel}</Button>
+            <Button bsSize="sm" variant="info" onClick={this.dict}>{dictLabel}</Button>
+            <Button bsSize="sm" variant="info" onClick={this.entry}>{entryLabel}</Button>
           </ButtonToolbar>
         </Col>
       </Row>;
@@ -350,8 +349,8 @@ export default class Command  extends React.Component {
     return (
       <div>
         {commandElems}
-        <Panel collapsible expanded={dictMode}>{dictPanel}</Panel>
-        <Panel collapsible expanded={entryMode}>{entryPanel}</Panel>
+        <Card collapsible expanded={dictMode}>{dictPanel}</Card>
+        <Card collapsible expanded={entryMode}>{entryPanel}</Card>
       </div>);
   }
   makeReadElem(paramKey,pIdx) {
@@ -417,7 +416,7 @@ export default class Command  extends React.Component {
     return (
       <div>
         <Row>
-          <Col sm={4}><Label bsStyle="default">Command File Entry</Label></Col>
+          <Col sm={4}><Badge variant="default">Command File Entry</Badge></Col>
           <Col className="text-left" sm={3}>
              <b>Last updated: </b>{this.props.lastUpdate}
           </Col>
@@ -469,7 +468,7 @@ export default class Command  extends React.Component {
     return (
       <div>
         <Row>
-          <Col sm={1} className="text-left"><Label bsStyle="default">Command Dictionary</Label></Col>
+          <Col sm={1} className="text-left"><Badge variant="default">Command Dictionary</Badge></Col>
         </Row>
         <Row>
           <Col sm={2} className="text-left"><b>{cmdTypeKey}</b></Col>
@@ -512,13 +511,13 @@ export default class Command  extends React.Component {
 
     for (var i=0; i<params.length; i++) {
       if (params[i].typeKey === "bpv7rc_scheme_p0" && params[i].initVal === "imc") {
-        return <Label>
+        return <Badge>
                  For this scheme, it is recommended that a <br/>
                  loopback TCP or UDP connection be configured.<br/>
                  Add a loopback contact and range, and a set<br/>
                  of protocol, induct, outduct, plan and planduct<br/>
                  commands in the .bprc file.
-               </Label>
+               </Badge>
       }
 
     }    
@@ -554,26 +553,26 @@ export default class Command  extends React.Component {
 
     return (
     <div style={{backgroundColor: '#F2F9C8'}}>
-      <Grid fluid>
+      <Container fluid>
         <Row>
-          <Col className="text-right" sm={1}><Label bsSize="lg" bsStyle="default">Command</Label></Col>
+          <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">Command</Badge></Col>
           <Col className="text-right" sm={1}><b>{this.props.name}</b></Col>
           <Col sm={3}> 
             <FormControl readOnly="true" bsSize="sm" type="text" value={cmdStr} />
           </Col>
           <Col sm={2}>
             <ButtonToolbar>
-              <Button bsSize="sm" bsStyle="primary" onClick={this.edit}>{editLabel}</Button>
-              <Button bsSize="sm" bsStyle="info" onClick={this.view}>{viewLabel}</Button>
+              <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+              <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
             </ButtonToolbar>
           </Col>
           <Col sm={2}> {cmdMsg} </Col>
           {this.makeEditFlagElem(editFlag)}
         </Row>
-        <Panel collapsible expanded={viewMode}>
+        <Card collapsible expanded={viewMode}>
          {viewPanel}
-        </Panel>
-      </Grid>
+        </Card>
+      </Container>
       </div>
     )
   };

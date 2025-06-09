@@ -9,9 +9,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
-import {Grid,Row,Col} from 'react-bootstrap';
-import {Label,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon,Panel} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
+import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Glyphicon} from '@strongdm/glyphicon';
+import {Card} from 'react-bootstrap';
 
 export default class Contacts  extends React.Component {
   constructor (props) {
@@ -38,9 +39,9 @@ export default class Contacts  extends React.Component {
     var AttrElems = [];
     const icon = "remove";
     const head  =  readMode? 
-        <Row key="head"><Col sm={2}> <Label bsSize="lg" bsStyle="default">Contacts Viewer</Label></Col></Row>
-      : <Row key="head"><Col sm={5}> <Label bsSize="lg" bsStyle="default">Contacts Editor</Label></Col> 
-        <Col sm={1}><Button bsSize="sm" bsStyle="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col></Row> ;
+        <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">Contacts Viewer</Badge></Col></Row>
+      : <Row key="head"><Col sm={5}> <Badge bsSize="lg" variant="default">Contacts Editor</Badge></Col> 
+        <Col sm={1}><Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col></Row> ;
     AttrElems.push(head);
     const nameElem = this.makeContactsAttrElem("","text",this.props.name,"Contacts Name",1,true,"");
     AttrElems.push(nameElem);
@@ -79,29 +80,29 @@ export default class Contacts  extends React.Component {
     const expandIcon = this.state.expandMode? 'chevron-down' : 'chevron-right';
 
     return (
-      <Grid fluid>
+      <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Label bsSize="lg" bsStyle="default">Contacts</Label></Col>
+            <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">Contacts</Badge></Col>
             <Col className="text-right" sm={1}><b>{name}</b></Col>
             <Col className="text-right" sm={1}><b>graph</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={2}> 
               <ButtonToolbar>
-                <Button bsSize="sm" bsStyle="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bsSize="sm" bsStyle="info" onClick={this.view}>{viewLabel}</Button>
-                <Button bsSize="sm" bsStyle="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
+                <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+                <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+                <Button bsSize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
               </ButtonToolbar>
             </Col>
           </div>
         </Row>
-        <Panel collapsible expanded={viewMode}>
+        <Card collapsible expanded={viewMode}>
          {this.makeContactsEditorElem()}
-        </Panel>
-        <Panel  collapsible expanded={expandMode}>
+        </Card>
+        <Card  collapsible expanded={expandMode}>
           {this.props.children}
-        </Panel>
-      </Grid>
+        </Card>
+      </Container>
     );
   };
 

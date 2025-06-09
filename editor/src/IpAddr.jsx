@@ -9,7 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
-import {Grid,Row,Col} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
 import {Button,ButtonToolbar} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
@@ -27,7 +27,7 @@ export default class IpAddr  extends React.Component {
     }
   }
   makeAlertElem(msg) {
-    return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
+    return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
   }
   // check if a new ipAddr is valid
   isDuplicateIpAddr(ipAddr) {
@@ -70,9 +70,9 @@ export default class IpAddr  extends React.Component {
     const pos = this.getPosition();
     const label  = addMode? "New " + tail : pos + " ) " + tail;
 
-    const chgbtn = addMode? "" : <Button bsSize="sm" bsStyle="primary" onClick={this.change}>{changeLabel}</Button>;
-    const delbtn = addMode? "" : <Button bsSize="sm" bsStyle="danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
-    const addbtn = addMode? <Button bsSize="sm" bsStyle="primary" onClick={this.add}>Add</Button> : "";
+    const chgbtn = addMode? "" : <Button bsSize="sm" variant="primary" onClick={this.change}>{changeLabel}</Button>;
+    const delbtn = addMode? "" : <Button bsSize="sm" variant="danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
+    const addbtn = addMode? <Button bsSize="sm" variant="primary" onClick={this.add}>Add</Button> : "";
 
     let msg = this.state.nameMsg;
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
@@ -83,7 +83,7 @@ export default class IpAddr  extends React.Component {
       <FormControl readOnly={read} bsSize="sm" type="text" value={ipAddr} spellCheck="false" onChange={this.handleChange.bind(null)} />;
 
     return (
-      <Grid fluid>
+      <Container fluid>
         <Row>
           <div className="row mt-4">
             <Col className="text-right" sm={2}><b>{label}</b></Col>
@@ -98,7 +98,7 @@ export default class IpAddr  extends React.Component {
             <Col sm={5}>{alert}</Col>
           </div>
         </Row>
-      </Grid>
+      </Container>
     )
   };
   change = () => {   // activated by Change/Submit button

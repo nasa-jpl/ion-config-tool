@@ -10,9 +10,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import "date-format-lite";
 import {FormControl} from 'react-bootstrap';
-import {Grid,Row,Col} from 'react-bootstrap';
-import {Label,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon,Panel} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
+import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Glyphicon} from '@strongdm/glyphicon'; 
+import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import {saveAs} from "file-saver";
 
@@ -42,11 +43,11 @@ export default class Config  extends React.Component {
       deleteAlert = this.makeDeleteAlertElem();
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Label bsSize="lg" bsStyle="default">Config File Editor</Label></Col>
+        <Col sm={5}> <Badge bsSize="lg" variant="default">Config File Editor</Badge></Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button bsSize="sm" bsStyle="danger" onClick={this.deleteOn}>Delete</Button>
-            <Button bsSize="sm" bsStyle="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
+            <Button bsSize="sm" variant="danger" onClick={this.deleteOn}>Delete</Button>
+            <Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
           </ButtonToolbar>
         </Col>
         <Col sm={5}>{deleteAlert}</Col>
@@ -71,7 +72,7 @@ export default class Config  extends React.Component {
     var configElems = [];
     const content = this.props.configType.content;
     const program = this.props.configType.program;
-    const head  = <Row key="head"><Col sm={2}> <Label bsSize="lg" bsStyle="default">Config File Viewer</Label></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">Config File Viewer</Badge></Col></Row>;
     configElems.push(head);
     const nameElem = this.makeConfigElem("","text",this.props.name,"Config File Name",1,true,"");
     configElems.push(nameElem);
@@ -130,7 +131,7 @@ export default class Config  extends React.Component {
     var form =
       <FormControl
         bsSize="sm"
-        componentClass="select"
+        as="select"
         placeholder=""
         onChange={this.handleNewCommand}
         >{optionItems}
@@ -142,7 +143,7 @@ export default class Config  extends React.Component {
         <Col className="text-right" sm={2}><b>Select new command:</b></Col>
         <Col sm={2}>{form}</Col>
         <Col sm={1}>
-          <Button bsSize="sm" bsStyle="success"  onClick={this.nonewcmd}><Glyphicon glyph={icon} /></Button>
+          <Button bsSize="sm" variant="success"  onClick={this.nonewcmd}><Glyphicon glyph={icon} /></Button>
         </Col>
       </div>
     );
@@ -153,11 +154,11 @@ export default class Config  extends React.Component {
     //<Col sm={1}>
     //</Col>
     return (
-      <Alert bsStyle="danger">
+      <Alert variant="danger">
         <b>Confirm delete of config file and all its commands?</b>
         <ButtonToolbar>
-          <Button bsSize="sm" bsStyle="danger"  onClick={this.delete}>Delete</Button>
-          <Button bsSize="sm" bsStyle="success" onClick={this.deleteOff}>Cancel</Button>
+          <Button bsSize="sm" variant="danger"  onClick={this.delete}>Delete</Button>
+          <Button bsSize="sm" variant="success" onClick={this.deleteOff}>Cancel</Button>
         </ButtonToolbar>
       </Alert>);
   };
@@ -194,20 +195,20 @@ export default class Config  extends React.Component {
 
     return (
     <div style={{backgroundColor: '#E1FAD2'}}>
-      <Grid fluid>
+      <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}> <Label bsSize="lg" bsStyle="default">Config File</Label></Col>
+            <Col className="text-right" sm={1}> <Badge bsSize="lg" variant="default">Config File</Badge></Col>
             <Col className="text-right" sm={1}><b>{this.props.name}</b></Col>
             <Col className="text-left"  sm={3}>{content}</Col>
             <Col sm={4}> 
               <ButtonToolbar>
-                <Button bsSize="sm" bsStyle="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bsSize="sm" bsStyle="info" onClick={this.view}>{viewLabel}</Button>
-                <Button bsSize="sm" bsStyle="info" onClick={this.info}>{infoTag}</Button>
-                <Button bsSize="sm" bsStyle="primary" onClick={this.saveme}>Save File</Button> 
-                <Button bsSize="sm" bsStyle="primary" disabled={dimNewCmd} onClick={this.newcmd}>New Command</Button>        
-                <Button bsSize="sm" bsStyle="success"  onClick={this.toggle}> <Glyphicon glyph={icon} />{' '}</Button>
+                <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+                <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+                <Button bsSize="sm" variant="info" onClick={this.info}>{infoTag}</Button>
+                <Button bsSize="sm" variant="primary" onClick={this.saveme}>Save File</Button> 
+                <Button bsSize="sm" variant="primary" disabled={dimNewCmd} onClick={this.newcmd}>New Command</Button>        
+                <Button bsSize="sm" variant="success"  onClick={this.toggle}> <Glyphicon glyph={icon} />{' '}</Button>
               </ButtonToolbar>
             </Col>
           </div>
@@ -215,16 +216,16 @@ export default class Config  extends React.Component {
         <Row>
           {cmdEntry}
         </Row>
-        <Panel collapsible expanded={viewMode}>
+        <Card collapsible expanded={viewMode}>
           {viewPanel}
-        </Panel>
-        <Panel collapsible expanded={configOpen}>
+        </Card>
+        <Card collapsible expanded={configOpen}>
           {this.makeInfo()} 
-        </Panel>
-        <Panel  collapsible expanded={expandMode}>
+        </Card>
+        <Card  collapsible expanded={expandMode}>
           {this.props.children}
-        </Panel>
-      </Grid>
+        </Card>
+      </Container>
       </div>
     )
   };

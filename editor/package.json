@@ -3,6 +3,7 @@
   "version": "4.8.3",
   "private": true,
   "dependencies": {
+    "@strongdm/glyphicon": "^0.0.5",
     "date-format-lite": "^17.7.0",
     "file-api": "^0.10.4",
     "file-saver": "^1.3.8",

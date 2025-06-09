@@ -9,7 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
-import {Grid,Row,Col} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
 import {Button,ButtonToolbar} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
@@ -30,7 +30,7 @@ export default class NetAddr  extends React.Component {
     }
   }
   makeAlertElem(msg) {
-    return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
+    return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
   }
   // check if a new ipAddr is duplicated
   isDuplicateIpAddr(ipAddr) {
@@ -51,7 +51,7 @@ export default class NetAddr  extends React.Component {
         </Modal.Header>
         <Modal.Body>{warnmsg}</Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" bsSize="sm" bsStyle="success" onClick={ () => this.setState({showWarnMsg : false})}>
+          <Button variant="primary" bsSize="sm" variant="success" onClick={ () => this.setState({showWarnMsg : false})}>
             Ok 
           </Button>
         </Modal.Footer>
@@ -88,9 +88,9 @@ export default class NetAddr  extends React.Component {
     const pos = this.getPosition();
     const label  = addMode? "New " + tail : pos + " ) " + tail;
 
-    const chgbtn = addMode? "" : <Button bsSize="sm" bsStyle="primary" onClick={this.change}>{changeLabel}</Button>;
-    const delbtn = addMode? "" : <Button bsSize="sm" bsStyle="danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
-    const addbtn = addMode? <Button bsSize="sm" bsStyle="primary" onClick={this.add}>Add</Button> : "";
+    const chgbtn = addMode? "" : <Button bsSize="sm" variant="primary" onClick={this.change}>{changeLabel}</Button>;
+    const delbtn = addMode? "" : <Button bsSize="sm" variant="danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
+    const addbtn = addMode? <Button bsSize="sm" variant="primary" onClick={this.add}>Add</Button> : "";
 
     let errmsg = this.state.errMsg;
     let warnmsg = this.state.warnMsg;
@@ -110,7 +110,7 @@ export default class NetAddr  extends React.Component {
 
     return (
       <div>
-      <Grid fluid>
+      <Container fluid>
         <Row>
           <div className="row mt-4">
             <Col className="text-right" sm={2}><b>{label}</b></Col>
@@ -125,7 +125,7 @@ export default class NetAddr  extends React.Component {
             <Col sm={5}>{alert}</Col>
           </div>
         </Row>
-      </Grid>
+      </Container>
       {warnpopup}
       </div>
     )

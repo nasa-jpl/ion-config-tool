@@ -11,8 +11,8 @@ import PropTypes from 'prop-types';
 import CreateReactCLass from 'create-react-class';
 import {Form,FormGroup,FormControl} from 'react-bootstrap';
 import {ControlLabel} from 'react-bootstrap';
-import {Grid,Row,Col} from 'react-bootstrap';
-import {Label,Button} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
+import {Badge,Button} from 'react-bootstrap';
 
 export default class Param  extends React.Component {
 
@@ -41,7 +41,7 @@ export default class Param  extends React.Component {
           <Col sm={3} type={type} value={value} readOnly={justread}>
             {this.props.children}
           </Col>
-          <Col sm={1}> <Button bsSize="sm" bsStyle="info">Info</Button> </Col>
+          <Col sm={1}> <Button bsSize="sm" variant="info">Info</Button> </Col>
         </div>
         </Row>
     )

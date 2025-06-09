@@ -10,9 +10,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
-import {Label,Button,ButtonToolbar} from 'react-bootstrap';
-import {Panel} from 'react-bootstrap';
-import {Glyphicon} from 'react-bootstrap';
+import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Card} from 'react-bootstrap';
+import {Glyphicon} from '@strongdm/glyphicon';
 import {saveAs} from "file-saver";
 import {Alert} from 'react-bootstrap';
 
@@ -1141,7 +1141,7 @@ export default class NetModel  extends React.Component {
     return optionItems;
   };
   makeAlertElem(msg) {
-    return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
+    return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
   };
   makeHeadElem(cols) {
     var colElems = cols.map(
@@ -1241,8 +1241,8 @@ export default class NetModel  extends React.Component {
     const icon = 'remove';
     const head  = 
       <Row key="head">
-        <Col sm={4}><Label bsSize="lg" bsStyle="default">Net Model Editor</Label></Col>
-        <Col sm={1}><Button bsSize="sm" bsStyle="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
+        <Col sm={4}><Badge bsSize="lg" variant="default">Net Model Editor</Badge></Col>
+        <Col sm={1}><Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
       </Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"Net Model Name",1,false,"");
@@ -1259,7 +1259,7 @@ export default class NetModel  extends React.Component {
   makeNetViewer() {
     //console.log(">>makeModelElems " + JSON.stringify(this.state));
     var modelElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Label bsSize="lg" bsStyle="default">Network Model Viewer</Label></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">Network Model Viewer</Badge></Col></Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"Network Model Name",1,true,"");
     modelElems.push(nameElem);
@@ -1322,28 +1322,28 @@ export default class NetModel  extends React.Component {
       <div>
         <Row>
           <hr/>
-          <Col className="text-left"  sm={1}><Label bsSize="sm" bsStyle="default">Net Model</Label></Col>
+          <Col className="text-left"  sm={1}><Badge bsSize="sm" variant="default">Net Model</Badge></Col>
           <Col className="text-right" sm={1}><b>{this.state.name}</b></Col>
           <Col className="text-left"  sm={2}>{this.state.desc}</Col>
           <Col sm={6}> 
             <ButtonToolbar>
-              <Button bsSize="sm" bsStyle="primary" onClick={this.edit}>{editLabel}</Button>
-              <Button bsSize="sm" bsStyle="info" onClick={this.view}>{viewLabel}</Button>
-              <Button bsSize="sm" bsStyle="primary" disabled={dimBuildIon} onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
-              <Button bsSize="sm" bsStyle="primary" disabled={dimSaveNet}  onClick={this.saveModel}>Save Model</Button>
-              <Button bsSize="sm" bsStyle="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
+              <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+              <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+              <Button bsSize="sm" variant="primary" disabled={dimBuildIon} onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
+              <Button bsSize="sm" variant="primary" disabled={dimSaveNet}  onClick={this.saveModel}>Save Model</Button>
+              <Button bsSize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
             </ButtonToolbar>
           </Col>
           <Col sm={4}>{alert}</Col>
         </Row>
-        <Panel collapsible expanded={viewMode}>
+        <Card collapsible expanded={viewMode}>
           {viewPanel}
-        </Panel>
-        <Panel  collapsible expanded={expandMode}>
+        </Card>
+        <Card  collapsible expanded={expandMode}>
           {hostList}
           {nodeList}
           {hopList}
-        </Panel>
+        </Card>
       </div>
     );
   };

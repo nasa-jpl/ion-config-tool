@@ -10,9 +10,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
-import {Label,Button,ButtonToolbar} from 'react-bootstrap';
-import {Table, Panel} from 'react-bootstrap';
-import {Glyphicon} from 'react-bootstrap';
+import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Table, Card} from 'react-bootstrap';
+import {Glyphicon} from '@strongdm/glyphicon';
 import PopoutWindow from 'react-popout';
 import {saveAs} from "file-saver";
 import JSZip from "jszip";
@@ -162,7 +162,7 @@ export default class IonModel  extends React.Component {
   };
   // END EXTRACT
   makeAlertElem(msg) {
-    return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
+    return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
   };
   // tranlsate version to sequence number for command effectivity
   // EXTRACT getIonVerSeqNo
@@ -639,10 +639,10 @@ export default class IonModel  extends React.Component {
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete the Ion Model?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" bsSize="sm" bsStyle="success" onClick={ () => this.deleteModelState(true)}>
+          <Button variant="secondary" bsSize="sm" variant="success" onClick={ () => this.deleteModelState(true)}>
             Yes 
           </Button>
-          <Button variant="primary" bsSize="sm" bsStyle="success" onClick={ () => this.deleteModelState(false)}>
+          <Button variant="primary" bsSize="sm" variant="success" onClick={ () => this.deleteModelState(false)}>
             Cancel
           </Button>
         </Modal.Footer>
@@ -1109,7 +1109,7 @@ export default class IonModel  extends React.Component {
         readOnly={!this.state.editMode}
         disabled={!this.state.editMode}
         bsSize="sm"
-        componentClass="select"
+        as="select"
         value={val}
         onChange={handler}
         >{options}
@@ -1133,8 +1133,8 @@ export default class IonModel  extends React.Component {
     const icon = 'remove';
     const head  = 
       <Row key="head">
-        <Col sm={4}><Label bsSize="lg" bsStyle="default">ION Model Editor</Label></Col>
-        <Col sm={1}><Button bsSize="sm" bsStyle="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
+        <Col sm={4}><Badge bsSize="lg" variant="default">ION Model Editor</Badge></Col>
+        <Col sm={1}><Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
       </Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"ION Model Name",1,false,"");
@@ -1176,7 +1176,7 @@ export default class IonModel  extends React.Component {
   makeIonViewer() {
     //console.log(">>makeModelElems " + JSON.stringify(this.state));
     var modelElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Label bsSize="lg" bsStyle="default">ION Model Viewer</Label></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">ION Model Viewer</Badge></Col></Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"ION Model Name",1,true,"");
     modelElems.push(nameElem);
@@ -1257,7 +1257,7 @@ export default class IonModel  extends React.Component {
 
     var alerts = this.checkModel();   // any alerts?
 
-    const alertit =  alerts.length? <Alert bsStyle="danger"><b>See Alerts (in Surveys)</b></Alert> : "";
+    const alertit =  alerts.length? <Alert variant="danger"><b>See Alerts (in Surveys)</b></Alert> : "";
 
     let viewPanel = null;
     if (viewMode)
@@ -1271,18 +1271,18 @@ export default class IonModel  extends React.Component {
       <div>
         <hr />
         <Row>
-          <Col className="text-left"  sm={1}><Label bsSize="sm" bsStyle="default">ION Model</Label></Col>
+          <Col className="text-left"  sm={1}><Badge bsSize="sm" variant="default">ION Model</Badge></Col>
           <Col className="text-right" sm={1}><b>{name}</b></Col>
           <Col className="text-left"  sm={2}>{this.state.desc}</Col>
           <Col sm={6}> 
             <ButtonToolbar>
-              <Button bsSize="sm" bsStyle="primary" onClick={this.edit}>{editLabel}</Button>
-              <Button bsSize="sm" bsStyle="info" onClick={this.view}>{viewLabel}</Button>
-              <Button bsSize="sm" bsStyle="info" onClick={this.showSurveys}>{showSurveyTag}</Button>
-              <Button bsSize="sm" bsStyle="primary" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
-              <Button bsSize="sm" bsStyle="primary" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
-              <Button bsSize="sm" bsStyle="danger" onClick={this.showDeleteWarn}>Delete Model</Button>
-              <Button bsSize="sm" bsStyle="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
+              <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+              <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+              <Button bsSize="sm" variant="info" onClick={this.showSurveys}>{showSurveyTag}</Button>
+              <Button bsSize="sm" variant="primary" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
+              <Button bsSize="sm" variant="primary" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
+              <Button bsSize="sm" variant="danger" onClick={this.showDeleteWarn}>Delete Model</Button>
+              <Button bsSize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
             </ButtonToolbar>
           </Col>
           <Col sm={2}> {alertit} </Col>
@@ -1290,14 +1290,14 @@ export default class IonModel  extends React.Component {
         {offerSurveys}
         {showPopoutWin}
         {showDeleteWarnModal}
-        <Panel collapsible expanded={viewMode}>
+        <Card collapsible expanded={viewMode}>
           {viewPanel}
-        </Panel>
-        <Panel  collapsible expanded={expandMode}>
+        </Card>
+        <Card  collapsible expanded={expandMode}>
           {ionHosts}
           {ionNodeList}
           {graphList}
-        </Panel>
+        </Card>
       </div>
     );
 

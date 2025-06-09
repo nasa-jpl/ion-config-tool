@@ -9,9 +9,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
-import {Grid,Row,Col} from 'react-bootstrap';
-import {Label,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon,Panel} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
+import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Glyphicon} from '@strongdm/glyphicon';
+import {Card} from 'react-bootstrap';
 
 export default class Graph  extends React.Component {
   constructor (props) {
@@ -41,7 +42,7 @@ export default class Graph  extends React.Component {
       <FormControl
         readOnly="false"
         bsSize="sm"
-        componentClass="select"
+        as="select"
         value="{val}"
         onChange={handler}
         >{options}
@@ -65,9 +66,9 @@ export default class Graph  extends React.Component {
     var graphElems = [];
     const icon = "remove";
     const head  =  readMode? 
-        <Row key="head"><Col sm={2}> <Label bsSize="lg" bsStyle="default">Graph Viewer</Label></Col></Row>
-      : <Row key="head"><Col sm={5}> <Label bsSize="lg" bsStyle="default">Graph Editor</Label></Col> 
-        <Col sm={1}><Button bsSize="sm" bsStyle="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col></Row> ;
+        <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">Graph Viewer</Badge></Col></Row>
+      : <Row key="head"><Col sm={5}> <Badge bsSize="lg" variant="default">Graph Editor</Badge></Col> 
+        <Col sm={1}><Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col></Row> ;
     graphElems.push(head);
     const nameElem = this.makeGraphAttrElem("","text",this.props.name,"Graph Name",1,true,"");
     graphElems.push(nameElem);
@@ -124,29 +125,29 @@ export default class Graph  extends React.Component {
 
     return (
     <div style={{backgroundColor: '#9DD1A0'}}>
-      <Grid fluid>
+      <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Label bsSize="lg" bsStyle="default">Graph</Label></Col>
+            <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">Graph</Badge></Col>
             <Col className="text-right" sm={1}><b>{name}</b></Col>
             <Col className="text-right" sm={1}>contact graph</Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={2}> 
               <ButtonToolbar>
-                <Button bsSize="sm" bsStyle="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bsSize="sm" bsStyle="info" onClick={this.view}>{viewLabel}</Button>
-                <Button bsSize="sm" bsStyle="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
+                <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+                <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+                <Button bsSize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
               </ButtonToolbar>
             </Col>
           </div>
         </Row>
-        <Panel collapsible expanded={viewMode}>
+        <Card collapsible expanded={viewMode}>
          {viewPanel}
-        </Panel>
-        <Panel  collapsible expanded={expandMode}>
+        </Card>
+        <Card  collapsible expanded={expandMode}>
           {this.props.children}
-        </Panel>
-      </Grid>
+        </Card>
+      </Container>
     </div>
     );
   };

@@ -16,10 +16,11 @@ import NetModel  from './NetModel.jsx';
 
 // 3rd-party component imports
 import {Navbar} from 'react-bootstrap';
+import {Card} from 'react-bootstrap';
 import {FormControl} from 'react-bootstrap';
 import {Button,ButtonToolbar} from 'react-bootstrap';
-import {Grid,Row,Col} from 'react-bootstrap';
-import {Glyphicon} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
+import {Glyphicon} from '@strongdm/glyphicon';
 import "date-format-lite";
 
 // schema imports
@@ -579,8 +580,8 @@ export default class App extends React.Component {
         <Col className="text-right" sm={2}><h4><b>Net Model File</b></h4></Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button  bsSize="sm" bsStyle="primary" disabled={dimNetBtns} onClick={this.loadNetModel.bind(this)}>Load</Button>
-            <Button  bsSize="sm" bsStyle="primary" disabled={dimNetBtns} onClick={this.newNetModel.bind(this)}>New</Button>
+            <Button  bsSize="sm" variant="primary" disabled={dimNetBtns} onClick={this.loadNetModel.bind(this)}>Load</Button>
+            <Button  bsSize="sm" variant="primary" disabled={dimNetBtns} onClick={this.newNetModel.bind(this)}>New</Button>
           </ButtonToolbar>
         </Col>
         <Col sm={2}>
@@ -589,8 +590,8 @@ export default class App extends React.Component {
         <Col className="text-right" sm={2}><h4><b>ION Model File</b></h4></Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button  bsSize="sm" bsStyle="primary" disabled={dimIonBtns} onClick={this.loadIonModel.bind(this)}>Load</Button>
-            <Button  bsSize="sm" bsStyle="primary" disabled={dimIonBtns} onClick={this.newIonModel.bind(this)}>New</Button>
+            <Button  bsSize="sm" variant="primary" disabled={dimIonBtns} onClick={this.loadIonModel.bind(this)}>Load</Button>
+            <Button  bsSize="sm" variant="primary" disabled={dimIonBtns} onClick={this.newIonModel.bind(this)}>New</Button>
           </ButtonToolbar>
         </Col>
       </Row>
@@ -754,8 +755,8 @@ export default class App extends React.Component {
         <Col sm={1}>(no spaces)</Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button bsSize="sm" bsStyle="primary" onClick={this.submitNewNet}>Submit</Button>
-            <Button bsSize="sm" bsStyle="success" onClick={this.noNewNetModel.bind(this)}><Glyphicon glyph={icon} /></Button>
+            <Button bsSize="sm" variant="primary" onClick={this.submitNewNet}>Submit</Button>
+            <Button bsSize="sm" variant="success" onClick={this.noNewNetModel.bind(this)}><Glyphicon glyph={icon} /></Button>
           </ButtonToolbar>
         </Col>
       </div>
@@ -775,8 +776,8 @@ export default class App extends React.Component {
         <Col sm={1}>(no spaces)</Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button bsSize="sm" bsStyle="primary" onClick={this.submitNewIon}>Submit</Button>
-            <Button bsSize="sm" bsStyle="success" onClick={this.noNewIonModel.bind(this)}><Glyphicon glyph={icon} /></Button>
+            <Button bsSize="sm" variant="primary" onClick={this.submitNewIon}>Submit</Button>
+            <Button bsSize="sm" variant="success" onClick={this.noNewIonModel.bind(this)}><Glyphicon glyph={icon} /></Button>
           </ButtonToolbar>
         </Col>
       </div>
@@ -1758,10 +1759,12 @@ export default class App extends React.Component {
     
     return (
       <div>
-        <Navbar>
-          <h3>ION Configuration Editor  4.8.3b7</h3>
+        <Container fluid>
+        <Navbar bg="light" variant="light">
+          <h3>ION Configuration Editor  4.9.0b0</h3>
         </Navbar>
-        <Grid fluid>
+        </Container>
+        <Container fluid>
           {modelBtnsElem}
           <Row>{newNet}</Row>
           <Row>{netLoader}</Row>
@@ -1769,8 +1772,7 @@ export default class App extends React.Component {
           <Row>{newIon}</Row>
           <Row>{ionLoader}</Row>
           {ionModelElem}
-          <hr />
-        </Grid>
+        </Container>
       </div>
     );
   };

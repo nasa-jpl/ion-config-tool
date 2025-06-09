@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Col} from 'react-bootstrap';
 import {Button, ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon} from 'react-bootstrap';
+import {Glyphicon} from '@strongdm/glyphicon';
 import {Alert} from 'react-bootstrap';
 
 import cmdTypes     from './json/cmdTypes.json';
@@ -323,7 +323,7 @@ export default class IonModelLoader extends React.Component {
   };
   // END EXTRACT
   makeAlertElem(msg) {
-    return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
+    return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
   };
   render() {
     // NOTE: this is an uncontrolled input form, so no value parameter provided
@@ -351,8 +351,8 @@ export default class IonModelLoader extends React.Component {
           <Col sm={2}>{form}</Col>
           <Col sm={2}>
             <ButtonToolbar>
-              <Button bsSize="sm" bsStyle="primary" onClick={this.load}>Submit</Button>
-              <Button bsSize="sm" bsStyle="success" onClick={this.props.noLoadIonModel}><Glyphicon glyph={icon} /></Button>
+              <Button bsSize="sm" variant="primary" onClick={this.load}>Submit</Button>
+              <Button bsSize="sm" variant="success" onClick={this.props.noLoadIonModel}><Glyphicon glyph={icon} /></Button>
             </ButtonToolbar>
           </Col>
           <Col sm={4}>{alert}</Col>

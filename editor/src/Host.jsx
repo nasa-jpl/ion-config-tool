@@ -9,9 +9,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
-import {Grid,Row,Col} from 'react-bootstrap';
-import {Label,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon,Panel} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
+import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Glyphicon} from '@strongdm/glyphicon';
+import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import IpAddr from './IpAddr.jsx';
 
@@ -32,7 +33,7 @@ export default class Host  extends React.Component {
     }
   }
   makeAlertElem(msg) {
-    return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
+    return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
   }
   makeIpAddrElem(hostKey,ipAddrKey,addMode) {
     console.log("makeIpAddrElem");
@@ -72,7 +73,7 @@ export default class Host  extends React.Component {
       <FormControl
         readOnly="false"
         bsSize="sm"
-        componentClass="select"
+        as="select"
         value="{val}"
         onChange={this.handleSelect.bind(null)}
         >{options}
@@ -98,8 +99,8 @@ export default class Host  extends React.Component {
     const hostKey = this.props.name;
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Label bsSize="lg" bsStyle="default">ION Host Editor</Label></Col>
-        <Col sm={1}><Button bsSize="sm" bsStyle="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
+        <Col sm={5}> <Badge bsSize="lg" variant="default">ION Host Editor</Badge></Col>
+        <Col sm={1}><Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
       </Row>;
     hostElems.push(head);
     const nameElem = this.makeHostElem("","text",hostKey,"Host Name",1,true,"");
@@ -147,7 +148,7 @@ export default class Host  extends React.Component {
   makeHostViewer() {
     console.log(">>makeHostViewer" + JSON.stringify(this.state));
     var hostElems = [];
-    const head = <Row key="head"><Col sm={2}> <Label bsSize="lg" bsStyle="default">ION Host Viewer</Label></Col></Row>;
+    const head = <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">ION Host Viewer</Badge></Col></Row>;
     hostElems.push(head);
     const nameElem = this.makeHostElem("","text",this.props.name,"Host Name",1,true,"");
     hostElems.push(nameElem);
@@ -218,24 +219,24 @@ export default class Host  extends React.Component {
 
     return (
     <div style={{backgroundColor: '#DBF4DC'}}>
-     <Grid fluid>
+     <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Label bsSize="lg" bsStyle="default">ION Host</Label></Col>
+            <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">ION Host</Badge></Col>
             <Col className="text-right" sm={1}><b>{hostKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.state.desc}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
-                <Button bsSize="sm" bsStyle="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bsSize="sm" bsStyle="info" onClick={this.view}>{viewLabel}</Button> 
+                <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+                <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button> 
               </ButtonToolbar>
             </Col>
           </div>
         </Row>
-        <Panel collapsible expanded={viewMode}>
+        <Card collapsible expanded={viewMode}>
          {viewPanel}
-        </Panel>
-      </Grid>
+        </Card>
+      </Container>
       </div>
     )
   };

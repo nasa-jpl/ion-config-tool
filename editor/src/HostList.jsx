@@ -9,9 +9,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
-import {Grid,Row,Col} from 'react-bootstrap';
-import {Label,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon,Panel} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
+import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Glyphicon} from '@strongdm/glyphicon';
+import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import Host from './Host.jsx';
 
@@ -28,7 +29,7 @@ export default class HostList  extends React.Component {
     };
   } 
   makeAlertElem(msg) {
-    return (<Alert bsStyle="danger"><b>ERROR: {msg}</b></Alert>);
+    return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
   }
   // check if a new host name is valid
   isGoodHostKey(newHostKey) {
@@ -88,8 +89,8 @@ export default class HostList  extends React.Component {
           <Col sm={1}>(no spaces)</Col>
           <Col sm={2}>
             <ButtonToolbar>
-              <Button bsSize="sm" bsStyle="primary" onClick={this.submitNewHost}>Submit</Button>
-              <Button bsSize="sm" bsStyle="success" onClick={this.nonewnode}><Glyphicon glyph={icon} /></Button>
+              <Button bsSize="sm" variant="primary" onClick={this.submitNewHost}>Submit</Button>
+              <Button bsSize="sm" variant="success" onClick={this.nonewnode}><Glyphicon glyph={icon} /></Button>
             </ButtonToolbar>
           </Col>
           <Col sm={4}>{alert}</Col>
@@ -117,16 +118,16 @@ export default class HostList  extends React.Component {
     }
 
     return (
-      <Grid fluid>
+      <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Label bsSize="lg" bsStyle="default">ION Host List</Label></Col>
+            <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">ION Host List</Badge></Col>
             <Col className="text-right" sm={1}><b>{name}</b></Col>
             <Col className="text-left"  sm={2}>ION Host Machines {hostCnt}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
-                <Button bsSize="sm" bsStyle="primary" disabled={dimNewHost} onClick={this.newhost}>New Ion Host</Button>  
-                <Button bsSize="sm" bsStyle="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
+                <Button bsSize="sm" variant="primary" disabled={dimNewHost} onClick={this.newhost}>New Ion Host</Button>  
+                <Button bsSize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
               </ButtonToolbar>
             </Col>
           </div>
@@ -134,10 +135,10 @@ export default class HostList  extends React.Component {
         <Row>
           {hostEntry}
         </Row>
-        <Panel  collapsible expanded={expandMode}>
+        <Card  collapsible expanded={expandMode}>
           {hostList}
-        </Panel>
-      </Grid>
+        </Card>
+      </Container>
     )
   };
   expand = () => {       // activated by expand/contract shutter icon
