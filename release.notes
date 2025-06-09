@@ -1,3 +1,37 @@
+Release Notes 4.8.3
+
+WHAT'S NEW:
+- Handling of complex multi-IP nodes is implemented in this release.
+  Net Model changes
+    - Specificying IP addresses in a Net Hop is implemented.
+      "From IP" and "To IP" fields have been added that are automatically
+      populated with all the IP addresses specified for the host that 
+      the node is associated with.
+    - Error checking for unspecified IP addresses for a net hop is
+      implemented.
+  ION Model changes
+    - If a DTN network is specified with nodes that have 
+      multiple IP addresses the ION model generated from that Net
+      Model automatically sets the IP address for TCP inducts to 0.0.0.0 
+      (INADDR_ANY) but this can be overridden by selecting a different IP 
+      address in the dropdown menu for the induct command.
+
+- A cfdprc is included if CFDP is added as an ION service. It is automatically
+  populated with two commands:
+
+       1
+       s 'bputa'
+  
+  But can be edited within the tool like any onther config file can.
+
+- CLI tools updated to allow a watch command to be specified on the 
+  command line for the biberc config file. See the top of the 
+  ionconfig.js script in the cli/bin/ directory for how to do this.
+
+- Various bug fixes and GUI enhancements.
+
+KNOWN ISSUES: None.
+
 Release Notes 4.8.2
 
 WHAT'S NEW:
