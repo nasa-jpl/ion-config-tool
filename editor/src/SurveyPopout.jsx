@@ -41,7 +41,7 @@ export default class SurveyPopout extends React.Component {
     } else {
       //var popout = <span onClick={this.popout} className="buttonGlyphicon glyphicon glyphicon-export"></span>;
       return (
-        <Button bsSize="sm" variant="info" onClick={this.popout}>{label}</Button>
+        <Button bssize="sm" variant="info" onClick={this.popout}>{label}</Button>
       );
     }
   }

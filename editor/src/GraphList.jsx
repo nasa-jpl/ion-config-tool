@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon} from '@strongdm/glyphicon';
+import Glyphicon from '@strongdm/glyphicon';
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import Graph from './Graph.jsx';
@@ -76,7 +76,7 @@ export default class GraphList  extends React.Component {
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
 
     var form =
-      <FormControl bsSize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewGraph}/>;
+      <FormControl bssize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewGraph}/>;
     const icon = 'remove';
     return (
       <div>
@@ -87,8 +87,8 @@ export default class GraphList  extends React.Component {
           <Col sm={1}>(no spaces)</Col>
           <Col sm={2}>
             <ButtonToolbar>
-              <Button bsSize="sm" variant="primary" onClick={this.submitNewGraph}>Submit</Button>
-              <Button bsSize="sm" variant="success" onClick={this.nonewgraph}><Glyphicon glyph={icon} /></Button>
+              <Button bssize="sm" variant="primary" onClick={this.submitNewGraph}>Submit</Button>
+              <Button bssize="sm" variant="success" onClick={this.nonewgraph}><Glyphicon glyph={icon} /></Button>
             </ButtonToolbar>
           </Col>
           <Col sm={4}>{alert}</Col>
@@ -147,13 +147,13 @@ export default class GraphList  extends React.Component {
       <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">Graph List</Badge></Col>
+            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Graph List</Badge></Col>
             <Col className="text-right" sm={1}><b>{name}</b></Col>
             <Col className="text-left"  sm={2}>Contact Graphs {graphCnt}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
-                <Button bsSize="sm" variant="primary" disabled={dimNewGraph} onClick={this.newgraph}>New Contact Graph</Button>  
-                <Button bsSize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
+                <Button bssize="sm" variant="primary" disabled={dimNewGraph} onClick={this.newgraph}>New Contact Graph</Button>  
+                <Button bssize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
               </ButtonToolbar>
             </Col>
           </div>

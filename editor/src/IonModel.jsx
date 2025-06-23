@@ -12,7 +12,9 @@ import {FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
 import {Table, Card} from 'react-bootstrap';
-import {Glyphicon} from '@strongdm/glyphicon';
+import {BsFillXSquareFill} from "react-icons/bs";
+import {BsChevronDoubleDown} from "react-icons/bs";
+import {BsChevronDoubleRight} from "react-icons/bs";
 import PopoutWindow from 'react-popout';
 import {saveAs} from "file-saver";
 import JSZip from "jszip";
@@ -639,10 +641,10 @@ export default class IonModel  extends React.Component {
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete the Ion Model?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" bsSize="sm" variant="success" onClick={ () => this.deleteModelState(true)}>
+          <Button variant="secondary" bssize="sm" onClick={ () => this.deleteModelState(true)}>
             Yes 
           </Button>
-          <Button variant="primary" bsSize="sm" variant="success" onClick={ () => this.deleteModelState(false)}>
+          <Button variant="primary" bssize="sm" onClick={ () => this.deleteModelState(false)}>
             Cancel
           </Button>
         </Modal.Footer>
@@ -1108,7 +1110,7 @@ export default class IonModel  extends React.Component {
       <FormControl
         readOnly={!this.state.editMode}
         disabled={!this.state.editMode}
-        bsSize="sm"
+        bssize="sm"
         as="select"
         value={val}
         onChange={handler}
@@ -1121,7 +1123,7 @@ export default class IonModel  extends React.Component {
     var form =
       <FormControl
         readOnly="true"
-        bsSize="sm"
+        bssize="sm"
         type="text"
         value={val}
       />;
@@ -1130,11 +1132,10 @@ export default class IonModel  extends React.Component {
   makeIonEditor() {
     //console.log(">>makeModelElems " + JSON.stringify(this.state));
     var modelElems = [];
-    const icon = 'remove';
     const head  = 
       <Row key="head">
-        <Col sm={4}><Badge bsSize="lg" variant="default">ION Model Editor</Badge></Col>
-        <Col sm={1}><Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
+        <Col sm={4}><Badge bssize="lg" variant="default">ION Model Editor</Badge></Col>
+        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><BsFillXSquareFill/></Button></Col>
       </Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"ION Model Name",1,false,"");
@@ -1176,7 +1177,7 @@ export default class IonModel  extends React.Component {
   makeIonViewer() {
     //console.log(">>makeModelElems " + JSON.stringify(this.state));
     var modelElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">ION Model Viewer</Badge></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">ION Model Viewer</Badge></Col></Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"ION Model Name",1,true,"");
     modelElems.push(nameElem);
@@ -1196,7 +1197,7 @@ export default class IonModel  extends React.Component {
   makeModelElem(prop,type,val,label,size,read,note) {
     //console.log(">>MakeModelElem " + prop + ' ' + type + ' ' + val + ' ' + size);
     const form =
-        <FormControl readOnly={read} bsSize="sm" type={type} value={val} onChange={this.handleIonChange.bind(null,prop)} />;
+        <FormControl readOnly={read} bssize="sm" type={type} value={val} onChange={this.handleIonChange.bind(null,prop)} />;
     return (
       <Row key={label}>
         <Col className="text-right" sm={2}><b>{label}</b></Col>
@@ -1251,7 +1252,7 @@ export default class IonModel  extends React.Component {
     const showDeleteWarnModal = showDeleteWarn? this.makeShowDeleteWarn() : "";
     const editLabel = editMode?  'Submit' : 'Edit'
     const viewLabel = viewMode?  'Hide' : 'Show'
-    const expandIcon = expandMode? 'chevron-down' : 'chevron-right';
+    const expandIcon = expandMode? <BsChevronDoubleDown/> : <BsChevronDoubleRight/>;
     const dimSaveION = false;
     const dimSaveConfigs = false;
 
@@ -1271,18 +1272,18 @@ export default class IonModel  extends React.Component {
       <div>
         <hr />
         <Row>
-          <Col className="text-left"  sm={1}><Badge bsSize="sm" variant="default">ION Model</Badge></Col>
+          <Col className="text-left"  sm={1}><Badge bssize="sm" variant="default">ION Model</Badge></Col>
           <Col className="text-right" sm={1}><b>{name}</b></Col>
           <Col className="text-left"  sm={2}>{this.state.desc}</Col>
           <Col sm={6}> 
             <ButtonToolbar>
-              <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-              <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
-              <Button bsSize="sm" variant="info" onClick={this.showSurveys}>{showSurveyTag}</Button>
-              <Button bsSize="sm" variant="primary" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
-              <Button bsSize="sm" variant="primary" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
-              <Button bsSize="sm" variant="danger" onClick={this.showDeleteWarn}>Delete Model</Button>
-              <Button bsSize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
+              <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+              <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+              <Button bssize="sm" variant="info" onClick={this.showSurveys}>{showSurveyTag}</Button>
+              <Button bssize="sm" variant="primary" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
+              <Button bssize="sm" variant="primary" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
+              <Button bssize="sm" variant="danger" onClick={this.showDeleteWarn}>Delete Model</Button>
+              <Button bssize="sm" variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
             </ButtonToolbar>
           </Col>
           <Col sm={2}> {alertit} </Col>

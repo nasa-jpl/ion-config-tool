@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon} from '@strongdm/glyphicon';
+import Glyphicon from '@strongdm/glyphicon';
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import {saveAs} from "file-saver";
@@ -74,7 +74,7 @@ export default class IonNode  extends React.Component {
     );
     var form =
       <FormControl
-        bsSize="sm"
+        bssize="sm"
         as="select"
         placeholder=""
         onChange={this.handleNewConfig}
@@ -87,7 +87,7 @@ export default class IonNode  extends React.Component {
         <Col className="text-right" sm={2}><b>Select new config file:</b></Col>
         <Col sm={2}>{form}</Col>
         <Col sm={1}>
-          <Button bsSize="sm" variant="success"  onClick={this.nonewconfig}><Glyphicon glyph={icon} /></Button>
+          <Button bssize="sm" variant="success"  onClick={this.nonewconfig}><Glyphicon glyph={icon} /></Button>
         </Col>
       </div>
     );
@@ -98,7 +98,7 @@ export default class IonNode  extends React.Component {
     var form =
       <FormControl
         readOnly="false"
-        bsSize="sm"
+        bssize="sm"
         as="select"
         value="{val}"
         onChange={handler}
@@ -111,7 +111,7 @@ export default class IonNode  extends React.Component {
     var form =
       <FormControl
         readOnly="true"
-        bsSize="sm"
+        bssize="sm"
         type="text"
         value={val}
       />;
@@ -123,8 +123,8 @@ export default class IonNode  extends React.Component {
     const icon = 'remove';
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Badge bsSize="lg" variant="default">ION Node Editor</Badge></Col>
-        <Col sm={1}><Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
+        <Col sm={5}> <Badge bssize="lg" variant="default">ION Node Editor</Badge></Col>
+        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
       </Row>;
     nodeElems.push(head);
     const nameElem = this.makeNodeElem("","text",this.props.name,"ION Node Name",1,true,"");
@@ -183,7 +183,7 @@ export default class IonNode  extends React.Component {
   makeNodeViewer() {
     //console.log(">>makeNodeElems " + JSON.stringify(this.state));
     var nodeElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">ION Node Viewer</Badge></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">ION Node Viewer</Badge></Col></Row>;
     nodeElems.push(head);
     const nameElem = this.makeNodeElem("","text",this.props.name,"ION Node Name",1,true,"");
     nodeElems.push(nameElem);
@@ -223,7 +223,7 @@ export default class IonNode  extends React.Component {
   makeNodeElem(prop,type,val,label,size,read,note) {
     //console.log(">>MakeNodeElem " + prop + ' ' + type + ' ' + val + ' ' + size);
     const form =
-        <FormControl readOnly={read} bsSize="sm" type={type} value={val} onChange={this.handleNodeChange.bind(null,prop)} />;
+        <FormControl readOnly={read} bssize="sm" type={type} value={val} onChange={this.handleNodeChange.bind(null,prop)} />;
     return (
       <Row key={label}>
         <Col className="text-right" sm={2}><b>{label}</b></Col>
@@ -261,17 +261,17 @@ export default class IonNode  extends React.Component {
       <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">ION Node</Badge></Col>
+            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">ION Node</Badge></Col>
             <Col className="text-right" sm={1}><b>{nodeKey}</b></Col>
             <Col className="text-right" sm={1}><b>ipn: {this.props.nodeNum}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
-                <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
-                <Button bsSize="sm" variant="primary" onClick={this.saveConfigs}>Save Configs</Button>
-                <Button bsSize="sm" variant="primary" disabled={dimNewconfig} onClick={this.newconfig}>New Config File</Button>  
-                <Button bsSize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
+                <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+                <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+                <Button bssize="sm" variant="primary" onClick={this.saveConfigs}>Save Configs</Button>
+                <Button bssize="sm" variant="primary" disabled={dimNewconfig} onClick={this.newconfig}>New Config File</Button>  
+                <Button bssize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
               </ButtonToolbar>
             </Col>
           </div>

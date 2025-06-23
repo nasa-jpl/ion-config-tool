@@ -12,7 +12,9 @@ import "date-format-lite";
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon} from '@strongdm/glyphicon'; 
+import {BsFillXSquareFill} from "react-icons/bs";
+import {BsChevronDoubleDown} from "react-icons/bs";
+import {BsChevronDoubleRight} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import {saveAs} from "file-saver";
@@ -34,7 +36,6 @@ export default class Config  extends React.Component {
   }
   makeConfigEditor() {
     var configElems = [];
-    const icon = 'remove';
     const content = this.props.configType.content;
     const program = this.props.configType.program;
     var deleteMode = this.state.deleteMode;
@@ -43,11 +44,11 @@ export default class Config  extends React.Component {
       deleteAlert = this.makeDeleteAlertElem();
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Badge bsSize="lg" variant="default">Config File Editor</Badge></Col>
+        <Col sm={5}> <Badge bssize="lg" variant="default">Config File Editor</Badge></Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button bsSize="sm" variant="danger" onClick={this.deleteOn}>Delete</Button>
-            <Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
+            <Button bssize="sm" variant="danger" onClick={this.deleteOn}>Delete</Button>
+            <Button bssize="sm" variant="success"  onClick={this.noedit}><BsFillXSquareFill/></Button>
           </ButtonToolbar>
         </Col>
         <Col sm={5}>{deleteAlert}</Col>
@@ -72,7 +73,7 @@ export default class Config  extends React.Component {
     var configElems = [];
     const content = this.props.configType.content;
     const program = this.props.configType.program;
-    const head  = <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">Config File Viewer</Badge></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">Config File Viewer</Badge></Col></Row>;
     configElems.push(head);
     const nameElem = this.makeConfigElem("","text",this.props.name,"Config File Name",1,true,"");
     configElems.push(nameElem);
@@ -90,7 +91,7 @@ export default class Config  extends React.Component {
   makeConfigElem(prop,type,val,label,size,read,note) {
     //console.log(">>MakeNodeElem " + prop + ' ' + type + ' ' + val + ' ' + size);
     const form =
-        <FormControl readOnly={read} bsSize="sm" type={type} value={val} onChange={this.handleConfigChange.bind(null,prop)} />;
+        <FormControl readOnly={read} bssize="sm" type={type} value={val} onChange={this.handleConfigChange.bind(null,prop)} />;
     return (
       <Row key={label}>
         <Col className="text-right" sm={2}><b>{label}</b></Col>
@@ -130,7 +131,7 @@ export default class Config  extends React.Component {
     optionItems.push(mainOptions);
     var form =
       <FormControl
-        bsSize="sm"
+        bssize="sm"
         as="select"
         placeholder=""
         onChange={this.handleNewCommand}
@@ -143,7 +144,7 @@ export default class Config  extends React.Component {
         <Col className="text-right" sm={2}><b>Select new command:</b></Col>
         <Col sm={2}>{form}</Col>
         <Col sm={1}>
-          <Button bsSize="sm" variant="success"  onClick={this.nonewcmd}><Glyphicon glyph={icon} /></Button>
+          <Button bssize="sm" variant="success"  onClick={this.nonewcmd}><BsFillXSquareFill/></Button>
         </Col>
       </div>
     );
@@ -157,8 +158,8 @@ export default class Config  extends React.Component {
       <Alert variant="danger">
         <b>Confirm delete of config file and all its commands?</b>
         <ButtonToolbar>
-          <Button bsSize="sm" variant="danger"  onClick={this.delete}>Delete</Button>
-          <Button bsSize="sm" variant="success" onClick={this.deleteOff}>Cancel</Button>
+          <Button bssize="sm" variant="danger"  onClick={this.delete}>Delete</Button>
+          <Button bssize="sm" variant="success" onClick={this.deleteOff}>Cancel</Button>
         </ButtonToolbar>
       </Alert>);
   };
@@ -178,7 +179,7 @@ export default class Config  extends React.Component {
     const editMode = this.state.editMode;
     const viewMode = this.state.viewMode;
     const content = this.props.configType.content;
-    var icon = this.state.expandMode? 'chevron-down' : 'chevron-right';
+    var icon = this.state.expandMode? <BsChevronDoubleDown/> : <BsChevronDoubleRight/>;
     var configOpen = this.state.configOpen;
     var infoTag = this.state.configOpen?  "Hide File" : "Show File" ;
     const dimNewCmd = this.state.newCommand? true : false;
@@ -198,17 +199,17 @@ export default class Config  extends React.Component {
       <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}> <Badge bsSize="lg" variant="default">Config File</Badge></Col>
+            <Col className="text-right" sm={1}> <Badge bssize="lg" variant="default">Config File</Badge></Col>
             <Col className="text-right" sm={1}><b>{this.props.name}</b></Col>
             <Col className="text-left"  sm={3}>{content}</Col>
             <Col sm={4}> 
               <ButtonToolbar>
-                <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
-                <Button bsSize="sm" variant="info" onClick={this.info}>{infoTag}</Button>
-                <Button bsSize="sm" variant="primary" onClick={this.saveme}>Save File</Button> 
-                <Button bsSize="sm" variant="primary" disabled={dimNewCmd} onClick={this.newcmd}>New Command</Button>        
-                <Button bsSize="sm" variant="success"  onClick={this.toggle}> <Glyphicon glyph={icon} />{' '}</Button>
+                <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+                <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+                <Button bssize="sm" variant="info" onClick={this.info}>{infoTag}</Button>
+                <Button bssize="sm" variant="primary" onClick={this.saveme}>Save File</Button> 
+                <Button bssize="sm" variant="primary" disabled={dimNewCmd} onClick={this.newcmd}>New Command</Button>        
+                <Button bssize="sm" variant="success"  onClick={this.toggle}> {icon}{' '}</Button>
               </ButtonToolbar>
             </Col>
           </div>

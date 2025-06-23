@@ -70,9 +70,9 @@ export default class IpAddr  extends React.Component {
     const pos = this.getPosition();
     const label  = addMode? "New " + tail : pos + " ) " + tail;
 
-    const chgbtn = addMode? "" : <Button bsSize="sm" variant="primary" onClick={this.change}>{changeLabel}</Button>;
-    const delbtn = addMode? "" : <Button bsSize="sm" variant="danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
-    const addbtn = addMode? <Button bsSize="sm" variant="primary" onClick={this.add}>Add</Button> : "";
+    const chgbtn = addMode? "" : <Button bssize="sm" variant="primary" onClick={this.change}>{changeLabel}</Button>;
+    const delbtn = addMode? "" : <Button bssize="sm" variant="danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
+    const addbtn = addMode? <Button bssize="sm" variant="primary" onClick={this.add}>Add</Button> : "";
 
     let msg = this.state.nameMsg;
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
@@ -80,7 +80,7 @@ export default class IpAddr  extends React.Component {
     this.state.nameMsg = '';
     
     const form =
-      <FormControl readOnly={read} bsSize="sm" type="text" value={ipAddr} spellCheck="false" onChange={this.handleChange.bind(null)} />;
+      <FormControl readOnly={read} bssize="sm" type="text" value={ipAddr} spellCheck="false" onChange={this.handleChange.bind(null)} />;
 
     return (
       <Container fluid>

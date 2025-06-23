@@ -18,9 +18,9 @@ import NetModel  from './NetModel.jsx';
 import {Navbar} from 'react-bootstrap';
 import {Card} from 'react-bootstrap';
 import {FormControl} from 'react-bootstrap';
-import {Button,ButtonToolbar} from 'react-bootstrap';
+import {Button,ButtonToolbar,ButtonGroup} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Glyphicon} from '@strongdm/glyphicon';
+import {BsFillXSquareFill} from "react-icons/bs";
 import "date-format-lite";
 
 // schema imports
@@ -579,20 +579,20 @@ export default class App extends React.Component {
   	  <Row>
         <Col className="text-right" sm={2}><h4><b>Net Model File</b></h4></Col>
         <Col sm={2}>
-          <ButtonToolbar>
-            <Button  bsSize="sm" variant="primary" disabled={dimNetBtns} onClick={this.loadNetModel.bind(this)}>Load</Button>
-            <Button  bsSize="sm" variant="primary" disabled={dimNetBtns} onClick={this.newNetModel.bind(this)}>New</Button>
-          </ButtonToolbar>
+          <ButtonGroup>
+            <Button  size="sm" variant="outline-primary" disabled={dimNetBtns} onClick={this.loadNetModel.bind(this)}>Load</Button>
+            <Button  size="sm" variant="outline-primary" disabled={dimNetBtns} onClick={this.newNetModel.bind(this)}>New</Button>
+          </ButtonGroup>
         </Col>
         <Col sm={2}>
           <h4><b>...can initialize a new...</b></h4>
         </Col>
         <Col className="text-right" sm={2}><h4><b>ION Model File</b></h4></Col>
         <Col sm={2}>
-          <ButtonToolbar>
-            <Button  bsSize="sm" variant="primary" disabled={dimIonBtns} onClick={this.loadIonModel.bind(this)}>Load</Button>
-            <Button  bsSize="sm" variant="primary" disabled={dimIonBtns} onClick={this.newIonModel.bind(this)}>New</Button>
-          </ButtonToolbar>
+          <ButtonGroup>
+            <Button  size="sm" variant="outline-primary" disabled={dimIonBtns} onClick={this.loadIonModel.bind(this)}>Load</Button>
+            <Button  size="sm" variant="outline-primary" disabled={dimIonBtns} onClick={this.newIonModel.bind(this)}>New</Button>
+          </ButtonGroup>
         </Col>
       </Row>
     );
@@ -686,7 +686,7 @@ export default class App extends React.Component {
         netAddrs={netAddrs}             // state
         noLoadNetModel={noLoadNetModel} // function
         dispatch={dispatch}             // function
-      /> );
+      />);
   }
   // build and return a NetModel element
   makeNetModelElem(netElems) {
@@ -745,41 +745,45 @@ export default class App extends React.Component {
     console.log("makeNewNetElem");
     const id = this.state.newNetModelName;
     var form =
-      <FormControl bsSize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewNet}/>;
-    const icon = 'remove';
+      <FormControl bssize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewNet}/>;
     return (
       <div>
         <hr />
+      <Row>
         <Col className="text-right" sm={2}><b>New Net Model Name:</b></Col>
         <Col sm={1}>{form}</Col>
         <Col sm={1}>(no spaces)</Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button bsSize="sm" variant="primary" onClick={this.submitNewNet}>Submit</Button>
-            <Button bsSize="sm" variant="success" onClick={this.noNewNetModel.bind(this)}><Glyphicon glyph={icon} /></Button>
+            <Button size="sm" variant="primary" onClick={this.submitNewNet}>Submit</Button>
+            <Button size="sm" variant="success" onClick={this.noNewNetModel.bind(this)}><BsFillXSquareFill/></Button>
           </ButtonToolbar>
         </Col>
+      </Row>
       </div>
     );
+    
   }
   makeNewIonElem() {
     console.log("makeNewIonElem");
     const id = this.state.newIonModelName;
     var form =
-      <FormControl bsSize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewIon}/>;
+      <FormControl bssize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewIon}/>;
     const icon = 'remove';
     return (
       <div>
         <hr />
+        <Row>
         <Col className="text-right" sm={2}><b>New ION Model Name:</b></Col>
         <Col sm={1}>{form}</Col>
         <Col sm={1}>(no spaces)</Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button bsSize="sm" variant="primary" onClick={this.submitNewIon}>Submit</Button>
-            <Button bsSize="sm" variant="success" onClick={this.noNewIonModel.bind(this)}><Glyphicon glyph={icon} /></Button>
+            <Button size="sm" variant="primary" onClick={this.submitNewIon}>Submit</Button>
+            <Button size="sm" variant="success" onClick={this.noNewIonModel.bind(this)}><BsFillXSquareFill/></Button>
           </ButtonToolbar>
         </Col>
+        </Row>
       </div>
     );
   }
@@ -1755,26 +1759,26 @@ export default class App extends React.Component {
 
     console.log("$$$$$$$$$$$$$$$ App render done");
     const newIon = this.state.makeNewIonModel? this.makeNewIonElem() : "";
-    const newNet = this.state.makeNewNetModel? this.makeNewNetElem() : "";
-    
+    const newNet = this.state.makeNewNetModel? this.makeNewNetElem() : "";    
     return (
-      <div>
-        <Container fluid>
+    <div>
+      <Container fluid>
         <Navbar bg="light" variant="light">
           <h3>ION Configuration Editor  4.9.0b0</h3>
         </Navbar>
-        </Container>
         <Container fluid>
-          {modelBtnsElem}
-          <Row>{newNet}</Row>
-          <Row>{netLoader}</Row>
-          {netModelElem}
-          <Row>{newIon}</Row>
-          <Row>{ionLoader}</Row>
-          {ionModelElem}
+            {modelBtnsElem}
+            {newNet}
+            {netLoader}
+            {netModelElem}
+            {newIon}
+            {ionLoader}
+            {ionModelElem}
         </Container>
-      </div>
+      </Container>
+    </div>
     );
+    
   };
   handleNewNet =(e) => {
     const val = e.target.value;

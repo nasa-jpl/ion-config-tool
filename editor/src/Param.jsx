@@ -41,7 +41,7 @@ export default class Param  extends React.Component {
           <Col sm={3} type={type} value={value} readOnly={justread}>
             {this.props.children}
           </Col>
-          <Col sm={1}> <Button bsSize="sm" variant="info">Info</Button> </Col>
+          <Col sm={1}> <Button bssize="sm" variant="info">Info</Button> </Col>
         </div>
         </Row>
     )

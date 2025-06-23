@@ -11,7 +11,9 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon} from '@strongdm/glyphicon';
+import {BsFillXSquareFill} from "react-icons/bs";
+import {BsChevronDoubleDown} from "react-icons/bs";
+import {BsChevronDoubleRight} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import NetHop from './NetHop.jsx';
@@ -76,7 +78,7 @@ export default class NetHopList  extends React.Component {
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
 
     var form =
-      <FormControl bsSize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewHop}/>;
+      <FormControl bssize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewHop}/>;
     const icon = 'remove';
     return (
       <div>
@@ -87,8 +89,8 @@ export default class NetHopList  extends React.Component {
           <Col sm={1}>(no spaces)</Col>
           <Col sm={2}>
             <ButtonToolbar>
-              <Button bsSize="sm" variant="primary" onClick={this.submitNewHop}>Submit</Button>
-              <Button bsSize="sm" variant="success" onClick={this.nonewhop}><Glyphicon glyph={icon} /></Button>
+              <Button bssize="sm" variant="primary" onClick={this.submitNewHop}>Submit</Button>
+              <Button bssize="sm" variant="success" onClick={this.nonewhop}><BsFillXSquareFill/></Button>
             </ButtonToolbar>
           </Col>
           <Col sm={4}>{alert}</Col>
@@ -104,7 +106,7 @@ export default class NetHopList  extends React.Component {
     const newHop = this.state.newHop;
     const netHops = this.props.netHops;
 
-    const expandIcon = expandMode? 'chevron-down' : 'chevron-right';
+    const expandIcon = expandMode? <BsChevronDoubleDown/> : <BsChevronDoubleRight/>;
 
     const dimNewHop = newHop?  true : false ; 
     const hopEntry  = newHop?  this.makeNewHopElem() : "" ;
@@ -119,13 +121,13 @@ export default class NetHopList  extends React.Component {
       <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">Net Hop List</Badge></Col>
+            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Net Hop List</Badge></Col>
             <Col className="text-right" sm={1}><b>{name}</b></Col>
             <Col className="text-left"  sm={2}>Node-to-Node Hops {hopCnt}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
-                <Button bsSize="sm" variant="primary" disabled={dimNewHop} onClick={this.newhop}>New Hop</Button>  
-                <Button bsSize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
+                <Button bssize="sm" variant="primary" disabled={dimNewHop} onClick={this.newhop}>New Hop</Button>  
+                <Button bssize="sm" variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonToolbar>
             </Col>
           </div>

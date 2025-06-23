@@ -8,10 +8,10 @@
 //                                                               
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FormControl} from 'react-bootstrap';
-import {Col} from 'react-bootstrap';
+import {Form} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
 import {Button, ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon} from '@strongdm/glyphicon';
+import {BsFillXSquareFill} from "react-icons/bs";
 import {Alert} from 'react-bootstrap';
 
 export default class NetModelLoader extends React.Component {
@@ -194,6 +194,7 @@ export default class NetModelLoader extends React.Component {
     // check for alert
     let msg = this.state.errMsg;
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
+    /*
     var form =
       <FormControl
         id="netmodel"
@@ -204,21 +205,32 @@ export default class NetModelLoader extends React.Component {
         className="inputClass"
         onChange={this.handleFileChange}
       />;
+      */
+    var form = 
+          <Form.Control 
+            type = "file"
+            id ="netmodel" 
+            label=""
+            accept=".json"
+            onChange={this.handleFileChange}
+          />
     let icon = "remove";
     console.log("NetModelLoader render div");
     return (
-        <div>
-          <hr />
+      <div>
+        <hr />
+        <Row>
           <Col className="text-right" sm={2}><b>Net Model File (.json)</b></Col>
           <Col sm={2}>{form}</Col>
           <Col sm={2}>
             <ButtonToolbar>
-              <Button bsSize="sm" variant="primary" onClick={this.load}>Submit</Button>
-              <Button bsSize="sm" variant="success" onClick={this.props.noLoadNetModel}><Glyphicon glyph={icon} /></Button>
+              <Button bssize="sm" variant="primary" onClick={this.load}>Submit</Button>
+              <Button bssize="sm" variant="success" onClick={this.props.noLoadNetModel}><BsFillXSquareFill/></Button>
             </ButtonToolbar>
           </Col>
           <Col sm={4}>{alert}</Col>
-        </div>
+        </Row>
+      </div>
     )
   };
   handleFileChange = (e) => {

@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon} from '@strongdm/glyphicon';
+import Glyphicon from '@strongdm/glyphicon';
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import IpAddr from './IpAddr.jsx';
@@ -72,7 +72,7 @@ export default class Host  extends React.Component {
     var form =
       <FormControl
         readOnly="false"
-        bsSize="sm"
+        bssize="sm"
         as="select"
         value="{val}"
         onChange={this.handleSelect.bind(null)}
@@ -85,7 +85,7 @@ export default class Host  extends React.Component {
     var form =
       <FormControl
         readOnly="true"
-        bsSize="sm"
+        bssize="sm"
         type="text"
         value={val}
       />;
@@ -99,8 +99,8 @@ export default class Host  extends React.Component {
     const hostKey = this.props.name;
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Badge bsSize="lg" variant="default">ION Host Editor</Badge></Col>
-        <Col sm={1}><Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
+        <Col sm={5}> <Badge bssize="lg" variant="default">ION Host Editor</Badge></Col>
+        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
       </Row>;
     hostElems.push(head);
     const nameElem = this.makeHostElem("","text",hostKey,"Host Name",1,true,"");
@@ -148,7 +148,7 @@ export default class Host  extends React.Component {
   makeHostViewer() {
     console.log(">>makeHostViewer" + JSON.stringify(this.state));
     var hostElems = [];
-    const head = <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">ION Host Viewer</Badge></Col></Row>;
+    const head = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">ION Host Viewer</Badge></Col></Row>;
     hostElems.push(head);
     const nameElem = this.makeHostElem("","text",this.props.name,"Host Name",1,true,"");
     hostElems.push(nameElem);
@@ -191,7 +191,7 @@ export default class Host  extends React.Component {
   makeHostElem(prop,type,val,label,size,read,note) {
     //console.log(">>MakeHostElem " + prop + ' ' + type + ' ' + val + ' ' + size);
     const form =
-        <FormControl readOnly={read} bsSize="sm" type={type} value={val} spellCheck="false" onChange={this.handleHostChange.bind(null,prop)} />;
+        <FormControl readOnly={read} bssize="sm" type={type} value={val} spellCheck="false" onChange={this.handleHostChange.bind(null,prop)} />;
     return (
       <Row key={label}>
         <Col className="text-right" sm={2}><b>{label}</b></Col>
@@ -222,13 +222,13 @@ export default class Host  extends React.Component {
      <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">ION Host</Badge></Col>
+            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">ION Host</Badge></Col>
             <Col className="text-right" sm={1}><b>{hostKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.state.desc}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
-                <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button> 
+                <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+                <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button> 
               </ButtonToolbar>
             </Col>
           </div>

@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon} from '@strongdm/glyphicon';
+import {BsFillXSquareFill} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import NetAddr from './NetAddr.jsx';
@@ -67,7 +67,7 @@ export default class NetHost  extends React.Component {
     var form =
       <FormControl
         readOnly="false"
-        bsSize="sm"
+        bssize="sm"
         as="select"
         value="{val}"
         onChange={handler}
@@ -80,7 +80,7 @@ export default class NetHost  extends React.Component {
     var form =
       <FormControl
         readOnly="true"
-        bsSize="sm"
+        bssize="sm"
         type="text"
         value={val}
       />;
@@ -93,11 +93,11 @@ export default class NetHost  extends React.Component {
     const hostKey = this.props.hostKey;
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Badge bsSize="lg" variant="default">Net Host Editor</Badge></Col>
+        <Col sm={5}> <Badge bssize="lg" variant="default">Net Host Editor</Badge></Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button bsSize="sm" variant="danger"   onClick={this.delete}>Delete</Button>
-            <Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
+            <Button bssize="sm" variant="danger"   onClick={this.delete}>Delete</Button>
+            <Button bssize="sm" variant="success"  onClick={this.noedit}><BsFillXSquareFill/></Button>
           </ButtonToolbar>
         </Col>
       </Row>;
@@ -135,7 +135,7 @@ export default class NetHost  extends React.Component {
   makeHostViewer() {
     //console.log(">>makeHostElems " + JSON.stringify(this.state));
     var hostElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">Net Host Viewer</Badge></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">Net Host Viewer</Badge></Col></Row>;
     hostElems.push(head);
     const keyElem = this.makeHostElem("","text",this.state.hostKey,"Host Name",1,true,"");
     hostElems.push(keyElem);
@@ -170,7 +170,7 @@ export default class NetHost  extends React.Component {
   makeHostElem(prop,type,val,label,size,read,note) {
     //console.log(">>MakeHostElem " + prop + ' ' + type + ' ' + val + ' ' + size);
     const form =
-        <FormControl readOnly={read} bsSize="sm" type={type} value={val} spellCheck="false" onChange={this.handleHostChange.bind(null,prop)} />;
+        <FormControl readOnly={read} bssize="sm" type={type} value={val} spellCheck="false" onChange={this.handleHostChange.bind(null,prop)} />;
     return (
       <Row key={label}>
         <Col className="text-right" sm={2}><b>{label}</b></Col>
@@ -200,13 +200,13 @@ export default class NetHost  extends React.Component {
       <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">Net Host</Badge></Col>
+            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Net Host</Badge></Col>
             <Col className="text-right" sm={1}><b>{hostKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
-                <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+                <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+                <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
               </ButtonToolbar>
             </Col>
           </div>

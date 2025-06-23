@@ -12,7 +12,7 @@ import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
 import {Card} from 'react-bootstrap';
-import {Glyphicon} from '@strongdm/glyphicon';
+import Glyphicon from '@strongdm/glyphicon';
 import {Alert} from 'react-bootstrap';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
@@ -75,7 +75,7 @@ export default class Command  extends React.Component {
       <FormControl
         readOnly={!this.state.editMode}
         disabled={!this.state.editMode}
-        bsSize="sm"
+        bssize="sm"
         as="select"
         value={value}
         onChange={this.handleParamSelect.bind(null,valIdx)}
@@ -89,7 +89,7 @@ export default class Command  extends React.Component {
     var form =
       <FormControl
         readOnly="true"
-        bsSize="sm"
+        bssize="sm"
         type="text"
         value={value}
       />;
@@ -118,7 +118,7 @@ export default class Command  extends React.Component {
     var form =
       <FormControl
         readOnly={justread}
-        bsSize="sm"
+        bssize="sm"
         type={type}
         value={value}
         spellCheck="false"
@@ -275,7 +275,7 @@ export default class Command  extends React.Component {
     if (editFlag) {
       return (
         <Col sm={1}>
-            <Button bsSize="sm" variant="danger">??</Button>
+            <Button bssize="sm" variant="danger">??</Button>
         </Col>
       );
     }
@@ -302,13 +302,13 @@ export default class Command  extends React.Component {
     const icon = 'remove';
     const head  =
       <Row key="head">
-        <Col sm={5}> <Badge bsSize="lg" variant="default">Command Editor</Badge></Col>
+        <Col sm={5}> <Badge bssize="lg" variant="default">Command Editor</Badge></Col>
         <Col sm={4}>
           <ButtonToolbar>
-            <Button bsSize="sm" variant="info" onClick={this.dict}>{dictLabel}</Button>
-            <Button bsSize="sm" variant="info" onClick={this.entry}>{entryLabel}</Button>
-            <Button bsSize="sm" variant="danger" onClick={this.delete}>Delete</Button>
-            <Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
+            <Button bssize="sm" variant="info" onClick={this.dict}>{dictLabel}</Button>
+            <Button bssize="sm" variant="info" onClick={this.entry}>{entryLabel}</Button>
+            <Button bssize="sm" variant="danger" onClick={this.delete}>Delete</Button>
+            <Button bssize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
           </ButtonToolbar>
         </Col>
         <Col sm={4}>{alert}</Col>
@@ -337,11 +337,11 @@ export default class Command  extends React.Component {
       entryPanel = this.makeFileEntry();
     const head  =
       <Row key="head">
-        <Col sm={5}><Badge bsSize="lg" variant="default">Command Viewer</Badge></Col>
+        <Col sm={5}><Badge bssize="lg" variant="default">Command Viewer</Badge></Col>
         <Col sm={3}>
           <ButtonToolbar>
-            <Button bsSize="sm" variant="info" onClick={this.dict}>{dictLabel}</Button>
-            <Button bsSize="sm" variant="info" onClick={this.entry}>{entryLabel}</Button>
+            <Button bssize="sm" variant="info" onClick={this.dict}>{dictLabel}</Button>
+            <Button bssize="sm" variant="info" onClick={this.entry}>{entryLabel}</Button>
           </ButtonToolbar>
         </Col>
       </Row>;
@@ -364,7 +364,7 @@ export default class Command  extends React.Component {
     if (param.valueType === "number")
       size = 1;
     const form =
-        <FormControl readOnly="true" bsSize="sm" type="text" value={val}/>;
+        <FormControl readOnly="true" bssize="sm" type="text" value={val}/>;
     return (
       <Row key={name}>
         <Col className="text-right" sm={3}><b>{name}</b></Col>
@@ -555,15 +555,15 @@ export default class Command  extends React.Component {
     <div style={{backgroundColor: '#F2F9C8'}}>
       <Container fluid>
         <Row>
-          <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">Command</Badge></Col>
+          <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Command</Badge></Col>
           <Col className="text-right" sm={1}><b>{this.props.name}</b></Col>
           <Col sm={3}> 
-            <FormControl readOnly="true" bsSize="sm" type="text" value={cmdStr} />
+            <FormControl readOnly="true" bssize="sm" type="text" value={cmdStr} />
           </Col>
           <Col sm={2}>
             <ButtonToolbar>
-              <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-              <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+              <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+              <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
             </ButtonToolbar>
           </Col>
           <Col sm={2}> {cmdMsg} </Col>

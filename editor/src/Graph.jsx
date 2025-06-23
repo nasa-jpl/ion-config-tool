@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import {Glyphicon} from '@strongdm/glyphicon';
+import Glyphicon from '@strongdm/glyphicon';
 import {Card} from 'react-bootstrap';
 
 export default class Graph  extends React.Component {
@@ -41,7 +41,7 @@ export default class Graph  extends React.Component {
     var form =
       <FormControl
         readOnly="false"
-        bsSize="sm"
+        bssize="sm"
         as="select"
         value="{val}"
         onChange={handler}
@@ -54,7 +54,7 @@ export default class Graph  extends React.Component {
     var form =
       <FormControl
         readOnly="true"
-        bsSize="sm"
+        bssize="sm"
         type="text"
         value={val}
       />;
@@ -66,9 +66,9 @@ export default class Graph  extends React.Component {
     var graphElems = [];
     const icon = "remove";
     const head  =  readMode? 
-        <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">Graph Viewer</Badge></Col></Row>
-      : <Row key="head"><Col sm={5}> <Badge bsSize="lg" variant="default">Graph Editor</Badge></Col> 
-        <Col sm={1}><Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col></Row> ;
+        <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">Graph Viewer</Badge></Col></Row>
+      : <Row key="head"><Col sm={5}> <Badge bssize="lg" variant="default">Graph Editor</Badge></Col> 
+        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col></Row> ;
     graphElems.push(head);
     const nameElem = this.makeGraphAttrElem("","text",this.props.name,"Graph Name",1,true,"");
     graphElems.push(nameElem);
@@ -99,7 +99,7 @@ export default class Graph  extends React.Component {
   makeGraphAttrElem(prop,type,val,label,size,read,note) {
     console.log(">>MakeGraphElem " + prop + ' ' + type + ' ' + val + ' ' + size + ' ' + read);
     const form =
-        <FormControl readOnly={read} bsSize="sm" type={type} value={val} onChange={this.handleAttrChange.bind(null,prop)} />;
+        <FormControl readOnly={read} bssize="sm" type={type} value={val} onChange={this.handleAttrChange.bind(null,prop)} />;
     return (
       <Row key={label}>
         <Col className="text-right" sm={2}><b>{label}</b></Col>
@@ -128,15 +128,15 @@ export default class Graph  extends React.Component {
       <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bsSize="lg" variant="default">Graph</Badge></Col>
+            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Graph</Badge></Col>
             <Col className="text-right" sm={1}><b>{name}</b></Col>
             <Col className="text-right" sm={1}>contact graph</Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={2}> 
               <ButtonToolbar>
-                <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
-                <Button bsSize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
+                <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+                <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+                <Button bssize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
               </ButtonToolbar>
             </Col>
           </div>

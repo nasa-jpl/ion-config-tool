@@ -12,7 +12,9 @@ import {FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
 import {Card} from 'react-bootstrap';
-import {Glyphicon} from '@strongdm/glyphicon';
+import {BsFillXSquareFill} from "react-icons/bs";
+import {BsChevronDoubleDown} from "react-icons/bs";
+import {BsChevronDoubleRight} from "react-icons/bs";
 import {saveAs} from "file-saver";
 import {Alert} from 'react-bootstrap';
 
@@ -1238,11 +1240,10 @@ export default class NetModel  extends React.Component {
   makeNetEditor() {
     //console.log(">>makeModelElems " + JSON.stringify(this.state));
     var modelElems = [];
-    const icon = 'remove';
     const head  = 
       <Row key="head">
-        <Col sm={4}><Badge bsSize="lg" variant="default">Net Model Editor</Badge></Col>
-        <Col sm={1}><Button bsSize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
+        <Col sm={4}><Badge bssize="lg" variant="default">Net Model Editor</Badge></Col>
+        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><BsFillXSquareFill/></Button></Col>
       </Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"Net Model Name",1,false,"");
@@ -1259,7 +1260,7 @@ export default class NetModel  extends React.Component {
   makeNetViewer() {
     //console.log(">>makeModelElems " + JSON.stringify(this.state));
     var modelElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Badge bsSize="lg" variant="default">Network Model Viewer</Badge></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">Network Model Viewer</Badge></Col></Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"Network Model Name",1,true,"");
     modelElems.push(nameElem);
@@ -1275,7 +1276,7 @@ export default class NetModel  extends React.Component {
   makeModelElem(prop,type,val,label,size,read,note) {
     //console.log(">>MakeModelElem " + prop + ' ' + type + ' ' + val + ' ' + size);
     const form =
-        <FormControl readOnly={read} bsSize="sm" type={type} value={val} onChange={this.handleNetChange.bind(null,prop)} />;
+        <FormControl readOnly={read} bssize="sm" type={type} value={val} onChange={this.handleNetChange.bind(null,prop)} />;
     return (
       <Row key={label}>
         <Col className="text-right" sm={2}><b>{label}</b></Col>
@@ -1301,7 +1302,7 @@ export default class NetModel  extends React.Component {
 
     const editLabel  = editMode?   'Submit' : 'Edit';
     const viewLabel  = viewMode?   'Hide' : 'Show';
-    const expandIcon = expandMode? 'chevron-down' : 'chevron-right';
+    const expandIcon = expandMode? <BsChevronDoubleDown/> : <BsChevronDoubleRight/>;
 
     const dimBuildIon = buildMode?  false : true;
     const dimSaveNet  = false;
@@ -1322,16 +1323,16 @@ export default class NetModel  extends React.Component {
       <div>
         <Row>
           <hr/>
-          <Col className="text-left"  sm={1}><Badge bsSize="sm" variant="default">Net Model</Badge></Col>
+          <Col className="text-left"  sm={1}><Badge bssize="sm" variant="default">Net Model</Badge></Col>
           <Col className="text-right" sm={1}><b>{this.state.name}</b></Col>
           <Col className="text-left"  sm={2}>{this.state.desc}</Col>
           <Col sm={6}> 
             <ButtonToolbar>
-              <Button bsSize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-              <Button bsSize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
-              <Button bsSize="sm" variant="primary" disabled={dimBuildIon} onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
-              <Button bsSize="sm" variant="primary" disabled={dimSaveNet}  onClick={this.saveModel}>Save Model</Button>
-              <Button bsSize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
+              <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
+              <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+              <Button bssize="sm" variant="primary" disabled={dimBuildIon} onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
+              <Button bssize="sm" variant="primary" disabled={dimSaveNet}  onClick={this.saveModel}>Save Model</Button>
+              <Button bssize="sm" variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
             </ButtonToolbar>
           </Col>
           <Col sm={4}>{alert}</Col>

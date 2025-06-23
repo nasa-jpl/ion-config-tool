@@ -51,7 +51,7 @@ export default class NetAddr  extends React.Component {
         </Modal.Header>
         <Modal.Body>{warnmsg}</Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" bsSize="sm" variant="success" onClick={ () => this.setState({showWarnMsg : false})}>
+          <Button variant="primary" bssize="sm" variant="success" onClick={ () => this.setState({showWarnMsg : false})}>
             Ok 
           </Button>
         </Modal.Footer>
@@ -88,9 +88,9 @@ export default class NetAddr  extends React.Component {
     const pos = this.getPosition();
     const label  = addMode? "New " + tail : pos + " ) " + tail;
 
-    const chgbtn = addMode? "" : <Button bsSize="sm" variant="primary" onClick={this.change}>{changeLabel}</Button>;
-    const delbtn = addMode? "" : <Button bsSize="sm" variant="danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
-    const addbtn = addMode? <Button bsSize="sm" variant="primary" onClick={this.add}>Add</Button> : "";
+    const chgbtn = addMode? "" : <Button bssize="sm" variant="primary" onClick={this.change}>{changeLabel}</Button>;
+    const delbtn = addMode? "" : <Button bssize="sm" variant="danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
+    const addbtn = addMode? <Button bssize="sm" variant="primary" onClick={this.add}>Add</Button> : "";
 
     let errmsg = this.state.errMsg;
     let warnmsg = this.state.warnMsg;
@@ -106,7 +106,7 @@ export default class NetAddr  extends React.Component {
     this.state.warnMsg = '';
 
     const form =
-      <FormControl readOnly={read} bsSize="sm" type="text" value={ipAddr} spellCheck="false" onChange={this.handleChange.bind(null)} />;
+      <FormControl readOnly={read} bssize="sm" type="text" value={ipAddr} spellCheck="false" onChange={this.handleChange.bind(null)} />;
 
     return (
       <div>
