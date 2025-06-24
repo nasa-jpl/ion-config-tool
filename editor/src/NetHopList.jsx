@@ -10,8 +10,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import {BsFillXSquareFill} from "react-icons/bs";
+import {Badge,Button,ButtonGroup} from 'react-bootstrap';
+import {BsXLg} from "react-icons/bs";
 import {BsChevronDoubleDown} from "react-icons/bs";
 import {BsChevronDoubleRight} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
@@ -81,21 +81,21 @@ export default class NetHopList  extends React.Component {
       <FormControl bssize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewHop}/>;
     const icon = 'remove';
     return (
-      <div>
+      <Container fluid>
         <hr />
         <Row>
           <Col className="text-right" sm={2}><b>New Hop Name:</b></Col>
           <Col sm={1}>{form}</Col>
           <Col sm={1}>(no spaces)</Col>
           <Col sm={2}>
-            <ButtonToolbar>
-              <Button bssize="sm" variant="primary" onClick={this.submitNewHop}>Submit</Button>
-              <Button bssize="sm" variant="success" onClick={this.nonewhop}><BsFillXSquareFill/></Button>
-            </ButtonToolbar>
+            <ButtonGroup>
+              <Button bssize="sm" variant="outline-primary" onClick={this.submitNewHop}>Submit</Button>
+              <Button bssize="sm" variant="outline-success" onClick={this.nonewhop}><BsXLg/></Button>
+            </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
         </Row>
-      </div>
+      </Container>
     );
   };
 
@@ -119,18 +119,17 @@ export default class NetHopList  extends React.Component {
 
     return (
       <Container fluid>
+        <hr />
         <Row>
-          <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Net Hop List</Badge></Col>
-            <Col className="text-right" sm={1}><b>{name}</b></Col>
-            <Col className="text-left"  sm={2}>Node-to-Node Hops {hopCnt}</Col>
+            <Col className="text-right" sm={1}><h5><Badge pill variant="secondary">Net Hop List</Badge></h5></Col>
+            <Col className="text-right" sm={1}><h6><b>{name}</b></h6></Col>
+            <Col className="text-left"  sm={2}><h6>Node-to-Node Hops {hopCnt}</h6></Col>
             <Col sm={3}> 
-              <ButtonToolbar>
-                <Button bssize="sm" variant="primary" disabled={dimNewHop} onClick={this.newhop}>New Hop</Button>  
-                <Button bssize="sm" variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
-              </ButtonToolbar>
+              <ButtonGroup>
+                <Button bssize="sm" variant="outline-primary" disabled={dimNewHop} onClick={this.newhop}>New Hop</Button>  
+                <Button bssize="sm" variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+              </ButtonGroup>
             </Col>
-          </div>
         </Row>
         <Row>
           {hopEntry}

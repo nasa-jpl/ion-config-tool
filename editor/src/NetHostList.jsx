@@ -10,8 +10,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import {BsFillXSquareFill} from "react-icons/bs";
+import {Badge,Button,ButtonGroup} from 'react-bootstrap';
+import {BsXLg} from "react-icons/bs";
 import {BsChevronDoubleDown} from "react-icons/bs";
 import {BsChevronDoubleRight} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
@@ -68,21 +68,21 @@ export default class NetHostList  extends React.Component {
       <FormControl bssize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewHost}/>;
     const icon = 'remove';
     return (
-      <div>
+      <Container fluid>
         <hr />
         <Row>
           <Col className="text-right" sm={2}><b>New Host Name:</b></Col>
           <Col sm={1}>{form}</Col>
           <Col sm={1}>(no spaces)</Col>
           <Col sm={2}>
-            <ButtonToolbar>
-              <Button bssize="sm" variant="primary" onClick={this.submitNewHost}>Submit</Button>
-              <Button bssize="sm" variant="success" onClick={this.nonewnode}><BsFillXSquareFill/></Button>
-            </ButtonToolbar>
+            <ButtonGroup>
+              <Button bssize="sm" variant="outline-primary" onClick={this.submitNewHost}>Submit</Button>
+              <Button bssize="sm" variant="outline-success" onClick={this.nonewhost}><BsXLg/></Button>
+            </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
         </Row>
-      </div>
+      </Container>
     );
   };
 
@@ -106,18 +106,17 @@ export default class NetHostList  extends React.Component {
 
     return (
       <Container fluid>
-        <Row>
-          <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Net Host List</Badge></Col>
-            <Col className="text-right" sm={1}><b>{name}</b></Col>
-            <Col className="text-left"  sm={2}>Network Host Machines {hostCnt}</Col>
+        <hr />
+       <Row>
+            <Col className="text-right" sm={1}><h5><Badge pill variant="secondary">Net Host List</Badge></h5></Col>
+            <Col className="text-right" sm={1}><h6><b>{name}</b></h6></Col>
+            <Col className="text-left"  sm={2}><h6>Network Host Machines {hostCnt}</h6></Col>
             <Col sm={3}> 
-              <ButtonToolbar>
-                <Button bssize="sm" variant="primary" disabled={dimNewHost} onClick={this.newhost}>New Host</Button>  
-                <Button bssize="sm" variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
-              </ButtonToolbar>
+              <ButtonGroup>
+                <Button variant="outline-primary" disabled={dimNewHost} onClick={this.newhost}>New Host</Button>  
+                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+              </ButtonGroup>
             </Col>
-          </div>
         </Row>
         <Row>
           {hostEntry}

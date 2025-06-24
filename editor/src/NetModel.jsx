@@ -10,9 +10,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Badge,Button,ButtonGroup} from 'react-bootstrap';
 import {Card} from 'react-bootstrap';
-import {BsFillXSquareFill} from "react-icons/bs";
+import {BsXLg} from "react-icons/bs";
 import {BsChevronDoubleDown} from "react-icons/bs";
 import {BsChevronDoubleRight} from "react-icons/bs";
 import {saveAs} from "file-saver";
@@ -1242,8 +1242,8 @@ export default class NetModel  extends React.Component {
     var modelElems = [];
     const head  = 
       <Row key="head">
-        <Col sm={4}><Badge bssize="lg" variant="default">Net Model Editor</Badge></Col>
-        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><BsFillXSquareFill/></Button></Col>
+        <Col sm={4}><h3><Badge variant="default">Net Model Editor</Badge></h3></Col>
+        <Col sm={1}><Button bssize="sm" variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"Net Model Name",1,false,"");
@@ -1260,7 +1260,7 @@ export default class NetModel  extends React.Component {
   makeNetViewer() {
     //console.log(">>makeModelElems " + JSON.stringify(this.state));
     var modelElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">Network Model Viewer</Badge></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}><h3><Badge variant="default">Network Model Viewer</Badge></h3></Col></Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"Network Model Name",1,true,"");
     modelElems.push(nameElem);
@@ -1321,26 +1321,26 @@ export default class NetModel  extends React.Component {
     console.log("NetModel render return next.")
     return (
       <div>
+        <hr />
         <Row>
-          <hr/>
-          <Col className="text-left"  sm={1}><Badge bssize="sm" variant="default">Net Model</Badge></Col>
-          <Col className="text-right" sm={1}><b>{this.state.name}</b></Col>
-          <Col className="text-left"  sm={2}>{this.state.desc}</Col>
+          <Col className="text-left"  sm={1}><h3><Badge pill variant="secondary">Net Model</Badge></h3></Col>
+          <Col className="text-right" sm={1}><h3><b>{this.state.name}</b></h3></Col>
+          <Col className="text-left"  sm={2}><h3>{this.state.desc}</h3></Col>
           <Col sm={6}> 
-            <ButtonToolbar>
-              <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-              <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
-              <Button bssize="sm" variant="primary" disabled={dimBuildIon} onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
-              <Button bssize="sm" variant="primary" disabled={dimSaveNet}  onClick={this.saveModel}>Save Model</Button>
-              <Button bssize="sm" variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
-            </ButtonToolbar>
+            <ButtonGroup>
+              <Button bssize="sm" variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
+              <Button bssize="sm" variant="outline-dark" onClick={this.view}>{viewLabel}</Button>
+              <Button bssize="sm" variant="outline-primary" disabled={dimBuildIon} onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
+              <Button bssize="sm" variant="outline-primary" disabled={dimSaveNet}  onClick={this.saveModel}>Save Model</Button>
+              <Button bssize="sm" variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+            </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
         </Row>
         <Card collapsible expanded={viewMode}>
           {viewPanel}
         </Card>
-        <Card  collapsible expanded={expandMode}>
+        <Card collapsible expanded={expandMode}>
           {hostList}
           {nodeList}
           {hopList}

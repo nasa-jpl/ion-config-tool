@@ -18,9 +18,9 @@ import NetModel  from './NetModel.jsx';
 import {Navbar} from 'react-bootstrap';
 import {Card} from 'react-bootstrap';
 import {FormControl} from 'react-bootstrap';
-import {Button,ButtonToolbar,ButtonGroup} from 'react-bootstrap';
+import {Button,ButtonGroup} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {BsFillXSquareFill} from "react-icons/bs";
+import {BsXLg} from "react-icons/bs";
 import "date-format-lite";
 
 // schema imports
@@ -754,10 +754,10 @@ export default class App extends React.Component {
         <Col sm={1}>{form}</Col>
         <Col sm={1}>(no spaces)</Col>
         <Col sm={2}>
-          <ButtonToolbar>
-            <Button size="sm" variant="primary" onClick={this.submitNewNet}>Submit</Button>
-            <Button size="sm" variant="success" onClick={this.noNewNetModel.bind(this)}><BsFillXSquareFill/></Button>
-          </ButtonToolbar>
+          <ButtonGroup>
+            <Button size="sm" variant="outline-primary" onClick={this.submitNewNet}>Submit</Button>
+            <Button size="sm" variant="outline-success" onClick={this.noNewNetModel.bind(this)}><BsXLg/></Button>
+          </ButtonGroup>
         </Col>
       </Row>
       </div>
@@ -778,10 +778,10 @@ export default class App extends React.Component {
         <Col sm={1}>{form}</Col>
         <Col sm={1}>(no spaces)</Col>
         <Col sm={2}>
-          <ButtonToolbar>
-            <Button size="sm" variant="primary" onClick={this.submitNewIon}>Submit</Button>
-            <Button size="sm" variant="success" onClick={this.noNewIonModel.bind(this)}><BsFillXSquareFill/></Button>
-          </ButtonToolbar>
+          <ButtonGroup>
+            <Button size="sm" variant="outline-primary" onClick={this.submitNewIon}>Submit</Button>
+            <Button size="sm" variant="outline-success" onClick={this.noNewIonModel.bind(this)}><BsXLg/></Button>
+          </ButtonGroup>
         </Col>
         </Row>
       </div>

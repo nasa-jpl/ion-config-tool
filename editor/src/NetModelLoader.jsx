@@ -9,9 +9,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Form} from 'react-bootstrap';
-import {Container,Row,Col} from 'react-bootstrap';
-import {Button, ButtonToolbar} from 'react-bootstrap';
-import {BsFillXSquareFill} from "react-icons/bs";
+import {Row,Col} from 'react-bootstrap';
+import {Button, ButtonGroup} from 'react-bootstrap';
+import {BsXLg} from "react-icons/bs";
 import {Alert} from 'react-bootstrap';
 
 export default class NetModelLoader extends React.Component {
@@ -194,18 +194,6 @@ export default class NetModelLoader extends React.Component {
     // check for alert
     let msg = this.state.errMsg;
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
-    /*
-    var form =
-      <FormControl
-        id="netmodel"
-        name="name"
-        type="file"
-        label="Label"
-        accept=".json"
-        className="inputClass"
-        onChange={this.handleFileChange}
-      />;
-      */
     var form = 
           <Form.Control 
             type = "file"
@@ -215,7 +203,6 @@ export default class NetModelLoader extends React.Component {
             onChange={this.handleFileChange}
           />
     let icon = "remove";
-    console.log("NetModelLoader render div");
     return (
       <div>
         <hr />
@@ -223,10 +210,10 @@ export default class NetModelLoader extends React.Component {
           <Col className="text-right" sm={2}><b>Net Model File (.json)</b></Col>
           <Col sm={2}>{form}</Col>
           <Col sm={2}>
-            <ButtonToolbar>
-              <Button bssize="sm" variant="primary" onClick={this.load}>Submit</Button>
-              <Button bssize="sm" variant="success" onClick={this.props.noLoadNetModel}><BsFillXSquareFill/></Button>
-            </ButtonToolbar>
+            <ButtonGroup>
+              <Button bssize="sm" variant="outline-primary" onClick={this.load}>Submit</Button>
+              <Button bssize="sm" variant="outline-success" onClick={this.props.noLoadNetModel}><BsXLg/></Button>
+            </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
         </Row>

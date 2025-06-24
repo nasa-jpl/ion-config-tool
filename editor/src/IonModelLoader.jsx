@@ -10,8 +10,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Col,Row} from 'react-bootstrap';
-import {Button, ButtonToolbar} from 'react-bootstrap';
-import {BsFillXSquareFill} from "react-icons/bs";
+import {Button, ButtonGroup} from 'react-bootstrap';
+import {BsXLg} from "react-icons/bs";
 import {Alert} from 'react-bootstrap';
 
 import cmdTypes     from './json/cmdTypes.json';
@@ -351,10 +351,10 @@ export default class IonModelLoader extends React.Component {
           <Col className="text-right" sm={2}><b>Ion Model File (.json)</b></Col>
           <Col sm={2}>{form}</Col>
           <Col sm={2}>
-            <ButtonToolbar>
-              <Button bssize="sm" variant="primary" onClick={this.load}>Submit</Button>
-              <Button bssize="sm" variant="success" onClick={this.props.noLoadIonModel}><BsFillXSquareFill/></Button>
-            </ButtonToolbar>
+            <ButtonGroup>
+              <Button bssize="sm" variant="outline-primary" onClick={this.load}>Submit</Button>
+              <Button bssize="sm" variant="outline-success" onClick={this.props.noLoadIonModel}><BsXLg/></Button>
+            </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
           </Row>
