@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import {BsFillXSquareFill} from "react-icons/bs";
+import {BsXLg} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import NetAddr from './NetAddr.jsx';
@@ -96,11 +96,11 @@ export default class NetHost  extends React.Component {
         <Col sm={5}> <Badge bssize="lg" variant="default">Net Host Editor</Badge></Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button bssize="sm" variant="danger"   onClick={this.delete}>Delete</Button>
-            <Button bssize="sm" variant="success"  onClick={this.noedit}><BsFillXSquareFill/></Button>
+            <Button variant="outline-danger"   onClick={this.delete}>Delete</Button>
+            <Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button>
           </ButtonToolbar>
         </Col>
-      </Row>;
+      </Row>
     hostElems.push(head);
     const keyElem = this.makeHostElem("","text",this.state.hostKey,"Host Name",1,true,"");
     hostElems.push(keyElem);
@@ -199,17 +199,15 @@ export default class NetHost  extends React.Component {
     return (
       <Container fluid>
         <Row>
-          <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Net Host</Badge></Col>
+            <Col className="text-right" sm={1}><h6><Badge variant="default">Net Host</Badge></h6></Col>
             <Col className="text-right" sm={1}><b>{hostKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
-                <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
               </ButtonToolbar>
             </Col>
-          </div>
         </Row>
         <Card collapsible expanded={viewMode}>
          {viewPanel}

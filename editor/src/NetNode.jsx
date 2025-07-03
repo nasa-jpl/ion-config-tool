@@ -88,8 +88,8 @@ export default class NetNode  extends React.Component {
         <Col sm={5}> <Badge bssize="lg" variant="default">Net Node Editor</Badge></Col>
         <Col sm={2}>
           <ButtonToolbar>
-            <Button bssize="sm" variant="danger"   onClick={this.delete}>Delete</Button>
-            <Button bssize="sm" variant="success"  onClick={this.noedit}><BsFillXSquareFill/></Button>
+            <Button variant="outline-danger"   onClick={this.delete}>Delete</Button>
+            <Button variant="outline-success"  onClick={this.noedit}><BsFillXSquareFill/></Button>
           </ButtonToolbar>
         </Col>
       </Row>;
@@ -206,21 +206,20 @@ export default class NetNode  extends React.Component {
     return (
       <Container fluid>
         <Row>
-          <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Net Node</Badge></Col>
+            <Col className="text-right" sm={1}><h6><Badge bssize="lg" variant="default">Net Node</Badge></h6></Col>
             <Col className="text-right" sm={1}><b>{nodeKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
-                <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
+                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
               </ButtonToolbar>
             </Col>
-          </div>
         </Row>
         <Card collapsible expanded={viewMode}>
          {viewPanel}
         </Card>
+        <hr />
       </Container>
     )
   };

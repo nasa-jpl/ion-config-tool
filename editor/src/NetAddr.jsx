@@ -43,7 +43,7 @@ export default class NetAddr  extends React.Component {
     return true;
   }
   makeDuplicateIPWarn(warnmsg) {
-    console.log("Delete Model: popup the modal delete warn");
+    //This is not working in bootstrap 4 with React 19.
     return (
       <Modal show={this.state.showWarnMsg}>
         <Modal.Header closeButton>
@@ -51,7 +51,7 @@ export default class NetAddr  extends React.Component {
         </Modal.Header>
         <Modal.Body>{warnmsg}</Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" bssize="sm" variant="success" onClick={ () => this.setState({showWarnMsg : false})}>
+          <Button variant="outline-success" onClick={ () => this.setState({showWarnMsg : false})}>
             Ok 
           </Button>
         </Modal.Footer>
@@ -88,9 +88,9 @@ export default class NetAddr  extends React.Component {
     const pos = this.getPosition();
     const label  = addMode? "New " + tail : pos + " ) " + tail;
 
-    const chgbtn = addMode? "" : <Button bssize="sm" variant="primary" onClick={this.change}>{changeLabel}</Button>;
-    const delbtn = addMode? "" : <Button bssize="sm" variant="danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
-    const addbtn = addMode? <Button bssize="sm" variant="primary" onClick={this.add}>Add</Button> : "";
+    const chgbtn = addMode? "" : <Button variant="outline-primary" onClick={this.change}>{changeLabel}</Button>;
+    const delbtn = addMode? "" : <Button variant="outline-danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
+    const addbtn = addMode? <Button variant="outline-primary" onClick={this.add}>Add</Button> : "";
 
     let errmsg = this.state.errMsg;
     let warnmsg = this.state.warnMsg;
@@ -99,6 +99,7 @@ export default class NetAddr  extends React.Component {
     if (errmsg !== '') {
       alert = this.makeAlertElem(errmsg);
     } else if (warnmsg !== '') {
+      //Modal returned here is not rendering, thus is excluded from DOM
       warnpopup = this.makeDuplicateIPWarn(warnmsg);
     }
 
@@ -112,7 +113,6 @@ export default class NetAddr  extends React.Component {
       <div>
       <Container fluid>
         <Row>
-          <div className="row mt-4">
             <Col className="text-right" sm={2}><b>{label}</b></Col>
             <Col sm={2}>{form}</Col>
             <Col sm={3}> 
@@ -123,10 +123,8 @@ export default class NetAddr  extends React.Component {
               </ButtonToolbar>
             </Col>
             <Col sm={5}>{alert}</Col>
-          </div>
         </Row>
       </Container>
-      {warnpopup}
       </div>
     )
   };

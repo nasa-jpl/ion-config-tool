@@ -66,7 +66,6 @@ export default class NetHostList  extends React.Component {
 
     var form =
       <FormControl bssize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewHost}/>;
-    const icon = 'remove';
     return (
       <Container fluid>
         <hr />
