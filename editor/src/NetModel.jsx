@@ -1340,11 +1340,13 @@ export default class NetModel  extends React.Component {
         <Card collapsible expanded={viewMode}>
           {viewPanel}
         </Card>
-        <Card collapsible expanded={expandMode}>
-          {hostList}
-          {nodeList}
-          {hopList}
-        </Card>
+        {expandMode && (
+          <Card>
+            {hostList}
+            {nodeList}
+            {hopList}
+          </Card>
+        )}
       </div>
     );
   };

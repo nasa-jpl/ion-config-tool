@@ -125,9 +125,11 @@ export default class NetNodeList  extends React.Component {
         <Row>
           {nodeEntry}
         </Row>
-        <Card  collapsible expanded={expandMode}>
-          {nodeList}
-        </Card>
+        {expandMode && (
+          <Card>
+            {nodeList}
+          </Card>
+        )}
       </Container>
     )
   };

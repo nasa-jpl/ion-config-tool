@@ -120,9 +120,11 @@ export default class NetHostList  extends React.Component {
         <Row>
           {hostEntry}
         </Row>
-        <Card  collapsible expanded={expandMode}>
-          {hostList}
-        </Card>
+        {expandMode && (
+          <Card>
+            {hostList}
+          </Card>
+        )}
       </Container>
     )
   };

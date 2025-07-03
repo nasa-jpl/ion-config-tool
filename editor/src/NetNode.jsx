@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import {BsFillXSquareFill} from "react-icons/bs";
+import {BsXLg} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
@@ -89,7 +89,7 @@ export default class NetNode  extends React.Component {
         <Col sm={2}>
           <ButtonToolbar>
             <Button variant="outline-danger"   onClick={this.delete}>Delete</Button>
-            <Button variant="outline-success"  onClick={this.noedit}><BsFillXSquareFill/></Button>
+            <Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button>
           </ButtonToolbar>
         </Col>
       </Row>;
@@ -219,7 +219,6 @@ export default class NetNode  extends React.Component {
         <Card collapsible expanded={viewMode}>
          {viewPanel}
         </Card>
-        <hr />
       </Container>
     )
   };

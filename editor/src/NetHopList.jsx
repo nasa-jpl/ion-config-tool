@@ -134,9 +134,11 @@ export default class NetHopList  extends React.Component {
         <Row>
           {hopEntry}
         </Row>
-        <Card  collapsible expanded={expandMode}>
-          {hopList}
-        </Card>
+        {expandMode && (
+          <Card>
+            {hopList}
+          </Card>
+        )}
       </Container>
     )
   };
