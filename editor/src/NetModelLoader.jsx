@@ -9,7 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Form} from 'react-bootstrap';
-import {Row,Col} from 'react-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
 import {Button, ButtonGroup} from 'react-bootstrap';
 import {BsXLg} from "react-icons/bs";
 import {Alert} from 'react-bootstrap';
@@ -185,7 +185,7 @@ export default class NetModelLoader extends React.Component {
   };
   // END EXTRACT
   makeAlertElem(msg) {
-    return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
+    return (<Alert variant="danger" show='true'><b>ERROR: {msg}</b></Alert>);
   };
   render() {
     // NOTE: this is an uncontrolled input form, so no value parameter provided
@@ -204,20 +204,20 @@ export default class NetModelLoader extends React.Component {
           />
     let icon = "remove";
     return (
-      <div>
+      <Container fluid>
         <hr />
         <Row>
           <Col className="text-right" sm={2}><b>Net Model File (.json)</b></Col>
           <Col sm={2}>{form}</Col>
           <Col sm={2}>
             <ButtonGroup>
-              <Button bssize="sm" variant="outline-primary" onClick={this.load}>Submit</Button>
-              <Button bssize="sm" variant="outline-success" onClick={this.props.noLoadNetModel}><BsXLg/></Button>
+              <Button variant="outline-primary" onClick={this.load}>Submit</Button>
+              <Button variant="outline-success" onClick={this.props.noLoadNetModel}><BsXLg/></Button>
             </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
         </Row>
-      </div>
+      </Container>
     )
   };
   handleFileChange = (e) => {
