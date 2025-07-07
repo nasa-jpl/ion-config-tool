@@ -8,11 +8,11 @@
 //                                                               
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {FormControl} from 'react-bootstrap';
+import {ButtonGroup, FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Badge,Button} from 'react-bootstrap';
 import {Table, Card} from 'react-bootstrap';
-import {BsFillXSquareFill} from "react-icons/bs";
+import {BsXLg} from "react-icons/bs";
 import {BsChevronDoubleDown} from "react-icons/bs";
 import {BsChevronDoubleRight} from "react-icons/bs";
 import PopoutWindow from 'react-popout';
@@ -1135,7 +1135,7 @@ export default class IonModel  extends React.Component {
     const head  = 
       <Row key="head">
         <Col sm={4}><Badge bssize="lg" variant="default">ION Model Editor</Badge></Col>
-        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><BsFillXSquareFill/></Button></Col>
+        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"ION Model Name",1,false,"");
@@ -1214,7 +1214,7 @@ export default class IonModel  extends React.Component {
           <Col sm={1}></Col>
           <Col className="text-left"  sm={2}><b>Click Popout Survey Topic(s):</b></Col>
           <Col sm={6}> 
-            <ButtonToolbar>
+            <ButtonGroup>
               <SurveyPopout label="Hosts" showSurvey={this.makeShowHosts.bind(this)}></SurveyPopout>
               <SurveyPopout label="Nodes" showSurvey={this.makeShowNodes.bind(this)}></SurveyPopout>
               <SurveyPopout label="Configs" showSurvey={this.makeShowConfigs.bind(this)}></SurveyPopout>
@@ -1225,7 +1225,7 @@ export default class IonModel  extends React.Component {
               <SurveyPopout label="Spans" showSurvey={this.makeShowSpans.bind(this)}></SurveyPopout>
               <SurveyPopout label="Clones" showSurvey={this.makeShowClones.bind(this)}></SurveyPopout>
               <SurveyPopout label="Alerts" showSurvey={this.makeShowAlerts.bind(this)}></SurveyPopout>
-            </ButtonToolbar>
+            </ButtonGroup>
           </Col>
         </Row>
       </div>
@@ -1258,7 +1258,7 @@ export default class IonModel  extends React.Component {
 
     var alerts = this.checkModel();   // any alerts?
 
-    const alertit =  alerts.length? <Alert variant="danger"><b>See Alerts (in Surveys)</b></Alert> : "";
+    const alertit =  alerts.length? <Alert variant="danger" show="true"><b>See Alerts (in Surveys)</b></Alert> : "";
 
     let viewPanel = null;
     if (viewMode)
@@ -1267,24 +1267,23 @@ export default class IonModel  extends React.Component {
       else
         viewPanel = this.makeIonViewer();
 
-    console.log("IonModel render return next.")
     return (
       <div>
         <hr />
         <Row>
-          <Col className="text-left"  sm={1}><Badge bssize="sm" variant="default">ION Model</Badge></Col>
+          <Col className="text-left"  sm={1}><h3><Badge pill variant="default">ION Model</Badge></h3></Col>
           <Col className="text-right" sm={1}><b>{name}</b></Col>
           <Col className="text-left"  sm={2}>{this.state.desc}</Col>
           <Col sm={6}> 
-            <ButtonToolbar>
-              <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-              <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
-              <Button bssize="sm" variant="info" onClick={this.showSurveys}>{showSurveyTag}</Button>
-              <Button bssize="sm" variant="primary" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
-              <Button bssize="sm" variant="primary" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
-              <Button bssize="sm" variant="danger" onClick={this.showDeleteWarn}>Delete Model</Button>
-              <Button bssize="sm" variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
-            </ButtonToolbar>
+            <ButtonGroup>
+              <Button bssize="sm" variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
+              <Button bssize="sm" variant="outline-info" onClick={this.view}>{viewLabel}</Button>
+              <Button bssize="sm" variant="outline-info" onClick={this.showSurveys}>{showSurveyTag}</Button>
+              <Button bssize="sm" variant="outline-primary" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
+              <Button bssize="sm" variant="outline-primary" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
+              <Button bssize="sm" variant="outline-danger" onClick={this.showDeleteWarn}>Delete Model</Button>
+              <Button bssize="sm" variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+            </ButtonGroup>
           </Col>
           <Col sm={2}> {alertit} </Col>
         </Row>
@@ -1294,11 +1293,13 @@ export default class IonModel  extends React.Component {
         <Card collapsible expanded={viewMode}>
           {viewPanel}
         </Card>
-        <Card  collapsible expanded={expandMode}>
-          {ionHosts}
-          {ionNodeList}
-          {graphList}
-        </Card>
+        {expandMode && (
+          <Card>
+            {ionHosts}
+            {ionNodeList}
+            {graphList}
+          </Card>
+        )}
       </div>
     );
 

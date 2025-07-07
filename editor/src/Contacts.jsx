@@ -11,8 +11,8 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import Glyphicon from '@strongdm/glyphicon';
 import {Card} from 'react-bootstrap';
+import { BsChevronDoubleDown, BsChevronDoubleRight, BsXLg } from 'react-icons/bs';
 
 export default class Contacts  extends React.Component {
   constructor (props) {
@@ -37,11 +37,10 @@ export default class Contacts  extends React.Component {
     console.log(">>makeContactsEditorElem " + JSON.stringify(this.state));
     const readMode = !this.state.editMode;
     var AttrElems = [];
-    const icon = "remove";
     const head  =  readMode? 
         <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">Contacts Viewer</Badge></Col></Row>
       : <Row key="head"><Col sm={5}> <Badge bssize="lg" variant="default">Contacts Editor</Badge></Col> 
-        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col></Row> ;
+        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><BsXLg/></Button></Col></Row> ;
     AttrElems.push(head);
     const nameElem = this.makeContactsAttrElem("","text",this.props.name,"Contacts Name",1,true,"");
     AttrElems.push(nameElem);
@@ -77,7 +76,7 @@ export default class Contacts  extends React.Component {
     const editLabel = editMode?  'Submit' : 'Edit'
     const viewLabel = viewMode?  'Hide' : 'Show'
 
-    const expandIcon = this.state.expandMode? 'chevron-down' : 'chevron-right';
+    const expandIcon = this.state.expandMode? <BsChevronDoubleDown/>: <BsChevronDoubleRight/>;
 
     return (
       <Container fluid>
@@ -91,7 +90,7 @@ export default class Contacts  extends React.Component {
               <ButtonToolbar>
                 <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
                 <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
-                <Button bssize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
+                <Button bssize="sm" variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonToolbar>
             </Col>
           </div>

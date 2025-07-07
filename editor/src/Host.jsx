@@ -10,8 +10,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import Glyphicon from '@strongdm/glyphicon';
+import {Badge,Button,ButtonGroup} from 'react-bootstrap';
+import {BsXLg} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import IpAddr from './IpAddr.jsx';
@@ -95,12 +95,11 @@ export default class Host  extends React.Component {
   makeHostEditor() {
     console.log(">>makeHostEditor " + JSON.stringify(this.state));
     var hostElems = [];
-    const icon = 'remove';
     const hostKey = this.props.name;
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Badge bssize="lg" variant="default">ION Host Editor</Badge></Col>
-        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
+        <Col sm={5}><Badge bssize="lg" variant="default">ION Host Editor</Badge></Col>
+        <Col sm={1}><Button bssize="sm" variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     hostElems.push(head);
     const nameElem = this.makeHostElem("","text",hostKey,"Host Name",1,true,"");
@@ -221,17 +220,15 @@ export default class Host  extends React.Component {
     <div style={{backgroundColor: '#DBF4DC'}}>
      <Container fluid>
         <Row>
-          <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">ION Host</Badge></Col>
+            <Col className="text-right" sm={1}><h6><Badge variant="default">ION Host</Badge></h6></Col>
             <Col className="text-right" sm={1}><b>{hostKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.state.desc}</Col>
             <Col sm={3}> 
-              <ButtonToolbar>
-                <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button> 
-              </ButtonToolbar>
+              <ButtonGroup>
+                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button> 
+              </ButtonGroup>
             </Col>
-          </div>
         </Row>
         <Card collapsible expanded={viewMode}>
          {viewPanel}

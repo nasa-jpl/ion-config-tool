@@ -1318,7 +1318,6 @@ export default class NetModel  extends React.Component {
       else
         viewPanel = this.makeNetViewer();
 
-    console.log("NetModel render return next.")
     return (
       <div>
         <hr />

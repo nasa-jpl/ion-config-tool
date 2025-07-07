@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Button,ButtonToolbar} from 'react-bootstrap';
+import {Button,ButtonGroup} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
 
@@ -116,11 +116,11 @@ export default class NetAddr  extends React.Component {
             <Col className="text-right" sm={2}><b>{label}</b></Col>
             <Col sm={2}>{form}</Col>
             <Col sm={3}> 
-              <ButtonToolbar>
+              <ButtonGroup>
                 {chgbtn}
                 {delbtn}
                 {addbtn}
-              </ButtonToolbar>
+              </ButtonGroup>
             </Col>
             <Col sm={5}>{alert}</Col>
         </Row>

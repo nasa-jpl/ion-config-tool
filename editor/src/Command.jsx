@@ -10,9 +10,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Badge,Button,ButtonGroup} from 'react-bootstrap';
+import {BsXLg} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
-import Glyphicon from '@strongdm/glyphicon';
 import {Alert} from 'react-bootstrap';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
@@ -299,17 +299,16 @@ export default class Command  extends React.Component {
     let msg = this.state.cmdMsg;
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
 
-    const icon = 'remove';
     const head  =
       <Row key="head">
         <Col sm={5}> <Badge bssize="lg" variant="default">Command Editor</Badge></Col>
         <Col sm={4}>
-          <ButtonToolbar>
-            <Button bssize="sm" variant="info" onClick={this.dict}>{dictLabel}</Button>
-            <Button bssize="sm" variant="info" onClick={this.entry}>{entryLabel}</Button>
-            <Button bssize="sm" variant="danger" onClick={this.delete}>Delete</Button>
-            <Button bssize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button>
-          </ButtonToolbar>
+          <ButtonGroup>
+            <Button variant="outline-info" onClick={this.dict}>{dictLabel}</Button>
+            <Button variant="outline-info" onClick={this.entry}>{entryLabel}</Button>
+            <Button variant="outline-danger" onClick={this.delete}>Delete</Button>
+            <Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button>
+          </ButtonGroup>
         </Col>
         <Col sm={4}>{alert}</Col>
       </Row>;
@@ -339,10 +338,10 @@ export default class Command  extends React.Component {
       <Row key="head">
         <Col sm={5}><Badge bssize="lg" variant="default">Command Viewer</Badge></Col>
         <Col sm={3}>
-          <ButtonToolbar>
-            <Button bssize="sm" variant="info" onClick={this.dict}>{dictLabel}</Button>
-            <Button bssize="sm" variant="info" onClick={this.entry}>{entryLabel}</Button>
-          </ButtonToolbar>
+          <ButtonGroup>
+            <Button variant="outline-info" onClick={this.dict}>{dictLabel}</Button>
+            <Button variant="outline-info" onClick={this.entry}>{entryLabel}</Button>
+          </ButtonGroup>
         </Col>
       </Row>;
     commandElems.unshift(head);
@@ -561,10 +560,10 @@ export default class Command  extends React.Component {
             <FormControl readOnly="true" bssize="sm" type="text" value={cmdStr} />
           </Col>
           <Col sm={2}>
-            <ButtonToolbar>
-              <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-              <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
-            </ButtonToolbar>
+            <ButtonGroup>
+              <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
+              <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
+            </ButtonGroup>
           </Col>
           <Col sm={2}> {cmdMsg} </Col>
           {this.makeEditFlagElem(editFlag)}

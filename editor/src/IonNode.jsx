@@ -8,10 +8,10 @@
 //                                                               
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FormControl} from 'react-bootstrap';
+import {ButtonGroup, FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import Glyphicon from '@strongdm/glyphicon';
+import {Badge,Button} from 'react-bootstrap';
+import {BsXLg,BsChevronDoubleDown,BsChevronDoubleRight} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import {saveAs} from "file-saver";
@@ -82,14 +82,13 @@ export default class IonNode  extends React.Component {
       </FormControl>;
     const icon = 'remove';
     return (
-      <div>
-        <hr />
+      <>
         <Col className="text-right" sm={2}><b>Select new config file:</b></Col>
         <Col sm={2}>{form}</Col>
         <Col sm={1}>
-          <Button bssize="sm" variant="success"  onClick={this.nonewconfig}><Glyphicon glyph={icon} /></Button>
+          <Button variant="outline-success"  onClick={this.nonewconfig}><BsXLg/></Button>
         </Col>
-      </div>
+      </>
     );
   }
   // show choices with selection widget
@@ -120,11 +119,10 @@ export default class IonNode  extends React.Component {
   makeNodeEditor() {
     //console.log(">>makeNodeElems " + JSON.stringify(this.state));
     var nodeElems = [];
-    const icon = 'remove';
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Badge bssize="lg" variant="default">ION Node Editor</Badge></Col>
-        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><Glyphicon glyph={icon} /></Button></Col>
+        <Col sm={5}> <Badge variant="default">ION Node Editor</Badge></Col>
+        <Col sm={1}><Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     nodeElems.push(head);
     const nameElem = this.makeNodeElem("","text",this.props.name,"ION Node Name",1,true,"");
@@ -243,7 +241,7 @@ export default class IonNode  extends React.Component {
 
     const editLabel = editMode?  'Submit' : 'Edit'
     const viewLabel = viewMode?  'Hide' : 'Show'
-    const expandIcon = expandMode? 'chevron-down' : 'chevron-right';
+    const expandIcon = expandMode? <BsChevronDoubleDown/>: <BsChevronDoubleRight/>;
 
     const dimNewconfig = newConfig?  true : false ; 
     const configEntry = newConfig?  this.makeNewConfigElem() : "" ; 
@@ -260,33 +258,35 @@ export default class IonNode  extends React.Component {
     <div style={{backgroundColor: '#A5E6A7'}}>
       <Container fluid>
         <Row>
-          <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">ION Node</Badge></Col>
+            <Col className="text-right" sm={1}><h6><Badge variant="default">ION Node</Badge></h6></Col>
             <Col className="text-right" sm={1}><b>{nodeKey}</b></Col>
             <Col className="text-right" sm={1}><b>ipn: {this.props.nodeNum}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={3}> 
-              <ButtonToolbar>
-                <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
-                <Button bssize="sm" variant="primary" onClick={this.saveConfigs}>Save Configs</Button>
-                <Button bssize="sm" variant="primary" disabled={dimNewconfig} onClick={this.newconfig}>New Config File</Button>  
-                <Button bssize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
-              </ButtonToolbar>
+              <ButtonGroup>
+                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
+                <Button variant="outline-primary" onClick={this.saveConfigs}>Save Configs</Button>
+                <Button variant="outline-primary" disabled={dimNewconfig} onClick={this.newconfig}>New Config File</Button>  
+                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+              </ButtonGroup>
             </Col>
-          </div>
         </Row>
         <Row>
           {configEntry}
         </Row>
-        <Card collapsible expanded={viewMode}>
-         {viewPanel}
-        </Card>
-        <Card  collapsible expanded={expandMode}>
-          {this.props.children}
-        </Card>
+        {viewMode && (
+          <Card>
+            {viewPanel}
+          </Card>
+        )}
+        {expandMode && (
+          <Card>
+            {this.props.children}
+          </Card>
+        )}
       </Container>
-      </div>
+    </div>
     )
   };
 

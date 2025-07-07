@@ -10,8 +10,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import Glyphicon from '@strongdm/glyphicon';
+import {Badge,Button,ButtonGroup} from 'react-bootstrap';
+import {BsXLg,BsChevronDoubleDown,BsChevronDoubleRight} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import IonNode from './IonNode.jsx';
@@ -102,23 +102,22 @@ export default class IonNodeList  extends React.Component {
 
     var form =
       <FormControl bssize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewIonNode}/>;
-    const icon = 'remove';
     return (
-      <div>
+      <Container fluid>
         <hr />
         <Row>
           <Col className="text-right" sm={2}><b>New Node Name:</b></Col>
           <Col sm={1}>{form}</Col>
           <Col sm={1}>(no spaces)</Col>
           <Col sm={2}>
-            <ButtonToolbar>
-              <Button bssize="sm" variant="primary" onClick={this.submitNewIonNode}>Submit</Button>
-              <Button bssize="sm" variant="success" onClick={this.nonewnode}><Glyphicon glyph={icon} /></Button>
-            </ButtonToolbar>
+            <ButtonGroup>
+              <Button variant="outline-primary" onClick={this.submitNewIonNode}>Submit</Button>
+              <Button variant="outline-success" onClick={this.nonewnode}><BsXLg/></Button>
+            </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
         </Row>
-      </div>
+      </Container>
     );
   };
 
@@ -129,7 +128,7 @@ export default class IonNodeList  extends React.Component {
     const newIonNode = this.state.newIonNode;
     const ionNodes = this.props.nodes;
 
-    const expandIcon = expandMode? 'chevron-down' : 'chevron-right';
+    const expandIcon = expandMode? <BsChevronDoubleDown/>: <BsChevronDoubleRight/>;
 
     const dimNewIonNode = newIonNode?  true : false ; 
     const nodeCnt = '(' + Object.keys(ionNodes).length.toString() + ')';
@@ -174,25 +173,26 @@ export default class IonNodeList  extends React.Component {
     }
     return (
       <Container fluid>
+        <hr />
         <Row>
-          <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">ION Node List</Badge></Col>
-            <Col className="text-right" sm={1}><b>{name}</b></Col>
-            <Col className="text-left"  sm={2}>ION Node Servers {nodeCnt}</Col>
+            <Col className="text-right" sm={1}><h5><Badge pill variant="secondary">ION Node List</Badge></h5></Col>
+            <Col className="text-right" sm={1}><h6><b>{name}</b></h6></Col>
+            <Col className="text-left"  sm={2}><h6>ION Node Servers {nodeCnt}</h6></Col>
             <Col sm={3}> 
-              <ButtonToolbar>
-                <Button bssize="sm" variant="primary" disabled={dimNewIonNode} onClick={this.newnode}>New Ion Node</Button>  
-                <Button bssize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
-              </ButtonToolbar>
+              <ButtonGroup>
+                <Button variant="outline-primary" disabled={dimNewIonNode} onClick={this.newnode}>New Ion Node</Button>  
+                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+              </ButtonGroup>
             </Col>
-          </div>
         </Row>
         <Row>
           {nodeEntry}
         </Row>
-        <Card  collapsible expanded={expandMode}>
-          {nodeList}
-        </Card>
+        {expandMode && (
+          <Card>
+            {nodeList}
+          </Card>
+        )}
       </Container>
     )
   };

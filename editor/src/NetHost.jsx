@@ -8,9 +8,9 @@
 //                                                               
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FormControl} from 'react-bootstrap';
+import {ButtonGroup, FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Badge,Button} from 'react-bootstrap';
 import {BsXLg} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
@@ -89,16 +89,15 @@ export default class NetHost  extends React.Component {
   makeHostEditor() {
     //console.log(">>makeHostElems " + JSON.stringify(this.state));
     var hostElems = [];
-    const icon = 'remove';
     const hostKey = this.props.hostKey;
     const head  = 
       <Row key="head">
         <Col sm={5}> <Badge bssize="lg" variant="default">Net Host Editor</Badge></Col>
         <Col sm={2}>
-          <ButtonToolbar>
+          <ButtonGroup>
             <Button variant="outline-danger"   onClick={this.delete}>Delete</Button>
             <Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button>
-          </ButtonToolbar>
+          </ButtonGroup>
         </Col>
       </Row>
     hostElems.push(head);
@@ -203,10 +202,10 @@ export default class NetHost  extends React.Component {
             <Col className="text-right" sm={1}><b>{hostKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={3}> 
-              <ButtonToolbar>
+              <ButtonGroup>
                 <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
                 <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
-              </ButtonToolbar>
+              </ButtonGroup>
             </Col>
         </Row>
         <Card collapsible expanded={viewMode}>

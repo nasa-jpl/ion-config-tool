@@ -10,8 +10,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import Glyphicon from '@strongdm/glyphicon';
+import {Badge,Button,ButtonGroup} from 'react-bootstrap';
+import {BsXLg,BsChevronDoubleDown,BsChevronDoubleRight} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import Graph from './Graph.jsx';
@@ -77,23 +77,22 @@ export default class GraphList  extends React.Component {
 
     var form =
       <FormControl bssize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewGraph}/>;
-    const icon = 'remove';
     return (
-      <div>
+      <Container fluid>
         <hr />
         <Row>
           <Col className="text-right" sm={2}><b>New Graph Name:</b></Col>
           <Col sm={1}>{form}</Col>
           <Col sm={1}>(no spaces)</Col>
           <Col sm={2}>
-            <ButtonToolbar>
-              <Button bssize="sm" variant="primary" onClick={this.submitNewGraph}>Submit</Button>
-              <Button bssize="sm" variant="success" onClick={this.nonewgraph}><Glyphicon glyph={icon} /></Button>
-            </ButtonToolbar>
+            <ButtonGroup>
+              <Button variant="outline-primary" onClick={this.submitNewGraph}>Submit</Button>
+              <Button variant="outline-success" onClick={this.nonewgraph}><BsXLg/></Button>
+            </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
         </Row>
-      </div>
+      </Container>
     );
   };
 
@@ -104,7 +103,7 @@ export default class GraphList  extends React.Component {
     const newGraph = this.state.newGraph;
     const graphs = this.props.graphs;
 
-    const expandIcon = expandMode? 'chevron-down' : 'chevron-right';
+    const expandIcon = expandMode? <BsChevronDoubleDown/>: <BsChevronDoubleRight/>;
 
     const dimNewGraph = newGraph?  true : false ;
     const graphCnt = '(' + Object.keys(graphs).length.toString() + ')';
@@ -145,25 +144,26 @@ export default class GraphList  extends React.Component {
     }
     return (
       <Container fluid>
+        <hr />
         <Row>
-          <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Graph List</Badge></Col>
-            <Col className="text-right" sm={1}><b>{name}</b></Col>
-            <Col className="text-left"  sm={2}>Contact Graphs {graphCnt}</Col>
+            <Col className="text-right" sm={1}><h5><Badge pill variant="secondary">Graph List</Badge></h5></Col>
+            <Col className="text-right" sm={1}><h6><b>{name}</b></h6></Col>
+            <Col className="text-left"  sm={2}><h6>Contact Graphs {graphCnt}</h6></Col>
             <Col sm={3}> 
-              <ButtonToolbar>
-                <Button bssize="sm" variant="primary" disabled={dimNewGraph} onClick={this.newgraph}>New Contact Graph</Button>  
-                <Button bssize="sm" variant="success" onClick={this.expand}><Glyphicon glyph={expandIcon}/>{' '}</Button>
-              </ButtonToolbar>
+              <ButtonGroup>
+                <Button variant="outline-primary" disabled={dimNewGraph} onClick={this.newgraph}>New Contact Graph</Button>  
+                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+              </ButtonGroup>
             </Col>
-          </div>
         </Row>
         <Row>
           {graphEntry}
         </Row>
-        <Card collapsible expanded={expandMode}>
-          {graphList}
-        </Card>
+        {expandMode && (
+          <Card>
+            {graphList}
+          </Card>
+        )}
       </Container>
     )
   };

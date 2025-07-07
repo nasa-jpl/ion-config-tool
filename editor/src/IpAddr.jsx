@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Button,ButtonToolbar} from 'react-bootstrap';
+import {Button,ButtonGroup} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
 export default class IpAddr  extends React.Component {
@@ -70,9 +70,9 @@ export default class IpAddr  extends React.Component {
     const pos = this.getPosition();
     const label  = addMode? "New " + tail : pos + " ) " + tail;
 
-    const chgbtn = addMode? "" : <Button bssize="sm" variant="primary" onClick={this.change}>{changeLabel}</Button>;
-    const delbtn = addMode? "" : <Button bssize="sm" variant="danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
-    const addbtn = addMode? <Button bssize="sm" variant="primary" onClick={this.add}>Add</Button> : "";
+    const chgbtn = addMode? "" : <Button variant="outline-primary" onClick={this.change}>{changeLabel}</Button>;
+    const delbtn = addMode? "" : <Button variant="outline-danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
+    const addbtn = addMode? <Button variant="outline-primary" onClick={this.add}>Add</Button> : "";
 
     let msg = this.state.nameMsg;
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
@@ -85,18 +85,16 @@ export default class IpAddr  extends React.Component {
     return (
       <Container fluid>
         <Row>
-          <div className="row mt-4">
             <Col className="text-right" sm={2}><b>{label}</b></Col>
             <Col sm={2}>{form}</Col>
             <Col sm={3}> 
-              <ButtonToolbar>
+              <ButtonGroup>
                 {chgbtn}
                 {delbtn}
                 {addbtn}
-              </ButtonToolbar>
+              </ButtonGroup>
             </Col>
             <Col sm={5}>{alert}</Col>
-          </div>
         </Row>
       </Container>
     )

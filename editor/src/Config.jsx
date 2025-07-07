@@ -11,8 +11,8 @@ import PropTypes from 'prop-types';
 import "date-format-lite";
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
-import {BsFillXSquareFill} from "react-icons/bs";
+import {Badge,Button,ButtonGroup} from 'react-bootstrap';
+import {BsXLg} from "react-icons/bs";
 import {BsChevronDoubleDown} from "react-icons/bs";
 import {BsChevronDoubleRight} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
@@ -46,10 +46,10 @@ export default class Config  extends React.Component {
       <Row key="head">
         <Col sm={5}> <Badge bssize="lg" variant="default">Config File Editor</Badge></Col>
         <Col sm={2}>
-          <ButtonToolbar>
-            <Button bssize="sm" variant="danger" onClick={this.deleteOn}>Delete</Button>
-            <Button bssize="sm" variant="success"  onClick={this.noedit}><BsFillXSquareFill/></Button>
-          </ButtonToolbar>
+          <ButtonGroup>
+            <Button variant="outline-danger" onClick={this.deleteOn}>Delete</Button>
+            <Button variant="outline-success"  onClick={this.noedit}><BsFillXSquareFill/></Button>
+          </ButtonGroup>
         </Col>
         <Col sm={5}>{deleteAlert}</Col>
       </Row>;
@@ -139,14 +139,13 @@ export default class Config  extends React.Component {
       </FormControl>;
     const icon = 'remove';
     return (
-      <div>
-        <hr />
+      <>
         <Col className="text-right" sm={2}><b>Select new command:</b></Col>
         <Col sm={2}>{form}</Col>
         <Col sm={1}>
-          <Button bssize="sm" variant="success"  onClick={this.nonewcmd}><BsFillXSquareFill/></Button>
+          <Button bssize="sm" variant="outline-success"  onClick={this.nonewcmd}><BsXLg/></Button>
         </Col>
-      </div>
+      </>
     );
     //return form;
   }
@@ -155,12 +154,12 @@ export default class Config  extends React.Component {
     //<Col sm={1}>
     //</Col>
     return (
-      <Alert variant="danger">
+      <Alert variant="outline-danger">
         <b>Confirm delete of config file and all its commands?</b>
-        <ButtonToolbar>
-          <Button bssize="sm" variant="danger"  onClick={this.delete}>Delete</Button>
-          <Button bssize="sm" variant="success" onClick={this.deleteOff}>Cancel</Button>
-        </ButtonToolbar>
+        <ButtonGroup>
+          <Button variant="outline-danger"  onClick={this.delete}>Delete</Button>
+          <Button variant="outline-success" onClick={this.deleteOff}>Cancel</Button>
+        </ButtonGroup>
       </Alert>);
   };
   makeInfo() {
@@ -198,21 +197,19 @@ export default class Config  extends React.Component {
     <div style={{backgroundColor: '#E1FAD2'}}>
       <Container fluid>
         <Row>
-          <div className="row mt-4">
             <Col className="text-right" sm={1}> <Badge bssize="lg" variant="default">Config File</Badge></Col>
             <Col className="text-right" sm={1}><b>{this.props.name}</b></Col>
             <Col className="text-left"  sm={3}>{content}</Col>
             <Col sm={4}> 
-              <ButtonToolbar>
-                <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
-                <Button bssize="sm" variant="info" onClick={this.info}>{infoTag}</Button>
-                <Button bssize="sm" variant="primary" onClick={this.saveme}>Save File</Button> 
-                <Button bssize="sm" variant="primary" disabled={dimNewCmd} onClick={this.newcmd}>New Command</Button>        
-                <Button bssize="sm" variant="success"  onClick={this.toggle}> {icon}{' '}</Button>
-              </ButtonToolbar>
+              <ButtonGroup>
+                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
+                <Button variant="outline-info" onClick={this.info}>{infoTag}</Button>
+                <Button variant="outline-primary" onClick={this.saveme}>Save File</Button> 
+                <Button variant="outline-primary" disabled={dimNewCmd} onClick={this.newcmd}>New Command</Button>        
+                <Button variant="outline-success"  onClick={this.toggle}> {icon}{' '}</Button>
+              </ButtonGroup>
             </Col>
-          </div>
         </Row>
         <Row>
           {cmdEntry}
@@ -220,12 +217,16 @@ export default class Config  extends React.Component {
         <Card collapsible expanded={viewMode}>
           {viewPanel}
         </Card>
-        <Card collapsible expanded={configOpen}>
-          {this.makeInfo()} 
-        </Card>
-        <Card  collapsible expanded={expandMode}>
-          {this.props.children}
-        </Card>
+        {configOpen && (
+          <Card>
+            {this.makeInfo()} 
+          </Card>
+        )}
+        {expandMode && (
+          <Card>
+            {this.props.children}
+          </Card>
+        )}
       </Container>
       </div>
     )
