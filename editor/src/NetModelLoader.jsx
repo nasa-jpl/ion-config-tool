@@ -44,14 +44,11 @@ export default class NetModelLoader extends React.Component {
     return true;
   }
   // EXTRACT extractModel
-  extractModel() {
+  extractModel(modelObj) {
     // extract the Net config JSON structure &
     // flatten the data structures for efficient access
 
     // make short names for state objects
-    // NO EXTRACT
-    const modelObj = this.state.modelJson;
-    // END NO EXTRACT
     var net = this.state.net;
     var hosts = this.state.netHosts;
     var nodes = this.state.netNodes;
@@ -233,24 +230,19 @@ export default class NetModelLoader extends React.Component {
   };
   handleFileLoad = (e) => {
     // now we operate on the file contents, since loading is complete
-    //console.log("result: " + e.target.result);
-    console.log("$$$$$ extract model!");
-    var json = {};
-    var newState = Object.assign({},this.state);
+    // Store the contents as a JSON object
+    var contents = {};
     try {
-      json = JSON.parse(e.target.result);
+      contents = JSON.parse(e.target.result);
     }
     catch (err) {
       this.setError("Failed to parse the JSON file. " + err);
       return;
     }
-    //console.log("Parse result: " + JSON.stringify(json));
-    newState.modelJson = json;
-    this.setState(newState);
-    if (!this.extractModel()) // extract & flatten model into state
+
+    if (!this.extractModel(contents)) // extract & flatten model into state
       return;                 // skip the load transaction on failure
 
-    //console.log("model object = " + JSON.stringify(this.state.modelJson));
     var tran = {
       action: "LOAD-NET-MODEL",
       netModel: this.state.net,
