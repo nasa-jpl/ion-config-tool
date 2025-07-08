@@ -48,7 +48,7 @@ export default class Config  extends React.Component {
         <Col sm={2}>
           <ButtonGroup>
             <Button variant="outline-danger" onClick={this.deleteOn}>Delete</Button>
-            <Button variant="outline-success"  onClick={this.noedit}><BsFillXSquareFill/></Button>
+            <Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button>
           </ButtonGroup>
         </Col>
         <Col sm={5}>{deleteAlert}</Col>
