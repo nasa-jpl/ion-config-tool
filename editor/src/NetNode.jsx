@@ -85,7 +85,7 @@ export default class NetNode  extends React.Component {
     const icon = 'remove';
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Badge bssize="lg" variant="default">Net Node Editor</Badge></Col>
+        <Col sm={5}> <Badge bg="secondary" text="light">Net Node Editor</Badge></Col>
         <Col sm={2}>
           <ButtonToolbar>
             <Button variant="outline-danger"   onClick={this.delete}>Delete</Button>
@@ -152,7 +152,7 @@ export default class NetNode  extends React.Component {
   makeNodeViewer() {
     //console.log(">>makeNodeElems " + JSON.stringify(this.state));
     var nodeElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">Net Node Viewer</Badge></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">Net Node Viewer</Badge></Col></Row>;
     nodeElems.push(head);
     const keyElem = this.makeNodeElem("","text",this.state.nodeKey,"Node Name",1,true,"");
     nodeElems.push(keyElem);
@@ -206,7 +206,7 @@ export default class NetNode  extends React.Component {
     return (
       <Container fluid>
         <Row>
-            <Col className="text-right" sm={1}><h6><Badge bssize="lg" variant="default">Net Node</Badge></h6></Col>
+            <Col className="text-right" sm={1}><h6><Badge bg="secondary" text="light">Net Node</Badge></h6></Col>
             <Col className="text-right" sm={1}><b>{nodeKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={3}> 

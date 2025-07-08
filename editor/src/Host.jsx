@@ -98,7 +98,7 @@ export default class Host  extends React.Component {
     const hostKey = this.props.name;
     const head  = 
       <Row key="head">
-        <Col sm={5}><Badge bssize="lg" variant="default">ION Host Editor</Badge></Col>
+        <Col sm={5}><Badge bg="secondary" text="light">ION Host Editor</Badge></Col>
         <Col sm={1}><Button bssize="sm" variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     hostElems.push(head);
@@ -147,7 +147,7 @@ export default class Host  extends React.Component {
   makeHostViewer() {
     console.log(">>makeHostViewer" + JSON.stringify(this.state));
     var hostElems = [];
-    const head = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">ION Host Viewer</Badge></Col></Row>;
+    const head = <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">ION Host Viewer</Badge></Col></Row>;
     hostElems.push(head);
     const nameElem = this.makeHostElem("","text",this.props.name,"Host Name",1,true,"");
     hostElems.push(nameElem);
@@ -219,7 +219,7 @@ export default class Host  extends React.Component {
     <div style={{backgroundColor: '#DBF4DC'}}>
      <Container fluid>
         <Row>
-            <Col className="text-right" sm={1}><h6><Badge variant="default">ION Host</Badge></h6></Col>
+            <Col className="text-right" sm={1}><h6><Badge bg="secondary" text="light">ION Host</Badge></h6></Col>
             <Col className="text-right" sm={1}><b>{hostKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.state.desc}</Col>
             <Col sm={3}> 

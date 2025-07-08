@@ -301,7 +301,7 @@ export default class Command  extends React.Component {
 
     const head  =
       <Row key="head">
-        <Col sm={5}> <Badge bssize="lg" variant="default">Command Editor</Badge></Col>
+        <Col sm={5}> <Badge bg="secondary" text="light">Command Editor</Badge></Col>
         <Col sm={4}>
           <ButtonGroup>
             <Button variant="outline-info" onClick={this.dict}>{dictLabel}</Button>
@@ -336,7 +336,7 @@ export default class Command  extends React.Component {
       entryPanel = this.makeFileEntry();
     const head  =
       <Row key="head">
-        <Col sm={5}><Badge bssize="lg" variant="default">Command Viewer</Badge></Col>
+        <Col sm={5}><Badge bg="secondary" text="light">Command Viewer</Badge></Col>
         <Col sm={3}>
           <ButtonGroup>
             <Button variant="outline-info" onClick={this.dict}>{dictLabel}</Button>
@@ -415,7 +415,7 @@ export default class Command  extends React.Component {
     return (
       <div>
         <Row>
-          <Col sm={4}><Badge variant="default">Command File Entry</Badge></Col>
+          <Col sm={4}><Badge bg="secondary" text="light">Command File Entry</Badge></Col>
           <Col className="text-left" sm={3}>
              <b>Last updated: </b>{this.props.lastUpdate}
           </Col>
@@ -467,7 +467,7 @@ export default class Command  extends React.Component {
     return (
       <div>
         <Row>
-          <Col sm={1} className="text-left"><Badge variant="default">Command Dictionary</Badge></Col>
+          <Col sm={1} className="text-left"><Badge bg="secondary" text="light">Command Dictionary</Badge></Col>
         </Row>
         <Row>
           <Col sm={2} className="text-left"><b>{cmdTypeKey}</b></Col>
@@ -554,7 +554,7 @@ export default class Command  extends React.Component {
     <div style={{backgroundColor: '#F2F9C8'}}>
       <Container fluid>
         <Row>
-          <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Command</Badge></Col>
+          <Col className="text-right" sm={1}><Badge bg="secondary" text="light">Command</Badge></Col>
           <Col className="text-right" sm={1}><b>{this.props.name}</b></Col>
           <Col sm={3}> 
             <FormControl readOnly="true" bssize="sm" type="text" value={cmdStr} />

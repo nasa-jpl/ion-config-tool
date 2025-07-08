@@ -1134,7 +1134,7 @@ export default class IonModel  extends React.Component {
     var modelElems = [];
     const head  = 
       <Row key="head">
-        <Col sm={4}><Badge bssize="lg" variant="default">ION Model Editor</Badge></Col>
+        <Col sm={4}><Badge bg="secondary" text="light">ION Model Editor</Badge></Col>
         <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     modelElems.push(head);
@@ -1177,7 +1177,7 @@ export default class IonModel  extends React.Component {
   makeIonViewer() {
     //console.log(">>makeModelElems " + JSON.stringify(this.state));
     var modelElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">ION Model Viewer</Badge></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">ION Model Viewer</Badge></Col></Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"ION Model Name",1,true,"");
     modelElems.push(nameElem);
@@ -1271,7 +1271,7 @@ export default class IonModel  extends React.Component {
       <div>
         <hr />
         <Row>
-          <Col className="text-left"  sm={1}><h3><Badge pill variant="default">ION Model</Badge></h3></Col>
+          <Col className="text-left"  sm={1}><h3><Badge pill bg="light">ION Model</Badge></h3></Col>
           <Col className="text-right" sm={1}><b>{name}</b></Col>
           <Col className="text-left"  sm={2}>{this.state.desc}</Col>
           <Col sm={6}> 

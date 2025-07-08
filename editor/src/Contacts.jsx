@@ -38,8 +38,8 @@ export default class Contacts  extends React.Component {
     const readMode = !this.state.editMode;
     var AttrElems = [];
     const head  =  readMode? 
-        <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">Contacts Viewer</Badge></Col></Row>
-      : <Row key="head"><Col sm={5}> <Badge bssize="lg" variant="default">Contacts Editor</Badge></Col> 
+        <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">Contacts Viewer</Badge></Col></Row>
+      : <Row key="head"><Col sm={5}> <Badge bg="secondary" text="light">Contacts Editor</Badge></Col> 
         <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><BsXLg/></Button></Col></Row> ;
     AttrElems.push(head);
     const nameElem = this.makeContactsAttrElem("","text",this.props.name,"Contacts Name",1,true,"");
@@ -82,7 +82,7 @@ export default class Contacts  extends React.Component {
       <Container fluid>
         <Row>
           <div className="row mt-4">
-            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Contacts</Badge></Col>
+            <Col className="text-right" sm={1}><Badge bg="secondary" text="light">Contacts</Badge></Col>
             <Col className="text-right" sm={1}><b>{name}</b></Col>
             <Col className="text-right" sm={1}><b>graph</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>

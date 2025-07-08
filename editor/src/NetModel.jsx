@@ -1242,7 +1242,7 @@ export default class NetModel  extends React.Component {
     var modelElems = [];
     const head  = 
       <Row key="head">
-        <Col sm={4}><h3><Badge variant="default">Net Model Editor</Badge></h3></Col>
+        <Col sm={4}><h3><Badge bg="secondary" text="light">Net Model Editor</Badge></h3></Col>
         <Col sm={1}><Button bssize="sm" variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     modelElems.push(head);
@@ -1260,7 +1260,7 @@ export default class NetModel  extends React.Component {
   makeNetViewer() {
     //console.log(">>makeModelElems " + JSON.stringify(this.state));
     var modelElems = [];
-    const head  = <Row key="head"><Col sm={2}><h3><Badge variant="default">Network Model Viewer</Badge></h3></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}><h3><Badge bg="secondary" text="light">Network Model Viewer</Badge></h3></Col></Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"Network Model Name",1,true,"");
     modelElems.push(nameElem);
@@ -1322,7 +1322,7 @@ export default class NetModel  extends React.Component {
       <div>
         <hr />
         <Row>
-          <Col className="text-left"  sm={1}><h3><Badge pill variant="secondary">Net Model</Badge></h3></Col>
+          <Col className="text-left"  sm={1}><h3><Badge pill bg="light">Net Model</Badge></h3></Col>
           <Col className="text-right" sm={1}><h3><b>{this.state.name}</b></h3></Col>
           <Col className="text-left"  sm={2}><h3>{this.state.desc}</h3></Col>
           <Col sm={6}> 

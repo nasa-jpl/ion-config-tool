@@ -44,7 +44,7 @@ export default class Config  extends React.Component {
       deleteAlert = this.makeDeleteAlertElem();
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Badge bssize="lg" variant="default">Config File Editor</Badge></Col>
+        <Col sm={5}> <Badge bg="secondary" text="light">Config File Editor</Badge></Col>
         <Col sm={2}>
           <ButtonGroup>
             <Button variant="outline-danger" onClick={this.deleteOn}>Delete</Button>
@@ -73,7 +73,7 @@ export default class Config  extends React.Component {
     var configElems = [];
     const content = this.props.configType.content;
     const program = this.props.configType.program;
-    const head  = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">Config File Viewer</Badge></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">Config File Viewer</Badge></Col></Row>;
     configElems.push(head);
     const nameElem = this.makeConfigElem("","text",this.props.name,"Config File Name",1,true,"");
     configElems.push(nameElem);
@@ -197,7 +197,7 @@ export default class Config  extends React.Component {
     <div style={{backgroundColor: '#E1FAD2'}}>
       <Container fluid>
         <Row>
-            <Col className="text-right" sm={1}> <Badge bssize="lg" variant="default">Config File</Badge></Col>
+            <Col className="text-right" sm={1}> <Badge bg="secondary" text="light">Config File</Badge></Col>
             <Col className="text-right" sm={1}><b>{this.props.name}</b></Col>
             <Col className="text-left"  sm={3}>{content}</Col>
             <Col sm={4}> 

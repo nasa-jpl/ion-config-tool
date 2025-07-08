@@ -108,7 +108,7 @@ export default class NetHop  extends React.Component {
     const icon = 'remove';
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Badge bssize="lg" variant="default">Net Hop Editor</Badge></Col>
+        <Col sm={5}> <Badge bg="secondary" text="light">Net Hop Editor</Badge></Col>
         <Col sm={2}>
           <ButtonToolbar>
             <Button variant="outline-danger"   onClick={this.delete}>Delete</Button>
@@ -217,7 +217,7 @@ export default class NetHop  extends React.Component {
   makeHopViewer() {
     //console.log(">>makeHopElems " + JSON.stringify(this.state));
     var hopElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">Net Hop Viewer</Badge></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">Net Hop Viewer</Badge></Col></Row>;
     hopElems.push(head);
     const keyElem = this.makeHopElem("","text",this.state.hopKey,"Hop Name",2,true,"");
     hopElems.push(keyElem);
@@ -281,7 +281,7 @@ export default class NetHop  extends React.Component {
     return (
       <Container fluid>
         <Row>
-            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Net Hop</Badge></Col>
+            <Col className="text-right" sm={1}><Badge bg="secondary" text="light">Net Hop</Badge></Col>
             <Col className="text-right" sm={2}><b>{hopKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={3}> 

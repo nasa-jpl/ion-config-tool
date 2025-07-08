@@ -99,7 +99,6 @@ export default class NetAddr  extends React.Component {
     if (errmsg !== '') {
       alert = this.makeAlertElem(errmsg);
     } else if (warnmsg !== '') {
-      //Modal returned here is not rendering, thus is excluded from DOM
       warnpopup = this.makeDuplicateIPWarn(warnmsg);
     }
 
@@ -125,6 +124,7 @@ export default class NetAddr  extends React.Component {
             <Col sm={5}>{alert}</Col>
         </Row>
       </Container>
+      {warnpopup}
       </div>
     )
   };

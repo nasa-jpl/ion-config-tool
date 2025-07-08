@@ -92,7 +92,7 @@ export default class NetHost  extends React.Component {
     const hostKey = this.props.hostKey;
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Badge bssize="lg" variant="default">Net Host Editor</Badge></Col>
+        <Col sm={5}> <Badge bg="secondary" text="light">Net Host Editor</Badge></Col>
         <Col sm={2}>
           <ButtonGroup>
             <Button variant="outline-danger"   onClick={this.delete}>Delete</Button>
@@ -134,7 +134,7 @@ export default class NetHost  extends React.Component {
   makeHostViewer() {
     //console.log(">>makeHostElems " + JSON.stringify(this.state));
     var hostElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">Net Host Viewer</Badge></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">Net Host Viewer</Badge></Col></Row>;
     hostElems.push(head);
     const keyElem = this.makeHostElem("","text",this.state.hostKey,"Host Name",1,true,"");
     hostElems.push(keyElem);
@@ -198,7 +198,7 @@ export default class NetHost  extends React.Component {
     return (
       <Container fluid>
         <Row>
-            <Col className="text-right" sm={1}><h6><Badge variant="default">Net Host</Badge></h6></Col>
+            <Col className="text-right" sm={1}><h6><Badge bg="secondary" text="light">Net Host</Badge></h6></Col>
             <Col className="text-right" sm={1}><b>{hostKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={3}> 

@@ -65,8 +65,8 @@ export default class Graph  extends React.Component {
     const readMode = !this.state.editMode;
     var graphElems = [];
     const head  =  readMode? 
-        <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">Graph Viewer</Badge></Col></Row>
-      : <Row key="head"><Col sm={5}> <Badge bssize="lg" variant="default">Graph Editor</Badge></Col> 
+        <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">Graph Viewer</Badge></Col></Row>
+      : <Row key="head"><Col sm={5}> <Badge bg="secondary" text="light">Graph Editor</Badge></Col> 
         <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><BsXLg/></Button></Col></Row> ;
     graphElems.push(head);
     const nameElem = this.makeGraphAttrElem("","text",this.props.name,"Graph Name",1,true,"");
@@ -126,7 +126,7 @@ export default class Graph  extends React.Component {
     <div style={{backgroundColor: '#9DD1A0'}}>
       <Container fluid>
         <Row>
-            <Col className="text-right" sm={1}><Badge bssize="lg" variant="default">Graph</Badge></Col>
+            <Col className="text-right" sm={1}><Badge bg="secondary" text="light">Graph</Badge></Col>
             <Col className="text-right" sm={1}><b>{name}</b></Col>
             <Col className="text-right" sm={1}>contact graph</Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>

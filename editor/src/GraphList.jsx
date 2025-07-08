@@ -146,7 +146,7 @@ export default class GraphList  extends React.Component {
       <Container fluid>
         <hr />
         <Row>
-            <Col className="text-right" sm={1}><h5><Badge pill variant="secondary">Graph List</Badge></h5></Col>
+            <Col className="text-right" sm={1}><h5><Badge pill bg="primary" text="light">Graph List</Badge></h5></Col>
             <Col className="text-right" sm={1}><h6><b>{name}</b></h6></Col>
             <Col className="text-left"  sm={2}><h6>Contact Graphs {graphCnt}</h6></Col>
             <Col sm={3}> 

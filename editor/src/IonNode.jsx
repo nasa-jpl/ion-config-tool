@@ -121,7 +121,7 @@ export default class IonNode  extends React.Component {
     var nodeElems = [];
     const head  = 
       <Row key="head">
-        <Col sm={5}> <Badge variant="default">ION Node Editor</Badge></Col>
+        <Col sm={5}> <Badge bg="secondary" text="light">ION Node Editor</Badge></Col>
         <Col sm={1}><Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     nodeElems.push(head);
@@ -181,7 +181,7 @@ export default class IonNode  extends React.Component {
   makeNodeViewer() {
     //console.log(">>makeNodeElems " + JSON.stringify(this.state));
     var nodeElems = [];
-    const head  = <Row key="head"><Col sm={2}> <Badge bssize="lg" variant="default">ION Node Viewer</Badge></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">ION Node Viewer</Badge></Col></Row>;
     nodeElems.push(head);
     const nameElem = this.makeNodeElem("","text",this.props.name,"ION Node Name",1,true,"");
     nodeElems.push(nameElem);
@@ -259,7 +259,7 @@ export default class IonNode  extends React.Component {
     <div style={{backgroundColor: '#A5E6A7'}}>
       <Container fluid>
         <Row>
-            <Col className="text-right" sm={1}><h6><Badge variant="default">ION Node</Badge></h6></Col>
+            <Col className="text-right" sm={1}><h6><Badge bg="secondary" text="light">ION Node</Badge></h6></Col>
             <Col className="text-right" sm={1}><b>{nodeKey}</b></Col>
             <Col className="text-right" sm={1}><b>ipn: {this.props.nodeNum}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
