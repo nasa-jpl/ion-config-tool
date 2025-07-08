@@ -215,6 +215,7 @@ export default class IonNode  extends React.Component {
     return (
       <div>
         {nodeElems}
+        <hr />
       </div>
     );
   };
@@ -275,11 +276,9 @@ export default class IonNode  extends React.Component {
         <Row>
           {configEntry}
         </Row>
-        {viewMode && (
-          <Card>
+        <Card collapsible expanded={viewMode}>
             {viewPanel}
-          </Card>
-        )}
+        </Card>
         {expandMode && (
           <Card>
             {this.props.children}

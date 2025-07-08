@@ -46,13 +46,12 @@ export default class IonModelLoader extends React.Component {
   };
 
   // EXTRACT extractModel
-  extractModel() {
+  extractModel(modelObj) {
     // extract the Ion config JSON structure &
     // flatten the data structures for efficient access
 
     // NO EXTRACT
     // make short names for state objects
-    const modelObj = this.state.modelJson;
     var ion = this.state.ion;
     var hosts = this.state.hosts;
     var ipaddrs = this.state.ipaddrs;
@@ -376,19 +375,17 @@ export default class IonModelLoader extends React.Component {
     // now we operate on the file contents, since loading is complete
     //console.log("result: " + e.target.result);
     console.log("$$$$$ extract model!");
-    var json = {};
+    var content = {};
     var newState = Object.assign({},this.state);
     try {
-      json = JSON.parse(e.target.result);
+      content = JSON.parse(e.target.result);
     }
     catch (err) {
       this.setError("Failed to parse the JSON file. " + err);
       return;
     }
     //console.log("Parse result: " + JSON.stringify(json));
-    newState.modelJson = json;
-    this.setState(newState);
-    if (!this.extractModel()) // extract & flatten model into state
+    if (!this.extractModel(content)) // extract & flatten model into state
       return;                 // skip the load transaction on failure
 
     //console.log("model object = " + JSON.stringify(this.state.modelJson));

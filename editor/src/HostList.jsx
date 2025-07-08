@@ -80,7 +80,6 @@ export default class HostList  extends React.Component {
 
     var form =
       <FormControl bssize="sm" type="text" value={id} spellCheck="false" onChange={this.handleNewHost}/>;
-    const icon = 'remove';
     return (
       <Container fluid>
         <hr />
@@ -91,7 +90,7 @@ export default class HostList  extends React.Component {
           <Col sm={2}>
             <ButtonGroup>
               <Button variant="outline-primary" onClick={this.submitNewHost}>Submit</Button>
-              <Button variant="outline-success" onClick={this.nonewnode}><BsXLg/></Button>
+              <Button variant="outline-success" onClick={this.nonewhost}><BsXLg/></Button>
             </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>

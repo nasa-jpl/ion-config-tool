@@ -181,7 +181,6 @@ export default class Host  extends React.Component {
     return (
       <div style={{backgroundColor: '#E1FAD2'}}>
         {hostElems}
-        <hr />
         {listline}
         {ipAddrList}
       </div>
