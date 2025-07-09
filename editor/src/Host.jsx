@@ -220,7 +220,7 @@ export default class Host  extends React.Component {
      <Container fluid>
         <Row>
             <Col className="text-right" sm={1}><h6><Badge bg="secondary" text="light">ION Host</Badge></h6></Col>
-            <Col className="text-right" sm={1}><b>{hostKey}</b></Col>
+            <Col className="text-left" sm={1}><b>{hostKey}</b></Col>
             <Col className="text-left"  sm={2}>{this.state.desc}</Col>
             <Col sm={3}> 
               <ButtonGroup>

@@ -191,21 +191,17 @@ export default class NetModelLoader extends React.Component {
     // check for alert
     let msg = this.state.errMsg;
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
-    var form = 
-          <Form.Control 
-            type = "file"
-            id ="netmodel" 
-            label=""
-            accept=".json"
-            onChange={this.handleFileChange}
-          />
-    let icon = "remove";
+    var form =
+      <Form.Group controlId="formFile" className="mb-3">
+        <Form.Control type="file" accept=".json"/>
+      </Form.Group>;
+
     return (
       <Container fluid>
         <hr />
-        <Row>
+        <Row>    
           <Col className="text-right" sm={2}><b>Net Model File (.json)</b></Col>
-          <Col sm={2}>{form}</Col>
+          <Col sm={3}>{form}</Col>
           <Col sm={2}>
             <ButtonGroup>
               <Button variant="outline-primary" onClick={this.load}>Submit</Button>

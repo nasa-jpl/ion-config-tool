@@ -127,7 +127,7 @@ export default class Graph  extends React.Component {
       <Container fluid>
         <Row>
             <Col className="text-right" sm={1}><Badge bg="secondary" text="light">Graph</Badge></Col>
-            <Col className="text-right" sm={1}><b>{name}</b></Col>
+            <Col className="text-left" sm={2}><b>{name}</b></Col>
             <Col className="text-right" sm={1}>contact graph</Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={2}> 

@@ -120,9 +120,9 @@ export default class HostList  extends React.Component {
       <Container fluid>
         <hr />
         <Row>
-            <Col className="text-right" sm={1}><h5><Badge pill bg="primary" text="light">ION Host List</Badge></h5></Col>
-            <Col className="text-right" sm={1}><h6><b>{name}</b></h6></Col>
-            <Col className="text-left"  sm={2}><h6>ION Host Machines {hostCnt}</h6></Col>
+            <Col className="text-left" sm={1}><h5><Badge pill bg="primary" text="light">ION Host List</Badge></h5></Col>
+            <Col className="text-left" sm={2}><h6><b>{name}</b></h6></Col>
+            <Col className="text-left" sm={2}><h6>ION Host Machines {hostCnt}</h6></Col>
             <Col sm={3}> 
               <ButtonGroup>
                 <Button variant="outline-primary" disabled={dimNewHost} onClick={this.newhost}>New Ion Host</Button>  

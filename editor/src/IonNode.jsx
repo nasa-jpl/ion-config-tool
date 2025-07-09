@@ -260,10 +260,10 @@ export default class IonNode  extends React.Component {
       <Container fluid>
         <Row>
             <Col className="text-right" sm={1}><h6><Badge bg="secondary" text="light">ION Node</Badge></h6></Col>
-            <Col className="text-right" sm={1}><b>{nodeKey}</b></Col>
+            <Col className="text-left" sm={1}><b>{nodeKey}</b></Col>
             <Col className="text-right" sm={1}><b>ipn: {this.props.nodeNum}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
-            <Col sm={3}> 
+            <Col sm={4}> 
               <ButtonGroup>
                 <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
                 <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>

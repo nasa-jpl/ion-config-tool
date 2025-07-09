@@ -13,6 +13,7 @@ import {Col,Row} from 'react-bootstrap';
 import {Button, ButtonGroup} from 'react-bootstrap';
 import {BsXLg} from "react-icons/bs";
 import {Alert} from 'react-bootstrap';
+import {Form} from 'react-bootstrap';
 
 import cmdTypes     from './json/cmdTypes.json';
 import paramTypes   from './json/paramTypes.json';
@@ -332,15 +333,10 @@ export default class IonModelLoader extends React.Component {
     let msg = this.state.errMsg;
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
     var form =
-      <FormControl
-        id="ionmodel"
-        name="name"
-        type="file"
-        label="Label"
-        accept=".json"
-        className="inputClass"
-        onChange={this.handleFileChange}
-      />;
+      <Form.Group controlId="formFile" className="mb-3">
+        <Form.Control type="file" accept=".json"/>
+      </Form.Group>;
+
     let icon = "remove";
     console.log("IonModelLoader render div");
     return (
@@ -348,11 +344,11 @@ export default class IonModelLoader extends React.Component {
           <hr />
           <Row>
           <Col className="text-right" sm={2}><b>Ion Model File (.json)</b></Col>
-          <Col sm={2}>{form}</Col>
+          <Col sm={3}>{form}</Col>
           <Col sm={2}>
             <ButtonGroup>
-              <Button bssize="sm" variant="outline-primary" onClick={this.load}>Submit</Button>
-              <Button bssize="sm" variant="outline-success" onClick={this.props.noLoadIonModel}><BsXLg/></Button>
+              <Button variant="outline-primary" onClick={this.load}>Submit</Button>
+              <Button variant="outline-success" onClick={this.props.noLoadIonModel}><BsXLg/></Button>
             </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>

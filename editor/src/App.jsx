@@ -584,7 +584,7 @@ export default class App extends React.Component {
             <Button  size="sm" variant="outline-primary" disabled={dimNetBtns} onClick={this.newNetModel.bind(this)}>New</Button>
           </ButtonGroup>
         </Col>
-        <Col sm={2}>
+        <Col sm={3}>
           <h4><b>...can initialize a new...</b></h4>
         </Col>
         <Col className="text-right" sm={2}><h4><b>ION Model File</b></h4></Col>
@@ -1766,7 +1766,6 @@ export default class App extends React.Component {
         <Navbar bg="light" variant="light">
           <h3>ION Configuration Editor  4.9.0b0</h3>
         </Navbar>
-        <Container fluid>
             {modelBtnsElem}
             {newNet}
             {netLoader}
@@ -1774,7 +1773,6 @@ export default class App extends React.Component {
             {newIon}
             {ionLoader}
             {ionModelElem}
-        </Container>
       </Container>
     </div>
     );

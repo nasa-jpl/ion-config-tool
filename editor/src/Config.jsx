@@ -198,7 +198,7 @@ export default class Config  extends React.Component {
       <Container fluid>
         <Row>
             <Col className="text-right" sm={1}> <Badge bg="secondary" text="light">Config File</Badge></Col>
-            <Col className="text-right" sm={1}><b>{this.props.name}</b></Col>
+            <Col className="text-left"  sm={2}><b>{this.props.name}</b></Col>
             <Col className="text-left"  sm={3}>{content}</Col>
             <Col sm={4}> 
               <ButtonGroup>

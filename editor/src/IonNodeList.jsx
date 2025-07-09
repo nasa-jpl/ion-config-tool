@@ -175,9 +175,9 @@ export default class IonNodeList  extends React.Component {
       <Container fluid>
         <hr />
         <Row>
-            <Col className="text-right" sm={1}><h5><Badge pill bg="primary" text="light">ION Node List</Badge></h5></Col>
-            <Col className="text-right" sm={1}><h6><b>{name}</b></h6></Col>
-            <Col className="text-left"  sm={2}><h6>ION Node Servers {nodeCnt}</h6></Col>
+            <Col className="text-left" sm={1}><h5><Badge pill bg="primary" text="light">ION Node List</Badge></h5></Col>
+            <Col className="text-left" sm={2}><h6><b>{name}</b></h6></Col>
+            <Col className="text-left" sm={2}><h6>ION Node Servers {nodeCnt}</h6></Col>
             <Col sm={3}> 
               <ButtonGroup>
                 <Button variant="outline-primary" disabled={dimNewIonNode} onClick={this.newnode}>New Ion Node</Button>  

@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {ButtonGroup, FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
 import {Badge,Button} from 'react-bootstrap';
-import {Table, Card} from 'react-bootstrap';
+import {Table, Card, Container} from 'react-bootstrap';
 import {BsXLg} from "react-icons/bs";
 import {BsChevronDoubleDown} from "react-icons/bs";
 import {BsChevronDoubleRight} from "react-icons/bs";
@@ -1135,14 +1135,14 @@ export default class IonModel  extends React.Component {
     const head  = 
       <Row key="head">
         <Col sm={4}><Badge bg="secondary" text="light">ION Model Editor</Badge></Col>
-        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><BsXLg/></Button></Col>
+        <Col sm={1}><Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     modelElems.push(head);
-    const nameElem = this.makeModelElem("name","text",this.state.name,"ION Model Name",1,false,"");
+    const nameElem = this.makeModelElem("name","text",this.state.name,"ION Model Name",2,false,"");
     modelElems.push(nameElem);
     const descElem = this.makeModelElem("desc","text",this.state.desc,"Description",2,false,"");
     modelElems.push(descElem);
-    const numElem  = this.makeModelElem("nextNodeNum","number",this.state.nextNodeNum,"Next Node Num",1,false,"(for new Node)");
+    const numElem  = this.makeModelElem("nextNodeNum","number",this.state.nextNodeNum,"Next Node Num",2,false,"(for new Node)");
     modelElems.push(numElem);
     // build contactGraph selector
     const contactFunc = this.handleIonChange.bind(null,"currentContacts");
@@ -1162,8 +1162,8 @@ export default class IonModel  extends React.Component {
     const contElem = 
       <Row key="contacts">
         <Col className="text-right" sm={2}><b>Current Contacts Name</b></Col>
-        <Col sm={1} value={contacts}>{show}</Col>
-        <Col sm={2} type="select" value={contacts} readOnly="false">{form}</Col>
+        <Col sm={2} value={contacts}>{show}</Col>
+        <Col sm={3} type="select" value={contacts} readOnly="false">{form}</Col>
         <Col sm={2} ></Col>
       </Row>;
     modelElems.push(contElem);
@@ -1179,13 +1179,13 @@ export default class IonModel  extends React.Component {
     var modelElems = [];
     const head  = <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">ION Model Viewer</Badge></Col></Row>;
     modelElems.push(head);
-    const nameElem = this.makeModelElem("name","text",this.state.name,"ION Model Name",1,true,"");
+    const nameElem = this.makeModelElem("name","text",this.state.name,"ION Model Name",2,true,"");
     modelElems.push(nameElem);
     const descElem = this.makeModelElem("desc","text",this.state.desc,"Description",2,true,"");
     modelElems.push(descElem);
-    const numElem  = this.makeModelElem("nextNodeNum","text",this.state.nextNodeNum,"Next Node Num",1,true,"");
+    const numElem  = this.makeModelElem("nextNodeNum","text",this.state.nextNodeNum,"Next Node Num",2,true,"");
     modelElems.push(numElem);
-    const contactsElem  = this.makeModelElem("currentContacts","text",this.state.currentContacts,"Current Contacts Graph",1,true,"");
+    const contactsElem  = this.makeModelElem("currentContacts","text",this.state.currentContacts,"Current Contacts Graph",2,true,"");
     modelElems.push(contactsElem);
 
     return (
@@ -1268,39 +1268,43 @@ export default class IonModel  extends React.Component {
         viewPanel = this.makeIonViewer();
 
     return (
-      <div>
-        <hr />
-        <Row>
-          <Col className="text-left"  sm={1}><h3><Badge pill bg="light">ION Model</Badge></h3></Col>
-          <Col className="text-right" sm={1}><b>{name}</b></Col>
-          <Col className="text-left"  sm={2}>{this.state.desc}</Col>
-          <Col sm={6}> 
-            <ButtonGroup>
-              <Button bssize="sm" variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-              <Button bssize="sm" variant="outline-info" onClick={this.view}>{viewLabel}</Button>
-              <Button bssize="sm" variant="outline-info" onClick={this.showSurveys}>{showSurveyTag}</Button>
-              <Button bssize="sm" variant="outline-primary" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
-              <Button bssize="sm" variant="outline-primary" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
-              <Button bssize="sm" variant="outline-danger" onClick={this.showDeleteWarn}>Delete Model</Button>
-              <Button bssize="sm" variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
-            </ButtonGroup>
-          </Col>
-          <Col sm={2}> {alertit} </Col>
-        </Row>
+      <>
+        <Container fluid>
+          <hr />
+          <Row>
+            <Col className="text-left"  sm={2}><h2><Badge pill bg="light">ION Model</Badge></h2></Col>
+            <Col className="text-left"  sm={2}><h5><b>{name}</b></h5></Col>
+            <Col className="text-right" sm={2}><h6>{this.state.desc}</h6></Col>
+            <Col sm={6}> 
+              <ButtonGroup>
+                <Button bssize="sm" variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
+                <Button bssize="sm" variant="outline-info" onClick={this.view}>{viewLabel}</Button>
+                <Button bssize="sm" variant="outline-info" onClick={this.showSurveys}>{showSurveyTag}</Button>
+                <Button bssize="sm" variant="outline-primary" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
+                <Button bssize="sm" variant="outline-primary" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
+                <Button bssize="sm" variant="outline-danger" onClick={this.showDeleteWarn}>Delete Model</Button>
+                <Button bssize="sm" variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+              </ButtonGroup>
+            </Col>
+            <Col sm={2}> {alertit} </Col>
+          </Row>
+        </Container>
         {offerSurveys}
         {showPopoutWin}
         {showDeleteWarnModal}
-        <Card collapsible expanded={viewMode}>
-          {viewPanel}
-        </Card>
-        {expandMode && (
-          <Card>
-            {ionHosts}
-            {ionNodeList}
-            {graphList}
+        <Container fluid>
+          <Card collapsible expanded={viewMode}>
+            {viewPanel}
           </Card>
-        )}
-      </div>
+          {expandMode && (
+            <Card>
+              {ionHosts}
+              {ionNodeList}
+              {graphList}
+            </Card>
+          )}
+        </Container>
+      </>
     );
 
   };

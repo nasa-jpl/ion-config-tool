@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonGroup} from 'react-bootstrap';
-import {Card} from 'react-bootstrap';
+import {Container,Card} from 'react-bootstrap';
 import {BsXLg} from "react-icons/bs";
 import {BsChevronDoubleDown} from "react-icons/bs";
 import {BsChevronDoubleRight} from "react-icons/bs";
@@ -1242,11 +1242,11 @@ export default class NetModel  extends React.Component {
     var modelElems = [];
     const head  = 
       <Row key="head">
-        <Col sm={4}><h3><Badge bg="secondary" text="light">Net Model Editor</Badge></h3></Col>
+        <Col sm={4}><Badge bg="secondary" text="light">Net Model Editor</Badge></Col>
         <Col sm={1}><Button bssize="sm" variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     modelElems.push(head);
-    const nameElem = this.makeModelElem("name","text",this.state.name,"Net Model Name",1,false,"");
+    const nameElem = this.makeModelElem("name","text",this.state.name,"Net Model Name",2,false,"");
     modelElems.push(nameElem);
     const descElem = this.makeModelElem("desc","text",this.state.desc,"Description",2,false,"");
     modelElems.push(descElem);
@@ -1260,9 +1260,9 @@ export default class NetModel  extends React.Component {
   makeNetViewer() {
     //console.log(">>makeModelElems " + JSON.stringify(this.state));
     var modelElems = [];
-    const head  = <Row key="head"><Col sm={2}><h3><Badge bg="secondary" text="light">Network Model Viewer</Badge></h3></Col></Row>;
+    const head  = <Row key="head"><Col sm={2}><Badge bg="secondary" text="light">Network Model Viewer</Badge></Col></Row>;
     modelElems.push(head);
-    const nameElem = this.makeModelElem("name","text",this.state.name,"Network Model Name",1,true,"");
+    const nameElem = this.makeModelElem("name","text",this.state.name,"Network Model Name",2,true,"");
     modelElems.push(nameElem);
     const descElem = this.makeModelElem("desc","text",this.state.desc,"Description",2,true,"");
     modelElems.push(descElem);
@@ -1319,12 +1319,13 @@ export default class NetModel  extends React.Component {
         viewPanel = this.makeNetViewer();
 
     return (
-      <div>
-        <hr />
+      <>
+      <hr />
+      <Container fluid>
         <Row>
-          <Col className="text-left"  sm={1}><h3><Badge pill bg="light">Net Model</Badge></h3></Col>
-          <Col className="text-right" sm={1}><h3><b>{this.state.name}</b></h3></Col>
-          <Col className="text-left"  sm={2}><h3>{this.state.desc}</h3></Col>
+          <Col className="text-left"  sm={2}><h2><Badge pill bg="light">Net Model</Badge></h2></Col>
+          <Col className="text-left"  sm={2}><h5><b>{this.state.name}</b></h5></Col>
+          <Col className="text-right" sm={2}><h6>{this.state.desc}</h6></Col>
           <Col sm={6}> 
             <ButtonGroup>
               <Button bssize="sm" variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
@@ -1336,6 +1337,8 @@ export default class NetModel  extends React.Component {
           </Col>
           <Col sm={4}>{alert}</Col>
         </Row>
+      </Container>
+      <Container fluid>
         <Card collapsible expanded={viewMode}>
           {viewPanel}
         </Card>
@@ -1346,7 +1349,8 @@ export default class NetModel  extends React.Component {
             {hopList}
           </Card>
         )}
-      </div>
+      </Container>
+      </>
     );
   };
   
