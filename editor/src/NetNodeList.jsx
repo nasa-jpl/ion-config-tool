@@ -112,10 +112,10 @@ export default class NetNodeList  extends React.Component {
       <Container fluid>
         <hr />
         <Row>
-            <Col className="text-right" sm={1}><h5><Badge pill bg="primary" text="light">Net Node List</Badge></h5></Col>
-            <Col className="text-right" sm={1}><h6><b>{name}</b></h6></Col>
-            <Col className="text-left"  sm={2}><h6>DTN Nodes  {nodeCnt}</h6></Col>
-            <Col sm={3}> 
+            <Col className="text-left" sm={1}><h5><Badge pill bg="primary" text="light">Net Node List</Badge></h5></Col>
+            <Col className="text-left" sm={2}><h6><b>{name}</b></h6></Col>
+            <Col className="text-left" sm={2}><h6>DTN Nodes  {nodeCnt}</h6></Col>
+            <Col> 
               <ButtonGroup>
                 <Button bssize="sm" variant="outline-primary" disabled={dimNewNode} onClick={this.newnode}>New Node</Button>  
                 <Button bssize="sm" variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>

@@ -101,12 +101,12 @@ export default class NetHost  extends React.Component {
         </Col>
       </Row>
     hostElems.push(head);
-    const keyElem = this.makeHostElem("","text",this.state.hostKey,"Host Name",1,true,"");
+    const keyElem = this.makeHostElem("","text",this.state.hostKey,"Host Name",2,true,"");
     hostElems.push(keyElem);
     const descElem = this.makeHostElem("desc","text",this.state.desc,"Description",2,false,"");
     hostElems.push(descElem);
     const listline = <Row key="listline">
-        <Col className="text-right" sm={2}><b>Host IP Addresses</b></Col>
+        <Col className="text-right" sm={3}><b>Host IP Addresses</b></Col>
         <Col sm={3}>(each item edited separately)</Col>
       </Row>;
 
@@ -136,7 +136,7 @@ export default class NetHost  extends React.Component {
     var hostElems = [];
     const head  = <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">Net Host Viewer</Badge></Col></Row>;
     hostElems.push(head);
-    const keyElem = this.makeHostElem("","text",this.state.hostKey,"Host Name",1,true,"");
+    const keyElem = this.makeHostElem("","text",this.state.hostKey,"Host Name",2,true,"");
     hostElems.push(keyElem);
     const descElem = this.makeHostElem("desc","text",this.state.desc,"Description",2,true,"");
     hostElems.push(descElem);
@@ -145,7 +145,7 @@ export default class NetHost  extends React.Component {
     console.log("+++++Viewer ipaddrs:" + JSON.stringify(addrs) );
     const note = (addrs.length > 0)? "(list)" : "(none)";
     const listline = <Row key="listline">
-        <Col className="text-right" sm={2}><b>Host IP Addresses</b></Col>
+        <Col className="text-right" sm={3}><b>Host IP Addresses</b></Col>
         <Col sm={3}>{note}</Col>
       </Row>;
 
@@ -172,7 +172,7 @@ export default class NetHost  extends React.Component {
         <FormControl readOnly={read} bssize="sm" type={type} value={val} spellCheck="false" onChange={this.handleHostChange.bind(null,prop)} />;
     return (
       <Row key={label}>
-        <Col className="text-right" sm={2}><b>{label}</b></Col>
+        <Col className="text-right" sm={3}><b>{label}</b></Col>
         <Col sm={size} value={val}>{form}</Col>
         <Col sm={size} value={2}>{note}</Col>
       </Row>
@@ -200,8 +200,8 @@ export default class NetHost  extends React.Component {
         <Row>
             <Col className="text-right" sm={1}><h6><Badge bg="secondary" text="light">Net Host</Badge></h6></Col>
             <Col className="text-right" sm={1}><b>{hostKey}</b></Col>
-            <Col className="text-left"  sm={2}>{this.props.desc}</Col>
-            <Col sm={3}> 
+            <Col className="text-left"  sm={3}>{this.props.desc}</Col>
+            <Col sm={2}> 
               <ButtonGroup>
                 <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
                 <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>

@@ -73,7 +73,7 @@ export default class NetNode  extends React.Component {
     const selectElem = 
       <Row key={label}>
         <Col className="text-right" sm={2}><b>{label}</b></Col>
-        <Col sm={1} value={value}>{showform}</Col>
+        <Col sm={2} value={value}>{showform}</Col>
         <Col sm={2} type="select" value={value} readOnly="false">{selectform}</Col>
         <Col sm={2} ></Col>
       </Row>;
@@ -94,7 +94,7 @@ export default class NetNode  extends React.Component {
         </Col>
       </Row>;
     nodeElems.push(head);
-    const keyElem = this.makeNodeElem("","text",this.state.nodeKey,"Node Name",1,true,"");
+    const keyElem = this.makeNodeElem("","text",this.state.nodeKey,"Node Name",2,true,"");
     nodeElems.push(keyElem);
     const descElem = this.makeNodeElem("desc","text",this.state.desc,"Description",2,false,"");
     nodeElems.push(descElem);
@@ -154,11 +154,11 @@ export default class NetNode  extends React.Component {
     var nodeElems = [];
     const head  = <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">Net Node Viewer</Badge></Col></Row>;
     nodeElems.push(head);
-    const keyElem = this.makeNodeElem("","text",this.state.nodeKey,"Node Name",1,true,"");
+    const keyElem = this.makeNodeElem("","text",this.state.nodeKey,"Node Name",2,true,"");
     nodeElems.push(keyElem);
     const descElem = this.makeNodeElem("desc","text",this.state.desc,"Description",2,true,"");
     nodeElems.push(descElem);
-    const hostElem = this.makeNodeElem("nodeHost","text",this.state.nodeHost,"Host Name",1,true,"");
+    const hostElem = this.makeNodeElem("nodeHost","text",this.state.nodeHost,"Host Name",2,true,"");
     nodeElems.push(hostElem);
     const typeElem = this.makeNodeElem("nodeType","text",this.state.nodeType,"Node Type",1,true,"");
     nodeElems.push(typeElem);
@@ -208,7 +208,7 @@ export default class NetNode  extends React.Component {
         <Row>
             <Col className="text-right" sm={1}><h6><Badge bg="secondary" text="light">Net Node</Badge></h6></Col>
             <Col className="text-right" sm={1}><b>{nodeKey}</b></Col>
-            <Col className="text-left"  sm={2}>{this.props.desc}</Col>
+            <Col className="text-left"  sm={3}>{this.props.desc}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
                 <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>

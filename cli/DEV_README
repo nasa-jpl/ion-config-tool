@@ -7,7 +7,6 @@ Developers notes after installing node.js and cloning repo
 To create and run the CLI tools do the following steps
 in the cli/ directory
 
-     > npm config set legacy-peer-deps true
      > npm install
      > ./make.sh
 

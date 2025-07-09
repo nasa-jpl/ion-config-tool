@@ -112,7 +112,7 @@ export default class NetAddr  extends React.Component {
       <div>
       <Container fluid>
         <Row>
-            <Col className="text-right" sm={2}><b>{label}</b></Col>
+            <Col className="text-right" sm={3}><b>{label}</b></Col>
             <Col sm={2}>{form}</Col>
             <Col sm={3}> 
               <ButtonGroup>

@@ -96,7 +96,7 @@ export default class NetHop  extends React.Component {
     const selectElem = 
       <Row key={label}>
         <Col className="text-right" sm={2}><b>{label}</b></Col>
-        <Col sm={1} value={value}>{showform}</Col>
+        <Col sm={2} value={value}>{showform}</Col>
         <Col sm={2} type="select" value={value} readOnly="false">{selectform}</Col>
         <Col sm={2} ></Col>
       </Row>;
@@ -192,7 +192,7 @@ export default class NetHop  extends React.Component {
     const portNumElem = this.makeHopElem("portNum", "number", this.state.portNum,"Port Number",1,false,"");
     hopElems.push(portNumElem);
 
-    const rateElem = this.makeHopElem("maxRate","number",this.state.maxRate,"Max Transmission Rate",1,false,"(bytes per sec)");
+    const rateElem = this.makeHopElem("maxRate","number",this.state.maxRate,"Max Transmission Rate",2,false,"(bytes per sec)");
     hopElems.push(rateElem);
     // build ltpLayer selector
     param    = "symmetric";
@@ -223,24 +223,24 @@ export default class NetHop  extends React.Component {
     hopElems.push(keyElem);
     const descElem = this.makeHopElem("desc","text",this.state.desc,"Description",3,true,"");
     hopElems.push(descElem);
-    const fromNodeElem = this.makeHopElem("fromNode","text",this.state.fromNode,"From Node Name",1,true,"");
+    const fromNodeElem = this.makeHopElem("fromNode","text",this.state.fromNode,"From Node Name",2,true,"");
     hopElems.push(fromNodeElem);
-    const fromIPElem = this.makeHopElem("fromIP", "text",this.state.fromIP,"From IP Addr",1,true,"");
+    const fromIPElem = this.makeHopElem("fromIP", "text",this.state.fromIP,"From IP Addr",2,true,"");
     hopElems.push(fromIPElem);
-    const toNodeElem = this.makeHopElem("toNode","text",this.state.toNode,"To Node Name",1,true,"");
+    const toNodeElem = this.makeHopElem("toNode","text",this.state.toNode,"To Node Name",2,true,"");
     hopElems.push(toNodeElem);
-    const toIPElem = this.makeHopElem("toIP","text",this.state.toIP,"To IP Addr",1,true,"");
+    const toIPElem = this.makeHopElem("toIP","text",this.state.toIP,"To IP Addr",2,true,"");
     hopElems.push(toIPElem);
-    const bpLayerElem = this.makeHopElem("bpLayer","text",this.state.bpLayer,"BP Layer Protocol CLA",1,true,"");
+    const bpLayerElem = this.makeHopElem("bpLayer","text",this.state.bpLayer,"BP Layer Protocol CLA",2,true,"");
     hopElems.push(bpLayerElem);
     const ltpLayerElem = this.makeHopElem("ltpLayer","text",this.state.ltpLayer,"LTP Underlying Layer Protocol",1,true,"");
     hopElems.push(ltpLayerElem);
-    const portNumElem = this.makeHopElem("portNum","number",this.state.portNum,"Port Number",1,true,"");
+    const portNumElem = this.makeHopElem("portNum","number",this.state.portNum,"Port Number",2,true,"");
     hopElems.push(portNumElem);
-    const rateElem = this.makeHopElem("maxRate","number",this.state.maxRate,"Max Transmission Rate",1,true,"(bytes per sec)");
+    const rateElem = this.makeHopElem("maxRate","number",this.state.maxRate,"Max Transmission Rate",2,true,"(bytes per sec)");
     hopElems.push(rateElem);
     var symStr = this.getBoolStr(this.state.symmetric);
-    const symmetricElem = this.makeHopElem("symmetric","text",symStr,"Symmetric 2-way Hop",1,true,"");
+    const symmetricElem = this.makeHopElem("symmetric","text",symStr,"Symmetric 2-way Hop",2,true,"");
     hopElems.push(symmetricElem);
 
     return (
@@ -282,8 +282,8 @@ export default class NetHop  extends React.Component {
       <Container fluid>
         <Row>
             <Col className="text-right" sm={1}><Badge bg="secondary" text="light">Net Hop</Badge></Col>
-            <Col className="text-right" sm={2}><b>{hopKey}</b></Col>
-            <Col className="text-left"  sm={2}>{this.props.desc}</Col>
+            <Col className="text-right" sm={1}><b>{hopKey}</b></Col>
+            <Col className="text-left"  sm={3}>{this.props.desc}</Col>
             <Col sm={3}> 
               <ButtonToolbar>
                 <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>

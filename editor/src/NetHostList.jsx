@@ -107,10 +107,10 @@ export default class NetHostList  extends React.Component {
       <Container fluid>
         <hr />
        <Row>
-            <Col className="text-right" sm={1}><h5><Badge pill bg="primary" text="light">Net Host List</Badge></h5></Col>
-            <Col className="text-right" sm={1}><h6><b>{name}</b></h6></Col>
-            <Col className="text-left"  sm={2}><h6>Network Host Machines {hostCnt}</h6></Col>
-            <Col sm={3}> 
+            <Col className="text-left" lg={1}><h5><Badge pill bg="primary" text="light">Net Host List</Badge></h5></Col>
+            <Col className="text-left" lg={2}><h6><b>{name}</b></h6></Col>
+            <Col className="text-left" lg={2}><h6>Network Host Machines {hostCnt}</h6></Col>
+            <Col> 
               <ButtonGroup>
                 <Button variant="outline-primary" disabled={dimNewHost} onClick={this.newhost}>New Host</Button>  
                 <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>

@@ -5,9 +5,8 @@ Author: Dave Hanks
 Developers notes after installing node.js and cloning repo
 
 To begin running, modifying and debugging the ION config
-tool, in the editor directory run these commands:
+tool, in the editor directory run this command:
 
-     > npm config set legacy-peer-deps true
      > npm install
 
 This should bring in all the dependencies that the ION
@@ -27,7 +26,13 @@ For building and deploying the ION config tool for
 distribution see DOBUILD and DORELEASE in the ionconfig
 directory.
 
-NOTE: I, Dave Hanks, always used the Chrome browser for
-development and testing. If you do not use Chrome your
-mileage may vary. Happy coding!
+NOTE: I used Visual Studio Code on a Mac to develop, test 
+and debug. It has a very rich set of tools built into the 
+IDE that makes this easier than using the built-in 
+developer tools included with most web browsers (ie. Chrome). 
+
+Visual Studio Code is open-source and available for 
+download for all major platforms. 
+
+  https://code.visualstudio.com/
 
