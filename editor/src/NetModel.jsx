@@ -1329,7 +1329,7 @@ export default class NetModel  extends React.Component {
           <Col sm={6}> 
             <ButtonGroup>
               <Button bssize="sm" variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-              <Button bssize="sm" variant="outline-dark" onClick={this.view}>{viewLabel}</Button>
+              <Button bssize="sm" variant="outline-info" onClick={this.view}>{viewLabel}</Button>
               <Button bssize="sm" variant="outline-primary" disabled={dimBuildIon} onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
               <Button bssize="sm" variant="outline-primary" disabled={dimSaveNet}  onClick={this.saveModel}>Save Model</Button>
               <Button bssize="sm" variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
