@@ -75,8 +75,8 @@ export default class NetHostList  extends React.Component {
           <Col sm={1}>(no spaces)</Col>
           <Col sm={2}>
             <ButtonGroup>
-              <Button bssize="sm" variant="outline-primary" onClick={this.submitNewHost}>Submit</Button>
-              <Button bssize="sm" variant="outline-success" onClick={this.nonewhost}><BsXLg/></Button>
+              <Button variant="outline-primary" onClick={this.submitNewHost}>Submit</Button>
+              <Button variant="outline-success" onClick={this.nonewhost}><BsXLg/></Button>
             </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>

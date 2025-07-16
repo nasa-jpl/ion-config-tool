@@ -40,7 +40,7 @@ export default class SurveyPopout extends React.Component {
       );
     } else {
       return (
-        <Button bssize="sm" variant="info" onClick={this.popout}>{label}</Button>
+        <Button variant="info" onClick={this.popout}>{label}</Button>
       );
     }
   }

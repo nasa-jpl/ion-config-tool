@@ -99,7 +99,7 @@ export default class Host  extends React.Component {
     const head  = 
       <Row key="head">
         <Col sm={5}><Badge bg="secondary" text="light">ION Host Editor</Badge></Col>
-        <Col sm={1}><Button bssize="sm" variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
+        <Col sm={1}><Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     hostElems.push(head);
     const nameElem = this.makeHostElem("","text",hostKey,"Host Name",1,true,"");
@@ -179,7 +179,7 @@ export default class Host  extends React.Component {
       ipAddrList.push(ipAddrElem);
     }
     return (
-      <div style={{backgroundColor: '#E1FAD2'}}>
+      <div style={{backgroundColor: '#C7D0D8'}}>
         {hostElems}
         {listline}
         {ipAddrList}
@@ -216,7 +216,7 @@ export default class Host  extends React.Component {
         viewPanel = this.makeHostViewer();
 
     return (
-    <div style={{backgroundColor: '#DBF4DC'}}>
+    <div style={{backgroundColor: '#E8F0F2'}}>
      <Container fluid>
         <Row>
             <Col className="text-right" sm={1}><h6><Badge bg="secondary" text="light">ION Host</Badge></h6></Col>

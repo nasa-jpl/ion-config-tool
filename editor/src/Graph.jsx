@@ -67,7 +67,7 @@ export default class Graph  extends React.Component {
     const head  =  readMode? 
         <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">Graph Viewer</Badge></Col></Row>
       : <Row key="head"><Col sm={5}> <Badge bg="secondary" text="light">Graph Editor</Badge></Col> 
-        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><BsXLg/></Button></Col></Row> ;
+        <Col sm={1}><Button variant="success"  onClick={this.noedit}><BsXLg/></Button></Col></Row> ;
     graphElems.push(head);
     const nameElem = this.makeGraphAttrElem("","text",this.props.name,"Graph Name",1,true,"");
     graphElems.push(nameElem);
@@ -123,7 +123,7 @@ export default class Graph  extends React.Component {
     const viewPanel = this.makeGraphEditorElem();
 
     return (
-    <div style={{backgroundColor: '#9DD1A0'}}>
+    <div style={{backgroundColor: '#E8F0F2'}}>
       <Container fluid>
         <Row>
             <Col className="text-right" sm={1}><Badge bg="secondary" text="light">Graph</Badge></Col>
@@ -132,9 +132,9 @@ export default class Graph  extends React.Component {
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={2}> 
               <ButtonGroup>
-                <Button bssize="sm" variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bssize="sm" variant="outline-info" onClick={this.view}>{viewLabel}</Button>
-                <Button bssize="sm" variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
+                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonGroup>
             </Col>
         </Row>

@@ -143,7 +143,7 @@ export default class Config  extends React.Component {
         <Col className="text-right" sm={2}><b>Select new command:</b></Col>
         <Col sm={2}>{form}</Col>
         <Col sm={1}>
-          <Button bssize="sm" variant="outline-success"  onClick={this.nonewcmd}><BsXLg/></Button>
+          <Button variant="outline-success"  onClick={this.nonewcmd}><BsXLg/></Button>
         </Col>
       </>
     );
@@ -194,7 +194,7 @@ export default class Config  extends React.Component {
         viewPanel = this.makeConfigViewer();
 
     return (
-    <div style={{backgroundColor: '#E1FAD2'}}>
+    <div style={{backgroundColor: '#C8D7E0'}}>
       <Container fluid>
         <Row>
             <Col className="text-right" sm={1}> <Badge bg="secondary" text="light">Config File</Badge></Col>

@@ -275,7 +275,7 @@ export default class Command  extends React.Component {
     if (editFlag) {
       return (
         <Col sm={1}>
-            <Button bssize="sm" variant="danger">??</Button>
+            <Button variant="danger">??</Button>
         </Col>
       );
     }
@@ -551,7 +551,7 @@ export default class Command  extends React.Component {
     var cmdMsg = this.makeCmdMessage();
 
     return (
-    <div style={{backgroundColor: '#F2F9C8'}}>
+    <div style={{backgroundColor: '#A8BCC8'}}>
       <Container fluid>
         <Row>
           <Col className="text-right" sm={1}><Badge bg="secondary" text="light">Command</Badge></Col>

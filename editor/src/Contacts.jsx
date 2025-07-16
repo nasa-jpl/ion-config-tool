@@ -40,7 +40,7 @@ export default class Contacts  extends React.Component {
     const head  =  readMode? 
         <Row key="head"><Col sm={2}> <Badge bg="secondary" text="light">Contacts Viewer</Badge></Col></Row>
       : <Row key="head"><Col sm={5}> <Badge bg="secondary" text="light">Contacts Editor</Badge></Col> 
-        <Col sm={1}><Button bssize="sm" variant="success"  onClick={this.noedit}><BsXLg/></Button></Col></Row> ;
+        <Col sm={1}><Button variant="success"  onClick={this.noedit}><BsXLg/></Button></Col></Row> ;
     AttrElems.push(head);
     const nameElem = this.makeContactsAttrElem("","text",this.props.name,"Contacts Name",1,true,"");
     AttrElems.push(nameElem);
@@ -88,9 +88,9 @@ export default class Contacts  extends React.Component {
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={2}> 
               <ButtonToolbar>
-                <Button bssize="sm" variant="primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bssize="sm" variant="info" onClick={this.view}>{viewLabel}</Button>
-                <Button bssize="sm" variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
+                <Button variant="primary" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="info" onClick={this.view}>{viewLabel}</Button>
+                <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonToolbar>
             </Col>
           </div>

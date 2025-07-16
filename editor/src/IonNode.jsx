@@ -215,7 +215,6 @@ export default class IonNode  extends React.Component {
     return (
       <div>
         {nodeElems}
-        <hr />
       </div>
     );
   };
@@ -256,7 +255,7 @@ export default class IonNode  extends React.Component {
 
 
     return (
-    <div style={{backgroundColor: '#A5E6A7'}}>
+    <div style={{backgroundColor: '#E8F0F2'}}>
       <Container fluid>
         <Row>
             <Col className="text-right" sm={1}><h6><Badge bg="secondary" text="light">ION Node</Badge></h6></Col>

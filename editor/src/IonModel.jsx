@@ -1277,13 +1277,13 @@ export default class IonModel  extends React.Component {
             <Col className="text-right" sm={2}><h6>{this.state.desc}</h6></Col>
             <Col sm={6}> 
               <ButtonGroup>
-                <Button bssize="sm" variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-                <Button bssize="sm" variant="outline-info" onClick={this.view}>{viewLabel}</Button>
-                <Button bssize="sm" variant="outline-info" onClick={this.showSurveys}>{showSurveyTag}</Button>
-                <Button bssize="sm" variant="outline-primary" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
-                <Button bssize="sm" variant="outline-primary" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
-                <Button bssize="sm" variant="outline-danger" onClick={this.showDeleteWarn}>Delete Model</Button>
-                <Button bssize="sm" variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
+                <Button variant="outline-info" onClick={this.showSurveys}>{showSurveyTag}</Button>
+                <Button variant="outline-primary" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
+                <Button variant="outline-primary" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
+                <Button variant="outline-danger" onClick={this.showDeleteWarn}>Delete Model</Button>
+                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonGroup>
             </Col>
             <Col sm={2}> {alertit} </Col>
@@ -1303,6 +1303,7 @@ export default class IonModel  extends React.Component {
               {graphList}
             </Card>
           )}
+          <hr />
         </Container>
       </>
     );
