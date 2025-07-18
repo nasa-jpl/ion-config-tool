@@ -95,8 +95,8 @@ export default class NetHost  extends React.Component {
         <Col sm={5}> <Badge bg="secondary" text="light">Net Host Editor</Badge></Col>
         <Col sm={2}>
           <ButtonGroup>
-            <Button variant="outline-danger"   onClick={this.delete}>Delete</Button>
-            <Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button>
+            <Button variant="danger" className="mr-1" onClick={this.delete}>Delete</Button>
+            <Button variant="success"  onClick={this.noedit}><BsXLg/></Button>
           </ButtonGroup>
         </Col>
       </Row>
@@ -203,8 +203,8 @@ export default class NetHost  extends React.Component {
             <Col className="text-left"  sm={3}>{this.props.desc}</Col>
             <Col sm={2}> 
               <ButtonGroup>
-                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
+                <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="info" onClick={this.view}>{viewLabel}</Button>
               </ButtonGroup>
             </Col>
         </Row>

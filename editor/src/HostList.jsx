@@ -89,8 +89,8 @@ export default class HostList  extends React.Component {
           <Col sm={1}>(no spaces)</Col>
           <Col sm={2}>
             <ButtonGroup>
-              <Button variant="outline-primary" onClick={this.submitNewHost}>Submit</Button>
-              <Button variant="outline-success" onClick={this.nonewhost}><BsXLg/></Button>
+              <Button variant="primary" onClick={this.submitNewHost}>Submit</Button>
+              <Button variant="success" onClick={this.nonewhost}><BsXLg/></Button>
             </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
@@ -125,8 +125,8 @@ export default class HostList  extends React.Component {
             <Col className="text-left" sm={2}><h6>ION Host Machines {hostCnt}</h6></Col>
             <Col sm={3}> 
               <ButtonGroup>
-                <Button variant="outline-primary" disabled={dimNewHost} onClick={this.newhost}>New Ion Host</Button>  
-                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+                <Button variant="primary" className="mr-1" disabled={dimNewHost} onClick={this.newhost}>New Ion Host</Button>  
+                <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonGroup>
             </Col>
         </Row>

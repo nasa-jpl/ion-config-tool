@@ -51,7 +51,7 @@ export default class NetAddr  extends React.Component {
         </Modal.Header>
         <Modal.Body>{warnmsg}</Modal.Body>
         <Modal.Footer>
-          <Button variant="outline-success" onClick={ () => this.setState({showWarnMsg : false})}>
+          <Button variant="success" onClick={ () => this.setState({showWarnMsg : false})}>
             Ok 
           </Button>
         </Modal.Footer>
@@ -88,9 +88,9 @@ export default class NetAddr  extends React.Component {
     const pos = this.getPosition();
     const label  = addMode? "New " + tail : pos + " ) " + tail;
 
-    const chgbtn = addMode? "" : <Button variant="outline-primary" onClick={this.change}>{changeLabel}</Button>;
-    const delbtn = addMode? "" : <Button variant="outline-danger" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
-    const addbtn = addMode? <Button variant="outline-primary" onClick={this.add}>Add</Button> : "";
+    const chgbtn = addMode? "" : <Button variant="primary" className="mr-1" onClick={this.change}>{changeLabel}</Button>;
+    const delbtn = addMode? "" : <Button variant="danger" className="mr-1" disabled={dimDelete} onClick={this.delete}>Delete</Button>;
+    const addbtn = addMode? <Button variant="primary" onClick={this.add}>Add</Button> : "";
 
     let errmsg = this.state.errMsg;
     let warnmsg = this.state.warnMsg;

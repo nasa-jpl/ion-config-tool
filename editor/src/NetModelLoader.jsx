@@ -212,8 +212,8 @@ export default class NetModelLoader extends React.Component {
           <Col sm={3}>{form}</Col>
           <Col sm={2}>
             <ButtonGroup>
-              <Button variant="outline-primary" onClick={this.load}>Submit</Button>
-              <Button variant="outline-success" onClick={this.props.noLoadNetModel}><BsXLg/></Button>
+              <Button variant="primary" onClick={this.load}>Submit</Button>
+              <Button variant="success" onClick={this.props.noLoadNetModel}><BsXLg/></Button>
             </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>

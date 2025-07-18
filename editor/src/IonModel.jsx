@@ -1135,7 +1135,7 @@ export default class IonModel  extends React.Component {
     const head  = 
       <Row key="head">
         <Col sm={4}><Badge bg="secondary" text="light">ION Model Editor</Badge></Col>
-        <Col sm={1}><Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
+        <Col sm={1}><Button variant="success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"ION Model Name",2,false,"");
@@ -1277,13 +1277,13 @@ export default class IonModel  extends React.Component {
             <Col className="text-right" sm={2}><h6>{this.state.desc}</h6></Col>
             <Col sm={6}> 
               <ButtonGroup>
-                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
-                <Button variant="outline-info" onClick={this.showSurveys}>{showSurveyTag}</Button>
-                <Button variant="outline-primary" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
-                <Button variant="outline-primary" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
-                <Button variant="outline-danger" onClick={this.showDeleteWarn}>Delete Model</Button>
-                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+                <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="info" className="mr-1" onClick={this.view}>{viewLabel}</Button>
+                <Button variant="info" className="mr-1" onClick={this.showSurveys}>{showSurveyTag}</Button>
+                <Button variant="primary" className="mr-1" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
+                <Button variant="primary" className="mr-1" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
+                <Button variant="danger" className="mr-1" onClick={this.showDeleteWarn}>Delete Model</Button>
+                <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonGroup>
             </Col>
             <Col sm={2}> {alertit} </Col>

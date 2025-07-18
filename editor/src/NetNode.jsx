@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonToolbar} from 'react-bootstrap';
+import {Badge,Button,ButtonGroup} from 'react-bootstrap';
 import {BsXLg} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
@@ -87,10 +87,10 @@ export default class NetNode  extends React.Component {
       <Row key="head">
         <Col sm={5}> <Badge bg="secondary" text="light">Net Node Editor</Badge></Col>
         <Col sm={2}>
-          <ButtonToolbar>
-            <Button variant="outline-danger"   onClick={this.delete}>Delete</Button>
-            <Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button>
-          </ButtonToolbar>
+          <ButtonGroup>
+            <Button variant="danger" className="mr-1" onClick={this.delete}>Delete</Button>
+            <Button variant="success"  onClick={this.noedit}><BsXLg/></Button>
+          </ButtonGroup>
         </Col>
       </Row>;
     nodeElems.push(head);
@@ -210,10 +210,10 @@ export default class NetNode  extends React.Component {
             <Col className="text-right" sm={1}><b>{nodeKey}</b></Col>
             <Col className="text-left"  sm={3}>{this.props.desc}</Col>
             <Col sm={3}> 
-              <ButtonToolbar>
-                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
-              </ButtonToolbar>
+              <ButtonGroup>
+                <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="info" onClick={this.view}>{viewLabel}</Button>
+              </ButtonGroup>
             </Col>
         </Row>
         <Card collapsible expanded={viewMode}>

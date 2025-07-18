@@ -1243,7 +1243,7 @@ export default class NetModel  extends React.Component {
     const head  = 
       <Row key="head">
         <Col sm={4}><Badge bg="secondary" text="light">Net Model Editor</Badge></Col>
-        <Col sm={1}><Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
+        <Col sm={1}><Button variant="success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     modelElems.push(head);
     const nameElem = this.makeModelElem("name","text",this.state.name,"Net Model Name",2,false,"");
@@ -1328,11 +1328,11 @@ export default class NetModel  extends React.Component {
           <Col className="text-right" sm={2}><h6>{this.state.desc}</h6></Col>
           <Col sm={6}> 
             <ButtonGroup>
-              <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-              <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
-              <Button variant="outline-primary" disabled={dimBuildIon} onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
-              <Button variant="outline-primary" disabled={dimSaveNet}  onClick={this.saveModel}>Save Model</Button>
-              <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+              <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
+              <Button variant="info" className="mr-1" onClick={this.view}>{viewLabel}</Button>
+              <Button variant="primary" className="mr-1" disabled={dimBuildIon} onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
+              <Button variant="primary" className="mr-1" disabled={dimSaveNet}  onClick={this.saveModel}>Save Model</Button>
+              <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
             </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>

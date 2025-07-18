@@ -355,8 +355,8 @@ export default class IonModelLoader extends React.Component {
           <Col sm={3}>{form}</Col>
           <Col sm={2}>
             <ButtonGroup>
-              <Button variant="outline-primary" onClick={this.load}>Submit</Button>
-              <Button variant="outline-success" onClick={this.props.noLoadIonModel}><BsXLg/></Button>
+              <Button variant="primary" className="mr-1" onClick={this.load}>Submit</Button>
+              <Button variant="success" onClick={this.props.noLoadIonModel}><BsXLg/></Button>
             </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>

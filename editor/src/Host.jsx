@@ -99,7 +99,7 @@ export default class Host  extends React.Component {
     const head  = 
       <Row key="head">
         <Col sm={5}><Badge bg="secondary" text="light">ION Host Editor</Badge></Col>
-        <Col sm={1}><Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
+        <Col sm={1}><Button variant="success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     hostElems.push(head);
     const nameElem = this.makeHostElem("","text",hostKey,"Host Name",1,true,"");
@@ -224,8 +224,8 @@ export default class Host  extends React.Component {
             <Col className="text-left"  sm={2}>{this.state.desc}</Col>
             <Col sm={3}> 
               <ButtonGroup>
-                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button> 
+                <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="info" onClick={this.view}>{viewLabel}</Button> 
               </ButtonGroup>
             </Col>
         </Row>

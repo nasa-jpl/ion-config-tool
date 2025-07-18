@@ -580,8 +580,8 @@ export default class App extends React.Component {
         <Col className="text-right" sm={2}><h4><b>Net Model File</b></h4></Col>
         <Col sm={2}>
           <ButtonGroup>
-            <Button  size="sm" variant="outline-primary" disabled={dimNetBtns} onClick={this.loadNetModel.bind(this)}>Load</Button>
-            <Button  size="sm" variant="outline-primary" disabled={dimNetBtns} onClick={this.newNetModel.bind(this)}>New</Button>
+            <Button variant="primary" className="mr-1" disabled={dimNetBtns} onClick={this.loadNetModel.bind(this)}>Load</Button>
+            <Button variant="primary" disabled={dimNetBtns} onClick={this.newNetModel.bind(this)}>New</Button>
           </ButtonGroup>
         </Col>
         <Col sm={3}>
@@ -590,8 +590,8 @@ export default class App extends React.Component {
         <Col className="text-right" sm={2}><h4><b>ION Model File</b></h4></Col>
         <Col sm={2}>
           <ButtonGroup>
-            <Button  size="sm" variant="outline-primary" disabled={dimIonBtns} onClick={this.loadIonModel.bind(this)}>Load</Button>
-            <Button  size="sm" variant="outline-primary" disabled={dimIonBtns} onClick={this.newIonModel.bind(this)}>New</Button>
+            <Button variant="primary" className="mr-1" disabled={dimIonBtns} onClick={this.loadIonModel.bind(this)}>Load</Button>
+            <Button variant="primary" disabled={dimIonBtns} onClick={this.newIonModel.bind(this)}>New</Button>
           </ButtonGroup>
         </Col>
       </Row>
@@ -755,8 +755,8 @@ export default class App extends React.Component {
         <Col sm={1}>(no spaces)</Col>
         <Col sm={2}>
           <ButtonGroup>
-            <Button size="sm" variant="outline-primary" onClick={this.submitNewNet}>Submit</Button>
-            <Button size="sm" variant="outline-success" onClick={this.noNewNetModel.bind(this)}><BsXLg/></Button>
+            <Button variant="primary" className="mr-1" onClick={this.submitNewNet}>Submit</Button>
+            <Button variant="success" onClick={this.noNewNetModel.bind(this)}><BsXLg/></Button>
           </ButtonGroup>
         </Col>
       </Row>
@@ -779,8 +779,8 @@ export default class App extends React.Component {
         <Col sm={1}>(no spaces)</Col>
         <Col sm={2}>
           <ButtonGroup>
-            <Button size="sm" variant="outline-primary" onClick={this.submitNewIon}>Submit</Button>
-            <Button size="sm" variant="outline-success" onClick={this.noNewIonModel.bind(this)}><BsXLg/></Button>
+            <Button variant="primary" className="mr-1" onClick={this.submitNewIon}>Submit</Button>
+            <Button variant="success" onClick={this.noNewIonModel.bind(this)}><BsXLg/></Button>
           </ButtonGroup>
         </Col>
         </Row>

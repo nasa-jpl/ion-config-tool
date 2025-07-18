@@ -47,8 +47,8 @@ export default class Config  extends React.Component {
         <Col sm={5}> <Badge bg="secondary" text="light">Config File Editor</Badge></Col>
         <Col sm={2}>
           <ButtonGroup>
-            <Button variant="outline-danger" onClick={this.deleteOn}>Delete</Button>
-            <Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button>
+            <Button variant="danger" className="mr-1" onClick={this.deleteOn}>Delete</Button>
+            <Button variant="success"  onClick={this.noedit}><BsXLg/></Button>
           </ButtonGroup>
         </Col>
         <Col sm={5}>{deleteAlert}</Col>
@@ -143,7 +143,7 @@ export default class Config  extends React.Component {
         <Col className="text-right" sm={2}><b>Select new command:</b></Col>
         <Col sm={2}>{form}</Col>
         <Col sm={1}>
-          <Button variant="outline-success"  onClick={this.nonewcmd}><BsXLg/></Button>
+          <Button variant="success"  onClick={this.nonewcmd}><BsXLg/></Button>
         </Col>
       </>
     );
@@ -157,8 +157,8 @@ export default class Config  extends React.Component {
       <Alert variant="outline-danger">
         <b>Confirm delete of config file and all its commands?</b>
         <ButtonGroup>
-          <Button variant="outline-danger"  onClick={this.delete}>Delete</Button>
-          <Button variant="outline-success" onClick={this.deleteOff}>Cancel</Button>
+          <Button variant="danger"  onClick={this.delete}>Delete</Button>
+          <Button variant="success" onClick={this.deleteOff}>Cancel</Button>
         </ButtonGroup>
       </Alert>);
   };
@@ -201,14 +201,14 @@ export default class Config  extends React.Component {
             <Col className="text-left"  sm={2}><b>{this.props.name}</b></Col>
             <Col className="text-left"  sm={3}>{content}</Col>
             <Col sm={4}> 
-              <ButtonGroup>
-                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
-                <Button variant="outline-info" onClick={this.info}>{infoTag}</Button>
-                <Button variant="outline-primary" onClick={this.saveme}>Save File</Button> 
-                <Button variant="outline-primary" disabled={dimNewCmd} onClick={this.newcmd}>New Command</Button>        
-                <Button variant="outline-success"  onClick={this.toggle}> {icon}{' '}</Button>
-              </ButtonGroup>
+            <ButtonGroup>
+              <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
+              <Button variant="info" className="mr-1" onClick={this.view}>{viewLabel}</Button>
+              <Button variant="info" className="mr-1" onClick={this.info}>{infoTag}</Button>
+              <Button variant="primary" className="mr-1" onClick={this.saveme}>Save File</Button> 
+              <Button variant="primary" className="mr-1" disabled={dimNewCmd} onClick={this.newcmd}>New Command</Button>        
+              <Button variant="success" onClick={this.toggle}> {icon}{' '}</Button>
+            </ButtonGroup>
             </Col>
         </Row>
         <Row>

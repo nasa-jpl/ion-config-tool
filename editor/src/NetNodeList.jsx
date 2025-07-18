@@ -81,8 +81,8 @@ export default class NetNodeList  extends React.Component {
           <Col sm={1}>(no spaces)</Col>
           <Col sm={2}>
             <ButtonGroup>
-              <Button variant="outline-primary" onClick={this.submitNewNode}>Submit</Button>
-              <Button variant="outline-success" onClick={this.nonewnode}><BsXLg/></Button>
+              <Button variant="primary" onClick={this.submitNewNode}>Submit</Button>
+              <Button variant="success" onClick={this.nonewnode}><BsXLg/></Button>
             </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
@@ -117,8 +117,8 @@ export default class NetNodeList  extends React.Component {
             <Col className="text-left" sm={2}><h6>DTN Nodes  {nodeCnt}</h6></Col>
             <Col> 
               <ButtonGroup>
-                <Button variant="outline-primary" disabled={dimNewNode} onClick={this.newnode}>New Node</Button>  
-                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+                <Button variant="primary" className="mr-1" disabled={dimNewNode} onClick={this.newnode}>New Node</Button>  
+                <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonGroup>
             </Col>
         </Row>

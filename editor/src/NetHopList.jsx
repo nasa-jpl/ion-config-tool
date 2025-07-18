@@ -89,8 +89,8 @@ export default class NetHopList  extends React.Component {
           <Col sm={1}>(no spaces)</Col>
           <Col sm={2}>
             <ButtonGroup>
-              <Button variant="outline-primary" onClick={this.submitNewHop}>Submit</Button>
-              <Button variant="outline-success" onClick={this.nonewhop}><BsXLg/></Button>
+              <Button variant="primary" onClick={this.submitNewHop}>Submit</Button>
+              <Button variant="success" onClick={this.nonewhop}><BsXLg/></Button>
             </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
@@ -126,8 +126,8 @@ export default class NetHopList  extends React.Component {
             <Col className="text-left" sm={2}><h6>Node-to-Node Hops {hopCnt}</h6></Col>
             <Col> 
               <ButtonGroup>
-                <Button variant="outline-primary" disabled={dimNewHop} onClick={this.newhop}>New Hop</Button>  
-                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+                <Button variant="primary" className="mr-1" disabled={dimNewHop} onClick={this.newhop}>New Hop</Button>  
+                <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonGroup>
             </Col>
         </Row>

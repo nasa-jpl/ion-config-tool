@@ -304,10 +304,10 @@ export default class Command  extends React.Component {
         <Col sm={5}> <Badge bg="secondary" text="light">Command Editor</Badge></Col>
         <Col sm={4}>
           <ButtonGroup>
-            <Button variant="outline-info" onClick={this.dict}>{dictLabel}</Button>
-            <Button variant="outline-info" onClick={this.entry}>{entryLabel}</Button>
-            <Button variant="outline-danger" onClick={this.delete}>Delete</Button>
-            <Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button>
+            <Button variant="info" onClick={this.dict}>{dictLabel}</Button>
+            <Button variant="info" onClick={this.entry}>{entryLabel}</Button>
+            <Button variant="danger" onClick={this.delete}>Delete</Button>
+            <Button variant="success"  onClick={this.noedit}><BsXLg/></Button>
           </ButtonGroup>
         </Col>
         <Col sm={4}>{alert}</Col>
@@ -339,8 +339,8 @@ export default class Command  extends React.Component {
         <Col sm={5}><Badge bg="secondary" text="light">Command Viewer</Badge></Col>
         <Col sm={3}>
           <ButtonGroup>
-            <Button variant="outline-info" onClick={this.dict}>{dictLabel}</Button>
-            <Button variant="outline-info" onClick={this.entry}>{entryLabel}</Button>
+            <Button variant="info" onClick={this.dict}>{dictLabel}</Button>
+            <Button variant="info" onClick={this.entry}>{entryLabel}</Button>
           </ButtonGroup>
         </Col>
       </Row>;
@@ -561,8 +561,8 @@ export default class Command  extends React.Component {
           </Col>
           <Col sm={2}>
             <ButtonGroup>
-              <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-              <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
+              <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
+              <Button variant="info" onClick={this.view}>{viewLabel}</Button>
             </ButtonGroup>
           </Col>
           <Col sm={2}> {cmdMsg} </Col>

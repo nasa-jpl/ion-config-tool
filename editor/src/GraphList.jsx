@@ -86,8 +86,8 @@ export default class GraphList  extends React.Component {
           <Col sm={1}>(no spaces)</Col>
           <Col sm={2}>
             <ButtonGroup>
-              <Button variant="outline-primary" onClick={this.submitNewGraph}>Submit</Button>
-              <Button variant="outline-success" onClick={this.nonewgraph}><BsXLg/></Button>
+              <Button variant="primary" className="mr-1" onClick={this.submitNewGraph}>Submit</Button>
+              <Button variant="success" onClick={this.nonewgraph}><BsXLg/></Button>
             </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
@@ -151,8 +151,8 @@ export default class GraphList  extends React.Component {
             <Col className="text-left" sm={2}><h6>Contact Graphs {graphCnt}</h6></Col>
             <Col sm={3}> 
               <ButtonGroup>
-                <Button variant="outline-primary" disabled={dimNewGraph} onClick={this.newgraph}>New Contact Graph</Button>  
-                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+                <Button variant="primary"  className="mr-1" disabled={dimNewGraph} onClick={this.newgraph}>New Contact Graph</Button>  
+                <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonGroup>
             </Col>
         </Row>

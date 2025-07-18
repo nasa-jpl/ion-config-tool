@@ -86,7 +86,7 @@ export default class IonNode  extends React.Component {
         <Col className="text-right" sm={2}><b>Select new config file:</b></Col>
         <Col sm={2}>{form}</Col>
         <Col sm={1}>
-          <Button variant="outline-success"  onClick={this.nonewconfig}><BsXLg/></Button>
+          <Button variant="success"  onClick={this.nonewconfig}><BsXLg/></Button>
         </Col>
       </>
     );
@@ -122,7 +122,7 @@ export default class IonNode  extends React.Component {
     const head  = 
       <Row key="head">
         <Col sm={5}> <Badge bg="secondary" text="light">ION Node Editor</Badge></Col>
-        <Col sm={1}><Button variant="outline-success"  onClick={this.noedit}><BsXLg/></Button></Col>
+        <Col sm={1}><Button variant="success"  onClick={this.noedit}><BsXLg/></Button></Col>
       </Row>;
     nodeElems.push(head);
     const nameElem = this.makeNodeElem("","text",this.props.name,"ION Node Name",1,true,"");
@@ -264,11 +264,11 @@ export default class IonNode  extends React.Component {
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={4}> 
               <ButtonGroup>
-                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
-                <Button variant="outline-primary" onClick={this.saveConfigs}>Save Configs</Button>
-                <Button variant="outline-primary" disabled={dimNewconfig} onClick={this.newconfig}>New Config File</Button>  
-                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+                <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="info" className="mr-1" onClick={this.view}>{viewLabel}</Button>
+                <Button variant="primary" className="mr-1" onClick={this.saveConfigs}>Save Configs</Button>
+                <Button variant="primary" className="mr-1" disabled={dimNewconfig} onClick={this.newconfig}>New Config File</Button>  
+                <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonGroup>
             </Col>
         </Row>

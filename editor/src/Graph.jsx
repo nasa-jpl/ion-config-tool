@@ -132,9 +132,9 @@ export default class Graph  extends React.Component {
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={2}> 
               <ButtonGroup>
-                <Button variant="outline-primary" onClick={this.edit}>{editLabel}</Button>
-                <Button variant="outline-info" onClick={this.view}>{viewLabel}</Button>
-                <Button variant="outline-success" onClick={this.expand}>{expandIcon}{' '}</Button>
+                <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
+                <Button variant="info" className="mr-1" onClick={this.view}>{viewLabel}</Button>
+                <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonGroup>
             </Col>
         </Row>
