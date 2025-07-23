@@ -13,6 +13,7 @@ import IonModelLoader from './IonModelLoader.jsx';
 import NetModelLoader from './NetModelLoader.jsx';
 import IonModel  from './IonModel.jsx';
 import NetModel  from './NetModel.jsx';
+import NodeDb from './NodeDb.jsx';
 
 // 3rd-party component imports
 import {Navbar} from 'react-bootstrap';
@@ -1773,6 +1774,9 @@ export default class App extends React.Component {
             {newIon}
             {ionLoader}
             {ionModelElem}
+      </Container>
+      <Container fluid>
+        <NodeDb/>
       </Container>
     </div>
     );
