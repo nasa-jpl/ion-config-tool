@@ -1,0 +1,7 @@
+{
+    "nodeDbUrls": {
+        "dbHost": "http://localhost:5000",
+        "hostUrl": "/hosts",
+        "nodeUrl": "/nodes"
+    }
+}

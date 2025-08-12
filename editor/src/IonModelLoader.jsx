@@ -8,7 +8,7 @@
 //                                                               
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FormControl} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import {Col,Row} from 'react-bootstrap';
 import {Button, ButtonGroup} from 'react-bootstrap';
 import {BsXLg} from "react-icons/bs";
@@ -330,7 +330,8 @@ export default class IonModelLoader extends React.Component {
     //     the html5 file input form controls its own state
     console.log("IonModelLoader render form");
     // check for alert
-    let msg = this.state.errMsg;
+    //let msg = this.state.errMsg;
+    let msg = "Alert!!! Alert!!!";
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
     var form =
       <Form.Group controlId="formFile" className="mb-3">
@@ -348,20 +349,22 @@ export default class IonModelLoader extends React.Component {
     let icon = "remove";
     console.log("IonModelLoader render div");
     return (
-        <div>
+      <Container fluid>
           <hr />
           <Row>
-          <Col className="text-right" sm={2}><b>Ion Model File (.json)</b></Col>
-          <Col sm={3}>{form}</Col>
-          <Col sm={2}>
+            <Col><b>Ion Model File (.json)</b></Col>
+          </Row>
+          <Row>
+          <Col>{form}</Col>
+          <Col>
             <ButtonGroup>
               <Button variant="primary" className="mr-1" onClick={this.load}>Submit</Button>
               <Button variant="success" onClick={this.props.noLoadIonModel}><BsXLg/></Button>
             </ButtonGroup>
           </Col>
-          <Col sm={4}>{alert}</Col>
+          <Col>{alert}</Col>
           </Row>
-        </div>
+      </Container>
     )
   };
   handleFileChange = (e) => {

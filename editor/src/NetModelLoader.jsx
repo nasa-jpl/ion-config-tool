@@ -208,15 +208,17 @@ export default class NetModelLoader extends React.Component {
       <Container fluid>
         <hr />
         <Row>    
-          <Col className="text-right" sm={2}><b>Net Model File (.json)</b></Col>
-          <Col sm={3}>{form}</Col>
-          <Col sm={2}>
+          <Col><b>Net Model File (.json)</b></Col>
+        </Row>
+        <Row>
+          <Col>{form}</Col>
+          <Col>
             <ButtonGroup>
               <Button variant="primary" onClick={this.load}>Submit</Button>
               <Button variant="success" onClick={this.props.noLoadNetModel}><BsXLg/></Button>
             </ButtonGroup>
           </Col>
-          <Col sm={4}>{alert}</Col>
+          <Col>{alert}</Col>
         </Row>
       </Container>
     )

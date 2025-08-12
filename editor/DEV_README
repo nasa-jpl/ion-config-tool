@@ -36,3 +36,30 @@ download for all major platforms.
 
   https://code.visualstudio.com/
 
+A FEW NOTES FOR FUTURE DEVELOPMENT
+
+As of July 2025, most of this application is written
+in an older style of React (components are defined as
+extending a parent React.component). This style is no
+longer the recommended way to create and maintain
+React objects. See the newer code used to download
+and manipulate the Node database for examples of the
+recommended way.
+
+If you have the time to convert the older objects into
+functional components instead of classes, go for it!
+Note that this has far reaching implications for
+managing state and properties as they are vastly different
+in the functional component style.
+
+Go to this link for more on migrating components:
+
+  https://react.dev/reference/react/Component
+
+In the meantime, the old and new styles can coexist
+happily since transpiling during the build process works
+fine.
+
+Any new React objects should be functional components
+and *not* class objects.
+

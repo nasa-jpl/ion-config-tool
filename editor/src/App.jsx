@@ -17,7 +17,7 @@ import NodeDb from './NodeDb.jsx';
 
 // 3rd-party component imports
 import {Navbar} from 'react-bootstrap';
-import {Card} from 'react-bootstrap';
+import {Tab, Tabs} from 'react-bootstrap';
 import {FormControl} from 'react-bootstrap';
 import {Button,ButtonGroup} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
@@ -595,6 +595,40 @@ export default class App extends React.Component {
             <Button variant="primary" disabled={dimIonBtns} onClick={this.newIonModel.bind(this)}>New</Button>
           </ButtonGroup>
         </Col>
+      </Row>
+    );
+  }
+
+  makeNetModelButtonsElem() {
+   var dimNetBtns = false;
+    if (this.state.makeNewNetModel ||
+        this.state.loadNetModel)
+      dimNetBtns = true;
+    return(
+      <Row className="p-3">
+        <Col>
+          <ButtonGroup>
+            <Button variant="primary" className="mr-1" disabled={dimNetBtns} onClick={this.loadNetModel.bind(this)}>Load</Button>
+            <Button variant="primary" disabled={dimNetBtns} onClick={this.newNetModel.bind(this)}>New</Button>
+          </ButtonGroup>
+        </Col>
+      </Row>
+      );
+  }
+
+  makeIonModelButtonsElem() {
+    var dimIonBtns = false;
+    if (this.state.makeNewIonModel ||
+        this.state.loadIonModel)
+      dimIonBtns = true;
+    return(
+      <Row className="p-3">
+        <Col>
+          <ButtonGroup>
+            <Button variant="primary" className="mr-1" disabled={dimIonBtns} onClick={this.loadIonModel.bind(this)}>Load</Button>
+            <Button variant="primary" disabled={dimIonBtns} onClick={this.newIonModel.bind(this)}>New</Button>
+          </ButtonGroup>
+        </Col>       
       </Row>
     );
   }
@@ -1753,6 +1787,8 @@ export default class App extends React.Component {
     console.log("$$$$$$$$$$$$$$$ App render start");
     //const modelBtnsElem  = this.state.ionModelActive?   "" : this.makeModelButtonsElem();
     const modelBtnsElem  = this.makeModelButtonsElem();
+    const netModelBtnsElem = this.makeNetModelButtonsElem();
+    const ionModelBtnsElem = this.makeIonModelButtonsElem();
     const ionLoader = this.state.loadIonModel?          this.makeIonModelLoaderElem() : "";
     const ionModelElem  = this.state.ionModelActive?    this.makeIonModelElem() : "";
     const netLoader = this.state.loadNetModel?          this.makeNetModelLoaderElem() : "";
@@ -1767,16 +1803,26 @@ export default class App extends React.Component {
         <Navbar bg="light" variant="light">
           <h3>ION Configuration Editor  4.9.0b1</h3>
         </Navbar>
-            {modelBtnsElem}
-            {newNet}
-            {netLoader}
-            {netModelElem}
-            {newIon}
-            {ionLoader}
-            {ionModelElem}
-      </Container>
-      <Container fluid>
-        <NodeDb/>
+        <Tabs
+          defaultActiveKey="netmodel"
+          className="mb=3"
+          >
+            <Tab eventKey="netmodel" title="Net Model">
+              {netModelBtnsElem}
+              {newNet}
+              {netLoader}
+              {netModelElem}
+            </Tab>
+            <Tab eventKey="ionmodel" title="ION Model">
+              {ionModelBtnsElem}
+              {newIon}
+              {ionLoader}
+              {ionModelElem}
+            </Tab>
+            <Tab eventKey="nodedb" title="Node DB">
+              <NodeDb/>
+            </Tab>
+        </Tabs>
       </Container>
     </div>
     );
