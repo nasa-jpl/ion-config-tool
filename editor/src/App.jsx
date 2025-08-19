@@ -1793,6 +1793,7 @@ export default class App extends React.Component {
     const ionModelElem  = this.state.ionModelActive?    this.makeIonModelElem() : "";
     const netLoader = this.state.loadNetModel?          this.makeNetModelLoaderElem() : "";
     const netModelElem  = this.state.netModelActive?    this.makeNetModelElem() : "";
+    const dispatch = this.dispatch.bind(this);  // make sure dispatch remembers "this"
 
     console.log("$$$$$$$$$$$$$$$ App render done");
     const newIon = this.state.makeNewIonModel? this.makeNewIonElem() : "";
@@ -1820,7 +1821,7 @@ export default class App extends React.Component {
               {ionModelElem}
             </Tab>
             <Tab eventKey="nodedb" title="Node DB">
-              <NodeDb/>
+              <NodeDb dispatch={dispatch}/>
             </Tab>
         </Tabs>
       </Container>

@@ -9,7 +9,6 @@
 
 import { useEffect, useState } from "react";
 import {Form,Container} from 'react-bootstrap';
-import {Row, Col} from 'react-bootstrap';
 import {Button,ButtonGroup} from 'react-bootstrap';
 import {Table} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';

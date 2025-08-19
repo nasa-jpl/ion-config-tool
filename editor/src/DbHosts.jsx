@@ -26,7 +26,7 @@ import nodeDB  from './json/nodeDB.json';
 //
 
 
-const DbHosts = () => {
+const DbHosts = (props) => {
   // State variables
   const [theHostTable, setHostTable]    = useState(null);  // HTML formatted table of hosts
   const [hostList, setHostList]         = useState([]);    // Raw host data returned from DB
@@ -95,7 +95,8 @@ const DbHosts = () => {
   // and if a dependency changes state.
   //
   // dependencies:
-  //    hostsLoaded -- toggle indicating whether hosts have been loaded from the db 
+  //    hostsLoaded  -- toggle hosts without destinations loaded 
+  //    loadComplete -- toggle all data loaded
   useEffect(() => {
     // Load the hosts from the db first
     if (!hostsLoaded) {
@@ -121,7 +122,8 @@ const DbHosts = () => {
       fetchDestsWithIds(destUrls);
 
     }
-
+    
+    // All loading is complete, format the host table
     if (loadComplete) {
         formatHostTable();
     }
@@ -160,6 +162,10 @@ const DbHosts = () => {
       return hosts;
   }
 
+  // formatHostTable
+  //
+  // This function is run to create the HTML representation of the
+  // host table once all the data has been loaded from the DB.
   function formatHostTable() {
     var hostTable = "";
 
@@ -197,10 +203,25 @@ const DbHosts = () => {
 
   function handleCheckboxChange(host_id) {
     console.log("checkbox "+host_id+" checked!");
+    var hostIdx = hostList.items.findIndex((host) => host.host_id === host_id);
+    if (hostIdx > -1) {
+      var isSelected = hostList.items[hostIdx].selected;
+      hostList.items[hostIdx].selected = !isSelected;
+    }
+    setHostList(hostList);
   };
 
   function importHosts() {
-      console.log("Import Hosts!!");
+    console.log("Import Hosts!!");
+    hostList.items.forEach(host => {
+      if (host.selected) {
+        const tran = {
+          action: "NEW-NET-HOST",
+          hostKey: host.hostname,
+        }
+        props.dispatch(tran);
+      }
+    });
   }
 
   return(

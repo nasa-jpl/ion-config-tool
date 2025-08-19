@@ -29,7 +29,7 @@ import nodeDB  from './json/nodeDB.json';
 //
 
 
-const NodeDb = () => {
+const NodeDb = (props) => {
   const [theError, setError] = useState(null);
 
   // Do a check to make sure the server has been specified and is 
@@ -64,7 +64,7 @@ const NodeDb = () => {
           <Col className="d-flex justify-content-center"><h1>Nodes</h1></Col>
         </Row>
         <Row>
-          <Col><DbHosts /></Col>
+          <Col><DbHosts dispatch={props.dispatch}/></Col>
           <Col><DbNodes /></Col>
         </Row>
       </Container>}
