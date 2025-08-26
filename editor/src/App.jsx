@@ -1375,6 +1375,35 @@ export default class App extends React.Component {
         console.log("New state hosts: " + JSON.stringify(newHosts));
         break;
 
+      case "NEW-NODEDB-DATA":
+        newNetHosts = Object.assign( {}, this.state.netHosts);
+        newNetNodes = Object.assign( {}, this.state.netNodes);
+
+        var dbData = transaction.dbData;
+        for (let i=0 ; i<dbData.length; i++) {
+          let dbDatum = dbData[i];
+          newNetHosts[dbDatum.host.hostname] = {
+            "id" : dbDatum.host.hostname,
+            "hostDesc" : "",
+            "ipAddrs" : dbDatum.ips
+          }
+          newNetNodes[dbDatum.node_name] = {
+            "id" : dbDatum.node_name,
+            "nodeDesc": "",
+            "nodeHost": dbDatum.host.hostname,
+            "nodeType"  : "",
+            "endpointID" : "",
+            "services" : []
+          };
+        }
+
+        this.setState({
+          netHosts: newNetHosts,
+          netNodes: newNetNodes
+        });
+        // First the host info
+        break;
+
       case "NEW-NET-HOST":
         console.log("dispatch NEW-NET-HOST called! " + transaction.hostKey);
         newNetHosts = Object.assign( {}, this.state.netHosts);

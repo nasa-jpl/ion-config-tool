@@ -8,14 +8,12 @@
 //                                                               
 
 import { useEffect, useState } from "react";
-import {Form,Container} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import {Row, Col} from 'react-bootstrap';
-import {Button} from 'react-bootstrap';
-import {Table} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
-import DbHosts from './DbHosts.jsx';
 import DbNodes from './DbNodes.jsx';
+//import DbNodes from './DbNodes_xx.jsx';
 import nodeDB  from './json/nodeDB.json';
 
 // NodeDb *must* be a functional component as opposed to a
@@ -38,7 +36,7 @@ const NodeDb = (props) => {
     var dbHost = nodeDB["nodeDbUrls"].dbHost;
 
     // Arbitrarily choose the URL for hosts
-    fetch(dbHost+"/hosts")
+    fetch(dbHost+"/nodes")
     .then(res => {
       if (!res.ok) { // error coming back from server 
         throw Error("Unable to connect to DB server at: "+dbHost);
@@ -60,12 +58,10 @@ const NodeDb = (props) => {
       <Container fluid>
         <hr />
         <Row >
-          <Col className="d-flex justify-content-center"><h1>Hosts</h1></Col>
           <Col className="d-flex justify-content-center"><h1>Nodes</h1></Col>
         </Row>
         <Row>
-          <Col><DbHosts dispatch={props.dispatch}/></Col>
-          <Col><DbNodes /></Col>
+          <Col><DbNodes dispatch={props.dispatch}/></Col>
         </Row>
       </Container>}
       <hr />
