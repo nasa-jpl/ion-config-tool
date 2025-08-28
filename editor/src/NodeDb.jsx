@@ -29,22 +29,25 @@ import nodeDB  from './json/nodeDB.json';
 
 const NodeDb = (props) => {
   const [theError, setError] = useState(null);
+  const [dbHost, setDbHost]  = useState("");
 
   // Do a check to make sure the server has been specified and is 
   // responding.
   useEffect(() => {
-    var dbHost = nodeDB["nodeDbUrls"].dbHost;
+    var url = nodeDB["nodeDbUrls"].dbHost;
 
     // Arbitrarily choose the URL for hosts
-    fetch(dbHost+"/nodes")
+    fetch(url+"/nodes")
     .then(res => {
       if (!res.ok) { // error coming back from server 
-        throw Error("Unable to connect to DB server at: "+dbHost);
+        throw Error("Unable to connect to DB server at: "+url);
+      } else {
+        setDbHost(url);
       }
     })
     .catch(err => {
       if (err.name === "TypeError") {
-        setError("Unable to reach Node DB server at: "+dbHost);
+        setError("Unable to reach Node DB server at: "+url);
       } else {
         // auto catches network / connection error
         setError(err.message);
@@ -57,6 +60,11 @@ const NodeDb = (props) => {
       {!theError && 
       <Container fluid>
         <hr />
+        <Row>
+          <Col className="d-flex justify-content-left">
+             <Alert variant="success" show='true'>Connected to {dbHost}</Alert>
+          </Col>
+        </Row>
         <Row >
           <Col className="d-flex justify-content-center"><h1>Nodes</h1></Col>
         </Row>

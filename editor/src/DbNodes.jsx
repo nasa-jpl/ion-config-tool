@@ -10,8 +10,8 @@
 //                                                               
 
 import {useEffect, useState} from "react";
-import {Form,Container} from 'react-bootstrap';
-import {Button,ButtonGroup} from 'react-bootstrap';
+import {Form,Container,Row,Col} from 'react-bootstrap';
+import {Button,InputGroup} from 'react-bootstrap';
 import {Table} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 
@@ -32,9 +32,10 @@ const DbNodes = (props) => {
   const [nodeTable, setNodeTable]       = useState(null);  // HTML formatted table of hosts
   const [hostList, setHostList]         = useState([]);    // Raw host data returned from DB
   const [hostsLoaded, setHostsLoaded]   = useState(false); // Flag indicating raw host data (without destinations) loaded
-  const [IPsLoaded, setIPsLoaded]       = useState(false); // Flag indicating raw host data (without destinations) loaded
-  const [nodeList, setNodeList]         = useState([]);
-  const [nodesLoaded, setNodesLoaded]   = useState(false);
+  const [IPsLoaded, setIPsLoaded]       = useState(false); // Flag indicating IPs for hosts loaded
+  const [nodeList, setNodeList]         = useState([]);    // Raw node data returned from DB
+  const [nodesLoaded, setNodesLoaded]   = useState(false); // Flag indicating raw node data loaded
+  const [netModelName, setNetModelName] = useState("");    // Name to affix to the Net Model upon import
 
   // Extract the parent URLs from the JSON configs
   var dbHost = nodeDB["nodeDbUrls"].dbHost;
@@ -320,9 +321,15 @@ const DbNodes = (props) => {
     const tran = {
       action: "NEW-NODEDB-DATA",
       dbData: dbDataToSend,
+      netModelName: netModelName
     }
     props.dispatch(tran);
 
+  }
+  
+  // Event listener for when the net model name field changes
+  function updateNetModelName(e) {
+    setNetModelName(e.target.value);
   }
 
   // Render the DbNodes object
@@ -330,11 +337,24 @@ const DbNodes = (props) => {
     <>
       {nodeTable && 
       <Container fluid>
-          {nodeTable}
-          <ButtonGroup>
-            <Button variant="primary" onClick={importData}>Import</Button>
-          </ButtonGroup>
-
+        <Row>
+          <Col>
+            {nodeTable}
+          </Col>
+        </Row>
+        <Row className="justify-content-md-left">
+          <Col xs lg="2">
+            <InputGroup className="mb-3">
+              <Form.Control
+                placeholder="Net Model Name (no spaces)"
+                aria-label="Net Model Name"
+                aria-describedby="basic-addon2"
+                onChange={updateNetModelName}
+              />
+              <Button variant="primary" id="button-addon2" onClick={importData}>Import</Button>
+            </InputGroup>
+          </Col>
+        </Row>
       </Container>}
     </>
   );

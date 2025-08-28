@@ -1380,6 +1380,9 @@ export default class App extends React.Component {
         newNetNodes = Object.assign( {}, this.state.netNodes);
 
         var dbData = transaction.dbData;
+        var netModelName = transaction.netModelName;
+        var newModelObj = { "name": netModelName, "desc": "Created from Node DB"}
+
         for (let i=0 ; i<dbData.length; i++) {
           let dbDatum = dbData[i];
           newNetHosts[dbDatum.host.hostname] = {
@@ -1398,6 +1401,9 @@ export default class App extends React.Component {
         }
 
         this.setState({
+          newNetModel: false,
+          netModelActive: true,
+          netModel: newModelObj,
           netHosts: newNetHosts,
           netNodes: newNetNodes
         });
@@ -1834,9 +1840,12 @@ export default class App extends React.Component {
           <h3>ION Configuration Editor  4.9.0b1</h3>
         </Navbar>
         <Tabs
-          defaultActiveKey="netmodel"
+          defaultActiveKey="nodedb"
           className="mb=3"
           >
+            <Tab eventKey="nodedb" title="Node DB">
+              <NodeDb dispatch={dispatch}/>
+            </Tab>
             <Tab eventKey="netmodel" title="Net Model">
               {netModelBtnsElem}
               {newNet}
@@ -1848,9 +1857,6 @@ export default class App extends React.Component {
               {newIon}
               {ionLoader}
               {ionModelElem}
-            </Tab>
-            <Tab eventKey="nodedb" title="Node DB">
-              <NodeDb dispatch={dispatch}/>
             </Tab>
         </Tabs>
       </Container>
