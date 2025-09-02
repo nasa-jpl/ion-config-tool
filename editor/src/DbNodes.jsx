@@ -13,7 +13,7 @@ import {useEffect, useState} from "react";
 import {Form,Container,Row,Col} from 'react-bootstrap';
 import {Button,InputGroup} from 'react-bootstrap';
 import {Table} from 'react-bootstrap';
-import {Alert} from 'react-bootstrap';
+import {Modal} from 'react-bootstrap';
 
 import nodeDB  from './json/nodeDB.json';
 
@@ -29,18 +29,51 @@ import nodeDB  from './json/nodeDB.json';
 
 const DbNodes = (props) => {
   // State variables
-  const [nodeTable, setNodeTable]       = useState(null);  // HTML formatted table of hosts
-  const [hostList, setHostList]         = useState([]);    // Raw host data returned from DB
-  const [hostsLoaded, setHostsLoaded]   = useState(false); // Flag indicating raw host data (without destinations) loaded
-  const [IPsLoaded, setIPsLoaded]       = useState(false); // Flag indicating IPs for hosts loaded
-  const [nodeList, setNodeList]         = useState([]);    // Raw node data returned from DB
-  const [nodesLoaded, setNodesLoaded]   = useState(false); // Flag indicating raw node data loaded
-  const [netModelName, setNetModelName] = useState("");    // Name to affix to the Net Model upon import
+  const [nodeTable, setNodeTable]           = useState(null);  // HTML formatted table of hosts
+  const [hostList, setHostList]             = useState([]);    // Raw host data returned from DB
+  const [hostsLoaded, setHostsLoaded]       = useState(false); // Flag indicating raw host data (without destinations) loaded
+  const [IPsLoaded, setIPsLoaded]           = useState(false); // Flag indicating IPs for hosts loaded
+  const [nodeList, setNodeList]             = useState([]);    // Raw node data returned from DB
+  const [nodesLoaded, setNodesLoaded]       = useState(false); // Flag indicating raw node data loaded
+  const [netModelName, setNetModelName]     = useState("");    // Name to affix to the Net Model upon import
+  const [showSuccess, setShowSuccess]       = useState(false); // Toggle to hide/show successful import modal
+  const [netNameNeeded, setNetNameNeeded]   = useState(false); // Toggle to hide/show successful import modal
 
   // Extract the parent URLs from the JSON configs
   var dbHost = nodeDB["nodeDbUrls"].dbHost;
   var hostUrl = dbHost+nodeDB["nodeDbUrls"].hostUrl;
   var nodeUrl = dbHost+nodeDB["nodeDbUrls"].nodeUrl;
+  var importAlert = 
+      <Modal show={showSuccess} 
+             onHide={toggleShowSuccess}
+             backdrop="static"
+             keyboard={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Node Import Successful!    </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" bssize="sm" onClick={toggleShowSuccess}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+  
+  var netModelNameAlert =
+      <Modal show={netNameNeeded} 
+             onHide={toggleShowSuccess}
+             backdrop="static"
+             keyboard={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Net Model Name Missing</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Net Model Name Required Before Import</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" bssize="sm" onClick={toggleNeedNetName}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
   // Fetch hosts from the DB
   const fetchHosts = (hostUrl) => {
@@ -311,6 +344,13 @@ const DbNodes = (props) => {
   // as a property.
   function importData() {
     console.log("Import Hosts!!");
+    if (netModelName === "") {
+      setNetNameNeeded(true);
+      return;
+    } else {
+      setNetNameNeeded(false);
+    }
+
     var dbDataToSend = [];
     nodeList.items.forEach(node => {
       if (node.selected) {
@@ -324,9 +364,19 @@ const DbNodes = (props) => {
       netModelName: netModelName
     }
     props.dispatch(tran);
-
+    toggleShowSuccess();
   }
   
+  function toggleShowSuccess() {
+    var newState = !showSuccess;
+    setShowSuccess(newState);
+  }
+
+  function toggleNeedNetName() {
+    var newState = !netNameNeeded;
+    setNetNameNeeded(newState);
+  }
+
   // Event listener for when the net model name field changes
   function updateNetModelName(e) {
     setNetModelName(e.target.value);
@@ -356,6 +406,8 @@ const DbNodes = (props) => {
           </Col>
         </Row>
       </Container>}
+      {importAlert}
+      {netModelNameAlert}
     </>
   );
 

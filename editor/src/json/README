@@ -16,6 +16,9 @@ files support the ionconfig browser tool, ionconfig command-line tool and dictio
 
    ionVersions.json   maps ION versions to ionconfig seq nums for command versioning 
 
+   nodeDB.json        contains parameters for configuring ION config tool to interface with the
+                      node registry database
+
 See /docs for more details.
 
 These parameter json files were first developed for the ionconfig browser tool in order to

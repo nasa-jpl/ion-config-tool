@@ -42,9 +42,8 @@ As of July 2025, most of this application is written
 in an older style of React (components are defined as
 extending a parent React.component). This style is no
 longer the recommended way to create and maintain
-React objects. See the newer code used to download
-and manipulate the Node database for examples of the
-recommended way.
+React objects. See the newer code used to access
+the Node database for examples of the recommended way.
 
 If you have the time to convert the older objects into
 functional components instead of classes, go for it!

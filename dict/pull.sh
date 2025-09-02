@@ -31,6 +31,9 @@ cp -p $master/ionVersions.json $local
 echo "pulling selections.json  from $master to $local"
 cp -p $master/selections.json  $local
 
+echo "pulling nodeDB.json  from $master to $local"
+cp -p $master/nodeDB.json  $local
+
 
 
 dev_local=../json
@@ -55,3 +58,6 @@ cp -p $master/ionVersions.json $dev_local
 
 echo "pulling selections.json  from $master to $dev_local"
 cp -p $master/selections.json  $dev_local
+
+echo "pulling nodeDB.json  from $master to $dev_local"
+cp -p $master/nodeDB.json  $dev_local

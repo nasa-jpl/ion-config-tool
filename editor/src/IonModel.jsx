@@ -6,7 +6,7 @@
 //                                                                   
 //      Author: Rick Borgen, Jet Propulsion Laboratory         
 //                                                               
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {ButtonGroup, FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
