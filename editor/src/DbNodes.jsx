@@ -393,7 +393,7 @@ const DbNodes = (props) => {
           </Col>
         </Row>
         <Row className="justify-content-md-left">
-          <Col lg="2">
+          <Col xs lg="2">
             <InputGroup className="mb-3">
               <Form.Control
                 placeholder="Net Model Name (no spaces)"
