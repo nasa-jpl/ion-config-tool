@@ -393,7 +393,7 @@ const DbNodes = (props) => {
           </Col>
         </Row>
         <Row className="justify-content-md-left">
-          <Col xs lg="2">
+          <Col lg="2">
             <InputGroup className="mb-3">
               <Form.Control
                 placeholder="Net Model Name (no spaces)"
@@ -402,6 +402,7 @@ const DbNodes = (props) => {
                 onChange={updateNetModelName}
               />
               <Button variant="primary" id="button-addon2" onClick={importData}>Import</Button>
+              <Form.Label>*will be created if it doesn't exist</Form.Label>
             </InputGroup>
           </Col>
         </Row>
