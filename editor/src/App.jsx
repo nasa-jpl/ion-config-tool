@@ -1395,7 +1395,7 @@ export default class App extends React.Component {
             "nodeDesc": "",
             "nodeHost": dbDatum.host.hostname,
             "nodeType"  : "",
-            "endpointID" : "",
+            "endpointID" : dbDatum.node_number,
             "services" : []
           };
         }

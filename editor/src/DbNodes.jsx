@@ -294,6 +294,7 @@ const DbNodes = (props) => {
             <th className="d-flex justify-content-center">Select</th>
             <th>Node ID</th>
             <th>Node Name</th>
+            <th>Node Number</th>
             <th>Host Name</th>
             <th>IP Addresses</th>
           </tr>
@@ -311,6 +312,7 @@ const DbNodes = (props) => {
               </td>
               <td>{item.node_id}</td>
               <td>{item.node_name}</td>
+              <td>{item.node_number}</td>
               <td>{item.host.hostname}</td>
               <td>{item.ips.join(", ")}</td>
             </tr>
@@ -402,7 +404,6 @@ const DbNodes = (props) => {
                 onChange={updateNetModelName}
               />
               <Button variant="primary" id="button-addon2" onClick={importData}>Import</Button>
-              <Form.Label>*will be created if it doesn't exist</Form.Label>
             </InputGroup>
           </Col>
         </Row>
