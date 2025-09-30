@@ -395,8 +395,8 @@ const DbNodes = (props) => {
           </Col>
         </Row>
         <Row className="justify-content-md-left">
-          <Col xs lg="2">
-            <InputGroup className="mb-3">
+          <Col lg="3">
+            <InputGroup className="mb-2">
               <Form.Control
                 placeholder="Net Model Name (no spaces)"
                 aria-label="Net Model Name"
@@ -407,6 +407,7 @@ const DbNodes = (props) => {
             </InputGroup>
           </Col>
         </Row>
+        <Row><Col><i>Net Model will be created if it doesn't exist.</i></Col></Row>
       </Container>}
       {importAlert}
       {netModelNameAlert}
