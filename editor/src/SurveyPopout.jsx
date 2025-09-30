@@ -9,7 +9,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Button} from 'react-bootstrap';
-import PopoutWindow from 'react-popout';
+import {Modal} from 'react-bootstrap';
+import {Popover} from 'react-bootstrap';
 
 export default class SurveyPopout extends React.Component {
   constructor(props) {
@@ -34,9 +35,22 @@ export default class SurveyPopout extends React.Component {
     if (this.state.popoutMode) {
       const survey = this.props.showSurvey();
       return (
-        <PopoutWindow title={label} onClosing={this.popoutClosed}>
-          {survey}
-        </PopoutWindow>
+        <Modal show={this.state.popoutMode}
+          onHide={this.popoutClosed}
+          backdrop="static"
+          scrollable={true}
+          size="xl"
+          keyboard={false}>
+          <Modal.Header closeButton>
+            <Modal.Title>{label}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{survey}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" bssize="sm" onClick={this.popoutClosed}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       );
     } else {
       return (
