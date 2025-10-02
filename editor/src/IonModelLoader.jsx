@@ -330,8 +330,7 @@ export default class IonModelLoader extends React.Component {
     //     the html5 file input form controls its own state
     console.log("IonModelLoader render form");
     // check for alert
-    //let msg = this.state.errMsg;
-    let msg = "Alert!!! Alert!!!";
+    let msg = this.state.errMsg;
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
     var form =
       <Form.Group controlId="formFile" className="mb-3">
