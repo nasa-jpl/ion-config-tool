@@ -36,7 +36,6 @@ export default class SurveyPopout extends React.Component {
       const survey = this.props.showSurvey();
       return (
         <Modal show={this.state.popoutMode}
-          onHide={this.popoutClosed}
           backdrop="static"
           scrollable={true}
           size="xl"
