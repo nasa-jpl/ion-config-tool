@@ -296,6 +296,7 @@ const DbNodes = (props) => {
             <th>Node Name</th>
             <th>Node Number</th>
             <th>Host Name</th>
+            <th>Host ID</th>
             <th>IP Addresses</th>
           </tr>
         </thead>
@@ -314,6 +315,7 @@ const DbNodes = (props) => {
               <td>{item.node_name}</td>
               <td>{item.node_number}</td>
               <td>{item.host.hostname}</td>
+              <td>{item.host.host_id}</td>
               <td>{item.ips.join(", ")}</td>
             </tr>
           ))}
