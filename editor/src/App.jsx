@@ -1396,6 +1396,7 @@ export default class App extends React.Component {
             "nodeHost": dbDatum.host.hostname,
             "nodeType"  : "",
             "endpointID" : dbDatum.node_number,
+            "configFlags" : dbDatum.sdr_config_flags,
             "services" : []
           };
         }

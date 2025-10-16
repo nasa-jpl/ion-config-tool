@@ -393,6 +393,11 @@ export default class NetModel  extends React.Component {
         default_val = eval(varstr);
         vals = [default_val];
 
+        // Override the default with a computed value if provided from the Node DB
+        if (ionconfig_parms[i] === "configFlags" && netNode.configFlags) {
+          let cFlagVal = this.computeConfigFlagValue(netNode.configFlags);
+          vals = [cFlagVal];
+        }
         // Make and add the ION command
         cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ionconfig",ionconfig_parms[i],vals);
         this.addCommandKey(configs,configName,cmdKey);
@@ -1071,6 +1076,26 @@ export default class NetModel  extends React.Component {
   };
   // END EXTRACT
   
+  // If the sdr_config_flags array has been provided by from the Node DB
+  // compute the bitwise OR value and return it
+  computeConfigFlagValue(cFlags) {
+    var cFlagVals = {};
+
+    // Hex values; see ionconfig(5) for more
+    cFlagVals["SDR_IN_DRAM"]    = 0x1
+    cFlagVals["SDR_IN_FILE"]    = 0x2
+    cFlagVals["SDR_REVERSIBLE"] = 0x4
+    cFlagVals["SDR_BOUNDED"]    = 0x8
+
+    // Go through the supplied array and compute the value
+    var configFlagVal = 0x0;
+    for (var i=0 ; i<cFlags.length ; i++) {
+      configFlagVal = configFlagVal | cFlagVals[cFlags[i]];
+    }
+
+    return configFlagVal;
+  }
+
   getDefaultIPforNode(netNode) {
     const netNodes = this.props.netNodes;
     const netHosts = this.props.netHosts;

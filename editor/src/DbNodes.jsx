@@ -298,6 +298,7 @@ const DbNodes = (props) => {
             <th>Host Name</th>
             <th>Host ID</th>
             <th>IP Addresses</th>
+            <th>Config Flags</th>
           </tr>
         </thead>
         <tbody>
@@ -317,6 +318,7 @@ const DbNodes = (props) => {
               <td>{item.host.hostname}</td>
               <td>{item.host.host_id}</td>
               <td>{item.ips.join(", ")}</td>
+              <td>{item.sdr_config_flags.join(", ")}</td>
             </tr>
           ))}
         </tbody>

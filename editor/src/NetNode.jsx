@@ -32,6 +32,10 @@ export default class NetNode  extends React.Component {
       expandMode: false,
       aService: "",
       alertMsg: "",
+      sdrWmSize: null,
+      configFlags: null,
+      heapWords: null,
+      wmSize: null,
 
       nodeKey: nodeKey,
       desc: desc,
@@ -310,6 +314,10 @@ NetNode.propTypes = {
   nodeType: PropTypes.string.isRequired,
   endpointID: PropTypes.string.isRequired,
   services: PropTypes.array.isRequired,
+  configFlags: PropTypes.number.isRequired,
+  sdrWmSize: PropTypes.number.isRequired,
+  heapWords: PropTypes.number.isRequired,
+  wmSize: PropTypes.number.isRequired,
 
   makeOptionElems: PropTypes.func.isRequired,   // func to get static options
   makeNetHostOptions: PropTypes.func.isRequired,// func to build hostkey options
