@@ -1378,25 +1378,32 @@ export default class App extends React.Component {
       case "NEW-NODEDB-DATA":
         newNetHosts = Object.assign( {}, this.state.netHosts);
         newNetNodes = Object.assign( {}, this.state.netNodes);
-
         var dbData = transaction.dbData;
         var netModelName = transaction.netModelName;
         var newModelObj = { "name": netModelName, "desc": "Created from Node DB"}
 
         for (let i=0 ; i<dbData.length; i++) {
           let dbDatum = dbData[i];
+
+          // Populate net hosts, mark as from the database
           newNetHosts[dbDatum.host.hostname] = {
+            "fromDb" : true,
             "id" : dbDatum.host.hostname,
             "hostDesc" : "",
             "ipAddrs" : dbDatum.ips
           }
+          // Populate net nodes, mark as from the database
           newNetNodes[dbDatum.node_name] = {
+            "fromDb" : true,
             "id" : dbDatum.node_name,
             "nodeDesc": "",
             "nodeHost": dbDatum.host.hostname,
             "nodeType"  : "",
             "endpointID" : dbDatum.node_number,
             "configFlags" : dbDatum.sdr_config_flags,
+            "sdrWmSize" : dbDatum.sdr_wm_size,
+            "heapWords" : dbDatum.heap_words,
+            "wmSize" : dbDatum.wm_size,
             "services" : []
           };
         }
@@ -1416,6 +1423,7 @@ export default class App extends React.Component {
         newNetHosts = Object.assign( {}, this.state.netHosts);
         hostKey = transaction.hostKey;
         newNetHosts[hostKey] = {
+          "fromDb" : false,
           "id" : hostKey,
           "hostDesc" : "",
           "ipAddrs" : []
@@ -1529,6 +1537,7 @@ export default class App extends React.Component {
         newNetNodes = Object.assign( {}, this.state.netNodes);
         nodeKey = transaction.nodeKey;
         newNetNodes[nodeKey] = {
+          "fromDb" : false,
           "id" : nodeKey,
           "nodeDesc": "",
           "nodeHost": "",

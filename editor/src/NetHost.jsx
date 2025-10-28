@@ -21,6 +21,7 @@ export default class NetHost  extends React.Component {
     super(props);
     // props
     const hostKey = this.props.hostKey;
+    const fromDb = this.props.fromDb;
     const desc = this.props.desc;
     console.log("NetHost ctor " + desc + ' ' + hostKey);
     this.state = {
@@ -274,6 +275,7 @@ export default class NetHost  extends React.Component {
 
 NetHost.propTypes = {   
   hostKey: PropTypes.object.isRequired,         // user model - netHost key
+  fromDb: PropTypes.bool.isRequired,
   desc: PropTypes.string.isRequired,
 
   netHost: PropTypes.object.isRequired,         // user model - net host object

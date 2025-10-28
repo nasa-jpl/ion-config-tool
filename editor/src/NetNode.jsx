@@ -20,6 +20,7 @@ export default class NetNode  extends React.Component {
     super(props);
     // props
     const nodeKey = this.props.nodeKey;
+    const fromDb = this.props.fromDb;
     const desc = this.props.desc;
     const nodeHost = this.props.nodeHost;
     const nodeType = this.props.nodeType;
@@ -309,6 +310,7 @@ export default class NetNode  extends React.Component {
 
 NetNode.propTypes = {   
   nodeKey: PropTypes.object.isRequired,         // user model - netNode key
+  fromDb: PropTypes.bool.isRequired,
   desc: PropTypes.string.isRequired,
   nodeHost: PropTypes.string.isRequired,
   nodeType: PropTypes.string.isRequired,

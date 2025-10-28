@@ -77,6 +77,8 @@ const DbNodes = (props) => {
 
   // Fetch hosts from the DB
   const fetchHosts = (hostUrl) => {
+    // This kludge is in place until a sensible way to handle pagination in the UI is developed
+    hostUrl = hostUrl+"?max_page_size=1000";
     fetch(hostUrl)
     .then(res => {
       if (!res.ok) { 
@@ -104,6 +106,8 @@ const DbNodes = (props) => {
 
   // Fetch nodes from the DB
   const fetchNodes = (nodeUrl) => {
+    // This kludge is in place until a sensible way to handle pagination in the UI is developed
+    nodeUrl=nodeUrl+"?max_page_size=1000";
     fetch(nodeUrl)
     .then(res => {
       if (!res.ok) { // error coming back from server

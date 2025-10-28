@@ -1,6 +1,6 @@
 {
     "nodeDbUrls": {
-        "dbHost": "http://localhost:5000",
+        "dbHost": "http://localhost:8000/api",
         "hostUrl": "/hosts",
         "nodeUrl": "/nodes"
     }

@@ -365,42 +365,54 @@ export default class NetModel  extends React.Component {
       var netNode = netNodes[nodeKey];
       var ionNode = nodes[nodeKey];
       nodeNum = ionNode.ionNodeNum;
-      // build ionconfig 
-      var configName = nodeKey + ".ionconfig";
-      configs[configName] = {
-        "id" : configName,
-        "nodeKey": nodeKey,
-        "configType" : "ionconfig",
-        "cmdKeys" : [] 
-      };
-      nodes[nodeKey].configKeys.push(configName);
-      var ionconfig = configName;
 
-      // The array of ionconfig variables to assume default values
-      var ionconfig_parms = ["configFlags", "sdrWmSize", "heapWords", "wmSize"];
-      var default_val = "";
-      var vals = [];
-      var cmdKey = "";
-      var needCfdp = false;
+      // See if this node even needs a .ionconfig file
+      if (this.netNodeNeedsIonConfig(netNode)) {
+        // build ionconfig 
+        var configName = nodeKey + ".ionconfig";
+        configs[configName] = {
+          "id" : configName,
+          "nodeKey": nodeKey,
+          "configType" : "ionconfig",
+          "cmdKeys" : [] 
+        };
+        nodes[nodeKey].configKeys.push(configName);
+        var ionconfig = configName;
 
-      // Loop thru the list of ionconfig variables and build the variable names for default values
-      for (i in ionconfig_parms) {
+        // The array of ionconfig variables to assume default values
+        var ionconfig_parms = ["configFlags", "sdrWmSize", "heapWords", "wmSize"];
+        var default_val = "";
+        var vals = [];
+        var cmdKey = "";
+        var needCfdp = false;
 
-        // Variable string to evaluate
-        let varstr = "myParams.ionconfig_"+ionconfig_parms[i]+"_p0.defaultValue;";
+        // Loop thru the list of ionconfig variables and build the variable names for default values
+        for (i in ionconfig_parms) {
 
-        // Grab the default value and place it in the vals array
-        default_val = eval(varstr);
-        vals = [default_val];
+          // Variable string to evaluate
+          let varstr = "myParams.ionconfig_"+ionconfig_parms[i]+"_p0.defaultValue;";
 
-        // Override the default with a computed value if provided from the Node DB
-        if (ionconfig_parms[i] === "configFlags" && netNode.configFlags) {
-          let cFlagVal = this.computeConfigFlagValue(netNode.configFlags);
-          vals = [cFlagVal];
+          // Grab the default value; it might get overridden below
+          default_val = eval(varstr);
+
+          // See if a value has already been provided from the node DB
+          let objVal = eval("netNode."+ionconfig_parms[i]);
+
+          // Override the default with a computed value if provided from the Node DB
+          if (objVal) {
+            if (ionconfig_parms[i] === "configFlags") {
+              default_val = this.computeConfigFlagValue(objVal);
+            } else {
+              default_val = objVal;
+            }
+          }
+
+          vals = [default_val];
+
+          // Make and add the ION command
+          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ionconfig",ionconfig_parms[i],vals);
+          this.addCommandKey(configs,configName,cmdKey);
         }
-        // Make and add the ION command
-        cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ionconfig",ionconfig_parms[i],vals);
-        this.addCommandKey(configs,configName,cmdKey);
       }
 
       // build ionrc 
@@ -902,6 +914,25 @@ export default class NetModel  extends React.Component {
       return;
     }
     configs[configName].cmdKeys.push(cmdKey);
+  }
+  // END EXTRACT
+
+  // EXTRACT netNodeNeedsIonConfig
+  // utility function to determine whether a node
+  // should have a .ionconfig file
+  netNodeNeedsIonConfig(netNode) {
+    // If the netNode IS NOT from the node DB
+    // it needs one
+    if (!netNode.fromDb) { return true; }
+
+    // If the node IS from the node DB AND
+    // any of the node attributes associated
+    // with the .ionconfig file are 
+    // present, it needs one
+    return (netNode.configFlags ||
+            netNode.sdrWmSize   ||
+            netNode.heapWords   ||
+            netNode.wmSize);
   }
   // END EXTRACT
 
