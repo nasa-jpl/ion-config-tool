@@ -1107,6 +1107,7 @@ export default class NetModel  extends React.Component {
   };
   // END EXTRACT
   
+  // EXTRACT computeConfigFlagValue
   // If the sdr_config_flags array has been provided by from the Node DB
   // compute the bitwise OR value and return it
   computeConfigFlagValue(cFlags) {
@@ -1126,6 +1127,7 @@ export default class NetModel  extends React.Component {
 
     return configFlagVal;
   }
+  // END EXTRACT
 
   getDefaultIPforNode(netNode) {
     const netNodes = this.props.netNodes;

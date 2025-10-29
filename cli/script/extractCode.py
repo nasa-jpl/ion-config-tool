@@ -346,6 +346,22 @@ srcAndDest = [
 				],
 				
 				[
+				  "../../editor/src/NetModel.jsx",       
+				  "computeConfigFlagValue",
+				  ["cFlags"],
+				  "../src/auto/getfunc-auto.js",
+				  {'console.log' : 'debug'}
+				],
+				
+				[
+				  "../../editor/src/NetModel.jsx",       
+				  "netNodeNeedsIonConfig",
+				  ["netNode"],
+				  "../src/auto/getfunc-auto.js",
+				  {'console.log' : 'debug'}
+				],
+				
+				[
 				  "../../editor/src/IonModel.jsx",       
 				  "checkModel",
 				  [],                                
