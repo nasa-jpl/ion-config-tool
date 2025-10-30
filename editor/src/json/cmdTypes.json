@@ -1794,7 +1794,8 @@
     "name": "seat_udp", 
     "order": 22, 
     "paramCnt": 2, 
-    "paramTypes": [], 
+    "paramTypes": [],
+    "isCloned": true,
     "pickClone": true, 
     "verFrom": 13, 
     "verThru": 999

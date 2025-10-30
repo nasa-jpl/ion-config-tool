@@ -648,7 +648,7 @@ export default class NetModel  extends React.Component {
     // pass 1 - build inducts
     console.log("@@@@@ building inducts and links!");
     var inductKeys = {};     // record inducts to avoid duplicate inducts per protocol
-    var startUdpKeys = {};   // hold ltp start udp commands for later (follows spans) per config
+    var seatUdpKeys = {};   // hold ltp seat udp commands for later (follows spans) per config
     var startDccpKeys = {};  // hold ltp start dccp commands for later (follows spans) per config 
     for (hKey in oneWays) {
       netHop = oneWays[hKey];
@@ -710,12 +710,12 @@ export default class NetModel  extends React.Component {
 
         var linkName  = toHostKey + ":" + netHop.portNum;
         if (netHop.ltpLayer === "udp") {
-          if (startUdpKeys.hasOwnProperty(configName) ) {  // already have start udp?
+          if (seatUdpKeys.hasOwnProperty(configName) ) {  // already have seat udp?
             continue;                                      // one is the limit
           }
           vals = [toAddr,netHop.portNum];
-          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","start_udp",vals);
-          startUdpKeys[configName] = cmdKey;
+          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","seat_udp",vals);
+          seatUdpKeys[configName] = cmdKey;
         };
         if (netHop.ltpLayer === "dccp") {
           if (startDccpKeys.hasOwnProperty(configName) ) {  // already have start dccp?
@@ -727,7 +727,7 @@ export default class NetModel  extends React.Component {
         };
       };
     };
-    console.log("$$$$$ startUdpKeys: " + JSON.stringify(startUdpKeys) );
+    console.log("$$$$$ seatUdpKeys: " + JSON.stringify(seatUdpKeys) );
     // pass 2 - build outducts
     // var toNode;
     console.log("@@@@@ building outducts and spans!");
@@ -787,10 +787,19 @@ export default class NetModel  extends React.Component {
         };
       };
     };
-    // HACK Alert!  -- only now add the start commands, so span not ignored by ION
-    //              -- see pass 1 for build of start commands
-    for (configName in startUdpKeys)
-      this.addCommandKey(configs,configName,startUdpKeys[configName]);
+    // HACK Alert!  
+    // -- only now add the seat commands for LTP over UDP
+    // -- see pass 1 for build of seat and commands
+    for (configName in seatUdpKeys) {
+        this.addCommandKey(configs,configName,seatUdpKeys[configName]);
+    }
+    // Now add the start all command for the ltprc files
+    for (configName in seatUdpKeys) {
+      cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","start_all",[]);
+      this.addCommandKey(configs,configName,cmdKey);
+    }
+
+    // Then add the start commands for dccp
     for (configName in startDccpKeys)
       this.addCommandKey(configs,configName,startDccpKeys[configName]);
 
