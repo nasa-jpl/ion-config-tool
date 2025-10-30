@@ -256,109 +256,116 @@ export default class App extends React.Component {
 
   // EXTRACT makeCloneVal
   // make a clone-able value object (or expression) based on special command types
-  makeCloneVal(nodeKey,cmd) {
+  makeCloneVal(nodeKey, cmd) {
     var cloneVal = {};
     // first assign properties not dependent on type
     cloneVal["id"] = cmd.id;
     cloneVal["nodeKey"] = nodeKey;
     cloneVal["clones"] = []     // a list for clone id objects (cmdKey & valIdx)
     cloneVal["value"] = this.makeComboValue(cmd,cmd.typeKey);
+    if (cmd.typeKey === "ltprc_seat_udp") {
+      var dummy = 0;
+    }
     // then check specific type for other init rules
-    if (cmd.typeKey === "node_nodenum") {    /// special model command (not ion)
-      cloneVal["type"] = "nodeNum";
-      cloneVal["label"] = nodeKey;
-    } else
-    if (cmd.typeKey === "node_nodekey") {    /// special model command (not ion)
-      cloneVal["type"] = "nodeKey";
-      cloneVal["label"] = nodeKey;
-    } else
-    if (cmd.typeKey === "host_hostkey") {    /// special model command (not ion)
-      cloneVal["type"] = "hostKey";
-      cloneVal["label"] = 'Host:' + cmd.values[0];
-    } else
-    if (cmd.typeKey === "host_ipaddr") {         /// special model command (not ion)
-      cloneVal["type"] = "ipAddr";
-      cloneVal["label"] = 'Host: ' + nodeKey + ' IpAddr:' + cmd.values[0];
-    } else
-    if (cmd.typeKey === "bpv6rc_endpoint" ||
-        cmd.typeKey === "bpv7rc_endpoint") {
-      cloneVal["type"] = "ionEndpoint";
-      // should annotate endpoint purpose in the the label
-      let suffix = '';
-      if (cmd.values[3] !== "")
-        suffix = ' [' + cmd.values[3] + ']';
-      cloneVal["label"] = 'node:' + nodeKey + ' servNum:' + cmd.values[1] + suffix;
-    } else
-    if (cmd.typeKey === "bpv6rc_induct_ltp" ||
-        cmd.typeKey === "bpv7rc_induct_ltp") {
-      cloneVal["type"] = "ltpInduct";
-      cloneVal["label"] = 'toNode: ' + nodeKey + ' ltpInductName: ' + cloneVal.value;
-    } else
-    if (cmd.typeKey === "bpv6rc_induct_udp" ||
-        cmd.typeKey === "bpv7rc_induct_udp") {
-      cloneVal["type"] = "udpInduct";
-      cloneVal["label"] = 'toNode: ' + nodeKey + ' udpInductName: ' + cloneVal.value;
-    } else 
-    if (cmd.typeKey === "bpv6rc_induct_stcp" ||
-        cmd.typeKey === "bpv7rc_induct_stcp") {
-      cloneVal["type"] = "stcpInduct";
-      cloneVal["label"] = 'toNode:' + nodeKey + ' stcpInductName: ' + cloneVal.value; 
-    } else 
-    if (cmd.typeKey === "bpv6rc_induct_tcp" ||
-        cmd.typeKey === "bpv7rc_induct_tcp") {
-      cloneVal["type"] = "tcpInduct";
-      cloneVal["label"] = 'toNode: ' + nodeKey + ' tcpInductName: ' + cloneVal.value;
-    } else 
-    if (cmd.typeKey === "bpv6rc_induct_dccp" ||
-        cmd.typeKey === "bpv7rc_induct_dccp") {
-      cloneVal["type"] = "dccpInduct";
-      cloneVal["label"] = 'toNode: ' + nodeKey + ' dccpInductName: ' + cloneVal.value; 
-    } else
-    if (cmd.typeKey === "bpv6rc_induct_bssp" ||
-        cmd.typeKey === "bpv7rc_induct_bssp") {
-      cloneVal["type"] = "bsspInduct";
-      cloneVal["label"] = 'toNode: ' + nodeKey + ' bsspInductName: ' + cloneVal.value;
-    } else 
-    if (cmd.typeKey === "bpv6rc_outduct_ltp" ||
-        cmd.typeKey === "bpv7rc_outduct_ltp") {
-      cloneVal["type"] = "ltpOutduct";
-      cloneVal["label"] = 'fromNode: ' + nodeKey + ' ltpOutductName: ' + cloneVal.value;
-    } else
-    if (cmd.typeKey === "bpv6rc_outduct_udp" ||
-        cmd.typeKey === "bpv7rc_outduct_udp") {
-      cloneVal["type"] = "udpOutduct";
-      cloneVal["label"] = 'fromNode: ' + nodeKey + ' udpOutductName: ' + cloneVal.value;
-    } else 
-    if (cmd.typeKey === "bpv6rc_outduct_stcp" ||
-        cmd.typeKey === "bpv7rc_outduct_stcp") {
-      cloneVal["type"] = "stcpOutduct";
-      cloneVal["label"] = 'fromNode:' + nodeKey + ' stcpOutductName: ' + cloneVal.value; 
-    } else 
-    if (cmd.typeKey === "bpv6rc_outduct_tcp" ||
-        cmd.typeKey === "bpv7rc_outduct_tcp") {
-      cloneVal["type"] = "tcpOutduct";
-      cloneVal["label"] = 'fromNode: ' + nodeKey + ' tcpOutductName: ' + cloneVal.value;
-    } else 
-    if (cmd.typeKey === "bpv6rc_outduct_dccp" ||
-        cmd.typeKey === "bpv7rc_outduct_dccp") {
-      cloneVal["type"] = "dccpOutduct";
-      cloneVal["label"] = 'fromNode: ' + nodeKey + ' dccpOutductName: ' + cloneVal.value; 
-    } else 
-    if (cmd.typeKey === "ltprc_start_udp") {
-      cloneVal["type"] = "udpLink";
-      cloneVal["label"] = 'toNode: ' + nodeKey + ' udpLinkName: ' + cloneVal.value;
-    } else 
-    if (cmd.typeKey === "ltprc_start_dccp") {
-      cloneVal["type"] = "dccpLink";
-      cloneVal["label"] = 'toNode: ' + nodeKey + ' dccpLinkName: ' + cloneVal.value;
-    } else
-    if (cmd.typeKey === "bpv6rc_outduct_bssp" ||
-        cmd.typeKey === "bpv7rc_outduct_bssp") {
-      cloneVal["type"] = "bsspOutduct";
-      cloneVal["label"] = 'fromNode: ' + nodeKey + ' bsspOutductName: ' + cloneVal.value;
-    } else {
-      console.log("!!! nodeKey: " + nodeKey + " is not clone type!! ");
-      return null;
+    switch (cmd.typeKey) {
+      case "node_nodenum":   /// special model command (not ion)
+        cloneVal["type"] = "nodeNum";
+        cloneVal["label"] = nodeKey;
+        break;
+      case "node_nodekey":   /// special model command (not ion)
+        cloneVal["type"] = "nodeKey";
+        cloneVal["label"] = nodeKey;
+        break;
+      case "host_hostkey":    /// special model command (not ion)
+        cloneVal["type"] = "hostKey";
+        cloneVal["label"] = 'Host:' + cmd.values[0];
+        break;
+      case "host_ipaddr":          /// special model command (not ion)
+        cloneVal["type"] = "ipAddr";
+        cloneVal["label"] = 'Host: ' + nodeKey + ' IpAddr:' + cmd.values[0];
+        break;
+      case "bpv6rc_endpointt":
+      case "bpv7rc_endpoint":
+        cloneVal["type"] = "ionEndpoint";
+        // should annotate endpoint purpose in the the label
+        let suffix = '';
+        if (cmd.values[3] !== "")
+          suffix = ' [' + cmd.values[3] + ']';
+        cloneVal["label"] = 'node:' + nodeKey + ' servNum:' + cmd.values[1] + suffix;
+        break;
+      case "bpv6rc_induct_ltp":
+      case "bpv7rc_induct_ltp":
+        cloneVal["type"] = "ltpInduct";
+        cloneVal["label"] = 'toNode: ' + nodeKey + ' ltpInductName: ' + cloneVal.value;
+        break;
+      case "bpv6rc_induct_udp":
+      case "bpv7rc_induct_udp":
+        cloneVal["type"] = "udpInduct";
+        cloneVal["label"] = 'toNode: ' + nodeKey + ' udpInductName: ' + cloneVal.value;
+        break;
+      case "bpv6rc_induct_stcp":
+      case "bpv7rc_induct_stcp":
+        cloneVal["type"] = "stcpInduct";
+        cloneVal["label"] = 'toNode:' + nodeKey + ' stcpInductName: ' + cloneVal.value;
+        break;
+      case "bpv6rc_induct_tcp":
+      case "bpv7rc_induct_tcp":
+        cloneVal["type"] = "tcpInduct";
+        cloneVal["label"] = 'toNode: ' + nodeKey + ' tcpInductName: ' + cloneVal.value;
+        break;
+      case "bpv6rc_induct_dccp":
+      case "bpv7rc_induct_dccp":
+        cloneVal["type"] = "dccpInduct";
+        cloneVal["label"] = 'toNode: ' + nodeKey + ' dccpInductName: ' + cloneVal.value;
+        break;
+      case "bpv6rc_induct_bssp":
+      case "bpv7rc_induct_bssp":
+        cloneVal["type"] = "bsspInduct";
+        cloneVal["label"] = 'toNode: ' + nodeKey + ' bsspInductName: ' + cloneVal.value;
+        break;
+      case "bpv6rc_outduct_ltp":
+      case "bpv7rc_outduct_ltp":
+        cloneVal["type"] = "ltpOutduct";
+        cloneVal["label"] = 'fromNode: ' + nodeKey + ' ltpOutductName: ' + cloneVal.value;
+        break;
+      case "bpv6rc_outduct_udp":
+      case "bpv7rc_outduct_udp":
+        cloneVal["type"] = "udpOutduct";
+        cloneVal["label"] = 'fromNode: ' + nodeKey + ' udpOutductName: ' + cloneVal.value;
+        break;
+      case "bpv6rc_outduct_stcp":
+      case "bpv7rc_outduct_stcp":
+        cloneVal["type"] = "stcpOutduct";
+        cloneVal["label"] = 'fromNode:' + nodeKey + ' stcpOutductName: ' + cloneVal.value;
+        break;
+      case "bpv6rc_outduct_tcp":
+      case "bpv7rc_outduct_tcp":
+        cloneVal["type"] = "tcpOutduct";
+        cloneVal["label"] = 'fromNode: ' + nodeKey + ' tcpOutductName: ' + cloneVal.value;
+        break;
+      case "bpv6rc_outduct_dccp":
+      case "bpv7rc_outduct_dccp":
+        cloneVal["type"] = "dccpOutduct";
+        cloneVal["label"] = 'fromNode: ' + nodeKey + ' dccpOutductName: ' + cloneVal.value;
+        break;
+      case "ltprc_start_udp":
+      case "ltprc_seat_udp":
+        cloneVal["type"] = "udpLink";
+        cloneVal["label"] = 'toNode: ' + nodeKey + ' udpLinkName: ' + cloneVal.value;
+        break;
+      case "ltprc_start_dccp":
+      case "ltprc_seat_dccp":
+        cloneVal["type"] = "dccpLink";
+        cloneVal["label"] = 'toNode: ' + nodeKey + ' dccpLinkName: ' + cloneVal.value;
+        break;
+      case "bpv6rc_outduct_bssp":
+      case "bpv7rc_outduct_bssp":
+        cloneVal["type"] = "bsspOutduct";
+        cloneVal["label"] = 'fromNode: ' + nodeKey + ' bsspOutductName: ' + cloneVal.value;
+        break;
+      default:
+        console.log("!!! nodeKey: " + nodeKey + " is not clone type!! ");
+        return null;
     }
     console.log("$$$ new cloneVal = " + JSON.stringify(cloneVal));
     return cloneVal;
@@ -370,48 +377,65 @@ export default class App extends React.Component {
   makeComboValue(cmd,type) {
     console.log("$$$ makeComboVal = " + type + ' ' + cmd.values[0]);
     let combo = "";
-    if (type === "node_nodenum") 
-      combo = cmd.values[0];
-    else if (type === "node_nodekey") 
-      combo = cmd.values[0];
-    else if (type === "host_hostkey") 
-      combo = cmd.values[0];
-    else if (type === "host_ipaddr") 
-      combo = cmd.values[0];
-    else if (type === "bpv6rc_endpoint"
-          || type === "bpv7rc_endpoint")
-      combo = "ipn:" + cmd.values[0] + '.' + cmd.values[1];
-    else if (type === "bpv6rc_induct_ltp"
-          || type === "bpv6rc_induct_bssp"
-          || type === "bpv7rc_induct_ltp"
-          || type === "bpv7rc_induct_bssp")
-      combo = cmd.values[0];
-    else if (type === "bpv6rc_induct_udp"
-          || type === "bpv6rc_induct_stcp"
-          || type === "bpv6rc_induct_tcp"
-          || type === "bpv6rc_induct_dccp" 
-          || type === "bpv7rc_induct_udp"
-          || type === "bpv7rc_induct_stcp"
-          || type === "bpv7rc_induct_tcp"
-          || type === "bpv7rc_induct_dccp" )
-      combo = cmd.values[0] + ':' + cmd.values[1];
-    else if (type === "bpv6rc_outduct_ltp"
-          || type === "bpv6rc_outduct_bssp"
-          || type === "bpv7rc_outduct_ltp"
-          || type === "bpv7rc_outduct_bssp")
-      combo = cmd.values[0];
-    else if (type === "bpv6rc_outduct_stcp"
-          || type === "bpv6rc_outduct_tcp"
-          || type === "bpv6rc_outduct_dccp" 
-          || type === "bpv6rc_outduct_udp"
-          || type === "bpv7rc_outduct_stcp"
-          || type === "bpv7rc_outduct_tcp"
-          || type === "bpv7rc_outduct_dccp" 
-          || type === "bpv7rc_outduct_udp")
-      combo = cmd.values[0];
-    else if (type === "ltprc_start_udp"
-          || type === "ltprc_start_dccp" )
-      combo = cmd.values[0] + ':' + cmd.values[1];
+    switch (type) {
+      case "node_nodenum":
+        combo = cmd.values[0];
+        break;
+      case "node_nodekey":
+        combo = cmd.values[0];
+        break;
+      case "host_hostkey":
+        combo = cmd.values[0];
+        break;
+      case "host_ipaddr":
+        combo = cmd.values[0];
+        break;
+      case "bpv6rc_endpoint":
+      case "bpv7rc_endpoint":
+        combo = "ipn:" + cmd.values[0] + '.' + cmd.values[1];
+        break;
+      case "bpv6rc_induct_ltp":
+      case "bpv6rc_induct_bssp":
+      case "bpv7rc_induct_ltp":
+      case "bpv7rc_induct_bssp":
+        combo = cmd.values[0];
+        break;
+      case "bpv6rc_induct_udp":
+      case "bpv6rc_induct_stcp":
+      case "bpv6rc_induct_tcp":
+      case "bpv6rc_induct_dccp":
+      case "bpv7rc_induct_udp":
+      case "bpv7rc_induct_stcp":
+      case "bpv7rc_induct_tcp":
+      case "bpv7rc_induct_dccp":
+        combo = cmd.values[0] + ':' + cmd.values[1];
+        break;
+      case "bpv6rc_outduct_ltp":
+      case "bpv6rc_outduct_bssp":
+      case "bpv7rc_outduct_ltp":
+      case "bpv7rc_outduct_bssp":
+        combo = cmd.values[0];
+        break;
+      case "bpv6rc_outduct_stcp":
+      case "bpv6rc_outduct_tcp":
+      case "bpv6rc_outduct_dccp":
+      case "bpv6rc_outduct_udp":
+      case "bpv7rc_outduct_stcp":
+      case "bpv7rc_outduct_tcp":
+      case "bpv7rc_outduct_dccp":
+      case "bpv7rc_outduct_udp":
+        combo = cmd.values[0];
+        break;
+      case "ltprc_start_udp":
+      case "ltprc_seat_udp":
+      case "ltprc_start_dccp":
+      case "ltprc_seat_dccp":
+        combo = cmd.values[0] + ':' + cmd.values[1];
+        break;
+      default:
+        let errstr = "In App.jsx makeComboValue "+type+" case not found.";
+        throw errstr;
+    }
     return combo;
   }
   // END EXTRACT
