@@ -649,7 +649,7 @@ export default class NetModel  extends React.Component {
     console.log("@@@@@ building inducts and links!");
     var inductKeys = {};     // record inducts to avoid duplicate inducts per protocol
     var seatUdpKeys = {};   // hold ltp seat udp commands for later (follows spans) per config
-    var startDccpKeys = {};  // hold ltp start dccp commands for later (follows spans) per config 
+    var seatDccpKeys = {};  // hold ltp start dccp commands for later (follows spans) per config 
     for (hKey in oneWays) {
       netHop = oneWays[hKey];
       console.log("processing hop: " + JSON.stringify(netHop));
@@ -718,12 +718,12 @@ export default class NetModel  extends React.Component {
           seatUdpKeys[configName] = cmdKey;
         };
         if (netHop.ltpLayer === "dccp") {
-          if (startDccpKeys.hasOwnProperty(configName) ) {  // already have start dccp?
+          if (seatDccpKeys.hasOwnProperty(configName) ) {  // already have seat dccp?
             continue;                                        // one is the limit
           }
           vals = [toAddr,netHop.portNum];
-          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","start_dccp",vals);
-          startDccpKeys[configName] = cmdKey;
+          cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","seat_dccp",vals);
+          seatDccpKeys[configName] = cmdKey;
         };
       };
     };
@@ -793,15 +793,23 @@ export default class NetModel  extends React.Component {
     for (configName in seatUdpKeys) {
         this.addCommandKey(configs,configName,seatUdpKeys[configName]);
     }
-    // Now add the start all command for the ltprc files
+    // Then add the seat commands for LTP over DCCP
+    for (configName in seatDccpKeys) {
+      this.addCommandKey(configs,configName,seatDccpKeys[configName]);
+    }
+
+    // Now add the start all command for the .ltprc file
+    // NOTE: the makeIonCommand function checks for duplicate commands and rejects
+    // any attempt to make one. Thus, it is benign if udp and dccp seats are in
+    // the same .ltprc file -- only one start command will appear in the config file.
     for (configName in seatUdpKeys) {
       cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","start_all",[]);
       this.addCommandKey(configs,configName,cmdKey);
     }
-
-    // Then add the start commands for dccp
-    for (configName in startDccpKeys)
-      this.addCommandKey(configs,configName,startDccpKeys[configName]);
+    for (configName in seatDccpKeys) {
+      cmdKey = this.makeIonCommand(commands,clones,nodeKey,configName,"ltprc","start_all",[]);
+      this.addCommandKey(configs,configName,cmdKey);
+    }
 
     // pass 3 - build plan cmds
     for (hKey in oneWays) {
