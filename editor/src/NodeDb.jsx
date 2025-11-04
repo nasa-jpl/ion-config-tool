@@ -36,7 +36,7 @@ const NodeDb = (props) => {
   useEffect(() => {
     var url = nodeDB["nodeDbUrls"].dbHost;
 
-    // Arbitrarily choose the URL for hosts
+    // Arbitrarily choose the URL for nodes
     fetch(url+"/nodes")
     .then(res => {
       if (!res.ok) { // error coming back from server 

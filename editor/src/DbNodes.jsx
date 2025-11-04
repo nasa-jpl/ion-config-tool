@@ -29,15 +29,16 @@ import nodeDB  from './json/nodeDB.json';
 
 const DbNodes = (props) => {
   // State variables
-  const [nodeTable, setNodeTable]           = useState(null);  // HTML formatted table of hosts
-  const [hostList, setHostList]             = useState([]);    // Raw host data returned from DB
-  const [hostsLoaded, setHostsLoaded]       = useState(false); // Flag indicating raw host data (without destinations) loaded
-  const [IPsLoaded, setIPsLoaded]           = useState(false); // Flag indicating IPs for hosts loaded
-  const [nodeList, setNodeList]             = useState([]);    // Raw node data returned from DB
-  const [nodesLoaded, setNodesLoaded]       = useState(false); // Flag indicating raw node data loaded
-  const [netModelName, setNetModelName]     = useState("");    // Name to affix to the Net Model upon import
-  const [showSuccess, setShowSuccess]       = useState(false); // Toggle to hide/show successful import modal
-  const [netNameNeeded, setNetNameNeeded]   = useState(false); // Toggle to hide/show successful import modal
+  const [nodeTable, setNodeTable]             = useState(null);  // HTML formatted table of hosts
+  const [hostList, setHostList]               = useState([]);    // Raw host data returned from DB
+  const [hostsLoaded, setHostsLoaded]         = useState(false); // Flag indicating raw host data (without destinations) loaded
+  const [IPsLoaded, setIPsLoaded]             = useState(false); // Flag indicating IPs for hosts loaded
+  const [nodeList, setNodeList]               = useState([]);    // Raw node data returned from DB
+  const [nodesLoaded, setNodesLoaded]         = useState(false); // Flag indicating raw node data loaded
+  const [protocolsLoaded, setProtocolsLoaded] = useState(false); // Flag indicating available protocols for nodes loaded
+  const [netModelName, setNetModelName]       = useState("");    // Name to affix to the Net Model upon import
+  const [showSuccess, setShowSuccess]         = useState(false); // Toggle to hide/show successful import modal
+  const [netNameNeeded, setNetNameNeeded]     = useState(false); // Toggle to hide/show successful import modal
 
   // Extract the parent URLs from the JSON configs
   var dbHost = nodeDB["nodeDbUrls"].dbHost;
@@ -147,7 +148,7 @@ const DbNodes = (props) => {
       }
     ));
 
-    // Now get the results of the fetches 
+    // Do the batch request 
     Promise.all(destWithIds.map(item => item.promise))
     .then(results => {
       const dataWithIds = results.map((data, index) => ({
@@ -163,17 +164,45 @@ const DbNodes = (props) => {
       // TBD deal with errors cleanly
       console.error(err);
     });
-
-
   }
 
+  // Fetch protocols for each node by ID
+  const fetchProtocolsByNode = (protUrls) => {
+
+    // Track node ID for each returned promise
+    // so the protocols are associated with the
+    // right node.
+    const protWithIds = protUrls.map(prot => (
+      {
+        prot: prot.node_id,
+        promise: fetch(prot.protUrl).then(res => res.json())
+      }
+    ));
+
+    // Do the batch request
+    Promise.all(protWithIds.map(item => item.promise))
+    .then( results => {
+      const dataWithIds = results.map((data, index) => ({
+        node_id: protWithIds[index].prot,
+        data: data
+      }));
+
+      setProtocolsInNodes(dataWithIds);
+      setProtocolsLoaded(true);
+    })
+    .catch(err => {
+      // TBD better error handling
+      console.error(err);
+    });
+  }
   // useEffect gets called after each time the object is rendered
   // and if a dependency changes state.
   //
   // dependencies:
-  //    hostsLoaded  -- toggle that hosts without destinations loaded 
-  //    nodesLoaded  -- toggle that nodes loaded
-  //    IPsLoaded    -- toggle that the IP addrs for hosts are loaded
+  //    hostsLoaded     -- toggle that hosts without destinations loaded 
+  //    nodesLoaded     -- toggle that nodes loaded
+  //    IPsLoaded       -- toggle that the IP addrs for hosts are loaded
+  //    protocolsLoaded -- toggle that protocols for nodes are loaded
   useEffect(() => {
     // Flags are used to control when certain fetches are completed.
     // Only when one fetch completes is the following one attempted.
@@ -209,14 +238,33 @@ const DbNodes = (props) => {
       fetchNodes(nodeUrl);
     }
 
+    // After nodes are loaded, get the valid protocols for each one
+    if (nodesLoaded && !protocolsLoaded) {
+      var protUrls = [];
+      // Build a set of URLs to do a batch fetch for all
+      // the protocols for every node in one call. Keep 
+      // track of the node ID to associate the returned
+      // protocols with the correct node.
+      for (let i=0; i<nodeList.items.length; i++) {
+        let node_id = nodeList.items[i].node_id;
+        let protUrl = nodeUrl+"/"+node_id+"/cl-protocols";
+        let urlWithNodeId = {"node_id" : node_id, "protUrl" : protUrl};
+        protUrls.push(urlWithNodeId);
+      }
+
+      // Do the fetch
+      fetchProtocolsByNode(protUrls);
+
+    }
+
     // If all loading is complete, merge host data into nodes
     // and format the table for rendering
-    if (hostsLoaded && IPsLoaded && nodesLoaded) {
+    if (hostsLoaded && IPsLoaded && nodesLoaded && protocolsLoaded) {
       mergeData();
       formatNodeTable();
     }
 
-  }, [hostsLoaded, nodesLoaded, IPsLoaded])
+  }, [hostsLoaded, nodesLoaded, IPsLoaded, protocolsLoaded])
 
   // After the destination (IP) data is loaded must associate
   // IPs with the correct host.
@@ -235,6 +283,22 @@ const DbNodes = (props) => {
     setHostList(hostList);
   };
 
+  // After protocols (ie. tcp, ltp, etc...) are loaded from the database, 
+  // it is associated with the appropriate node in memory
+  function setProtocolsInNodes(protData) {
+    protData.forEach(dataobj => {
+      let node_id = dataobj.node_id;
+      let prots = dataobj.data.items;
+
+      prots.forEach(element => {
+        const index = nodeList.items.findIndex(item => item.node_id === node_id);
+        if (index !== -1) {
+          nodeList.items[index].prots.push(element.cl_protocol_name);
+        }
+      })
+    })
+  };
+
   // preProcessHosts
   //
   // Initialize the host data with an empty array for destinations (usu. IPs)
@@ -250,15 +314,18 @@ const DbNodes = (props) => {
 
   // preProcessNodes
   //
-  // Initialize the node data with the flag indicating whether the user
-  // has selected the node for import and an empty array of IPs 
+  // Initialize nodes to prepare for data that will get filled
+  // in later either through user or from elsewhere in the node
+  // database. 
   function preProcessNodes(data) {
       var nodes = data;
       // ips      -- array of IPs associated with a node's host
       // selected -- true = import host; false = do not import host
+      // prots    -- array of protocols associated with a node
       for (let i=0 ; i<nodes.items.length; i++) {
           nodes.items[i].ips = [];
           nodes.items[i].selected = false;
+          nodes.items[i].prots = [];
       }
       
       return nodes;
@@ -298,6 +365,7 @@ const DbNodes = (props) => {
             <th className="d-flex justify-content-center">Select</th>
             <th>Node ID</th>
             <th>Node Name</th>
+            <th>Protocols</th>
             <th>Node Number</th>
             <th>Host Name</th>
             <th>Host ID</th>
@@ -318,6 +386,7 @@ const DbNodes = (props) => {
               </td>
               <td>{item.node_id}</td>
               <td>{item.node_name}</td>
+              <td>{item.prots.join(", ")}</td>
               <td>{item.node_number}</td>
               <td>{item.host.hostname}</td>
               <td>{item.host.host_id}</td>
