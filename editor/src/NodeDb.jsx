@@ -30,12 +30,13 @@ import nodeDB  from './json/nodeDB.json';
 const NodeDb = (props) => {
   const [theError, setError] = useState(null);
   const [dbHost, setDbHost]  = useState("");
+  const [loading, setLoading] = useState(true);
 
   // Do a check to make sure the server has been specified and is 
   // responding.
   useEffect(() => {
     var url = nodeDB["nodeDbUrls"].dbHost;
-
+    setLoading(true);
     // Arbitrarily choose the URL for nodes
     fetch(url+"/nodes")
     .then(res => {
@@ -43,6 +44,7 @@ const NodeDb = (props) => {
         throw Error("Unable to connect to DB server at: "+url);
       } else {
         setDbHost(url);
+        setLoading(false);
       }
     })
     .catch(err => {
@@ -61,9 +63,10 @@ const NodeDb = (props) => {
       <Container fluid>
         <hr />
         <Row>
-          <Col className="d-flex justify-content-left">
+          {!loading && <Col className="d-flex justify-content-left">
              <Alert variant="success" show='true'>Connected to {dbHost}</Alert>
-          </Col>
+          </Col>}
+          {loading && <b>LOADING...</b>}
         </Row>
         <Row >
           <Col className="d-flex justify-content-center"><h1>Nodes</h1></Col>

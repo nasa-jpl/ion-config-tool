@@ -1162,6 +1162,7 @@ export default class NetModel  extends React.Component {
 
     return netHostIPs[0];
   };
+
   makeNetHostOptions() {
     const netHosts = this.props.netHosts;
     console.log("makeNetHostOptions " + JSON.stringify(netHosts));
@@ -1178,6 +1179,7 @@ export default class NetModel  extends React.Component {
     var optionItems = this.props.mapOptionElems(vals);
     return optionItems;
   };
+
   makeNetNodeOptions() {
     const netNodes = this.props.netNodes;
     console.log("makeNetNodeOptions " + JSON.stringify(netNodes));
@@ -1194,6 +1196,54 @@ export default class NetModel  extends React.Component {
     var optionItems = this.props.mapOptionElems(vals);
     return optionItems;
   };
+
+  // makeNetNodeOptionsForParam
+  //
+  // Based on the parameter and nodeKey (optional)
+  // supplied retrieve values for the options in 
+  // a drop down menu.
+  makeNetNodeOptionsForParam(param, nodeKey) {
+    const netNodes = this.props.netNodes;
+    var optionItems;
+    // No node key, use default behavior based on
+    // parameter only
+    if (nodeKey === '') {
+      return this.props.makeOptionElems(param);
+    }
+
+    // If the net node supplied, is not from the node
+    // DB, use default behavior based on parameter only
+    if (!netNodes[nodeKey].fromDb) {
+      return this.props.makeOptionElems(param);
+    }
+
+    // Set up for making the list of options
+    let vals = [];
+    let noneVal = {"value": '??', "label": 'None Selected'};
+    vals.push(noneVal);
+
+    // Based on parameter and node, build options available
+    switch (param) {
+      case "bpLayer":
+        // Grab protocols from node
+        let netNode = netNodes[nodeKey];
+        for (var idx in netNode.protocols) {
+          let value = netNode.protocols[idx];
+          let label = "";
+          vals.push({"value": value, "label": label});
+        }
+        optionItems = this.props.mapOptionElems(vals);
+        break;
+      default:
+        // Default behavior for unknown param is to 
+        // build list from default selections
+        optionItems = this.props.makeOptionElems(param);
+        break;
+    } 
+
+    return optionItems;
+  };
+
   makeNetIPOptions(netNode) {
     const netNodes = this.props.netNodes;
     const netHosts = this.props.netHosts;
@@ -1290,6 +1340,7 @@ export default class NetModel  extends React.Component {
     const makeOptions = this.props.makeTypeOptions;
     const makeOptElems = this.props.makeOptionElems;
     const makeNetNodeOptions = this.makeNetNodeOptions.bind(this);
+    const makeNetNodeOptionsForParam = this.makeNetNodeOptionsForParam.bind(this);
     const makeNetIPOptions = this.makeNetIPOptions.bind(this);
     const getDefaultIPforNode = this.getDefaultIPforNode.bind(this);
 
@@ -1305,6 +1356,8 @@ export default class NetModel  extends React.Component {
         isGoodNetHopKey={isGoodNetHopKey}    // verify hostKey not in use
         makeTypeOptions={makeOptions} 
         makeOptionElems={makeOptElems}
+
+        makeNetNodeOptionsForParam = {makeNetNodeOptionsForParam}
         makeNetNodeOptions = {makeNetNodeOptions} // make options list of node keys
         makeNetIPOptions= {makeNetIPOptions}      // make options list of IP addresses
         getDefaultIPforNode= {getDefaultIPforNode} // return first IP address for net node 
@@ -1414,7 +1467,7 @@ export default class NetModel  extends React.Component {
         </Row>
       </Container>
       <Container fluid>
-        <Card collapsible expanded={viewMode}>
+        <Card collapsible="true" expanded={viewMode.toString()}>
           {viewPanel}
         </Card>
         {expandMode && (

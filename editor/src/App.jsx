@@ -35,17 +35,20 @@ import selections  from './json/selections.json';
 
 export default class App extends React.Component {
   constructor(props) {
+    var debugOutput = false;
     super(props);
-    console.log("App ctor");
-    var myConfigs = JSON.stringify(configTypes);
-    console.log('configTypes:' + myConfigs);
-    var myCmds = JSON.stringify(cmdTypes);
-    console.log('cmdTypes:' + myCmds);
-    var myParams = JSON.stringify(paramTypes);
-    console.log('paramTypes:' + myParams);
-    var mySelect = JSON.stringify(selections);
-    console.log('selections:' + mySelect);
 
+    if (debugOutput) {
+      var myConfigs = JSON.stringify(configTypes);
+      console.log('configTypes:' + myConfigs);
+      var myCmds = JSON.stringify(cmdTypes);
+      console.log('cmdTypes:' + myCmds);
+      var myParams = JSON.stringify(paramTypes);
+      console.log('paramTypes:' + myParams);
+      var mySelect = JSON.stringify(selections);
+      console.log('selections:' + mySelect);
+    }
+    
     var cloneValues = {};
 
     // future state objects based on network model
@@ -73,24 +76,28 @@ export default class App extends React.Component {
       let confType = cmdTypes[cmdType].configType;
       configTypes[confType].cmdTypes.push(cmdType);
       let isCloned = cmdTypes[cmdType].isCloned;
-      if (isCloned) 
+      if (isCloned && debugOutput) 
         console.log("*** cmdType: " + cmdType + " has a cloned property.");
     }
-    console.log("=== cmdTypes now mapped into configTypes.");
-    for (var conType in configTypes) {
-      console.log("configType: " + conType + " has: " + JSON.stringify(configTypes[conType].cmdTypes)); 
+    if (debugOutput) {
+      console.log("=== cmdTypes now mapped into configTypes.");
+      for (var conType in configTypes) {
+        console.log("configType: " + conType + " has: " + JSON.stringify(configTypes[conType].cmdTypes)); 
+      }
     }
     // assign paramTypes list to each cmdType
     for (var pType in paramTypes) {
-      console.log("ingest paramType: " + pType);
+      if (debugOutput) console.log("ingest paramType: " + pType);
       let cType = paramTypes[pType].cmdType;
       cmdTypes[cType].paramTypes.push(pType);
     }
-    console.log("=== paramTypes now mapped into cmdTypes.");
-    for (var cmType in cmdTypes) {
-      console.log("cmdType: " + cmType + " has: " + JSON.stringify(cmdTypes[cmType].paramTypes)); 
+
+    if (debugOutput) {
+      console.log("=== paramTypes now mapped into cmdTypes.");
+      for (var cmType in cmdTypes) {
+        console.log("cmdType: " + cmType + " has: " + JSON.stringify(cmdTypes[cmType].paramTypes)); 
+      }
     }
-     
     // the master state atom
     this.state = {
        loadIonModel: false,
@@ -1428,7 +1435,8 @@ export default class App extends React.Component {
             "sdrWmSize" : dbDatum.sdr_wm_size,
             "heapWords" : dbDatum.heap_words,
             "wmSize" : dbDatum.wm_size,
-            "services" : []
+            "services" : [],
+            "protocols" : dbDatum.prots
           };
         }
 

@@ -221,7 +221,7 @@ export default class NetNode  extends React.Component {
               </ButtonGroup>
             </Col>
         </Row>
-        <Card collapsible expanded={viewMode}>
+        <Card collapsible="true" expanded={viewMode.toString()}>
          {viewPanel}
         </Card>
       </Container>

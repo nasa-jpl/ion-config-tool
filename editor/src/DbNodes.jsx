@@ -114,7 +114,7 @@ const DbNodes = (props) => {
       if (!res.ok) { // error coming back from server
         throw Error('could not fetch the data for that resource');
       }
-      console.log(res);
+      //console.log(res);
       return res.json();
     })
     .then(data => {
@@ -209,7 +209,6 @@ const DbNodes = (props) => {
 
     // Load the hosts from the db first
     if (!hostsLoaded) {
-      console.log("going to load the hosts");
       fetchHosts(hostUrl);
     }
 
@@ -234,7 +233,6 @@ const DbNodes = (props) => {
 
     // If the IPs are loaded, load the nodes from the db
     if (IPsLoaded && !nodesLoaded) {
-      console.log("going to load nodes");
       fetchNodes(nodeUrl);
     }
 

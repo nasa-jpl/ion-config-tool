@@ -168,7 +168,7 @@ export default class NetHop  extends React.Component {
     param    = "bpLayer";
     value    = this.state.bpLayer;
     handler  = this.handleHopChange.bind(null,param);
-    opts     = this.props.makeOptionElems(param);
+    opts     = this.props.makeNetNodeOptionsForParam(param, this.state.toNode);
     selform  = this.makeSelectForm(value,handler,opts);
     showform = this.makeShowForm(value);
     const bpLayerElem = this.makeSelectElem(value,'BP Protocol Layer CLA',showform,selform);
@@ -410,10 +410,12 @@ NetHop.propTypes = {
   maxRate: PropTypes.number.isRequired,
   symmetric: PropTypes.bool.isRequired,
 
-  makeTypeOptions: PropTypes.func.isRequired,    // func to get dynamic (cloned) options
-  makeOptionElems: PropTypes.func.isRequired,    // func to get static options
-  makeNetNodeOptions: PropTypes.func.isRequired, // func to build node options
-  makeNetIPOptions: PropTypes.func.isRequired,   // func to build node IP options
-  getDefaultIPforNode: PropTypes.func.isRequired,// func to get default IP given a node
+  makeTypeOptions: PropTypes.func.isRequired,           // get dynamic (cloned) options
+  makeOptionElems: PropTypes.func.isRequired,           // get static options
+  makeNetNodeOptions: PropTypes.func.isRequired,        // build node options
+  makeNetIPOptions: PropTypes.func.isRequired,          // build node IP options
+  getDefaultIPforNode: PropTypes.func.isRequired,       // get default IP given a node
+  makeNetNodeOptionsForParam: PropTypes.func.isRequired,// get options based on node
+
   dispatch: PropTypes.func.isRequired
 }

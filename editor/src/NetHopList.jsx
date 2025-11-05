@@ -40,6 +40,7 @@ export default class NetHopList  extends React.Component {
     const makeOptions = this.props.makeTypeOptions;
     const makeOptElems = this.props.makeOptionElems;
     const makeNetNodeOptions = this.props.makeNetNodeOptions;
+    const makeNetNodeOptionsForParam = this.props.makeNetNodeOptionsForParam;
     const makeNetIPOptions = this.props.makeNetIPOptions;
     const getDefaultIPforNode = this.props.getDefaultIPforNode;
     const dispatch = this.props.dispatch;  // pass dispatch through
@@ -63,6 +64,7 @@ export default class NetHopList  extends React.Component {
         makeOptionElems={makeOptElems}
 
         makeNetNodeOptions = {makeNetNodeOptions}
+        makeNetNodeOptionsForParam = {makeNetNodeOptionsForParam}
         makeNetIPOptions = {makeNetIPOptions}
         getDefaultIPforNode = {getDefaultIPforNode}
         dispatch={dispatch}           // dispatch func for hop updates
@@ -206,12 +208,14 @@ NetHopList.propTypes = {
   name:  PropTypes.string.isRequired,            // user model - model name
   netHops: PropTypes.object.isRequired,          // hop dict
 
-  isGoodName: PropTypes.func.isRequired,         // func to validate name
-  isGoodNetHopKey: PropTypes.func.isRequired,    // func to validate hopKey not in use
-  makeTypeOptions: PropTypes.func.isRequired,    // func to get dynamic (cloned) options
-  makeOptionElems: PropTypes.func.isRequired,    // func to get static options
-  makeNetNodeOptions: PropTypes.func.isRequired, // func to build nodekey options
-  makeNetIPOptions: PropTypes.func.isRequired,   // func to build IP address options
-  getDefaultIPforNode: PropTypes.func.isRequired,// func to get default IP for given node
+  isGoodName: PropTypes.func.isRequired,                 // validate name
+  isGoodNetHopKey: PropTypes.func.isRequired,            // validate hopKey not in use
+  makeTypeOptions: PropTypes.func.isRequired,            // get dynamic (cloned) options
+  makeOptionElems: PropTypes.func.isRequired,            // get static options
+  makeNetNodeOptions: PropTypes.func.isRequired,         // build nodekey options
+  makeNetIPOptions: PropTypes.func.isRequired,           // build IP address options
+  getDefaultIPforNode: PropTypes.func.isRequired,        // get default IP for given node
+  makeNetNodeOptionsForParam: PropTypes.func.isRequired, // get options based on node
+
   dispatch: PropTypes.func.isRequired,
 }

@@ -192,7 +192,7 @@ export default class NetModelLoader extends React.Component {
     let msg = this.state.errMsg;
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
     var form =
-      <Form.Group controlId="formFile" className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Control 
           id="netmodel"
           name="name"
