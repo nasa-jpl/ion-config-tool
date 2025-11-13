@@ -1163,6 +1163,41 @@ export default class NetModel  extends React.Component {
     return netHostIPs[0];
   };
 
+  getPortNumForNodeAndProtocol(netNode, protocol) {
+    const netNodes = this.props.netNodes;
+    var portNum = '';
+    if (netNode === "") return"";
+
+    // See if the node was read from the node DB
+    if (netNodes[netNode].fromDb) {
+       netNodes[netNode].inducts.forEach(induct => {
+        if (induct.cl_protocol === protocol) {
+          portNum = induct.port_number ? induct.port_number : '';
+        }
+       });
+    }
+
+    // If the node does not have a port
+    // number defined for it's induct use
+    // default based on protocol
+    if (portNum === '') {
+      switch (protocol) {
+        case "tcp":
+        case "stcp":
+        case "dccp":
+          portNum = 4556;
+          break;
+        case "ltp":
+        case "udp":
+          portNum = 1113;
+          break;
+        default:
+          throw new Error("Unrecognized protocol: "+protocol);
+      }
+    }
+    return portNum;
+  };
+
   makeNetHostOptions() {
     const netHosts = this.props.netHosts;
     console.log("makeNetHostOptions " + JSON.stringify(netHosts));
@@ -1202,7 +1237,7 @@ export default class NetModel  extends React.Component {
   // Based on the parameter and nodeKey (optional)
   // supplied retrieve values for the options in 
   // a drop down menu.
-  makeNetNodeOptionsForParam(param, nodeKey) {
+  makeNetNodeOptionsForParam(param, nodeKey = '') {
     const netNodes = this.props.netNodes;
     var optionItems;
     // No node key, use default behavior based on
@@ -1211,7 +1246,7 @@ export default class NetModel  extends React.Component {
       return this.props.makeOptionElems(param);
     }
 
-    // If the net node supplied, is not from the node
+    // If the net node supplied is not from the node
     // DB, use default behavior based on parameter only
     if (!netNodes[nodeKey].fromDb) {
       return this.props.makeOptionElems(param);
@@ -1343,6 +1378,7 @@ export default class NetModel  extends React.Component {
     const makeNetNodeOptionsForParam = this.makeNetNodeOptionsForParam.bind(this);
     const makeNetIPOptions = this.makeNetIPOptions.bind(this);
     const getDefaultIPforNode = this.getDefaultIPforNode.bind(this);
+    const getPortNumForNodeAndProtocol = this.getPortNumForNodeAndProtocol.bind(this);
 
     const dispatch = this.props.dispatch;      // make sure dispatch remembers "this"
 
@@ -1361,6 +1397,7 @@ export default class NetModel  extends React.Component {
         makeNetNodeOptions = {makeNetNodeOptions} // make options list of node keys
         makeNetIPOptions= {makeNetIPOptions}      // make options list of IP addresses
         getDefaultIPforNode= {getDefaultIPforNode} // return first IP address for net node 
+        getPortNumForNodeAndProtocol = {getPortNumForNodeAndProtocol}
         dispatch={dispatch}                       // dispatch func for new hosts
       />
     );

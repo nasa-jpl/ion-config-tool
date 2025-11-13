@@ -366,19 +366,7 @@ export default class NetHop  extends React.Component {
     switch(prop) {
       // A change in bpLayer may require change in port number
       case "bpLayer":
-        switch(newState[prop]) {
-        case "tcp":
-        case "stcp":
-        case "dccp":
-          newState["portNum"] = 4556;
-          break;
-        case "ltp":
-        case "udp":
-          newState["portNum"] = 1113;
-          break;
-        default:
-          break;
-        }
+        newState["portNum"] = this.props.getPortNumForNodeAndProtocol(this.state.toNode, newState[prop]);
         break;
       // Change in fromNode/toNode --> change in default fromIP/toIP
       case "fromNode":
@@ -391,7 +379,7 @@ export default class NetHop  extends React.Component {
         break;
       default:
         break;
-      }
+    }
     this.setState (newState);
     e.preventDefault();
   };
@@ -415,6 +403,7 @@ NetHop.propTypes = {
   makeNetNodeOptions: PropTypes.func.isRequired,        // build node options
   makeNetIPOptions: PropTypes.func.isRequired,          // build node IP options
   getDefaultIPforNode: PropTypes.func.isRequired,       // get default IP given a node
+  getPortNumForNodeAndProtocol: PropTypes.func.isRequired,
   makeNetNodeOptionsForParam: PropTypes.func.isRequired,// get options based on node
 
   dispatch: PropTypes.func.isRequired

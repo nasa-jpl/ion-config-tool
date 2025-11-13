@@ -528,6 +528,9 @@ export default class App extends React.Component {
       (val) => {
         var option = val.value;
         var text   = val.label;
+        if (text === '') {
+          return <option key={option} value={option}>{option}</option>;
+        }
         return <option key={option} value={option}>{option}    == {text}</option>;
       }
     );
@@ -563,7 +566,6 @@ export default class App extends React.Component {
       (typeVal) => {
         var option = typeVal.value;
         var text = typeVal.label;
-        console.log("makeTypeOptions option= " + option + " text= " + text);
         return <option key={option} value={option}>{option}    == {text}</option>;
       } 
     );
@@ -1013,7 +1015,6 @@ export default class App extends React.Component {
   }
   // all transactions are handled centrally with the combined state (REDUX-style)
   dispatch(transaction) {
-    console.log("====dispatch called with transaction: "+ JSON.stringify(transaction));
     const now = new Date();
     const tranTime = now.format("YYYY-MM-DDThh:mm");
     // containers for new state
@@ -1436,7 +1437,8 @@ export default class App extends React.Component {
             "heapWords" : dbDatum.heap_words,
             "wmSize" : dbDatum.wm_size,
             "services" : [],
-            "protocols" : dbDatum.prots
+            "protocols" : dbDatum.prots,
+            "inducts" : dbDatum.inducts
           };
         }
 

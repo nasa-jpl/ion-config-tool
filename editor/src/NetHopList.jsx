@@ -43,6 +43,7 @@ export default class NetHopList  extends React.Component {
     const makeNetNodeOptionsForParam = this.props.makeNetNodeOptionsForParam;
     const makeNetIPOptions = this.props.makeNetIPOptions;
     const getDefaultIPforNode = this.props.getDefaultIPforNode;
+    const getPortNumForNodeAndProtocol = this.props.getPortNumForNodeAndProtocol;
     const dispatch = this.props.dispatch;  // pass dispatch through
 
     return (
@@ -67,6 +68,7 @@ export default class NetHopList  extends React.Component {
         makeNetNodeOptionsForParam = {makeNetNodeOptionsForParam}
         makeNetIPOptions = {makeNetIPOptions}
         getDefaultIPforNode = {getDefaultIPforNode}
+        getPortNumForNodeAndProtocol = {getPortNumForNodeAndProtocol}
         dispatch={dispatch}           // dispatch func for hop updates
       />
     );  
@@ -216,6 +218,7 @@ NetHopList.propTypes = {
   makeNetIPOptions: PropTypes.func.isRequired,           // build IP address options
   getDefaultIPforNode: PropTypes.func.isRequired,        // get default IP for given node
   makeNetNodeOptionsForParam: PropTypes.func.isRequired, // get options based on node
+  getPortNumForNodeAndProtocol: PropTypes.func.isRequired, // get port number for selected protocol
 
   dispatch: PropTypes.func.isRequired,
 }

@@ -36,6 +36,7 @@ const DbNodes = (props) => {
   const [nodeList, setNodeList]               = useState([]);    // Raw node data returned from DB
   const [nodesLoaded, setNodesLoaded]         = useState(false); // Flag indicating raw node data loaded
   const [protocolsLoaded, setProtocolsLoaded] = useState(false); // Flag indicating available protocols for nodes loaded
+  const [inductsLoaded, setInductsLoaded]     = useState(false); // Flag indicating inducts for nodes loaded
   const [netModelName, setNetModelName]       = useState("");    // Name to affix to the Net Model upon import
   const [showSuccess, setShowSuccess]         = useState(false); // Toggle to hide/show successful import modal
   const [netNameNeeded, setNetNameNeeded]     = useState(false); // Toggle to hide/show successful import modal
@@ -143,7 +144,7 @@ const DbNodes = (props) => {
     // associated. 
     const destWithIds = destUrls.map(dest => (
       {
-        dest: dest.host_id,
+        host_id: dest.host_id,
         promise: fetch(dest.destUrl).then(res => res.json())
       }
     ));
@@ -152,7 +153,7 @@ const DbNodes = (props) => {
     Promise.all(destWithIds.map(item => item.promise))
     .then(results => {
       const dataWithIds = results.map((data, index) => ({
-        host_id: destWithIds[index].dest,
+        host_id: destWithIds[index].host_id,
         data: data
       }));
       
@@ -174,7 +175,7 @@ const DbNodes = (props) => {
     // right node.
     const protWithIds = protUrls.map(prot => (
       {
-        prot: prot.node_id,
+        node_id: prot.node_id,
         promise: fetch(prot.protUrl).then(res => res.json())
       }
     ));
@@ -183,7 +184,7 @@ const DbNodes = (props) => {
     Promise.all(protWithIds.map(item => item.promise))
     .then( results => {
       const dataWithIds = results.map((data, index) => ({
-        node_id: protWithIds[index].prot,
+        node_id: protWithIds[index].node_id,
         data: data
       }));
 
@@ -195,6 +196,37 @@ const DbNodes = (props) => {
       console.error(err);
     });
   }
+
+  // Fetch inducts for each node by ID
+  const fetchInductsByNode = (inductUrls) => {
+
+    // Track node ID for each returned promise
+    // so the inducts are associated with the
+    // right node.
+    const inductWithIds = inductUrls.map(induct => (
+      {
+        node_id: induct.node_id,
+        promise: fetch(induct.inductUrl).then(res => res.json())
+      }
+    ));
+
+    // Do the batch request
+    Promise.all(inductWithIds.map(item => item.promise))
+    .then( results => {
+      const dataWithIds = results.map((data, index) => ({
+        node_id: inductWithIds[index].node_id,
+        data: data
+      }));
+
+      setInductsInNodes(dataWithIds);
+      setInductsLoaded(true);
+    })
+    .catch(err => {
+      // TBD better error handling
+      console.error(err);
+    });
+  }
+
   // useEffect gets called after each time the object is rendered
   // and if a dependency changes state.
   //
@@ -203,6 +235,7 @@ const DbNodes = (props) => {
   //    nodesLoaded     -- toggle that nodes loaded
   //    IPsLoaded       -- toggle that the IP addrs for hosts are loaded
   //    protocolsLoaded -- toggle that protocols for nodes are loaded
+  //    inductsLoaded   -- toggle that inducts for nodes are loaded
   useEffect(() => {
     // Flags are used to control when certain fetches are completed.
     // Only when one fetch completes is the following one attempted.
@@ -236,7 +269,7 @@ const DbNodes = (props) => {
       fetchNodes(nodeUrl);
     }
 
-    // After nodes are loaded, get the valid protocols for each one
+    // After nodes are loaded, get the valid protocols for each node
     if (nodesLoaded && !protocolsLoaded) {
       var protUrls = [];
       // Build a set of URLs to do a batch fetch for all
@@ -252,17 +285,36 @@ const DbNodes = (props) => {
 
       // Do the fetch
       fetchProtocolsByNode(protUrls);
+    }
 
+    // After protocols are loaded, get the inducts defined
+    // for each node
+    if (protocolsLoaded && !inductsLoaded) {
+      var inductUrls =[];
+      // Build a set of URLs to do a batch fetch for all
+      // the inducts for every node in one call. Keep 
+      // track of the node ID to associate the returned
+      // inducts with the correct node.
+
+      for (let i=0; i<nodeList.items.length; i++) {
+        let node_id = nodeList.items[i].node_id;
+        let inductUrl = nodeUrl+"/"+node_id+"/inducts";
+        let urlWithNodeId = {"node_id" : node_id, "inductUrl" : inductUrl};
+        inductUrls.push(urlWithNodeId);
+      }
+
+      // Do the fetch
+      fetchInductsByNode(inductUrls);
     }
 
     // If all loading is complete, merge host data into nodes
     // and format the table for rendering
-    if (hostsLoaded && IPsLoaded && nodesLoaded && protocolsLoaded) {
+    if (hostsLoaded && IPsLoaded && nodesLoaded && protocolsLoaded && inductsLoaded) {
       mergeData();
       formatNodeTable();
     }
 
-  }, [hostsLoaded, nodesLoaded, IPsLoaded, protocolsLoaded])
+  }, [hostsLoaded, nodesLoaded, IPsLoaded, protocolsLoaded, inductsLoaded])
 
   // After the destination (IP) data is loaded must associate
   // IPs with the correct host.
@@ -282,7 +334,7 @@ const DbNodes = (props) => {
   };
 
   // After protocols (ie. tcp, ltp, etc...) are loaded from the database, 
-  // it is associated with the appropriate node in memory
+  // they are associated with the appropriate node in memory
   function setProtocolsInNodes(protData) {
     protData.forEach(dataobj => {
       let node_id = dataobj.node_id;
@@ -292,6 +344,24 @@ const DbNodes = (props) => {
         const index = nodeList.items.findIndex(item => item.node_id === node_id);
         if (index !== -1) {
           nodeList.items[index].prots.push(element.cl_protocol_name);
+        }
+      })
+    })
+  };
+
+  // After inducts are loaded from the database, they have relevant
+  // data associated with the appropriate node in memory
+  function setInductsInNodes(inductData) {
+    inductData.forEach(dataobj => {
+      let node_id = dataobj.node_id;
+      let inducts = dataobj.data.items;
+
+      inducts.forEach(element => {
+        const index = nodeList.items.findIndex(item => item.node_id === node_id);
+        if (index !== -1) {
+          let inductObj = {"cl_protocol" : element.cl_protocol.cl_protocol_name,
+                           "port_number" : element.duct_name.port_number};
+          nodeList.items[index].inducts.push(inductObj);
         }
       })
     })
@@ -320,10 +390,12 @@ const DbNodes = (props) => {
       // ips      -- array of IPs associated with a node's host
       // selected -- true = import host; false = do not import host
       // prots    -- array of protocols associated with a node
+      // inducts  -- array of relevant induct information for a node
       for (let i=0 ; i<nodes.items.length; i++) {
           nodes.items[i].ips = [];
           nodes.items[i].selected = false;
           nodes.items[i].prots = [];
+          nodes.items[i].inducts = [];
       }
       
       return nodes;
