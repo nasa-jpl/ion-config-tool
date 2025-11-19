@@ -55,8 +55,11 @@ const DbNodes = (props) => {
         </Modal.Header>
         <Modal.Body>Node Import Successful!    </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" bssize="sm" onClick={toggleShowSuccess}>
+          <Button variant="secondary" bssize="sm" onClick={() => toggleShowSuccess("false")}>
             Close
+          </Button>
+          <Button variant="primary" bssize="sm" onClick={() => toggleShowSuccess("true")}>
+            Show Net Model
           </Button>
         </Modal.Footer>
       </Modal>
@@ -513,11 +516,18 @@ const DbNodes = (props) => {
       netModelName: netModelName
     }
     props.dispatch(tran);
-    toggleShowSuccess();
+    toggleShowSuccess(false);
   }
   
-  function toggleShowSuccess() {
+  function toggleShowSuccess(showNet) {
     var newState = !showSuccess;
+    if (showNet == "true") {
+      const tran = {
+        action: "SHOW-TAB",
+        tabKey: "netmodel"
+      }
+      props.dispatch(tran);
+    }
     setShowSuccess(newState);
   }
 

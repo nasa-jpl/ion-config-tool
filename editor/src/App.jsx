@@ -124,7 +124,9 @@ export default class App extends React.Component {
        configs: configs,           // model
        commands: commands,         // model
 
-       cloneValues: cloneValues    // derived
+       cloneValues: cloneValues,   // derived
+
+       tabKey: "nodedb"            // default tab 
     };
   };
   // EXTRACT getUniqId
@@ -1451,7 +1453,12 @@ export default class App extends React.Component {
         });
         // First the host info
         break;
-
+      case "SHOW-TAB":
+        var showTab = transaction.tabKey;
+        this.setState({
+          tabKey: showTab
+        });
+        break;
       case "NEW-NET-HOST":
         console.log("dispatch NEW-NET-HOST called! " + transaction.hostKey);
         newNetHosts = Object.assign( {}, this.state.netHosts);
@@ -1884,8 +1891,9 @@ export default class App extends React.Component {
           <h3>ION Configuration Editor  4.9.0b2</h3>
         </Navbar>
         <Tabs
-          defaultActiveKey="nodedb"
           className="mb=3"
+          activeKey={this.state.tabKey}
+          onSelect={(k) => this.setKey(k)}
           >
             <Tab eventKey="nodedb" title="Node DB">
               <NodeDb dispatch={dispatch}/>
@@ -1908,6 +1916,12 @@ export default class App extends React.Component {
     );
     
   };
+
+  setKey = (k) => {
+    var newState = Object.assign({}, this.state);
+    newState.tabKey = k;
+    this.setState(newState);
+  }
   handleNewNet =(e) => {
     const val = e.target.value;
     console.log("a new network model name! " + val);
