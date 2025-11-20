@@ -17,6 +17,7 @@ import {BsChevronDoubleDown} from "react-icons/bs";
 import {BsChevronDoubleRight} from "react-icons/bs";
 import {saveAs} from "file-saver";
 import {Alert} from 'react-bootstrap';
+import {Modal} from 'react-bootstrap';
 
 import cmdTypes     from './json/cmdTypes.json';
 import paramTypes   from './json/paramTypes.json'
@@ -42,7 +43,7 @@ export default class NetModel  extends React.Component {
       editMode: false,
       viewMode: false,
       expandMode: false,
-      buildMode: true,
+      showBuildSuccess: false,
       newNodeId: "",
 
       errMsg: ""
@@ -197,8 +198,11 @@ export default class NetModel  extends React.Component {
       return null;
     }
     this.buildIonModel();
-    this.setError("");   // might be a rerun, so clear any prior errors
-    return null;
+
+    var newState = Object.assign({},this.state);
+    newState.showBuildSuccess = true;
+    newState.errMsg = "";
+    this.setState (newState);
   }
   // EXTRACT buildIonModel
   // build ion model
@@ -915,9 +919,6 @@ export default class NetModel  extends React.Component {
     };
     this.props.dispatch(tran);
 
-    var newState = Object.assign({},this.state);
-    newState.buildMode = false;  // just build once 
-    this.setState (newState);
     // END NO EXTRACT
     return null;
   };
@@ -1198,6 +1199,21 @@ export default class NetModel  extends React.Component {
     return portNum;
   };
 
+  toggleBuildSuccess(showIon) {
+    var newState = !this.state.showBuildSuccess;
+    this.setState({
+      showBuildSuccess: newState
+    });
+
+    if (showIon) {
+      const tran = {
+        action: "SHOW-TAB",
+        tabKey: "ionmodel"
+      }
+      this.props.dispatch(tran);
+    }
+  };
+
   makeNetHostOptions() {
     const netHosts = this.props.netHosts;
     console.log("makeNetHostOptions " + JSON.stringify(netHosts));
@@ -1451,6 +1467,26 @@ export default class NetModel  extends React.Component {
     );
   };
 
+  makeBuildSuccessDialog() {
+    console.log("Delete Model: popup the modal delete warn");
+    return (
+      <Modal show={this.state.showBuildSuccess}>
+        <Modal.Header closeButton>
+          <Modal.Title>Success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>ION Model Successfully Built</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" bssize="sm" onClick={ () => this.toggleBuildSuccess(false)}>
+            Ok 
+          </Button>
+          <Button variant="primary" bssize="sm" onClick={ () => this.toggleBuildSuccess(true)}>
+            Show ION Model 
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  };
+
   render() {
     //console.log("NetModel render begin. state" +JSON.stringify(this.state));
     console.log("NetModel render begin.");
@@ -1463,18 +1499,19 @@ export default class NetModel  extends React.Component {
     const editMode   = this.state.editMode;
     const viewMode   = this.state.viewMode;
     const expandMode = this.state.expandMode;
-    const buildMode  = this.state.buildMode;
+    const showBuildSuccess = this.state.showBuildSuccess;
 
     const editLabel  = editMode?   'Submit' : 'Edit';
     const viewLabel  = viewMode?   'Hide' : 'Show';
     const expandIcon = expandMode? <BsChevronDoubleDown/> : <BsChevronDoubleRight/>;
 
-    const dimBuildIon = buildMode?  false : true;
     const dimSaveNet  = false;
 
     const hostList  = expandMode? this.makeNetHostListElem(name) : "";
     const nodeList  = expandMode? this.makeNetNodeListElem(name) : "";
     const hopList   = expandMode? this.makeNetHopListElem(name)  : "";
+
+    const buildSuccessDialog = showBuildSuccess ? this.makeBuildSuccessDialog() : "";
 
     let viewPanel = null;
     if (viewMode)
@@ -1495,7 +1532,7 @@ export default class NetModel  extends React.Component {
             <ButtonGroup>
               <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
               <Button variant="info" className="mr-1" onClick={this.view}>{viewLabel}</Button>
-              <Button variant="primary" className="mr-1" disabled={dimBuildIon} onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
+              <Button variant="primary" className="mr-1" onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
               <Button variant="primary" className="mr-1" disabled={dimSaveNet}  onClick={this.saveModel}>Save Model</Button>
               <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
             </ButtonGroup>
@@ -1503,6 +1540,7 @@ export default class NetModel  extends React.Component {
           <Col sm={4}>{alert}</Col>
         </Row>
       </Container>
+      {buildSuccessDialog}
       <Container fluid>
         <Card collapsible="true" expanded={viewMode.toString()}>
           {viewPanel}
