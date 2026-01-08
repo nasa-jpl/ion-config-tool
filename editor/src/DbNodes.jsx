@@ -31,20 +31,28 @@ const DbNodes = (props) => {
   // State variables
   const [nodeTable, setNodeTable]             = useState(null);  // HTML formatted table of hosts
   const [hostList, setHostList]               = useState([]);    // Raw host data returned from DB
+  const [hostData, setHostData]               = useState([]);
   const [hostsLoaded, setHostsLoaded]         = useState(false); // Flag indicating raw host data (without destinations) loaded
   const [IPsLoaded, setIPsLoaded]             = useState(false); // Flag indicating IPs for hosts loaded
   const [nodeList, setNodeList]               = useState([]);    // Raw node data returned from DB
+  const [nodeData, setNodeData]               = useState([]);    // Raw node data returned from DB
   const [nodesLoaded, setNodesLoaded]         = useState(false); // Flag indicating raw node data loaded
   const [protocolsLoaded, setProtocolsLoaded] = useState(false); // Flag indicating available protocols for nodes loaded
   const [inductsLoaded, setInductsLoaded]     = useState(false); // Flag indicating inducts for nodes loaded
   const [netModelName, setNetModelName]       = useState("");    // Name to affix to the Net Model upon import
   const [showSuccess, setShowSuccess]         = useState(false); // Toggle to hide/show successful import modal
   const [netNameNeeded, setNetNameNeeded]     = useState(false); // Toggle to hide/show successful import modal
+  const [nextHostToken, setNextHostToken]     = useState(null);  // Token to handle pagination in DB
+  const [nextNodeToken, setNextNodeToken]     = useState(null);  // Token to handle pagination in DB
 
   // Extract the parent URLs from the JSON configs
   var dbHost = nodeDB["nodeDbUrls"].dbHost;
   var hostUrl = dbHost+nodeDB["nodeDbUrls"].hostUrl;
   var nodeUrl = dbHost+nodeDB["nodeDbUrls"].nodeUrl;
+
+  // Query limit is 100 items per fetch
+  var qLimit = 100;
+
   var importAlert = 
       <Modal show={showSuccess} 
              onHide={toggleShowSuccess}
@@ -74,71 +82,145 @@ const DbNodes = (props) => {
         </Modal.Header>
         <Modal.Body>Net Model Name Required Before Import</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" bssize="sm" onClick={toggleNeedNetName}>
+          <Button variant="secondary" bssize="sm" onClick={toggleNetNameNeeded}>
             Close
           </Button>
         </Modal.Footer>
       </Modal>
 
-  // Fetch hosts from the DB
-  const fetchHosts = (hostUrl) => {
-    // This kludge is in place until a sensible way to handle pagination in the UI is developed
-    hostUrl = hostUrl+"?max_page_size=1000";
-    fetch(hostUrl)
-    .then(res => {
-      if (!res.ok) { 
-        throw Error('could not fetch the data for hosts');
-      }
-      return res.json();
-    })
-    .then(data => {
-      // Successful fetch, set the toggle and pre process the data
-      setHostsLoaded(true);
-      setHostList(preProcessHosts(data));
-    })
-    .catch(err => {
-      // TBD deal with errors cleanly
-      if (err.name === 'AbortError') {
-        console.log('fetch aborted')
-      } else {
-        if (err.name === "TypeError") {
-        } else {
-          // auto catches network / connection error
-        }
-      }
-    });
-  };
+  // Grab the hosts from the DB in an effect.
+  useEffect(() => {
+    // ignore flag set on cleanup
+    let ignore = false;
 
-  // Fetch nodes from the DB
-  const fetchNodes = (nodeUrl) => {
-    // This kludge is in place until a sensible way to handle pagination in the UI is developed
-    nodeUrl=nodeUrl+"?max_page_size=1000";
-    fetch(nodeUrl)
-    .then(res => {
-      if (!res.ok) { // error coming back from server
-        throw Error('could not fetch the data for that resource');
-      }
-      //console.log(res);
-      return res.json();
-    })
-    .then(data => {
-      setNodeList(preProcessNodes(data));
-      setNodesLoaded(true);
-    })
-    .catch(err => {
-      // TBD deal with errors cleanly
-      if (err.name === 'AbortError') {
-        console.log('fetch aborted')
+    async function fetchHosts() {
+
+      var params = {};
+      // set params accordingly
+      if (nextHostToken) {
+        params = new URLSearchParams({
+          max_page_size: qLimit,
+          page_token: nextHostToken
+        });
       } else {
-        if (err.name === "TypeError") {
-          console.log("Type Error encountered")
-        } else {
-          // auto catches network / connection error
-          console.log(err.name);
-        }
+        params = new URLSearchParams({
+          max_page_size: qLimit
+        })
       }
-    });
-  };
+
+      // Build the URL with the query parameters
+      var url = `${hostUrl}/?${params}`;
+      fetch(url)
+      .then(res => {
+        if (!res.ok) { 
+          throw Error('could not fetch the data for hosts');
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (ignore) return;
+        if (!data.next_page_token) {
+          // No next page token, pre-process the data and set the toggle
+          // that we are done.
+          hostData.push(...data.items);
+          preProcessHosts(hostData.slice());
+          setHostsLoaded(true);
+        } else {
+          // There's more data to get. Append and set the next
+          // token which will trigger another fetch.
+          hostData.push(...data.items);
+          setHostData(hostData);
+          setNextHostToken(data.next_page_token);
+        }
+      })
+      .catch(err => {
+        // TBD deal with errors cleanly
+        if (err.name === 'AbortError') {
+          console.log('fetch aborted')
+        } else {
+          if (err.name === "TypeError") {
+          } else {
+            // auto catches network / connection error
+          }
+        }
+      });
+    };
+
+    // Do the fetch for hosts
+    fetchHosts();
+
+    // Set ignore flag on cleanup
+    return () => {
+      ignore = true;
+    };
+
+  }, [nextHostToken])
+
+  // Grab nodes from the DB in an effect
+  useEffect(() => {
+    // Initialize cleanup flag
+    let ignore = false;
+
+    async function fetchNodes() {
+      var params = {};
+
+      // Set query params
+      if (nextNodeToken) {
+        params = new URLSearchParams({
+          max_page_size: qLimit,
+          page_token: nextNodeToken
+        });
+      } else {
+        params = new URLSearchParams({
+          max_page_size: qLimit
+        })
+      }
+
+      // Build URL and fetch
+      var url = `${nodeUrl}/?${params}`;
+      fetch(url)
+      .then(res => {
+        if (!res.ok) { // error coming back from server
+          throw Error('could not fetch the data for that resource');
+        }
+        return res.json();
+      })
+      .then(data => {
+        // If ignore is set, no-op
+        if (ignore) return;
+        if (!data.next_page_token) {
+          nodeData.push(...data.items);
+          preProcessNodes(nodeData.slice());
+          setNodesLoaded(true);
+        } else {
+          nodeData.push(...data.items);
+          setNodeData(nodeData);
+          setNextNodeToken(data.next_page_token);
+        }
+      })
+      .catch(err => {
+        // TBD deal with errors cleanly
+        if (err.name === 'AbortError') {
+          console.log('fetch aborted')
+        } else {
+          if (err.name === "TypeError") {
+            console.log("Type Error encountered")
+          } else {
+            // auto catches network / connection error
+            console.log(err.name);
+          }
+        }
+      });
+    };
+    
+    // Do the fetch
+    fetchNodes();
+
+    // Set ignore flag on cleanup
+    return () => {
+      ignore = true;
+    };
+  }, [nextNodeToken])
 
   // Fetch host destinations (usally IP addrs)
   const fetchDestsWithIds = (destUrls) => {
@@ -160,9 +242,7 @@ const DbNodes = (props) => {
         data: data
       }));
       
-      setDestinationsInHosts(dataWithIds);
-      setIPsLoaded(true);
-
+      setHostList(setDestinationsInHosts(dataWithIds));
     })
     .catch(err => {
       // TBD deal with errors cleanly
@@ -191,8 +271,7 @@ const DbNodes = (props) => {
         data: data
       }));
 
-      setProtocolsInNodes(dataWithIds);
-      setProtocolsLoaded(true);
+      setNodeList(setProtocolsInNodes(dataWithIds));
     })
     .catch(err => {
       // TBD better error handling
@@ -221,7 +300,7 @@ const DbNodes = (props) => {
         data: data
       }));
 
-      setInductsInNodes(dataWithIds);
+      setNodeList(setInductsInNodes(dataWithIds));
       setInductsLoaded(true);
     })
     .catch(err => {
@@ -230,8 +309,7 @@ const DbNodes = (props) => {
     });
   }
 
-  // useEffect gets called after each time the object is rendered
-  // and if a dependency changes state.
+  // Load data that needs node-based and host-based URLs
   //
   // dependencies:
   //    hostsLoaded     -- toggle that hosts without destinations loaded 
@@ -243,21 +321,18 @@ const DbNodes = (props) => {
     // Flags are used to control when certain fetches are completed.
     // Only when one fetch completes is the following one attempted.
 
-    // Load the hosts from the db first
-    if (!hostsLoaded) {
-      fetchHosts(hostUrl);
-    }
+    // Nothing to do until hosts and nodes are loaded
+    if (!hostsLoaded || !nodesLoaded) return;
 
-    // If host loading is complete, get the IPs from the destinations
-    // URL
-    if (hostsLoaded && !IPsLoaded) {
+    // Load IP addresses if they have not yet been
+    if (!IPsLoaded) {
       var destUrls = [];
       // Build up a set of URLs to do a batch fetch of all the IP
       // addresses at once. Keep track of the host ID for each
       // fetch to maintain the association of which host has
       // which destinations in the DB.
-      for (let i=0 ; i<hostList.items.length; i++) {
-        let host_id = hostList.items[i].host_id;
+      for (let i=0 ; i<hostList.length; i++) {
+        let host_id = hostList[i].host_id;
         let destUrl = hostUrl+"/"+host_id+"/destinations";
         let urlWithHostId = {"host_id" : host_id, "destUrl" : destUrl };
         destUrls.push(urlWithHostId);
@@ -265,22 +340,18 @@ const DbNodes = (props) => {
 
       // Do the fetch
       fetchDestsWithIds(destUrls);
+      setIPsLoaded(true);
     }
 
-    // If the IPs are loaded, load the nodes from the db
-    if (IPsLoaded && !nodesLoaded) {
-      fetchNodes(nodeUrl);
-    }
-
-    // After nodes are loaded, get the valid protocols for each node
-    if (nodesLoaded && !protocolsLoaded) {
+    // Load protocols if they have not yet been
+    if (!protocolsLoaded) {
       var protUrls = [];
       // Build a set of URLs to do a batch fetch for all
       // the protocols for every node in one call. Keep 
       // track of the node ID to associate the returned
       // protocols with the correct node.
-      for (let i=0; i<nodeList.items.length; i++) {
-        let node_id = nodeList.items[i].node_id;
+      for (let i=0; i<nodeList.length; i++) {
+        let node_id = nodeList[i].node_id;
         let protUrl = nodeUrl+"/"+node_id+"/cl-protocols";
         let urlWithNodeId = {"node_id" : node_id, "protUrl" : protUrl};
         protUrls.push(urlWithNodeId);
@@ -288,19 +359,19 @@ const DbNodes = (props) => {
 
       // Do the fetch
       fetchProtocolsByNode(protUrls);
+      setProtocolsLoaded(true);
     }
 
-    // After protocols are loaded, get the inducts defined
-    // for each node
-    if (protocolsLoaded && !inductsLoaded) {
+    // Load inducts if they have not yet been
+    if (!inductsLoaded) {
       var inductUrls =[];
       // Build a set of URLs to do a batch fetch for all
       // the inducts for every node in one call. Keep 
       // track of the node ID to associate the returned
       // inducts with the correct node.
 
-      for (let i=0; i<nodeList.items.length; i++) {
-        let node_id = nodeList.items[i].node_id;
+      for (let i=0; i<nodeList.length; i++) {
+        let node_id = nodeList[i].node_id;
         let inductUrl = nodeUrl+"/"+node_id+"/inducts";
         let urlWithNodeId = {"node_id" : node_id, "inductUrl" : inductUrl};
         inductUrls.push(urlWithNodeId);
@@ -310,11 +381,11 @@ const DbNodes = (props) => {
       fetchInductsByNode(inductUrls);
     }
 
-    // If all loading is complete, merge host data into nodes
-    // and format the table for rendering
-    if (hostsLoaded && IPsLoaded && nodesLoaded && protocolsLoaded && inductsLoaded) {
+    // If inducts are loaded, time to merge all the data into
+    // one data structure and generate the node table
+    if (inductsLoaded) {
       mergeData();
-      formatNodeTable();
+      setNodeTable(formatNodeTable());
     }
 
   }, [hostsLoaded, nodesLoaded, IPsLoaded, protocolsLoaded, inductsLoaded])
@@ -326,14 +397,14 @@ const DbNodes = (props) => {
       let host_id = dataobj.host_id;
       let dests = dataobj.data.items;
       dests.forEach(element => {
-        const index = hostList.items.findIndex(item => item.host_id === host_id);
+        const index = hostList.findIndex(item => item.host_id === host_id);
         if (index !== -1) {
-          hostList.items[index].dests.push(element.destination_value);
+          hostList[index].dests.push(element.destination_value);
         }
       })
     })
 
-    setHostList(hostList);
+    return hostList;
   };
 
   // After protocols (ie. tcp, ltp, etc...) are loaded from the database, 
@@ -344,12 +415,14 @@ const DbNodes = (props) => {
       let prots = dataobj.data.items;
 
       prots.forEach(element => {
-        const index = nodeList.items.findIndex(item => item.node_id === node_id);
+        const index = nodeList.findIndex(item => item.node_id === node_id);
         if (index !== -1) {
-          nodeList.items[index].prots.push(element.cl_protocol_name);
+          nodeList[index].prots.push(element.cl_protocol_name);
         }
       })
     })
+
+    return nodeList;
   };
 
   // After inducts are loaded from the database, they have relevant
@@ -360,27 +433,28 @@ const DbNodes = (props) => {
       let inducts = dataobj.data.items;
 
       inducts.forEach(element => {
-        const index = nodeList.items.findIndex(item => item.node_id === node_id);
+        const index = nodeList.findIndex(item => item.node_id === node_id);
         if (index !== -1) {
           let inductObj = {"cl_protocol" : element.cl_protocol.cl_protocol_name,
                            "port_number" : element.duct_name.port_number};
-          nodeList.items[index].inducts.push(inductObj);
+          nodeList[index].inducts.push(inductObj);
         }
       })
     })
+
+    return(nodeList);
   };
 
   // preProcessHosts
   //
   // Initialize the host data with an empty array for destinations (usu. IPs)
-  function preProcessHosts(data) {
-      var hosts = data;
+  function preProcessHosts(hosts) {
       // dests -- array of destinations that is likely IPs associated with host
-      for (let i=0 ; i<hosts.items.length; i++) {
-          hosts.items[i].dests = [];
+      for (let i=0 ; i<hosts.length; i++) {
+          hosts[i].dests = [];
       }
       
-      return hosts;
+      setHostList(hosts);
   }
 
   // preProcessNodes
@@ -388,20 +462,19 @@ const DbNodes = (props) => {
   // Initialize nodes to prepare for data that will get filled
   // in later either through user or from elsewhere in the node
   // database. 
-  function preProcessNodes(data) {
-      var nodes = data;
+  function preProcessNodes(nodes) {
       // ips      -- array of IPs associated with a node's host
       // selected -- true = import host; false = do not import host
       // prots    -- array of protocols associated with a node
       // inducts  -- array of relevant induct information for a node
-      for (let i=0 ; i<nodes.items.length; i++) {
-          nodes.items[i].ips = [];
-          nodes.items[i].selected = false;
-          nodes.items[i].prots = [];
-          nodes.items[i].inducts = [];
+      for (let i=0 ; i<nodes.length; i++) {
+          nodes[i].ips = [];
+          nodes[i].selected = false;
+          nodes[i].prots = [];
+          nodes[i].inducts = [];
       }
       
-      return nodes;
+      setNodeList(nodes);
   }
 
   // mergeData
@@ -410,8 +483,8 @@ const DbNodes = (props) => {
   // it into the nodes array. We are only going to deal with one array
   // of objects for display and manipulation
   function mergeData()  {
-    var nodes = nodeList.items;
-    var hosts = hostList.items;
+    var nodes = nodeList;
+    var hosts = hostList;
 
     for (var idx in nodes) {
       var hostname = nodes[idx].host.hostname;
@@ -429,9 +502,8 @@ const DbNodes = (props) => {
   // This function is run to create the HTML representation of the
   // node table once all the data has been loaded from the DB.
   function formatNodeTable() {
-    var nodeTable = "";
 
-    nodeTable = 
+    return (
       <Table striped border hover>
         <thead>
           <tr>
@@ -447,7 +519,7 @@ const DbNodes = (props) => {
           </tr>
         </thead>
         <tbody>
-          {nodeList.items.map((item, index) => (
+          {nodeList.map((item, index) => (
             <tr key={item.node_id}>
               <td className="d-flex justify-content-center">
                 <Form.Check
@@ -468,10 +540,8 @@ const DbNodes = (props) => {
             </tr>
           ))}
         </tbody>
-      </Table>
-    
-    // Update state with the table, this triggers a render
-    setNodeTable(nodeTable);
+      </Table>)
+
   };
 
   // hadleCheckboxChange
@@ -480,10 +550,10 @@ const DbNodes = (props) => {
   // and update the node list with the change.
   function handleCheckboxChange(node_id) {
     console.log("checkbox "+node_id+" checked!");
-    var nodeIdx = nodeList.items.findIndex((node) => node.node_id === node_id);
+    var nodeIdx = nodeList.findIndex((node) => node.node_id === node_id);
     if (nodeIdx > -1) {
-      var isSelected = nodeList.items[nodeIdx].selected;
-      nodeList.items[nodeIdx].selected = !isSelected;
+      var isSelected = nodeList[nodeIdx].selected;
+      nodeList[nodeIdx].selected = !isSelected;
     }
     setNodeList(nodeList);
   };
@@ -495,7 +565,6 @@ const DbNodes = (props) => {
   // level App object. Note: dispatch is passed into the DbNodes object
   // as a property.
   function importData() {
-    console.log("Import Hosts!!");
     if (netModelName === "") {
       setNetNameNeeded(true);
       return;
@@ -504,7 +573,7 @@ const DbNodes = (props) => {
     }
 
     var dbDataToSend = [];
-    nodeList.items.forEach(node => {
+    nodeList.forEach(node => {
       if (node.selected) {
         dbDataToSend.push(node);
       }
@@ -531,7 +600,7 @@ const DbNodes = (props) => {
     setShowSuccess(newState);
   }
 
-  function toggleNeedNetName() {
+  function toggleNetNameNeeded() {
     var newState = !netNameNeeded;
     setNetNameNeeded(newState);
   }
