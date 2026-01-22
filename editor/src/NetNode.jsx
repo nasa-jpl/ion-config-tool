@@ -21,6 +21,9 @@ export default class NetNode  extends React.Component {
     // props
     const nodeKey = this.props.nodeKey;
     const fromDb = this.props.fromDb;
+    const dbCreatedTime = this.props.dbCreatedTime;
+    const dbUpdatedTime = this.props.dbUpdatedTime;
+    const dbComment = this.props.dbComment;
     const desc = this.props.desc;
     const nodeHost = this.props.nodeHost;
     const nodeType = this.props.nodeType;
@@ -43,7 +46,12 @@ export default class NetNode  extends React.Component {
       nodeHost: nodeHost,
       nodeType: nodeType,
       endpointID: endpointID,
-      services: services
+      services: services,
+
+      fromDb: fromDb,
+      dbCreatedTime: dbCreatedTime,
+      dbUpdatedTime: dbUpdatedTime,
+      dbComment: dbComment
     }
   }
   makeAlertElem(msg) {
@@ -87,7 +95,6 @@ export default class NetNode  extends React.Component {
   makeNodeEditor() {
     //console.log(">>makeNodeElems " + JSON.stringify(this.state));
     var nodeElems = [];
-    const icon = 'remove';
     const head  = 
       <Row key="head">
         <Col sm={5}> <Badge bg="secondary" text="light">Net Node Editor</Badge></Col>
@@ -104,6 +111,15 @@ export default class NetNode  extends React.Component {
     const descElem = this.makeNodeElem("desc","text",this.state.desc,"Description",2,false,"");
     nodeElems.push(descElem);
 
+    if (this.state.fromDb) {
+      const createElem = this.makeNodeElem("","text",this.state.dbCreatedTime,"Created",2,true,"");
+      nodeElems.push(createElem);
+      const updateElem = this.makeNodeElem("","text",this.state.dbUpdatedTime,"Last Updated",2,true,"");
+      nodeElems.push(updateElem);
+      const commentText = this.state.dbComment ? this.state.dbComment : "None";
+      const commentElem = this.makeNodeElem("","text",commentText,"Comment",2,true,"");
+      nodeElems.push(commentElem);
+    }
 
     var param;
     var value;
@@ -163,6 +179,15 @@ export default class NetNode  extends React.Component {
     nodeElems.push(keyElem);
     const descElem = this.makeNodeElem("desc","text",this.state.desc,"Description",2,true,"");
     nodeElems.push(descElem);
+    if (this.state.fromDb) {
+      const createElem = this.makeNodeElem("","text",this.state.dbCreatedTime,"Created",2,true,"");
+      nodeElems.push(createElem);
+      const updateElem = this.makeNodeElem("","text",this.state.dbUpdatedTime,"Last Updated",2,true,"");
+      nodeElems.push(updateElem);
+      const commentText = this.state.dbComment ? this.state.dbComment : "None";
+      const commentElem = this.makeNodeElem("","text",commentText,"Comment",2,true,"");
+      nodeElems.push(commentElem);
+    }
     const hostElem = this.makeNodeElem("nodeHost","text",this.state.nodeHost,"Host Name",2,true,"");
     nodeElems.push(hostElem);
     const typeElem = this.makeNodeElem("nodeType","text",this.state.nodeType,"Node Type",1,true,"");
@@ -310,7 +335,15 @@ export default class NetNode  extends React.Component {
 
 NetNode.propTypes = {   
   nodeKey: PropTypes.object.isRequired,         // user model - netNode key
-  fromDb: PropTypes.bool.isRequired,
+  fromDb: PropTypes.bool.isRequired,            // indicates if data from node DB
+
+  //----------------------------------------//
+  // These are set only if from the node DB
+  dbCreatedTime: PropTypes.string.isRequired,   // time created in node DB
+  dbUpdatedTime: PropTypes.string.isRequired,   // time updated in node DB
+  dbComment: PropTypes.string.isRequired,       // comment from node DB
+  //---------------------------------------//
+
   desc: PropTypes.string.isRequired,
   nodeHost: PropTypes.string.isRequired,
   nodeType: PropTypes.string.isRequired,

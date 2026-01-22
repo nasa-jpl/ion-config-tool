@@ -1429,6 +1429,9 @@ export default class App extends React.Component {
           // Populate net nodes, mark as from the database
           newNetNodes[dbDatum.node_name] = {
             "fromDb" : true,
+            "dbCreatedTime" : dbDatum.created_at,
+            "dbUpdatedTime" : dbDatum.modified_at,
+            "dbComment" : dbDatum.comments,
             "id" : dbDatum.node_name,
             "nodeDesc": "",
             "nodeHost": dbDatum.host.hostname,

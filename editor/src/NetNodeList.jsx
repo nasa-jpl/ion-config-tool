@@ -49,6 +49,10 @@ export default class NetNodeList  extends React.Component {
     return (
       <NetNode
         key={nodeKey}                 // unique id
+        fromDb={node.fromDb}          // state
+        dbCreatedTime={node.dbCreatedTime}
+        dbUpdatedTime={node.dbUpdatedTime}
+        dbComment={node.dbComment}
         nodeKey={nodeKey}             // state
         desc={node.nodeDesc}          // state
         nodeHost={node.nodeHost}      // state
