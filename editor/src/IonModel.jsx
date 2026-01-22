@@ -1416,7 +1416,7 @@ export default class IonModel  extends React.Component {
     const blob = new Blob( [modelJson], {type: "text/plain; charset=utf-8"} );
     const modelName = this.state.name + ".json";
     console.log("save ION model to: " + modelName);
-    saveAs(blob, modelName, true);   // true = disable autoBOM
+    saveAs(blob, modelName); 
   };
   saveConfigs = () => {
     console.log("let's save all config files in a zip file!");
@@ -1455,7 +1455,7 @@ export default class IonModel  extends React.Component {
     };
     const zipname = this.props.name + ".zip";
     zip.generateAsync( {type:"blob"}).then(function(content) {
-      saveAs(content, zipname, true);   // true = disable autoBOM
+      saveAs(content, zipname);
     });
     console.log("finished zip file!??");
   };

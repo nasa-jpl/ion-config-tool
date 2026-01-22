@@ -1614,7 +1614,7 @@ export default class NetModel  extends React.Component {
     const blob = new Blob( [modelJson], {type: "text/plain; charset=utf-8"} );
     const modelName = this.state.name + ".json";
     console.log("save Net model to: " + modelName);
-    saveAs(blob, modelName, true);   // true = disable autoBOM
+    saveAs(blob, modelName);
   };
   handleNetChange = (prop,e) => {
     console.log("a value change of " + prop +  e);

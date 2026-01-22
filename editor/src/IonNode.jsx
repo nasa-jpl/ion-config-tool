@@ -374,7 +374,7 @@ export default class IonNode  extends React.Component {
     // build zip file
     const zipname = this.props.name + ".zip";
     zip.generateAsync( {type:"blob"}).then(function(content) {
-      saveAs(content, zipname, true);   // true = disable autoBOM
+      saveAs(content, zipname);
     });
     console.log("finished zip file!??");
   };

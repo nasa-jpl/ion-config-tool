@@ -316,7 +316,7 @@ export default class Config  extends React.Component {
         lf = "\r\n";
     const page = cmdLines.join(lf) + lf;
     var blob = new Blob( [page], {type: "text/plain; charset=utf-8"} );
-    saveAs(blob, this.props.name, true);   // true = disable autoBOM
+    saveAs(blob, this.props.name); 
   };
   newcmd = () => {
     console.log("add a new command!");
