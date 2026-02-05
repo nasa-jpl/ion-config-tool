@@ -173,7 +173,8 @@ srcAndDest = [
 				  "makeCmdLine",
 				  ["cmdTypeKey","cmdParams"],
 				  "../src/auto/ionfunc-auto.js",
-				  {'console.log' : 'debug'}
+				  {'console.log' : 'debug',
+	               'this.props.cmdTypes' : 'cmdTypes'}
 				],
 				
 				[
@@ -184,7 +185,8 @@ srcAndDest = [
 				  {'this.state.name':  'ion.name',
 				   'this.state.desc':  'ion.desc',
 				   'this.props.nodes': 'nodes',
-				   'console.log':      'debug'}
+				   'console.log':      'debug',
+	               'this.props.cmdTypes' : 'cmdTypes'}
 				],
 				
 				[
