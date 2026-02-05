@@ -101,7 +101,6 @@ export default class Config  extends React.Component {
     );
   };
   makeNewCommandElem() {
-    //console.log("makeNewCommandElems cmdTypes: " + this.props.configType.cmdTypes);
     var optionItems = [ ];
 
     optionItems[0] = <option key="none" value="none">&lt;none&gt;</option>;

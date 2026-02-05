@@ -28,7 +28,6 @@ import HostList     from './HostList.jsx';
 import IonNodeList  from './IonNodeList.jsx';
 import GraphList    from './GraphList.jsx';
 
-import cmdTypes     from './json/cmdTypes.json';
 import configTypes  from './json/configTypes.json';
 import paramTypes   from './json/paramTypes.json';
 import patterns     from './json/patterns.json';
@@ -226,6 +225,7 @@ export default class IonModel  extends React.Component {
     const hosts = this.props.hosts;                     // host objects
     const configs = this.props.configs;                 // config objects
     const commands = this.props.commands;               // command objects
+    const cmdTypes = this.props.cmdTypes;
     const ipaddrs = this.props.ipaddrs;                 // ipaddr objects
     const isGoodName = this.props.isGoodName;           // pass through
     const isGoodNodeNum = this.props.isGoodNodeNum;     // pass through
@@ -248,7 +248,6 @@ export default class IonModel  extends React.Component {
         commands={commands}                // user model - commands
         ipaddrs={ipaddrs}                  // user model - ipaddrs
 
-        configTypes={configTypes}          // schema
         cmdTypes={cmdTypes}                // schema
         paramTypes={paramTypes}            // schema
 
@@ -342,7 +341,7 @@ export default class IonModel  extends React.Component {
     // console.log("makeCmdLine cmdTypeKey: " + cmdTypeKey + "  Params : " + JSON.stringify(cmdParams));
     const targets = [ "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" ];
     var cmdPattern = patterns[cmdTypeKey];
-    let cmdType = cmdTypes[cmdTypeKey];
+    let cmdType = this.props.cmdTypes[cmdTypeKey];
     //console.log("cmdType: " + JSON.stringify(cmdType));
     for (var i = 0; i < cmdParams.length; i++) {
       //console.log("makeCmdLine Pattern: " + cmdPattern + " tgt: " + cmdTypeKey + "  " + targets[i] + "  " + cmdParams[i]);
@@ -407,7 +406,7 @@ export default class IonModel  extends React.Component {
       const cmd = commands[cmdKey];
       const cmdTypeKey = cmd.typeKey;
       //console.log("makeCmdLines cmdTypeKey: " + cmdTypeKey);
-      const cmdType = cmdTypes[cmdTypeKey];
+      const cmdType = this.props.cmdTypes[cmdTypeKey];
       const cmdName = cmdType.name;
       cmdLines.push("#");
       cmdLines.push("#  " + cmdName.toUpperCase());
@@ -547,7 +546,7 @@ export default class IonModel  extends React.Component {
     //console.log("makeCommandElem " + cmdKey);
     const cmd = this.props.commands[cmdKey];
     const cmdTypeKey = cmd.typeKey;
-    const cmdType = cmdTypes[cmdTypeKey];
+    const cmdType = this.props.cmdTypes[cmdTypeKey];
     const pattern = patterns[cmdTypeKey];
     const vals = this.props.getValues(cmdKey).slice(0); // a shallow copy of the values
     const clones = this.props.cloneValues;              // need to know if command value is cloned
@@ -1029,7 +1028,7 @@ export default class IonModel  extends React.Component {
         for (let n=0; n<configObj.cmdKeys.length; n++) { 
           let cmdKey = configObj.cmdKeys[n];
           let cmdTypeKey = commands[cmdKey].typeKey;
-          var cmdType = cmdTypes[cmdTypeKey];
+          var cmdType = this.props.cmdTypes[cmdTypeKey];
           console.log("checking command type: " + cmdTypeKey + " " );
           if (cmdType.verFrom > ionVerSeqNo) {
             let msg = "Node " + nodeKey + "(" + ionVer + ") needs earlier variant of this command";
@@ -1078,7 +1077,7 @@ export default class IonModel  extends React.Component {
         for (var cntKey in cmdCounts) {
           if (cmdCounts[cntKey] > 1) {
             console.log("***** " + cntKey + " count =" + cmdCounts[cntKey].toString() );
-            if (!cmdTypes[cntKey].hasOwnProperty("multiple")) {   // singleton command?
+            if (!this.props.cmdTypes[cntKey].hasOwnProperty("multiple")) {   // singleton command?
               let msg = "Improper duplicate command: " + cntKey;
               alerts.push({"type": "Config", "name": confKey, "level":"warn", "msg": msg});
             }
@@ -1481,6 +1480,7 @@ IonModel.propTypes = {
   nodes: PropTypes.array.isRequired,
   configs: PropTypes.array.isRequired,
   commands: PropTypes.array.isRequired,
+  cmdTypes: PropTypes.object.isRequired,
   cloneValues: PropTypes.array.isRequired,
 
   getNodeKey: PropTypes.func.isRequired,      // func to find nodeKey from a cmdKey

@@ -25,10 +25,10 @@ import {BsXLg} from "react-icons/bs";
 import "date-format-lite";
 
 // schema imports
-import configTypes from './json/configTypes.json';
-import cmdTypes    from './json/cmdTypes.json';
-import paramTypes  from './json/paramTypes.json';
-import selections  from './json/selections.json';
+import configTypesSrc from './json/configTypes.json';
+import cmdTypesSrc    from './json/cmdTypes.json';
+import paramTypes     from './json/paramTypes.json';
+import selections     from './json/selections.json';
 
  // non-render state
  var uniqId = 0;       // counter used to make unique names
@@ -37,17 +37,6 @@ export default class App extends React.Component {
   constructor(props) {
     var debugOutput = false;
     super(props);
-
-    if (debugOutput) {
-      var myConfigs = JSON.stringify(configTypes);
-      console.log('configTypes:' + myConfigs);
-      var myCmds = JSON.stringify(cmdTypes);
-      console.log('cmdTypes:' + myCmds);
-      var myParams = JSON.stringify(paramTypes);
-      console.log('paramTypes:' + myParams);
-      var mySelect = JSON.stringify(selections);
-      console.log('selections:' + mySelect);
-    }
     
     var cloneValues = {};
 
@@ -71,33 +60,20 @@ export default class App extends React.Component {
       return true
     }
 
+    var configTypes = structuredClone(configTypesSrc);
+    var cmdTypes = structuredClone(cmdTypesSrc);
+
     // assign cmdTypes list to each configType
     for (var cmdType in cmdTypes) {
       let confType = cmdTypes[cmdType].configType;
       configTypes[confType].cmdTypes.push(cmdType);
-      let isCloned = cmdTypes[cmdType].isCloned;
-      if (isCloned && debugOutput) 
-        console.log("*** cmdType: " + cmdType + " has a cloned property.");
-    }
-    if (debugOutput) {
-      console.log("=== cmdTypes now mapped into configTypes.");
-      for (var conType in configTypes) {
-        console.log("configType: " + conType + " has: " + JSON.stringify(configTypes[conType].cmdTypes)); 
-      }
     }
     // assign paramTypes list to each cmdType
     for (var pType in paramTypes) {
-      if (debugOutput) console.log("ingest paramType: " + pType);
       let cType = paramTypes[pType].cmdType;
       cmdTypes[cType].paramTypes.push(pType);
     }
 
-    if (debugOutput) {
-      console.log("=== paramTypes now mapped into cmdTypes.");
-      for (var cmType in cmdTypes) {
-        console.log("cmdType: " + cmType + " has: " + JSON.stringify(cmdTypes[cmType].paramTypes)); 
-      }
-    }
     // the master state atom
     this.state = {
        loadIonModel: false,
@@ -123,6 +99,7 @@ export default class App extends React.Component {
        nodes: nodes,               // model
        configs: configs,           // model
        commands: commands,         // model
+       cmdTypes: cmdTypes,
 
        cloneValues: cloneValues,   // derived
 
@@ -160,7 +137,7 @@ export default class App extends React.Component {
   getCmdType(cmdKey) {
      let cmd = this.state.commands[cmdKey];
      let cmdTypeKey = cmd.typeKey;
-     let cmdType = cmdTypes[cmdTypeKey];
+     let cmdType = this.state.cmdTypes[cmdTypeKey];
      return cmdType;
   }
   // EXTRACT isGoodName
@@ -700,6 +677,7 @@ export default class App extends React.Component {
     const nodes = this.state.nodes;
     const configs = this.state.configs;
     const commands = this.state.commands;
+    const cmdTypes = this.state.cmdTypes;
     const cloneVals = this.state.cloneValues;
 
     const getNodeKey = this.getNodeKey.bind(this);
@@ -728,6 +706,7 @@ export default class App extends React.Component {
         nodes={nodes}             // state
         configs={configs}         // state
         commands={commands}       // state
+        cmdTypes={cmdTypes}
         cloneValues={cloneVals}   // state
 
         isGoodName={isGoodName}           // verify name string is valid
@@ -871,7 +850,7 @@ export default class App extends React.Component {
     if (cmdTypeKey === "host_ipaddr")    // special model commands (non-ion)
       isCloned = true;
     else {
-      let cmdType = cmdTypes[cmdTypeKey];
+      let cmdType = this.state.cmdTypes[cmdTypeKey];
       isCloned = cmdType.isCloned;
     }
     console.log("=== updateClones().  type: " + cmdKey + " isCloned: " + isCloned);
@@ -897,7 +876,7 @@ export default class App extends React.Component {
           vals[clone.valIdx] = cloneVal.value;
           this.updateCommand(cmds,clone.cmdKey,tranTime,vals);
           // now check for recursive cloning!
-          let cloneCmdType = cmdTypes[clonedCmd.typeKey];
+          let cloneCmdType = this.state.cmdTypes[clonedCmd.typeKey];
           // now check if we just updated a clone-able command...causing a chain reaction
           if (cloneCmdType.isCloned) {
             this.updateClones(cmds,cloneVals,nodeKey,clonedCmd,tranTime);
@@ -1126,7 +1105,7 @@ export default class App extends React.Component {
         configKey = transaction.configKey;
         const cmdTypeKey = transaction.cmdTypeKey;
         nodeKey = transaction.nodeKey;
-        cmdType = cmdTypes[cmdTypeKey];
+        cmdType = this.state.cmdTypes[cmdTypeKey];
         const cmdName = cmdType.name;
         cmdKey = "cmd_" + this.getUniqId();
         const valCnt = cmdType.paramCnt;
