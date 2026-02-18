@@ -132,6 +132,15 @@ export default class IonNode  extends React.Component {
     const numElem  = this.makeNodeElem("nodeNum","number",this.state.nodeNum,"Ion Node Num",1,false,"");
     nodeElems.push(numElem);
 
+    if (this.props.fromDb) {
+      const createdElem = this.makeNodeElem("","text",this.props.dbCreatedTime,"DB Creation Time",2,true,"");
+      nodeElems.push(createdElem);
+      const updatedElem = this.makeNodeElem("","text",this.props.dbUpdatedTime,"DB Updated Time",2,true,"");
+      nodeElems.push(updatedElem);
+      const commentElem = this.makeNodeElem("","text",this.props.dbComment,"DB Comment",3,true,"");
+      nodeElems.push(commentElem);
+    }
+
     // build ion version selector
     var ver = this.state.version;
     const verFunc = this.handleVersion.bind(null);
@@ -189,6 +198,16 @@ export default class IonNode  extends React.Component {
     nodeElems.push(descElem);
     const numElem  = this.makeNodeElem("nodeNum","text",this.state.nodeNum,"Ion Node Num",1,true,"");
     nodeElems.push(numElem);
+
+    if (this.props.fromDb) {
+      const createdElem = this.makeNodeElem("","text",this.props.dbCreatedTime,"DB Creation Time",2,true,"");
+      nodeElems.push(createdElem);
+      const updatedElem = this.makeNodeElem("","text",this.props.dbUpdatedTime,"DB Updated Time",2,true,"");
+      nodeElems.push(updatedElem);
+      const commentElem = this.makeNodeElem("","text",this.props.dbComment,"DB Comment",3,true,"");
+      nodeElems.push(commentElem);
+    }
+    
     // show ion version selection
     var ver = this.state.version;
     const showVer = this.makeShowForm(ver);
@@ -445,6 +464,13 @@ IonNode.propTypes = {
   hostKey: PropTypes.string.isRequired,
   host:  PropTypes.object.isRequired,          // user model - host object of node
   currentContacts: PropTypes.string.isRequired, // network contacts name
+  fromDb: PropTypes.bool.isRequired,            // true if node is from node DB, false otherwise
+ //----------------------------------------//
+  // These are set only if from the node DB
+  dbCreatedTime: PropTypes.string.isRequired,   // time created in node DB
+  dbUpdatedTime: PropTypes.string.isRequired,   // time updated in node DB
+  dbComment: PropTypes.string.isRequired,       // comment from node DB
+  //---------------------------------------//
 
   configKeys: PropTypes.array.isRequired,     // config file names of this node
   configNames: PropTypes.array.isRequired,    // config type names of this node

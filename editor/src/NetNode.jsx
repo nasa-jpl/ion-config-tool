@@ -112,12 +112,12 @@ export default class NetNode  extends React.Component {
     nodeElems.push(descElem);
 
     if (this.state.fromDb) {
-      const createElem = this.makeNodeElem("","text",this.state.dbCreatedTime,"Created",2,true,"");
+      const createElem = this.makeNodeElem("","text",this.state.dbCreatedTime,"DB Creation",2,true,"");
       nodeElems.push(createElem);
-      const updateElem = this.makeNodeElem("","text",this.state.dbUpdatedTime,"Last Updated",2,true,"");
+      const updateElem = this.makeNodeElem("","text",this.state.dbUpdatedTime,"DB Last Update",2,true,"");
       nodeElems.push(updateElem);
       const commentText = this.state.dbComment ? this.state.dbComment : "None";
-      const commentElem = this.makeNodeElem("","text",commentText,"Comment",2,true,"");
+      const commentElem = this.makeNodeElem("","text",commentText,"DB Comment",2,true,"");
       nodeElems.push(commentElem);
     }
 
@@ -180,12 +180,12 @@ export default class NetNode  extends React.Component {
     const descElem = this.makeNodeElem("desc","text",this.state.desc,"Description",2,true,"");
     nodeElems.push(descElem);
     if (this.state.fromDb) {
-      const createElem = this.makeNodeElem("","text",this.state.dbCreatedTime,"Created",2,true,"");
+      const createElem = this.makeNodeElem("","text",this.state.dbCreatedTime,"DB Creation",2,true,"");
       nodeElems.push(createElem);
-      const updateElem = this.makeNodeElem("","text",this.state.dbUpdatedTime,"Last Updated",2,true,"");
+      const updateElem = this.makeNodeElem("","text",this.state.dbUpdatedTime,"DB Last Update",2,true,"");
       nodeElems.push(updateElem);
       const commentText = this.state.dbComment ? this.state.dbComment : "None";
-      const commentElem = this.makeNodeElem("","text",commentText,"Comment",2,true,"");
+      const commentElem = this.makeNodeElem("","text",commentText,"DB Comment",2,true,"");
       nodeElems.push(commentElem);
     }
     const hostElem = this.makeNodeElem("nodeHost","text",this.state.nodeHost,"Host Name",2,true,"");

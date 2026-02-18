@@ -355,6 +355,14 @@ export default class NetModel  extends React.Component {
         "hostKey" : netNode.nodeHost,
         "configKeys" : []
       };
+
+      if (netNode.fromDb) {
+        nodes[nodeKey].fromDb = true;
+        nodes[nodeKey].dbCreatedTime = netNode.dbCreatedTime;
+        nodes[nodeKey].dbUpdatedTime = netNode.dbUpdatedTime;
+        nodes[nodeKey].dbComment = netNode.dbComment;
+      };
+
       // build nodenum & nodekey clone value
       let numCmdKey = "nodeNum_" + nodeKey;
       let nodeClone = { "id": numCmdKey, "typeKey": "node_nodenum", "values":[ nodeNum.toString() ] };

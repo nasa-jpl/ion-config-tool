@@ -48,6 +48,10 @@ export default class IonNodeList  extends React.Component {
     const ipaddrs = this.props.ipaddrs;
     const desc = node.longName;
     const hostKey = node.hostKey;
+    const fromDb = node.fromDb;
+    const dbCreatedTime = fromDb ? node.dbCreatedTime : "";
+    const dbUpdatedTime = fromDb ? node.dbUpdatedTime : "";
+    const dbComment = fromDb ? node.dbComment : "";
     const host = this.props.hosts[hostKey];
 
     const configKeys = node.configKeys;
@@ -73,6 +77,10 @@ export default class IonNodeList  extends React.Component {
         version={node.ionVersion}     // state
         hostKey={hostKey}             // state
         host={host}                   // state
+        fromDb={fromDb}               // state
+        dbCreatedTime={dbCreatedTime} // state
+        dbUpdatedTime={dbUpdatedTime} // state
+        dbComment={dbComment}         // state
         currentContacts={contacts}    // user model - network contacts name
 
         configKeys={configKeys}       // user model - config file keys of this node
