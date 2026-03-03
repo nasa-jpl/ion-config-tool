@@ -397,8 +397,18 @@ export default class IonModel  extends React.Component {
     if (node) {
       cmdLines.push("#  NODE:      " + nodeKey +  "    [" + nodeDesc + "]");
       cmdLines.push("#  IPN:       " + nodeLabel);
-    }
-    cmdLines.push("#  DATE:      " + fileDate);
+      cmdLines.push("#  DATE:      " + fileDate);
+      if (node.fromDb) {
+        cmdLines.push("#");
+        cmdLines.push("#  NODE DB INFO");
+        cmdLines.push("#    CREATED: " + node.dbCreatedTime);
+        cmdLines.push("#    UPDATED: " + node.dbUpdatedTime);
+        var comment = node.dbComment ? node.dbComment : "None";
+        cmdLines.push("#    COMMENT: " + comment);
+      };
+    } else {
+      cmdLines.push("#  DATE:      " + fileDate);
+    };
     // build commands
     for (var i=0; i<cmdKeys.length; i++) {
       const cmdKey = cmdKeys[i];
