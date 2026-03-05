@@ -61,6 +61,21 @@ try:
 except FileNotFoundError:
   print("File not found.")
 
+# For first time users who have just cloned repo, set up symlink to json source
+os.chdir(dictdir)    # ensure home dir
+src_json_dir = "../editor/src/json"
+dst_json_dir = "../cli/json"
+if (not os.path.exists(dst_json_dir)):
+  try:
+    os.symlink(src_json_dir,dst_json_dir,target_is_directory=True)
+    print ("Created symlink from "+dst_json_dir+" to "+src_json_dir)
+  except FileExistsError:
+    print ("Error: symlink: "+dst_json_dir+" already exists.")
+  except PermissionError:
+    print ("Error: you do not have permission to create symlink "+src_json_dir)
+  except OSError as e:
+    print ("Error creating symlink "+src_json_dir+": "+e)
+
 os.chdir(dictdir)    # ensure home dir
 jsondir = "json-" + configver
 
