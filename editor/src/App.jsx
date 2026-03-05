@@ -1870,7 +1870,7 @@ export default class App extends React.Component {
     <div>
       <Container fluid>
         <Navbar bg="light" variant="light">
-          <h3>ION Configuration Editor  4.9.0b3</h3>
+          <h3>ION Configuration Editor  4.9.0b4</h3>
         </Navbar>
         <Tabs
           className="mb=3"
