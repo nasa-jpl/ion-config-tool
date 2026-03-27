@@ -21,6 +21,8 @@ import {Tab, Tabs} from 'react-bootstrap';
 import {FormControl} from 'react-bootstrap';
 import {Button,ButtonGroup} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
+import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {BsQuestionCircle} from 'react-icons/bs';
 import {BsXLg} from "react-icons/bs";
 import "date-format-lite";
 
@@ -578,39 +580,6 @@ export default class App extends React.Component {
     }
     return "";
   }
-  // make Model Load Buttons elem
-  makeModelButtonsElem() {
-    var dimNetBtns = false;
-    if (this.state.makeNewNetModel ||
-        this.state.loadNetModel)
-      dimNetBtns = true;
-    var dimIonBtns = false;
-    if (this.state.makeNewIonModel ||
-        this.state.loadIonModel)
-      dimIonBtns = true;
-  	return (
-  	  <Row>
-        <Col className="text-right" sm={2}><h4><b>Net Model File</b></h4></Col>
-        <Col sm={2}>
-          <ButtonGroup>
-            <Button variant="primary" className="mr-1" disabled={dimNetBtns} onClick={this.loadNetModel.bind(this)}>Load</Button>
-            <Button variant="primary" disabled={dimNetBtns} onClick={this.newNetModel.bind(this)}>New</Button>
-          </ButtonGroup>
-        </Col>
-        <Col sm={3}>
-          <h4><b>...can initialize a new...</b></h4>
-        </Col>
-        <Col className="text-right" sm={2}><h4><b>ION Model File</b></h4></Col>
-        <Col sm={2}>
-          <ButtonGroup>
-            <Button variant="primary" className="mr-1" disabled={dimIonBtns} onClick={this.loadIonModel.bind(this)}>Load</Button>
-            <Button variant="primary" disabled={dimIonBtns} onClick={this.newIonModel.bind(this)}>New</Button>
-          </ButtonGroup>
-        </Col>
-      </Row>
-    );
-  }
-
   makeNetModelButtonsElem() {
    var dimNetBtns = false;
     if (this.state.makeNewNetModel ||
@@ -622,6 +591,18 @@ export default class App extends React.Component {
           <ButtonGroup>
             <Button variant="primary" className="mr-1" disabled={dimNetBtns} onClick={this.loadNetModel.bind(this)}>Load</Button>
             <Button variant="primary" disabled={dimNetBtns} onClick={this.newNetModel.bind(this)}>New</Button>
+            <OverlayTrigger
+              placement="right"
+              overlay={
+                <Tooltip id="tooltip">
+                  Load or Create a Network Model which can then be used to build an ION Model. Network Models can be partially created by importing nodes from the Node DB.  
+                </Tooltip>
+              }
+            >
+              <div style={{alignItems: "center", display: "flex", marginLeft: "5px"}}>
+              <BsQuestionCircle />
+              </div>
+            </OverlayTrigger>
           </ButtonGroup>
         </Col>
       </Row>
@@ -639,6 +620,18 @@ export default class App extends React.Component {
           <ButtonGroup>
             <Button variant="primary" className="mr-1" disabled={dimIonBtns} onClick={this.loadIonModel.bind(this)}>Load</Button>
             <Button variant="primary" disabled={dimIonBtns} onClick={this.newIonModel.bind(this)}>New</Button>
+            <OverlayTrigger
+              placement="right"
+              overlay={
+                <Tooltip id="tooltip">
+                  Load or Create an ION Model. The quickest way to create one is to build it from a Net Model. Once created, ION Configuration Files can be genereated for use in ION.  
+                </Tooltip>
+              }
+            >
+              <div style={{alignItems: "center", display: "flex", marginLeft: "5px"}}>
+              <BsQuestionCircle />
+              </div>
+            </OverlayTrigger>
           </ButtonGroup>
         </Col>       
       </Row>
@@ -1853,8 +1846,6 @@ export default class App extends React.Component {
 
   render() {
     console.log("$$$$$$$$$$$$$$$ App render start");
-    //const modelBtnsElem  = this.state.ionModelActive?   "" : this.makeModelButtonsElem();
-    const modelBtnsElem  = this.makeModelButtonsElem();
     const netModelBtnsElem = this.makeNetModelButtonsElem();
     const ionModelBtnsElem = this.makeIonModelButtonsElem();
     const ionLoader = this.state.loadIonModel?          this.makeIonModelLoaderElem() : "";

@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import {Container} from 'react-bootstrap';
 import {Row, Col} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
+import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {BsQuestionCircle} from 'react-icons/bs';
 
 import DbNodes from './DbNodes.jsx';
 //import DbNodes from './DbNodes_xx.jsx';
@@ -68,9 +70,24 @@ const NodeDb = (props) => {
           </Col>}
           {loading && <b>LOADING...</b>}
         </Row>
+        <Container fluid>
         <Row >
-          <Col className="d-flex justify-content-center"><h1>Nodes</h1></Col>
+          <Col className="d-flex justify-content-center"><h1>Nodes</h1>
+            <OverlayTrigger
+              placement="right"
+              overlay={
+                <Tooltip id="tooltip">
+                  Select Nodes to import, then provide a Net Model name at bottom and click "Import". A partial Net Model will be created that still needs node connection information.  
+                </Tooltip>
+              }
+            >
+              <div style={{alignItems: "center", display: "flex", marginLeft: "5px"}}>
+              <BsQuestionCircle />
+              </div>
+            </OverlayTrigger>
+            </Col>
         </Row>
+        </Container>
         <Row>
           <Col><DbNodes dispatch={props.dispatch}/></Col>
         </Row>

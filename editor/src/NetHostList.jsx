@@ -11,6 +11,8 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonGroup} from 'react-bootstrap';
+import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {BsQuestionCircle} from 'react-icons/bs';
 import {BsXLg} from "react-icons/bs";
 import {BsChevronDoubleDown} from "react-icons/bs";
 import {BsChevronDoubleRight} from "react-icons/bs";
@@ -106,9 +108,24 @@ export default class NetHostList  extends React.Component {
     return (
       <Container fluid>
         <hr />
-       <Row>
-            <Col className="text-left" lg={1}><h5><Badge pill bg="primary" text="light">Net Host List</Badge></h5></Col>
-            <Col className="text-left" lg={2}><h6><b>{name}</b></h6></Col>
+        <Row>
+            <Col className="text-left" lg={2}>
+            <ButtonGroup>
+            <h5><Badge pill bg="primary" text="light">Net Host List</Badge></h5>
+              <OverlayTrigger
+                placement="right"
+                overlay={
+                  <Tooltip id="tooltip">
+                    Expand to view, create or edit hosts. If nodes were imported from the Node DB their host information is here. 
+                  </Tooltip>
+                }
+              >
+                <div style={{alignItems: "center", display: "flex", marginLeft: "5px"}}>
+                <BsQuestionCircle />
+                </div>
+              </OverlayTrigger>
+            </ButtonGroup>            
+            </Col>
             <Col className="text-left" lg={2}><h6>Network Host Machines {hostCnt}</h6></Col>
             <Col> 
               <ButtonGroup>

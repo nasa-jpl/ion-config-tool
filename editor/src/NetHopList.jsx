@@ -11,6 +11,8 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonGroup} from 'react-bootstrap';
+import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {BsQuestionCircle} from 'react-icons/bs';
 import {BsXLg} from "react-icons/bs";
 import {BsChevronDoubleDown} from "react-icons/bs";
 import {BsChevronDoubleRight} from "react-icons/bs";
@@ -125,9 +127,24 @@ export default class NetHopList  extends React.Component {
       <Container fluid>
         <hr />
         <Row>
-            <Col className="text-left" sm={1}><h5><Badge pill bg="primary" text="light">Net Hop List</Badge></h5></Col>
-            <Col className="text-left" sm={2}><h6><b>{name}</b></h6></Col>
-            <Col className="text-left" sm={2}><h6>Node-to-Node Hops {hopCnt}</h6></Col>
+            <Col className="text-left" lg={2}>
+            <ButtonGroup>
+            <h5><Badge pill bg="primary" text="light">Net Hop List</Badge></h5>
+              <OverlayTrigger
+                placement="right"
+                overlay={
+                  <Tooltip id="tooltip">
+                    Expand to view, create or edit network hops. Network nodes must exist before hops can be created and hops must exist before an ION model can be built.
+                  </Tooltip>
+                }
+              >
+                <div style={{alignItems: "center", display: "flex", marginLeft: "5px"}}>
+                <BsQuestionCircle />
+                </div>
+              </OverlayTrigger>
+            </ButtonGroup>
+            </Col>
+            <Col className="text-left" lg={2}><h6>Node-to-Node Hops {hopCnt}</h6></Col>
             <Col> 
               <ButtonGroup>
                 <Button variant="primary" className="mr-1" disabled={dimNewHop} onClick={this.newhop}>New Hop</Button>  

@@ -11,6 +11,8 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonGroup} from 'react-bootstrap';
+import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {BsQuestionCircle} from 'react-icons/bs';
 import {BsXLg,BsChevronDoubleDown,BsChevronDoubleRight} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
@@ -183,9 +185,25 @@ export default class IonNodeList  extends React.Component {
       <Container fluid>
         <hr />
         <Row>
-            <Col className="text-left" sm={1}><h5><Badge pill bg="primary" text="light">ION Node List</Badge></h5></Col>
-            <Col className="text-left" sm={2}><h6><b>{name}</b></h6></Col>
-            <Col className="text-left" sm={2}><h6>ION Node Servers {nodeCnt}</h6></Col>
+            <Col className="text-left" lg={2}>
+            <ButtonGroup>
+            <h5><Badge pill bg="primary" text="light">ION Node List</Badge></h5>
+              <OverlayTrigger
+                placement="right"
+                overlay={
+                  <Tooltip id="tooltip">
+                    Expand to view, create or edit ION configuration files for nodes. 
+                    Nodes from the node database will have associated database metadata shown.
+                  </Tooltip>
+                }
+              >
+                <div style={{alignItems: "center", display: "flex", marginLeft: "5px"}}>
+                <BsQuestionCircle />
+                </div>
+              </OverlayTrigger>
+            </ButtonGroup>            
+            </Col>
+            <Col className="text-left" lg={2}><h6>ION Node Servers {nodeCnt}</h6></Col>
             <Col sm={3}> 
               <ButtonGroup>
                 <Button variant="primary" className="mr-1" disabled={dimNewIonNode} onClick={this.newnode}>New Ion Node</Button>  

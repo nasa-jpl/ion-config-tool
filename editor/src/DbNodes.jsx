@@ -10,8 +10,10 @@
 //                                                               
 
 import {useEffect, useState} from "react";
-import {Form,Container,Row,Col} from 'react-bootstrap';
+import {Form,Container,Row,Col, Navbar, FormLabel} from 'react-bootstrap';
 import {Button,InputGroup} from 'react-bootstrap';
+import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {BsQuestionCircle} from 'react-icons/bs';
 import {Table} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
 
@@ -615,26 +617,38 @@ const DbNodes = (props) => {
     <>
       {nodeTable && 
       <Container fluid>
-        <Row>
-          <Col>
-            {nodeTable}
-          </Col>
-        </Row>
-        <Row className="justify-content-md-left">
-          <Col lg="3">
-            <InputGroup className="mb-2">
-              <Form.Control
-                placeholder="Net Model Name (no spaces)"
-                aria-label="Net Model Name"
-                aria-describedby="basic-addon2"
-                onChange={updateNetModelName}
-              />
-              <Button variant="primary" id="button-addon2" onClick={importData}>Import</Button>
-            </InputGroup>
-          </Col>
-        </Row>
-        <Row><Col><i>Net Model will be created if it doesn't exist.</i></Col></Row>
-      </Container>}
+          <Row>
+            <Col>
+              {nodeTable}
+            </Col>
+          </Row>
+          <Row>
+            <Navbar bg="light" container="fluid" fixed="bottom">
+              <Col lg="auto">
+                <FormLabel>Net Model Name (no spaces):</FormLabel>
+              </Col>
+                <Col lg="auto">
+                  <Form>
+                    <InputGroup>
+                      <Form.Control
+                        onChange={updateNetModelName} />
+                    </InputGroup>
+                  </Form>
+                </Col>
+                <Col lg="auto">
+                  <Button variant="primary" id="button-addon2" className="mr-2" onClick={importData}>Import</Button>
+                  <OverlayTrigger
+                    placement="right"
+                    overlay={<Tooltip id="tooltip">
+                      Import selected nodes into Net Model. Net Model will be created if it doesn't exist.
+                    </Tooltip>}
+                  >
+                    <BsQuestionCircle />
+                  </OverlayTrigger>
+                </Col>
+            </Navbar>
+          </Row>
+          </Container>}
       {importAlert}
       {netModelNameAlert}
     </>

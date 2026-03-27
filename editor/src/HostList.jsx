@@ -11,6 +11,8 @@ import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
 import {Badge,Button,ButtonGroup} from 'react-bootstrap';
+import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {BsQuestionCircle} from 'react-icons/bs';
 import {BsXLg} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
@@ -120,9 +122,24 @@ export default class HostList  extends React.Component {
       <Container fluid>
         <hr />
         <Row>
-            <Col className="text-left" sm={1}><h5><Badge pill bg="primary" text="light">ION Host List</Badge></h5></Col>
-            <Col className="text-left" sm={2}><h6><b>{name}</b></h6></Col>
-            <Col className="text-left" sm={2}><h6>ION Host Machines {hostCnt}</h6></Col>
+            <Col className="text-left" lg={2}>
+            <ButtonGroup>
+            <h5><Badge pill bg="primary" text="light">ION Host List</Badge></h5>
+              <OverlayTrigger
+                placement="right"
+                overlay={
+                  <Tooltip id="tooltip">
+                    Expand to view, create or edit ION configuration information for hosts. 
+                  </Tooltip>
+                }
+              >
+                <div style={{alignItems: "center", display: "flex", marginLeft: "5px"}}>
+                <BsQuestionCircle />
+                </div>
+              </OverlayTrigger>
+            </ButtonGroup>            
+            </Col>
+            <Col className="text-left" lg={2}><h6>ION Host Machines {hostCnt}</h6></Col>
             <Col sm={3}> 
               <ButtonGroup>
                 <Button variant="primary" className="mr-1" disabled={dimNewHost} onClick={this.newhost}>New Ion Host</Button>  

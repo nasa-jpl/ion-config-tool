@@ -10,7 +10,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {ButtonGroup, FormControl} from 'react-bootstrap';
 import {Container,Row,Col} from 'react-bootstrap';
-import {Badge,Button} from 'react-bootstrap';
+import {Badge,Button,OverlayTrigger,Tooltip} from 'react-bootstrap';
+import {BsQuestionCircle} from 'react-icons/bs';
 import {BsXLg,BsChevronDoubleDown,BsChevronDoubleRight} from "react-icons/bs";
 import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
@@ -288,6 +289,19 @@ export default class IonNode  extends React.Component {
                 <Button variant="primary" className="mr-1" onClick={this.saveConfigs}>Save Configs</Button>
                 <Button variant="primary" className="mr-1" disabled={dimNewconfig} onClick={this.newconfig}>New Config File</Button>  
                 <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip id="tooltip">
+                      Expand to view the ION configuration files associated with this node. Config files can be created, edited or deleted. 
+                    </Tooltip>
+                 }
+                >
+                  <div style={{alignItems: "center", display: "flex", marginLeft: "5px"}}>
+                  <BsQuestionCircle />
+                  </div>
+                </OverlayTrigger>
+
               </ButtonGroup>
             </Col>
         </Row>

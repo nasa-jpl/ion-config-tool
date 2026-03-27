@@ -10,11 +10,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
-import {Badge,Button,ButtonGroup} from 'react-bootstrap';
+import {Badge,Button,ButtonGroup,OverlayTrigger,Tooltip} from 'react-bootstrap';
 import {Container,Card} from 'react-bootstrap';
 import {BsXLg} from "react-icons/bs";
 import {BsChevronDoubleDown} from "react-icons/bs";
 import {BsChevronDoubleRight} from "react-icons/bs";
+import {BsQuestionCircle} from 'react-icons/bs';
 import {saveAs} from "file-saver";
 import {Alert} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
@@ -1533,16 +1534,28 @@ export default class NetModel  extends React.Component {
       <hr />
       <Container fluid>
         <Row>
-          <Col className="text-left"  sm={2}><h2><Badge pill bg="light">Net Model</Badge></h2></Col>
-          <Col className="text-left"  sm={2}><h5><b>{this.state.name}</b></h5></Col>
-          <Col className="text-right" sm={2}><h6>{this.state.desc}</h6></Col>
-          <Col sm={6}> 
+          <Col className="text-left"  lg={2}><h2><Badge pill bg="light">Net Model</Badge></h2></Col>
+          <Col className="text-left"  lg={1}><h5><b>{this.state.name}</b></h5></Col>
+          <Col className="text-right" lg={2}><h6>{this.state.desc}</h6></Col>
+          <Col lg={6}> 
             <ButtonGroup>
               <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
               <Button variant="info" className="mr-1" onClick={this.view}>{viewLabel}</Button>
               <Button variant="primary" className="mr-1" onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
               <Button variant="primary" className="mr-1" disabled={dimSaveNet}  onClick={this.saveModel}>Save Model</Button>
               <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
+              <OverlayTrigger
+                placement="right"
+                overlay={
+                  <Tooltip id="tooltip">
+                    Expand to view and modify the elements of the Network Model. The Network Model abstraction can be used to create an ION Model to configure ION for use in operations.
+                  </Tooltip>
+                }
+              >
+                <div style={{alignItems: "center", display: "flex", marginLeft: "5px"}}>
+                <BsQuestionCircle />
+                </div>
+              </OverlayTrigger>
             </ButtonGroup>
           </Col>
           <Col sm={4}>{alert}</Col>
