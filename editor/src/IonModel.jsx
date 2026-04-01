@@ -270,6 +270,7 @@ export default class IonModel  extends React.Component {
     const graphs = this.props.graphs;                       // graph objects
     const configs = this.props.configs;                     // config objects
     const commands = this.props.commands;                   // command objects
+    const cmdTypes = this.props.cmdTypes;
     const isGoodName = this.props.isGoodName;               // pass through
     const makeCmdLines = this.makeCmdLines.bind(this);      // remember this
     const makeTypeOptions = this.props.makeTypeOptions;     // pass through
@@ -285,6 +286,7 @@ export default class IonModel  extends React.Component {
         graphs={graphs}                     // user model - graphs
         configs={configs}                   // user model - configs
         commands={commands}                 // user model - commands
+        cmdTypes={cmdTypes}                 // schema
 
         isGoodName={isGoodName}             // verify name string is valid
         makeCmdLines={makeCmdLines}         // all lines formatting of config file

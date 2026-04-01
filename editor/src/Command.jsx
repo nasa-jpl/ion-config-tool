@@ -535,12 +535,13 @@ export default class Command  extends React.Component {
 
     let viewPanel = null;
     const paramKeys = this.props.params.map(param => {return param.id});
-    if (viewMode)
-      if (editMode)
+    if (viewMode) {
+      if (editMode) {
         viewPanel = this.makeCommandEditor(paramKeys);
-      else
+      } else {
         viewPanel = this.makeCommandViewer(paramKeys);
-
+      };
+    };
     const cmdTypeKey = this.props.cmdTypeKey;
     var cmdStr = this.props.makeCmd(cmdTypeKey,vals);
         // check if this command should be flagged for editing

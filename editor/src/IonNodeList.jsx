@@ -18,8 +18,6 @@ import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import IonNode from './IonNode.jsx';
 
-import cmdTypes    from './json/cmdTypes.json';
-
 export default class IonNodeList  extends React.Component {
   constructor (props) {
     super(props);
@@ -166,7 +164,7 @@ export default class IonNodeList  extends React.Component {
           const cmd = this.props.commands[cmdKey];
           const cmdTypeKey = cmd.typeKey;
           // console.log("Command cmdKey:" + cmdKey + " cmdTypeKey: " + cmdTypeKey);
-          var paramTypeKeys = cmdTypes[cmdTypeKey].paramTypes;
+          var paramTypeKeys = this.props.cmdTypes[cmdTypeKey].paramTypes;
           var paramProps = [];
           for (var k = 0; k < paramTypeKeys.length; k++) {
             const pTypeKey = paramTypeKeys[k];
@@ -291,6 +289,7 @@ IonNodeList.propTypes = {
   configs: PropTypes.array.isRequired,        // config objects of the ION network
   commands: PropTypes.array.isRequired,       // config objects of the ION network
   ipaddrs: PropTypes.array.isRequired,        // ipaddr objects of the ION network
+  cmdTypes: PropTypes.object.isRequired,
 
   isGoodName: PropTypes.func.isRequired,      // validate name format
   isGoodNodeNum: PropTypes.func.isRequired,   // validate node num

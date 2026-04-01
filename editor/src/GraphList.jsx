@@ -18,8 +18,6 @@ import {Card} from 'react-bootstrap';
 import {Alert} from 'react-bootstrap';
 import Graph from './Graph.jsx';
 
-import cmdTypes    from './json/cmdTypes.json';
-
 export default class GraphList  extends React.Component {
   constructor (props) {
     super(props);
@@ -130,7 +128,7 @@ export default class GraphList  extends React.Component {
         const cmd = this.props.commands[cmdKey];
         const cmdTypeKey = cmd.typeKey;
         //console.log("Command cmdKey:" + cmdKey + " cmdTypeKey: " + cmdTypeKey);
-        var paramTypeKeys = cmdTypes[cmdTypeKey].paramTypes;
+        var paramTypeKeys = this.props.cmdTypes[cmdTypeKey].paramTypes;
         var paramProps = [];
         for (var k = 0; k < paramTypeKeys.length; k++) {
           const pTypeKey = paramTypeKeys[k];
@@ -250,6 +248,7 @@ GraphList.propTypes = {
   graphs: PropTypes.array.isRequired,         // graph objects of the ION network
   configs: PropTypes.array.isRequired,        // config objects of the ION network
   commands: PropTypes.array.isRequired,       // config objects of the ION network
+  cmdTypes: PropTypes.object.isRequired,
 
   isGoodName: PropTypes.func.isRequired,      // validate name format
   makeCmdLines: PropTypes.func.isRequired,    // all lines formatting of config file
