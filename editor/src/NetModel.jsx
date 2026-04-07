@@ -1542,7 +1542,7 @@ export default class NetModel  extends React.Component {
               <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
               <Button variant="info" className="mr-1" onClick={this.view}>{viewLabel}</Button>
               <Button variant="primary" className="mr-1" onClick={this.makeIonModel.bind(this)}>Build ION Model</Button>
-              <Button variant="primary" className="mr-1" disabled={dimSaveNet}  onClick={this.saveModel}>Save Model</Button>
+              <Button variant="primary" className="mr-1" disabled={dimSaveNet}  onClick={this.saveModel}>Save Net Model</Button>
               <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
               <OverlayTrigger
                 placement="right"

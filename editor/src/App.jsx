@@ -595,7 +595,9 @@ export default class App extends React.Component {
               placement="right"
               overlay={
                 <Tooltip id="tooltip">
-                  Load or Create a Network Model which can then be used to build an ION Model. Network Models can be partially created by importing nodes from the Node DB.  
+                  Load or Create a Network Model which can then be used to build an ION Model. 
+                  Network Models can be partially created by importing nodes from the Node DB.
+                  If nodes were successfully imported, the Net Model is below.
                 </Tooltip>
               }
             >
