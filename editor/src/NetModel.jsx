@@ -1628,14 +1628,33 @@ export default class NetModel  extends React.Component {
     newState.viewMode = !viewMode;
     this.setState (newState);
   };
-  saveModel = () => {
+  saveModel = async () => {
     console.log("save Net model!");
     const modelObj = this.makeModelObj();
     const modelJson = JSON.stringify(modelObj,null,2);
     const blob = new Blob( [modelJson], {type: "text/plain; charset=utf-8"} );
     const modelName = this.state.name + ".json";
     console.log("save Net model to: " + modelName);
-    saveAs(blob, modelName);
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: modelName,
+        types: [
+          {
+            description: 'JSON Files',
+            accept: {'text/plain': ['.json']},
+          },
+        ],
+      });
+      const writable = await handle.createWritable();
+      await writable.write(blob);
+      await writable.close();
+    } catch (e) {
+      if (e.name === 'AbortError') {
+        console.log("User cancelled the save file dialog.");
+      } else {
+        console.error("Error saving file:", e);
+      }
+    }
   };
   handleNetChange = (prop,e) => {
     console.log("a value change of " + prop +  e);

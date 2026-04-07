@@ -1420,14 +1420,31 @@ export default class IonModel  extends React.Component {
     };
     this.props.dispatch(tran);
   };
-  saveModel = () => {
+  saveModel = async () => {
     console.log("save ION model!");
     const modelObj = this.makeModelObj();
     const modelJson = JSON.stringify(modelObj,null,2);
     const blob = new Blob( [modelJson], {type: "text/plain; charset=utf-8"} );
     const modelName = this.state.name + ".json";
     console.log("save ION model to: " + modelName);
-    saveAs(blob, modelName); 
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: modelName,
+        types: [{
+          description: 'JSON file',
+          accept: {'text/plain': ['.json']},
+        }],
+      });
+      const writable = await handle.createWritable();
+      await writable.write(blob);
+      await writable.close();
+    } catch (e) {
+      if (e.name === 'AbortError') {
+        console.log("User cancelled the save file dialog.");
+      } else {
+        console.error("Error saving file:", e);
+      }
+    }
   };
   saveConfigs = () => {
     console.log("let's save all config files in a zip file!");
