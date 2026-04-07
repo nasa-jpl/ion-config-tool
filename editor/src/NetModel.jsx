@@ -225,7 +225,7 @@ export default class NetModel  extends React.Component {
     var myParams = paramTypes;
 
     // default values
-    const ionName   = this.state.name + "-ion";
+    const ionName   = this.state.name;
     const graphName = this.state.name + "-graph";
     const ionDesc   = "ION " + this.state.desc;
     const graphDesc = "ION " + this.state.desc + " Contacts";
@@ -1633,7 +1633,7 @@ export default class NetModel  extends React.Component {
     const modelObj = this.makeModelObj();
     const modelJson = JSON.stringify(modelObj,null,2);
     const blob = new Blob( [modelJson], {type: "text/plain; charset=utf-8"} );
-    const modelName = this.state.name + ".json";
+    const modelName = this.state.name + "-net" + ".json";
     console.log("save Net model to: " + modelName);
     try {
       const handle = await window.showSaveFilePicker({

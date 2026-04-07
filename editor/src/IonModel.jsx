@@ -54,14 +54,12 @@ export default class IonModel  extends React.Component {
       expandMode: false
     }
   };
-  componentWillReceiveProps(newProps) {
-    //console.log("IonModel componentWillReceiveProps" + newProps.desc + ' ' + newProps.nextNodeNum);
-    if (newProps.nextNodeNum !== this.state.nextNodeNum) {
-       var newState = Object.assign({},this.state);
-       newState.nextNodeNum = newProps.nextNodeNum;   // only field updated externally
-       this.setState (newState);
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("IonModel componentDidUpdate " + this.props.desc + ' ' + this.props.nextNodeNum);
+    if (prevState.nextNodeNum !== this.state.nextNodeNum) {
+      this.props.onChange(this.state.nextNodeNum);
     }
-    return null;
   }
 
   // EXTRACT makeModelObj
@@ -1291,8 +1289,8 @@ export default class IonModel  extends React.Component {
                 <Button variant="primary" className="mr-1" onClick={this.edit}>{editLabel}</Button>
                 <Button variant="info" className="mr-1" onClick={this.view}>{viewLabel}</Button>
                 <Button variant="info" className="mr-1" onClick={this.showSurveys}>{showSurveyTag}</Button>
-                <Button variant="primary" className="mr-1" disabled={dimSaveION}  onClick={this.saveModel}>Save Model</Button>
-                <Button variant="primary" className="mr-1" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save Configs</Button>
+                <Button variant="primary" className="mr-1" disabled={dimSaveION}  onClick={this.saveModel}>Save ION Model</Button>
+                <Button variant="primary" className="mr-1" disabled={dimSaveConfigs}  onClick={this.saveConfigs}>Save ION Configs</Button>
                 <Button variant="danger" className="mr-1" onClick={this.showDeleteWarn}>Delete Model</Button>
                 <Button variant="success" onClick={this.expand}>{expandIcon}{' '}</Button>
               </ButtonGroup>
@@ -1425,7 +1423,7 @@ export default class IonModel  extends React.Component {
     const modelObj = this.makeModelObj();
     const modelJson = JSON.stringify(modelObj,null,2);
     const blob = new Blob( [modelJson], {type: "text/plain; charset=utf-8"} );
-    const modelName = this.state.name + ".json";
+    const modelName = this.state.name + "-ion" + ".json";
     console.log("save ION model to: " + modelName);
     try {
       const handle = await window.showSaveFilePicker({
@@ -1481,7 +1479,7 @@ export default class IonModel  extends React.Component {
       let page = cmdLines.join(lf) + lf;
       nodedir.file(startName,page);
     };
-    const zipname = this.props.name + ".zip";
+    const zipname = this.props.name + "-ionconfig.zip";
     zip.generateAsync( {type:"blob"}).then(function(content) {
       saveAs(content, zipname);
     });
