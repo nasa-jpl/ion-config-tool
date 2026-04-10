@@ -68,7 +68,7 @@ export default class NetHop  extends React.Component {
     return "false";
   }
   // show choices with selection widget
-  makeSelectForm(val,handler,options) {
+  makeSelectForm(val,handler,options,disabled=false) {
     console.log("makeSelectFormElem version = " + val);
     var form =
       <FormControl
@@ -77,6 +77,7 @@ export default class NetHop  extends React.Component {
         as="select"
         value="{val}"
         onChange={handler}
+        disabled={disabled}
         >{options}
       </FormControl>;
     return form;
@@ -128,6 +129,8 @@ export default class NetHop  extends React.Component {
     var opts;
     var selform;
     var showform;
+    var disableTwoWay = false;
+    
     // build fromNode selector
     param    = "fromNode";
     value    = this.state.fromNode;
@@ -181,6 +184,7 @@ export default class NetHop  extends React.Component {
       this.state.ltpLayer = "";
     } else {
       value = this.state.ltpLayer;
+      disableTwoWay = true;  // LTP must be two-way, so disable two-way selector if bpLayer is ltp
     }
     handler  = this.handleHopChange.bind(null,param);
     opts     = this.props.makeOptionElems(param);
@@ -199,7 +203,7 @@ export default class NetHop  extends React.Component {
     value    = this.getBoolStr(this.state.twoWay);
     handler  = this.handleHopChange.bind(null,param);
     opts     = this.props.makeOptionElems(param);
-    selform  = this.makeSelectForm(value,handler,opts);
+    selform  = this.makeSelectForm(value,handler,opts,disableTwoWay);
     showform = this.makeShowForm(value);
     const twoWayElem = this.makeSelectElem(value,'Two-Way Hop',showform,selform);
     hopElems.push(twoWayElem);
@@ -367,6 +371,9 @@ export default class NetHop  extends React.Component {
       // A change in bpLayer may require change in port number
       case "bpLayer":
         newState["portNum"] = this.props.getPortNumForNodeAndProtocol(this.state.toNode, newState[prop]);
+        if (e.target.value == "ltp") {
+          newState["twoWay"] = "true";  // LTP must be two-way
+        }
         break;
       // Change in fromNode/toNode --> change in default fromIP/toIP
       case "fromNode":
