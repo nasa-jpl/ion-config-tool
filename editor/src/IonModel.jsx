@@ -1418,8 +1418,22 @@ export default class IonModel  extends React.Component {
     };
     this.props.dispatch(tran);
   };
+  
   saveModel = async () => {
-    console.log("save ION model!");
+    // Not all browsers support the file picker API
+    if ('showSaveFilePicker' in window) {
+      this.saveUsingFilePicker();
+      return;
+    }
+
+    const modelObj = this.makeModelObj();
+    const modelJson = JSON.stringify(modelObj,null,2);
+    const blob = new Blob( [modelJson], {type: "text/plain; charset=utf-8"} );
+    const modelName = this.state.name + "-ion" + ".json";
+    saveAs(blob, modelName);
+  }
+
+  saveUsingFilePicker = async () => {
     const modelObj = this.makeModelObj();
     const modelJson = JSON.stringify(modelObj,null,2);
     const blob = new Blob( [modelJson], {type: "text/plain; charset=utf-8"} );

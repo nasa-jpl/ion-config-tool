@@ -1630,7 +1630,18 @@ export default class NetModel  extends React.Component {
   };
 
   saveModel = () => {
-    this.saveUsingFilePicker();
+    // Not all browsers support the file picker API
+    if ('showSaveFilePicker' in window) {
+      this.saveUsingFilePicker();
+      return;
+    }
+
+    // Fallback for browsers that do not support the file picker API
+    const modelObj = this.makeModelObj();
+    const modelJson = JSON.stringify(modelObj,null,2);
+    const blob = new Blob( [modelJson], {type: "text/plain; charset=utf-8"} );
+    const modelName = this.state.name + "-net" + ".json";
+    saveAs(blob, modelName);
   };
 
   saveUsingFilePicker = async () => {
