@@ -184,9 +184,9 @@
     { "ams"  : "Asynchronous Messaging Service" },
     { "amp"  : "Asynchronous Management Protocol" }
   ],
-  "symmetric" : [
+  "twoWay" : [
     { "false" : "one-way hop" },
-    { "true"  : "symmetric two-way hop"}
+    { "true"  : "two-way hop"}
   ],
   "host_linefeed" : [
     { "unix"    : "unix-style (LF)" },

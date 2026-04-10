@@ -104,7 +104,7 @@ export default class NetModel  extends React.Component {
         ltpLayer: hopObj.ltpLayer,
         portNum: hopObj.portNum,
         maxRate: hopObj.maxRate,
-        symmetric: hopObj.symmetric
+        twoWay: hopObj.twoWay
       }
       model["netHops"][hopKey] = hopJson
     }
@@ -636,7 +636,7 @@ export default class NetModel  extends React.Component {
       }
 
       oneWays[hKey] = Object.assign({},netHop);
-      if (netHop.symmetric) {  // symmetric implies a reverse hop also
+      if (netHop.twoWay) {  // twoWay implies a reverse hop also
         // append -2 to key to indicate reverse hop
         var newKey = hKey + "-2";
         oneWays[newKey] = Object.assign({},netHop);
@@ -1628,8 +1628,13 @@ export default class NetModel  extends React.Component {
     newState.viewMode = !viewMode;
     this.setState (newState);
   };
-  saveModel = async () => {
-    console.log("save Net model!");
+
+  saveModel = () => {
+    this.saveUsingFilePicker();
+  };
+
+  saveUsingFilePicker = async () => {
+    console.log("save Net model using file picker!");
     const modelObj = this.makeModelObj();
     const modelJson = JSON.stringify(modelObj,null,2);
     const blob = new Blob( [modelJson], {type: "text/plain; charset=utf-8"} );

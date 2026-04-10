@@ -1614,7 +1614,7 @@ export default class App extends React.Component {
           "bpLayer" : "",
           "ltpLayer" : "",
           "maxRate" : 0,
-          "symmetric" : false
+          "twoWay" : false
         };
         this.setState({ 
           netHops: newNetHops
@@ -1637,7 +1637,7 @@ export default class App extends React.Component {
           "ltpLayer" : transaction.ltpLayer,
           "portNum" : transaction.portNum,
           "maxRate" : transaction.maxRate,
-          "symmetric" : transaction.symmetric
+          "twoWay" : transaction.twoWay
         };
         this.setState({ 
           netHops: newNetHops

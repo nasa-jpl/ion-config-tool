@@ -157,11 +157,11 @@ export default class NetModelLoader extends React.Component {
         rate = hopObj["maxRate"];
       var sym = "no";
       var flag = false;
-      if(hopObj.hasOwnProperty("symmetric"))
-        flag = hopObj["symmetric"];
-      var sym = true;
+      if(hopObj.hasOwnProperty("symmetric") || hopObj.hasOwnProperty("twoWay"))
+        flag = hopObj["twoWay"];
+      var twoWay = true;
       if (!flag || flag === "false" || flag === "no")
-        sym = false;
+        twoWay = false;
       // build the nodes state object
       hops[hopKey] = { 
         "id" : hopKey, 
@@ -175,7 +175,7 @@ export default class NetModelLoader extends React.Component {
         "ltpLayer": ltp,
         "portNum": port,
         "maxRate": rate,
-        "symmetric": sym
+        "twoWay": twoWay
       };
     };
     return true;

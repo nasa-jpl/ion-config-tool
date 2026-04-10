@@ -32,7 +32,7 @@ export default class NetHop  extends React.Component {
     const portNum = this.props.portNum;
     const maxRate = this.props.maxRate === undefined ||
                     this.props.maxRate === 0 ? maxRateDefault : this.props.maxRate;
-    const symmetric = this.props.symmetric;
+    const twoWay = this.props.twoWay;  // default to one-way unless specified as two-way
     console.log("NetHop ctor " + desc + ' ' + hopKey);
     this.state = {
       editMode: false,
@@ -50,7 +50,7 @@ export default class NetHop  extends React.Component {
       ltpLayer: ltpLayer,
       portNum: portNum,
       maxRate: maxRate,
-      symmetric: symmetric
+      twoWay: twoWay
     }
   }
   makeAlertElem(msg) {
@@ -195,14 +195,14 @@ export default class NetHop  extends React.Component {
     const rateElem = this.makeHopElem("maxRate","number",this.state.maxRate,"Max Transmission Rate",2,false,"(bytes per sec)");
     hopElems.push(rateElem);
     // build ltpLayer selector
-    param    = "symmetric";
-    value    = this.getBoolStr(this.state.symmetric);
+    param    = "twoWay";
+    value    = this.getBoolStr(this.state.twoWay);
     handler  = this.handleHopChange.bind(null,param);
     opts     = this.props.makeOptionElems(param);
     selform  = this.makeSelectForm(value,handler,opts);
     showform = this.makeShowForm(value);
-    const symmetricElem = this.makeSelectElem(value,'Symmetric 2-way Hop',showform,selform);
-    hopElems.push(symmetricElem);
+    const twoWayElem = this.makeSelectElem(value,'Two-Way Hop',showform,selform);
+    hopElems.push(twoWayElem);
   
     const msg = "";
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
@@ -239,9 +239,9 @@ export default class NetHop  extends React.Component {
     hopElems.push(portNumElem);
     const rateElem = this.makeHopElem("maxRate","number",this.state.maxRate,"Max Transmission Rate",2,true,"(bytes per sec)");
     hopElems.push(rateElem);
-    var symStr = this.getBoolStr(this.state.symmetric);
-    const symmetricElem = this.makeHopElem("symmetric","text",symStr,"Symmetric 2-way Hop",2,true,"");
-    hopElems.push(symmetricElem);
+    var twoWayStr = this.getBoolStr(this.state.twoWay);
+    const twoWayElem = this.makeHopElem("twoWay","text",twoWayStr,"Two-Way Hop",2,true,"");
+    hopElems.push(twoWayElem);
 
     return (
       <div>
@@ -318,7 +318,7 @@ export default class NetHop  extends React.Component {
   };
   submit = () => {    // callable by edit (above)
     console.log("submit hop updates!" + JSON.stringify(this.props.desc));
-    var sym = this.getBool(this.state.symmetric);  // cast to boolean
+    var twoWay = this.getBool(this.state.twoWay);  // cast to boolean
     var tran = {
       action: "UPDATE-NET-HOP",
       hopKey: this.props.hopKey,
@@ -331,7 +331,7 @@ export default class NetHop  extends React.Component {
       ltpLayer: this.state.ltpLayer,
       portNum: this.state.portNum,
       maxRate: this.state.maxRate,
-      symmetric: sym
+      twoWay: twoWay
     };
     this.props.dispatch(tran);
   };
@@ -396,7 +396,7 @@ NetHop.propTypes = {
   ltpLayer: PropTypes.string.isRequired,
   portNum: PropTypes.number.isRequired,
   maxRate: PropTypes.number.isRequired,
-  symmetric: PropTypes.bool.isRequired,
+  twoWay: PropTypes.bool.isRequired,
 
   makeTypeOptions: PropTypes.func.isRequired,           // get dynamic (cloned) options
   makeOptionElems: PropTypes.func.isRequired,           // get static options
