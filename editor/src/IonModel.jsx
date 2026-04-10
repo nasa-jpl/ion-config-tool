@@ -1458,7 +1458,7 @@ export default class IonModel  extends React.Component {
       }
     }
   };
-  saveConfigs = () => {
+  saveConfigs = async () => {
     console.log("let's save all config files in a zip file!");
     var zip = new JSZip();
     var rootdir = zip.folder(this.props.name);   // the network name
@@ -1495,8 +1495,31 @@ export default class IonModel  extends React.Component {
     };
     const zipname = this.props.name + "-ionconfig.zip";
     zip.generateAsync( {type:"blob"}).then(function(content) {
-      saveAs(content, zipname);
+      if ('showSaveFilePicker' in window) {
+        const handle = window.showSaveFilePicker({
+          suggestedName: zipname,
+          types: [{
+            description: 'Zip file',
+            accept: {'application/zip': ['.zip']},
+          }],
+        }).then(handle => {
+          handle.createWritable().then(writable => {
+            writable.write(content).then(() => {
+              writable.close();
+            });
+          });
+        }).catch(e => {
+          if (e.name === 'AbortError') {
+            console.log("User cancelled the save file dialog.");
+          } else {
+            console.error("Error saving file:", e);
+          }
+        });
+      } else {  
+        saveAs(content, zipname);
+      }
     });
+    
     console.log("finished zip file!??");
   };
   handleIonChange = (prop,e) => {
