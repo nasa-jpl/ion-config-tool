@@ -277,7 +277,7 @@ export default class NetModel  extends React.Component {
         // If host has more than one IP addr, automatically add
         // 0.0.0.0 to IP address list in case a TCP induct 
         // needs to use it.
-        if (netHost.ipAddrs.length > 1) {
+        if (netHost.ipAddrs.length > 1 && !netHost.ipAddrs.includes("0.0.0.0")  ) {
           let addr = "0.0.0.0"
           let uniqid = this.props.getUniqId();
           let ipAddrKey = "ipAddr_" + uniqid;

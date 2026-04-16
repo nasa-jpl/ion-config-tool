@@ -493,7 +493,9 @@ const DbNodes = (props) => {
       const hostIdx = hosts.findIndex(h => h.hostname === hostname)
       if ( hostIdx > -1) {
         var host = hosts[hostIdx];
-        nodes[idx].ips = host.dests;       
+        nodes[idx].ips = host.dests;
+        nodes[idx].ips = nodes[idx].ips.map(str => str.trim());
+
       }
     }
     
