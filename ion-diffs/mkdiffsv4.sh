@@ -14,20 +14,6 @@ diff $root/ion-$v1/ams/doc/pod5/amsrc.pod     $root/ion-$v2/ams/doc/pod5/amsrc.p
 echo '----amsxml diffs----' >> $rpt
 diff $root/ion-$v1/ams/doc/pod5/amsxml.pod    $root/ion-$v2/ams/doc/pod5/amsxml.pod >> $rpt
 echo '----bpv6 ascrc diffs----' >> $rpt
-diff $root/ion-$v1/bpv6/doc/pod5/acsrc.pod    $root/ion-$v2/bpv6/doc/pod5/acsrc.pod >> $rpt
-echo '----bpv6 bprc diffs----' >> $rpt
-diff $root/ion-$v1/bpv6/doc/pod5/bprc.pod     $root/ion-$v2/bpv6/doc/pod5/bprc.pod >> $rpt
-echo '----bpv6 bpsecrc diffs----' >> $rpt
-diff $root/ion-$v1/bpv6/doc/pod5/bpsecrc.pod  $root/ion-$v2/bpv6/doc/pod5/bpsecrc.pod >> $rpt
-echo '----bpv6 dtn2rc diffs----' >> $rpt
-diff $root/ion-$v1/bpv6/doc/pod5/dtn2rc.pod   $root/ion-$v2/bpv6/doc/pod5/dtn2rc.pod >> $rpt
-echo '----bpv6 imcrc diffs----' >> $rpt
-diff $root/ion-$v1/bpv6/doc/pod5/imcrc.pod    $root/ion-$v2/bpv6/doc/pod5/imcrc.pod >> $rpt
-echo '----bpv6 ipnrc diffs----' >> $rpt
-diff $root/ion-$v1/bpv6/doc/pod5/ipnrc.pod    $root/ion-$v2/bpv6/doc/pod5/ipnrc.pod >> $rpt
-echo '----bpv6 lgfile diffs----' >> $rpt
-diff $root/ion-$v1/bpv6/doc/pod5/lgfile.pod   $root/ion-$v2/bpv6/doc/pod5/lgfile.pod >> $rpt
-echo '----bpv6 biberc diffs----' >> $rpt
 diff $root/ion-$v1/bpv7/doc/pod5/biberc.pod   $root/ion-$v2/bpv7/doc/pod5/biberc.pod >> $rpt
 echo '----bpv7 bprc diffs----' >> $rpt
 diff $root/ion-$v1/bpv7/doc/pod5/bprc.pod     $root/ion-$v2/bpv7/doc/pod5/bprc.pod >> $rpt
