@@ -72,7 +72,7 @@
     "paramCnt": 2, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_attach_outduct_tcp": {
     "configType": "bpv6rc", 
@@ -83,7 +83,7 @@
     "paramTypes": [], 
     "pickClone": true,
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_attach_outduct_stcp": {
     "configType": "bpv6rc", 
@@ -94,7 +94,7 @@
     "paramTypes": [], 
     "pickClone": true,
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_attach_outduct_udp": {
     "configType": "bpv6rc", 
@@ -105,7 +105,7 @@
     "paramTypes": [], 
     "pickClone": true,
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_attach_outduct_ltp": {
     "configType": "bpv6rc", 
@@ -116,7 +116,7 @@
     "paramTypes": [], 
     "pickClone": true,
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_attach_outduct_dccp": {
     "configType": "bpv6rc", 
@@ -127,7 +127,7 @@
     "paramTypes": [], 
     "pickClone": true,
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_attach_outduct_bssp": {
     "configType": "bpv6rc", 
@@ -138,7 +138,7 @@
     "paramTypes": [], 
     "pickClone": true,
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_attach_outduct_any": {
     "configType": "bpv6rc", 
@@ -148,7 +148,7 @@
     "paramCnt": 3, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_gateway_plan": {
     "configType": "bpv6rc", 
@@ -158,7 +158,7 @@
     "paramCnt": 2, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },  
   "bpv6rc_endpoint": {
     "configType": "bpv6rc", 
@@ -170,7 +170,7 @@
     "paramCnt": 4, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_heapmax": {
     "configType": "bpv6rc", 
@@ -179,7 +179,7 @@
     "paramCnt": 1, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_maxcount": {
     "configType": "bpv6rc", 
@@ -188,7 +188,7 @@
     "paramCnt": 1, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_induct_tcp": {
     "configType": "bpv6rc", 
@@ -199,7 +199,7 @@
     "paramTypes": [], 
     "pickClone": true, 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_induct_stcp": {
     "configType": "bpv6rc", 
@@ -210,7 +210,7 @@
     "paramTypes": [], 
     "pickClone": true, 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_induct_udp": {
     "configType": "bpv6rc", 
@@ -221,7 +221,7 @@
     "pickClone": true, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_induct_ltp": {
     "configType": "bpv6rc", 
@@ -232,7 +232,7 @@
     "paramCnt": 2, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_induct_dccp": {
     "configType": "bpv6rc", 
@@ -243,7 +243,7 @@
     "paramTypes": [], 
     "pickClone": true, 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_induct_bssp": {
     "configType": "bpv6rc", 
@@ -254,7 +254,7 @@
     "paramCnt": 2, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_induct_any": {
     "configType": "bpv6rc", 
@@ -264,7 +264,7 @@
     "paramCnt": 3, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_initialize": {
     "configType": "bpv6rc", 
@@ -273,7 +273,7 @@
     "paramCnt": 0, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_outduct_tcp": {
     "configType": "bpv6rc", 
@@ -285,7 +285,7 @@
     "paramTypes": [], 
     "pickClone": true, 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_outduct_stcp": {
     "configType": "bpv6rc", 
@@ -297,7 +297,7 @@
     "paramTypes": [], 
     "pickClone": true, 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_outduct_udp": {
     "configType": "bpv6rc", 
@@ -308,7 +308,7 @@
     "paramTypes": [], 
     "pickClone": true,
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_outduct_ltp": {
     "configType": "bpv6rc", 
@@ -320,7 +320,7 @@
     "paramTypes": [], 
     "pickClone": true, 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_outduct_dccp": {
     "configType": "bpv6rc", 
@@ -332,7 +332,7 @@
     "paramTypes": [], 
     "pickClone": true, 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },  
   "bpv6rc_outduct_bssp": {
     "configType": "bpv6rc", 
@@ -344,7 +344,7 @@
     "paramTypes": [], 
     "pickClone": true, 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },   
   "bpv6rc_outduct_any": {
     "configType": "bpv6rc", 
@@ -354,7 +354,7 @@
     "paramCnt": 4, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },  
   "bpv6rc_protocol": {
     "configType": "bpv6rc", 
@@ -364,7 +364,7 @@
     "paramCnt": 4, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_run": {
     "configType": "bpv6rc", 
@@ -374,7 +374,7 @@
     "paramCnt": 1, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_run_ipnadmin": {
     "configType": "bpv6rc", 
@@ -384,7 +384,7 @@
     "paramCnt": 1, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_scheme": {
     "configType": "bpv6rc", 
@@ -393,7 +393,7 @@
     "paramCnt": 3, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_start": {
     "configType": "bpv6rc", 
@@ -402,7 +402,7 @@
     "paramCnt": 0, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "bpv6rc_watch": {
     "configType": "bpv6rc", 
@@ -411,7 +411,7 @@
     "paramCnt": 1, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv6rc_watch_all": {
     "configType": "bpv6rc", 
@@ -420,7 +420,7 @@
     "paramCnt": 0, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpv7rc_ion_plan": {
     "configType": "bpv7rc", 
@@ -1479,6 +1479,16 @@
     "verFrom": 10, 
     "verThru": 999
   }, 
+  "ionsecrc_pubkey": {
+    "configType": "ionsecrc", 
+    "multiple": true, 
+    "name": "key", 
+    "order": 20, 
+    "paramCnt": 2, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  }, 
   "bpsecv6rc_bspbcbrule": {
     "configType": "bpsecv6rc", 
     "multiple": true, 
@@ -1487,7 +1497,7 @@
     "paramCnt": 5, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpsecv6rc_bspbcbrule_nocheck": {
     "configType": "bpsecv6rc", 
@@ -1497,7 +1507,7 @@
     "paramCnt": 3, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpsecv6rc_bspbibrule": {
     "configType": "bpsecv6rc", 
@@ -1507,7 +1517,7 @@
     "paramCnt": 5, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "bpsecv6rc_bspbibrule_nocheck": {
     "configType": "bpsecv6rc", 
@@ -1517,47 +1527,7 @@
     "paramCnt": 3, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
-  }, 
-  "bpsecv7rc_bcbrule": {
-    "configType": "bpsecv7rc", 
-    "multiple": true, 
-    "name": "bcbrule", 
-    "order": 50, 
-    "paramCnt": 5, 
-    "paramTypes": [], 
-    "verFrom": 10, 
-    "verThru": 999
-  }, 
-  "bpsecv7rc_bcbrule_nocheck": {
-    "configType": "bpsecv7rc", 
-    "multiple": true, 
-    "name": "bcbrule_nocheck", 
-    "order": 52, 
-    "paramCnt": 3, 
-    "paramTypes": [], 
-    "verFrom": 10, 
-    "verThru": 999
-  }, 
-  "bpsecv7rc_bibrule": {
-    "configType": "bpsecv7rc", 
-    "multiple": true, 
-    "name": "bibrule", 
-    "order": 40, 
-    "paramCnt": 5, 
-    "paramTypes": [], 
-    "verFrom": 10, 
-    "verThru": 999
-  }, 
-  "bpsecv7rc_bibrule_nocheck": {
-    "configType": "bpsecv7rc", 
-    "multiple": true, 
-    "name": "bibrule_nocheck", 
-    "order": 42, 
-    "paramCnt": 3, 
-    "paramTypes": [], 
-    "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "ltpsecrc_ltprecvauthrule": {
     "configType": "ltpsecrc", 
@@ -1719,6 +1689,24 @@
     "verFrom": 10, 
     "verThru": 999
   }, 
+  "ltprc_maxretries": {
+    "configType": "ltprc", 
+    "name": "maxretries", 
+    "order": 46, 
+    "paramCnt": 1, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  },
+  "ltprc_maxseglossrate": {
+    "configType": "ltprc", 
+    "name": "maxseglossrate", 
+    "order": 46, 
+    "paramCnt": 1, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  },
   "ltprc_maxber": {
     "configType": "ltprc", 
     "name": "maxber", 
@@ -1726,7 +1714,7 @@
     "paramCnt": 1, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   },
   "ltprc_maxbacklog": {
     "configType": "ltprc", 

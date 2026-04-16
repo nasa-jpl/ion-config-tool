@@ -3402,6 +3402,26 @@
     "showDefault": true,
     "defaultValue":  ".000001"  
   },
+  "ltprc_maxretries_p0" : {
+    "id" :  "ltprc_maxretries_p0",
+    "name":  "max retries",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_maxretries",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "5"  
+  },
+  "ltprc_maxseglossrate_p0" : {
+    "id" :  "ltprc_maxseglossrate_p0",
+    "name":  "max segment loss rate",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_maxseglossrate",
+    "valType":  "number",
+    "units":  "decimal fraction",
+    "showDefault": true,
+    "defaultValue":  ".01"  
+  },
   "ltprc_watch_p0" : {
     "id" :  "ltprc_watch_p0",
     "name":  "watch characters",
@@ -3687,6 +3707,51 @@
     "units":  "",
     "defaultValue":  ""
   },
+  "ionsecrc_pubkey_p0" : {
+    "id" :  "ionsecrc_key_p0",
+    "name":  "node",
+    "configType":  "ionsecrc",
+    "cmdType":  "ionsecrc_pubkey",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ionsecrc_pubkey_p1" : {
+    "id" :  "ionsecrc_key_p1",
+    "name":  "effective time",
+    "configType":  "ionsecrc",
+    "cmdType":  "ionsecrc_pubkey",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ionsecrc_pubkey_p2" : {
+    "id" :  "ionsecrc_key_p2",
+    "name":  "assertion time",
+    "configType":  "ionsecrc",
+    "cmdType":  "ionsecrc_pubkey",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ionsecrc_pubkey_p3" : {
+    "id" :  "ionsecrc_key_p3",
+    "name":  "key length",
+    "configType":  "ionsecrc",
+    "cmdType":  "ionsecrc_pubkey",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ionsecrc_pubkey_p4" : {
+    "id" :  "ionsecrc_key_p4",
+    "name":  "key text",
+    "configType":  "ionsecrc",
+    "cmdType":  "ionsecrc_pubkey",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
   "bpsecv6rc_bspbibrule_p0" : {
     "id" :  "bpsecv6rc_bspbibrule_p0",
     "name":  "source endpoint expression",
@@ -3827,150 +3892,6 @@
     "name":  "block type number",
     "configType":  "bpsecv6rc",
     "cmdType":  "bpsecv6rc_bspbcbrule_nocheck",
-    "valType":  "number",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bibrule_p0" : {
-    "id" :  "bpsecv7rc_bibrule_p0",
-    "name":  "source endpoint expression",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bibrule",
-    "valType":  "text",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bibrule_p1" : {
-    "id" :  "bpsecv7rc_bibrule_p1",
-    "name":  "destination endpoint expression",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bibrule",
-    "valType":  "text",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bibrule_p2" : {
-    "id" :  "bpsecv7rc_bibrule_p2",
-    "name":  "block type number",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bibrule",
-    "valType":  "number",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bibrule_p3" : {
-    "id" :  "bpsecv7rc_bibrule_p3",
-    "name":  "ciphersuite name",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bibrule",
-    "valType":  "text",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bibrule_p4" : {
-    "id" :  "bpsecv7rc_bibrule_p4",
-    "name":  "key name",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bibrule",
-    "valType":  "text",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bibrule_nocheck_p0" : {
-    "id" :  "bpsecv7rc_bibrule_nocheck_p0",
-    "name":  "sender endpoint expression",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bibrule_nocheck",
-    "valType":  "text",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bibrule_nocheck_p1" : {
-    "id" :  "bpsecv7rc_bibrule_nocheck_p1",
-    "name":  "receiver endpoint expression",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bibrule_nocheck",
-    "valType":  "text",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bibrule_nocheck_p2" : {
-    "id" :  "bpsecv7rc_bibrule_nocheck_p2",
-    "name":  "block type number",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bibrule_nocheck",
-    "valType":  "number",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bcbrule_p0" : {
-    "id" :  "bpsecv7rc_bcbrule_p0",
-    "name":  "source endpoint expression",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bcbrule",
-    "valType":  "text",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bcbrule_p1" : {
-    "id" :  "bpsecv7rc_bcbrule_p1",
-    "name":  "destination endpoint expression",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bcbrule",
-    "valType":  "text",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bcbrule_p2" : {
-    "id" :  "bpsecv7rc_bcbrule_p2",
-    "name":  "block type number",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bcbrule",
-    "valType":  "number",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bcbrule_p3" : {
-    "id" :  "bpsecv7rc_bcbrule_p3",
-    "name":  "ciphersuite name",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bcbrule",
-    "valType":  "text",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bcbrule_p4" : {
-    "id" :  "bpsecv7rc_bcbrule_p4",
-    "name":  "key name",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bcbrule",
-    "valType":  "text",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bcbrule_nocheck_p0" : {
-    "id" :  "bpsecv7rc_bcbrule_nocheck_p0",
-    "name":  "sender endpoint expression",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bcbrule_nocheck",
-    "valType":  "text",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bcbrule_nocheck_p1" : {
-    "id" :  "bpsecv7rc_bcbrule_nocheck_p1",
-    "name":  "receiver endpoint expression",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bcbrule_nocheck",
-    "valType":  "text",
-    "units":  "",
-    "defaultValue":  ""
-  },
-  "bpsecv7rc_bcbrule_nocheck_p2" : {
-    "id" :  "bpsecv7rc_bcbrule_nocheck_p2",
-    "name":  "block type number",
-    "configType":  "bpsecv7rc",
-    "cmdType":  "bpsecv7rc_bcbrule_nocheck",
     "valType":  "number",
     "units":  "",
     "defaultValue":  ""
