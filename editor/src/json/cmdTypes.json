@@ -1482,7 +1482,7 @@
   "ionsecrc_pubkey": {
     "configType": "ionsecrc", 
     "multiple": true, 
-    "name": "key", 
+    "name": "pubkey", 
     "order": 20, 
     "paramCnt": 2, 
     "paramTypes": [], 
