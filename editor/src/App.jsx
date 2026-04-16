@@ -102,6 +102,7 @@ export default class App extends React.Component {
        configs: configs,           // model
        commands: commands,         // model
        cmdTypes: cmdTypes,
+       configTypes: configTypes,
 
        cloneValues: cloneValues,   // derived
 
@@ -673,6 +674,7 @@ export default class App extends React.Component {
     const configs = this.state.configs;
     const commands = this.state.commands;
     const cmdTypes = this.state.cmdTypes;
+    const configTypes = this.state.configTypes;
     const cloneVals = this.state.cloneValues;
 
     const getNodeKey = this.getNodeKey.bind(this);
@@ -702,6 +704,7 @@ export default class App extends React.Component {
         configs={configs}         // state
         commands={commands}       // state
         cmdTypes={cmdTypes}
+        configTypes={configTypes}
         cloneValues={cloneVals}   // state
 
         isGoodName={isGoodName}           // verify name string is valid

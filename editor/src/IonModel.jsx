@@ -28,7 +28,6 @@ import HostList     from './HostList.jsx';
 import IonNodeList  from './IonNodeList.jsx';
 import GraphList    from './GraphList.jsx';
 
-import configTypes  from './json/configTypes.json';
 import paramTypes   from './json/paramTypes.json';
 import patterns     from './json/patterns.json';
 import selections   from './json/selections.json';
@@ -368,7 +367,7 @@ export default class IonModel  extends React.Component {
     // END NO EXTRACT
     const cmdKeys = configObj.cmdKeys;
     const configTypeKey = configObj.configType;
-    const configTypeObj = configTypes[configTypeKey];
+    const configTypeObj = this.props.configTypes[configTypeKey];
     //console.log("makeConfigElem configType:" + JSON.stringify(configType));
     const modelName = this.state.name;
     const modelDesc = this.state.desc;
@@ -458,7 +457,7 @@ export default class IonModel  extends React.Component {
     for (var i=0; i<node.configKeys.length; i++) {
       let configKey = node.configKeys[i];
       let configType = configs[configKey].configType;
-      let order = configTypes[configType].start_order;
+      let order = this.props.configTypes[configType].start_order;
       let nodeConfig = configs[configKey];
       nodeConfig.order = order;
       if (configKey.indexOf("ionconfig") < 0)  // add all except ionconfig
@@ -471,7 +470,7 @@ export default class IonModel  extends React.Component {
     if (contacts !== "") {
       let configKey = this.state.currentContacts + ".cg";
       let configType = "contacts";
-      let order = configTypes[configType].start_order;
+      let order = this.props.configTypes[configType].start_order;
       let nodeConfig = configs[configKey];
       nodeConfig.order = order;
       configFiles.push(nodeConfig);
@@ -485,7 +484,7 @@ export default class IonModel  extends React.Component {
       let configKey = configObj.id;
       console.log("makeStartLines configKey: " + configKey);
       let configTypeKey = configObj.configType;
-      let configTypeObj = configTypes[configTypeKey];
+      let configTypeObj = this.props.configTypes[configTypeKey];
       let prog = configTypeObj.program;
       if (j === 0) 
         cmdLines.push('echo "Starting ION node ' + nodeLabel + ' on $host from $wdir"');
@@ -519,7 +518,7 @@ export default class IonModel  extends React.Component {
   makeConfigElem(configKey,cmdKeys,cmdsList) {
     const config = this.props.configs[configKey];
     const configTypeKey = config.configType;
-    const configType = configTypes[configTypeKey];
+    const configType = this.props.configTypes[configTypeKey];
     const nodeKey = config.nodeKey;     // note...nodeKey might NOT be a node (graphs)
     var verSeqNo = this.getIonVerSeqNo(nodeKey);
     console.log("???the Version sequence Number is: " + verSeqNo.toString() + " for " + configKey);
@@ -1545,6 +1544,7 @@ IonModel.propTypes = {
   configs: PropTypes.array.isRequired,
   commands: PropTypes.array.isRequired,
   cmdTypes: PropTypes.object.isRequired,
+  configTypes: PropTypes.object.isRequired,
   cloneValues: PropTypes.array.isRequired,
 
   getNodeKey: PropTypes.func.isRequired,      // func to find nodeKey from a cmdKey
