@@ -1785,6 +1785,33 @@
     "units":  "",
     "defaultValue":  ""
   },
+  "bpv7rc_cbraggr_p0" : {
+    "id" :  "bpv7rc_cbraggr_p0",
+    "name":  "CRS limit",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_cbraggr",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "1"
+  },
+  "bpv7rc_cbraggr_p1" : {
+    "id" :  "bpv7rc_cbraggr_p1",
+    "name":  "CCS limit",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_cbraggr",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "1"
+  },
+  "bpv7rc_cbraggr_p2" : {
+    "id" :  "bpv7rc_cbraggr_p2",
+    "name":  "timeout",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_cbraggr",
+    "valType":  "number",
+    "units":  "seconds",
+    "defaultValue":  "2"
+  },
   "bpv7rc_induct_tcp_p0" : {
     "id" :  "bpv7rc_induct_tcp_p0",
     "name":  "ip address (or name)",

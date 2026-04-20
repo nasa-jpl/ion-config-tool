@@ -759,7 +759,6 @@
   },
   "bpv7rc_primarycrc": {
     "configType": "bpv7rc", 
-    "multiple": true, 
     "name": "primarycrc", 
     "order": 40, 
     "paramCnt": 1, 
@@ -769,7 +768,6 @@
   },
   "bpv7rc_payloadcrc": {
     "configType": "bpv7rc", 
-    "multiple": true, 
     "name": "payloadcrc", 
     "order": 40, 
     "paramCnt": 1, 
@@ -779,10 +777,18 @@
   },
   "bpv7rc_custodymode": {
     "configType": "bpv7rc", 
-    "multiple": true, 
     "name": "custodymode", 
     "order": 40, 
     "paramCnt": 1, 
+    "paramTypes": [], 
+    "verFrom": 14, 
+    "verThru": 999
+  },
+  "bpv7rc_cbraggr": {
+    "configType": "bpv7rc", 
+    "name": "cbraggr", 
+    "order": 40, 
+    "paramCnt": 3, 
     "paramTypes": [], 
     "verFrom": 14, 
     "verThru": 999

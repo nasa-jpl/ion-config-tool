@@ -99,6 +99,7 @@
   "bpv7rc_primarycrc"    : "m primarycrc  [1]",
   "bpv7rc_payloadcrc"    : "m payloadcrc  [1]",
   "bpv7rc_custodymode"   : "m custodymode  [1]",
+  "bpv7rc_cbraggr"       : "m cbraggr  [1]  [2]  [3]",
   "bpv7rc_run"           : "r '[1]'",
   "bpv7rc_start"         : "s",
   "bpv7rc_watch"         : "w '[1]'",
