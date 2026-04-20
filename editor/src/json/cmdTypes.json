@@ -763,7 +763,7 @@
     "order": 40, 
     "paramCnt": 1, 
     "paramTypes": [], 
-    "verFrom": 14, 
+    "verFrom": 15, 
     "verThru": 999
   },
   "bpv7rc_payloadcrc": {
@@ -772,7 +772,7 @@
     "order": 40, 
     "paramCnt": 1, 
     "paramTypes": [], 
-    "verFrom": 14, 
+    "verFrom": 15, 
     "verThru": 999
   },
   "bpv7rc_custodymode": {
@@ -781,7 +781,7 @@
     "order": 40, 
     "paramCnt": 1, 
     "paramTypes": [], 
-    "verFrom": 14, 
+    "verFrom": 15, 
     "verThru": 999
   },
   "bpv7rc_cbraggr": {
@@ -790,7 +790,7 @@
     "order": 40, 
     "paramCnt": 3, 
     "paramTypes": [], 
-    "verFrom": 14, 
+    "verFrom": 15, 
     "verThru": 999
   },
   "bpv7rc_run": {
