@@ -3635,26 +3635,27 @@
   },
   "biberc_dest_endpoint_p0" : {
     "id" :  "biberc_dest_endpoint_p0",
-    "name":  "destination node",
+    "name":  "peer EID",
     "configType":  "biberc",
     "cmdType":  "biberc_dest_endpoint",
     "valType":  "nodeNum",
-    "pickClone": true,
+    "copyClone": true,
     "units":  "",
-    "defaultValue":  ""
+    "defaultValue":  "[cloned from Node]"
   },
   "biberc_dest_endpoint_p1" : {
     "id" :  "biberc_dest_endpoint_p1",
-    "name":  "forward latency",
+    "name":  "service num",
     "configType":  "biberc",
     "cmdType":  "biberc_dest_endpoint",
     "valType":  "number",
-    "units":  "secs",
-    "defaultValue":  "0"
+    "showDefault": true,
+    "units":  "",
+    "defaultValue":  ""
   },
   "biberc_dest_endpoint_p2" : {
     "id" :  "biberc_dest_endpoint_p2",
-    "name":  "return latency",
+    "name":  "forward latency",
     "configType":  "biberc",
     "cmdType":  "biberc_dest_endpoint",
     "valType":  "number",
@@ -3663,24 +3664,80 @@
   },
   "biberc_dest_endpoint_p3" : {
     "id" :  "biberc_dest_endpoint_p3",
-    "name":  "priority",
+    "name":  "return latency",
     "configType":  "biberc",
     "cmdType":  "biberc_dest_endpoint",
     "valType":  "number",
-    "units":  "",
+    "units":  "secs",
     "defaultValue":  "0"
   },
   "biberc_dest_endpoint_p4" : {
     "id" :  "biberc_dest_endpoint_p4",
-    "name":  "ordinal",
+    "name":  "report-to EID",
+    "configType":  "biberc",
+    "cmdType":  "biberc_dest_endpoint",
+    "valType": "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "biberc_dest_endpoint_p5" : {
+    "id" :  "biberc_dest_endpoint_p5",
+    "name":  "service num",
+    "configType":  "biberc",
+    "cmdType":  "biberc_dest_endpoint",
+    "valType":  "number",
+    "showDefault": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "biberc_dest_endpoint_p6" : {
+    "id" :  "biberc_dest_endpoint_p6",
+    "name":  "BSR flags",
+    "configType":  "biberc",
+    "cmdType":  "biberc_dest_endpoint",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "biberc_dest_endpoint_p7" : {
+    "id" :  "biberc_dest_endpoint_p7",
+    "name":  "lifespan",
     "configType":  "biberc",
     "cmdType":  "biberc_dest_endpoint",
     "valType":  "number",
     "units":  "",
+    "defaultValue":  "60"
+  },
+  "biberc_dest_endpoint_p8" : {
+    "id" :  "biberc_dest_endpoint_p8",
+    "name":  "priority",
+    "configType":  "biberc",
+    "cmdType":  "biberc_dest_endpoint",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "biberc_dest_endpoint_p9" : {
+    "id" :  "biberc_dest_endpoint_p9",
+    "name":  "ordinal",
+    "configType":  "biberc",
+    "cmdType":  "biberc_dest_endpoint",
+    "valType":  "text",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "biberc_dest_endpoint_p10" : {
+    "id" :  "biberc_dest_endpoint_p10",
+    "name":  "QOS flags",
+    "configType":  "biberc",
+    "cmdType":  "biberc_dest_endpoint",
+    "valType":  "text",
+    "units":  "",
     "defaultValue":  "0"
   },
-  "biberc_dest_endpoint_p5" : {
-    "id" :  "biberc_dest_endpoint_p5",
+  "biberc_dest_endpoint_p11" : {
+    "id" :  "biberc_dest_endpoint_p11",
     "name":  "data label",
     "configType":  "biberc",
     "cmdType":  "biberc_dest_endpoint",

@@ -338,7 +338,7 @@ export default class IonModel  extends React.Component {
   // builds ION command text (commands file format)
   makeCmdLine(cmdTypeKey,cmdParams) {
     // console.log("makeCmdLine cmdTypeKey: " + cmdTypeKey + "  Params : " + JSON.stringify(cmdParams));
-    const targets = [ "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" ];
+    const targets = [ "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]", "[10]", "[11]" ];
     var cmdPattern = patterns[cmdTypeKey];
     let cmdType = this.props.cmdTypes[cmdTypeKey];
     //console.log("cmdType: " + JSON.stringify(cmdType));

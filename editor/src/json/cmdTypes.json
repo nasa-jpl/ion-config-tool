@@ -40,7 +40,7 @@
     "configType": "biberc", 
     "name": "dest_endpoint", 
     "order": 10, 
-    "paramCnt": 6, 
+    "paramCnt": 11, 
     "paramTypes": [],
     "pickClone": true, 
     "verFrom": 10, 
@@ -1367,7 +1367,7 @@
     "paramCnt": 1, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "ionrc_outer": {
     "configType": "ionrc", 
@@ -1376,7 +1376,7 @@
     "paramCnt": 1, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "ionrc_passageway": {
     "configType": "ionrc", 
@@ -1385,7 +1385,7 @@
     "paramCnt": 3, 
     "paramTypes": [], 
     "verFrom": 10, 
-    "verThru": 999
+    "verThru": 14
   }, 
   "ionrc_horizon": {
     "configType": "ionrc", 
