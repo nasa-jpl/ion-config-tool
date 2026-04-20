@@ -96,6 +96,21 @@
     { "2" : "Protocol performs NO retransmission (e.g. udp)" },
     { "8" : "Protocol performs error detection and retransmission (e.g. tcp)" }
   ],
+  "bpv7rc_primarycrc_p0" : [
+    { "0" : "none"},
+    { "1" : "CRC16" },
+    { "2" : "CRC32" }
+  ],
+  "bpv7rc_payloadcrc_p0" : [
+    { "0" : "none"},
+    { "1" : "CRC16" },
+    { "2" : "CRC32" }
+  ],
+  "bpv7rc_custodymode_p0" : [
+    { "none"       : "Custody disabled"},
+    { "bibe"       : "Reserved for BIBE-based custody" },
+    { "orangebook" : "CCSDS Orange Book CBR/CT mode" }
+  ],
   "ionconfig_configFlags_p0" : [
     {  "0" : "0000" },
     {  "1" : "0001                                              SDR_IN_DRAM" },

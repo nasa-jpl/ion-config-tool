@@ -1758,6 +1758,33 @@
     "optional": true,
     "defaultValue":  "8"
   },
+  "bpv7rc_primarycrc_p0" : {
+    "id" :  "bpv7rc_primarycrc_p0",
+    "name":  "CRC type",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_primarycrc",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  "1"
+  },
+  "bpv7rc_payloadcrc_p0" : {
+    "id" :  "bpv7rc_payloadcrc_p0",
+    "name":  "CRC type",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_payloadcrc",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  "1"
+  },
+  "bpv7rc_custodymode_p0" : {
+    "id" :  "bpv7rc_custodymode_p0",
+    "name":  "CRC type",
+    "configType":  "bpv7rc",
+    "cmdType":  "bpv7rc_custodymode",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
   "bpv7rc_induct_tcp_p0" : {
     "id" :  "bpv7rc_induct_tcp_p0",
     "name":  "ip address (or name)",
