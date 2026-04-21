@@ -4016,6 +4016,16 @@
     "units":  "",
     "defaultValue":  ""
   },
+  "ionsecrc_key_p2" : {
+    "id" :  "ionsecrc_key_p2",
+    "name":  "key length",
+    "configType":  "ionsecrc",
+    "cmdType":  "ionsecrc_key",
+    "valType":  "text",
+    "units":  "(optional)",
+    "optional" : true,
+    "defaultValue":  ""
+  },
   "ionsecrc_pubkey_p0" : {
     "id" :  "ionsecrc_key_p0",
     "name":  "node",

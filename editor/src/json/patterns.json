@@ -195,7 +195,7 @@
   "bssprc_watch"         : "w '[1]'",
   "bssprc_watch_all"     : "w 1",
   "ionsecrc_initialize"  : "1",
-  "ionsecrc_key"         : "a key  [1]  [2]",
+  "ionsecrc_key"         : "a key  [1]  [2]  [3]",
   "ionsecrc_pubkey"         : "a pubkey  [1]  [2]  [3]  [4]  [5]",
   "bpsecv6rc_bspbibrule"    : "a bspbibrule  [1]  [2]  [3]  [4]  [5]",
   "bpsecv6rc_bspbcbrule"    : "a bspbcbrule  [1]  [2]  [3]  [4]  [5]",
