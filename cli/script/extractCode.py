@@ -186,7 +186,8 @@ srcAndDest = [
 				   'this.state.desc':  'ion.desc',
 				   'this.props.nodes': 'nodes',
 				   'console.log':      'debug',
-	               'this.props.cmdTypes' : 'cmdTypes'}
+	               'this.props.cmdTypes' : 'cmdTypes',
+				   'this.props.configTypes' : 'configTypes'}
 				],
 				
 				[
@@ -197,6 +198,7 @@ srcAndDest = [
 				  {'this.state.name':            'ion.name', 
 				   'this.state.currentContacts': 'ion.currentContacts', 
 				   'this.props.nodes':           'nodes',
+				   'this.props.configTypes':     'configTypes',
 				   'console.log':               'debug'}
 				],
 				
