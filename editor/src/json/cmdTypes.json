@@ -1734,6 +1734,51 @@
     "verFrom": 15, 
     "verThru": 999
   },
+  "ltprc_maxretriesxmit": {
+    "configType": "ltprc", 
+    "name": "maxretriesxmit", 
+    "order": 46, 
+    "paramCnt": 1, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  },
+  "ltprc_maxretriesrecv": {
+    "configType": "ltprc", 
+    "name": "maxretriesrecv", 
+    "order": 46, 
+    "paramCnt": 1, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  },
+  "ltprc_span_ovr_maxretries": {
+    "configType": "ltprc", 
+    "name": "span_ovr_maxretries", 
+    "order": 46, 
+    "paramCnt": 2, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  },
+  "ltprc_span_ovr_maxretriesxmit": {
+    "configType": "ltprc", 
+    "name": "span_ovr_maxretriesxmit", 
+    "order": 46, 
+    "paramCnt": 2, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  },
+  "ltprc_span_ovr_maxretriesrecv": {
+    "configType": "ltprc", 
+    "name": "span_ovr_maxretriesrecv", 
+    "order": 46, 
+    "paramCnt": 2, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  },
   "ltprc_maxseglossrate": {
     "configType": "ltprc", 
     "name": "maxseglossrate", 
@@ -1743,6 +1788,60 @@
     "verFrom": 15, 
     "verThru": 999
   },
+  "ltprc_maxseglossratexmit": {
+    "configType": "ltprc", 
+    "name": "maxseglossratexmit", 
+    "order": 46, 
+    "paramCnt": 1, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  },
+  "ltprc_maxseglossraterecv": {
+    "configType": "ltprc", 
+    "name": "maxseglossraterecv", 
+    "order": 46, 
+    "paramCnt": 1, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  },
+  "ltprc_span_ovr_maxseglossrate": {
+    "configType": "ltprc", 
+    "name": "span_ovr_maxseglossrate", 
+    "order": 46, 
+    "paramCnt": 2, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  },
+  "ltprc_span_ovr_maxseglossratexmit": {
+    "configType": "ltprc", 
+    "name": "span_ovr_maxseglossratexmit", 
+    "order": 46, 
+    "paramCnt": 2, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  },
+  "ltprc_span_ovr_maxseglossraterecv": {
+    "configType": "ltprc", 
+    "name": "span_ovr_maxseglossraterecv", 
+    "order": 46, 
+    "paramCnt": 2, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  },
+  "ltprc_span_inactivity": {
+    "configType": "ltprc", 
+    "name": "span_inactivity", 
+    "order": 53, 
+    "paramCnt": 2, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  }, 
   "ltprc_maxber": {
     "configType": "ltprc", 
     "name": "maxber", 

@@ -65,15 +65,30 @@ export default class App extends React.Component {
     var configTypes = structuredClone(configTypesSrc);
     var cmdTypes = structuredClone(cmdTypesSrc);
 
-    // assign cmdTypes list to each configType
-    for (var cmdType in cmdTypes) {
-      let confType = cmdTypes[cmdType].configType;
-      configTypes[confType].cmdTypes.push(cmdType);
+    // Leave this try catch in to aid in debugging
+    // problems with the cmdTypes.json file
+    try {
+      // assign cmdTypes list to each configType
+      for (var cmdType in cmdTypes) {
+        let confType = cmdTypes[cmdType].configType;
+        configTypes[confType].cmdTypes.push(cmdType);
+      }
+    } catch (error) {
+      console.error("Problem with cmdTypes: "+cmdType);
+      throw new Error("Problem with cmdTypes: "+cmdType);
     }
-    // assign paramTypes list to each cmdType
-    for (var pType in paramTypes) {
-      let cType = paramTypes[pType].cmdType;
-      cmdTypes[cType].paramTypes.push(pType);
+
+    // Leave this try catch in to aid in debugging
+    // problems with the paramTypes.json file
+    try {    
+      // assign paramTypes list to each cmdType
+      for (var pType in paramTypes) {
+        let cType = paramTypes[pType].cmdType;
+        cmdTypes[cType].paramTypes.push(pType);
+      }
+    } catch (error) {
+      console.error("Problem with paramTypes: "+pType);
+      throw new Error("Problem with paramTypes: "+pType);
     }
 
     // the master state atom

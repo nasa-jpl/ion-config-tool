@@ -3476,6 +3476,185 @@
     "showDefault": true,
     "defaultValue":  ".01"  
   },
+  "ltprc_maxretriesxmit_p0" : {
+    "id" :  "ltprc_maxretriesxmit_p0",
+    "name":  "max retries (xmit)",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_maxretriesxmit",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "5"  
+  },
+  "ltprc_maxretriesrecv_p0" : {
+    "id" :  "ltprc_maxretriesrecv_p0",
+    "name":  "max retries (recv)",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_maxretriesrecv",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "5"  
+  },
+  "ltprc_maxseglossratexmit_p0" : {
+    "id" :  "ltprc_maxseglossratexmit_p0",
+    "name":  "max segment loss rate (xmit)",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_maxseglossratexmit",
+    "valType":  "number",
+    "units":  "decimal fraction",
+    "showDefault": true,
+    "defaultValue":  ".01"  
+  },
+  "ltprc_maxseglossraterecv_p0" : {
+    "id" :  "ltprc_maxseglossraterecv_p0",
+    "name":  "max segment loss rate (recv)",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_maxseglossraterecv",
+    "valType":  "number",
+    "units":  "decimal fraction",
+    "showDefault": true,
+    "defaultValue":  ".01"  
+  },
+  "ltprc_span_ovr_maxretries_p0" : {
+    "id" :  "ltprc_span_ovr_maxretries_p0",
+    "name":  "node identifier",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_ovr_maxretries",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""  
+  },
+  "ltprc_span_ovr_maxretries_p1" : {
+    "id" :  "ltprc_span_ovr_maxretries_p1",
+    "name":  "max retries",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_ovr_maxretries",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "5"  
+  },
+  "ltprc_span_ovr_maxseglossrate_p0" : {
+    "id" :  "ltprc_span_ovr_maxseglossrate_p0",
+    "name":  "node identifier",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_ovr_maxseglossrate",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""  
+  },
+  "ltprc_span_ovr_maxseglossrate_p1" : {
+    "id" :  "ltprc_span_ovr_maxseglossrate_p1",
+    "name":  "max retries",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_ovr_maxseglossrate",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "5"  
+  },
+  "ltprc_span_ovr_maxretriesxmit_p0" : {
+    "id" :  "ltprc_span_ovr_maxretriesxmit_p0",
+    "name":  "node identifier",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_ovr_maxretriesxmit",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""  
+  },
+  "ltprc_span_ovr_maxretriesxmit_p1" : {
+    "id" :  "ltprc_span_ovr_maxretriesxmit_p1",
+    "name":  "max retries",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_ovr_maxretriesxmit",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "5"  
+  },
+  "ltprc_span_ovr_maxretriesrecv_p0" : {
+    "id" :  "ltprc_span_ovr_maxretriesrecv_p0",
+    "name":  "node identifier",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_ovr_maxretriesrecv",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""  
+  },
+  "ltprc_span_ovr_maxretriesrecv_p1" : {
+    "id" :  "ltprc_span_ovr_maxretriesrecv_p1",
+    "name":  "max retries",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_ovr_maxretriesrecv",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "5"  
+  },
+  "ltprc_span_ovr_maxseglossratexmit_p0" : {
+    "id" :  "ltprc_span_ovr_maxseglossratexmit_p0",
+    "name":  "node identifier",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_ovr_maxseglossratexmit",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""  
+  },
+  "ltprc_span_ovr_maxseglossratexmit_p1" : {
+    "id" :  "ltprc_span_ovr_maxseglossratexmit_p1",
+    "name":  "max segment loss rate (xmit)",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_ovr_maxseglossratexmit",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "5"  
+  },
+  "ltprc_span_ovr_maxseglossraterecv_p0" : {
+    "id" :  "ltprc_span_ovr_maxseglossraterecv_p0",
+    "name":  "node identifier",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_ovr_maxseglossraterecv",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""  
+  },
+  "ltprc_span_ovr_maxseglossraterecv_p1" : {
+    "id" :  "ltprc_span_ovr_maxseglossraterecv_p1",
+    "name":  "max segment loss rate (xmit)",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_ovr_maxseglossraterecv",
+    "valType":  "number",
+    "units":  "",
+    "showDefault": true,
+    "defaultValue":  "5"  
+  },
+  "ltprc_span_inactivity_p0" : {
+    "id" :  "ltprc_span_inactivity_p1",
+    "name":  "peer engine number",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_inactivity",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ltprc_inactivity_p1" : {
+    "id" :  "ltprc_span_inactivity_p1",
+    "name":  "max idle time til cancel",
+    "configType":  "ltprc",
+    "cmdType":  "ltprc_span_inactivity",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  "86400"
+  },
   "ltprc_watch_p0" : {
     "id" :  "ltprc_watch_p0",
     "name":  "watch characters",
