@@ -31,7 +31,7 @@ table td {
 <h3>ION Release Date: 2022-03-15</h3>
 <h4>Dictionary Seq No: 14</h4>
 <h4>Configuration Files: 20</h4>
-<h4>Commands: 199</h4>
+<h4>Commands: 195</h4>
 <h3>Introduction</h3>
 <p>
 The dictionary describes the configuration files and commands supported by ION Configuration Tool. The version is important.  The configuration commands supported by ION can and usually do evolve with each new version, and so it does also for the configuration tool.  It is not easy to spot the changes from version to version, so new releases of the tool also provide delta reports summarizing the changes between successive versions.
@@ -134,15 +134,21 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 <hr>
 <h3>ION Command File Type: biberc</h3>
 </br><b>ION Config Command Name: </b>dest_endpoint</br>
-<b>ION Command Pattern: </b><code>a bcla  [1]  [2]  [3]  [4]  [5]  [6]</code></br>
+<b>ION Command Pattern: </b><code>a bcla  ipn:[1].[2]  [3]  [4]  ipn:[5].[6]  [7]  [8]  [9]  [10]  [11]</code></br>
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
-<tr><td>destination node</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>peer EID</td><td>true</td><td>nodeNum</td><td></td><td>[cloned from Node]</td><td>true</td><td>false</td></tr>
+<tr><td>service num</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
 <tr><td>forward latency</td><td>true</td><td>number</td><td>secs</td><td>0</td><td>false</td><td>false</td></tr>
 <tr><td>return latency</td><td>true</td><td>number</td><td>secs</td><td>0</td><td>false</td><td>false</td></tr>
-<tr><td>priority</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
-<tr><td>ordinal</td><td>true</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
+<tr><td>report-to EID</td><td>true</td><td>nodeNum</td><td></td><td></td><td>false</td><td>true</td></tr>
+<tr><td>service num</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>BSR flags</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>lifespan</td><td>true</td><td>number</td><td></td><td>60</td><td>false</td><td>false</td></tr>
+<tr><td>priority</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>ordinal</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>QOS flags</td><td>true</td><td>text</td><td></td><td>0</td><td>false</td><td>false</td></tr>
 <tr><td>data label</td><td>false</td><td>number</td><td></td><td>0</td><td>false</td><td>false</td></tr>
 </tbody>
 </table>
@@ -205,56 +211,6 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 <br>
 </br><b>ION Config Command Name: </b>bspbibrule_nocheck</br>
 <b>ION Command Pattern: </b><code>a bspbibrule  [1]  [2]  [3]  ''</code></br>
-<table>
-<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
-<tbody>
-<tr><td>sender endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>receiver endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>block type number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
-</tbody>
-</table>
-<br>
-<hr>
-<h3>ION Command File Type: bpsecv7rc</h3>
-</br><b>ION Config Command Name: </b>bcbrule</br>
-<b>ION Command Pattern: </b><code>a bcbrule  [1]  [2]  [3]  [4]  [5]</code></br>
-<table>
-<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
-<tbody>
-<tr><td>source endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>destination endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>block type number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>ciphersuite name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>key name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-</tbody>
-</table>
-<br>
-</br><b>ION Config Command Name: </b>bcbrule_nocheck</br>
-<b>ION Command Pattern: </b><code>a bcbrule  [1]  [2]  [3]  ''</code></br>
-<table>
-<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
-<tbody>
-<tr><td>sender endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>receiver endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>block type number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
-</tbody>
-</table>
-<br>
-</br><b>ION Config Command Name: </b>bibrule</br>
-<b>ION Command Pattern: </b><code>a bibrule  [1]  [2]  [3]  [4]  [5]</code></br>
-<table>
-<thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
-<tbody>
-<tr><td>source endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>destination endpoint expression</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>block type number</td><td>true</td><td>number</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>ciphersuite name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-<tr><td>key name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
-</tbody>
-</table>
-<br>
-</br><b>ION Config Command Name: </b>bibrule_nocheck</br>
-<b>ION Command Pattern: </b><code>a bibrule  [1]  [2]  [3]  ''</code></br>
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
@@ -1719,12 +1675,13 @@ Most of the dictionary is dedicated to carefully describing each parameter for e
 </table>
 <br>
 </br><b>ION Config Command Name: </b>key</br>
-<b>ION Command Pattern: </b><code>a key  [1]  [2]</code></br>
+<b>ION Command Pattern: </b><code>a key  [1]  [2]  [3]</code></br>
 <table>
 <thead><tr class="header"><th align="left">Parameters</th><th align="left">Required</th><th align="left">Value Type</th><th align="left">Units</th><th align="left">Default</th><th align="left">CopyClone</th><th align="left">PickClone</th></tr></thead>
 <tbody>
 <tr><td>key name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
 <tr><td>key file name</td><td>true</td><td>text</td><td></td><td></td><td>false</td><td>false</td></tr>
+<tr><td>key length</td><td>false</td><td>text</td><td>(optional)</td><td></td><td>false</td><td>false</td></tr>
 </tbody>
 </table>
 <br>
