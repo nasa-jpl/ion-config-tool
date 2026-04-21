@@ -954,6 +954,38 @@
     "verFrom": 10, 
     "verThru": 999
   }, 
+  "cfdprc_info": {
+    "configType": "cfdprc", 
+    "multiple": true, 
+    "name": "info", 
+    "order": 12, 
+    "paramCnt": 0, 
+    "paramTypes": [], 
+    "pickClone": true, 
+    "verFrom": 15, 
+    "verThru": 999
+  }, 
+  "cfdprc_entity_info": {
+    "configType": "cfdprc", 
+    "multiple": true, 
+    "name": "entity_info", 
+    "order": 12, 
+    "paramCnt": 1, 
+    "paramTypes": [], 
+    "pickClone": true, 
+    "verFrom": 15, 
+    "verThru": 999
+  }, 
+  "cfdprc_throttle": {
+    "configType": "cfdprc", 
+    "multiple": true, 
+    "name": "throttle", 
+    "order": 12, 
+    "paramCnt": 1, 
+    "paramTypes": [], 
+    "verFrom": 15, 
+    "verThru": 999
+  }, 
   "cfdprc_entity_bp": {
     "configType": "cfdprc", 
     "multiple": true, 

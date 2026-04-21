@@ -3664,6 +3664,25 @@
     "units":  "",
     "defaultValue":  ""
   },
+  "cfdprc_entity_info_p0" : {
+    "id" :  "cfdprc_entity_info_p0",
+    "name":  "remote entity number",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_entity_info",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "cfdprc_throttle_p0" : {
+    "id" :  "cfdprc_throttle_p0",
+    "name":  "throttle",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_throttle",
+    "valType":  "number",
+    "units":  "bits per sec (0 = unlimited)",
+    "defaultValue":  "0"
+  },
   "cfdprc_entity_bp_p0" : {
     "id" :  "cfdprc_entity_bp_p0",
     "name":  "remote entity number",
