@@ -1632,7 +1632,7 @@ export default class App extends React.Component {
           "bpLayer" : "",
           "ltpLayer" : "",
           "maxRate" : 0,
-          "twoWay" : false
+          "twoWay" : true
         };
         this.setState({ 
           netHops: newNetHops
@@ -1879,7 +1879,7 @@ export default class App extends React.Component {
     const newNet = this.state.makeNewNetModel? this.makeNewNetElem() : "";    
     return (
     <div>
-      <Container fluid>
+      <Container fluid className="p-5">
         <Navbar bg="light" variant="light">
           <h3>ION Configuration Editor  4.9.0b6</h3>
         </Navbar>
