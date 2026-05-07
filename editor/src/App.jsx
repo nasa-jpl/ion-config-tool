@@ -759,6 +759,7 @@ export default class App extends React.Component {
     const netNodes = this.state.netNodes;
     const netHops = this.state.netHops;
     const netAddrs = this.state.netAddrs;
+    const cmdTypes = this.state.cmdTypes;
     const getIonModel = this.getIonModel.bind(this);
     const isGoodName = this.isGoodName.bind(this);
     const isGoodNetHostKey = this.isGoodNetHostKey.bind(this);
@@ -785,6 +786,7 @@ export default class App extends React.Component {
         netNodes={netNodes}       // state
         netHops={netHops}         // state
         netAddrs={netAddrs}       // state
+        cmdTypes={cmdTypes}
   
         getIonModel={getIonModel}            // get ion model handle
         isGoodName={isGoodName}              // verify name string is valid

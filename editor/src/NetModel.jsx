@@ -20,7 +20,6 @@ import {saveAs} from "file-saver";
 import {Alert} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
 
-import cmdTypes     from './json/cmdTypes.json';
 import paramTypes   from './json/paramTypes.json'
 import ionVersions  from './json/ionVersions.json'
 
@@ -972,7 +971,7 @@ export default class NetModel  extends React.Component {
     let cmdTypeKey = configType + "_" + cmdName;
     let uniqid = this.props.getUniqId();
     let cmdKey = "cmd_" + uniqid;
-    let cmdType = cmdTypes[cmdTypeKey];
+    let cmdType = this.props.cmdTypes[cmdTypeKey];
     console.log("makeIonCommand ... configType: " + configType + 
                 " groupKey: " + groupKey + " cmdName: " + cmdName +
                 " cmdKey: " + cmdKey + " values: " + values);
@@ -1033,7 +1032,7 @@ export default class NetModel  extends React.Component {
       let cmd = commands[cmdKey];
       let cmdTypeKey = cmd.typeKey;
       console.log("$$$ cmdKey: " + cmdKey + " has type: " + cmdTypeKey);
-      let cmdType = cmdTypes[cmd.typeKey];
+      let cmdType = this.props.cmdTypes[cmd.typeKey];
       if(cmdType.copyClone  || cmdType.pickClone) {
         for (let i = 0; i < cmdType.paramTypes.length; i++) {
            let paramTypeKey = cmdType.paramTypes[i];
@@ -1690,6 +1689,7 @@ NetModel.propTypes = {
   netNodes: PropTypes.array.isRequired,
   netHops: PropTypes.array.isRequired,
   netAddrs: PropTypes.array.isRequired,
+  cmdTypes: PropTypes.object.isRequired,
 
   getIonModel: PropTypes.func.isRequired,      // func to get ion model handle
   isGoodName: PropTypes.func.isRequired,       // func to validate name
