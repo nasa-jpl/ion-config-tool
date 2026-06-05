@@ -18,6 +18,7 @@ import {Table} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
 
 import nodeDB  from './json/nodeDB.json';
+import NodeTable from './NodeTable';
 
 // DbNodes *must* be a functional component as opposed to a
 // React component (ie. inherits from React.Component).
@@ -387,7 +388,7 @@ const DbNodes = (props) => {
     // one data structure and generate the node table
     if (inductsLoaded) {
       mergeData();
-      setNodeTable(formatNodeTable());
+      setNodeTable(formatNodeTable(nodeList));
     }
 
   }, [hostsLoaded, nodesLoaded, IPsLoaded, protocolsLoaded, inductsLoaded])
@@ -490,10 +491,13 @@ const DbNodes = (props) => {
 
     for (var idx in nodes) {
       var hostname = nodes[idx].host.hostname;
+      var host_id  = nodes[idx].host.host_id;
       const hostIdx = hosts.findIndex(h => h.hostname === hostname)
       if ( hostIdx > -1) {
         var host = hosts[hostIdx];
         nodes[idx].ips = host.dests.map(str => str.trim());
+        nodes[idx].hostname = hostname;
+        nodes[idx].host_id = host_id;
       }
     }
     
@@ -501,57 +505,40 @@ const DbNodes = (props) => {
 
   // formatNodeTable
   //
-  // This function is run to create the HTML representation of the
-  // node table once all the data has been loaded from the DB.
-  function formatNodeTable() {
+  // This function is run once all the data has been loaded from the DB.
+  //
+  // label    - The string that appears in the table header 
+  // accessor - used by the sorting algorithm defined in the NodeTable
+  // sortable - only columns with true can be sorted.
+  function formatNodeTable(data) {
+
+    const columns = [
+      { label: "Select", accesor: "select", sortable: false},
+      { label: "Node ID", accessor: "node_id", sortable: true},
+      { label: "Node Name", accessor: "node_name", sortable: true},
+      { label: "Protocols", accessor: "protocols", sortable: false},
+      { label: "Node Number", accessor: "node_number", sortable: true},
+      { label: "Host Name", accessor: "hostname", sortable: true},
+      { label: "Host ID", accessor: "host_id", sortable: true},
+      { label: "IP Adddresses", acccessor: "ip_addr", sortable: false},
+      { label: "Config Flags", accessor: "config_flags", sortable: false}
+    ];
 
     return (
-      <Table striped border hover>
-        <thead>
-          <tr>
-            <th className="d-flex justify-content-center">Select</th>
-            <th>Node ID</th>
-            <th>Node Name</th>
-            <th>Protocols</th>
-            <th>Node Number</th>
-            <th>Host Name</th>
-            <th>Host ID</th>
-            <th>IP Addresses</th>
-            <th>Config Flags</th>
-          </tr>
-        </thead>
-        <tbody>
-          {nodeList.map((item, index) => (
-            <tr key={item.node_id}>
-              <td className="d-flex justify-content-center">
-                <Form.Check
-                  type="checkbox"
-                  id={'checkbox-${item.host_id}'}
-                  checked={item.checked}
-                  onChange={() => handleCheckboxChange(item.node_id)}
-                  />
-              </td>
-              <td>{item.node_id}</td>
-              <td>{item.node_name}</td>
-              <td>{item.prots.join(", ")}</td>
-              <td>{item.node_number}</td>
-              <td>{item.host.hostname}</td>
-              <td>{item.host.host_id}</td>
-              <td>{item.ips.join(", ")}</td>
-              <td>{item.sdr_config_flags.join(", ")}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>)
+      <NodeTable 
+        columns={columns} 
+        data={data}
+        handleCheckboxChange={handleCheckboxChange}>
+      </NodeTable>
+    )
 
   };
 
-  // hadleCheckboxChange
+  // handleCheckboxChange
   //
   // The user has selected/deselected a node for import set the change
   // and update the node list with the change.
   function handleCheckboxChange(node_id) {
-    console.log("checkbox "+node_id+" checked!");
     var nodeIdx = nodeList.findIndex((node) => node.node_id === node_id);
     if (nodeIdx > -1) {
       var isSelected = nodeList[nodeIdx].selected;
