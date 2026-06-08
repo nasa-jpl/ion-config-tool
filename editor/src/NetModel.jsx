@@ -1151,12 +1151,12 @@ export default class NetModel  extends React.Component {
   getDefaultIPforNode(netNode) {
     const netNodes = this.props.netNodes;
     const netHosts = this.props.netHosts;
-    if (netNode === "")
+    if (!netNodes[netNode] || netNode === "")
       return "";
 
     var hostForNode = netNodes[netNode].nodeHost;
 
-    if (hostForNode === "") {
+    if (!netHosts[hostForNode] || hostForNode === "") {
       return "";
     }
 
@@ -1265,7 +1265,7 @@ export default class NetModel  extends React.Component {
 
     // If the net node supplied is not from the node
     // DB, use default behavior based on parameter only
-    if (!netNodes[nodeKey].fromDb) {
+    if (netNodes[nodeKey] && !netNodes[nodeKey].fromDb) {
       return this.props.makeOptionElems(param);
     }
 
@@ -1304,9 +1304,9 @@ export default class NetModel  extends React.Component {
     vals.push(noneVal);
 
     // If node not yet selected, nothing to build
-    if (netNode !== "") {
+    if (netNodes[netNode] && netNode !== "") {
       var netNodeHost = netNodes[netNode].nodeHost;
-      if (netNodeHost !== "") {
+      if (netHosts[netNodeHost] && netNodeHost !== "") {
         var netHostIPs = netHosts[netNodeHost].ipAddrs;
 
         for (var idx in netHostIPs) {
