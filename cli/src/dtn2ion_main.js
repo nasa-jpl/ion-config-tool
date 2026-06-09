@@ -115,7 +115,7 @@ console.log("Combining single ion model object.");
 var modelObj = makeModelObj();
 
 console.log("---");
-const modelName = ion.name + ".json";
+const modelName = ion.name + "-ion.json";
 console.log("Writing json model to " + modelName);
 saveModel(modelName,modelObj);
 

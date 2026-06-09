@@ -148,7 +148,8 @@ srcAndDest = [
 				    "cmdName","values"
 				  ],
 				  "../src/auto/appfunc-auto.js",
-				  {'console.log' : 'debug'}
+				  {'console.log'         : 'debug',
+	               'this.props.cmdTypes' : 'cmdTypes'}
 				],
 				
 				[
@@ -243,7 +244,8 @@ srcAndDest = [
 				 "assignClones",
 				 [],
 				 "../src/auto/ionloader-auto.js",
-				  {'console.log' : 'debug'}
+				  {'console.log' : 'debug',
+	               'this.props.cmdTypes' : 'cmdTypes'}
 				],
 
 				["../../editor/src/IonModelLoader.jsx",
@@ -314,7 +316,8 @@ srcAndDest = [
 				  "assignClones",
 				  ["commands","cloneValues"],        
 				  "../src/auto/getfunc-auto.js",
-				  {'console.log' : 'debug'}
+				  {'console.log' : 'debug',
+	               'this.props.cmdTypes' : 'cmdTypes'}
 				],
 				
 				[
