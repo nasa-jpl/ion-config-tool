@@ -111,7 +111,7 @@
   "ipnrc_plan_dccp"      : "a plan  [1]  dccp/[2]  [3]",
   "ipnrc_plan_bssp"      : "a plan  [1]  bssp/[2]  [3]",
   "ipnrc_plan_any"       : "a plan  [1]  [2]  [3]",
-  "ipnrc_exit_ion"       : "a exit  [1]  [2]  ipn.[3].0",
+  "ipnrc_exit_ion"       : "a exit  [1]  [2]  ipn:[3].0",
   "ipnrc_rtovrd"         : "a rtovrd  [1]  [2]  [3]  [4]",
   "ipnrc_cosovrd_v11"    : "a cosovrd  [1]  [2]  [3]  [4]  [5]",
   "ipnrc_cosovrd"        : "a cosovrd  [1]  [2]  [3]  [4]  [5]  [6]",
