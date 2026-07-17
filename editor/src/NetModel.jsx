@@ -682,10 +682,16 @@ export default class NetModel  extends React.Component {
         var ports = this.getHostPorts(toHostKey,hosts,ipaddrs,commands);
 
         // If the user has specified a port number, use it. Otherwise, default
-        var nextPort = netHop.portNum === "" ? 4556 : netHop.portNum;
-        while (ports.includes(nextPort))
-          nextPort++;
-        vals = [toAddr,nextPort,cli];
+        var usePort = "";
+        if (netHop.portNum === undefined || netHop.portNum === "") {
+          usePort = 4556;  // default port for tcp
+          // make sure it isn't already in use; if it is bump port number until we find one that isn't
+          while (ports.includes(usePort))
+            usePort++;
+        } else {
+          usePort = netHop.portNum;
+        }
+        vals = [toAddr,usePort,cli];
       } else {   // non-standard protocol
         induct = "induct_any";
         vals = [bpLayer, "", cli];
