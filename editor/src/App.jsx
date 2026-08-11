@@ -368,7 +368,7 @@ export default class App extends React.Component {
         cloneVal["label"] = 'fromNode: ' + nodeKey + ' bsspOutductName: ' + cloneVal.value;
         break;
       default:
-        console.log("!!! nodeKey: " + nodeKey + " is not clone type!! ");
+        console.log("!!! nodeKey: " + cmd.typeKey + " is not clone type!! ");
         return null;
     }
     console.log("$$$ new cloneVal = " + JSON.stringify(cloneVal));
@@ -453,8 +453,9 @@ export default class App extends React.Component {
     for (var key in cloneVals) {
       let cloneVal = cloneVals[key];
       //console.log("$$$ checking cloneVal: " + JSON.stringify(cloneVal));
-      if (cloneVal.type === type && String(cloneVal.value) === target) 
+      if (cloneVal.type === type && String(cloneVal.value) === target) {
         return cloneVal;
+      }
     }
     console.log ("!!! failed to find cloneVal for type: " + type + "  value: " + value);
     return null;
@@ -984,6 +985,24 @@ export default class App extends React.Component {
       }
     }
   }
+
+  // Remove all references to a clone value that is in the
+  // process of being deleted.
+  removeAllCloneRefs(cloneVals,cmdKey) {
+    console.log("removeAllCloneRefs to cmdKey:"+ cmdKey);
+    for (var cloneIdx in cloneVals) {
+      let cloneVal = cloneVals[cloneIdx];
+      for (let i=0; i<cloneVal.clones.length; i++) {
+        let cloneObj = cloneVal.clones[i];
+        if (cmdKey === cloneObj.cmdKey) {
+          console.log("deleting clone entry no: " + i);
+          cloneVal.clones.splice(i,1);
+          break;
+        }
+      }
+    }
+
+  }
   addClone(cloneVals,cmdKey,type,value,valIdx) {
     console.log("addClone cmdKey:"+ cmdKey + " type: " + type + " value: " + value);
     let cloneVal = this.findCloneVal(cloneVals,type,value);
@@ -1095,7 +1114,7 @@ export default class App extends React.Component {
           let cloneType = this.getCmdCloneType(cmdKey);
           let cloneVal = this.getCmdClonedValue(cmdKey);
           console.log("$$$ call removeClone " + cmdKey + " " + cloneType + " " + cloneVal);
-          this.removeClone(newCloneVals,cmdKey,cloneType,cloneVal);
+          this.removeAllCloneRefs(newCloneVals,cmdKey);
         }
         this.deleteCloneVals(newCloneVals,cmdKey);
         this.removeCmdKey(newConfigs,configKey,cmdKey);

@@ -713,6 +713,7 @@ export default class NetModel  extends React.Component {
           ports = this.getHostPorts(toHostKey,hosts,ipaddrs,commands);
 
           // If the user has specified a port number, use it. Otherwise, default
+          var nextPort = "";
           nextPort =  netHop.portNum === "" ? 1113 : netHop.portNum;
           while (ports.includes(nextPort))
             nextPort++;
