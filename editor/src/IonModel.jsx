@@ -980,14 +980,27 @@ export default class IonModel  extends React.Component {
     const reqConfigs = ["ionrc", "ionconfig"];
     // TODO : add req for bprc of either v6 or v7
     // Config-level required command types
-    var reqCmds = {}; 
-    reqCmds["ionrc"] = ["initialize","start"];
-    reqCmds["bpv6rc"] = ["initialize","scheme","start"];
-    reqCmds["bpv7rc"] = ["initialize","scheme","start"];
-    reqCmds["ionconfig"] = [];
-    reqCmds["ipnrc"] = ["plan"];
-    reqCmds["ltprc"] = ["initialize"];
-    reqCmds["bssprc"] = ["initialize"];
+
+    // Simple checks for required commands by config type.
+    var checkCmds = {}; 
+    checkCmds["ionrc"] = ["initialize","start"];
+    checkCmds["bpv6rc"] = ["initialize","scheme","start"];
+    checkCmds["bpv7rc"] = ["initialize","scheme","start"];
+    checkCmds["ionconfig"] = [];
+    checkCmds["ipnrc"] = [];
+    checkCmds["ltprc"] = ["initialize"];
+    checkCmds["bssprc"] = ["initialize"];
+
+    // More complicated checks. 
+    // NOTE: The check between config files is assumed to be
+    // an OR check. The check within a config file is an AND check. 
+    //
+    // In plain english, the check below means "If the ipnrc file has a plan command
+    // OR the bprc file has a plan command AND an attach_outduct command, then the ipnrc
+    // file is good".
+    var crossCheckCmds = {};
+    crossCheckCmds["ipnrc"] = {"ipnrc": ["plan"], "bpv7rc": ["plan", "attach_outduct"]};
+
     // host loop
     for (var hostKey in hosts) {
       const host = hosts[hostKey];
@@ -1030,8 +1043,10 @@ export default class IonModel  extends React.Component {
         let cmdCounts = {};   // dict for cmd type counts
 
         let missed = [];   // assume all required commands missing...will drop from list if found
-        if (reqCmds.hasOwnProperty(chkConf) ) 
-          missed = reqCmds[chkConf];
+        if (checkCmds.hasOwnProperty(chkConf) ) {
+          missed = checkCmds[chkConf];
+        }
+
         console.log("+++ checking reqd cmds: " + missed.toString());
         // node config commands loop
         for (let n=0; n<configObj.cmdKeys.length; n++) { 
@@ -1099,6 +1114,38 @@ export default class IonModel  extends React.Component {
           alerts.push({"type": "Config", "name": confKey, "level":"warn", "msg": msg});
         }
       } //end of config loop
+
+      // Check for more complicated issues across config files for this node
+      for (let k=0; k<nconfs.length; k++) {
+        let confKey = nconfs[k];
+        var configObj = configs[confKey];
+        let chkConf = configObj.configType;
+
+        // Loop through required cross checks.
+        if (crossCheckCmds.hasOwnProperty(chkConf)) {
+          // Assume file is not good.
+          let fileOk = false;
+
+          // Grab requried cross check commands for this config file.
+          let crossCheck = crossCheckCmds[chkConf];
+          for (var fType in crossCheck) {
+
+            // Construct the config file key
+            let cFileKey = nodeKey + "." + fType;
+            let chkConfigObj = configs[cFileKey];
+
+            // If ANY of the config files have the required commands, then we are good.
+            if (this.configFileHasCmds(chkConfigObj,crossCheck[fType])) {
+              fileOk = true;
+              break;
+            } 
+          }
+          if (!fileOk) {
+            let msg = "Config file " + confKey + this.formatCrossCheckMsg(crossCheck);
+            alerts.push({"type": "Node", "name": nodeKey, "level":"error", "msg": msg});
+          }
+       }
+      }
       console.log("***** ductFlags " + JSON.stringify(ductFlags));
       console.log("***** protFlags " + JSON.stringify(protFlags));
       // alert any missing protocol commands
@@ -1108,10 +1155,43 @@ export default class IonModel  extends React.Component {
           alerts.push({"type": "Node", "name": nodeKey, "level":"error", "msg": msg});
         }
       }
+
+
     } // end of node loop
 
     return alerts;
   }
+
+  formatCrossCheckMsg(crossCheck) {
+    var msg = " requires one of the following command sets: ";
+    for (var fType in crossCheck) {
+      msg += fType + " with commands: " + crossCheck[fType].join(", ") + "; ";
+    }
+    return msg;
+  }
+  
+  // check if config file has all required commandsd
+  configFileHasCmds(configObj,cmdList) {
+    var allFound = true;
+    var msg = "";
+    for (var i=0; i<cmdList.length; i++) {
+      var found = false;
+      let chkCmd = cmdList[i];
+      for (var j=0; j<configObj.cmdKeys.length; j++) {
+        let cmdKey = configObj.cmdKeys[j];
+        let cmdTypeKey = this.props.commands[cmdKey].typeKey;
+        if (cmdTypeKey.indexOf(chkCmd) >= 0) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        allFound = false;
+      }
+    }
+    return allFound;
+  }
+
   // END EXTRACT
   makeSelectFormElem(val,handler,options) {
     var form =
