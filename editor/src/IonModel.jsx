@@ -1042,12 +1042,6 @@ export default class IonModel  extends React.Component {
         let chkConf = configObj.configType;
         let cmdCounts = {};   // dict for cmd type counts
 
-        let missed = [];   // assume all required commands missing...will drop from list if found
-        if (checkCmds.hasOwnProperty(chkConf) ) {
-          missed = checkCmds[chkConf];
-        }
-
-        console.log("+++ checking reqd cmds: " + missed.toString());
         // node config commands loop
         for (let n=0; n<configObj.cmdKeys.length; n++) { 
           let cmdKey = configObj.cmdKeys[n];
@@ -1068,13 +1062,6 @@ export default class IonModel  extends React.Component {
           else 
             cmdCounts[cmdTypeKey] = 1;
 
-          for (let c=0; c<missed.length; c++) {
-            let reqCmd = missed[c];
-            if (cmdTypeKey.indexOf(reqCmd) >= 0) {
-              missed.splice(c,1);  // drop this one from missing list
-              break;               // and exit loop
-            }
-          }
           // check for missing command parameters
           let cmdObj = commands[cmdKey];
           let cmdStr = this.makeCmdLine(cmdTypeKey,cmdObj.values);
@@ -1108,9 +1095,9 @@ export default class IonModel  extends React.Component {
           }
         }
         // alert any missing commands
-        for (let m=0; m<missed.length; m++) {
-          let missedCmd = missed[m];
-          let msg = "Has no " + missedCmd + " command.";
+        let { allFound, missing } = this.configFileHasCmds(configObj,checkCmds[chkConf]);
+        if (!allFound) {
+          let msg = "Missing commands: " + missing.join(", ");
           alerts.push({"type": "Config", "name": confKey, "level":"warn", "msg": msg});
         }
       } //end of config loop
@@ -1135,7 +1122,8 @@ export default class IonModel  extends React.Component {
             let chkConfigObj = configs[cFileKey];
 
             // If ANY of the config files have the required commands, then we are good.
-            if (this.configFileHasCmds(chkConfigObj,crossCheck[fType])) {
+            let { allFound, missing } = this.configFileHasCmds(chkConfigObj,crossCheck[fType]);
+            if (allFound) {
               fileOk = true;
               break;
             } 
@@ -1161,19 +1149,24 @@ export default class IonModel  extends React.Component {
 
     return alerts;
   }
+  // END EXTRACT
 
   formatCrossCheckMsg(crossCheck) {
     var msg = " requires one of the following command sets: ";
+    var msgArray = [];
     for (var fType in crossCheck) {
-      msg += fType + " with commands: " + crossCheck[fType].join(", ") + "; ";
+      msgArray.push(fType + " with commands: " + crossCheck[fType].join(", "));
     }
+    msg += msgArray.join(" OR ");
     return msg;
   }
   
-  // check if config file has all required commandsd
+  // check if config file has all required commands
   configFileHasCmds(configObj,cmdList) {
+
     var allFound = true;
-    var msg = "";
+    var missing = [];
+    if (!cmdList) return { allFound, missing};
     for (var i=0; i<cmdList.length; i++) {
       var found = false;
       let chkCmd = cmdList[i];
@@ -1187,12 +1180,14 @@ export default class IonModel  extends React.Component {
       }
       if (!found) {
         allFound = false;
+        missing.push(chkCmd);
       }
     }
-    return allFound;
+
+    // Return the flag and the list of missing commands.
+    return { allFound, missing };
   }
 
-  // END EXTRACT
   makeSelectFormElem(val,handler,options) {
     var form =
       <FormControl
