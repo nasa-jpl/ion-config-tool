@@ -1151,6 +1151,7 @@ export default class IonModel  extends React.Component {
   }
   // END EXTRACT
 
+  // EXTRACT formatCrossCheckMsg
   formatCrossCheckMsg(crossCheck) {
     var msg = " requires one of the following command sets: ";
     var msgArray = [];
@@ -1160,9 +1161,14 @@ export default class IonModel  extends React.Component {
     msg += msgArray.join(" OR ");
     return msg;
   }
-  
+  // END EXTRACT
+
+  // EXTRACT configFileHasCmds
   // check if config file has all required commands
   configFileHasCmds(configObj,cmdList) {
+    // NO EXTRACT
+    var commands = this.props.commands;
+    // END NO EXTRACT
 
     var allFound = true;
     var missing = [];
@@ -1172,7 +1178,7 @@ export default class IonModel  extends React.Component {
       let chkCmd = cmdList[i];
       for (var j=0; j<configObj.cmdKeys.length; j++) {
         let cmdKey = configObj.cmdKeys[j];
-        let cmdTypeKey = this.props.commands[cmdKey].typeKey;
+        let cmdTypeKey = commands[cmdKey].typeKey;
         if (cmdTypeKey.indexOf(chkCmd) >= 0) {
           found = true;
           break;
@@ -1187,6 +1193,7 @@ export default class IonModel  extends React.Component {
     // Return the flag and the list of missing commands.
     return { allFound, missing };
   }
+  // END EXTRACT
 
   makeSelectFormElem(val,handler,options) {
     var form =

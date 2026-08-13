@@ -107,6 +107,12 @@ try:
 except FileNotFoundError:
   print("File not found.")
 
+try:
+    os.mkdir("./work")
+    print("./work directory created")
+except FileExistsError:
+    print("./work already exists")
+
 os.chdir(dictdir)    # ensure home dir
 clearcmd = '/bin/rm work/* docs/*.html' 
 print("Clear work & docs dirs   cmd: '%s'" % clearcmd);

@@ -375,7 +375,24 @@ srcAndDest = [
 				  "../src/auto/checkion-auto.js",
 				  {'this.props.name': 'ion.name',
   				   'console.log' : 'debug'}
+				],
+
+				[
+				  "../../editor/src/IonModel.jsx",       
+				  "configFileHasCmds",
+				  ["configObj","cmdList"],                                
+				  "../src/auto/checkion-auto.js",
+				  {}
+				],
+
+				[
+				  "../../editor/src/IonModel.jsx",       
+				  "formatCrossCheckMsg",
+				  ["crossCheck"],                                
+				  "../src/auto/checkion-auto.js",
+				  {}
 				] 
+
 			 ]
 
 # Utility function for replacing strings according
