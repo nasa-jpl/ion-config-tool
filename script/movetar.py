@@ -29,7 +29,7 @@ def getRelease():
   try:
     dict=json.load(relfile,object_hook=None)
   except ValueError as err:
-    msg = "JSON parse failed: " + err
+    msg = "JSON parse failed: " + str(err)
     logMsg("release","FATAL",msg)
   return dict
 
@@ -41,6 +41,11 @@ ionconfigver = rel["ionConfigVersion"];
 #  assume all operations in the /tmp dir
 #  and current dir = ionconfig (root)
 workdir = '/tmp'
+try:
+    os.mkdir("./tars")
+    print("./tars directory created")
+except FileExistsError:
+    print("./tars already exists")
 
 # Move tar file to tars dir
 tarfile = '%s/ionconfig-%s.tar' % (workdir,ionconfigver)
