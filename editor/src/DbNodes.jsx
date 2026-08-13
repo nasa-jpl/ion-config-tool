@@ -470,14 +470,20 @@ const DbNodes = (props) => {
       // selected -- true = import host; false = do not import host
       // prots    -- array of protocols associated with a node
       // inducts  -- array of relevant induct information for a node
-      for (let i=0 ; i<nodes.length; i++) {
-          nodes[i].ips = [];
-          nodes[i].selected = false;
-          nodes[i].prots = [];
-          nodes[i].inducts = [];
+      var nodesWithHosts = [];
+
+      // The Node DB may have hostless nodes which are meaningless to
+      // the Net Model, so filter them out.
+      nodesWithHosts = nodes.filter(node => node.hasOwnProperty("host") && node.host !== null);
+
+      for (let i=0 ; i<nodesWithHosts.length; i++) {
+        nodesWithHosts[i].ips = [];
+        nodesWithHosts[i].selected = false;
+        nodesWithHosts[i].prots = [];
+        nodesWithHosts[i].inducts = [];
       }
       
-      setNodeList(nodes);
+      setNodeList(nodesWithHosts);
   }
 
   // mergeData
