@@ -1001,6 +1001,18 @@ export default class IonModel  extends React.Component {
     var crossCheckCmds = {};
     crossCheckCmds["ipnrc"] = {"ipnrc": ["plan"], "bpv7rc": ["plan", "attach_outduct"]};
 
+    var newCrossCheckCmds = {
+      "ipnrc": {"exit":  
+                  { "valIdx": 2,
+                    "crossChecks": {
+                      "ipnrc": [{"cmd": "plan", "valIdx": -1}],
+                      "bpv7rc": [{"cmd":"plan", "valIdx": 0},
+                                {"cmd": "attach_outduct", "valIdx": 0}]
+                    }
+                  }
+                }
+    };
+
     // host loop
     for (var hostKey in hosts) {
       const host = hosts[hostKey];
@@ -1107,7 +1119,7 @@ export default class IonModel  extends React.Component {
         let confKey = nconfs[k];
         var configObj = configs[confKey];
         let chkConf = configObj.configType;
-
+       
         // Loop through required cross checks.
         if (crossCheckCmds.hasOwnProperty(chkConf)) {
           // Assume file is not good.
@@ -1132,7 +1144,7 @@ export default class IonModel  extends React.Component {
             let msg = "Config file " + confKey + this.formatCrossCheckMsg(crossCheck);
             alerts.push({"type": "Node", "name": nodeKey, "level":"error", "msg": msg});
           }
-       }
+        }
       }
       console.log("***** ductFlags " + JSON.stringify(ductFlags));
       console.log("***** protFlags " + JSON.stringify(protFlags));
@@ -1174,10 +1186,10 @@ export default class IonModel  extends React.Component {
     var missing = [];
     if (!cmdList) return { allFound, missing};
     for (var i=0; i<cmdList.length; i++) {
-      var found = false;
+    var found = false;
       let chkCmd = cmdList[i];
-      for (var j=0; j<configObj.cmdKeys.length; j++) {
-        let cmdKey = configObj.cmdKeys[j];
+    for (var j=0; j<configObj.cmdKeys.length; j++) {
+      let cmdKey = configObj.cmdKeys[j];
         let cmdTypeKey = commands[cmdKey].typeKey;
         if (cmdTypeKey.indexOf(chkCmd) >= 0) {
           found = true;
