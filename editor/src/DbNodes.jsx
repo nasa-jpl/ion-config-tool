@@ -481,6 +481,9 @@ const DbNodes = (props) => {
         nodesWithHosts[i].selected = false;
         nodesWithHosts[i].prots = [];
         nodesWithHosts[i].inducts = [];
+        if (!nodesWithHosts[i].sdr_config_flags) {
+          nodesWithHosts[i].sdr_config_flags = ["SDR_IN_DRAM"];
+        }
       }
       
       setNodeList(nodesWithHosts);
