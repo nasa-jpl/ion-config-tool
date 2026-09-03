@@ -995,22 +995,31 @@ export default class IonModel  extends React.Component {
     // NOTE: The check between config files is assumed to be
     // an OR check. The check within a config file is an AND check. 
     //
-    // In plain english, the check below means "If the ipnrc file has a plan command
-    // OR the bprc file has a plan command AND an attach_outduct command, then the ipnrc
-    // file is good".
-    var crossCheckCmds = {};
-    crossCheckCmds["ipnrc"] = {"ipnrc": ["plan"], "bpv7rc": ["plan", "attach_outduct"]};
-
-    var newCrossCheckCmds = {
-      "ipnrc": {"exit":  
-                  { "valIdx": 2,
-                    "crossChecks": {
-                      "ipnrc": [{"cmd": "plan", "valIdx": -1}],
-                      "bpv7rc": [{"cmd":"plan", "valIdx": 0},
-                                {"cmd": "attach_outduct", "valIdx": 0}]
-                    }
-                  }
-                }
+    // In plain english, the structure can be read like this:
+    // For ipnrc files that exist for a node, if there is an exit
+    // command for the node ID in the second index of the array
+    // for that command, the ipnrc file MUST have either it's 
+    // own plan command (don't care if it matches the exit commands
+    // node ID) OR the bpv7rc file for this node MUST
+    // have both a plan AND an attach_outduct command that 
+    // matches the node ID in the exit command. The relevant
+    // position in the commands value arrays are indicated.
+    var crossCheckCmds = {
+      "ipnrc": {
+        "exit":  
+          { "valIdx": 2,
+            "crossChecks": {
+              "ipnrc": {
+                  "plan": -1
+              },
+              
+              "bpv7rc": {
+                "plan": 0,
+                "attach_outduct": 0
+              }
+            }
+          }
+        }
     };
 
     // host loop
@@ -1119,35 +1128,57 @@ export default class IonModel  extends React.Component {
         let confKey = nconfs[k];
         var configObj = configs[confKey];
         let chkConf = configObj.configType;
-       
-        // Loop through required cross checks.
+
+        // FIRST Loop through required cross checks.
         if (crossCheckCmds.hasOwnProperty(chkConf)) {
-          // Assume file is not good.
-          let fileOk = false;
 
-          // Grab requried cross check commands for this config file.
+          // NEXT Grab requried cross checks for this config file.
           let crossCheck = crossCheckCmds[chkConf];
-          for (var fType in crossCheck) {
 
-            // Construct the config file key
-            let cFileKey = nodeKey + "." + fType;
-            let chkConfigObj = configs[cFileKey];
+          // NEXT for each command that needs checking, do the cross check
+          for (var chkCmd in crossCheck) {
 
-            // If ANY of the config files have the required commands, then we are good.
-            let { allFound, missing } = this.configFileHasCmds(chkConfigObj,crossCheck[fType]);
-            if (allFound) {
-              fileOk = true;
-              break;
-            } 
-          }
-          if (!fileOk) {
-            let msg = "Config file " + confKey + this.formatCrossCheckMsg(crossCheck);
-            alerts.push({"type": "Node", "name": nodeKey, "level":"error", "msg": msg});
+            // FIRST gather the commands required by the crosscheck
+            let cmdsToCheck = this.configFileGetCmds(chkCmd, configObj);
+
+            // NEXT loop through each command to check
+            for (let cmdToChkIdx = 0 ; cmdToChkIdx < cmdsToCheck.length ; cmdToChkIdx++) {
+              // FIRST assume command is bad
+              var commandIsOk = false;
+
+              // NEXT extract the important value of the command we are checking
+              var keyIdx = crossCheck[chkCmd].valIdx;
+              var keyVal = cmdsToCheck[cmdToChkIdx].values[keyIdx];
+
+              // NEXT Load up the types of config files we need to check
+              var typesToChk = crossCheck[chkCmd].crossChecks;
+
+              // NEXT Loop through those files and do the check
+              for (var cType in typesToChk) {
+                // FIRST Build the key to the config file we need to check
+                var fileToCheckKey = nodeKey+"."+cType;
+                var fileToCheck = configs[fileToCheckKey];
+
+                // NEXT get the specific commands that need to exist
+                var needsCmds = typesToChk[cType];
+
+                // NEXT see if they are there with the correct key value
+                if (this.configHasValidCommands(needsCmds, fileToCheck, keyVal)) {
+                  commandIsOk = true;
+                  break;
+                }
+              }
+
+              // NEXT, if not ok, generate appropriate error messsage.
+              if (!commandIsOk) {
+                let msg = "Config file "+confKey+this.formatCrossCheckMsg(crossCheck, keyVal);
+                alerts.push({"type": "Node", "name": nodeKey, "level":"error", "msg": msg});
+              }
+            }
           }
         }
       }
-      console.log("***** ductFlags " + JSON.stringify(ductFlags));
-      console.log("***** protFlags " + JSON.stringify(protFlags));
+
       // alert any missing protocol commands
       for (var prot in ductFlags) {
         if (!protFlags.hasOwnProperty(prot)) {
@@ -1163,13 +1194,76 @@ export default class IonModel  extends React.Component {
   }
   // END EXTRACT
 
-  // EXTRACT formatCrossCheckMsg
-  formatCrossCheckMsg(crossCheck) {
-    var msg = " requires one of the following command sets: ";
-    var msgArray = [];
-    for (var fType in crossCheck) {
-      msgArray.push(fType + " with commands: " + crossCheck[fType].join(", "));
+  // EXTRACT configHasValidCommands
+  // See if a config file contains the commmands with a particular value
+  // If keyVal is -1, it is not part of the validity check
+  configHasValidCommands(needsCmds, configObj, keyVal) {
+
+    // FIRST grab each command and the position the key value is supposed
+    // to be
+    for (const [checkFor, cmdIdx] of Object.entries(needsCmds)) {
+      // NEXT Assume that this particular command is absent
+      var found = false;
+
+      // NEXT, see if any are present and get them all
+      let cmdsFound = this.configFileGetCmds(checkFor, configObj);
+
+      // NEXT if cmdIdx is -1, we are just looking for that type
+      // of command, do not need to look at command parameters
+      if (cmdIdx == -1 && cmdsFound.length > 0) {
+          return true;
+      } else if (cmdIdx >= 0) {
+        // NEXT the value of the parameter at cmdIdx is relevant, it
+        // needs to match the value at keyIdx
+        for (const cmd of cmdsFound) {
+          if (cmd.values[cmdIdx] == keyVal) {
+            found = true;
+            continue;
+          }
+        }
+      }
+
+      // IF anything is missing we are done return false
+      if (!found) {
+        return false;
+      }      
     }
+    return true;
+  }
+  // END EXTRACT
+
+  // EXTRACT configFileGetCmds
+  // Retrieve ALL the commands of this type from the configurate file object
+  // and return them
+  configFileGetCmds(cmd, configObj) {
+    // NO EXTRACT
+    var commands = this.props.commands;
+    // END NO EXTRACT
+    var cmdsFound = [];
+    for (var i=0 ; i<configObj.cmdKeys.length; i++) {
+      var cmdKey = configObj.cmdKeys[i];
+      var cmdType = commands[cmdKey].typeName;
+      if (cmdType.indexOf(cmd) >= 0) {
+        cmdsFound.push(commands[cmdKey]);
+      }
+    }
+    return cmdsFound;
+  }
+  // END EXTRACT
+
+  // EXTRACT formatCrossCheckMsg
+  formatCrossCheckMsg(crossCheck, keyVal) {
+    var msgArray = [];
+    for (var badCmd in crossCheck) {
+      var msg = " "+badCmd+" (node "+keyVal+") ";
+      var depCmds = crossCheck[badCmd].crossChecks;
+      for (var depCmd in depCmds) {
+        var missingCmds = Object.keys(depCmds[depCmd]);
+        msgArray.push(depCmd + " with commands: "+missingCmds.join(", "));
+      }
+
+    }
+    msg += " requires one of the following command sets: ";
     msg += msgArray.join(" OR ");
     return msg;
   }
@@ -1186,10 +1280,10 @@ export default class IonModel  extends React.Component {
     var missing = [];
     if (!cmdList) return { allFound, missing};
     for (var i=0; i<cmdList.length; i++) {
-    var found = false;
+      var found = false;
       let chkCmd = cmdList[i];
-    for (var j=0; j<configObj.cmdKeys.length; j++) {
-      let cmdKey = configObj.cmdKeys[j];
+      for (var j=0; j<configObj.cmdKeys.length; j++) {
+        let cmdKey = configObj.cmdKeys[j];
         let cmdTypeKey = commands[cmdKey].typeKey;
         if (cmdTypeKey.indexOf(chkCmd) >= 0) {
           found = true;

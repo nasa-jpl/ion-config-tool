@@ -388,7 +388,23 @@ srcAndDest = [
 				[
 				  "../../editor/src/IonModel.jsx",       
 				  "formatCrossCheckMsg",
-				  ["crossCheck"],                                
+				  ["crossCheck", "keyVal"],                                
+				  "../src/auto/checkion-auto.js",
+				  {}
+				],
+
+				[
+				  "../../editor/src/IonModel.jsx",       
+				  "configHasValidCommands",
+				  ["needsCmds", "configObj", "keyVal"],                                
+				  "../src/auto/checkion-auto.js",
+				  {}
+				], 
+
+				[
+				  "../../editor/src/IonModel.jsx",       
+				  "configFileGetCmds",
+				  ["cmd", "configObj"],                                
 				  "../src/auto/checkion-auto.js",
 				  {}
 				] 
