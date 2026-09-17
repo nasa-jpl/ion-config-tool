@@ -41,9 +41,9 @@
 Double click the <code>index.html</code> file in the installation directory or use the browser&#39;s <strong>Load File</strong> and load it.  The application will begin running in a new tab of the browser.</p>
 <p>The ION Configuration Editor runs in this mode as a single page application running independently as a desktop application on your local machine.  It cannot communicate outside of your local machine.  If you wish to clear and restart the application, just reload the page with the browser reload button.  Be sure to save any current work prior to a reload, because using the reload button completely clears the application.</p>
 <p><b>Webserver Mode (must be used if interfacing with a DTNNR)</b></p>
-<p>There are many choices when running the ION Configuration Editor as a webserver. The simplist is to use a Python 3 installation and run the code by navigating to the installation directory where the <code>index.heml</code> file exists and issuing the following command:</p>
+<p>There are many choices of server technology when running the ION Configuration Editor as a webserver. One of the simplest is to use a Python 3 installation and run the code by navigating to the installation directory where the <code>index.heml</code> file exists and issuing the following command:</p>
 <p><pre>python3 -m http.server</pre></p>
-<p>This will start a webserver that can be accessed from your browser by using the URL <pre>http://localhost:8000</pre>. If you desire to use a different port, the Python http server can be started by passing the desired port number on the commmand line. For example,</p>
+<p>This will start a webserver that can be accessed from your browser by using the URL <pre>http://localhost:8000</pre> If you desire to use a different port, the Python http server can be started by passing the desired port number on the commmand line. For example,</p>
 <p><pre>python3 -m http.server 3030</pre> will start the server on port 3030 and the URL to use in your browser is <pre>http://localhost:3030</pre></p>
 <h2 id="dtn-node-repo">Interfacing with a DTN Node Repository</h2>
 <p><strong>NEW IN THIS RELEASE</strong></p>
@@ -134,10 +134,10 @@ a scheme  ipn  ipnfw  ipnadminep
 a endpoint  ipn:10.5  x 
 </code></pre><p>Of course, all of this annotation tends to defeat one of the design purposes of the ION command syntax.  ION commands are terse by design in order to minimize impact on space links.  If that is the concern, it is a simple matter to strip all of the comment lines since every comment line begins with a hash-mark and a blank.</p>
 <p>Returning to the issue of generating configuration text files, let us first look at the Config File object.  The <strong>Save File</strong> button will create a text file with the shown name (e.g., msl.bprc) with the annotated file format. Each browser has its own convention for its destination directory, with some using the Downloads directory.  For the Config File object, the Save File operation saves that exact file and nothing more.  If one wishes to preview the generated file, click the button <strong>Show File</strong>.</p>
-<h4 id="config-file-object-example">Config File Object Example</h4>
+<h4 id="config-file-object-example">Config File Object Examples</h4>
 <p><img src="Config-File-Object.png" alt="alt text" title="Config File Object"></p>
 <p>Looking now at the Ion Node object, one clicks the <strong>Save Configs</strong> button to generate the configuration text files.  In this case, the tool generates a file for each Config File child of that Ion Node.  At the node level, the tool also generates an ION startup script to invoke the correct ION programs with config files and in the correct order.  Assuming there is an associated Contact Graph, the start script will include that as well.</p>
-<h4 id="ion-node-object-example">Ion Node Object Example</h4>
+<h4 id="ion-node-object-example">Ion Node Object Examples</h4>
 <p><img src="Ion-Node-Object.png" alt="alt text" title="Ion Node Object"></p>
 <h4 id="ion-start-script-example">ION Start Script Example</h4>
 <pre><code>#!/bin/bash
