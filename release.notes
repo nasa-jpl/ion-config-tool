@@ -1,3 +1,14 @@
+Release Notes 4.9.0
+
+WHAT'S NEW:
+- The ION Configuration Editor has a new interface to an optional DTN Node Repository (DTNRR). See the User Manual in the 'manual' directory of the installation for details.
+
+- The UI has a tabbed interface for easier workflow.
+
+- The command dictionary has been updated to handle ION 4.1.4 commands.
+
+KNOWN ISSUES: None.
+
 Release Notes 4.8.3
 
 WHAT'S NEW:
