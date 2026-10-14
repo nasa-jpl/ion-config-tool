@@ -998,6 +998,17 @@
     "verFrom": 10, 
     "verThru": 999
   }, 
+  "cfdprc_entity_tcp": {
+    "configType": "cfdprc", 
+    "multiple": true, 
+    "name": "entity_tcp", 
+    "order": 12, 
+    "paramCnt": 6, 
+    "paramTypes": [], 
+    "pickClone": true, 
+    "verFrom": 10, 
+    "verThru": 999
+  }, 
   "cfdprc_fillchar": {
     "configType": "cfdprc", 
     "name": "fillchar", 
@@ -1021,6 +1032,15 @@
     "name": "initialize", 
     "order": 10, 
     "paramCnt": 0, 
+    "paramTypes": [], 
+    "verFrom": 10, 
+    "verThru": 999
+  }, 
+  "cfdprc_maxevents": {
+    "configType": "cfdprc", 
+    "name": "maxevents", 
+    "order": 44, 
+    "paramCnt": 1, 
     "paramTypes": [], 
     "verFrom": 10, 
     "verThru": 999
@@ -1469,7 +1489,7 @@
     "configType": "ionrc", 
     "name": "inbound", 
     "order": 45, 
-    "paramCnt": 1, 
+    "paramCnt": 2, 
     "paramTypes": [], 
     "verFrom": 10, 
     "verThru": 999
@@ -1488,7 +1508,7 @@
     "configType": "ionrc", 
     "name": "outbound", 
     "order": 50, 
-    "paramCnt": 1, 
+    "paramCnt": 2, 
     "paramTypes": [], 
     "verFrom": 10, 
     "verThru": 999
@@ -1707,7 +1727,7 @@
     "verFrom": 10, 
     "verThru": 999
   }, 
-  "ipnrc_rtovrd": {
+  "ipnrc_rtovrd_v12": {
     "configType": "ipnrc", 
     "multiple": true, 
     "name": "rtovrd", 
@@ -1716,6 +1736,17 @@
     "paramTypes": [], 
     "pickClone": true, 
     "verFrom": 10, 
+    "verThru": 12
+  }, 
+  "ipnrc_rtovrd": {
+    "configType": "ipnrc", 
+    "multiple": true, 
+    "name": "rtovrd", 
+    "order": 31, 
+    "paramCnt": 5, 
+    "paramTypes": [], 
+    "pickClone": true, 
+    "verFrom": 13, 
     "verThru": 999
   }, 
   "ipnrc_cosovrd_v11": {

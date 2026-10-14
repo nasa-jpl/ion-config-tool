@@ -86,19 +86,39 @@
   },
   "ionrc_inbound_p0" : {
     "id" :  "ionrc_inbound_p0",
-    "name":  "inbound heap (or file) limit",
+    "name":  "inbound heap occupancy limit",
     "configType":  "ionrc",
     "cmdType":  "ionrc_inbound",
     "valType":  "number",
     "units":  "megabytes",
     "defaultValue":  "-1"
   },
+  "ionrc_inbound_p1" : {
+    "id" :  "ionrc_inbound_p1",
+    "name":  "inbound file occupancy limit",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_inbound",
+    "valType":  "number",
+    "optional":  true,
+    "units":  "megabytes",
+    "defaultValue":  "-1"
+  },
   "ionrc_outbound_p0" : {
     "id" :  "ionrc_outbound_p0",
-    "name":  "outbound heap (or file) limit",
+    "name":  "outbound heap occupancy limit",
     "configType":  "ionrc",
     "cmdType":  "ionrc_outbound",
     "valType":  "number",
+    "units":  "megabytes",
+    "defaultValue":  "-1"
+  },
+  "ionrc_outbound_p1" : {
+    "id" :  "ionrc_outbound_p1",
+    "name":  "outbound file occupancy limit",
+    "configType":  "ionrc",
+    "cmdType":  "ionrc_outbound",
+    "valType":  "number",
+    "optional":  true,
     "units":  "megabytes",
     "defaultValue":  "-1"
   },
@@ -2491,6 +2511,45 @@
     "units":  "",
     "defaultValue":  ""
   },
+  "ipnrc_rtovrd_v12_p0" : {
+    "id" :  "ipnrc_rtovrd_v12_p0",
+    "name" :  "data label",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_rtovrd_v12",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_rtovrd_v12_p1" : {
+    "id" :  "ipnrc_rtovrd_v12_p1",
+    "name" :  "dest node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_rtovrd_v12",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_rtovrd_v12_p2" : {
+    "id" :  "ipnrc_rtovrd_v12_p2",
+    "name" :  "src node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_rtovrd_v12",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_rtovrd_v12_p3" : {
+    "id" :  "ipnrc_rtovrd_v12_p3",
+    "name" :  "neighbor node number",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_rtovrd_v12",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
   "ipnrc_rtovrd_p0" : {
     "id" :  "ipnrc_rtovrd_p0",
     "name" :  "data label",
@@ -2527,6 +2586,16 @@
     "cmdType":  "ipnrc_rtovrd",
     "valType":  "nodeNum",
     "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "ipnrc_rtovrd_p4" : {
+    "id" :  "ipnrc_rtovrd_p4",
+    "name" :  "duct expression",
+    "configType":  "ipnrc",
+    "cmdType":  "ipnrc_rtovrd",
+    "valType":  "text",
+    "optional":  true,
     "units":  "",
     "defaultValue":  ""
   },
@@ -3730,6 +3799,62 @@
     "units":  "",
     "defaultValue":  ""
   },
+  "cfdprc_entity_tcp_p0" : {
+    "id" :  "cfdprc_entity_tcp_p0",
+    "name":  "remote entity number",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_entity_tcp",
+    "valType":  "nodeNum",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "cfdprc_entity_tcp_p1" : {
+    "id" :  "cfdprc_entity_tcp_p1",
+    "name":  "ip address (or name)",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_entity_tcp",
+    "valType":  "ipAddr",
+    "pickClone": true,
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "cfdprc_entity_tcp_p2" : {
+    "id" :  "cfdprc_entity_tcp_p2",
+    "name":  "port number",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_entity_tcp",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "cfdprc_entity_tcp_p3" : {
+    "id" :  "cfdprc_entity_tcp_p3",
+    "name":  "round-trip time",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_entity_tcp",
+    "valType":  "number",
+    "units":  "secs",
+    "defaultValue":  ""
+  },
+  "cfdprc_entity_tcp_p4" : {
+    "id" :  "cfdprc_entity_tcp_p4",
+    "name":  "incoming checksum type",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_entity_tcp",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
+  "cfdprc_entity_tcp_p5" : {
+    "id" :  "cfdprc_entity_tcp_p5",
+    "name":  "outgoing checksum type",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_entity_tcp",
+    "valType":  "select",
+    "units":  "",
+    "defaultValue":  ""
+  },
   "cfdprc_start_any_p0" : {
     "id" :  "cfdprc_start_any_p0",
     "name":  "UTS command",
@@ -3774,6 +3899,15 @@
     "valType":  "number",
     "units":  "secs",
     "defaultValue":  "86400"
+  },
+  "cfdprc_maxevents_p0" : {
+    "id" :  "cfdprc_maxevents_p0",
+    "name":  "max queued service indications",
+    "configType":  "cfdprc",
+    "cmdType":  "cfdprc_maxevents",
+    "valType":  "number",
+    "units":  "",
+    "defaultValue":  "100"
   },
   "cfdprc_maxtimeouts_p0" : {
     "id" :  "cfdprc_maxtimeouts_p0",
