@@ -143,6 +143,16 @@
     { "2"  : "CRC32 checksum" },
     { "15" : "null checksum" }
   ],
+  "cfdprc_entity_tcp_p4" : [
+    { "0"  : "modular checksum" },
+    { "2"  : "CRC32 checksum" },
+    { "15" : "null checksum" }
+  ],
+  "cfdprc_entity_tcp_p5" : [
+    { "0"  : "modular checksum" },
+    { "2"  : "CRC32 checksum" },
+    { "15" : "null checksum" }
+  ],
   "cfdprc_discard_p0" : [
     { "0" : "disable discarding" },
     { "1" : "enable discarding" }
