@@ -119,18 +119,34 @@ export default class IonModelLoader extends React.Component {
     for (i=0; i<nodeList.length; i++) {
       var nodeObj = nodeList[i];
       var nodeKey = nodeObj["nodeName"];
+      // node identity: a 2-part node has just nodeNum; a 3-part node also has
+      // an allocator.  Accept an explicit allocator field, or (defensively) a
+      // dotted "<allocator>.<node>" value stored in nodeNum.  Never normalize.
+      var loadNodeNum = nodeObj["nodeNum"];
+      var loadAllocator = (nodeObj["allocator"] === undefined || nodeObj["allocator"] === null)
+                            ? "" : nodeObj["allocator"];
+      if (loadAllocator === "") {
+        var dot = ("" + loadNodeNum).indexOf(".");
+        if (dot >= 0) {
+          loadAllocator = ("" + loadNodeNum).substring(0,dot);
+          loadNodeNum = Number(("" + loadNodeNum).substring(dot+1));
+        }
+      }
+      var loadNodeId = (loadAllocator === "") ? ("" + loadNodeNum)
+                                              : (loadAllocator + "." + loadNodeNum);
       // build the nodes state object
-      nodes[nodeKey] = { 
-        "id" : nodeObj["nodeName"], 
-        "longName" : nodeObj["nodeDesc"], 
-        "ionNodeNum" : nodeObj["nodeNum"],
+      nodes[nodeKey] = {
+        "id" : nodeObj["nodeName"],
+        "longName" : nodeObj["nodeDesc"],
+        "ionNodeNum" : loadNodeNum,
+        "allocator" : loadAllocator,
         "ionVersion" : nodeObj["ionVersion"],
         "hostKey" : nodeObj["hostName"],
         "configKeys" : []
       };
-      // build nodenum & nodekey clone value
+      // build nodenum & nodekey clone value (fixed node identity string)
       let numCmdKey = "nodeNum_" + nodeKey;
-      let cmdObj = { "id": numCmdKey, "typeKey": "node_nodenum", "values":[ nodeObj["nodeNum"] ] };
+      let cmdObj = { "id": numCmdKey, "typeKey": "node_nodenum", "values":[ loadNodeId ] };
       let cloneVal = this.props.makeCloneVal(nodeKey,cmdObj);
       cloneValues[numCmdKey] = cloneVal;
       let nodeCmdKey = "nodeKey_" + nodeKey;

@@ -332,13 +332,20 @@ export default class NetModel  extends React.Component {
     // build ion nodes first, to establish all ion node numbers
     for (var nodeKey in netNodes) {
       let netNode = netNodes[nodeKey];
+      let allocator = "";          // "" => 2-part (classic) node identity
       nodeNum = nextNodeNum;   // default
       if (netNode.nodeType === 'ion' && netNode.endpointID !== '') {
-        try {
-          nodeNum = Number(netNode.endpointID);
+        // endpointID is authored as either "<node>" (2-part) or
+        // "<allocator>.<node>" (3-part).  Split on '.' as ION's getFqn does;
+        // do NOT use Number(), which turns "1.638" into the float 1.638.
+        let eid = ("" + netNode.endpointID).trim();
+        let dot = eid.indexOf(".");
+        if (dot >= 0) {
+          allocator = eid.substring(0,dot);
+          nodeNum = Number(eid.substring(dot+1));
         }
-        catch (err) {
-          nodeNum= nextNodeNum;
+        else {
+          nodeNum = Number(eid);
         }
       }
       if (nodeNum === nextNodeNum) {  // used nextNodeNum?
@@ -347,10 +354,13 @@ export default class NetModel  extends React.Component {
       if (nodeNum > nextNodeNum) {    // higher node num ceiling?
         nextNodeNum = nodeNum + 1;
       }
+      // the node's single fixed identity string ("<node>" or "<alloc>.<node>")
+      let nodeId = (allocator === "") ? ("" + nodeNum) : (allocator + "." + nodeNum);
       nodes[nodeKey] = {
-        "id" : nodeKey, 
-        "longName" : netNode.nodeDesc, 
+        "id" : nodeKey,
+        "longName" : netNode.nodeDesc,
         "ionNodeNum" : nodeNum,
+        "allocator" : allocator,
         "ionVersion" : ionVer,
         "hostKey" : netNode.nodeHost,
         "configKeys" : []
@@ -363,9 +373,9 @@ export default class NetModel  extends React.Component {
         nodes[nodeKey].dbComment = netNode.dbComment;
       };
 
-      // build nodenum & nodekey clone value
+      // build nodenum & nodekey clone value (the fixed node identity string)
       let numCmdKey = "nodeNum_" + nodeKey;
-      let nodeClone = { "id": numCmdKey, "typeKey": "node_nodenum", "values":[ nodeNum.toString() ] };
+      let nodeClone = { "id": numCmdKey, "typeKey": "node_nodenum", "values":[ nodeId ] };
       let cloneVal = this.props.makeCloneVal(nodeKey,nodeClone);
       clones[numCmdKey] = cloneVal;
     };
@@ -376,7 +386,7 @@ export default class NetModel  extends React.Component {
       var protocols = [];  // init node protocols list
       var netNode = netNodes[nodeKey];
       var ionNode = nodes[nodeKey];
-      nodeNum = ionNode.ionNodeNum;
+      nodeNum = this.nodeIdOf(ionNode);   // fixed node identity (2- or 3-part)
 
       // See if this node even needs a .ionconfig file
       if (this.netNodeNeedsIonConfig(netNode)) {
@@ -662,7 +672,7 @@ export default class NetModel  extends React.Component {
       nodeKey = toNode.id;
       var bpLayer = netHop.bpLayer;
       var cli = bpLayer + "cli";
-      var toNodeNum = toNode.ionNodeNum;
+      var toNodeNum = this.nodeIdOf(toNode);
       var toHostKey = toNode.hostKey;
       var toAddr = netHop.toIP;
 
@@ -757,7 +767,7 @@ export default class NetModel  extends React.Component {
       var clo = bpLayer + "clo";
       if (bpLayer === "ltp" ||
           bpLayer === "bssp") {
-        toNodeNum = toNode.ionNodeNum;
+        toNodeNum = this.nodeIdOf(toNode);
         vals = [toNodeNum,clo,""]
       //} else if (bpLayer === "udp") {   //old udp promiscuous mode
       //  vals = ["udpclo",""]
@@ -830,7 +840,7 @@ export default class NetModel  extends React.Component {
       fromNode = nodes[netHop.fromNode];
       nodeKey = fromNode.id;
       toNode = nodes[netHop.toNode]
-      toNodeNum = toNode.ionNodeNum;
+      toNodeNum = this.nodeIdOf(toNode);
       //toHostKey = toNode.hostKey;
       toAddr = netHop.toIP;
       rate = netHop.maxRate;
@@ -894,9 +904,9 @@ export default class NetModel  extends React.Component {
       netHop = oneWays[hKey];
       rate = netHop.maxRate;
       fromNode = nodes[netHop.fromNode];
-      var fromNodeNum = fromNode.ionNodeNum;
+      var fromNodeNum = this.nodeIdOf(fromNode);
       toNode = nodes[netHop.toNode];
-      toNodeNum = toNode.ionNodeNum;
+      toNodeNum = this.nodeIdOf(toNode);
 
       // range cmd   - build one per link...avoid implicit range for possible reverse link
       vals = [0,maxSecs,fromNodeNum,toNodeNum,1];
@@ -1019,6 +1029,17 @@ export default class NetModel  extends React.Component {
     let tranTime = now.format("YYYY-MM-DDThh:mm");
     return tranTime;
   }
+
+  // EXTRACT nodeIdOf
+  // the node's single fixed identity string for emission: "<node>" for a
+  // 2-part node, "<allocator>.<node>" for a 3-part node.  Never normalized.
+  nodeIdOf(ionNode) {
+    let a = ionNode.allocator;
+    return (a === undefined || a === null || a === "")
+      ? ("" + ionNode.ionNodeNum)
+      : (a + "." + ionNode.ionNodeNum);
+  }
+  // END EXTRACT
 
   // EXTRACT assignClones
   // build clone list for each new cloneVal  (a duplicate of the ionModelLoader function)

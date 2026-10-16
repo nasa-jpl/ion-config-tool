@@ -106,6 +106,12 @@ export default class IonModel  extends React.Component {
         hostName: nodeObj.hostKey,
         configs: {}
       }
+      // only emit allocator for 3-part nodes, so 2-part models serialize
+      // byte-identically to before this feature
+      if (nodeObj.allocator !== undefined && nodeObj.allocator !== null
+            && nodeObj.allocator !== "") {
+        nodeJson.allocator = nodeObj.allocator;
+      }
       const nodeConfigKeys = nodeObj.configKeys;
       for (var i=0; i<nodeConfigKeys.length; i++) {
         const configKey = nodeConfigKeys[i];
@@ -163,6 +169,16 @@ export default class IonModel  extends React.Component {
     return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
   };
   // tranlsate version to sequence number for command effectivity
+  // EXTRACT nodeIdOf
+  // the node's single fixed identity string: "<node>" for a 2-part node,
+  // "<allocator>.<node>" for a 3-part node.  Never normalized.
+  nodeIdOf(node) {
+    let a = node.allocator;
+    return (a === undefined || a === null || a === "")
+      ? ("" + node.ionNodeNum)
+      : (a + "." + node.ionNodeNum);
+  }
+  // END EXTRACT
   // EXTRACT getIonVerSeqNo
   getIonVerSeqNo(nodeKey) {
     console.log("getIonVerSeqNo for:" + nodeKey);
@@ -376,8 +392,8 @@ export default class IonModel  extends React.Component {
     let nodeDesc = "";
     let nodeLabel = "";
     if (node) {  // a node?,  might be a graphs key)    
-      nodeDesc = this.props.nodes[nodeKey].longName; 
-      nodeLabel = "ipn:" + node.ionNodeNum;
+      nodeDesc = this.props.nodes[nodeKey].longName;
+      nodeLabel = "ipn:" + this.nodeIdOf(node);
     };
     const content = configTypeObj.content;
     const program = configTypeObj.program;
@@ -437,7 +453,7 @@ export default class IonModel  extends React.Component {
   makeStartLines(nodeKey) {
     let node = this.props.nodes[nodeKey];
     let fileName = "start_" + nodeKey + ".sh";
-    let nodeLabel = "ipn:" + node.ionNodeNum;
+    let nodeLabel = "ipn:" + this.nodeIdOf(node);
     //const now = new Date();
     //const fileDate = now.format("YYYY-MM-DD hh:mm");
     const fileDate = this.getNow();
@@ -500,7 +516,7 @@ export default class IonModel  extends React.Component {
     //  cmdLines.push("# global contact graph");
     //  cmdLines.push("ionadmin  " + contactsFile);
     //}
-    let nodeId = node.ionNodeNum;
+    let nodeId = this.nodeIdOf(node);
     cmdLines.push('echo "Startup of ION node ' + nodeLabel + ' on $host complete!"');
     cmdLines.push('echo "Starting bpecho on ipn:' + nodeId + '.3."');
     cmdLines.push('bpecho   ipn:' + nodeId + '.3 &');
@@ -744,7 +760,7 @@ export default class IonModel  extends React.Component {
       var node = nodes[i];
       var nodeKey = node.id;
       var desc = node.longName;;
-      var nodeAddr = "ipn:" + node.ionNodeNum;
+      var nodeAddr = "ipn:" + this.nodeIdOf(node);
       var host = node.hostKey;
       var configStr = node.configKeys.join();
       var nodeElem = this.makeRowElem(nodeKey,[nodeKey,desc,nodeAddr,host,configStr]);
