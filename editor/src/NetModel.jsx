@@ -354,8 +354,9 @@ export default class NetModel  extends React.Component {
       if (nodeNum > nextNodeNum) {    // higher node num ceiling?
         nextNodeNum = nodeNum + 1;
       }
-      // the node's single fixed identity string ("<node>" or "<alloc>.<node>")
-      let nodeId = (allocator === "") ? ("" + nodeNum) : (allocator + "." + nodeNum);
+      // the node's single fixed identity ("<node>" or "<alloc>.<node>");
+      // keep the bare number unchanged for 2-part so output is byte-identical
+      let nodeId = (allocator === "") ? nodeNum : (allocator + "." + nodeNum);
       nodes[nodeKey] = {
         "id" : nodeKey,
         "longName" : netNode.nodeDesc,
@@ -1030,16 +1031,18 @@ export default class NetModel  extends React.Component {
     return tranTime;
   }
 
-  // EXTRACT nodeIdOf
   // the node's single fixed identity string for emission: "<node>" for a
   // 2-part node, "<allocator>.<node>" for a 3-part node.  Never normalized.
+  // NOTE: the CLI build provides a matching global nodeIdOf() in utilfunc.js
+  // (this is called by extracted code but is not itself extracted).
   nodeIdOf(ionNode) {
     let a = ionNode.allocator;
+    // 2-part: return the node number unchanged (preserves its numeric type so
+    // existing models serialize byte-identically).  3-part: compose the string.
     return (a === undefined || a === null || a === "")
-      ? ("" + ionNode.ionNodeNum)
+      ? ionNode.ionNodeNum
       : (a + "." + ionNode.ionNodeNum);
   }
-  // END EXTRACT
 
   // EXTRACT assignClones
   // build clone list for each new cloneVal  (a duplicate of the ionModelLoader function)

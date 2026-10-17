@@ -132,7 +132,7 @@ export default class IonModelLoader extends React.Component {
           loadNodeNum = Number(("" + loadNodeNum).substring(dot+1));
         }
       }
-      var loadNodeId = (loadAllocator === "") ? ("" + loadNodeNum)
+      var loadNodeId = (loadAllocator === "") ? loadNodeNum
                                               : (loadAllocator + "." + loadNodeNum);
       // build the nodes state object
       nodes[nodeKey] = {

@@ -228,13 +228,11 @@ export default class App extends React.Component {
   // the fully-qualified node number key for uniqueness: allocator (default 0)
   // and node number together.  "638" and "0.638" collapse to the same key
   // (same ION node); "638" and "1.638" are distinct.
-  // EXTRACT fqnnKey
   fqnnKey(allocator,nodeNum) {
     let a = (allocator === undefined || allocator === null || allocator === "")
       ? 0 : Number(allocator);
     return a + ":" + Number(nodeNum);
   }
-  // END EXTRACT fqnnKey
   // check if a new node identity is valid (unique by fully-qualified node nbr)
   isGoodNodeNum(myNodeKey, nodeNum, allocator) {
     console.log("isGoodNodeNum ?? " + myNodeKey + ' ' + nodeNum + ' alloc=' + allocator);
@@ -1056,13 +1054,12 @@ export default class App extends React.Component {
   // "<node>" for a 2-part node, "<allocator>.<node>" for a 3-part node.
   // This is the single source of truth for every reference to the node; it is
   // never normalized (a 2-part node never gains a "0." prefix).
-  // EXTRACT makeNodeId
   makeNodeId(allocator,nodeNum) {
+    // 2-part: node number unchanged (preserves type).  3-part: compose string.
     return (allocator === undefined || allocator === null || allocator === "")
-      ? "" + nodeNum
+      ? nodeNum
       : allocator + "." + nodeNum;
   }
-  // END EXTRACT makeNodeId
   getNodeId(nodeKey) {
     let node = this.state.nodes[nodeKey];
     return this.makeNodeId(node.allocator,node.ionNodeNum);

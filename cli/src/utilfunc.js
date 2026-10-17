@@ -24,7 +24,20 @@ function debug(s) {
 // get now date-time in standard format
 function getNow() {
   const now = new Date();
-  var goodNow = df.formatISO(now); 
+  var goodNow = df.formatISO(now);
   goodNow = goodNow.substring(0,16);
   return goodNow;
+};
+
+// the node's single fixed identity string for emission: "<node>" for a
+// 2-part node, "<allocator>.<node>" for a 3-part node.  Never normalized.
+// Mirrors the GUI helper of the same name (editor/src); provided here
+// because it is called by extracted code but is not itself extracted.
+function nodeIdOf(node) {
+  var a = node.allocator;
+  // 2-part: return the node number unchanged (preserves numeric type so
+  // existing models serialize byte-identically).  3-part: compose the string.
+  return (a === undefined || a === null || a === "")
+    ? node.ionNodeNum
+    : (a + "." + node.ionNodeNum);
 };

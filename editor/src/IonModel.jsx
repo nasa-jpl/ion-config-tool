@@ -169,16 +169,18 @@ export default class IonModel  extends React.Component {
     return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
   };
   // tranlsate version to sequence number for command effectivity
-  // EXTRACT nodeIdOf
   // the node's single fixed identity string: "<node>" for a 2-part node,
   // "<allocator>.<node>" for a 3-part node.  Never normalized.
+  // NOTE: the CLI build provides a matching global nodeIdOf() in utilfunc.js
+  // (this is called by extracted code but is not itself extracted).
   nodeIdOf(node) {
     let a = node.allocator;
+    // 2-part: return the node number unchanged (preserves numeric type).
+    // 3-part: compose "<allocator>.<node>".
     return (a === undefined || a === null || a === "")
-      ? ("" + node.ionNodeNum)
+      ? node.ionNodeNum
       : (a + "." + node.ionNodeNum);
   }
-  // END EXTRACT
   // EXTRACT getIonVerSeqNo
   getIonVerSeqNo(nodeKey) {
     console.log("getIonVerSeqNo for:" + nodeKey);
