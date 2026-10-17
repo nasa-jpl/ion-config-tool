@@ -74,6 +74,7 @@ export default class IonNodeList  extends React.Component {
         name={nodeKey}                // node key
         desc={desc}                   // description
         nodeNum={node.ionNodeNum}     // state
+        allocator={node.allocator}    // state (optional; present => 3-part EID)
         version={node.ionVersion}     // state
         hostKey={hostKey}             // state
         host={host}                   // state

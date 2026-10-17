@@ -345,6 +345,14 @@ export default class IonModel  extends React.Component {
         }
       }
     }
+    // ION 4.1.4 ltpsecadmin parses the LTP auth-rule engine id with atoi,
+    // which truncates a 3-part (allocator-qualified) identity.  Flag it so the
+    // operator knows this line will be mis-parsed by this ION release.
+    if ((pTypeKey === "ltpsecrc_ltprecvauthrule" || pTypeKey === "ltpsecrc_ltpxmitauthrule")
+          && pIdx === 0 && ("" + paramVal).indexOf(".") >= 0) {
+      descrip = descrip
+        + " [WARNING: 3-part engine id; ltpsecadmin truncates it in ION 4.1.4]";
+    }
     const note = "#  " + posTag + " " + longname + " : " + paramVal + " " + units + " " + descrip;
     //console.log("param Note " + pTypeKey + " " + note);
     return note;

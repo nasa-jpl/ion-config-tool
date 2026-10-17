@@ -26,6 +26,8 @@ export default class IonNode  extends React.Component {
     // props
     const desc = this.props.desc;
     const nodeNum = this.props.nodeNum;
+    const allocator = (this.props.allocator === undefined || this.props.allocator === null)
+                        ? "" : this.props.allocator;
     const version = this.props.version;
     const hostKey = this.props.hostKey;
     console.log("IonNode ctor " + desc + ' ' + nodeNum);
@@ -37,15 +39,19 @@ export default class IonNode  extends React.Component {
       alertMsg: "",
       desc: desc,
       nodeNum: nodeNum,
+      allocator: allocator,
       version: version,
       hostKey: hostKey
     }
   }
   componentWillReceiveProps(newProps) {
     console.log("IonNode componentWillReceiveProps" + newProps.desc + ' ' + newProps.nodeNum);
-    if (newProps.nodeNum !== this.state.nodeNum) {
+    if (newProps.nodeNum !== this.state.nodeNum
+          || newProps.allocator !== this.state.allocator) {
        var newState = Object.assign({},this.state);
        newState.nodeNum = newProps.nodeNum;
+       newState.allocator = (newProps.allocator === undefined || newProps.allocator === null)
+                              ? "" : newProps.allocator;
        newState.version = newProps.version;
        newState.hostKey = newProps.hostKey;
        this.setState (newState);
@@ -54,6 +60,16 @@ export default class IonNode  extends React.Component {
   }
   makeAlertElem(msg) {
     return (<Alert variant="danger"><b>ERROR: {msg}</b></Alert>);
+  }
+  // a node number is a non-negative integer; an allocator (if present) is too.
+  isValidNodeId(allocator,nodeNum) {
+    const intRe = /^\d+$/;
+    if (!intRe.test("" + nodeNum))
+      return false;
+    if (allocator !== undefined && allocator !== null && allocator !== ""
+          && !intRe.test("" + allocator))
+      return false;
+    return true;
   }
   makeNewConfigElem() {
     console.log("makeNewConfigElem cmdNames: " + this.props.configNames);
@@ -130,6 +146,8 @@ export default class IonNode  extends React.Component {
     nodeElems.push(nameElem);
     const descElem = this.makeNodeElem("desc","text",this.state.desc,"Description",2,false,"");
     nodeElems.push(descElem);
+    const allocElem = this.makeNodeElem("allocator","text",this.state.allocator,"Allocator (opt, for 3-part EID)",1,false,"");
+    nodeElems.push(allocElem);
     const numElem  = this.makeNodeElem("nodeNum","number",this.state.nodeNum,"Ion Node Num",1,false,"");
     nodeElems.push(numElem);
 
@@ -177,7 +195,11 @@ export default class IonNode  extends React.Component {
     const configElem = this.makeNodeElem("","text",configStr,"Config Files",3,true,"");
     nodeElems.push(configElem);
 
-    const msg = (this.props.isGoodNodeNum(this.props.name,this.state.nodeNum)) ? "" : "Ion node number is already assigned" ;
+    let msg = "";
+    if (!this.isValidNodeId(this.state.allocator,this.state.nodeNum))
+      msg = "Node number (and allocator, if given) must be non-negative integers";
+    else if (!this.props.isGoodNodeNum(this.props.name,this.state.nodeNum,this.state.allocator))
+      msg = "Ion node EID is already assigned" ;
 
     var alert = (msg === "")?  "" : this.makeAlertElem(msg);
 
@@ -197,6 +219,10 @@ export default class IonNode  extends React.Component {
     nodeElems.push(nameElem);
     const descElem = this.makeNodeElem("desc","text",this.state.desc,"Description",2,true,"");
     nodeElems.push(descElem);
+    if (this.state.allocator !== "") {
+      const allocElem = this.makeNodeElem("allocator","text",this.state.allocator,"Allocator",1,true,"");
+      nodeElems.push(allocElem);
+    }
     const numElem  = this.makeNodeElem("nodeNum","text",this.state.nodeNum,"Ion Node Num",1,true,"");
     nodeElems.push(numElem);
 
@@ -280,7 +306,7 @@ export default class IonNode  extends React.Component {
         <Row>
             <Col className="text-right" sm={1}><h6><Badge bg="secondary" text="light">ION Node</Badge></h6></Col>
             <Col className="text-left" sm={1}><b>{nodeKey}</b></Col>
-            <Col className="text-right" sm={1}><b>ipn: {this.props.nodeNum}</b></Col>
+            <Col className="text-right" sm={1}><b>ipn: {(this.props.allocator !== undefined && this.props.allocator !== null && this.props.allocator !== "") ? (this.props.allocator + "." + this.props.nodeNum) : this.props.nodeNum}</b></Col>
             <Col className="text-left"  sm={2}>{this.props.desc}</Col>
             <Col sm={4}> 
               <ButtonGroup>
@@ -341,8 +367,10 @@ export default class IonNode  extends React.Component {
   };
   submit = () => {    // callable by edit (above)
     console.log("submit node updates!" + JSON.stringify(this.props.desc));
-    if (this.props.isGoodNodeNum(this.props.name,this.state.nodeNum))
-       console.log("node number is okay");
+    if (!this.isValidNodeId(this.state.allocator,this.state.nodeNum))
+      return;   // invalid identity, do nothing
+    if (this.props.isGoodNodeNum(this.props.name,this.state.nodeNum,this.state.allocator))
+       console.log("node EID is okay");
     else
       return;   // do nothing
     var tran = {
@@ -350,6 +378,7 @@ export default class IonNode  extends React.Component {
       nodeKey: this.props.node.id,
       desc: this.state.desc,
       nodeNum: this.state.nodeNum,
+      allocator: this.state.allocator,
       version: this.state.version,
       hostKey: this.state.hostKey
     };
@@ -473,7 +502,8 @@ IonNode.propTypes = {
   node: PropTypes.object.isRequired,          // user model - node object
   name: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
-  nodeNum: PropTypes.number.isRequired,
+  nodeNum: PropTypes.oneOfType([PropTypes.number,PropTypes.string]).isRequired,
+  allocator: PropTypes.oneOfType([PropTypes.number,PropTypes.string]), // optional; present => 3-part EID
   version: PropTypes.string.isRequired,
   hostKey: PropTypes.string.isRequired,
   host:  PropTypes.object.isRequired,          // user model - host object of node
