@@ -653,6 +653,7 @@ export default class NetModel  extends React.Component {
     // pass 1 - build inducts
     console.log("@@@@@ building inducts and links!");
     var inductKeys = {};     // record inducts to avoid duplicate inducts per protocol
+    var inductPorts = {};    // port of each port-based induct, by inKey
     var seatUdpKeys = {};   // hold ltp seat udp commands for later (follows spans) per config
     var seatDccpKeys = {};  // hold ltp start dccp commands for later (follows spans) per config 
     for (hKey in oneWays) {
@@ -683,14 +684,23 @@ export default class NetModel  extends React.Component {
 
         // If the user has specified a port number, use it. Otherwise, default
         var usePort = "";
+        var portKey = nodeKey + ".bpv7rc" + bpLayer;
         if (netHop.portNum === undefined || netHop.portNum === "") {
-          usePort = 4556;  // default port for tcp
-          // make sure it isn't already in use; if it is bump port number until we find one that isn't
-          while (ports.includes(usePort))
-            usePort++;
+          if (inductPorts.hasOwnProperty(portKey)) {
+            // node already has this induct; reuse its port
+            usePort = inductPorts[portKey];
+          } else {
+            usePort = 4556;  // default port for tcp
+            // make sure it isn't already in use; if it is bump port number until we find one that isn't
+            while (ports.includes(usePort))
+              usePort++;
+          }
+          netHop.portNum = usePort;  // outduct in pass 2 must use the same port
         } else {
           usePort = netHop.portNum;
         }
+        if (!inductPorts.hasOwnProperty(portKey))
+          inductPorts[portKey] = usePort;
         vals = [toAddr,usePort,cli];
       } else {   // non-standard protocol
         induct = "induct_any";
