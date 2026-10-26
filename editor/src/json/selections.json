@@ -133,6 +133,10 @@
     { "y" : "discard out-of-schedule segments" },
     { "n" : "accept out-of-schedule segments" }
   ],
+  "contacts_announce_p0" : [
+    { "0" : "do not announce contact plan updates" },
+    { "1" : "multicast contact plan updates to region" }
+  ],
   "cfdprc_entity_bp_p3" : [
     { "0" : "modular checksum" },
     { "2" : "CRC32 checksum" },
