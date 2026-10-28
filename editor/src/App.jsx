@@ -225,12 +225,22 @@ export default class App extends React.Component {
          return false;
     return true;
   }
-  // check if a new nodeNum is valid
-  isGoodNodeNum(myNodeKey, nodeNum) {
-    console.log("isGoodNodeNum ?? " + myNodeKey + ' ' + nodeNum);
+  // the fully-qualified node number key for uniqueness: allocator (default 0)
+  // and node number together.  "638" and "0.638" collapse to the same key
+  // (same ION node); "638" and "1.638" are distinct.
+  fqnnKey(allocator,nodeNum) {
+    let a = (allocator === undefined || allocator === null || allocator === "")
+      ? 0 : Number(allocator);
+    return a + ":" + Number(nodeNum);
+  }
+  // check if a new node identity is valid (unique by fully-qualified node nbr)
+  isGoodNodeNum(myNodeKey, nodeNum, allocator) {
+    console.log("isGoodNodeNum ?? " + myNodeKey + ' ' + nodeNum + ' alloc=' + allocator);
+    let newKey = this.fqnnKey(allocator,nodeNum);
     for (var nodeKey in this.state.nodes) {
       //console.log("checking node: " + nodeKey);
-      if (Number(nodeNum) === Number(this.state.nodes[nodeKey].ionNodeNum) 
+      let other = this.state.nodes[nodeKey];
+      if (newKey === this.fqnnKey(other.allocator,other.ionNodeNum)
             && myNodeKey !== nodeKey )
         return false;
     }
@@ -1028,6 +1038,32 @@ export default class App extends React.Component {
     node.ionNodeNum = nodeNum;
     return null;
   }
+  // allocator is the (optional) ipn allocator number.  When present, the node
+  // uses the 3-part (allocator-qualified) EID form; when absent/empty the node
+  // uses the classic 2-part form.  See getNodeId for the composed identity.
+  getAllocator(nodeKey) {
+    let node = this.state.nodes[nodeKey];
+    return (node && node.allocator) ? node.allocator : "";
+  }
+  setAllocator(nodeKey,allocator) {
+    let node = this.state.nodes[nodeKey];
+    node.allocator = allocator;
+    return null;
+  }
+  // the node's single, fixed identity string as it must appear on the wire:
+  // "<node>" for a 2-part node, "<allocator>.<node>" for a 3-part node.
+  // This is the single source of truth for every reference to the node; it is
+  // never normalized (a 2-part node never gains a "0." prefix).
+  makeNodeId(allocator,nodeNum) {
+    // 2-part: node number unchanged (preserves type).  3-part: compose string.
+    return (allocator === undefined || allocator === null || allocator === "")
+      ? nodeNum
+      : allocator + "." + nodeNum;
+  }
+  getNodeId(nodeKey) {
+    let node = this.state.nodes[nodeKey];
+    return this.makeNodeId(node.allocator,node.ionNodeNum);
+  }
   // all transactions are handled centrally with the combined state (REDUX-style)
   dispatch(transaction) {
     const now = new Date();
@@ -1157,9 +1193,9 @@ export default class App extends React.Component {
           if (paramType.hasOwnProperty("pickClone"))  // 1st check for existence
             pickClone = paramType.pickClone;
           if (copyClone && paramType.valType === "nodeNum") {
-            let nodeNum = this.getNodeNum(nodeKey);
-            values.push(nodeNum);
-            this.addClone(newCloneVals,cmdKey,"nodeNum",nodeNum,i);
+            let nodeId = this.getNodeId(nodeKey);
+            values.push(nodeId);
+            this.addClone(newCloneVals,cmdKey,"nodeNum",nodeId,i);
           }
           else if (copyClone && paramType.valType === "nodeKey") {
             values.push(nodeKey);
@@ -1265,8 +1301,10 @@ export default class App extends React.Component {
         while (!this.isGoodNodeNum(nodeKey,nextNodeNum))  // if not good, increment
           nextNodeNum += 1;
         // artificially create cloneVal for nodeNum  & nodeKey (not directly based on a on ion command)
+        // a new node defaults to the 2-part form (no allocator); the clone value
+        // is the composed node identity so references render the fixed form.
         numCmdKey = "nodeNum_" + nodeKey;
-        cmdObj = { "id": numCmdKey, "typeKey": "node_nodenum", "values":[nextNodeNum]}
+        cmdObj = { "id": numCmdKey, "typeKey": "node_nodenum", "values":[this.makeNodeId("",nextNodeNum)]}
         cloneVal = this.makeCloneVal(nodeKey,cmdObj);
         newCloneVals[numCmdKey] = cloneVal;
         nodeCmdKey = "node_" + nodeKey;
@@ -1276,8 +1314,9 @@ export default class App extends React.Component {
         console.log("New cloneVals: " + JSON.stringify(newCloneVals));
         newNodes[nodeKey] = {
           "id" : nodeKey,
-          "name" : nodeKey, 
+          "name" : nodeKey,
           "ionNodeNum" : nextNodeNum,
+          "allocator" : "",
           "ionVersion" : latestIonVer,
           "hostKey" : "",
           "configKeys" : []
@@ -1300,12 +1339,14 @@ export default class App extends React.Component {
         nodeKey = transaction.nodeKey;
         newNodes[nodeKey]["longName"] = transaction.desc;
         newNodes[nodeKey]["ionNodeNum"] = transaction.nodeNum;
+        newNodes[nodeKey]["allocator"] = transaction.allocator ? transaction.allocator : "";
         newNodes[nodeKey]["ionVersion"] = transaction.version;
         newNodes[nodeKey]["hostKey"] = transaction.hostKey;
         numCmdKey = "nodeNum_" + nodeKey;
-        cmdObj = { "id": numCmdKey, "typeKey": "node_nodenum", "values":[transaction.nodeNum]}
+        cmdObj = { "id": numCmdKey, "typeKey": "node_nodenum",
+                   "values":[this.makeNodeId(transaction.allocator,transaction.nodeNum)]}
         this.updateClones(newCommands,newCloneVals,nodeKey,cmdObj,tranTime);
-        console.log("$$$ updated clones for:" + transaction.nodeNum);
+        console.log("$$$ updated clones for:" + numCmdKey);
         this.setState({ 
           nodes: newNodes,
           commands: newCommands,

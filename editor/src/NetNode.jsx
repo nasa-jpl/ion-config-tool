@@ -141,7 +141,7 @@ export default class NetNode  extends React.Component {
 
     // Node Number is read-only if Node Type is *not* "ion"
     let read_only = this.state.nodeType !== "ion";
-    const endElem = this.makeNodeElem("endpointID","text",this.state.endpointID,"Node Number",1,read_only,"");
+    const endElem = this.makeNodeElem("endpointID","text",this.state.endpointID,"Node Number",1,read_only,"(node, or allocator.node for 3-part EID)");
     nodeElems.push(endElem);
     // read-only services list
     let servList = this.state.services.join(',');
