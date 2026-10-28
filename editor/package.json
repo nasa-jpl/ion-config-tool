@@ -26,13 +26,17 @@
     "babel-preset-react": "^6.24.1",
     "check-dependencies": "^2.0.0",
     "react-popout": "^4.0.0",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "@playwright/test": "latest",
+    "playwright": "latest",
+    "unzipper": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:e2e": "playwright test"
   },
   "browserslist": {
     "production": [
