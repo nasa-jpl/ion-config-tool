@@ -41,14 +41,15 @@ export default class NetHop  extends React.Component {
       alertMsg: "",
 
       hopKey: hopKey,
-      desc: desc,
-      fromNode: fromNode,
-      fromIP: fromIP,
-      toNode: toNode,
-      toIP: toIP,
-      bpLayer: bpLayer,
-      ltpLayer: ltpLayer,
-      portNum: portNum,
+      // Text inputs bind to these; default to '' so they are never undefined.
+      desc: desc ?? '',
+      fromNode: fromNode ?? '',
+      fromIP: fromIP ?? '',
+      toNode: toNode ?? '',
+      toIP: toIP ?? '',
+      bpLayer: bpLayer ?? '',
+      ltpLayer: ltpLayer ?? '',
+      portNum: portNum ?? '',
       maxRate: maxRate,
       twoWay: twoWay
     }
@@ -75,7 +76,7 @@ export default class NetHop  extends React.Component {
         readOnly="false"
         bssize="sm"
         as="select"
-        value="{val}"
+        value={val}
         onChange={handler}
         disabled={disabled}
         >{options}
@@ -401,7 +402,8 @@ NetHop.propTypes = {
   toIP: PropTypes.string.isRequired,
   bpLayer: PropTypes.string.isRequired,
   ltpLayer: PropTypes.string.isRequired,
-  portNum: PropTypes.number.isRequired,
+  // '' means no port is known yet; NetModel treats it as unset (see getPortNumForNodeAndProtocol).
+  portNum: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   maxRate: PropTypes.number.isRequired,
   twoWay: PropTypes.bool.isRequired,
 

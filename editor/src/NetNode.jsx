@@ -65,7 +65,7 @@ export default class NetNode  extends React.Component {
         readOnly="false"
         bssize="sm"
         as="select"
-        value="{val}"
+        value={val}
         onChange={handler}
         >{options}
       </FormControl>;

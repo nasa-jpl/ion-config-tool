@@ -29,36 +29,33 @@ test.describe('ION Model', () => {
     await netModelTab.addNode('Node1', 'Host1');
     await netModelTab.addNode('Node2', 'Host2');
     await netModelTab.addNode('Node3', 'Host3');
+
+    // Build the ION model from the Net Model — subsequent tests verify
+    // node counts, graph counts, and save behavior.
+    await netModelTab.buildIonModel();
   });
 
   test('should build ION model and verify nodes and validation', async ({ page }) => {
-    // Workflow:
-    // 1. Switch to 'netmodel' tab.
-    await appPage.switchTab('netmodel');
-
-    // 2. Trigger buildIonModel().
-    await netModelTab.buildIonModel();
-
-    // 3. Verify the 'ionmodel' tab is now active.
+    // buildIonModel() is called in beforeEach; verify the 'ionmodel' tab is active.
     // NetModelTab.buildIonModel() internally waits for 'text=ION Model'
-    // We can further verify with expect or just rely on the transition.
-    await expect(page).toHaveURL(/.*ionmodel/); // Optional: depends on if the URL changes
+    // 1. Verify we're on the ION Model tab (URL does not change; check active tab instead)
+    await expect(ionModelTab.page.getByRole('tab', { name: 'ION Model' })).toHaveAttribute('aria-selected', 'true');
 
-    // 4. Verify IonModelTab.getNodeCount() === 3.
+    // 2. Verify IonModelTab.getNodeCount() === 3.
     const nodeCount = await ionModelTab.getNodeCount();
     expect(nodeCount).toBe(3);
 
-    // 5. Verify the generated ION Model contains contact/range commands (check getGraphCount() > 0).
+    // 3. Verify the generated ION Model contains contact/range commands (check getGraphCount() > 0).
     const graphCount = await ionModelTab.getGraphCount();
     expect(graphCount).toBeGreaterThan(0);
 
-    // 6. Verify that saving the ION model (which triggers validation) produces no error alerts.
+    // 4. Verify that saving the ION model (which triggers validation) produces no error alerts.
     await ionModelTab.saveIonModel();
     
     const alertText = await netModelTab.getAlertText();
     expect(alertText).toBeNull();
     
-    // 7. Call AppPage.expectNoErrors() at the end.
+    // 5. Call AppPage.expectNoErrors() at the end.
     await appPage.expectNoErrors();
   });
 });

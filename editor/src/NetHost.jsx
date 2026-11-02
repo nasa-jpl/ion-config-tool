@@ -70,7 +70,7 @@ export default class NetHost  extends React.Component {
         readOnly="false"
         bssize="sm"
         as="select"
-        value="{val}"
+        value={val}
         onChange={handler}
         >{options}
       </FormControl>;

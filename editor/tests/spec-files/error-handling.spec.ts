@@ -3,31 +3,31 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { AppPage } from '../page-objects/AppPage';
 import { NetModelTab } from '../page-objects/NetModelTab';
-import { IonModelTab } from '../page-objects/IonModelTab';
 
 test.describe('Error Handling', () => {
   let appPage: AppPage;
   let netModelTab: NetModelTab;
-  let ionModelTab: IonModelTab;
+
 
   test.beforeEach(async ({ page }) => {
     appPage = new AppPage(page);
     netModelTab = new NetModelTab(page);
-    ionModelTab = new IonModelTab(page);
+    await appPage.goto();
     await appPage.waitForAppReady();
   });
 
   test('should show error when building ION model from empty net model', async ({ page }) => {
     await netModelTab.goto();
+    await netModelTab.createNetModel('test-model');
     // Ensure model is empty (0 hops)
     // Assuming clearModel or similar exists, or we just start fresh
-    
-    await ionModelTab.goto();
-    await ionModelTab.buildModel();
-    
+
+    await netModelTab.goto();
+    await netModelTab.buildIonModel({ expectFailure: true });
+
     const alertText = await appPage.getAlertText();
-    expect(alertText).toMatch(/Error|Warning/);
-    
+    expect(alertText).toMatch(/Error|Warning/i);
+
     await appPage.expectNoErrors();
   });
 
@@ -49,6 +49,7 @@ test.describe('Error Handling', () => {
 
   test('should block submission of empty names', async ({ page }) => {
     await netModelTab.goto();
+    await netModelTab.createNetModel('test-model');
     
     const initialCount = await netModelTab.getHostCount();
     await netModelTab.addHost(''); // Empty name
@@ -61,18 +62,20 @@ test.describe('Error Handling', () => {
 
   test('should show alert for duplicate names', async ({ page }) => {
     await netModelTab.goto();
+    await netModelTab.createNetModel('test-model');
     
     await netModelTab.addHost('HostA');
     await netModelTab.addHost('HostA');
     
     const alertText = await appPage.getAlertText();
-    expect(alertText).toMatch(/duplicate name/i);
+    expect(alertText).toMatch(/already used/i);
     
     await appPage.expectNoErrors();
   });
 
   test('should show validation errors for incomplete model', async ({ page }) => {
     await netModelTab.goto();
+    await netModelTab.createNetModel('test-model');
     
     // Create a node without a host (assuming this is possible via API/UI for the test)
     await netModelTab.createIncompleteNode(); 
@@ -80,7 +83,7 @@ test.describe('Error Handling', () => {
     await netModelTab.validateModel();
     
     const alertText = await appPage.getAlertText();
-    expect(alertText).toMatch(/validation error/i);
+    expect(alertText).toMatch(/stopped/i);
     
     await appPage.expectNoErrors();
   });

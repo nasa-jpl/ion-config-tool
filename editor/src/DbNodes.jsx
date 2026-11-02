@@ -112,7 +112,7 @@ const DbNodes = (props) => {
       }
 
       // Build the URL with the query parameters
-      var url = `${hostUrl}/?${params}`;
+             var url = `${hostUrl}?${params}`;
       fetch(url)
       .then(res => {
         if (!res.ok) { 
@@ -180,7 +180,7 @@ const DbNodes = (props) => {
       }
 
       // Build URL and fetch
-      var url = `${nodeUrl}/?${params}`;
+             var url = `${nodeUrl}?${params}`;
       fetch(url)
       .then(res => {
         if (!res.ok) { // error coming back from server
@@ -477,6 +477,7 @@ const DbNodes = (props) => {
       nodesWithHosts = nodes.filter(node => node.hasOwnProperty("host") && node.host !== null);
 
       for (let i=0 ; i<nodesWithHosts.length; i++) {
+        nodesWithHosts[i].node_id = nodesWithHosts[i].id;
         nodesWithHosts[i].ips = [];
         nodesWithHosts[i].selected = false;
         nodesWithHosts[i].prots = [];
@@ -522,14 +523,14 @@ const DbNodes = (props) => {
   function formatNodeTable(data) {
 
     const columns = [
-      { label: "Select", accesor: "select", sortable: false},
+      { label: "Select", accessor: "select", sortable: false},
       { label: "Node ID", accessor: "node_id", sortable: true},
       { label: "Node Name", accessor: "node_name", sortable: true},
       { label: "Protocols", accessor: "protocols", sortable: false},
       { label: "Node Number", accessor: "node_number", sortable: true},
       { label: "Host Name", accessor: "hostname", sortable: true},
       { label: "Host ID", accessor: "host_id", sortable: true},
-      { label: "IP Adddresses", acccessor: "ip_addr", sortable: false},
+      { label: "IP Adddresses", accessor: "ip_addr", sortable: false},
       { label: "Config Flags", accessor: "config_flags", sortable: false}
     ];
 

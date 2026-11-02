@@ -8,7 +8,9 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:3000',
     downloadsPath: '/tmp/pwt-downloads',
+    acceptDownloads: true,
   },
+  testMatch: ['tests/**/*.spec.ts'],
   projects: [
     {
       name: 'chromium',

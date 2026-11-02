@@ -32,8 +32,8 @@ test.describe('Model Roundtrip Identity', () => {
     await netModelTab.addNode('Node2', 'Host2');
     await netModelTab.addNode('Node3', 'Host3');
     
-    await netModelTab.addHop('Hop1-2', 'Node1', 'Node2');
-    await netModelTab.addHop('Hop2-3', 'Node2', 'Node3');
+    await netModelTab.addHop('Hop1-2', 'Node1', 'Node2', '', '127.0.0.1', '127.0.0.2');
+    await netModelTab.addHop('Hop2-3', 'Node2', 'Node3', '', '127.0.0.2', '127.0.0.3');
 
     const originalHosts = await netModelTab.getHostCount();
     const originalNodes = await netModelTab.getNodeCount();
@@ -70,7 +70,8 @@ test.describe('Model Roundtrip Identity', () => {
     await netModelTab.addHost('H2', '2.2.2.2');
     await netModelTab.addNode('N1', 'H1');
     await netModelTab.addNode('N2', 'H2');
-    await netModelTab.addHop('H1-2', 'N1', 'N2');
+    // The app rejects a hop with no BP layer CLA when building the ION model.
+    await netModelTab.addHop('H1-2', 'N1', 'N2', 'tcp', '1.1.1.1', '2.2.2.2');
     
     await netModelTab.buildIonModel();
     await appPage.switchTab('ionmodel');
@@ -86,12 +87,9 @@ test.describe('Model Roundtrip Identity', () => {
     const tempFilePath = path.join(os.tmpdir(), `ion-model-roundtrip-${Date.now()}.json`);
     await download.saveAs(tempFilePath);
 
-    // 4. Reload the file
-    // Since IonModelTab doesn't have its own load, we use NetModelTab's load 
-    // which is the standard way to load the model configuration.
-    await appPage.switchTab('netmodel');
-    await netModelTab.loadNetModel(tempFilePath);
-    await netModelTab.buildIonModel();
+    // 4. Reload the file using IonModelLoader (ION model files have ionModelName).
+    await appPage.switchTab('ionmodel');
+    await ionModelTab.loadIonModel(tempFilePath);
     await appPage.switchTab('ionmodel');
 
     // 5. Verify that the number of nodes and graphs matches the original

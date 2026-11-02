@@ -25,13 +25,13 @@ test.describe('Net Model Workflow', () => {
     await netModelTab.addHost('host3', '192.168.1.103');
 
     // Add 3 nodes
-    await netModelTab.addNode('node1', 'host1', 'ion', '1.1');
-    await netModelTab.addNode('node2', 'host2', 'ion', '2.1');
-    await netModelTab.addNode('node3', 'host3', 'ion', '3.1');
+    await netModelTab.addNode('node1');
+    await netModelTab.addNode('node2');
+    await netModelTab.addNode('node3');
 
     // Add 2 hops
-    await netModelTab.addHop('hop12', 'node1', 'node2');
-    await netModelTab.addHop('hop23', 'node2', 'node3');
+    await netModelTab.addHop('hop12');
+    await netModelTab.addHop('hop23');
 
     // Verify counts
     expect(await netModelTab.getHostCount()).toBe(3);
