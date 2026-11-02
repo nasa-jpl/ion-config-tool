@@ -21,14 +21,15 @@
     "tar": "^4.4.8"
   },
   "devDependencies": {
+    "@playwright/test": "latest",
     "babel-jest": "^28.1.3",
     "babel-preset-env": "^1.4.0",
     "babel-preset-react": "^6.24.1",
     "check-dependencies": "^2.0.0",
+    "playwright": "latest",
     "react-popout": "^4.0.0",
     "react-scripts": "^5.0.1",
-    "@playwright/test": "latest",
-    "playwright": "latest",
+    "tsx": "^4.23.15",
     "unzipper": "latest"
   },
   "scripts": {

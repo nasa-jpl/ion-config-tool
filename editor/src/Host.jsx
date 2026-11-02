@@ -74,7 +74,7 @@ export default class Host  extends React.Component {
         readOnly="false"
         bssize="sm"
         as="select"
-        value="{val}"
+        value={val}
         onChange={this.handleSelect.bind(null)}
         >{options}
       </FormControl>;

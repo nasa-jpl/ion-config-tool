@@ -7,36 +7,58 @@ export class NodeDbTab {
         this.page = page;
     }
 
+    /**
+     * Sets the DB connection URL by filling host and port separately.
+     * The UI has two inputs: "Host/IP Address" and "Port".
+     */
     async setDbUrl(url: string) {
-        // Assuming the DB API URL field is an input associated with a label or has a specific placeholder/id
-        // Using a generic selector that would typically match such a field in this context
-        await this.page.getByLabel('DB API URL').fill(url);
+        const parsedUrl = new URL(url);
+        const host = parsedUrl.hostname;
+        const port = parsedUrl.port;
+        await this.page.getByPlaceholder('Host/IP Address').fill(host);
+        if (port) {
+            await this.page.getByPlaceholder('Port').fill(port);
+        }
     }
 
     async connect() {
-        // Clicks the connect/update button for the DB URL
-        await this.page.getByRole('button', { name: /Connect|Update/i }).click();
+        await this.page.getByRole('button', { name: 'Connect' }).click();
+        // Wait for the success alert indicating connection established
+        await this.page.getByRole('alert').filter({ hasText: 'Connected to' }).waitFor({ state: 'visible', timeout: 30000 });
+        // The node table and import navbar only render after DbNodes completes
+        // its full async fetch chain (hosts → nodes → destinations → protocols → inducts)
+        // and sets nodeTable. The navbar is the reliable indicator that loading is done.
+        await this.page.locator('nav.fixed-bottom').waitFor({ state: 'visible', timeout: 30000 });
+        // Now the node table should be populated with rows
+        await this.page.locator('table tbody tr').first().waitFor({ state: 'visible', timeout: 10000 });
     }
 
+    /**
+     * Sets the Net Model Name field in the import form.
+     * The label "Net Model Name (no spaces):" exists as text but has no
+     * programmatic htmlFor/id association with the input. The input is
+     * inside a fixed-bottom navbar.
+     */
     async setNetModelName(name: string) {
-        // Fills the "Net Model Name" field in the import form
-        await this.page.getByLabel('Net Model Name').fill(name);
+        // The navbar only renders after the full async fetch chain completes
+        // (after setNodeTable is called). Wait for the input directly with a
+        // generous timeout.
+        const navbarInput = this.page.locator('nav.fixed-bottom input.form-control');
+        await navbarInput.waitFor({ state: 'visible', timeout: 30000 });
+        await navbarInput.fill(name);
     }
 
     async clickImport() {
-        // Clicks the "Import" button
         await this.page.getByRole('button', { name: 'Import' }).click();
+        // Wait for the modal or action to complete
+        await this.page.waitForTimeout(500);
     }
 
     async getTableRow(nodeName: string): Promise<Locator> {
-        // Returns the table row element containing the node name
-        // This searches for a row that contains the text of the nodeName
-        return this.page.locator('tr', { hasText: nodeName });
+        return this.page.locator('tbody tr').filter({ hasText: nodeName });
     }
 
     async getRowCount(): Promise<number> {
-        // Returns the number of rows in the node table
-        // Assuming rows are defined by 'tr' elements within a table body
         return await this.page.locator('table tbody tr').count();
     }
 }

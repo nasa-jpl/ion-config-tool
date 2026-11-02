@@ -391,6 +391,10 @@ export default class IonModel  extends React.Component {
     console.log("makeCmdLines for: " + configKey);
     const configObj = this.props.configs[configKey];
     // END NO EXTRACT
+    if (!configObj) {
+      console.error("makeCmdLines: configObj undefined for configKey: " + configKey);
+      return [];
+    }
     const cmdKeys = configObj.cmdKeys;
     const configTypeKey = configObj.configType;
     const configTypeObj = this.props.configTypes[configTypeKey];
@@ -480,7 +484,7 @@ export default class IonModel  extends React.Component {
 
     let configFiles = [];
     let configs = this.props.configs;
-    for (var i=0; i<node.configKeys.length; i++) {
+    for (var i=0; i<(node.configKeys || []).length; i++) {
       let configKey = node.configKeys[i];
       let configType = configs[configKey].configType;
       let order = this.props.configTypes[configType].start_order;
@@ -1684,10 +1688,10 @@ export default class IonModel  extends React.Component {
     for (var nodeKey in this.props.nodes) {
       const node = this.props.nodes[nodeKey]
       var nodedir = rootdir.folder(node.id);
-      const confKeys = node.configKeys;
+      const confKeys = node.configKeys || [];
       var lf = "\n";   // assign linefeed format for text files
       var host = this.props.hosts[node.hostKey];  // get host object of node
-      if (host.linefeed === 'windows')            // windows is different
+      if (host && host.linefeed === 'windows')    // windows is different
         lf = "\r\n";
 
       for (let j=0; j<confKeys.length; j++) {
