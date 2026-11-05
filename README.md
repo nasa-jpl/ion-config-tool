@@ -6,3 +6,6 @@ See: https://nodejs.org/en/download
 Once node.js is installed, see DEV_README in the editor/ directory and
 see DEV_README in the cli/ directory for more.
 
+To publish a release, see RELEASING.md. Pushing a `v*` tag builds the release
+archives and creates a GitHub Release.
+
