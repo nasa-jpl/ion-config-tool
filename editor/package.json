@@ -27,7 +27,7 @@
     "babel-preset-react": "^6.24.1",
     "check-dependencies": "^2.0.0",
     "playwright": "latest",
-    "react-popout": "^4.0.0",
+    "react-popout": "^4.0.1",
     "react-scripts": "^5.0.1",
     "tsx": "^4.23.15",
     "unzipper": "latest"
