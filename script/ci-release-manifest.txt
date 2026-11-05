@@ -1,0 +1,29 @@
+# Required entries in a packaged ionconfig release, relative to the
+# top-level ionconfig-<ver>/ directory. Entries ending in "/" are
+# directories. Used by ci-verify-release.sh and test-ci-verify.sh.
+# Mirrors the layout dorelease.sh produces.
+README
+release.json
+release.notes
+ion3node.json
+json/cmdMsgs.json
+json/cmdTypes.json
+json/configTypes.json
+json/ionVersions.json
+json/nodeDB.json
+json/paramTypes.json
+json/patterns.json
+json/selections.json
+cli/checkdtn.js
+cli/dtn2ion.js
+cli/ionconfig.js
+cli/ionsurvey.js
+cli/package.json
+cli/package-lock.json
+cli/node_modules/
+cli/docs/
+editor/index.html
+editor/static/
+editor/manual/
+dictionary/dict.html
+dictionary/delta.html
