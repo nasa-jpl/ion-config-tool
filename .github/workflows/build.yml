@@ -1,0 +1,190 @@
+name: Build
+
+# Builds the editor, CLI, and release tree on every push/PR to main, gated
+# by the Playwright suite. A v* tag push also publishes a GitHub Release.
+# See RELEASING.md for the operator procedure.
+
+on:
+  push:
+    branches: ["main"]
+    tags: ["v*"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Create a DRAFT release named dry-run-<version>-<run id> instead of a real release (no publishing)"
+        type: boolean
+        default: false
+
+# Least privilege by default. Only the release job requests contents: write.
+permissions:
+  contents: read
+
+# One run per ref for branches; tag runs are never cancelled so a release
+# in progress is not interrupted by a later push.
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      # actionlint is pinned by version; the download script verifies the checksum.
+      - name: Install actionlint
+        run: bash <(curl -sSfL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.12/scripts/download-actionlint.bash) 1.7.12 "$RUNNER_TEMP"
+
+      - name: Run actionlint
+        run: $RUNNER_TEMP/actionlint -color
+
+      # actionlint does not check dependabot.yml, so validate it here.
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.x"
+
+      - name: Check Dependabot configuration
+        run: |
+          python3 -m pip install --quiet pyyaml
+          ./script/test-dependabot.sh
+
+  # Reuses the Playwright suite. A failing test blocks build and release.
+  test:
+    uses: ./.github/workflows/playwright.yml
+
+  build:
+    needs: [test, lint]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.x"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            editor/package-lock.json
+            cli/package-lock.json
+
+      - name: Test release verification scripts
+        run: |
+          ./script/test-check-tag.sh
+          ./script/test-ci-verify.sh
+
+      - name: Build release
+        run: ./script/ci-build.sh
+
+      # ci-build.sh must not leave changes in the tracked tree (it restores
+      # editor/src/App.jsx). Untracked outputs are ignored (see .gitignore).
+      - name: Check working tree is clean
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Working tree changed during build:" >&2
+            git status --porcelain >&2
+            exit 1
+          fi
+
+      - name: Verify release tarball
+        run: |
+          VER="$(python3 -c 'import json; print(json.load(open("release.json"))["ionConfigVersion"])')"
+          ./script/ci-verify-release.sh "dist/ionconfig-$VER.tar.gz" "$VER"
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: ionconfig-release
+          path: |
+            dist/ionconfig-*.tar.gz
+            dist/ionconfig-*.zip
+            dist/SHA256SUMS
+          retention-days: 14
+          if-no-files-found: error
+
+  # Publishes only on a v* tag, or on a manual run with dry_run=true (draft).
+  release:
+    needs: [build]
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.dry_run)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' }}
+      TAG: ${{ github.ref_name }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      # On a tag run the tag must equal "v" + release.json version; a manual
+      # dry run skips that comparison but still validates the version format.
+      - name: Check version and tag
+        id: check
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            ./script/check-tag.sh --dry-run >> "$GITHUB_OUTPUT"
+          else
+            ./script/check-tag.sh "$TAG" >> "$GITHUB_OUTPUT"
+          fi
+          cat "$GITHUB_OUTPUT"
+
+      - name: Download release artifacts
+        uses: actions/download-artifact@v8
+        with:
+          name: ionconfig-release
+          path: dist
+
+      # Release notes: the matching "Release Notes <version>" section of
+      # release.notes when present, otherwise GitHub-generated notes.
+      - name: Extract release notes
+        env:
+          VERSION: ${{ steps.check.outputs.version }}
+        run: |
+          awk -v v="$VERSION" '
+            /^Release Notes /{ if (found) exit; if ($3 == v) found = 1 }
+            found
+          ' release.notes > "$RUNNER_TEMP/notes.md"
+          if [ -s "$RUNNER_TEMP/notes.md" ]; then
+            echo "NOTES_ARGS=--notes-file $RUNNER_TEMP/notes.md" >> "$GITHUB_ENV"
+          else
+            echo "No Release Notes section for $VERSION; using generated notes."
+            echo "NOTES_ARGS=--generate-notes" >> "$GITHUB_ENV"
+          fi
+
+      - name: Publish GitHub Release
+        env:
+          VERSION: ${{ steps.check.outputs.version }}
+          PRERELEASE: ${{ steps.check.outputs.prerelease }}
+        run: |
+          assets="dist/ionconfig-$VERSION.tar.gz dist/ionconfig-$VERSION.zip dist/SHA256SUMS"
+          prerelease_flag=""
+          if [ "$PRERELEASE" = "true" ]; then prerelease_flag="--prerelease"; fi
+          # shellcheck disable=SC2086
+          if [ "$DRY_RUN" = "true" ]; then
+            # Draft only: the operator inspects it, then deletes it. The run id
+            # in the tag name lets repeated dry runs of one version coexist.
+            gh release create "dry-run-$VERSION-$GITHUB_RUN_ID" $assets \
+              --target "$GITHUB_SHA" --draft \
+              --title "DRY RUN IonConfig $VERSION" \
+              $NOTES_ARGS $prerelease_flag
+          else
+            # --verify-tag fails the job if the tag is not on the remote.
+            # shellcheck disable=SC2086
+            gh release create "$TAG" $assets \
+              --verify-tag \
+              --title "IonConfig $VERSION" \
+              $NOTES_ARGS $prerelease_flag
+          fi
