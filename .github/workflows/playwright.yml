@@ -1,10 +1,13 @@
 name: Playwright Tests
 
+# Reusable: called by build.yml, which owns the push/pull_request triggers
+# so the suite runs once per event. workflow_dispatch allows a manual run.
 on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   test:
@@ -14,26 +17,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
+      # Node version is pinned in .nvmrc (see RELEASING.md).
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '26'
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: editor/package-lock.json
 
+      # npm ci installs exactly the versions in editor/package-lock.json.
       - name: Install dependencies
-        run: cd editor && npm install
+        working-directory: editor
+        run: npm ci
 
       - name: Install Playwright browsers
+        working-directory: editor
         run: npx playwright install --with-deps chromium
 
-      - name: Start development server
-        run: cd editor && npm start &
-
-      - name: Wait for server to be ready
-        run: |
-          timeout 60s bash -c 'until curl -s http://localhost:3000; do sleep 5; done'
-
+      # No separate dev server is started here: editor/tests/fixtures/global-setup.ts
+      # starts the dev server (port 3000) and mock server (port 8000) itself
+      # and waits for them to be ready.
       - name: Run Playwright tests
-        run: cd editor && npx playwright test
+        working-directory: editor
+        run: npx playwright test
 
       - name: Upload test results
         uses: actions/upload-artifact@v7

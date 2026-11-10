@@ -32,3 +32,6 @@
 /*.swp
 
 editor/test-results/
+
+# CI and local release output (script/ci-build.sh)
+/dist
