@@ -347,13 +347,19 @@ export default class IonModel  extends React.Component {
         }
       }
     }
-    // ION 4.1.4 ltpsecadmin parses the LTP auth-rule engine id with atoi,
-    // which truncates a 3-part (allocator-qualified) identity.  Flag it so the
-    // operator knows this line will be mis-parsed by this ION release.
-    if ((pTypeKey === "ltpsecrc_ltprecvauthrule" || pTypeKey === "ltpsecrc_ltpxmitauthrule")
+    // ltpsecadmin reads the LTP auth-rule engine id into a 32-bit int, not a
+    // uvast, so an allocator-qualified identity cannot be expressed here in
+    // any form: the dotted text is rejected outright by the "a" commands this
+    // tool emits, and a folded fully-qualified node number overflows the int.
+    // Flag it so the operator knows ION will refuse the line.  Compare
+    // pType.cmdType rather than pTypeKey -- pTypeKey is a parameter key
+    // ("..._p0"), so comparing it to a command name never matches.
+    if ((pType.cmdType === "ltpsecrc_ltprecvauthrule"
+          || pType.cmdType === "ltpsecrc_ltpxmitauthrule")
           && pIdx === 0 && ("" + paramVal).indexOf(".") >= 0) {
       descrip = descrip
-        + " [WARNING: 3-part engine id; ltpsecadmin truncates it in ION 4.1.4]";
+        + " [WARNING: 3-part engine id unusable here; ltpsecadmin parses a"
+        + " 32-bit int and will reject this line]";
     }
     const note = "#  " + posTag + " " + longname + " : " + paramVal + " " + units + " " + descrip;
     //console.log("param Note " + pTypeKey + " " + note);
