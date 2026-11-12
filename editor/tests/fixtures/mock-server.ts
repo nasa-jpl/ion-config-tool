@@ -67,6 +67,8 @@ export class MockServer {
           return;
         }
 
+        // Stays undefined only when the path or the host/node id is unknown,
+        // which is what produces a 404 below.
         let items: any[] | undefined;
 
         if (pathname === '/api/hosts') {
@@ -74,23 +76,30 @@ export class MockServer {
         } else if (pathname === '/api/nodes') {
           items = MOCK_NODES;
         } else if (pathname.startsWith('/api/hosts/') && pathname.endsWith('/destinations')) {
-          items = MOCK_DESTINATIONS[pathname.split('/')[3]];
+          const hostId = pathname.split('/')[3];
+          // A known host with no destinations is a 200 empty list in the
+          // registry, not a 404; only an unknown host id 404s.
+          if (MOCK_HOSTS.some(h => h.host_id === hostId)) items = MOCK_DESTINATIONS[hostId] ?? [];
         } else if (pathname.startsWith('/api/nodes/') && pathname.endsWith('/cl-protocols')) {
-          items = MOCK_PROTOCOLS[pathname.split('/')[3]];
+          const nodeId = pathname.split('/')[3];
+          if (MOCK_NODES.some(n => n.node_id === nodeId)) items = MOCK_PROTOCOLS[nodeId] ?? [];
         } else if (pathname.startsWith('/api/nodes/') && pathname.endsWith('/inducts')) {
-          items = MOCK_INDUCTS[pathname.split('/')[3]];
+          const nodeId = pathname.split('/')[3];
+          if (MOCK_NODES.some(n => n.node_id === nodeId)) items = MOCK_INDUCTS[nodeId] ?? [];
         }
 
-        // An unknown path and an unknown host/node id both answer the way the
-        // registry does: 404 carrying a problem-details body with no `items`.
-        // Answering a well-formed empty envelope instead would mask how the
-        // editor copes with a bad sub-resource URL -- it would read zero rows
-        // and carry on rather than failing -- and that is precisely the
-        // failure this fixture exists to surface.
+        // The registry serves a known id's empty sub-resource as a 200
+        // {items: []} envelope, and a genuinely unknown id or path as a 404
+        // carrying a problem-details body (status/title/detail) with no
+        // `items`. Reproducing that 404 is the point of this fixture: when a
+        // node's id reads `undefined`, its sub-resource URL is
+        // /nodes/undefined/... , which 404s with no `items`, so the editor's
+        // unchecked `.items` access throws and the table never renders --
+        // exactly the failure the id -> node_id fix cures.
         const page: ResponseData<any> | null =
           items === undefined ? null : { items, next_page_token: null };
         const statusCode = page === null ? 404 : 200;
-        const responseBody = page ?? { status_code: 404, detail: 'Not Found' };
+        const responseBody = page ?? { status: 404, title: 'Not Found', detail: 'Not Found' };
 
         // Set CORS headers
         res.setHeader('Content-Type', 'application/json');
