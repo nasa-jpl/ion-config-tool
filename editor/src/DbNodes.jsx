@@ -36,11 +36,9 @@ const DbNodes = (props) => {
   const [hostList, setHostList]               = useState([]);    // Raw host data returned from DB
   const [hostData, setHostData]               = useState([]);
   const [hostsLoaded, setHostsLoaded]         = useState(false); // Flag indicating raw host data (without destinations) loaded
-  const [IPsLoaded, setIPsLoaded]             = useState(false); // Flag indicating IPs for hosts loaded
   const [nodeList, setNodeList]               = useState([]);    // Raw node data returned from DB
   const [nodeData, setNodeData]               = useState([]);    // Raw node data returned from DB
   const [nodesLoaded, setNodesLoaded]         = useState(false); // Flag indicating raw node data loaded
-  const [protocolsLoaded, setProtocolsLoaded] = useState(false); // Flag indicating available protocols for nodes loaded
   const [inductsLoaded, setInductsLoaded]     = useState(false); // Flag indicating inducts for nodes loaded
   const [netModelName, setNetModelName]       = useState("");    // Name to affix to the Net Model upon import
   const [showSuccess, setShowSuccess]         = useState(false); // Toggle to hide/show successful import modal
@@ -51,14 +49,14 @@ const DbNodes = (props) => {
   // Guards marking each per-item batch fetch as already issued.
   //
   // These must be refs rather than state. The effect that issues the batch
-  // fetches re-runs every time one of its *Loaded dependencies flips, and
-  // StrictMode invokes it a second time on mount -- in both cases the effect
-  // closure still sees the pre-update flag values, so a state-based guard
-  // reads false and the fetch is issued again. A ref is updated synchronously
-  // and survives the re-run, so each batch is issued exactly once. Issuing
-  // twice is not harmless: the setters below append to the node and host
-  // records with push(), so a repeated fetch duplicates every destination,
-  // protocol and induct it returns.
+  // fetches re-runs when inductsLoaded flips (to merge and render), and
+  // StrictMode invokes it a second time on mount; in both cases a guard set
+  // earlier in the same effect run is not yet visible to the next run, so a
+  // state-based guard would read false and the fetch would be issued again. A
+  // ref updates synchronously and survives the re-run, so each batch is issued
+  // exactly once. Issuing twice is not harmless: the handlers append to the
+  // node and host records with push(), so a repeated fetch duplicates every
+  // destination, protocol and induct it returns.
   const destsRequested     = useRef(false);
   const protocolsRequested = useRef(false);
   const inductsRequested   = useRef(false);
@@ -332,8 +330,6 @@ const DbNodes = (props) => {
   // dependencies:
   //    hostsLoaded     -- toggle that hosts without destinations loaded 
   //    nodesLoaded     -- toggle that nodes loaded
-  //    IPsLoaded       -- toggle that the IP addrs for hosts are loaded
-  //    protocolsLoaded -- toggle that protocols for nodes are loaded
   //    inductsLoaded   -- toggle that inducts for nodes are loaded
   useEffect(() => {
     // Flags are used to control when certain fetches are completed.
@@ -343,7 +339,7 @@ const DbNodes = (props) => {
     if (!hostsLoaded || !nodesLoaded) return;
 
     // Load IP addresses if they have not yet been
-    if (!IPsLoaded && !destsRequested.current) {
+    if (!destsRequested.current) {
       destsRequested.current = true;
       var destUrls = [];
       // Build up a set of URLs to do a batch fetch of all the IP
@@ -359,11 +355,10 @@ const DbNodes = (props) => {
 
       // Do the fetch
       fetchDestsWithIds(destUrls);
-      setIPsLoaded(true);
     }
 
     // Load protocols if they have not yet been
-    if (!protocolsLoaded && !protocolsRequested.current) {
+    if (!protocolsRequested.current) {
       protocolsRequested.current = true;
       var protUrls = [];
       // Build a set of URLs to do a batch fetch for all
@@ -379,16 +374,12 @@ const DbNodes = (props) => {
 
       // Do the fetch
       fetchProtocolsByNode(protUrls);
-      setProtocolsLoaded(true);
     }
 
-    // Load inducts if they have not yet been.
-    //
-    // inductsLoaded cannot double as the guard here the way the flags above
-    // do: it is set only once the induct data has actually arrived, because
-    // it is what gates the merge and table render below. Without the ref the
-    // two state updates above re-run this effect while inductsLoaded is still
-    // false, issuing the whole induct batch a second time.
+    // Load inducts if they have not yet been. inductsLoaded gates the merge
+    // and render below and is set only when the induct data arrives, so -- as
+    // with the two batches above -- the ref, not inductsLoaded, is what keeps
+    // this batch from being issued twice.
     if (!inductsLoaded && !inductsRequested.current) {
       inductsRequested.current = true;
       var inductUrls =[];
@@ -415,7 +406,7 @@ const DbNodes = (props) => {
       setNodeTable(formatNodeTable(nodeList));
     }
 
-  }, [hostsLoaded, nodesLoaded, IPsLoaded, protocolsLoaded, inductsLoaded])
+  }, [hostsLoaded, nodesLoaded, inductsLoaded])
 
   // After the destination (IP) data is loaded must associate
   // IPs with the correct host.
