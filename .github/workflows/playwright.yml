@@ -23,7 +23,7 @@ jobs:
         run: cd editor && npm install
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        run: cd editor && npx playwright install --with-deps chromium
 
       - name: Start development server
         run: cd editor && npm start &
