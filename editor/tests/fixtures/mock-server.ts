@@ -12,10 +12,15 @@ const MOCK_HOSTS = [
   { hostname: 'host3', ip: '192.168.1.103', host_id: 'host3' },
 ];
 
+// The registry identifies a node by `node_id` and serves no `id` field at
+// all. Naming it `id` here let the editor read an identifier the real
+// registry never sends, so every per-node sub-request silently went to
+// /nodes/undefined/... against a live server while these tests still passed.
+// Keep these field names matched to the registry's response schema.
 const MOCK_NODES = [
-  { id: 'node1', node_number: 1, node_name: 'node1', host: { hostname: 'host1', host_id: 'host1' } },
-  { id: 'node2', node_number: 2, node_name: 'node2', host: { hostname: 'host2', host_id: 'host2' } },
-  { id: 'node3', node_number: 3, node_name: 'node3', host: { hostname: 'host3', host_id: 'host3' } },
+  { node_id: 'node1', node_number: 1, node_name: 'node1', host: { hostname: 'host1', host_id: 'host1' } },
+  { node_id: 'node2', node_number: 2, node_name: 'node2', host: { hostname: 'host2', host_id: 'host2' } },
+  { node_id: 'node3', node_number: 3, node_name: 'node3', host: { hostname: 'host3', host_id: 'host3' } },
 ];
 
 const MOCK_DESTINATIONS: Record<string, any[]> = {
@@ -62,26 +67,39 @@ export class MockServer {
           return;
         }
 
-        let responseBody: ResponseData<any> = { items: [], next_page_token: null };
-        let statusCode = 200;
+        // Stays undefined only when the path or the host/node id is unknown,
+        // which is what produces a 404 below.
+        let items: any[] | undefined;
 
         if (pathname === '/api/hosts') {
-          responseBody.items = MOCK_HOSTS;
+          items = MOCK_HOSTS;
         } else if (pathname === '/api/nodes') {
-          responseBody.items = MOCK_NODES;
-        } else if (pathname?.startsWith('/api/hosts/') && pathname.endsWith('/destinations')) {
+          items = MOCK_NODES;
+        } else if (pathname.startsWith('/api/hosts/') && pathname.endsWith('/destinations')) {
           const hostId = pathname.split('/')[3];
-          responseBody.items = MOCK_DESTINATIONS[hostId] || [];
-        } else if (pathname?.startsWith('/api/nodes/') && pathname.endsWith('/cl-protocols')) {
+          // A known host with no destinations is a 200 empty list in the
+          // registry, not a 404; only an unknown host id 404s.
+          if (MOCK_HOSTS.some(h => h.host_id === hostId)) items = MOCK_DESTINATIONS[hostId] ?? [];
+        } else if (pathname.startsWith('/api/nodes/') && pathname.endsWith('/cl-protocols')) {
           const nodeId = pathname.split('/')[3];
-          responseBody.items = MOCK_PROTOCOLS[nodeId] || [];
-        } else if (pathname?.startsWith('/api/nodes/') && pathname.endsWith('/inducts')) {
+          if (MOCK_NODES.some(n => n.node_id === nodeId)) items = MOCK_PROTOCOLS[nodeId] ?? [];
+        } else if (pathname.startsWith('/api/nodes/') && pathname.endsWith('/inducts')) {
           const nodeId = pathname.split('/')[3];
-          responseBody.items = MOCK_INDUCTS[nodeId] || [];
-        } else {
-          statusCode = 404;
-          responseBody = { items: [], next_page_token: null };
+          if (MOCK_NODES.some(n => n.node_id === nodeId)) items = MOCK_INDUCTS[nodeId] ?? [];
         }
+
+        // The registry serves a known id's empty sub-resource as a 200
+        // {items: []} envelope, and a genuinely unknown id or path as a 404
+        // carrying a problem-details body (status/title/detail) with no
+        // `items`. Reproducing that 404 is the point of this fixture: when a
+        // node's id reads `undefined`, its sub-resource URL is
+        // /nodes/undefined/... , which 404s with no `items`, so the editor's
+        // unchecked `.items` access throws and the table never renders --
+        // exactly the failure the id -> node_id fix cures.
+        const page: ResponseData<any> | null =
+          items === undefined ? null : { items, next_page_token: null };
+        const statusCode = page === null ? 404 : 200;
+        const responseBody = page ?? { status: 404, title: 'Not Found', detail: 'Not Found' };
 
         // Set CORS headers
         res.setHeader('Content-Type', 'application/json');

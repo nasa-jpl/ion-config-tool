@@ -9,7 +9,7 @@
 //      Author: Dave Hanks, Jet Propulsion Laboratory         
 //                                                               
 
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Form,Container,Row,Col, Navbar, FormLabel} from 'react-bootstrap';
 import {Button,InputGroup} from 'react-bootstrap';
 import {OverlayTrigger, Tooltip} from 'react-bootstrap';
@@ -36,17 +36,30 @@ const DbNodes = (props) => {
   const [hostList, setHostList]               = useState([]);    // Raw host data returned from DB
   const [hostData, setHostData]               = useState([]);
   const [hostsLoaded, setHostsLoaded]         = useState(false); // Flag indicating raw host data (without destinations) loaded
-  const [IPsLoaded, setIPsLoaded]             = useState(false); // Flag indicating IPs for hosts loaded
   const [nodeList, setNodeList]               = useState([]);    // Raw node data returned from DB
   const [nodeData, setNodeData]               = useState([]);    // Raw node data returned from DB
   const [nodesLoaded, setNodesLoaded]         = useState(false); // Flag indicating raw node data loaded
-  const [protocolsLoaded, setProtocolsLoaded] = useState(false); // Flag indicating available protocols for nodes loaded
   const [inductsLoaded, setInductsLoaded]     = useState(false); // Flag indicating inducts for nodes loaded
   const [netModelName, setNetModelName]       = useState("");    // Name to affix to the Net Model upon import
   const [showSuccess, setShowSuccess]         = useState(false); // Toggle to hide/show successful import modal
   const [netNameNeeded, setNetNameNeeded]     = useState(false); // Toggle to hide/show successful import modal
   const [nextHostToken, setNextHostToken]     = useState(null);  // Token to handle pagination in DB
   const [nextNodeToken, setNextNodeToken]     = useState(null);  // Token to handle pagination in DB
+
+  // Guards marking each per-item batch fetch as already issued.
+  //
+  // These must be refs rather than state. The effect that issues the batch
+  // fetches re-runs when inductsLoaded flips (to merge and render), and
+  // StrictMode invokes it a second time on mount; in both cases a guard set
+  // earlier in the same effect run is not yet visible to the next run, so a
+  // state-based guard would read false and the fetch would be issued again. A
+  // ref updates synchronously and survives the re-run, so each batch is issued
+  // exactly once. Issuing twice is not harmless: the handlers append to the
+  // node and host records with push(), so a repeated fetch duplicates every
+  // destination, protocol and induct it returns.
+  const destsRequested     = useRef(false);
+  const protocolsRequested = useRef(false);
+  const inductsRequested   = useRef(false);
 
   // Extract the parent URLs from the JSON configs
   var dbHost = nodeDB["nodeDbUrls"].dbHost;
@@ -317,8 +330,6 @@ const DbNodes = (props) => {
   // dependencies:
   //    hostsLoaded     -- toggle that hosts without destinations loaded 
   //    nodesLoaded     -- toggle that nodes loaded
-  //    IPsLoaded       -- toggle that the IP addrs for hosts are loaded
-  //    protocolsLoaded -- toggle that protocols for nodes are loaded
   //    inductsLoaded   -- toggle that inducts for nodes are loaded
   useEffect(() => {
     // Flags are used to control when certain fetches are completed.
@@ -328,7 +339,8 @@ const DbNodes = (props) => {
     if (!hostsLoaded || !nodesLoaded) return;
 
     // Load IP addresses if they have not yet been
-    if (!IPsLoaded) {
+    if (!destsRequested.current) {
+      destsRequested.current = true;
       var destUrls = [];
       // Build up a set of URLs to do a batch fetch of all the IP
       // addresses at once. Keep track of the host ID for each
@@ -343,11 +355,11 @@ const DbNodes = (props) => {
 
       // Do the fetch
       fetchDestsWithIds(destUrls);
-      setIPsLoaded(true);
     }
 
     // Load protocols if they have not yet been
-    if (!protocolsLoaded) {
+    if (!protocolsRequested.current) {
+      protocolsRequested.current = true;
       var protUrls = [];
       // Build a set of URLs to do a batch fetch for all
       // the protocols for every node in one call. Keep 
@@ -362,11 +374,14 @@ const DbNodes = (props) => {
 
       // Do the fetch
       fetchProtocolsByNode(protUrls);
-      setProtocolsLoaded(true);
     }
 
-    // Load inducts if they have not yet been
-    if (!inductsLoaded) {
+    // Load inducts if they have not yet been. inductsLoaded gates the merge
+    // and render below and is set only when the induct data arrives, so -- as
+    // with the two batches above -- the ref, not inductsLoaded, is what keeps
+    // this batch from being issued twice.
+    if (!inductsLoaded && !inductsRequested.current) {
+      inductsRequested.current = true;
       var inductUrls =[];
       // Build a set of URLs to do a batch fetch for all
       // the inducts for every node in one call. Keep 
@@ -391,7 +406,7 @@ const DbNodes = (props) => {
       setNodeTable(formatNodeTable(nodeList));
     }
 
-  }, [hostsLoaded, nodesLoaded, IPsLoaded, protocolsLoaded, inductsLoaded])
+  }, [hostsLoaded, nodesLoaded, inductsLoaded])
 
   // After the destination (IP) data is loaded must associate
   // IPs with the correct host.
@@ -477,7 +492,6 @@ const DbNodes = (props) => {
       nodesWithHosts = nodes.filter(node => node.hasOwnProperty("host") && node.host !== null);
 
       for (let i=0 ; i<nodesWithHosts.length; i++) {
-        nodesWithHosts[i].node_id = nodesWithHosts[i].id;
         nodesWithHosts[i].ips = [];
         nodesWithHosts[i].selected = false;
         nodesWithHosts[i].prots = [];
