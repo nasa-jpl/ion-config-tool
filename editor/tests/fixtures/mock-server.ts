@@ -38,7 +38,13 @@ const MOCK_PROTOCOLS: Record<string, any[]> = {
 const MOCK_INDUCTS: Record<string, any[]> = {
   node1: [{ id: 'ind1', name: 'Induct 1', cl_protocol: { cl_protocol_name: 'tcp' }, duct_name: { port_number: 5000 } }],
   node2: [{ id: 'ind2', name: 'Induct 2', cl_protocol: { cl_protocol_name: 'tcp' }, duct_name: { port_number: 5001 } }],
-  node3: [{ id: 'ind3', name: 'Induct 3', cl_protocol: { cl_protocol_name: 'tcp' }, duct_name: { port_number: 5002 } }],
+  // node3's second induct has a null cl_protocol, which the registry permits.
+  // The editor must skip it and still import node3 with its valid induct,
+  // rather than throwing and hanging the whole load.
+  node3: [
+    { id: 'ind3', name: 'Induct 3', cl_protocol: { cl_protocol_name: 'tcp' }, duct_name: { port_number: 5002 } },
+    { id: 'ind3b', name: 'Induct 3b', cl_protocol: null, duct_name: { value: 'ltp-engine-id' } },
+  ],
 };
 
 export class MockServer {
