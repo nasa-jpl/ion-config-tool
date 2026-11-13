@@ -16,6 +16,7 @@ import {OverlayTrigger, Tooltip} from 'react-bootstrap';
 import {BsQuestionCircle} from 'react-icons/bs';
 import {Table} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
+import {Alert} from 'react-bootstrap';
 
 import nodeDB  from './json/nodeDB.json';
 import NodeTable from './NodeTable';
@@ -45,6 +46,7 @@ const DbNodes = (props) => {
   const [netNameNeeded, setNetNameNeeded]     = useState(false); // Toggle to hide/show successful import modal
   const [nextHostToken, setNextHostToken]     = useState(null);  // Token to handle pagination in DB
   const [nextNodeToken, setNextNodeToken]     = useState(null);  // Token to handle pagination in DB
+  const [loadError, setLoadError]             = useState(null);  // Message shown when a Node DB fetch fails
 
   // Guards marking each per-item batch fetch as already issued.
   //
@@ -68,6 +70,12 @@ const DbNodes = (props) => {
 
   // Query limit is 100 items per fetch
   var qLimit = 100;
+
+  // Per-item sub-resource lists (destinations, protocols, inducts) are each
+  // fetched as a single page, so request the registry maximum. Without this
+  // the default page size (10) silently truncates any host or node that has
+  // more, and the dropped rows never appear in the import.
+  var qLimitMax = 1000;
 
   var importAlert = 
       <Modal show={showSuccess} 
@@ -150,15 +158,12 @@ const DbNodes = (props) => {
         }
       })
       .catch(err => {
-        // TBD deal with errors cleanly
         if (err.name === 'AbortError') {
-          console.log('fetch aborted')
-        } else {
-          if (err.name === "TypeError") {
-          } else {
-            // auto catches network / connection error
-          }
+          console.log('fetch aborted');
+          return;
         }
+        console.error(err);
+        setLoadError(err.message);
       });
     };
 
@@ -215,20 +220,15 @@ const DbNodes = (props) => {
         }
       })
       .catch(err => {
-        // TBD deal with errors cleanly
         if (err.name === 'AbortError') {
-          console.log('fetch aborted')
-        } else {
-          if (err.name === "TypeError") {
-            console.log("Type Error encountered")
-          } else {
-            // auto catches network / connection error
-            console.log(err.name);
-          }
+          console.log('fetch aborted');
+          return;
         }
+        console.error(err);
+        setLoadError(err.message);
       });
     };
-    
+
     // Do the fetch
     fetchNodes();
 
@@ -238,6 +238,16 @@ const DbNodes = (props) => {
     };
   }, [nextNodeToken])
 
+  // Fetch JSON from a sub-resource URL, failing loudly with the URL on a
+  // non-OK response so an error body is never parsed as if it were data.
+  const fetchJson = (url) =>
+    fetch(url).then(res => {
+      if (!res.ok) {
+        throw Error("Node DB request failed (HTTP " + res.status + "): " + url);
+      }
+      return res.json();
+    });
+
   // Fetch host destinations (usally IP addrs)
   const fetchDestsWithIds = (destUrls) => {
     // Need to track host ID with each fetch so we
@@ -246,7 +256,7 @@ const DbNodes = (props) => {
     const destWithIds = destUrls.map(dest => (
       {
         host_id: dest.host_id,
-        promise: fetch(dest.destUrl).then(res => res.json())
+        promise: fetchJson(dest.destUrl)
       }
     ));
 
@@ -261,8 +271,8 @@ const DbNodes = (props) => {
       setHostList(setDestinationsInHosts(dataWithIds));
     })
     .catch(err => {
-      // TBD deal with errors cleanly
       console.error(err);
+      setLoadError(err.message);
     });
   }
 
@@ -275,7 +285,7 @@ const DbNodes = (props) => {
     const protWithIds = protUrls.map(prot => (
       {
         node_id: prot.node_id,
-        promise: fetch(prot.protUrl).then(res => res.json())
+        promise: fetchJson(prot.protUrl)
       }
     ));
 
@@ -290,8 +300,8 @@ const DbNodes = (props) => {
       setNodeList(setProtocolsInNodes(dataWithIds));
     })
     .catch(err => {
-      // TBD better error handling
       console.error(err);
+      setLoadError(err.message);
     });
   }
 
@@ -304,7 +314,7 @@ const DbNodes = (props) => {
     const inductWithIds = inductUrls.map(induct => (
       {
         node_id: induct.node_id,
-        promise: fetch(induct.inductUrl).then(res => res.json())
+        promise: fetchJson(induct.inductUrl)
       }
     ));
 
@@ -320,8 +330,8 @@ const DbNodes = (props) => {
       setInductsLoaded(true);
     })
     .catch(err => {
-      // TBD better error handling
       console.error(err);
+      setLoadError(err.message);
     });
   }
 
@@ -348,7 +358,7 @@ const DbNodes = (props) => {
       // which destinations in the DB.
       for (let i=0 ; i<hostList.length; i++) {
         let host_id = hostList[i].host_id;
-        let destUrl = hostUrl+"/"+host_id+"/destinations";
+        let destUrl = hostUrl+"/"+host_id+"/destinations?max_page_size="+qLimitMax;
         let urlWithHostId = {"host_id" : host_id, "destUrl" : destUrl };
         destUrls.push(urlWithHostId);
       }
@@ -367,7 +377,7 @@ const DbNodes = (props) => {
       // protocols with the correct node.
       for (let i=0; i<nodeList.length; i++) {
         let node_id = nodeList[i].node_id;
-        let protUrl = nodeUrl+"/"+node_id+"/cl-protocols";
+        let protUrl = nodeUrl+"/"+node_id+"/cl-protocols?max_page_size="+qLimitMax;
         let urlWithNodeId = {"node_id" : node_id, "protUrl" : protUrl};
         protUrls.push(urlWithNodeId);
       }
@@ -390,7 +400,7 @@ const DbNodes = (props) => {
 
       for (let i=0; i<nodeList.length; i++) {
         let node_id = nodeList[i].node_id;
-        let inductUrl = nodeUrl+"/"+node_id+"/inducts";
+        let inductUrl = nodeUrl+"/"+node_id+"/inducts?max_page_size="+qLimitMax;
         let urlWithNodeId = {"node_id" : node_id, "inductUrl" : inductUrl};
         inductUrls.push(urlWithNodeId);
       }
@@ -453,8 +463,14 @@ const DbNodes = (props) => {
       inducts.forEach(element => {
         const index = nodeList.findIndex(item => item.node_id === node_id);
         if (index !== -1) {
+          // cl_protocol is nullable in the registry; an induct with no
+          // protocol is not usable in the Net Model, so skip it rather than
+          // dereferencing null, which used to throw and abort the entire
+          // induct load so the node table never rendered. Only IP ducts carry
+          // a port_number -- LTP/BSSP ducts have none.
+          if (!element.cl_protocol) return;
           let inductObj = {"cl_protocol" : element.cl_protocol.cl_protocol_name,
-                           "port_number" : element.duct_name.port_number};
+                           "port_number" : element.duct_name?.port_number};
           nodeList[index].inducts.push(inductObj);
         }
       })
@@ -516,7 +532,10 @@ const DbNodes = (props) => {
     for (var idx in nodes) {
       var hostname = nodes[idx].host.hostname;
       var host_id  = nodes[idx].host.host_id;
-      const hostIdx = hosts.findIndex(h => h.hostname === hostname)
+      // Join on host_id, not hostname: hostname is not unique in the registry,
+      // so matching on it would hand a node the IP addresses of whichever host
+      // sharing that name happens to come first.
+      const hostIdx = hosts.findIndex(h => h.host_id === host_id)
       if ( hostIdx > -1) {
         var host = hosts[hostIdx];
         nodes[idx].ips = host.dests.map(str => str.trim());
@@ -660,6 +679,10 @@ const DbNodes = (props) => {
             </Navbar>
           </Row>
           </Container>}
+      {loadError &&
+        <Alert variant="danger">
+          <b>Node DB load error:</b> {loadError}
+        </Alert>}
       {importAlert}
       {netModelNameAlert}
     </>
