@@ -113,7 +113,18 @@ export class MockServer {
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
         res.writeHead(statusCode);
-        res.end(JSON.stringify(responseBody));
+
+        // Delay destination responses so they resolve after the (instant)
+        // protocol and induct batches. This deterministically reproduces the
+        // load-order race the editor must tolerate: the merge that copies a
+        // host's destinations into its node's IP list has to wait for the
+        // destinations, not fire the moment inducts arrive.
+        const body = JSON.stringify(responseBody);
+        if (pathname.endsWith('/destinations')) {
+          setTimeout(() => res.end(body), 300);
+        } else {
+          res.end(body);
+        }
       });
 
       this.server.on('error', (err) => {

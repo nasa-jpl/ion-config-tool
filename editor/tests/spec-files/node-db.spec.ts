@@ -30,8 +30,11 @@ test('should import nodes from mock DB server and display them in the table', as
     // For a specific node (e.g., 'node1'), verify the table row contains the expected attributes (host, node number)
     const nodeRow = await nodeDbTab.getTableRow('node1');
     await expect(nodeRow).toContainText('node1');
-    // Note: Specific host/node number attributes depend on the mock server data, 
-    // but we verify the row exists and contains the node name.
+
+    // The node's IP address must appear. The mock delays destination
+    // responses so they resolve after the induct batch; if the merge fired on
+    // inducts alone (the load-order race), the IP column would be empty here.
+    await expect(nodeRow).toContainText('192.168.1.101');
 
     // Call AppPage.expectNoErrors() at the end
     await appPage.expectNoErrors();

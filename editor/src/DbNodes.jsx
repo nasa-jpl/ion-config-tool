@@ -40,6 +40,8 @@ const DbNodes = (props) => {
   const [nodeList, setNodeList]               = useState([]);    // Raw node data returned from DB
   const [nodeData, setNodeData]               = useState([]);    // Raw node data returned from DB
   const [nodesLoaded, setNodesLoaded]         = useState(false); // Flag indicating raw node data loaded
+  const [destsLoaded, setDestsLoaded]         = useState(false); // Flag indicating destinations (IPs) for hosts loaded
+  const [protocolsLoaded, setProtocolsLoaded] = useState(false); // Flag indicating protocols for nodes loaded
   const [inductsLoaded, setInductsLoaded]     = useState(false); // Flag indicating inducts for nodes loaded
   const [netModelName, setNetModelName]       = useState("");    // Name to affix to the Net Model upon import
   const [showSuccess, setShowSuccess]         = useState(false); // Toggle to hide/show successful import modal
@@ -269,6 +271,7 @@ const DbNodes = (props) => {
       }));
       
       setHostList(setDestinationsInHosts(dataWithIds));
+      setDestsLoaded(true);
     })
     .catch(err => {
       console.error(err);
@@ -298,6 +301,7 @@ const DbNodes = (props) => {
       }));
 
       setNodeList(setProtocolsInNodes(dataWithIds));
+      setProtocolsLoaded(true);
     })
     .catch(err => {
       console.error(err);
@@ -409,14 +413,18 @@ const DbNodes = (props) => {
       fetchInductsByNode(inductUrls);
     }
 
-    // If inducts are loaded, time to merge all the data into
-    // one data structure and generate the node table
-    if (inductsLoaded) {
+    // Only merge and render once all three per-item batches have arrived.
+    // mergeData copies each host's destinations into its node's IP list, and
+    // the table also shows protocols and inducts, so gating on inducts alone
+    // raced the destination load: if destinations resolved after inducts the
+    // merge ran against empty dests, every node imported with no IPs, and it
+    // never re-ran. Waiting on all three removes the ordering dependency.
+    if (destsLoaded && protocolsLoaded && inductsLoaded) {
       mergeData();
       setNodeTable(formatNodeTable(nodeList));
     }
 
-  }, [hostsLoaded, nodesLoaded, inductsLoaded])
+  }, [hostsLoaded, nodesLoaded, destsLoaded, protocolsLoaded, inductsLoaded])
 
   // After the destination (IP) data is loaded must associate
   // IPs with the correct host.
